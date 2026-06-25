@@ -1,0 +1,15 @@
+{
+  "name": "one-point-digital-services-premium-multipage",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Premium multipage website for One Point Digital Services with native Razorpay and PhonePe payment APIs.",
+  "scripts": {
+    "start": "node server.js",
+    "check": "node --check server.js && node --check backend/auth-service.js && node --check backend/catalog-service.js && node --check assets/app.js && node --check assets/auth.js && node --check assets/checkout.js && node --check assets/payment-status.js && node --check assets/admin-payments.js && node --check assets/customer-dashboard.js",
+    "dashboard:build": "npm --prefix Dashboard/source run build",
+    "dashboard:lint": "npm --prefix Dashboard/source run lint"
+  },
+  "devDependencies": {
+    "puppeteer": "^25.1.0"
+  }
+}

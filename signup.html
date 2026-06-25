@@ -1,0 +1,166 @@
+﻿<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Create a One Point Digital Services account with Google signup, mobile verification and dashboard access.">
+    <title>Signup | One Point Digital Services</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+        <link rel="stylesheet" href="assets/onepoint.css?v=2">
+    <link rel="stylesheet" href="assets/auth-visual-refresh.css?v=auth_refresh_v2">
+</head>
+  <body class="elite-auth-body">
+    <!-- Fluid background glow meshes -->
+    <div class="ambient-orb orb-blue"></div>
+    <div class="ambient-orb orb-gold"></div>
+
+    <main class="elite-auth-shell">
+      <div class="elite-auth-card glass-panel">
+        
+        <!-- Left Brand Sidebar -->
+        <div class="brand-sidebar">
+          <div class="brand-sidebar-content">
+            <a class="brand-logo-link" href="index.html" aria-label="One Point Digital Services home">
+              <img class="elite-brand-logo" src="assets/logo-bisen-one-point.svg" alt="Bisen One Point Suvidha Kendra">
+            </a>
+            
+            <div class="brand-hero-copy">
+              <div class="cloud-tag"><i data-lucide="user-plus"></i> Customer Portal</div>
+              <h1>One Login for all Services.</h1>
+              <p>Create a secure profile using your registered mobile number to automatically track all orders, payments, and document updates in one dashboard.</p>
+            </div>
+
+            <!-- Metrics List inside sidebar -->
+            <div class="elite-metrics-list">
+              <div class="metric-item">
+                <i data-lucide="receipt-text"></i>
+                <div>
+                  <strong>Unified Tracking</strong>
+                  <span>All service requests linked</span>
+                </div>
+              </div>
+              <div class="metric-item">
+                <i data-lucide="shield-check"></i>
+                <div>
+                  <strong>Profile Linking</strong>
+                  <span>Based on trusted mobile</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="brand-footer-copy">
+              <p>&copy; 2026 One Point. Built for High-Performance Governance.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Form Pane -->
+        <div class="form-pane">
+          <div class="auth-form-wrapper">
+            
+            <form class="elite-auth-card" data-auth-signup>
+              <div class="auth-card-header">
+                <h2>Create Your <span class="h2-gold">Account</span></h2>
+                <p>Sign up to link and track your digital applications.</p>
+              </div>
+
+              <div class="auth-notice">
+                <i data-lucide="shield-check"></i>
+                <div>
+                  <strong>Secure Profile Linking</strong>
+                  <span>Use the same mobile number that you used while applying for a service to link existing orders.</span>
+                </div>
+              </div>
+
+              <div class="form-grid elite-form-grid">
+                <div class="form-field full">
+                  <label for="signup-name">Full Name <span aria-hidden="true">*</span></label>
+                  <div class="elite-input-wrapper">
+                    <i data-lucide="user"></i>
+                    <input class="input" id="signup-name" name="name" placeholder="As per document" required autocomplete="name">
+                  </div>
+                </div>
+                
+                <div class="form-field full">
+                  <label for="signup-phone">Mobile Number <span aria-hidden="true">*</span></label>
+                  <div class="elite-input-wrapper">
+                    <i data-lucide="phone"></i>
+                    <input class="input" id="signup-phone" name="phone" inputmode="numeric" placeholder="10-digit mobile number" required autocomplete="tel">
+                  </div>
+                </div>
+                
+                <div class="form-field full">
+                  <label for="signup-email">Email Address <span aria-hidden="true">*</span></label>
+                  <div class="elite-input-wrapper">
+                    <i data-lucide="mail"></i>
+                    <input class="input" id="signup-email" name="email" type="email" placeholder="name@example.com" required autocomplete="email">
+                  </div>
+                </div>
+                
+                <div class="form-field full">
+                  <label for="signup-password">Password <span aria-hidden="true">*</span></label>
+                  <div class="elite-input-wrapper">
+                    <i data-lucide="lock"></i>
+                    <input class="input" id="signup-password" name="password" type="password" placeholder="Minimum 8 characters" required autocomplete="new-password">
+                  </div>
+                </div>
+                
+                <div class="form-field full">
+                  <label for="signup-confirm">Confirm Password <span aria-hidden="true">*</span></label>
+                  <div class="elite-input-wrapper">
+                    <i data-lucide="lock-keyhole"></i>
+                    <input class="input" id="signup-confirm" name="confirm_password" type="password" placeholder="Re-enter password" required autocomplete="new-password">
+                  </div>
+                </div>
+
+                <button class="btn btn-primary full elite-shimmer-btn" type="submit">
+                  <span data-auth-submit-text><i data-lucide="user-plus"></i> Create Customer Account</span>
+                  <span class="shimmer-wave"></span>
+                </button>
+                
+                <div class="login-status full" data-auth-status></div>
+                
+                <div class="auth-inline-actions full">
+                  <a class="btn btn-soft" href="login.html"><i data-lucide="log-in"></i> Existing User Login</a>
+                  <a class="btn btn-ghost" href="login.html?tab=otp"><i data-lucide="smartphone"></i> Use Mobile OTP</a>
+                </div>
+              </div>
+
+              <div class="auth-card-footer">
+                <a class="footer-link" href="track-application.html"><i data-lucide="search"></i> Track Application</a>
+                <span class="dot-sep">&bull;</span>
+                <a class="footer-link" href="contact.html"><i data-lucide="help-circle"></i> Help & Support</a>
+              </div>
+            </form>
+
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+    <script src="assets/app.js?v=clean_js_v11" defer></script>
+    <script src="assets/auth.js?v=auth_v2" defer></script>
+  
+<script id="line-alignment-script">
+  document.addEventListener("DOMContentLoaded", function() {
+    setTimeout(() => {
+      document.querySelectorAll(".section-head h2").forEach(h2 => {
+        let align = window.getComputedStyle(h2).textAlign;
+        let parent = h2.closest('.section-head');
+        if (parent) {
+          if (align === "center") {
+            parent.classList.add("center-line");
+          } else {
+            parent.classList.add("left-line");
+          }
+        }
+      });
+    }, 100); // small delay to ensure CSS is applied
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,507 @@
+﻿<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Secure cloud login portal for One Point Digital Services Admin Console and Customer Portal.">
+    <title>Secure Cloud Portal | One Point Digital Services</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+        <link rel="stylesheet" href="assets/onepoint.css?v=2">
+    <link rel="stylesheet" href="assets/auth-visual-refresh.css?v=auth_refresh_v2">
+</head>
+  <body class="elite-auth-body">
+    <!-- Fluid background glow meshes -->
+    <div class="ambient-orb orb-blue"></div>
+    <div class="ambient-orb orb-gold"></div>
+
+    <main class="elite-auth-shell">
+      <div class="elite-auth-card glass-panel">
+        
+        <!-- Left Brand Sidebar -->
+        <div class="brand-sidebar">
+          <div class="brand-sidebar-content">
+            <a class="brand-logo-link" href="index.html" aria-label="One Point Digital Services home">
+              <img class="elite-brand-logo" src="assets/logo-bisen-one-point.svg" alt="Bisen One Point Suvidha Kendra">
+            </a>
+            
+            <!-- Standard Welcome Copy -->
+            <div class="brand-hero-copy" id="brand-default-hero">
+              <div class="cloud-tag"><i data-lucide="radio"></i> <span id="ticker-text">All systems operational</span></div>
+              <h1>Premium Digital Infrastructure.</h1>
+              <p>Experience SaaS-grade governance, unified secure checkout, and instant multi-channel service tracking.</p>
+            </div>
+
+            <!-- Dynamic Welcome Card (Onboarding Flow) -->
+            <div class="brand-hero-copy" id="brand-onboarding-hero">
+              <div class="cloud-tag">
+                <i data-lucide="party-popper"></i> Registration Active
+              </div>
+              <h2>Welcome, <span id="onboarding-user-name">User</span>!</h2>
+              <p>Your service application has been successfully filed under Tracking ID: <strong id="onboarding-tracking-id">OPDS-XXXXX</strong>.</p>
+              <div>
+                <h3>
+                  <i data-lucide="shield-check"></i> Instant Activation
+                </h3>
+                <p>We have automatically created your secure account. Please verify your mobile number on the right to instantly open your dashboard and track progress.</p>
+              </div>
+            </div>
+
+            <!-- Metrics List inside sidebar -->
+            <div class="elite-metrics-list">
+              <div class="metric-item">
+                <i data-lucide="shield-check"></i>
+                <div>
+                  <strong>99.99% Uptime SLA</strong>
+                  <span>Continuous secure gateways</span>
+                </div>
+              </div>
+              <div class="metric-item">
+                <i data-lucide="lock"></i>
+                <div>
+                  <strong>256-Bit SSL</strong>
+                  <span>Bank-Grade Encryption</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="brand-footer-copy">
+              <p>&copy; 2026 One Point. Built for High-Performance Governance.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Form Pane -->
+        <div class="form-pane">
+          <div class="auth-form-wrapper">
+            
+            <!-- Main Login Mode switcher -->
+            <div class="elite-segmented-control main-auth-tabs" id="main-tab-switcher" role="group" aria-label="Login Method" data-active="otp">
+              <label class="segment-item" data-tab="password">
+                <i data-lucide="lock"></i>
+                <span>Password</span>
+              </label>
+              <label class="segment-item active" data-tab="otp">
+                <i data-lucide="smartphone"></i>
+                <span>Mobile OTP</span>
+              </label>
+              <label class="segment-item" data-tab="gmail">
+                <i data-lucide="mail"></i>
+                <span>Gmail Link</span>
+              </label>
+              <div class="segment-highlight" id="main-tab-highlight"></div>
+            </div>
+
+            <!-- CARD 1: Password Login (Admin + Customer switcher inside) -->
+            <form class="elite-auth-card auth-card-hidden" id="password-login-card">
+              <div class="auth-card-header">
+                <h2>Welcome to <span class="h2-gold">Portal</span></h2>
+                <p>Select your cloud environment and authenticate.</p>
+              </div>
+
+              <div class="elite-segmented-control" role="group" aria-label="Portal Environment">
+                <label class="segment-item" id="seg-admin">
+                  <input type="radio" name="portal_type" value="admin" hidden>
+                  <i data-lucide="layout-dashboard"></i>
+                  <span>Admin Console</span>
+                </label>
+                <label class="segment-item active" id="seg-customer">
+                  <input type="radio" name="portal_type" value="customer" checked hidden>
+                  <i data-lucide="user"></i>
+                  <span>Customer Portal</span>
+                </label>
+                <div class="segment-highlight" id="seg-highlight"></div>
+              </div>
+
+              <div class="form-grid elite-form-grid">
+                <div class="form-field full">
+                  <label for="login-user">Mobile / Email <span aria-hidden="true">*</span></label>
+                  <div class="elite-input-wrapper">
+                    <i data-lucide="user-check"></i>
+                    <input class="input" id="login-user" name="user_id" placeholder="Enter mobile number or email" required autocomplete="username">
+                  </div>
+                </div>
+                <div class="form-field full">
+                  <label for="login-pass">Password <span aria-hidden="true">*</span></label>
+                  <div class="elite-input-wrapper">
+                    <i data-lucide="lock"></i>
+                    <input class="input" id="login-pass" name="password" type="password" placeholder="Enter Password" required autocomplete="current-password">
+                  </div>
+                </div>
+
+                <button class="btn btn-primary full elite-shimmer-btn" type="submit">
+                  <span class="btn-text"><i data-lucide="log-in"></i> Secure Cloud Login</span>
+                  <span class="shimmer-wave"></span>
+                </button>
+                <div class="login-status error full" id="login-error"></div>
+                
+                <div class="auth-inline-actions full">
+                  <a class="btn btn-soft" href="signup.html"><i data-lucide="user-plus"></i> Create Account</a>
+                  <a class="btn btn-ghost" href="track-application.html"><i data-lucide="search"></i> Track App</a>
+                </div>
+              </div>
+
+              <div class="auth-card-footer">
+                <a class="footer-link" href="forgot-password.html"><i data-lucide="key-round"></i> Forgot Password?</a>
+                <span class="dot-sep">&bull;</span>
+                <a class="footer-link" href="contact.html"><i data-lucide="help-circle"></i> Help & Support</a>
+              </div>
+            </form>
+
+            <!-- CARD 2: Mobile OTP Login Card (Normal visitors) -->
+            <form class="elite-auth-card" id="otp-login-card" data-auth-otp data-otp-purpose="login">
+              <div class="auth-card-header">
+                <h2>OTP <span class="h2-gold">Authentication</span></h2>
+                <p>Secure login using your registered mobile number.</p>
+              </div>
+
+              <div class="form-grid elite-form-grid">
+                <div class="form-field full">
+                  <label for="otp-phone">Mobile Number <span aria-hidden="true">*</span></label>
+                  <div class="elite-input-wrapper">
+                    <i data-lucide="smartphone"></i>
+                    <input class="input" id="otp-phone" name="phone" inputmode="numeric" placeholder="10-digit mobile number" required autocomplete="tel">
+                  </div>
+                </div>
+
+                <div class="form-field full" data-otp-panel hidden>
+                  <label for="otp-code">One-Time Password <span aria-hidden="true">*</span></label>
+                  <div class="elite-input-wrapper">
+                    <i data-lucide="shield-check"></i>
+                    <input class="input" id="otp-code" name="otp" inputmode="numeric" maxlength="6" placeholder="Enter 6-digit OTP" autocomplete="one-time-code">
+                  </div>
+                </div>
+
+                <!-- Button 1: Send OTP -->
+                <button class="btn btn-primary full elite-shimmer-btn" type="button" data-send-otp>
+                  <span data-auth-submit-text><i data-lucide="send"></i> Send Verification OTP</span>
+                  <span class="shimmer-wave"></span>
+                </button>
+
+                <!-- Button 2: Verify OTP -->
+                <button class="btn btn-success full" type="button" data-verify-otp>
+                  <i data-lucide="check-circle-2"></i> Verify & Login
+                </button>
+
+                <div class="login-status full" data-auth-status></div>
+                
+                <div class="auth-inline-actions full">
+                  <a class="btn btn-soft" href="signup.html"><i data-lucide="user-plus"></i> Create Account</a>
+                  <a class="btn btn-ghost" href="track-application.html"><i data-lucide="search"></i> Track App</a>
+                </div>
+              </div>
+
+              <div class="auth-card-footer">
+                <a class="footer-link" href="contact.html"><i data-lucide="help-circle"></i> Help & Support</a>
+              </div>
+            </form>
+
+            <!-- CARD 3: Gmail Quick Login Card -->
+            <form class="elite-auth-card gmail-auth-card auth-card-hidden" id="gmail-login-card" data-auth-gmail>
+              <div class="gmail-auth-head">
+                <span><i data-lucide="mail-check"></i></span>
+                <div>
+                  <strong>Continue with Gmail</strong>
+                  <small>Gmail email verify hoga, phir mobile OTP se orders attach honge.</small>
+                </div>
+              </div>
+              <div class="form-grid elite-form-grid compact">
+                <div class="form-field full">
+                  <label for="gmail-name">Name</label>
+                  <div class="elite-input-wrapper">
+                    <i data-lucide="user"></i>
+                    <input class="input" id="gmail-name" name="gmail_name" placeholder="Optional display name" autocomplete="name">
+                  </div>
+                </div>
+                <div class="form-field full">
+                  <label for="gmail-email">Gmail Address <span aria-hidden="true">*</span></label>
+                  <div class="elite-input-wrapper">
+                    <i data-lucide="mail"></i>
+                    <input class="input" id="gmail-email" name="gmail_email" type="email" placeholder="name@gmail.com" required autocomplete="email">
+                  </div>
+                </div>
+                <div class="form-field full">
+                  <label for="gmail-phone">Mobile Number <span aria-hidden="true">*</span></label>
+                  <div class="elite-input-wrapper">
+                    <i data-lucide="phone"></i>
+                    <input class="input" id="gmail-phone" name="gmail_phone" inputmode="numeric" placeholder="10-digit mobile number" required autocomplete="tel">
+                  </div>
+                </div>
+                <div class="form-field full" data-gmail-otp-panel hidden>
+                  <label for="gmail-otp">Mobile OTP <span aria-hidden="true">*</span></label>
+                  <div class="elite-input-wrapper">
+                    <i data-lucide="shield-check"></i>
+                    <input class="input" id="gmail-otp" name="gmail_otp" inputmode="numeric" maxlength="6" placeholder="6-digit OTP" autocomplete="one-time-code">
+                  </div>
+                </div>
+                <button class="btn btn-soft full" type="button" data-gmail-start>
+                  <span data-auth-submit-text><i data-lucide="send"></i> Send Mobile OTP</span>
+                </button>
+                <button class="btn btn-primary full" type="button" data-gmail-verify>
+                  <i data-lucide="check-circle-2"></i> Verify & Open Dashboard
+                </button>
+                <div class="login-status full" data-auth-status></div>
+              </div>
+            </form>
+
+            <!-- CARD 4: Dedicated Onboarding OTP Verification Card -->
+            <form class="elite-auth-card auth-card-hidden" id="onboarding-login-card" data-auth-otp data-otp-purpose="login">
+              <div class="auth-card-header">
+                <h2>Verify Your <span class="h2-gold">Mobile</span></h2>
+                <p>Almost done! Authenticate your registered mobile number to open your secure dashboard.</p>
+              </div>
+
+              <div class="form-grid elite-form-grid">
+                <div class="form-field full">
+                  <label for="onboarding-phone">Registered Mobile Number</label>
+                  <div class="elite-input-wrapper">
+                    <i data-lucide="smartphone"></i>
+                    <input class="input" id="onboarding-phone" name="phone" inputmode="numeric" readonly placeholder="10-digit mobile number">
+                  </div>
+                </div>
+
+                <div class="form-field full" data-otp-panel hidden>
+                  <label for="onboarding-otp">One-Time Password <span aria-hidden="true">*</span></label>
+                  <div class="elite-input-wrapper">
+                    <i data-lucide="lock-keyhole"></i>
+                    <input class="input" id="onboarding-otp" name="otp" inputmode="numeric" maxlength="6" placeholder="Enter 6-digit OTP" autocomplete="one-time-code">
+                  </div>
+                </div>
+
+                <!-- Button 1: Send OTP -->
+                <button class="btn btn-primary full elite-shimmer-btn" type="button" data-send-otp>
+                  <span data-auth-submit-text><i data-lucide="send"></i> Send Verification OTP</span>
+                  <span class="shimmer-wave"></span>
+                </button>
+
+                <!-- Button 2: Verify OTP -->
+                <button class="btn btn-success full" type="button" data-verify-otp>
+                  <i data-lucide="check-check"></i> Verify & Open Dashboard
+                </button>
+
+                <div class="login-status full" data-auth-status></div>
+              </div>
+
+              <div class="auth-card-footer">
+                <span>
+                  <i data-lucide="shield"></i> Secured by One Point Cloud OS
+                </span>
+              </div>
+            </form>
+
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+    <script src="assets/app.js?v=clean_js_v11" defer></script>
+    <script src="assets/auth.js?v=auth_v2" defer></script>
+    
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        // Live system ticker messages
+        const tickerText = document.getElementById("ticker-text");
+        const tickerMessages = [
+          "All secure payment gateways operational...",
+          "256-Bit SSL active on all endpoints...",
+          "Razorpay & PhonePe fallback standby ready...",
+          "Instant OTP login available for customers..."
+        ];
+        let tickerIdx = 0;
+        setInterval(() => {
+          tickerIdx = (tickerIdx + 1) % tickerMessages.length;
+          if (tickerText) tickerText.textContent = tickerMessages[tickerIdx];
+        }, 4000);
+
+        // UI references
+        const mainTabSwitcher = document.getElementById("main-tab-switcher");
+        const tabs = mainTabSwitcher.querySelectorAll(".segment-item");
+        const passwordCard = document.getElementById("password-login-card");
+        const otpCard = document.getElementById("otp-login-card");
+        const gmailCard = document.getElementById("gmail-login-card");
+        const onboardingCard = document.getElementById("onboarding-login-card");
+
+        // Tab selection change logic
+        tabs.forEach(tab => {
+          tab.addEventListener("click", () => {
+            const targetTab = tab.dataset.tab;
+            mainTabSwitcher.setAttribute("data-active", targetTab);
+            tabs.forEach(t => t.classList.remove("active"));
+            tab.classList.add("active");
+
+            // Hide all standard cards
+            passwordCard.classList.add("auth-card-hidden");
+            otpCard.classList.add("auth-card-hidden");
+            gmailCard.classList.add("auth-card-hidden");
+
+            // Show active card
+            if (targetTab === "password") {
+              passwordCard.classList.remove("auth-card-hidden");
+            } else if (targetTab === "otp") {
+              otpCard.classList.remove("auth-card-hidden");
+            } else if (targetTab === "gmail") {
+              gmailCard.classList.remove("auth-card-hidden");
+            }
+          });
+        });
+
+        // Admin/Customer Segment control inside Password card
+        const segAdmin = document.getElementById("seg-admin");
+        const segCustomer = document.getElementById("seg-customer");
+        const segHighlight = document.getElementById("seg-highlight");
+        const radios = document.querySelectorAll('input[name="portal_type"]');
+        const userField = document.getElementById("login-user");
+        const passField = document.getElementById("login-pass");
+        const errorDiv = document.getElementById("login-error");
+
+        function updateSegment(value) {
+          if (value === "admin") {
+            segAdmin.classList.add("active");
+            segCustomer.classList.remove("active");
+            if (segHighlight) segHighlight.style.transform = "translateX(0%)";
+            if (userField) userField.placeholder = "Enter User ID (e.g. bisenasif0001)";
+          } else {
+            segCustomer.classList.add("active");
+            segAdmin.classList.remove("active");
+            if (segHighlight) segHighlight.style.transform = "translateX(calc(100% + 2px))";
+            if (userField) userField.placeholder = "Enter mobile number or email";
+          }
+        }
+
+        radios.forEach(radio => {
+          radio.addEventListener("change", (e) => updateSegment(e.target.value));
+        });
+        updateSegment("customer");
+
+        // Busy status helper for Password form
+        function setLoginBusy(isBusy) {
+          const submitText = passwordCard.querySelector('button[type="submit"] .btn-text');
+          const button = passwordCard.querySelector('button[type="submit"]');
+          if (button) button.disabled = Boolean(isBusy);
+          if (!submitText) return;
+          if (isBusy) {
+            submitText.dataset.originalText = submitText.dataset.originalText || submitText.innerHTML;
+            submitText.innerHTML = '<i data-lucide="loader-2" class="spin"></i> Authenticating Session...';
+          } else if (submitText.dataset.originalText) {
+            submitText.innerHTML = submitText.dataset.originalText;
+          }
+          if (window.lucide) window.lucide.createIcons();
+        }
+
+        // Form Submit for Password Login
+        passwordCard.addEventListener("submit", async (e) => {
+          e.preventDefault();
+          errorDiv.style.display = "none";
+          const user = userField.value.trim();
+          const pass = passField.value.trim();
+          const portalType = document.querySelector('input[name="portal_type"]:checked').value;
+
+          if (portalType === "admin") {
+            try {
+              setLoginBusy(true);
+              const data = await window.OPDSAuth.api("/api/auth/admin/login", { user_id: user, password: pass });
+              localStorage.setItem("opds_admin_token", data.token);
+              window.location.href = "dashboard/index.html?portal=admin&panel=home";
+            } catch (error) {
+              errorDiv.textContent = error.message || "Invalid admin User ID or Password.";
+              errorDiv.style.display = "block";
+              setLoginBusy(false);
+            }
+          } else if (portalType === "customer") {
+            try {
+              setLoginBusy(true);
+              const data = await window.OPDSAuth.loginCustomer({ identifier: user, password: pass });
+              window.location.href = window.OPDSAuth.dashboardUrl(data.user, { panel: "orders" });
+            } catch (error) {
+              errorDiv.textContent = error.message || "Customer login failed. Use mobile/email and password, or login with OTP.";
+              errorDiv.style.display = "block";
+              setLoginBusy(false);
+            }
+          }
+        });
+
+        // URL Query Parameters Handling for User Onboarding Flow
+        const urlParams = new URLSearchParams(window.location.search);
+        const flow = urlParams.get('flow');
+        const phone = urlParams.get('phone');
+        const name = urlParams.get('name');
+        const trackingId = urlParams.get('tracking_id');
+
+        if (flow === 'onboarding') {
+          // 1. Hide Standard Switcher and Testing Kicker
+          if (mainTabSwitcher) mainTabSwitcher.style.display = 'none';
+          if (quickFillBtn) quickFillBtn.style.display = 'none';
+
+          // 2. Hide all normal login forms
+          passwordCard.classList.add("auth-card-hidden");
+          otpCard.classList.add("auth-card-hidden");
+          gmailCard.classList.add("auth-card-hidden");
+
+          // 3. Show dedicated onboarding OTP form
+          onboardingCard.classList.remove("auth-card-hidden");
+
+          // 4. Toggle Welcome Panel Content on Left side
+          const defaultHero = document.getElementById("brand-default-hero");
+          const onboardingHero = document.getElementById("brand-onboarding-hero");
+          if (defaultHero) defaultHero.style.display = 'none';
+          if (onboardingHero) onboardingHero.style.display = 'block';
+
+          // Set user onboarding metadata
+          if (name) {
+            const nameSpan = document.getElementById("onboarding-user-name");
+            if (nameSpan) nameSpan.textContent = name;
+          }
+          if (trackingId) {
+            const trackingSpan = document.getElementById("onboarding-tracking-id");
+            if (trackingSpan) trackingSpan.textContent = trackingId;
+          }
+
+          // Pre-fill phone parameter in onboarding OTP form
+          const onboardingPhoneInput = document.getElementById("onboarding-phone");
+          if (onboardingPhoneInput && phone) {
+            onboardingPhoneInput.value = phone;
+          }
+        } else {
+          // Hide onboarding form in normal visitor mode
+          onboardingCard.classList.add("auth-card-hidden");
+
+          // Detect tab parameter on load (if not in onboarding flow)
+          const activeTabParam = urlParams.get('tab');
+          if (activeTabParam && ['password', 'otp', 'gmail'].includes(activeTabParam)) {
+            const targetTab = mainTabSwitcher.querySelector(`[data-tab="${activeTabParam}"]`);
+            if (targetTab) targetTab.click();
+          }
+
+          // ?portal=admin → directly open Admin Console on Password tab
+          if (urlParams.get('portal') === 'admin') {
+            const passwordTab = mainTabSwitcher.querySelector('[data-tab="password"]');
+            if (passwordTab && !passwordTab.classList.contains('active')) passwordTab.click();
+            const adminRadio = document.querySelector('input[name="portal_type"][value="admin"]');
+            if (adminRadio) { adminRadio.checked = true; adminRadio.dispatchEvent(new Event('change')); }
+          }
+        }
+      });
+    </script>
+  
+<script id="line-alignment-script">
+  document.addEventListener("DOMContentLoaded", function() {
+    setTimeout(() => {
+      document.querySelectorAll(".section-head h2").forEach(h2 => {
+        let align = window.getComputedStyle(h2).textAlign;
+        let parent = h2.closest('.section-head');
+        if (parent) {
+          if (align === "center") {
+            parent.classList.add("center-line");
+          } else {
+            parent.classList.add("left-line");
+          }
+        }
+      });
+    }, 100); // small delay to ensure CSS is applied
+  });
+</script>
+</body>
+</html>

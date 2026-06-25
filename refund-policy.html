@@ -1,0 +1,173 @@
+﻿<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Refund Policy for One Point Digital Services covering service charges, payment proof review, duplicate payments and official fee limitations.">
+    <title>Refund Policy | One Point Digital Services</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+        <link rel="stylesheet" href="assets/onepoint.css?v=2">
+
+    <style>
+      /* Hero */
+      .compact-hero {
+        background:
+          linear-gradient(90deg, rgba(18,86,150,0.98) 0%, rgba(18,86,150,0.88) 45%, rgba(210,161,42,0.3) 100%),
+          url('assets/csc_hero_bg.png') no-repeat center / cover !important;
+      }
+      .compact-hero::before,
+      .compact-hero::after { display: none !important; }
+      .compact-hero { padding-inline: 0 !important; }
+      .compact-hero h1 { text-align: left !important; margin-inline: 0 !important; }
+      .compact-hero p:not(.eyebrow) { text-align: left !important; margin-inline: 0 !important; }
+      .compact-hero .hero-actions { justify-content: flex-start !important; }
+
+      /* Content section — 2×2 grid */
+      .legal-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        background: #f5f8fe;
+        align-items: start;
+      }
+      .legal-content .legal-action-strip {
+        grid-column: 1 / -1;
+        margin-top: 8px;
+      }
+
+      /* Panel cards */
+      .legal-content .panel {
+        background: #ffffff;
+        border-radius: 16px;
+        padding: clamp(24px, 3vw, 36px);
+        border: 1px solid rgba(10,44,88,.08);
+        box-shadow: 0 1px 3px rgba(0,0,0,.04), 0 4px 20px rgba(0,0,0,.06);
+      }
+      .legal-content .panel h2 {
+        font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+        font-weight: 800;
+        color: var(--primary, #0a2c58);
+        letter-spacing: -0.02em;
+        margin-bottom: 10px;
+        position: relative;
+      }
+      .legal-content .panel h2::after {
+        content: '';
+        display: block;
+        width: 40px;
+        height: 3px;
+        background: var(--grad-gold, linear-gradient(90deg,#c8982e,#e8b94a));
+        border-radius: 100px;
+        margin-top: 10px;
+      }
+      .legal-content .panel p {
+        font-size: 0.9rem;
+        color: #4a5568;
+        line-height: 1.65;
+        margin: 0;
+        margin-top: 14px;
+      }
+
+      @media (max-width: 640px) {
+        .legal-content { grid-template-columns: 1fr; }
+      }
+    </style>
+</head>
+  <body>
+    <div data-site-nav>
+      <header class="site-header fallback-site-header">
+        <nav class="nav-bar" aria-label="Primary fallback">
+          <a class="brand" href="index.html" aria-label="One Point Digital Services home">
+            <img class="brand-logo brand-logo-header" src="assets/logo-bisen-one-point-footer.svg" alt="Bisen One Point Suvidha Kendra">
+          </a>
+          <div class="fallback-nav-links">
+            <a class="nav-link" href="index.html">Home</a>
+            <a class="nav-link" href="services.html">Services</a>
+            <a class="nav-link" href="products.html">Store</a>
+            <a class="nav-link" href="track-application.html">Track</a>
+            <a class="nav-link" href="contact.html">Contact</a>
+          </div>
+        </nav>
+      </header>
+    </div>
+    <main class="page-shell">
+      <section class="compact-hero">
+        <div class="site-container">
+          <p class="eyebrow">Refund Policy</p>
+          <h1>Payment review and refund rules.</h1>
+          <p>Last updated: May 14, 2026. Refunds depend on service stage, payment verification and third-party official fee rules.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="support.html">Raise Payment Issue</a>
+            <a class="btn btn-ghost" href="track-application.html">Track Request</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section legal-content">
+        <div class="panel">
+          <h2>Before <span class="h2-gold">Processing</span></h2>
+          <p>If payment is made but processing has not started, you may request cancellation and refund review through WhatsApp or the contact form.</p>
+        </div>
+        <div class="panel">
+          <h2>After Processing <span class="h2-gold">Starts</span></h2>
+          <p>Service assistance charges may be non-refundable once document review, form filling, booking support or official submission work has started.</p>
+        </div>
+        <div class="panel">
+          <h2>Official <span class="h2-gold">Fees</span></h2>
+          <p>Government portal fees, gateway charges, ticket charges and other third-party fees follow the refund rules of the relevant department or provider.</p>
+        </div>
+        <div class="panel">
+          <h2>Duplicate <span class="h2-gold">Payments</span></h2>
+          <p>Duplicate or wrong UPI payments should be reported with transaction ID and payment proof. Approved refunds are processed after verification.</p>
+        </div>
+        <div class="legal-action-strip">
+          <span><i data-lucide="receipt-text"></i> Keep your UPI reference, gateway ID or payment screenshot ready for faster review.</span>
+          <a class="btn btn-soft" href="contact.html">Submit Proof</a>
+        </div>
+      </section>
+    </main>
+    <div data-site-footer></div>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+    <script src="assets/app.js?v=clean_js_v11" defer></script>
+  
+<script id="line-alignment-script">
+  document.addEventListener("DOMContentLoaded", function() {
+    setTimeout(() => {
+      document.querySelectorAll(".section-head h2").forEach(h2 => {
+        let align = window.getComputedStyle(h2).textAlign;
+        let parent = h2.closest('.section-head');
+        if (parent) {
+          if (align === "center") {
+            parent.classList.add("center-line");
+          } else {
+            parent.classList.add("left-line");
+          }
+        }
+      });
+    }, 100); // small delay to ensure CSS is applied
+  });
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

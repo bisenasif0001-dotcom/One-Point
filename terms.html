@@ -1,0 +1,558 @@
+﻿<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Terms and Conditions for One Point Digital Services, including assisted application processing and official department approval limitations.">
+    <title>Terms | One Point Digital Services</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+        <link rel="stylesheet" href="assets/onepoint.css?v=2">
+
+    <style>
+      /* â”€â”€â”€ Brand tokens â”€â”€â”€ */
+      :root {
+        --brand-blue:      #125696;
+        --brand-blue-dark: #0c4da2;
+        --brand-gold:      #b8860b;
+        --brand-gold-light:#d2a12a;
+        --text-primary:    #1a2942;
+        --text-secondary:  #4a5568;
+        --text-muted:      #718096;
+        --border:          rgba(18,86,150,0.12);
+        --surface:         #ffffff;
+        --page-bg:         #f5f8fe;
+      }
+
+      .compact-hero {
+        background:
+          linear-gradient(90deg, rgba(18, 86, 150, 0.98) 0%, rgba(18, 86, 150, 0.88) 45%, rgba(210, 161, 42, 0.3) 100%),
+          url('assets/csc_hero_bg.png') no-repeat center / cover !important;
+      }
+      .compact-hero::before,
+      .compact-hero::after { display: none !important; }
+      .compact-hero { padding-inline: 0 !important; }
+      .compact-hero h1 { text-align: left !important; margin-inline: 0 !important; }
+      .compact-hero p:not(.eyebrow) { text-align: left !important; margin-inline: 0 !important; }
+      .compact-hero .hero-actions { justify-content: flex-start !important; }
+
+      /* Section band backgrounds */
+      .sp-band-white { background: #ffffff; }
+      .sp-band-tint  { background: #f5f8fe; }
+
+      /* â”€â”€â”€ Section sub-heading under h2 â”€â”€â”€ */
+      .sp-intro-p {
+        margin: 0 0 32px;
+      }
+
+      /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+         1. CHANNEL CARDS
+      â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+      .sp-channels {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+        margin-bottom: 0;
+      }
+      @media (max-width: 768px) { .sp-channels { grid-template-columns: 1fr; } }
+      @media (min-width: 480px) and (max-width: 768px) { .sp-channels { grid-template-columns: repeat(2,1fr); } }
+
+      .sp-channel {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 24px 22px 20px;
+        display: flex;
+        flex-direction: column;
+        transition: border-color 0.2s, box-shadow 0.2s;
+      }
+      .sp-channel:hover {
+        border-color: rgba(18,86,150,0.3);
+        box-shadow: 0 4px 20px rgba(18,86,150,0.07);
+      }
+
+      .sp-ch-icon {
+        width: 44px; height: 44px;
+        border-radius: 12px;
+        display: flex; align-items: center; justify-content: center;
+        margin-bottom: 16px;
+        flex-shrink: 0;
+      }
+      .sp-ch-icon.blue { background: rgba(18,86,150,0.08); color: var(--brand-blue); }
+      .sp-ch-icon.gold { background: rgba(184,134,11,0.09); color: var(--brand-gold); }
+      .sp-ch-icon svg { width:20px; height:20px; }
+
+      .sp-channel h3 {
+        font-size: 0.95rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        margin: 0 0 6px;
+      }
+      .sp-channel p {
+        font-size: 0.84rem !important;
+        color: var(--text-secondary) !important;
+        line-height: 1.55 !important;
+        margin: 0 0 16px !important;
+        flex: 1;
+      }
+      .sp-ch-meta {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        font-size: 0.76rem;
+        font-weight: 600;
+        color: var(--text-muted);
+        margin-bottom: 14px;
+      }
+      .sp-ch-meta svg { width:12px; height:12px; }
+
+      .sp-ch-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 9px 16px;
+        border-radius: 8px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.18s;
+        width: fit-content;
+        border: 1px solid;
+      }
+      .sp-ch-btn svg { width:14px; height:14px; }
+      .sp-ch-btn.blue {
+        color: var(--brand-blue);
+        background: rgba(18,86,150,0.07);
+        border-color: rgba(18,86,150,0.2);
+      }
+      .sp-ch-btn.blue:hover {
+        background: rgba(18,86,150,0.14);
+        color: var(--brand-blue-dark);
+      }
+      .sp-ch-btn.gold {
+        color: var(--brand-gold);
+        background: rgba(184,134,11,0.07);
+        border-color: rgba(184,134,11,0.22);
+      }
+      .sp-ch-btn.gold:hover {
+        background: rgba(184,134,11,0.14);
+        color: #8a6008;
+      }
+
+      /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+         2. CONTACT ROWS TABLE (Badges styled for Terms)
+      â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+      .sp-contacts {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        overflow: hidden;
+      }
+      .sp-contacts-header {
+        display: grid;
+        grid-template-columns: 44px 1fr auto;
+        align-items: center;
+        gap: 16px;
+        padding: 14px 24px;
+        background: rgba(18,86,150,0.04);
+        border-bottom: 1px solid var(--border);
+      }
+      .sp-contacts-header span {
+        font-size: 0.72rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.09em;
+        color: var(--text-muted);
+      }
+      .sp-contact-row {
+        display: grid;
+        grid-template-columns: 44px 1fr auto;
+        align-items: center;
+        gap: 16px;
+        padding: 16px 24px;
+        border-bottom: 1px solid rgba(18,86,150,0.07);
+        transition: background 0.18s;
+      }
+      .sp-contact-row:last-child { border-bottom: none; }
+      .sp-contact-row:hover { background: rgba(18,86,150,0.025); }
+
+      .sp-contact-icon {
+        width: 40px; height: 40px;
+        border-radius: 10px;
+        display: flex; align-items: center; justify-content: center;
+        flex-shrink: 0;
+      }
+      .sp-contact-icon.blue { background: rgba(18,86,150,0.08); color: var(--brand-blue); border: 1px solid rgba(18,86,150,0.14); }
+      .sp-contact-icon.gold { background: rgba(184,134,11,0.08); color: var(--brand-gold); border: 1px solid rgba(184,134,11,0.18); }
+      .sp-contact-icon svg { width:17px; height:17px; }
+
+      .sp-contact-body strong {
+        display: block !important;
+        font-size: 0.88rem !important;
+        font-weight: 700 !important;
+        color: var(--text-primary) !important;
+        margin-bottom: 2px !important;
+      }
+      .sp-contact-body span {
+        font-size: 0.8rem !important;
+        color: var(--text-secondary) !important;
+        line-height: 1.45 !important;
+      }
+      .sp-contact-link {
+        font-size: 0.8rem;
+        font-weight: 700;
+        color: var(--brand-blue);
+        background: rgba(18,86,150,0.07);
+        border: 1px solid rgba(18,86,150,0.18);
+        border-radius: 7px;
+        padding: 6px 14px;
+        text-decoration: none;
+        white-space: nowrap;
+        transition: all 0.18s;
+        flex-shrink: 0;
+      }
+      .sp-contact-link:hover {
+        background: var(--brand-blue);
+        color: #ffffff;
+        border-color: var(--brand-blue);
+      }
+
+      /* Badges specific to terms tables */
+      .sp-contact-badge {
+        font-size: 0.75rem;
+        font-weight: 700;
+        padding: 5px 12px;
+        border-radius: 6px;
+        white-space: nowrap;
+        text-align: center;
+        display: inline-block;
+      }
+      .sp-contact-badge.gold {
+        color: var(--brand-gold);
+        background: rgba(184,134,11,0.07);
+        border: 1px solid rgba(184,134,11,0.18);
+      }
+      .sp-contact-badge.blue {
+        color: var(--brand-blue);
+        background: rgba(18,86,150,0.07);
+        border: 1px solid rgba(18,86,150,0.18);
+      }
+
+      /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+         3. BOTTOM CTA STRIP
+      â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+      .sp-cta {
+        background: var(--brand-blue);
+        border-radius: 16px;
+        padding: 24px 28px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        flex-wrap: wrap;
+      }
+      .sp-cta-left {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+      .sp-cta-icon {
+        width: 44px; height: 44px;
+        border-radius: 10px;
+        background: rgba(255,255,255,0.12);
+        border: 1px solid rgba(255,255,255,0.2);
+        display: flex; align-items: center; justify-content: center;
+        color: #ffffff;
+        flex-shrink: 0;
+      }
+      .sp-cta-icon svg { width:20px; height:20px; }
+      .sp-cta-text strong {
+        display: block !important;
+        font-size: 0.95rem !important;
+        font-weight: 700 !important;
+        color: #ffffff !important;
+        margin-bottom: 2px !important;
+      }
+      .sp-cta-text span {
+        font-size: 0.82rem !important;
+        color: rgba(255,255,255,0.8) !important;
+      }
+      .sp-cta-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+      .sp-cta-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        padding: 9px 18px;
+        border-radius: 9px;
+        font-size: 0.875rem;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.18s;
+        border: 1px solid;
+        white-space: nowrap;
+      }
+      .sp-cta-btn svg { width:14px; height:14px; }
+      .sp-cta-btn.white {
+        background: #ffffff;
+        color: var(--brand-blue-dark);
+        border-color: transparent;
+      }
+      .sp-cta-btn.white:hover {
+        background: #edf2fb;
+      }
+      .sp-cta-btn.ghost {
+        background: rgba(255,255,255,0.1);
+        color: #ffffff;
+        border-color: rgba(255,255,255,0.3);
+      }
+      .sp-cta-btn.ghost:hover {
+        background: rgba(255,255,255,0.2);
+        border-color: rgba(255,255,255,0.5);
+      }
+    </style></head>
+  <body class="online-services-page">
+    <div data-site-nav>
+      <header class="site-header fallback-site-header">
+        <nav class="nav-bar" aria-label="Primary fallback">
+          <a class="brand" href="index.html" aria-label="One Point Digital Services home">
+            <img class="brand-logo brand-logo-header" src="assets/logo-bisen-one-point-footer.svg" alt="Bisen One Point Suvidha Kendra">
+          </a>
+          <div class="fallback-nav-links">
+            <a class="nav-link" href="index.html">Home</a>
+            <a class="nav-link" href="services.html">Services</a>
+            <a class="nav-link" href="products.html">Store</a>
+            <a class="nav-link" href="track-application.html">Track</a>
+            <a class="nav-link" href="contact.html">Contact</a>
+          </div>
+        </nav>
+      </header>
+    </div>
+    <main>
+      <!-- Hero -->
+      <div class="page-shell">
+        <section class="compact-hero">
+          <div class="site-container">
+            <p class="eyebrow">Terms</p>
+            <h1>Clear terms for assisted services.</h1>
+            <p>Last updated: May 14, 2026. Please read these terms before requesting government, student, business, travel or store services.</p>
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="contact.html">Ask Before Applying</a>
+              <a class="btn btn-ghost" href="services.html">Browse Services</a>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Section 1: Assistance Scope -->
+      <section class="sp-band-white reveal" id="terms-section-1">
+        <div class="site-container">
+          <p class="section-kicker">One Point Protocol</p>
+          <h2>Assistance <span class="h2-gold">Scope</span></h2>
+          <p class="sp-intro-p">We operate as a private utility facilitation agency. Our digital services are designed to simplify, manage, and expedite application form-filling and submissions to competent authorities.</p>
+          
+          <div class="sp-channels">
+            <div class="sp-channel c-blue">
+              <div class="sp-ch-icon blue"><i data-lucide="shield"></i></div>
+              <h3>Private Utility Agent</h3>
+              <p>We are a privately run facilitation agency. We are not a government office, department, ministry, or administrative authority under any government body.</p>
+            </div>
+            
+            <div class="sp-channel c-blue">
+              <div class="sp-ch-icon blue"><i data-lucide="settings"></i></div>
+              <h3>Manual Assistance</h3>
+              <p>Our services are strictly limited to assistance in document organization, form-filling draft reviews, fee payment routing, and application tracking.</p>
+            </div>
+            
+            <div class="sp-channel c-gold">
+              <div class="sp-ch-icon gold"><i data-lucide="info"></i></div>
+              <h3>Approval Limitations</h3>
+              <p>We do not possess the authority to issue, print, stamp, or modify government records. Final validation and approval rests solely with respective government departments.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 2: User Responsibility -->
+      <section class="sp-band-tint reveal" id="terms-section-2">
+        <div class="site-container">
+          <p class="section-kicker">User Obligations</p>
+          <h2>User <span class="h2-gold">Responsibility</span></h2>
+          <p class="sp-intro-p">To ensure error-free submissions, accuracy and compliance on the applicant's side are critical. We translate provided details directly into official application modules.</p>
+          
+          <div class="sp-contacts">
+            <div class="sp-contact-row">
+              <div class="sp-contact-icon gold"><i data-lucide="check-square"></i></div>
+              <div class="sp-contact-body">
+                <strong>Authentic Documentation</strong>
+                <span>Applicants must provide valid, legal, and authentic credentials, address proofs, declarations, and identity records for application processing.</span>
+              </div>
+              <div>
+                <span class="sp-contact-badge gold">Required</span>
+              </div>
+            </div>
+            
+            <div class="sp-contact-row">
+              <div class="sp-contact-icon gold"><i data-lucide="alert-triangle"></i></div>
+              <div class="sp-contact-body">
+                <strong>Compliance &amp; Legal Liability</strong>
+                <span>Submission of fraudulent, forged, or stolen documents is strictly illegal. The applicant remains solely responsible for legal consequences under applicable law.</span>
+              </div>
+              <div>
+                <span class="sp-contact-badge gold">Mandatory</span>
+              </div>
+            </div>
+            
+            <div class="sp-contact-row">
+              <div class="sp-contact-icon blue"><i data-lucide="edit"></i></div>
+              <div class="sp-contact-body">
+                <strong>Draft Verification</strong>
+                <span>Applicants must carefully inspect form draft previews before final submission. We are not liable for errors present in drafts verified by the applicant.</span>
+              </div>
+              <div>
+                <span class="sp-contact-badge blue">Important</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 3: Payments & Fees -->
+      <section class="sp-band-white reveal" id="terms-section-3">
+        <div class="site-container">
+          <p class="section-kicker">Transaction Rules</p>
+          <h2>Payments &amp; <span class="h2-gold">Fees</span></h2>
+          <p class="sp-intro-p">We enforce structured fee models and government fee management to protect payments and guarantee quick routing to state treasury portals.</p>
+          
+          <div class="sp-channels">
+            <div class="sp-channel c-blue">
+              <div class="sp-ch-icon blue"><i data-lucide="credit-card"></i></div>
+              <h3>Advance Payment</h3>
+              <p>All facilitation charges and corresponding portal fees must be cleared before form-filling and submission processes are initiated.</p>
+            </div>
+            
+            <div class="sp-channel c-blue">
+              <div class="sp-ch-icon blue"><i data-lucide="landmark"></i></div>
+              <h3>Government Portal Fees</h3>
+              <p>Fees routed to official government departments are credited to state accounts and cannot be refunded or adjusted under any circumstances.</p>
+            </div>
+            
+            <div class="sp-channel c-gold">
+              <div class="sp-ch-icon gold"><i data-lucide="refresh-ccw"></i></div>
+              <h3>Facilitation Refund Rules</h3>
+              <p>Our manual verification and facilitation fee is fully earned once document review or electronic uploading begins, making it non-refundable.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 4: Limitation of Liability -->
+      <section class="sp-band-tint reveal" id="terms-section-4">
+        <div class="site-container">
+          <p class="section-kicker">Legal Policy</p>
+          <h2>No Guaranteed <span class="h2-gold">Approval</span></h2>
+          <p class="sp-intro-p">Sanctioning, verification approvals, issuance speeds, and final decisions rest strictly within the administrative jurisdiction of government bodies.</p>
+          
+          <div class="sp-contacts">
+            <div class="sp-contact-row">
+              <div class="sp-contact-icon gold"><i data-lucide="shield-alert"></i></div>
+              <div class="sp-contact-body">
+                <strong>Department Discretion</strong>
+                <span>Official authorities retain the absolute right to approve, reject, seek clarifications, or delay any certificate or card application based on internal compliance standards.</span>
+              </div>
+              <div>
+                <span class="sp-contact-badge gold">Discretionary</span>
+              </div>
+            </div>
+            
+            <div class="sp-contact-row">
+              <div class="sp-contact-icon blue"><i data-lucide="clock"></i></div>
+              <div class="sp-contact-body">
+                <strong>No Timeline Guarantees</strong>
+                <span>Timelines displayed on our screens represent standard averages. We are not responsible for government server down-times, maintenance intervals, or holiday delays.</span>
+              </div>
+              <div>
+                <span class="sp-contact-badge blue">Estimates Only</span>
+              </div>
+            </div>
+            
+            <div class="sp-contact-row">
+              <div class="sp-contact-icon gold"><i data-lucide="x-circle"></i></div>
+              <div class="sp-contact-body">
+                <strong>Exclusion of Liability</strong>
+                <span>One Point will not be held liable for commercial delays, travel ticket cancellations, or any direct/indirect financial loss stemming from delayed or rejected government requests.</span>
+              </div>
+              <div>
+                <span class="sp-contact-badge gold">Excluded</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Bottom Action Strip -->
+      <section class="sp-band-white reveal">
+        <div class="site-container">
+          <div class="sp-cta">
+            <div class="sp-cta-left">
+              <div class="sp-cta-icon"><i data-lucide="shield-alert"></i></div>
+              <div class="sp-cta-text">
+                <strong>Transparent Facilitation</strong>
+                <span>We explain charges, required documents, and service limitations before processing.</span>
+              </div>
+            </div>
+            <div class="sp-cta-actions">
+              <a class="sp-cta-btn white" href="support.html">
+                <i data-lucide="help-circle"></i> Request Help
+              </a>
+              <a class="sp-cta-btn ghost" href="services.html">
+                <i data-lucide="search"></i> Browse Services
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <div data-site-footer></div>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+    <script src="assets/app.js?v=clean_js_v11" defer></script>
+  
+<script id="line-alignment-script">
+  document.addEventListener("DOMContentLoaded", function() {
+    setTimeout(() => {
+      document.querySelectorAll(".section-head h2").forEach(h2 => {
+        let align = window.getComputedStyle(h2).textAlign;
+        let parent = h2.closest('.section-head');
+        if (parent) {
+          if (align === "center") {
+            parent.classList.add("center-line");
+          } else {
+            parent.classList.add("left-line");
+          }
+        }
+      });
+    }, 100); // small delay to ensure CSS is applied
+  });
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,639 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Support Center for One Point Digital Services &mdash; WhatsApp, call, document help, application tracking and quick FAQs. We're here every day, 9 AM to 8 PM.">
+    <title>Support Center | One Point Digital Services</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+        <link rel="stylesheet" href="assets/onepoint.css?v=2">
+
+    <style>
+      /* â”€â”€â”€ Brand tokens â”€â”€â”€ */
+      :root {
+        --brand-blue:      #125696;
+        --brand-blue-dark: #0c4da2;
+        --brand-gold:      #b8860b;
+        --brand-gold-light:#d2a12a;
+        --text-primary:    #1a2942;
+        --text-secondary:  #4a5568;
+        --text-muted:      #718096;
+        --border:          rgba(18,86,150,0.12);
+        --surface:         #ffffff;
+        --page-bg:         #f5f8fe;
+      }
+
+      /* â”€â”€â”€ Hero â”€â”€â”€ */
+      .compact-hero {
+        background:
+          linear-gradient(90deg, rgba(18,86,150,0.97) 0%, rgba(18,86,150,0.88) 50%, rgba(18,86,150,0.60) 100%),
+          url('assets/disclaimer_human.png') no-repeat center / cover !important;
+      }
+      .compact-hero::before,
+      .compact-hero::after { display: none !important; }
+      .compact-hero { padding-inline: 0 !important; }
+      .compact-hero h1 { text-align: left !important; margin-inline: 0 !important; }
+      .compact-hero p:not(.eyebrow) { text-align: left !important; margin-inline: 0 !important; }
+      .compact-hero .hero-actions { justify-content: flex-start !important; }
+
+      /* â”€â”€â”€ Page shell â”€â”€â”€ */
+      /* â”€â”€â”€ Section band backgrounds â”€â”€â”€ */
+      /* padding comes from global: section { padding-top:64px; padding-bottom:64px } */
+      .sp-band-white { background: #ffffff; padding-bottom: clamp(56px, 8vw, 88px); }
+      .unified-apply-section { padding-top: clamp(64px, 8vw, 96px) !important; }
+      .sp-band-tint  { background: #f5f8fe; }
+
+      /* â”€â”€â”€ Section sub-heading under h2 â”€â”€â”€ */
+      .sp-intro-p {
+        margin: 0 0 32px;
+      }
+
+      /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+         1. CHANNEL CARDS
+      â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+      .sp-channels {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+        margin-bottom: 0;
+      }
+      @media (max-width: 768px) { .sp-channels { grid-template-columns: 1fr; } }
+      @media (min-width: 480px) and (max-width: 768px) { .sp-channels { grid-template-columns: repeat(2,1fr); } }
+
+      .sp-channel {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 24px 22px 20px;
+        display: flex;
+        flex-direction: column;
+        transition: border-color 0.2s, box-shadow 0.2s;
+      }
+      .sp-channel:hover {
+        border-color: rgba(18,86,150,0.3);
+        box-shadow: 0 4px 20px rgba(18,86,150,0.07);
+      }
+      /* no left accent border &mdash; clean flat cards */
+
+      .sp-ch-icon {
+        width: 44px; height: 44px;
+        border-radius: 12px;
+        display: flex; align-items: center; justify-content: center;
+        margin-bottom: 16px;
+        flex-shrink: 0;
+      }
+      .sp-ch-icon.blue { background: rgba(18,86,150,0.08); color: var(--brand-blue); }
+      .sp-ch-icon.gold { background: rgba(184,134,11,0.09); color: var(--brand-gold); }
+      .sp-ch-icon svg { width:20px; height:20px; }
+
+      .sp-channel h3 {
+        font-size: 0.95rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        margin: 0 0 6px;
+      }
+      .sp-channel p {
+        font-size: 0.84rem !important;
+        color: var(--text-secondary) !important;
+        line-height: 1.55 !important;
+        margin: 0 0 16px !important;
+        flex: 1;
+      }
+      .sp-ch-meta {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        font-size: 0.76rem;
+        font-weight: 600;
+        color: var(--text-muted);
+        margin-bottom: 14px;
+      }
+      .sp-ch-meta svg { width:12px; height:12px; }
+
+      .sp-ch-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 9px 16px;
+        border-radius: 8px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.18s;
+        width: fit-content;
+        border: 1px solid;
+      }
+      .sp-ch-btn svg { width:14px; height:14px; }
+      .sp-ch-btn.blue {
+        color: var(--brand-blue);
+        background: rgba(18,86,150,0.07);
+        border-color: rgba(18,86,150,0.2);
+      }
+      .sp-ch-btn.blue:hover {
+        background: rgba(18,86,150,0.14);
+        color: var(--brand-blue-dark);
+      }
+      .sp-ch-btn.gold {
+        color: var(--brand-gold);
+        background: rgba(184,134,11,0.07);
+        border-color: rgba(184,134,11,0.22);
+      }
+      .sp-ch-btn.gold:hover {
+        background: rgba(184,134,11,0.14);
+        color: #8a6008;
+      }
+
+      /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+         2. CONTACT ROWS TABLE
+      â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+      .sp-contacts {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        overflow: hidden;
+      }
+      .sp-contacts-header {
+        display: grid;
+        grid-template-columns: 44px 1fr auto;
+        align-items: center;
+        gap: 16px;
+        padding: 14px 24px;
+        background: rgba(18,86,150,0.04);
+        border-bottom: 1px solid var(--border);
+      }
+      .sp-contacts-header span {
+        font-size: 0.72rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.09em;
+        color: var(--text-muted);
+      }
+      .sp-contact-row {
+        display: grid;
+        grid-template-columns: 44px 1fr auto;
+        align-items: center;
+        gap: 16px;
+        padding: 16px 24px;
+        border-bottom: 1px solid rgba(18,86,150,0.07);
+        transition: background 0.18s;
+      }
+      .sp-contact-row:last-child { border-bottom: none; }
+      .sp-contact-row:hover { background: rgba(18,86,150,0.025); }
+
+      .sp-contact-icon {
+        width: 40px; height: 40px;
+        border-radius: 10px;
+        display: flex; align-items: center; justify-content: center;
+        flex-shrink: 0;
+      }
+      .sp-contact-icon.blue { background: rgba(18,86,150,0.08); color: var(--brand-blue); border: 1px solid rgba(18,86,150,0.14); }
+      .sp-contact-icon.gold { background: rgba(184,134,11,0.08); color: var(--brand-gold); border: 1px solid rgba(184,134,11,0.18); }
+      .sp-contact-icon svg { width:17px; height:17px; }
+
+      .sp-contact-body strong {
+        display: block !important;
+        font-size: 0.88rem !important;
+        font-weight: 700 !important;
+        color: var(--text-primary) !important;
+        margin-bottom: 2px !important;
+      }
+      .sp-contact-body span {
+        font-size: 0.8rem !important;
+        color: var(--text-secondary) !important;
+        line-height: 1.45 !important;
+      }
+      .sp-contact-link {
+        font-size: 0.8rem;
+        font-weight: 700;
+        color: var(--brand-blue);
+        background: rgba(18,86,150,0.07);
+        border: 1px solid rgba(18,86,150,0.18);
+        border-radius: 7px;
+        padding: 6px 14px;
+        text-decoration: none;
+        white-space: nowrap;
+        transition: all 0.18s;
+        flex-shrink: 0;
+        min-width: 82px;
+        text-align: center;
+      }
+      .sp-contact-link:hover {
+        background: var(--brand-blue);
+        color: #ffffff;
+        border-color: var(--brand-blue);
+      }
+
+      /* Hours pill inside contacts */
+      .sp-hours-row {
+        padding: 12px 24px;
+        background: rgba(18,86,150,0.04);
+        border-top: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 0.82rem;
+        font-weight: 600;
+        color: var(--text-secondary) !important;
+      }
+      .sp-hours-row svg { width:14px; height:14px; color: var(--brand-gold-light); flex-shrink: 0; }
+
+      /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+         3. QUICK FAQ
+      â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+      .sp-faq-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        align-items: start;
+      }
+      @media (max-width: 640px) { .sp-faq-grid { grid-template-columns: 1fr; } }
+
+      .sp-faq-item {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        overflow: hidden;
+        transition: border-color 0.18s, box-shadow 0.18s;
+      }
+      .sp-faq-item:hover {
+        border-color: rgba(18,86,150,0.26);
+        box-shadow: 0 2px 12px rgba(18,86,150,0.06);
+      }
+      .sp-faq-item[open] {
+        border-color: rgba(18,86,150,0.3);
+        border-left: 3px solid var(--brand-blue);
+      }
+      .sp-faq-item summary {
+        list-style: none;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 14px 16px;
+        cursor: pointer;
+        font-size: 0.86rem !important;
+        font-weight: 600 !important;
+        color: var(--text-primary) !important;
+        user-select: none;
+        transition: background 0.18s;
+      }
+      .sp-faq-item summary::-webkit-details-marker { display: none; }
+      .sp-faq-item[open] summary {
+        background: rgba(18,86,150,0.03);
+        color: var(--brand-blue-dark) !important;
+      }
+      .sp-faq-dot {
+        width: 7px; height: 7px;
+        border-radius: 50%;
+        background: var(--brand-gold-light);
+        flex-shrink: 0;
+        transition: background 0.18s;
+      }
+      .sp-faq-item[open] .sp-faq-dot { background: var(--brand-blue); }
+      .sp-faq-chevron {
+        margin-left: auto;
+        width: 15px; height: 15px;
+        color: #b0bec5;
+        transition: transform 0.28s, color 0.18s;
+        flex-shrink: 0;
+      }
+      .sp-faq-item[open] .sp-faq-chevron {
+        transform: rotate(180deg);
+        color: var(--brand-blue);
+      }
+      .sp-faq-answer {
+        padding: 2px 16px 14px 33px;
+        font-size: 0.835rem !important;
+        color: var(--text-secondary) !important;
+        line-height: 1.65 !important;
+        border-top: 1px solid rgba(18,86,150,0.07);
+      }
+      .sp-faq-answer a { color: var(--brand-blue); font-weight: 600; text-decoration: underline; }
+
+      /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+         4. BOTTOM CTA STRIP
+      â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+      .sp-cta {
+        background: var(--brand-blue);
+        border-radius: 16px;
+        padding: 24px 28px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        flex-wrap: wrap;
+      }
+      .sp-cta-left {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+      .sp-cta-icon {
+        width: 44px; height: 44px;
+        border-radius: 10px;
+        background: rgba(255,255,255,0.12);
+        border: 1px solid rgba(255,255,255,0.2);
+        display: flex; align-items: center; justify-content: center;
+        color: #ffffff;
+        flex-shrink: 0;
+      }
+      .sp-cta-icon svg { width:20px; height:20px; }
+      .sp-cta-text strong {
+        display: block !important;
+        font-size: 0.95rem !important;
+        font-weight: 700 !important;
+        color: #ffffff !important;
+        margin-bottom: 2px !important;
+      }
+      .sp-cta-text span {
+        font-size: 0.82rem !important;
+        color: rgba(255,255,255,0.8) !important;
+      }
+      .sp-cta-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+      .sp-cta-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        padding: 9px 18px;
+        border-radius: 9px;
+        font-size: 0.875rem;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.18s;
+        border: 1px solid;
+        white-space: nowrap;
+      }
+      .sp-cta-btn svg { width:14px; height:14px; }
+      .sp-cta-btn.white {
+        background: #ffffff;
+        color: var(--brand-blue-dark);
+        border-color: transparent;
+      }
+      .sp-cta-btn.white:hover {
+        background: #edf2fb;
+      }
+      .sp-cta-btn.ghost {
+        background: rgba(255,255,255,0.1);
+        color: #ffffff;
+        border-color: rgba(255,255,255,0.3);
+      }
+      .sp-cta-btn.ghost:hover {
+        background: rgba(255,255,255,0.2);
+        border-color: rgba(255,255,255,0.5);
+      }
+    </style></head>
+  <body>
+    <div data-site-nav>
+      <header class="site-header fallback-site-header">
+        <nav class="nav-bar" aria-label="Primary fallback">
+          <a class="brand" href="index.html" aria-label="One Point Digital Services home">
+            <img class="brand-logo brand-logo-header" src="assets/logo-bisen-one-point-footer.svg" alt="Bisen One Point Suvidha Kendra">
+          </a>
+          <div class="fallback-nav-links">
+            <a class="nav-link" href="index.html">Home</a>
+            <a class="nav-link" href="services.html">Services</a>
+            <a class="nav-link" href="products.html">Store</a>
+            <a class="nav-link" href="track-application.html">Track</a>
+            <a class="nav-link" href="contact.html">Contact</a>
+          </div>
+        </nav>
+      </header>
+    </div>
+
+    <main>
+
+      <!-- â•â• Hero â•â• -->
+      <div class="page-shell">
+        <section class="compact-hero">
+          <div class="site-container">
+            <p class="eyebrow">Support Center</p>
+            <h1>Fast help for forms, payments &amp; documents.</h1>
+            <p>Reach us before payment, after application, or during document review &mdash; every day, 9 AM to 8 PM.</p>
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="https://wa.me/919473946181" target="_blank" rel="noopener"><i data-lucide="message-circle"></i> WhatsApp Us</a>
+              <a class="btn btn-ghost" href="track-application.html"><i data-lucide="search"></i> Track Request</a>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- â•â• Section 1 &middot; Get in Touch â•â• -->
+      <section class="sp-band-white reveal">
+        <div class="site-container">
+          <p class="section-kicker">Get in Touch</p>
+          <h2>Choose how to reach <span class="h2-gold">us</span></h2>
+          <p class="sp-intro-p">Three ways to get instant support &mdash; pick what works best for you.</p>
+
+          <div class="sp-channels">
+
+            <div class="sp-channel c-blue">
+              <div class="sp-ch-icon blue"><i data-lucide="message-circle"></i></div>
+              <h3>WhatsApp Support</h3>
+              <p>Send documents, ask fees, check application status &mdash; all on WhatsApp in minutes.</p>
+              <div class="sp-ch-meta"><i data-lucide="clock"></i> Avg. reply &lt; 10 minutes</div>
+              <a class="sp-ch-btn blue" href="https://wa.me/919473946181" target="_blank" rel="noopener">
+                <i data-lucide="message-circle"></i> Chat on WhatsApp
+              </a>
+            </div>
+
+            <div class="sp-channel c-blue">
+              <div class="sp-ch-icon blue"><i data-lucide="phone-call"></i></div>
+              <h3>Call Support</h3>
+              <p>Call us directly for step-by-step guidance on any government, student or business service.</p>
+              <div class="sp-ch-meta"><i data-lucide="clock"></i> Available 9 AM &mdash; 8 PM daily</div>
+              <a class="sp-ch-btn blue" href="tel:+919473946181">
+                <i data-lucide="phone"></i> Call Now
+              </a>
+            </div>
+
+            <div class="sp-channel c-gold">
+              <div class="sp-ch-icon gold"><i data-lucide="file-check"></i></div>
+              <h3>Document Help</h3>
+              <p>Browse our services page for document checklists or WhatsApp us for a personalized list.</p>
+              <div class="sp-ch-meta"><i data-lucide="folder-open"></i> Checklists for every service</div>
+              <a class="sp-ch-btn gold" href="services.html">
+                <i data-lucide="search"></i> Browse Services
+              </a>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- â•â• Section 2 &middot; Contact Details â•â• -->
+      <section class="sp-band-tint reveal">
+        <div class="site-container">
+          <p class="section-kicker">Contact Details</p>
+          <h2>All ways to reach <span class="h2-gold">us</span></h2>
+          <p class="sp-intro-p">Message, call, form or track &mdash; every channel in one place.</p>
+
+          <div class="sp-contacts">
+            <div class="sp-contact-row">
+              <div class="sp-contact-icon blue"><i data-lucide="message-circle"></i></div>
+              <div class="sp-contact-body">
+                <strong>WhatsApp</strong>
+                <span>+91 94739 46181 &mdash; send documents, ask queries, get status updates</span>
+              </div>
+              <a class="sp-contact-link" href="https://wa.me/919473946181" target="_blank" rel="noopener">Open &#x2197;</a>
+            </div>
+            <div class="sp-contact-row">
+              <div class="sp-contact-icon blue"><i data-lucide="phone"></i></div>
+              <div class="sp-contact-body">
+                <strong>Phone Call</strong>
+                <span>+91 94739 46181 &mdash; call us directly during business hours</span>
+              </div>
+              <a class="sp-contact-link" href="tel:+919473946181">Call &#x2197;</a>
+            </div>
+            <div class="sp-contact-row">
+              <div class="sp-contact-icon gold"><i data-lucide="send"></i></div>
+              <div class="sp-contact-body">
+                <strong>Contact Form</strong>
+                <span>Fill a detailed query and we'll respond within 2&mdash;4 hours</span>
+              </div>
+              <a class="sp-contact-link" href="contact.html">Form &#x2197;</a>
+            </div>
+            <div class="sp-contact-row">
+              <div class="sp-contact-icon blue"><i data-lucide="search"></i></div>
+              <div class="sp-contact-body">
+                <strong>Track Application</strong>
+                <span>Check the live status of your submitted application with your tracking ID</span>
+              </div>
+              <a class="sp-contact-link" href="track-application.html">Track &#x2197;</a>
+            </div>
+            <div class="sp-hours-row">
+              <i data-lucide="clock"></i>
+              Open Monday &mdash; Sunday &nbsp;&middot;&nbsp; 9:00 AM to 8:00 PM
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- â•â• Section 3 &middot; Quick Answers + CTA â•â• -->
+      <section class="sp-band-white reveal">
+        <div class="site-container">
+          <p class="section-kicker">Quick Answers</p>
+          <h2>Common support <span class="h2-gold">questions</span></h2>
+          <p class="sp-intro-p">Find quick answers below. For anything else, WhatsApp us directly.</p>
+
+          <div class="sp-faq-grid">
+
+            <details class="sp-faq-item">
+              <summary>
+                <span class="sp-faq-dot"></span>
+                How do I pay for online services?
+                <i data-lucide="chevron-down" class="sp-faq-chevron"></i>
+              </summary>
+              <div class="sp-faq-answer">
+                <p>We accept UPI (Google Pay, PhonePe, Paytm, BHIM), cash at the center, and bank transfer. For remote requests, send the payment screenshot as confirmation.</p>
+              </div>
+            </details>
+
+            <details class="sp-faq-item">
+              <summary>
+                <span class="sp-faq-dot"></span>
+                Can I visit the center physically?
+                <i data-lucide="chevron-down" class="sp-faq-chevron"></i>
+              </summary>
+              <div class="sp-faq-answer">
+                <p>Yes! Walk in anytime between 9 AM and 8 PM, Monday to Sunday. Our team will assist you directly at the counter.</p>
+              </div>
+            </details>
+
+            <details class="sp-faq-item">
+              <summary>
+                <span class="sp-faq-dot"></span>
+                Are my documents and data safe?
+                <i data-lucide="chevron-down" class="sp-faq-chevron"></i>
+              </summary>
+              <div class="sp-faq-answer">
+                <p>Yes. Documents are used only for the requested service and never shared. We follow all UIDAI guidelines. See our <a href="privacy.html">Privacy Policy</a>.</p>
+              </div>
+            </details>
+
+            <details class="sp-faq-item">
+              <summary>
+                <span class="sp-faq-dot"></span>
+                How do I check my application status?
+                <i data-lucide="chevron-down" class="sp-faq-chevron"></i>
+              </summary>
+              <div class="sp-faq-answer">
+                <p>Use our <a href="track-application.html">Track Application</a> page with your tracking ID, or WhatsApp us your tracking ID for an instant status update.</p>
+              </div>
+            </details>
+
+            <details class="sp-faq-item">
+              <summary>
+                <span class="sp-faq-dot"></span>
+                What if my application gets rejected?
+                <i data-lucide="chevron-down" class="sp-faq-chevron"></i>
+              </summary>
+              <div class="sp-faq-answer">
+                <p>If the rejection is due to our error, we re-process at no extra charge. For rejections due to wrong documents submitted by you, a re-application charge applies. See <a href="refund-policy.html">Refund Policy</a>.</p>
+              </div>
+            </details>
+
+            <details class="sp-faq-item">
+              <summary>
+                <span class="sp-faq-dot"></span>
+                Do you work on Sundays and holidays?
+                <i data-lucide="chevron-down" class="sp-faq-chevron"></i>
+              </summary>
+              <div class="sp-faq-answer">
+                <p>We are open Monday to Sunday, 9 AM to 8 PM. On major public holidays we may have reduced hours &mdash; WhatsApp us to confirm availability.</p>
+              </div>
+            </details>
+
+          </div>
+
+          <!-- CTA -->
+          <div class="sp-cta">
+            <div class="sp-cta-left">
+              <div class="sp-cta-icon"><i data-lucide="message-circle"></i></div>
+              <div class="sp-cta-text">
+                <strong>Still need help?</strong>
+                <span>Our team responds within minutes &mdash; every day, 9 AM to 8 PM.</span>
+              </div>
+            </div>
+            <div class="sp-cta-actions">
+              <a class="sp-cta-btn white" href="https://wa.me/919473946181" target="_blank" rel="noopener">
+                <i data-lucide="message-circle"></i> WhatsApp Us
+              </a>
+              <a class="sp-cta-btn ghost" href="contact.html">
+                <i data-lucide="send"></i> Send a Query
+              </a>
+              <a class="sp-cta-btn ghost" href="faq.html">
+                <i data-lucide="help-circle"></i> Full FAQ
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+    </main>
+
+    <div data-site-footer></div>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+    <script src="assets/app.js?v=clean_js_v11" defer></script>
+  
+<script id="line-alignment-script">
+  document.addEventListener("DOMContentLoaded", function() {
+    setTimeout(() => {
+      document.querySelectorAll(".section-head h2").forEach(h2 => {
+        let align = window.getComputedStyle(h2).textAlign;
+        let parent = h2.closest('.section-head');
+        if (parent) {
+          if (align === "center") {
+            parent.classList.add("center-line");
+          } else {
+            parent.classList.add("left-line");
+          }
+        }
+      });
+    }, 100); // small delay to ensure CSS is applied
+  });
+</script>
+</body>
+</html>

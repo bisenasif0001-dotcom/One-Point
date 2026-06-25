@@ -1,0 +1,111 @@
+"use strict";
+
+const products = [
+  { slug: "spotify-plaques", name: "Spotify Plaques", category: "Personalized Gifts", image: "https://images.unsplash.com/photo-1501386761578-eac5c94b800a?auto=format&fit=crop&w=900&q=82", price: 449, taxRate: 18 },
+  { slug: "visiting-cards", name: "Visiting Cards", category: "Business Branding", image: "https://images.unsplash.com/photo-1586281380349-632531db7ed4?auto=format&fit=crop&w=900&q=82", price: 299, taxRate: 18 },
+  { slug: "acrylic-name-plates", name: "Acrylic Name Plates", category: "UV DTF Printing", image: "https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?auto=format&fit=crop&w=900&q=82", price: 599, taxRate: 18 },
+  { slug: "anime-stickers", name: "Anime Stickers", category: "Trending Products", image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=900&q=82", price: 149, taxRate: 18 },
+  { slug: "packaging-stickers", name: "Packaging Labels", category: "Sticker Printing", image: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?auto=format&fit=crop&w=900&q=82", price: 179, taxRate: 18 },
+  { slug: "logo-stickers", name: "Logo Stickers", category: "Sticker Printing", image: "https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?auto=format&fit=crop&w=900&q=82", price: 99, taxRate: 18 },
+  { slug: "waterproof-stickers", name: "Waterproof Stickers", category: "Sticker Printing", image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=900&q=82", price: 149, taxRate: 18 },
+  { slug: "holographic-stickers", name: "Holographic Stickers", category: "Sticker Printing", image: "https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=900&q=82", price: 199, taxRate: 18 },
+  { slug: "custom-t-shirts", name: "Custom T-Shirts", category: "T-Shirt Printing", image: "https://images.unsplash.com/photo-1523381294911-8d3cead13475?auto=format&fit=crop&w=900&q=82", price: 399, taxRate: 18 },
+  { slug: "couple-t-shirts", name: "Couple T-Shirts", category: "T-Shirt Printing", image: "https://images.unsplash.com/photo-1523381294911-8d3cead13475?auto=format&fit=crop&w=900&q=82", price: 699, taxRate: 18 },
+  { slug: "polo-t-shirts", name: "Polo T-Shirts", category: "T-Shirt Printing", image: "https://images.unsplash.com/photo-1523381294911-8d3cead13475?auto=format&fit=crop&w=900&q=82", price: 499, taxRate: 18 },
+  { slug: "hoodies", name: "Hoodies", category: "T-Shirt Printing", image: "https://images.unsplash.com/photo-1523381294911-8d3cead13475?auto=format&fit=crop&w=900&q=82", price: 899, taxRate: 18 },
+  { slug: "dtf-transfers", name: "DTF Transfers", category: "T-Shirt Printing", image: "https://images.unsplash.com/photo-1523381294911-8d3cead13475?auto=format&fit=crop&w=900&q=82", price: 149, taxRate: 18 },
+  { slug: "magic-mugs", name: "Magic Mugs", category: "Personalized Gifts", image: "https://images.unsplash.com/photo-1514228742587-6b1558fcca3d?auto=format&fit=crop&w=900&q=82", price: 249, taxRate: 18 },
+  { slug: "custom-mugs", name: "Custom Mugs", category: "Personalized Gifts", image: "https://images.unsplash.com/photo-1514228742587-6b1558fcca3d?auto=format&fit=crop&w=900&q=82", price: 199, taxRate: 18 },
+  { slug: "mobile-covers", name: "Mobile Covers", category: "Personalized Gifts", image: "https://images.unsplash.com/photo-1556656793-08538906a9f8?auto=format&fit=crop&w=900&q=82", price: 299, taxRate: 18 },
+  { slug: "photo-frames", name: "Photo Frames", category: "Personalized Gifts", image: "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=900&q=82", price: 349, taxRate: 18 },
+  { slug: "led-frames", name: "LED Frames", category: "Personalized Gifts", image: "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=900&q=82", price: 799, taxRate: 18 },
+  { slug: "keychains", name: "Keychains", category: "Personalized Gifts", image: "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=900&q=82", price: 99, taxRate: 18 },
+  { slug: "cushion-printing", name: "Cushion Printing", category: "Personalized Gifts", image: "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=900&q=82", price: 399, taxRate: 18 },
+  { slug: "vinyl-stickers", name: "Vinyl Stickers", category: "Sticker Printing", image: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?auto=format&fit=crop&w=900&q=82", price: 149, taxRate: 18 },
+  { slug: "laptop-stickers", name: "Laptop Stickers", category: "Sticker Printing", image: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?auto=format&fit=crop&w=900&q=82", price: 129, taxRate: 18 },
+  { slug: "qr-code-stickers", name: "QR Code Stickers", category: "Sticker Printing", image: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?auto=format&fit=crop&w=900&q=82", price: 99, taxRate: 18 },
+  { slug: "product-labels", name: "Product Labels", category: "Sticker Printing", image: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?auto=format&fit=crop&w=900&q=82", price: 179, taxRate: 18 },
+  { slug: "cup-branding", name: "Cup Branding", category: "UV DTF Printing", image: "https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?auto=format&fit=crop&w=900&q=82", price: 199, taxRate: 18 },
+  { slug: "bottle-branding", name: "Bottle Branding", category: "UV DTF Printing", image: "https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?auto=format&fit=crop&w=900&q=82", price: 249, taxRate: 18 },
+  { slug: "glass-stickers", name: "Glass Stickers", category: "UV DTF Printing", image: "https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?auto=format&fit=crop&w=900&q=82", price: 149, taxRate: 18 },
+  { slug: "business-logo-transfers", name: "Business Logo Transfers", category: "UV DTF Printing", image: "https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?auto=format&fit=crop&w=900&q=82", price: 249, taxRate: 18 },
+  { slug: "product-branding", name: "Product Branding", category: "UV DTF Printing", image: "https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?auto=format&fit=crop&w=900&q=82", price: 299, taxRate: 18 }
+];
+
+const services = [
+  { slug: "pan-card", name: "PAN Card", category: "E-Services", price: 199, taxRate: 0 },
+  { slug: "new-pan", name: "New PAN", category: "E-Services", price: 199, taxRate: 0 },
+  { slug: "pan-correction", name: "PAN Correction", category: "E-Services", price: 199, taxRate: 0 },
+  { slug: "e-pan-download", name: "E-PAN Download", category: "E-Services", price: 199, taxRate: 0 },
+  { slug: "card-reprint", name: "Card Reprint", category: "E-Services", price: 199, taxRate: 0 },
+  { slug: "ayushman-card", name: "Ayushman Card", category: "E-Services", price: 199, taxRate: 0 },
+  { slug: "voter-id", name: "Voter ID", category: "E-Services", price: 199, taxRate: 0 },
+  { slug: "passport-assistance", name: "Passport Assistance", category: "E-Services", price: 199, taxRate: 0 },
+  { slug: "birth-certificate", name: "Birth Certificate", category: "E-Services", price: 199, taxRate: 0 },
+  { slug: "income-certificate", name: "Income Certificate", category: "E-Services", price: 199, taxRate: 0 },
+  { slug: "domicile-certificate", name: "Domicile Certificate", category: "E-Services", price: 199, taxRate: 0 },
+  { slug: "caste-certificate", name: "Caste Certificate", category: "E-Services", price: 199, taxRate: 0 },
+  { slug: "police-verification", name: "Police Verification", category: "E-Services", price: 199, taxRate: 0 },
+  { slug: "exam-form-filling", name: "Exam Form Filling", category: "EduPoint", price: 199, taxRate: 0 },
+  { slug: "admit-card-download", name: "Admit Card Download", category: "EduPoint", price: 199, taxRate: 0 },
+  { slug: "result-download", name: "Result Download", category: "EduPoint", price: 199, taxRate: 0 },
+  { slug: "scholarship-form", name: "Scholarship Form", category: "EduPoint", price: 199, taxRate: 0 },
+  { slug: "ccc-o-level", name: "CCC / O Level", category: "EduPoint", price: 199, taxRate: 0 },
+  { slug: "university-services", name: "University Services", category: "EduPoint", price: 199, taxRate: 0 },
+  { slug: "photocopy-printing", name: "Photocopy & Printing", category: "EduPoint", price: 199, taxRate: 0 },
+  { slug: "lamination", name: "Lamination", category: "EduPoint", price: 199, taxRate: 0 },
+  { slug: "online-test", name: "Online Test", category: "EduPoint", price: 199, taxRate: 0 },
+  { slug: "resume-builder", name: "Resume Builder", category: "EduPoint", price: 199, taxRate: 0 },
+  { slug: "gst-registration", name: "GST Registration", category: "ProServe", price: 199, taxRate: 0 },
+  { slug: "msme-registration", name: "MSME Registration", category: "ProServe", price: 199, taxRate: 0 },
+  { slug: "digital-signature", name: "Digital Signature", category: "ProServe", price: 199, taxRate: 0 },
+  { slug: "fssai", name: "FSSAI", category: "ProServe", price: 199, taxRate: 0 },
+  { slug: "shop-license", name: "Shop License", category: "ProServe", price: 199, taxRate: 0 },
+  { slug: "iec-code", name: "IEC Code", category: "ProServe", price: 199, taxRate: 0 },
+  { slug: "trademark", name: "Trademark", category: "ProServe", price: 199, taxRate: 0 },
+  { slug: "company-registration", name: "Company Registration", category: "ProServe", price: 199, taxRate: 0 },
+  { slug: "pm-kisan", name: "PM Kisan", category: "CSC Services", price: 199, taxRate: 0 },
+  { slug: "pension", name: "Pension", category: "CSC Services", price: 199, taxRate: 0 },
+  { slug: "insurance", name: "Insurance", category: "CSC Services", price: 199, taxRate: 0 },
+  { slug: "banking", name: "Banking", category: "CSC Services", price: 199, taxRate: 0 },
+  { slug: "ayushman", name: "Ayushman", category: "CSC Services", price: 199, taxRate: 0 },
+  { slug: "jan-seva", name: "Jan Seva", category: "CSC Services", price: 199, taxRate: 0 },
+  { slug: "typing", name: "Typing", category: "Documentation", price: 199, taxRate: 0 },
+  { slug: "scan", name: "Scan", category: "Documentation", price: 199, taxRate: 0 },
+  { slug: "print", name: "Print", category: "Documentation", price: 199, taxRate: 0 },
+  { slug: "print-scan", name: "Print & Scan", category: "Documentation", price: 199, taxRate: 0 },
+  { slug: "color-printing", name: "Color Printing", category: "Documentation", price: 199, taxRate: 0 },
+  { slug: "document-scanning", name: "Document Scanning", category: "Documentation", price: 199, taxRate: 0 },
+  { slug: "affidavit", name: "Affidavit", category: "Documentation", price: 199, taxRate: 0 },
+  { slug: "certificates", name: "Certificates", category: "Documentation", price: 199, taxRate: 0 },
+  { slug: "mobile-recharge", name: "Mobile Recharge", category: "Bill & Recharge", price: 199, taxRate: 0 },
+  { slug: "electricity-bill", name: "Electricity Bill", category: "Bill & Recharge", price: 199, taxRate: 0 },
+  { slug: "fastag", name: "FASTag", category: "Bill & Recharge", price: 199, taxRate: 0 },
+  { slug: "dth-recharge", name: "DTH Recharge", category: "Bill & Recharge", price: 199, taxRate: 0 },
+  { slug: "water-bill", name: "Water Bill", category: "Bill & Recharge", price: 199, taxRate: 0 },
+  { slug: "logo-design", name: "Logo Design", category: "Design Services", price: 199, taxRate: 0 },
+  { slug: "flex-design", name: "Flex Design", category: "Design Services", price: 199, taxRate: 0 },
+  { slug: "visiting-card-design", name: "Visiting Card", category: "Design Services", price: 199, taxRate: 0 },
+  { slug: "banner-design", name: "Banner Design", category: "Design Services", price: 199, taxRate: 0 },
+  { slug: "social-media-post", name: "Social Media Post", category: "Design Services", price: 199, taxRate: 0 },
+  { slug: "bus-ticket", name: "Bus Ticket", category: "Travel Services", price: 199, taxRate: 0 },
+  { slug: "train-ticket", name: "Train Ticket", category: "Travel Services", price: 199, taxRate: 0 },
+  { slug: "flight-booking", name: "Flight Booking", category: "Travel Services", price: 199, taxRate: 0 },
+  { slug: "hotel-booking", name: "Hotel Booking", category: "Travel Services", price: 199, taxRate: 0 },
+  { slug: "tour-package", name: "Tour Package", category: "Travel Services", price: 199, taxRate: 0 }
+];
+
+function getProduct(slug) {
+  return products.find((item) => item.slug === slug);
+}
+
+function getService(slug) {
+  return services.find((item) => item.slug === slug);
+}
+
+module.exports = {
+  products,
+  services,
+  getProduct,
+  getService
+};

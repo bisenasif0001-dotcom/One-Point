@@ -1,0 +1,114 @@
+﻿<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Contact One Point Digital Services for government services, student services, business registrations, printing and products.">
+    <title>Contact Us | One Point Digital Services</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+        <link rel="stylesheet" href="assets/onepoint.css?v=2">
+
+    <style>
+      .compact-hero.contact-hero-bg {
+        background: 
+          linear-gradient(90deg, rgba(18, 86, 150, 0.98) 0%, rgba(18, 86, 150, 0.88) 45%, rgba(210, 161, 42, 0.3) 100%),
+          url('assets/contact_hero_bg.png') no-repeat center / cover !important;
+      }
+      .compact-hero::before,
+      .compact-hero::after,
+      .contact-hero-bg::before,
+      .contact-hero-bg::after {
+        display: none !important;
+      }
+      #visit-us {
+        background: linear-gradient(180deg, #f0f6ff 0%, #f7faff 100%) !important;
+        width: 100vw !important;
+        max-width: none !important;
+        margin-left: calc(50% - 50vw) !important;
+        margin-right: calc(50% - 50vw) !important;
+        box-sizing: border-box !important;
+        position: relative !important;
+      }
+      #visit-us .site-container {
+        padding-left: 24px !important;
+        padding-right: 24px !important;
+        max-width: 1200px !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+        margin: 0 auto !important;
+      }
+    </style></head>
+  <body>
+    <div data-site-nav>
+      <header class="site-header fallback-site-header">
+        <nav class="nav-bar" aria-label="Primary fallback">
+          <a class="brand" href="index.html" aria-label="One Point Digital Services home">
+            <img class="brand-logo brand-logo-header" src="assets/logo-bisen-one-point-footer.svg" alt="Bisen One Point Suvidha Kendra">
+          </a>
+          <div class="fallback-nav-links">
+            <a class="nav-link" href="index.html">Home</a>
+            <a class="nav-link" href="services.html">Services</a>
+            <a class="nav-link" href="products.html">Store</a>
+            <a class="nav-link" href="track-application.html">Track</a>
+            <a class="nav-link" href="contact.html">Contact</a>
+          </div>
+        </nav>
+      </header>
+    </div>
+    <main class="page-shell">
+      <section class="compact-hero contact-hero-bg">
+        <div class="site-container">
+          <p class="eyebrow">Connect With Us</p>
+          <h1>Your gateway to seamless digital services.</h1>
+          <p class="font-medium">Have a service request, custom print query, or business registration need? Contact the One Point team for fast, transparent, and expert assistance.</p>
+        </div>
+      </section>
+
+      <div data-unified-apply-slot></div>
+
+      <section class="section reveal" id="visit-us">
+        <div class="site-container">
+          <div class="panel visit-center-panel">
+            <p class="section-kicker">Visit Center</p>
+            <h2>Local support with online <span class="h2-gold">convenience.</span></h2>
+            <div class="visit-contact-grid">
+              <span><i data-lucide="message-circle"></i><strong>WhatsApp</strong>+91 9473946181</span>
+              <span><i data-lucide="phone"></i><strong>Phone</strong>+91 9473946181</span>
+              <span><i data-lucide="mail"></i><strong>Email</strong>support@bisenonepoint.com</span>
+              <span><i data-lucide="clock"></i><strong>Hours</strong>9:00 AM to 8:00 PM</span>
+            </div>
+            <p class="visit-address"><i data-lucide="map-pin"></i> One Point Suvidha Kendra, Lucknow, Uttar Pradesh &mdash; 226001</p>
+            <div class="card-actions">
+              <a class="btn btn-primary" href="https://wa.me/919473946181">Open WhatsApp</a>
+              <a class="btn btn-soft" href="https://www.google.com/maps/search/?api=1&query=One%20Point%20Digital%20Services" target="_blank">Open Map</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <div data-site-footer></div>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+    <script src="assets/app.js?v=clean_js_v11" defer></script>
+  
+<script id="line-alignment-script">
+  document.addEventListener("DOMContentLoaded", function() {
+    setTimeout(() => {
+      document.querySelectorAll(".section-head h2").forEach(h2 => {
+        let align = window.getComputedStyle(h2).textAlign;
+        let parent = h2.closest('.section-head');
+        if (parent) {
+          if (align === "center") {
+            parent.classList.add("center-line");
+          } else {
+            parent.classList.add("left-line");
+          }
+        }
+      });
+    }, 100); // small delay to ensure CSS is applied
+  });
+</script>
+</body>
+</html>

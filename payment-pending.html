@@ -1,0 +1,76 @@
+﻿<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Payment pending processing page for One Point orders.">
+    <title>Payment Pending | One Point</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+        <link rel="stylesheet" href="assets/onepoint.css?v=2">
+</head>
+  <body>
+    <div data-site-nav></div>
+    <main class="page-shell payment-result-shell">
+      <section class="payment-result-card pending-state">
+        <div class="processing-animation"><span></span><span></span><span></span></div>
+        <p class="section-kicker">Payment Status</p>
+        <h1>Payment Processing</h1>
+        <p class="status-copy">Gateway confirmation pending hai. Refresh karke transaction status check kar sakte hain.</p>
+        <div data-payment-status></div>
+        <div class="result-next-steps" aria-label="Pending payment guidance">
+          <span><i data-lucide="clock-3"></i><strong>Wait briefly</strong><small>Some UPI and gateway confirmations take a few minutes.</small></span>
+          <span><i data-lucide="refresh-cw"></i><strong>Refresh status</strong><small>Use the button after checking your bank app.</small></span>
+          <span><i data-lucide="message-circle"></i><strong>Share proof</strong><small>Support can verify a debit screenshot or UTR.</small></span>
+        </div>
+        <div class="status-actions">
+          <button class="btn btn-primary" type="button" onclick="window.location.reload()">Refresh Status</button>
+          <a class="btn btn-soft" href="support.html">Contact Support</a>
+        </div>
+      </section>
+    </main>
+    <div data-site-footer></div>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+    <script src="assets/app.js?v=clean_js_v11" defer></script>
+    <script src="assets/payment-status.js?v=payment-system-v1" defer></script>
+  
+<script id="line-alignment-script">
+  document.addEventListener("DOMContentLoaded", function() {
+    setTimeout(() => {
+      document.querySelectorAll(".section-head h2").forEach(h2 => {
+        let align = window.getComputedStyle(h2).textAlign;
+        let parent = h2.closest('.section-head');
+        if (parent) {
+          if (align === "center") {
+            parent.classList.add("center-line");
+          } else {
+            parent.classList.add("left-line");
+          }
+        }
+      });
+    }, 100); // small delay to ensure CSS is applied
+  });
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

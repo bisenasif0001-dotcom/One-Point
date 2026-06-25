@@ -1,0 +1,605 @@
+﻿<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="All One Point Digital Services categories, including EduPoint, E-Services, ProServe, OneMart, Travel Services, CSC and utility services.">
+    <title>Services | One Point Digital Services</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+        <link rel="stylesheet" href="assets/onepoint.css?v=2">
+</head>
+  <body class="services-page">
+    <div data-site-nav>
+      <header class="site-header fallback-site-header">
+        <nav class="nav-bar" aria-label="Primary fallback">
+          <a class="brand" href="index.html" aria-label="One Point Digital Services home">
+            <img class="brand-logo brand-logo-header" src="assets/logo-bisen-one-point-footer.svg" alt="Bisen One Point Suvidha Kendra">
+          </a>
+          <div class="fallback-nav-links">
+            <a class="nav-link" href="index.html">Home</a>
+            <a class="nav-link" href="services.html">Services</a>
+            <a class="nav-link" href="products.html">Store</a>
+            <a class="nav-link" href="track-application.html">Track</a>
+            <a class="nav-link" href="contact.html">Contact</a>
+          </div>
+        </nav>
+      </header>
+    </div>
+    <main class="page-shell">
+      <section class="page-hero page-hero-service premium-service-hero services-hero">
+        <!-- Background Video -->
+        <video class="hero-video-bg" autoplay loop muted playsinline>
+          <source src="assets/Hero section home page.mp4" type="video/mp4">
+        </video>
+        <div class="hero-video-overlay"></div>
+        <div class="page-hero-grid">
+          <div class="page-hero-copy services-hero-copy">
+            <p class="eyebrow">All Services</p>
+            <h1 class="page-hero-title">
+              <span class="service-title-static">Find every service</span>
+              <span class="animated-word service-animated-word" data-animated-word data-words="without confusion.|with smart routing.|with local support.|with clear tracking.|in one guided catalog.">without confusion.</span>
+            </h1>
+            <p>Search, filter and apply across government, student, business, travel, store and local support services from one guided catalog.</p>
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="#service-options"><i data-lucide="grid-3x3"></i> Browse Services</a>
+              <a class="btn btn-ghost" href="service-pan-card.html"><i data-lucide="id-card"></i> Apply PAN</a>
+            </div>
+                        <div class="hero-trust-strip">
+              <span class="hero-trust-badge badge-upi">
+                <i data-lucide="layers-3"></i> <strong>9</strong> Categories
+              </span>
+              <span class="hero-trust-badge badge-speed">
+                <i data-lucide="search-check"></i> <strong>Smart</strong> Service Routing
+              </span>
+              <span class="hero-trust-badge badge-whatsapp">
+                <i data-lucide="message-circle"></i> <strong>Local</strong> Operator Support
+              </span>
+            </div>
+          </div>
+          <div class="page-hero-console">
+            <article class="hero-command-center dark-mockup">
+              <div class="command-topbar">
+                <span></span><span></span><span></span>
+                <strong>Service OS</strong>
+              </div>
+              <div class="command-grid">
+                <div class="command-main">
+                  <span class="tag tag-premium">Live Catalog</span>
+                  <h3>All service modules</h3>
+                  <p>Search, category filter and direct routing in one assisted flow.</p>
+                  <div class="search-box">
+                    <i data-lucide="search"></i>
+                    <input data-ai-search placeholder='Try "PAN banana hai" or "admit card"' aria-label="AI service search">
+                  </div>
+                  <div class="suggestions" data-ai-suggestions></div>
+                </div>
+                <div class="command-tile">
+                  <i data-lucide="grid-3x3"></i>
+                  <strong>Categories</strong>
+                  <small>online + local</small>
+                </div>
+                <div class="command-tile">
+                  <i data-lucide="search-check"></i>
+                  <strong>Track</strong>
+                  <small>status ready</small>
+                </div>
+              </div>
+              <div class="command-list">
+                <div><span><i data-lucide="id-card"></i></span><strong>PAN Card</strong><small class="status-complete">2-3 days</small></div>
+                <div><span><i data-lucide="graduation-cap"></i></span><strong>Student Help</strong><small class="status-pending">exam support</small></div>
+                <div><span><i data-lucide="briefcase-business"></i></span><strong>Business Setup</strong><small class="status-complete">guided filing</small></div>
+              </div>
+            </article>
+            <article class="hero-mini-card hero-mini-card-one dark-mockup">
+              <span class="secure-flow-kicker">Smart routing</span>
+              <strong>Search + category mapping</strong>
+            </article>
+            <article class="hero-mini-card hero-mini-card-two dark-mockup">
+              <span class="helpdesk-kicker">One flow</span>
+              <strong>Select, apply, track</strong>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section edupoint-trending-services services-catalog-section" id="service-options" data-edupoint-service-carousel>
+        <div class="section-head edupoint-trending-head">
+          <div>
+            <p class="section-kicker">Categories</p>
+            <h2>All services at <span class="h2-gold">OneTouch.</span></h2>
+          </div>
+          <button class="btn btn-soft edupoint-view-all-btn" type="button" data-edupoint-view-all aria-expanded="false">
+            <span>View All</span> <i data-lucide="arrow-right"></i>
+          </button>
+        </div>
+
+        <div class="category-filters edupoint-category-filters" data-edupoint-service-filters>
+          <button class="btn btn-soft active" type="button" data-edupoint-filter="all">All Services</button>
+          <button class="btn btn-ghost" type="button" data-edupoint-filter="digital">Digital</button>
+          <button class="btn btn-ghost" type="button" data-edupoint-filter="student">Student</button>
+          <button class="btn btn-ghost" type="button" data-edupoint-filter="business">Business</button>
+          <button class="btn btn-ghost" type="button" data-edupoint-filter="local">Local</button>
+          <button class="btn btn-ghost" type="button" data-edupoint-filter="store-travel">Store &amp; Travel</button>
+        </div>
+
+        <div class="services-carousel-container edupoint-carousel-shell">
+          <button type="button" class="carousel-arrow prev edupoint-carousel-arrow" data-edupoint-carousel-prev aria-label="Previous service category">
+            <i data-lucide="chevron-left"></i>
+          </button>
+          <div class="services-carousel-viewport edupoint-carousel-viewport">
+            <div class="services-carousel-track edupoint-service-track" data-edupoint-service-track>
+              <a class="service-option-card service-card" id="government-services" href="online-services.html" data-edupoint-service-card data-edupoint-categories="digital popular">
+                <div>
+                  <div class="service-top" style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:16px;">
+                    <span class="service-icon"><i data-lucide="landmark"></i></span>
+                    <div style="display:flex;gap:6px;align-items:center;flex-wrap:nowrap;justify-content:flex-end;overflow:hidden;">
+                      <span class="tag">Govt</span>
+                      <span class="tag badge-amber">10+ services</span>
+                    </div>
+                  </div>
+                  <h3 style="margin-bottom:8px;">E-Services</h3>
+                  <p>PAN card, Ayushman, voter ID, passport and all government certificates at one place.</p>
+                </div>
+                <div class="card-actions" style="display:flex;gap:10px;margin-top:auto;">
+                  <span class="btn btn-primary" style="flex:1;" data-service="E-Services">Explore</span>
+                </div>
+              </a>
+              <a class="service-option-card service-card" id="student-services" href="edupoint.html" data-edupoint-service-card data-edupoint-categories="student popular">
+                <div>
+                  <div class="service-top" style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:16px;">
+                    <span class="service-icon"><i data-lucide="graduation-cap"></i></span>
+                    <div style="display:flex;gap:6px;align-items:center;flex-wrap:nowrap;justify-content:flex-end;overflow:hidden;">
+                      <span class="tag">EduPoint</span>
+                      <span class="tag badge-amber">10+ services</span>
+                    </div>
+                  </div>
+                  <h3 style="margin-bottom:8px;">EduPoint</h3>
+                  <p>Exam forms, admit cards, results, scholarship support and student assistance services.</p>
+                </div>
+                <div class="card-actions" style="display:flex;gap:10px;margin-top:auto;">
+                  <span class="btn btn-primary" style="flex:1;" data-service="EduPoint">Start</span>
+                </div>
+              </a>
+              <a class="service-option-card service-card" id="business-services" href="business-solutions.html" data-edupoint-service-card data-edupoint-categories="business popular">
+                <div>
+                  <div class="service-top" style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:16px;">
+                    <span class="service-icon"><i data-lucide="briefcase-business"></i></span>
+                    <div style="display:flex;gap:6px;align-items:center;flex-wrap:nowrap;justify-content:flex-end;overflow:hidden;">
+                      <span class="tag">ProServe</span>
+                      <span class="tag badge-amber">8 services</span>
+                    </div>
+                  </div>
+                  <h3 style="margin-bottom:8px;">ProServe</h3>
+                  <p>GST registration, MSME, DSC, FSSAI, shop license and trademark filing support.</p>
+                </div>
+                <div class="card-actions" style="display:flex;gap:10px;margin-top:auto;">
+                  <span class="btn btn-primary" style="flex:1;" data-service="ProServe">Explore</span>
+                </div>
+              </a>
+              <a class="service-option-card service-card" id="store-services" href="products.html" data-edupoint-service-card data-edupoint-categories="store-travel">
+                <div>
+                  <div class="service-top" style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:16px;">
+                    <span class="service-icon"><i data-lucide="shopping-bag"></i></span>
+                    <div style="display:flex;gap:6px;align-items:center;flex-wrap:nowrap;justify-content:flex-end;overflow:hidden;">
+                      <span class="tag">OneMart</span>
+                      <span class="tag badge-amber">Store</span>
+                    </div>
+                  </div>
+                  <h3 style="margin-bottom:8px;">OneMart</h3>
+                  <p>Islamic products, stationery, printer ink, accessories and branded print supplies.</p>
+                </div>
+                <div class="card-actions" style="display:flex;gap:10px;margin-top:auto;">
+                  <span class="btn btn-primary" style="flex:1;" data-service="OneMart">Shop</span>
+                </div>
+              </a>
+              <a class="service-option-card service-card" id="travel-services" href="travel-services.html" data-edupoint-service-card data-edupoint-categories="store-travel">
+                <div>
+                  <div class="service-top" style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:16px;">
+                    <span class="service-icon"><i data-lucide="plane"></i></span>
+                    <div style="display:flex;gap:6px;align-items:center;flex-wrap:nowrap;justify-content:flex-end;overflow:hidden;">
+                      <span class="tag">Travel</span>
+                      <span class="tag badge-amber">Booking</span>
+                    </div>
+                  </div>
+                  <h3 style="margin-bottom:8px;">Travel Services</h3>
+                  <p>Bus, train, flight, hotel, tour packages and passport support from local helpdesk.</p>
+                </div>
+                <div class="card-actions" style="display:flex;gap:10px;margin-top:auto;">
+                  <span class="btn btn-primary" style="flex:1;" data-service="Travel Services">Book</span>
+                </div>
+              </a>
+              <a class="service-option-card service-card" id="csc-services" href="csc-services.html" data-edupoint-service-card data-edupoint-categories="digital local">
+                <div>
+                  <div class="service-top" style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:16px;">
+                    <span class="service-icon"><i data-lucide="network"></i></span>
+                    <div style="display:flex;gap:6px;align-items:center;flex-wrap:nowrap;justify-content:flex-end;overflow:hidden;">
+                      <span class="tag">CSC</span>
+                      <span class="tag badge-amber">Utility</span>
+                    </div>
+                  </div>
+                  <h3 style="margin-bottom:8px;">CSC &amp; Utility</h3>
+                  <p>PM Kisan, pension, insurance, banking, bill payment and CSC utility services.</p>
+                </div>
+                <div class="card-actions" style="display:flex;gap:10px;margin-top:auto;">
+                  <span class="btn btn-primary" style="flex:1;" data-service="CSC & Utility">Explore</span>
+                </div>
+              </a>
+              <a class="service-option-card service-card" id="printing" href="print-scan.html" data-edupoint-service-card data-edupoint-categories="local student">
+                <div>
+                  <div class="service-top" style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:16px;">
+                    <span class="service-icon"><i data-lucide="printer"></i></span>
+                    <div style="display:flex;gap:6px;align-items:center;flex-wrap:nowrap;justify-content:flex-end;overflow:hidden;">
+                      <span class="tag">Local</span>
+                      <span class="tag badge-amber">Quick</span>
+                    </div>
+                  </div>
+                  <h3 style="margin-bottom:8px;">Print &amp; Scan</h3>
+                  <p>Photocopy, color print, document scanning, lamination and ID card printing services.</p>
+                </div>
+                <div class="card-actions" style="display:flex;gap:10px;margin-top:auto;">
+                  <span class="btn btn-primary" style="flex:1;" data-service="Print & Scan">Open</span>
+                </div>
+              </a>
+              <a class="service-option-card service-card" id="design-services" href="design-services.html" data-edupoint-service-card data-edupoint-categories="local business">
+                <div>
+                  <div class="service-top" style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:16px;">
+                    <span class="service-icon"><i data-lucide="palette"></i></span>
+                    <div style="display:flex;gap:6px;align-items:center;flex-wrap:nowrap;justify-content:flex-end;overflow:hidden;">
+                      <span class="tag">Creative</span>
+                      <span class="tag badge-amber">Design</span>
+                    </div>
+                  </div>
+                  <h3 style="margin-bottom:8px;">Design Services</h3>
+                  <p>Visiting card, banner, flex board, logo design and complete brand identity support.</p>
+                </div>
+                <div class="card-actions" style="display:flex;gap:10px;margin-top:auto;">
+                  <span class="btn btn-primary" style="flex:1;" data-service="Design Services">Open</span>
+                </div>
+              </a>
+              <a class="service-option-card service-card" id="recharge-bills" href="csc-services.html#recharge-bills" data-edupoint-service-card data-edupoint-categories="digital local">
+                <div>
+                  <div class="service-top" style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:16px;">
+                    <span class="service-icon"><i data-lucide="receipt"></i></span>
+                    <div style="display:flex;gap:6px;align-items:center;flex-wrap:nowrap;justify-content:flex-end;overflow:hidden;">
+                      <span class="tag">Bills</span>
+                      <span class="tag badge-amber">Recharge</span>
+                    </div>
+                  </div>
+                  <h3 style="margin-bottom:8px;">Recharge &amp; Bills</h3>
+                  <p>Mobile recharge, electricity, DTH, internet and all utility bill payment support.</p>
+                </div>
+                <div class="card-actions" style="display:flex;gap:10px;margin-top:auto;">
+                  <span class="btn btn-primary" style="flex:1;" data-service="Recharge & Bills">Pay</span>
+                </div>
+              </a>
+            </div>
+          </div>
+          <button type="button" class="carousel-arrow next edupoint-carousel-arrow" data-edupoint-carousel-next aria-label="Next service category">
+            <i data-lucide="chevron-right"></i>
+          </button>
+        </div>
+      </section>
+
+      <!-- How It Works Section -->
+      <section class="section reveal hiw-section" id="how-it-works">
+        <div class="hiw-inner">
+          <div class="section-head">
+            <div>
+              <p class="section-kicker"><i data-lucide="route"></i> Simple Process</p>
+              <h2>How it <span class="h2-gold">works</span></h2>
+              <p class="how-it-works-subtitle">From request submission to live tracking, everything stays simple and transparent.</p>
+            </div>
+          </div>
+          <div class="how-it-works-grid">
+            <div class="step-card">
+              <div class="hiw-step-top">
+                <span class="hiw-step-icon"><i data-lucide="clipboard-list"></i></span>
+                <span class="hiw-step-num">01</span>
+              </div>
+              <h3>Submit Details</h3>
+              <p>Share your KYC documents and service details. Our operator reviews your request and checks eligibility before proceeding.</p>
+            </div>
+            <i class="hiw-connector" data-lucide="chevron-right"></i>
+            <div class="step-card">
+              <div class="hiw-step-top">
+                <span class="hiw-step-icon"><i data-lucide="file-check-2"></i></span>
+                <span class="hiw-step-num">02</span>
+              </div>
+              <h3>Document Review</h3>
+              <p>We confirm address proof and business activity. Documents are verified by our local support operator before portal access.</p>
+            </div>
+            <i class="hiw-connector" data-lucide="chevron-right"></i>
+            <div class="step-card">
+              <div class="hiw-step-top">
+                <span class="hiw-step-icon"><i data-lucide="send"></i></span>
+                <span class="hiw-step-num">03</span>
+              </div>
+              <h3>Portal Support</h3>
+              <p>We prepare and submit the application on the official government portal with all required and verified information.</p>
+            </div>
+            <i class="hiw-connector" data-lucide="chevron-right"></i>
+            <div class="step-card">
+              <div class="hiw-step-top">
+                <span class="hiw-step-icon"><i data-lucide="bell-ring"></i></span>
+                <span class="hiw-step-num">04</span>
+              </div>
+              <h3>Status Update</h3>
+              <p>Receive live status updates and compliance guidance on WhatsApp directly from your assigned local operator.</p>
+            </div>
+          </div>
+          <div class="how-it-works-trust">
+            <span class="trust-pill"><i data-lucide="shield-check"></i> Secure Submission</span>
+            <span class="trust-pill"><i data-lucide="user-check"></i> Verified Support</span>
+            <span class="trust-pill"><i data-lucide="activity"></i> Real-Time Updates</span>
+            <span class="trust-pill"><i data-lucide="search-check"></i> Operator Review</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Required Documents Tabbed Checklist Section -->
+      <section class="premium-story-showcase required-documents-section reveal" id="required-documents">
+        <!-- Subtle Glowing Background Orbs (Combining Brand Blue and Gold) -->
+        <div class="ambient-orb"></div>
+        <div class="ambient-orb"></div>
+
+        <div class="premium-container">
+          <div class="premium-header text-left">
+            <span class="premium-badge-pill"><i data-lucide="files"></i> Required Documents</span>
+            <h2 class="premium-headline">Upload only what is <span class="h2-gold">needed.</span></h2>
+            <p class="premium-subhead-new">Select a category below to see typical documents needed before operator review. Final requirements are confirmed after request submission.</p>
+          </div>
+          
+          <div class="pan-doc-tabs-shell" data-pan-doc-tabs>
+            <div class="pan-doc-tablist" role="tablist" aria-label="Service category document list">
+              <button class="pan-doc-tab active" type="button" role="tab" id="category-tab-e-services" aria-selected="true" aria-controls="category-panel-e-services" data-pan-doc-tab="category-panel-e-services"><i data-lucide="landmark"></i><span>E-Services</span></button>
+              <button class="pan-doc-tab" type="button" role="tab" id="category-tab-edupoint" aria-selected="false" aria-controls="category-panel-edupoint" data-pan-doc-tab="category-panel-edupoint"><i data-lucide="graduation-cap"></i><span>EduPoint</span></button>
+              <button class="pan-doc-tab" type="button" role="tab" id="category-tab-proserve" aria-selected="false" aria-controls="category-panel-proserve" data-pan-doc-tab="category-panel-proserve"><i data-lucide="briefcase-business"></i><span>ProServe</span></button>
+              <button class="pan-doc-tab" type="button" role="tab" id="category-tab-csc-utility" aria-selected="false" aria-controls="category-panel-csc-utility" data-pan-doc-tab="category-panel-csc-utility"><i data-lucide="network"></i><span>CSC &amp; Utility</span></button>
+              <button class="pan-doc-tab" type="button" role="tab" id="category-tab-travel-print" aria-selected="false" aria-controls="category-panel-travel-print" data-pan-doc-tab="category-panel-travel-print"><i data-lucide="printer"></i><span>Travel &amp; Local</span></button>
+            </div>
+            
+            <div class="pan-doc-tabs-layout">
+              <div class="pan-doc-panels">
+                
+                <!-- Panel E-Services -->
+                <div class="pan-doc-panel active" id="category-panel-e-services" role="tabpanel" aria-labelledby="category-tab-e-services" data-pan-doc-panel="category-panel-e-services">
+                  <div class="pan-doc-panel-head"><span>E-Services</span><h3>Govt ID &amp; Certificates checklist</h3></div>
+                  <div class="pan-doc-list">
+                    <div class="pan-doc-item">
+                      <i data-lucide="id-card"></i>
+                      <div>
+                        <strong>Aadhaar Card of Applicant</strong>
+                        <p>Mandatory for PAN, Ayushman, Domicile, Caste, Voter, and Passport services.</p>
+                      </div>
+                    </div>
+                    <div class="pan-doc-item">
+                      <i data-lucide="home"></i>
+                      <div>
+                        <strong>Address Proof &amp; Registry</strong>
+                        <p>Electricity bill, Rent agreement, or water bill required for Passport and certificates.</p>
+                      </div>
+                    </div>
+                    <div class="pan-doc-item">
+                      <i data-lucide="image"></i>
+                      <div>
+                        <strong>Applicant Photo &amp; Signature Scan</strong>
+                        <p>Keep a clear passport-size photo and signature ready for online upload.</p>
+                      </div>
+                    </div>
+                    <div class="pan-doc-item">
+                      <i data-lucide="smartphone"></i>
+                      <div>
+                        <strong>Aadhaar-Linked Mobile Number</strong>
+                        <p>Essential for receiving verification OTPs during official portal submissions.</p>
+                      </div>
+                    </div>
+                    <div class="pan-doc-item">
+                      <i data-lucide="file-check-2"></i>
+                      <div>
+                        <strong>Supporting Family Proofs</strong>
+                        <p>Ration card (for Ayushman PMJAY) or educational records (for Voter ID correction).</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Panel EduPoint -->
+                <div class="pan-doc-panel" id="category-panel-edupoint" role="tabpanel" aria-labelledby="category-tab-edupoint" data-pan-doc-panel="category-panel-edupoint">
+                  <div class="pan-doc-panel-head"><span>EduPoint</span><h3>Student Form checklist</h3></div>
+                  <div class="pan-doc-list">
+                    <div class="pan-doc-item">
+                      <i data-lucide="graduation-cap"></i>
+                      <div>
+                        <strong>Previous Marksheets &amp; Roll IDs</strong>
+                        <p>Keep board or university roll numbers handy for admission and exam forms.</p>
+                      </div>
+                    </div>
+                    <div class="pan-doc-item">
+                      <i data-lucide="file-text"></i>
+                      <div>
+                        <strong>Aadhaar Card of the Student</strong>
+                        <p>Necessary for applying to scholarship benefits and college enrollment portals.</p>
+                      </div>
+                    </div>
+                    <div class="pan-doc-item">
+                      <i data-lucide="image-up"></i>
+                      <div>
+                        <strong>Student Photo &amp; Signature Scan</strong>
+                        <p>Correct size and aspect ratio scans are required for error-free form uploads.</p>
+                      </div>
+                    </div>
+                    <div class="pan-doc-item">
+                      <i data-lucide="badge-indian-rupee"></i>
+                      <div>
+                        <strong>Income &amp; Caste Certificates</strong>
+                        <p>Required for verifying eligibility and claiming scholarship benefits.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Panel ProServe -->
+                <div class="pan-doc-panel" id="category-panel-proserve" role="tabpanel" aria-labelledby="category-tab-proserve" data-pan-doc-panel="category-panel-proserve">
+                  <div class="pan-doc-panel-head"><span>ProServe</span><h3>Business filing &amp; Licensing checklist</h3></div>
+                  <div class="pan-doc-list">
+                    <div class="pan-doc-item">
+                      <i data-lucide="briefcase"></i>
+                      <div>
+                        <strong>PAN Card of Proprietor or Firm</strong>
+                        <p>Required to start GST, MSME, DSC, and corporate registration filings.</p>
+                      </div>
+                    </div>
+                    <div class="pan-doc-item">
+                      <i data-lucide="user-check"></i>
+                      <div>
+                        <strong>Aadhaar of Owner / Directors</strong>
+                        <p>Linked mobile number is necessary for online verification and OTP signature check.</p>
+                      </div>
+                    </div>
+                    <div class="pan-doc-item">
+                      <i data-lucide="building-2"></i>
+                      <div>
+                        <strong>Business Address Proof</strong>
+                        <p>Electricity bill, rent agreement, or NOC from the property owner is mandatory.</p>
+                      </div>
+                    </div>
+                    <div class="pan-doc-item">
+                      <i data-lucide="receipt-text"></i>
+                      <div>
+                        <strong>Bank Details or Cancelled Cheque</strong>
+                        <p>Proof of active bank account required to update GST portal database.</p>
+                      </div>
+                    </div>
+                    <div class="pan-doc-item">
+                      <i data-lucide="activity"></i>
+                      <div>
+                        <strong>Firm Name &amp; Nature of Activity</strong>
+                        <p>Describe your trade name and services for accurate licensing and category setup.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Panel CSC & Utility -->
+                <div class="pan-doc-panel" id="category-panel-csc-utility" role="tabpanel" aria-labelledby="category-tab-csc-utility" data-pan-doc-panel="category-panel-csc-utility">
+                  <div class="pan-doc-panel-head"><span>CSC &amp; Utility</span><h3>Govt Scheme &amp; Utility checklist</h3></div>
+                  <div class="pan-doc-list">
+                    <div class="pan-doc-item">
+                      <i data-lucide="id-card"></i>
+                      <div>
+                        <strong>Aadhaar Card of Beneficiary</strong>
+                        <p>Required for PM Kisan, Ayushman, pension registration, and all CSC scheme enrollments.</p>
+                      </div>
+                    </div>
+                    <div class="pan-doc-item">
+                      <i data-lucide="landmark"></i>
+                      <div>
+                        <strong>Bank Passbook or Account Details</strong>
+                        <p>Active bank account with IFSC code needed for PM Kisan and pension benefit transfers.</p>
+                      </div>
+                    </div>
+                    <div class="pan-doc-item">
+                      <i data-lucide="sprout"></i>
+                      <div>
+                        <strong>Land Records / Kisan ID (PM Kisan)</strong>
+                        <p>Khasra-Khatauni or Kisan registration number for PM Kisan Samman Nidhi scheme.</p>
+                      </div>
+                    </div>
+                    <div class="pan-doc-item">
+                      <i data-lucide="smartphone"></i>
+                      <div>
+                        <strong>Aadhaar-Linked Mobile Number</strong>
+                        <p>OTP verification is required on CSC portal for insurance and utility scheme enrollments.</p>
+                      </div>
+                    </div>
+                    <div class="pan-doc-item">
+                      <i data-lucide="file-badge-2"></i>
+                      <div>
+                        <strong>Existing Policy or Scheme Reference</strong>
+                        <p>Previous policy number or enrollment ID needed for insurance renewal or complaint tracking.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Panel Travel & Local -->
+                <div class="pan-doc-panel" id="category-panel-travel-print" role="tabpanel" aria-labelledby="category-tab-travel-print" data-pan-doc-panel="category-panel-travel-print">
+                  <div class="pan-doc-panel-head"><span>Travel &amp; Local</span><h3>Booking, Print &amp; Design checklist</h3></div>
+                  <div class="pan-doc-list">
+                    <div class="pan-doc-item">
+                      <i data-lucide="plane"></i>
+                      <div>
+                        <strong>Passenger ID &amp; Travel Dates</strong>
+                        <p>Aadhaar, Voter ID, or passport details along with dates for train/bus/flight bookings.</p>
+                      </div>
+                    </div>
+                    <div class="pan-doc-item">
+                      <i data-lucide="printer"></i>
+                      <div>
+                        <strong>Print or Scan Source Files</strong>
+                        <p>Provide high-resolution PDF or JPEG files for clean photocopies, scans, or lamination.</p>
+                      </div>
+                    </div>
+                    <div class="pan-doc-item">
+                      <i data-lucide="palette"></i>
+                      <div>
+                        <strong>Design Brief &amp; Logos</strong>
+                        <p>Share a rough layout, color preferences, and text details for Banner, Card, or Flex design.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+              
+              <article class="premium-large-card pan-doc-side-card">
+                <img class="pan-doc-side-img" src="assets/happy_indian_customer.png" alt="Assisted document support">
+                <div class="large-card-icon"><i data-lucide="files"></i></div>
+                <h3 class="large-card-title">Assisted Catalog</h3>
+                <p class="large-card-desc">Select a category tab to view typical documents needed for daily digital services.</p>
+                <a class="large-card-cta" href="#service-options">Browse Services <i data-lucide="arrow-right"></i></a>
+              </article>
+            </div>
+          </div>
+          
+          <div class="document-notice-box">
+            <span class="notice-icon-wrap"><i data-lucide="shield-check"></i></span>
+            <div class="notice-body">
+              <strong class="notice-label">Important Note</strong>
+              <p>Document requirements may vary depending on your specific case. Our operator will confirm the final checklist after reviewing your submission.</p>
+            </div>
+            <div class="notice-badges">
+              <span class="notice-badge"><i data-lucide="check-circle-2"></i> Operator Verified</span>
+              <span class="notice-badge"><i data-lucide="clock-4"></i> Confirmed at Submission</span>
+            </div>
+          </div>
+        </div>
+      </section>
+      </main>
+    <div data-site-footer></div>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+    <script src="assets/app.js?v=clean_js_v11" defer></script>
+  
+<script id="line-alignment-script">
+  document.addEventListener("DOMContentLoaded", function() {
+    setTimeout(() => {
+      document.querySelectorAll(".section-head h2").forEach(h2 => {
+        let align = window.getComputedStyle(h2).textAlign;
+        let parent = h2.closest('.section-head');
+        if (parent) {
+          if (align === "center") {
+            parent.classList.add("center-line");
+          } else {
+            parent.classList.add("left-line");
+          }
+        }
+      });
+    }, 100); // small delay to ensure CSS is applied
+  });
+</script>
+</body>
+</html>
+

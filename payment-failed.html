@@ -1,0 +1,77 @@
+﻿<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Payment failed page with retry and gateway switch options.">
+    <title>Payment Failed | One Point</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+        <link rel="stylesheet" href="assets/onepoint.css?v=2">
+</head>
+  <body>
+    <div data-site-nav></div>
+    <main class="page-shell payment-result-shell">
+      <section class="payment-result-card failed-state">
+        <div class="success-animation"><i data-lucide="x"></i></div>
+        <p class="section-kicker">Payment Status</p>
+        <h1>Payment Failed</h1>
+        <p class="status-copy">Failure reason will appear below. You can retry payment or switch gateway.</p>
+        <div data-payment-status></div>
+        <div class="result-next-steps" aria-label="Payment recovery checklist">
+          <span><i data-lucide="wifi"></i><strong>Check network</strong><small>Gateway failures often resolve after one clean retry.</small></span>
+          <span><i data-lucide="landmark"></i><strong>Try another gateway</strong><small>Switch payment mode if your bank declined the first attempt.</small></span>
+          <span><i data-lucide="headphones"></i><strong>Keep reference</strong><small>Share any debit SMS or transaction ID with support.</small></span>
+        </div>
+        <div class="status-actions">
+          <a class="btn btn-primary" href="checkout.html">Retry Payment</a>
+          <button class="btn btn-soft" type="button" data-retry-payment="phonepe">Switch Payment Gateway</button>
+          <a class="btn btn-ghost" href="support.html">Contact Support</a>
+        </div>
+      </section>
+    </main>
+    <div data-site-footer></div>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+    <script src="assets/app.js?v=clean_js_v11" defer></script>
+    <script src="assets/payment-status.js?v=payment-system-v1" defer></script>
+  
+<script id="line-alignment-script">
+  document.addEventListener("DOMContentLoaded", function() {
+    setTimeout(() => {
+      document.querySelectorAll(".section-head h2").forEach(h2 => {
+        let align = window.getComputedStyle(h2).textAlign;
+        let parent = h2.closest('.section-head');
+        if (parent) {
+          if (align === "center") {
+            parent.classList.add("center-line");
+          } else {
+            parent.classList.add("left-line");
+          }
+        }
+      });
+    }, 100); // small delay to ensure CSS is applied
+  });
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

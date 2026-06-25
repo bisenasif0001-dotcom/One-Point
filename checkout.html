@@ -1,0 +1,235 @@
+﻿<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Secure checkout portal for One Point Digital Services products and government e-service bookings.">
+    <meta name="robots" content="noindex,nofollow">
+    <title>Secure Unified Checkout | One Point Digital Services</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+        <link rel="stylesheet" href="assets/onepoint.css?v=2">
+</head>
+  <body class="elite-console-body">
+    <header class="elite-console-topbar">
+      <div class="topbar-left">
+        <a class="brand" href="index.html" aria-label="One Point Digital Services home">
+          <img class="console-logo" src="assets/logo-bisen-one-point-footer.svg" alt="Bisen One Point Suvidha Kendra">
+        </a>
+        <span class="console-title-tag badge-checkout">Secure Checkout</span>
+      </div>
+      
+      <div class="topbar-center">
+        <div class="region-badge badge-ssl">
+          <i data-lucide="lock"></i>
+          <span>256-Bit SSL Encrypted Checkout &bull; Verified by OneMart</span>
+        </div>
+      </div>
+
+      <div class="topbar-right">
+        <a class="btn btn-soft btn-xs console-exit-btn" href="https://wa.me/919473946181" target="_blank">
+          <i data-lucide="help-circle"></i> Live Help (9473946181)
+        </a>
+      </div>
+    </header>
+
+    <main class="elite-console-main">
+      <h1 class="sr-only">Secure Checkout</h1>
+      <div class="elite-checkout-layout simple-checkout-layout">
+        <form class="elite-checkout-form simple-checkout-card glass-panel" data-checkout-form id="checkout-form">
+          <div class="simple-checkout-hero">
+            <div class="checkout-form-header">
+              <span class="checkout-kicker">Secure checkout</span>
+              <h2>Confirm and <span class="h2-gold">pay.</span></h2>
+              <p>Only check your name, mobile number, and payment method. Receipt and tracking will be shared after payment.</p>
+            </div>
+
+            <div class="summary-payable-band">
+              <span>Payable now</span>
+              <strong id="summary-payable-total">Rs. 0.00</strong>
+              <small>Verified One Point service fee.</small>
+            </div>
+          </div>
+
+          <div class="simple-review-box">
+            <div class="simple-review-head">
+              <span><i data-lucide="shopping-bag"></i></span>
+              <div>
+                <small>Selected service</small>
+                <strong>Review before payment</strong>
+              </div>
+            </div>
+            <div id="checkout-items-container" class="checkout-items-list">
+              <div class="empty-console-state">
+                <i data-lucide="loader-2" class="spin"></i>
+                <p>Calculating service fee...</p>
+              </div>
+            </div>
+            <div class="premium-totals simple-totals">
+              <div class="totals-row">
+                <span>Service fee</span>
+                <strong id="summary-subtotal">Rs. 0.00</strong>
+              </div>
+              <div class="totals-row">
+                <span>Platform security fee</span>
+                <strong>FREE</strong>
+              </div>
+              <div class="totals-row totals-row-final">
+                <span>Total payable</span>
+                <strong id="summary-total">Rs. 0.00</strong>
+              </div>
+            </div>
+          </div>
+
+          <div class="checkout-section-badge">
+            <span class="step-num">1</span>
+            <div>
+              <h3>Contact details</h3>
+              <p class="checkout-section-helper">Bas naam aur mobile number confirm kar dijiye.</p>
+            </div>
+          </div>
+
+          <div class="form-grid elite-form-grid simple-essential-grid">
+            <div class="form-field">
+              <label for="checkout-name">Full Name <span aria-hidden="true">*</span></label>
+              <div class="elite-input-wrapper">
+                <i data-lucide="user"></i>
+                <input class="input" id="checkout-name" name="name" autocomplete="name" placeholder="Enter your full name" required>
+              </div>
+            </div>
+            <div class="form-field">
+              <label for="checkout-mobile">Mobile Number <span aria-hidden="true">*</span></label>
+              <div class="elite-input-wrapper">
+                <i data-lucide="phone"></i>
+                <input class="input" id="checkout-mobile" name="mobile" type="tel" inputmode="numeric" autocomplete="tel" pattern="[0-9]{10}" maxlength="10" placeholder="10-digit mobile number" required>
+              </div>
+            </div>
+          </div>
+
+          <input id="checkout-email" name="email" type="hidden">
+          <input id="checkout-address" name="address" type="hidden">
+          <input id="checkout-notes" name="notes" type="hidden">
+          <input id="checkout-attachments" name="attachments" type="hidden">
+          <input type="hidden" name="gateway" value="razorpay">
+
+          <div class="checkout-section-badge mt-32">
+            <span class="step-num">2</span>
+            <div>
+              <h3>Payment method</h3>
+              <p class="checkout-section-helper">UPI selected hai. Zarurat ho to method change kar sakte hain.</p>
+            </div>
+          </div>
+
+          <div class="premium-choice-grid">
+            <label class="premium-radio-tile active" id="tile-upi">
+              <input type="radio" name="paymentMethod" value="upi" checked hidden>
+              <div class="tile-content">
+                <i data-lucide="qr-code"></i>
+                <span>UPI / QR Code <small>GooglePay, PhonePe, Paytm</small></span>
+              </div>
+            </label>
+            <label class="premium-radio-tile" id="tile-card">
+              <input type="radio" name="paymentMethod" value="card" hidden>
+              <div class="tile-content">
+                <i data-lucide="credit-card"></i>
+                <span>Debit / Credit Cards <small>Visa, Mastercard, RuPay</small></span>
+              </div>
+            </label>
+            <label class="premium-radio-tile" id="tile-net">
+              <input type="radio" name="paymentMethod" value="netbanking" hidden>
+              <div class="tile-content">
+                <i data-lucide="building-2"></i>
+                <span>Net Banking <small>All Major Indian Banks</small></span>
+              </div>
+            </label>
+          </div>
+
+          <div class="summary-safe-note">
+            <i data-lucide="info"></i>
+            <span>Payment ke baad receipt aur tracking details WhatsApp par share honge.</span>
+          </div>
+
+          <div id="checkout-error" class="login-status error"></div>
+
+          <button class="btn btn-primary full elite-shimmer-btn" type="submit">
+            <span class="btn-text" id="submit-btn-text"><i data-lucide="lock"></i> Complete Secure Payment</span>
+            <span class="shimmer-wave"></span>
+          </button>
+
+          <p class="checkout-urgency">
+            <i data-lucide="zap"></i>
+            <span>Same-day available. Active operator slot locked for your application.</span>
+          </p>
+
+          <div class="simple-trust-strip">
+            <span><i data-lucide="shield-check"></i> Secure transaction</span>
+            <span><i data-lucide="receipt"></i> Receipt shared</span>
+            <span><i data-lucide="message-circle"></i> WhatsApp support</span>
+          </div>
+        </form>
+      </div>
+    </main>
+
+    <div data-site-footer></div>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+    <script src="assets/app.js?v=clean_js_v11" defer></script>
+    <script src="assets/checkout.js?v=elite-system-v10" defer></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        function setupTileGroup(name, prefix) {
+          const radios = document.querySelectorAll(`input[name="${name}"]`);
+          radios.forEach(radio => {
+            radio.addEventListener("change", (e) => {
+              document.querySelectorAll(`input[name="${name}"]`).forEach(r => {
+                const tile = document.getElementById(`${prefix}-${r.value}`);
+                if (tile) {
+                  if (r.checked) tile.classList.add("active");
+                  else tile.classList.remove("active");
+                }
+              });
+            });
+          });
+        }
+        setupTileGroup("gateway", "tile");
+        setupTileGroup("paymentMethod", "tile");
+      });
+    </script>
+  
+<script id="line-alignment-script">
+  document.addEventListener("DOMContentLoaded", function() {
+    setTimeout(() => {
+      document.querySelectorAll(".section-head h2").forEach(h2 => {
+        let align = window.getComputedStyle(h2).textAlign;
+        let parent = h2.closest('.section-head');
+        if (parent) {
+          if (align === "center") {
+            parent.classList.add("center-line");
+          } else {
+            parent.classList.add("left-line");
+          }
+        }
+      });
+    }, 100); // small delay to ensure CSS is applied
+  });
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

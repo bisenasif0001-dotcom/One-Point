@@ -1,0 +1,57 @@
+﻿<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Opening the One Point Digital Services customer dashboard with CRM, order tracking, documents, and support tools.">
+    <meta http-equiv="refresh" content="0; url=/dashboard/?portal=customer&panel=crm">
+    <title>Opening Dashboard | One Point Digital Services</title>
+    <script>
+      (function() {
+        var target = "dashboard/?portal=customer&panel=crm";
+        if (window.location.protocol === "file:") {
+          window.location.replace("http://localhost:4173/" + target);
+        } else {
+          window.location.replace(new URL(target, window.location.href).toString());
+        }
+      })();
+    </script>      <link rel="stylesheet" href="assets/onepoint.css?v=2">
+</head>
+  <body>
+    <h1 class="sr-only">Opening Customer Dashboard</h1>
+    <p>Opening One Point dashboard...</p>
+  
+<script id="line-alignment-script">
+  document.addEventListener("DOMContentLoaded", function() {
+    setTimeout(() => {
+      document.querySelectorAll(".section-head h2").forEach(h2 => {
+        let align = window.getComputedStyle(h2).textAlign;
+        let parent = h2.closest('.section-head');
+        if (parent) {
+          if (align === "center") {
+            parent.classList.add("center-line");
+          } else {
+            parent.classList.add("left-line");
+          }
+        }
+      });
+    }, 100); // small delay to ensure CSS is applied
+  });
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

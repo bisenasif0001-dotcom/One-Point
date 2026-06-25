@@ -1,0 +1,38 @@
+%PDF-1.4
+1 0 obj << /Type /Catalog /Pages 2 0 R >> endobj
+2 0 obj << /Type /Pages /Kids [3 0 R] /Count 1 >> endobj
+3 0 obj << /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 4 0 R >> >> /Contents 5 0 R >> endobj
+4 0 obj << /Type /Font /Subtype /Type1 /BaseFont /Helvetica >> endobj
+5 0 obj << /Length 1075 >> stream
+BT /F1 22 Tf 48 790 Td (One Point Digital Services) Tj ET
+BT /F1 16 Tf 48 764 Td (Payment Invoice) Tj ET
+BT /F1 12 Tf 48 730 Td (Invoice No: INV-OPDS-20260604-000002) Tj ET
+BT /F1 12 Tf 48 712 Td (Order ID: OPDS-20260604-000002) Tj ET
+BT /F1 12 Tf 48 694 Td (Transaction ID: Pending) Tj ET
+BT /F1 12 Tf 48 676 Td (Date: 4/6/2026, 12:11:36 pm) Tj ET
+BT /F1 12 Tf 48 646 Td (Customer: Priya Sharma) Tj ET
+BT /F1 12 Tf 48 628 Td (Phone: 9999888877) Tj ET
+BT /F1 12 Tf 48 610 Td (Email: priya@test.com) Tj ET
+BT /F1 12 Tf 48 592 Td (Address: -) Tj ET
+BT /F1 14 Tf 48 558 Td (Items) Tj ET
+BT /F1 12 Tf 58 536 Td (Ayushman x 1 - Rs. 199.00) Tj ET
+BT /F1 12 Tf 360 230 Td (Subtotal: Rs. 199.00) Tj ET
+BT /F1 12 Tf 360 212 Td (GST: Rs. 0.00) Tj ET
+BT /F1 12 Tf 360 194 Td (Discount: Rs. 0.00) Tj ET
+BT /F1 12 Tf 360 176 Td (Delivery: Rs. 0.00) Tj ET
+BT /F1 15 Tf 360 150 Td (Total Paid: Rs. 199.00) Tj ET
+BT /F1 10 Tf 48 98 Td (This invoice was generated after server-side payment verification.) Tj ET
+BT /F1 10 Tf 48 82 Td (Support: +91 9473946181 | support@bisenonepoint.com) Tj ET
+endstream endobj
+xref
+0 6
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000241 00000 n 
+0000000311 00000 n 
+trailer << /Size 6 /Root 1 0 R >>
+startxref
+1438
+%%EOF

@@ -1,0 +1,353 @@
+﻿<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Track One Point Digital Services applications with Pending, Processing, Approved and Delivered status stages.">
+    <title>Track Application | One Point Digital Services</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;650;700;800;900&display=swap" rel="stylesheet">
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+        <link rel="stylesheet" href="assets/onepoint.css?v=2">
+    <style>
+      /* Search input wrapper — icon needs a positioned parent */
+      .premium-search-row > div {
+        position: relative;
+        flex: 1;
+        display: flex;
+        align-items: center;
+      }
+      .premium-search-row > div .input { width: 100%; }
+
+      /* Command topbar — was designed for dark cards, needs its own dark pill here */
+      .tracker-card-right .command-topbar {
+        background: linear-gradient(120deg, #0a2c58 0%, #125696 100%);
+        border-radius: 12px;
+        padding: 10px 16px;
+        margin-bottom: 20px;
+        border-bottom: none;
+      }
+      .tracker-card-right .command-topbar strong {
+        color: rgba(255,255,255,.85);
+        font-size: 0.75rem;
+        letter-spacing: 0.1em;
+      }
+
+      /* Icon box: centered icon + consistent border-radius on all 4 states */
+      .tracker-hero-timeline .status-step .status-dot {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 10px;
+      }
+      /* Pending future steps: light tinted background so all boxes feel equally solid */
+      .tracker-hero-timeline .status-step:not(.done):not(.active) .status-dot {
+        background: rgba(18,86,150,.05);
+        border-color: rgba(18,86,150,.18);
+        color: rgba(18,86,150,.45);
+      }
+
+      /* Last step — hide the dangling connecting line below it */
+      .tracker-hero-timeline .status-step:last-child .status-track-line { display: none; }
+
+      /* Active step — prominent left gold accent */
+      .tracker-hero-timeline .status-step.active {
+        border-left-width: 3px;
+        border-left-color: var(--brand-gold, #c8982e);
+      }
+
+      /* Description spacing below title */
+      .tracker-hero-timeline .status-desc { margin-top: 5px; }
+
+      /* Title + badge: allow wrap on narrow widths */
+      .tracker-hero-timeline .status-title { flex-wrap: wrap; gap: 4px 0; }
+
+      /* Doc upload card */
+      .doc-upload-card {
+        background: #fff;
+        border-radius: 18px;
+        border: 1px solid rgba(18,86,150,.09);
+        padding: clamp(24px, 3vw, 36px);
+        box-shadow: 0 1px 4px rgba(0,0,0,.04), 0 6px 24px rgba(0,0,0,.07);
+        max-width: var(--max, 1200px);
+        margin-inline: auto;
+        width: 100%;
+        box-sizing: border-box;
+      }
+      .doc-upload-header {
+        display: flex; align-items: center; gap: 16px;
+        padding-bottom: 20px; margin-bottom: 24px;
+        border-bottom: 1px solid rgba(18,86,150,.08);
+      }
+      .doc-upload-icon {
+        width: 48px; height: 48px; border-radius: 12px;
+        background: rgba(18,86,150,.07); display: flex;
+        align-items: center; justify-content: center;
+        color: var(--primary, #0a2c58); flex-shrink: 0;
+      }
+      .doc-upload-title { font-size: 1rem; font-weight: 700; color: var(--primary, #0a2c58); margin-bottom: 3px; }
+      .doc-upload-subtitle { font-size: 0.82rem; color: #6b7280; line-height: 1.4; }
+      #doc-upload-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+        gap: 12px; margin-bottom: 16px;
+      }
+      #doc-upload-grid label {
+        display: flex; align-items: center; gap: 12px;
+        padding: 13px 16px; border-radius: 10px;
+        border: 1.5px dashed rgba(18,86,150,.2);
+        cursor: pointer; font-size: 0.84rem; font-weight: 600;
+        color: var(--primary, #0a2c58); transition: all .18s;
+      }
+      #doc-upload-grid label:hover {
+        border-color: var(--accent, #c8982e);
+        background: #fffdf5; transform: translateY(-1px);
+      }
+      #doc-upload-grid label input[type="file"] { display: none; }
+      #doc-upload-status {
+        font-size: 0.84rem; padding: 11px 16px; border-radius: 9px;
+        background: rgba(18,86,150,.04); color: #374151;
+        border: 1px solid rgba(18,86,150,.08);
+      }
+    </style>
+</head>
+  <body class="online-services-page">
+    <div data-site-nav>
+      <header class="site-header fallback-site-header">
+        <nav class="nav-bar" aria-label="Primary fallback">
+          <a class="brand" href="index.html" aria-label="One Point Digital Services home">
+            <img class="brand-logo brand-logo-header" src="assets/logo-bisen-one-point-footer.svg" alt="Bisen One Point Suvidha Kendra">
+          </a>
+          <div class="fallback-nav-links">
+            <a class="nav-link" href="index.html">Home</a>
+            <a class="nav-link" href="services.html">Services</a>
+            <a class="nav-link" href="products.html">Store</a>
+            <a class="nav-link" href="track-application.html">Track</a>
+            <a class="nav-link" href="contact.html">Contact</a>
+          </div>
+        </nav>
+      </header>
+    </div>
+    <main class="page-shell">
+      <section class="page-hero page-hero-service premium-service-hero online-services-hero tracker-hero">
+        <div class="site-container">
+          <div class="tracker-unified-card">
+            <div class="tracker-card-grid">
+              <!-- Left Column: Form & Info -->
+              <div class="tracker-card-left">
+                <span class="status-live-badge"><i data-lucide="radio"></i> LIVE SYSTEM</span>
+                <p class="eyebrow">Track Application</p>
+                <h1 class="page-hero-title">Know exactly where your request stands.</h1>
+                <p class="hero-desc">Enter your transaction or application ID to view detailed real-time processing milestones.</p>
+                
+                <form class="input-row premium-search-row" data-tracker-form>
+                  <div>
+                    <input class="input" name="applicationId" placeholder="Example: OPDS-20260604-000002" aria-label="Application ID" autocomplete="off">
+                    <i data-lucide="search" class="search-icon-container"></i>
+                  </div>
+                  <button class="btn btn-primary" type="submit"><i data-lucide="compass"></i> Track</button>
+                </form>
+                
+                <div class="tracker-output-wrapper">
+                  <i data-lucide="info"></i>
+                  <div data-tracker-output role="status" aria-live="polite">Enter your tracking number to see live application status.</div>
+                </div>
+              </div>
+              
+              <!-- Right Column: Timeline -->
+              <div class="tracker-card-right">
+                <div class="command-topbar">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                  <strong>LIVE STATUS CENTER</strong>
+                </div>
+                
+                <div class="status-track tracker-hero-timeline">
+                  
+                  <div class="status-step done" data-status-step="Pending">
+                    <div class="status-track-line"></div>
+                    <div class="status-dot">
+                      <i data-lucide="clipboard-list"></i>
+                    </div>
+                    <div class="status-content">
+                      <strong class="status-title">Pending <span class="step-badge-done">Completed</span></strong>
+                      <p class="status-desc">Application request received & documents assigned to operator.</p>
+                    </div>
+                  </div>
+                  
+                  <div class="status-step active" data-status-step="Processing">
+                    <div class="status-track-line"></div>
+                    <div class="status-dot">
+                      <i data-lucide="settings"></i>
+                    </div>
+                    <div class="status-content">
+                      <strong class="status-title">Processing <span class="step-badge-active">Current</span></strong>
+                      <p class="status-desc">Operator validation, compliance check and processing underway.</p>
+                    </div>
+                  </div>
+                  
+                  <div class="status-step" data-status-step="Approved">
+                    <div class="status-track-line"></div>
+                    <div class="status-dot">
+                      <i data-lucide="shield-check"></i>
+                    </div>
+                    <div class="status-content">
+                      <strong class="status-title">Approved</strong>
+                      <p class="status-desc">Authority signature verified and certificate generated.</p>
+                    </div>
+                  </div>
+                  
+                  <div class="status-step" data-status-step="Delivered">
+                    <div class="status-track-line"></div>
+                    <div class="status-dot">
+                      <i data-lucide="package"></i>
+                    </div>
+                    <div class="status-content">
+                      <strong class="status-title">Delivered</strong>
+                      <p class="status-desc">Notification receipt issued & copy dispatched to your WhatsApp.</p>
+                    </div>
+                  </div>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Document Upload Section -->
+      <section class="section reveal" id="doc-upload-section">
+        <div class="doc-upload-card">
+          <div class="doc-upload-header">
+            <div class="doc-upload-icon">
+              <i data-lucide="upload-cloud"></i>
+            </div>
+            <div>
+              <div class="doc-upload-title">Upload Required Documents</div>
+              <div class="doc-upload-subtitle">Upload documents to speed up verification. Bot will auto-check after each upload.</div>
+            </div>
+          </div>
+          <div id="doc-upload-grid"></div>
+          <div id="doc-upload-status"></div>
+        </div>
+      </section>
+
+    </main>
+    <div data-site-footer></div>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+    <script src="assets/app.js?v=clean_js_v11" defer></script>
+    <script>
+    (function() {
+      const DOCS = [
+        { id: "aadhaar",       label: "Aadhaar Card" },
+        { id: "pan",           label: "PAN Card" },
+        { id: "photo",         label: "Passport Photo" },
+        { id: "birth_cert",    label: "Birth Certificate" },
+        { id: "income_cert",   label: "Income Certificate" },
+        { id: "address_proof", label: "Address Proof" },
+        { id: "signature",     label: "Signature" },
+      ];
+
+      async function getCsrf() {
+        try { const r = await fetch('/api/csrf'); const d = await r.json(); return d.csrfToken || ''; } catch { return ''; }
+      }
+
+      async function uploadDoc(orderId, docType, file) {
+        const csrf = await getCsrf();
+        const res = await fetch('/api/orders/documents', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'X-CSRF-Token': csrf },
+          body: JSON.stringify({ orderId, docType, fileName: file.name, fileUrl: '' }),
+        });
+        return res.json();
+      }
+
+      function buildGrid(orderId) {
+        const grid = document.getElementById('doc-upload-grid');
+        if (!grid) return;
+        grid.innerHTML = DOCS.map(doc => `
+          <label id="lbl-${doc.id}">
+            <i data-lucide="file-plus"></i>
+            <div>
+              <div>${doc.label}</div>
+              <div id="ds-${doc.id}">Click to upload</div>
+            </div>
+            <input type="file" accept=".jpg,.jpeg,.png,.pdf" onchange="window._trackUpload(event,'${orderId}','${doc.id}')">
+          </label>
+        `).join('');
+        if (window.lucide) window.lucide.createIcons();
+      }
+
+      window._trackUpload = async function(e, orderId, docType) {
+        const file = e.target.files && e.target.files[0];
+        if (!file) return;
+        const ds = document.getElementById('ds-' + docType);
+        const lbl = document.getElementById('lbl-' + docType);
+        const msg = document.getElementById('doc-upload-status');
+        if (ds) ds.textContent = 'Uploading…';
+        if (msg) msg.innerHTML = '<span>⏳ Uploading...</span>';
+        try {
+          const result = await uploadDoc(orderId, docType, file);
+          if (result.ok) {
+            if (ds)  { ds.textContent = '✓ Uploaded'; ds.style.color = '#22c55e'; }
+            if (lbl) { lbl.style.borderColor = '#22c55e'; lbl.style.background = '#f0fdf4'; }
+            if (msg) msg.innerHTML = '<span>✓ Document uploaded! Bot has been triggered to re-verify your application.</span>';
+          } else { throw new Error(result.message || 'Upload failed'); }
+        } catch (err) {
+          if (ds)  { ds.textContent = 'Failed'; ds.style.color = '#ef4444'; }
+          if (msg) msg.innerHTML = `<span>✗ ${err.message}</span>`;
+        }
+      };
+
+      document.addEventListener('DOMContentLoaded', function() {
+        const params = new URLSearchParams(window.location.search);
+        const orderId = params.get('id') || params.get('order') || '';
+        if (!orderId) return;
+        const section = document.getElementById('doc-upload-section');
+        if (section) section.style.display = 'block';
+        buildGrid(orderId);
+      });
+    })();
+    </script>
+  
+<script id="line-alignment-script">
+  document.addEventListener("DOMContentLoaded", function() {
+    setTimeout(() => {
+      document.querySelectorAll(".section-head h2").forEach(h2 => {
+        let align = window.getComputedStyle(h2).textAlign;
+        let parent = h2.closest('.section-head');
+        if (parent) {
+          if (align === "center") {
+            parent.classList.add("center-line");
+          } else {
+            parent.classList.add("left-line");
+          }
+        }
+      });
+    }, 100); // small delay to ensure CSS is applied
+  });
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

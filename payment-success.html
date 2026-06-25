@@ -1,0 +1,78 @@
+﻿<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Payment successful for One Point Digital Services order.">
+    <title>Payment Successful | One Point</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+        <link rel="stylesheet" href="assets/onepoint.css?v=2">
+</head>
+  <body>
+    <div data-site-nav></div>
+    <main class="page-shell payment-result-shell">
+      <section class="payment-result-card success-state">
+        <div class="success-animation"><i data-lucide="check"></i></div>
+        <p class="section-kicker">Payment Status</p>
+        <h1>Payment Successful</h1>
+        <p>Your order is verified on the server. Invoice and tracking details are ready below.</p>
+        <div data-payment-status></div>
+        <div class="result-next-steps" aria-label="Next steps after payment">
+          <span><i data-lucide="receipt"></i><strong>Invoice ready</strong><small>Download from the status panel when order details are available.</small></span>
+          <span><i data-lucide="route"></i><strong>Track progress</strong><small>Follow document review, processing and delivery stages.</small></span>
+          <span><i data-lucide="message-circle"></i><strong>Support active</strong><small>Share your order ID on WhatsApp if anything looks unclear.</small></span>
+        </div>
+        <div class="status-actions result-static-actions">
+          <a class="btn btn-primary" href="track-application.html">Track Order</a>
+          <a class="btn btn-soft" href="dashboard.html">Open Dashboard</a>
+          <a class="btn btn-ghost" href="support.html">Need Help?</a>
+        </div>
+        <p class="payment-redirect-note" data-dashboard-redirect-note></p>
+      </section>
+    </main>
+    <div data-site-footer></div>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+    <script src="assets/app.js?v=clean_js_v11" defer></script>
+    <script src="assets/payment-status.js?v=payment-system-v2" defer></script>
+  
+<script id="line-alignment-script">
+  document.addEventListener("DOMContentLoaded", function() {
+    setTimeout(() => {
+      document.querySelectorAll(".section-head h2").forEach(h2 => {
+        let align = window.getComputedStyle(h2).textAlign;
+        let parent = h2.closest('.section-head');
+        if (parent) {
+          if (align === "center") {
+            parent.classList.add("center-line");
+          } else {
+            parent.classList.add("left-line");
+          }
+        }
+      });
+    }, 100); // small delay to ensure CSS is applied
+  });
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
