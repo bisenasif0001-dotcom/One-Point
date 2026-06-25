@@ -109,8 +109,8 @@ export const TopBar = ({ onSearchOpen }: { onSearchOpen: () => void }) => {
         )}
 
         {isCustomer && (
-          <span className="chip" style={{ background: 'var(--emerald-dim)', color: 'var(--emerald)', borderColor: 'var(--emerald-border)', padding: '4px 10px', fontSize: 'var(--fs-xs)', fontWeight: 'var(--fw-semibold)' }}>
-            {currentCustomer?.tier || 'Customer'} Customer
+          <span style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-3)', fontWeight: 'var(--fw-medium)', padding: '3px 8px', background: 'var(--bg-3)', border: '1px solid var(--border-1)', borderRadius: 6 }}>
+            {currentCustomer?.tier || 'Standard'} Tier
           </span>
         )}
 
@@ -181,7 +181,7 @@ export const TopBar = ({ onSearchOpen }: { onSearchOpen: () => void }) => {
         )}
 
         {/* User Avatar */}
-        <button className="user-btn" onClick={() => setActivePanel(isCustomer ? 'crm' : 'settings')} title={isCustomer ? 'Open my profile' : 'Open platform settings'}>
+        <button className="user-btn" onClick={() => setActivePanel(isCustomer ? 'customer-profile' : 'settings')} title={isCustomer ? 'Open my profile' : 'Open platform settings'}>
           <div className="user-avatar" style={{ background: isCustomer ? 'var(--blue)' : undefined }}>
             {isCustomer ? (currentCustomer?.initials || 'OP') : 'AS'}
           </div>

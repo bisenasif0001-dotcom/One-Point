@@ -331,6 +331,8 @@ p  { color: var(--muted); }
 
 .nav-actions { display: flex; align-items: center; gap: 10px; }
 .mobile-toggle { display: none; }
+.nav-backdrop { display: none; }
+.mobile-nav-head { display: none; }
 
 /* Desktop dropdown triggers + panels (markup injected by app.js) */
 .nav-item { position: relative; }
@@ -484,13 +486,16 @@ p  { color: var(--muted); }
   .desktop-nav-menu { display: none; }
   .mobile-toggle { display: inline-flex; }
   .nav-menu {
-    position: fixed; top: 0; right: 0; bottom: 0; left: auto; width: min(360px, 86vw);
+    position: fixed; top: 0; right: 0; bottom: auto; left: auto; width: min(340px, 84vw);
+    height: 100vh; height: 100dvh;
     background: var(--navy); border-left: 1px solid rgba(255,255,255,.1);
-    padding: 80px 18px 24px; flex-direction: column; align-items: stretch; gap: 4px;
-    display: none; transform: translateX(0); transition: transform var(--t) var(--ease);
-    overflow-y: auto; z-index: 120;
+    box-shadow: -24px 0 60px rgba(7,27,52,.55);
+    padding: 16px 18px calc(24px + env(safe-area-inset-bottom, 0px)); flex-direction: column; align-items: stretch; gap: 4px;
+    display: none; overflow-y: auto; overscroll-behavior: contain; z-index: 130;
   }
-  .nav-menu.open { display: flex; }
+  .nav-menu.open { display: flex; animation: navDrawerIn .26s var(--ease); }
+  @keyframes navDrawerIn { from { transform: translateX(100%); } to { transform: translateX(0); } }
+  @keyframes navBackdropIn { from { opacity: 0; } to { opacity: 1; } }
   .mobile-nav-menu { display: flex; flex-direction: column; gap: 4px; }
   .mobile-nav-menu .nav-link { color: rgba(255,255,255,.85); }
   .mobile-accordion { border-bottom: 1px solid rgba(255,255,255,.07); }
@@ -499,6 +504,20 @@ p  { color: var(--muted); }
   .mobile-accordion.open .mobile-accordion-panel { display: flex; }
   .mobile-accordion-panel a { color: rgba(255,255,255,.7); padding: 8px 10px; border-radius: var(--r-xs); font-size: .9rem; }
   .mobile-accordion-panel a:hover { background: rgba(255,255,255,.06); color: #fff; }
+
+  /* Drawer header with close button */
+  .mobile-nav-head { display: flex; align-items: center; justify-content: space-between; padding: 2px 0 12px; margin-bottom: 6px; border-bottom: 1px solid rgba(255,255,255,.1); }
+  .mobile-nav-title { color: #fff; font-weight: 800; font-size: 1.05rem; letter-spacing: .01em; }
+  .mobile-nav-close { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 12px; color: #fff; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.14); transition: background var(--t), transform var(--t); cursor: pointer; }
+  .mobile-nav-close:active { transform: scale(.94); background: rgba(255,255,255,.16); }
+
+  /* Backdrop + scroll lock when drawer open */
+  .nav-backdrop { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; height: 100dvh; background: rgba(4,12,28,.55); z-index: 120; }
+  body.nav-open { overflow: hidden; }
+  body.nav-open .nav-backdrop { display: block; animation: navBackdropIn .2s var(--ease); }
+  body.nav-open .whatsapp-float,
+  body.nav-open .live-activity-bar,
+  body.nav-open .mobile-bottom-nav { display: none !important; }
 }
 
 @media (max-width: 720px) {
@@ -543,7 +562,7 @@ p  { color: var(--muted); }
     background: rgba(var(--primary-rgb), .72);
   }
   .mobile-bottom-nav a:active { transform: scale(.97); }
-  .whatsapp-float { bottom: 92px; }
+  /* WhatsApp float position handled in the consolidated bottom-bar block below. */
 }
 
 /* ---------------------------------------------------------------------------
@@ -969,6 +988,13 @@ p  { color: var(--muted); }
 .carousel-slide-inner-card h3 { margin: 12px 0 8px; }
 .carousel-slide-inner-card p { color: var(--muted-2); font-size: .9rem; }
 .bento-visual { margin-top: 16px; }
+/* Phones: tighten the 3 stepper tabs so labels like "Pay & Start" don't wrap raggedly. */
+@media (max-width: 560px) {
+  .bento-stepper-header { gap: 6px; }
+  .bento-stepper-btn { padding: 8px 7px; }
+  .stepper-tab-num { font-size: .68rem; }
+  .stepper-tab-label { font-size: .72rem; line-height: 1.2; }
+}
 
 /* ---------------------------------------------------------------------------
    FEATURED PRODUCTS
@@ -1314,6 +1340,28 @@ p  { color: var(--muted); }
 .service-option-card h3 { font-size: 1.15rem; }
 .service-option-card p { color: var(--muted-2); font-size: .9rem; flex: 1; margin-bottom: 24px; }
 .btn-service-select { width: 100%; margin-top: 6px; }
+
+/* Mobile: the JS windows the carousel to 1 card (visibleCount) but the base CSS
+   keeps every card at 1/4 width, crushing them to ~77px and breaking the text
+   character-by-character. The JS order/is-visible mechanism can't cleanly show a
+   single 100%-wide card, so on phones we neutralize the order/transform with
+   !important and let the viewport scroll natively — full-width, swipeable cards.
+   Filtering (.is-filtered-out) and the is-active state are untouched. */
+@media (max-width: 700px) {
+  .edupoint-carousel-viewport {
+    overflow-x: auto; overflow-y: hidden;
+    scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .edupoint-carousel-viewport::-webkit-scrollbar { display: none; }
+  .edupoint-service-track { transform: none !important; gap: 14px; }
+  .edupoint-service-track > .service-option-card {
+    flex: 0 0 88% !important; order: 0 !important; scroll-snap-align: start;
+  }
+  .edupoint-carousel-arrow { display: none; }
+  /* "View All" expanded grid collapses to a single column on phones */
+  #service-options.is-expanded .edupoint-service-track > .service-option-card { flex: 0 0 100% !important; }
+}
 
 /* --- Required documents (tabbed) --- */
 .required-documents-section { max-width: calc(var(--max) + var(--gutter) * 2); margin-inline: auto; padding: var(--section-y) var(--gutter); }
@@ -2712,6 +2760,22 @@ button[type="submit"]:disabled svg, button[type="submit"]:disabled i { pointer-e
 .live-activity-content strong { color: var(--success-2); }
 .live-activity-close { color: rgba(255,255,255,.5); flex: none; display: grid; place-items: center; }
 .live-activity-close:hover { color: #fff; }
+
+/* Mobile bottom-bar coordination. Lift the WhatsApp button above the bottom nav
+   and drop the social-proof ticker on small screens so the three fixed floats
+   stop colliding. Placed after the base rules above so it wins the cascade
+   (the earlier max-width:720 override was being reset by .whatsapp-float base). */
+@media (max-width: 720px) {
+  .mobile-bottom-nav { bottom: calc(12px + env(safe-area-inset-bottom, 0px)); }
+  .whatsapp-float {
+    right: 16px;
+    bottom: calc(88px + env(safe-area-inset-bottom, 0px));
+    padding: 11px 16px; font-size: .85rem;
+    box-shadow: 0 10px 26px rgba(37,211,102,.45);
+  }
+  .whatsapp-float svg { width: 22px; height: 22px; }
+  .live-activity-bar { display: none !important; }
+}
 
 /* Cart drawer */
 .cart-drawer-shell { position: fixed; inset: 0; z-index: 300; visibility: hidden; }
@@ -6845,4 +6909,197 @@ html body.online-services-page main.page-shell > section#pricing.design-pricing-
 /* ── compact-hero: match site-container outer width to nav-bar so text aligns with logo ── */
 .compact-hero .site-container {
   max-width: calc(var(--max, 1200px) + var(--gutter, 32px) * 2);
+}
+
+/* ===========================================================================
+   MOBILE POLISH — SaaS-grade pass. Every rule is scoped to a mobile breakpoint
+   or a coarse-pointer query, so desktop (fine pointer / >980px) is untouched.
+   Consolidated here for easy review/revert. Brand: --accent gold, --primary blue.
+   =========================================================================== */
+
+/* ── Phase 1 · Touch & input ergonomics ─────────────────────────────────── */
+/* Kill iOS focus-zoom: text inputs must render >=16px on phones/tablets. */
+@media (max-width: 768px) {
+  .input,
+  input[type="text"], input[type="tel"], input[type="email"],
+  input[type="number"], input[type="search"], input[type="password"],
+  input[type="url"], input:not([type]), select, textarea,
+  .hero-search-box .input, .input-with-icon .input { font-size: 16px !important; }
+}
+/* 44px minimum tap targets on touch layouts. */
+@media (max-width: 980px) {
+  .btn { min-height: 44px; }
+  .icon-button { min-height: 44px; min-width: 44px; }
+  .category-filters .btn { height: 44px; }
+  .featured-product-tabs a { min-height: 44px; padding-block: 11px; }
+  .apply-drawer-close { width: 44px; height: 44px; }
+  .top-contact-link { padding-block: 6px; }
+  /* Bigger footer-link tap area without bloating the column: padding absorbs the gap. */
+  .footer-links { gap: 0; }
+  .footer-links a { display: block; padding-block: 6px; }
+}
+/* App-like tap feedback: no blue flash, subtle press-scale (touch devices only). */
+@media (hover: none) and (pointer: coarse) {
+  a, button, .btn, .nav-link, .icon-button, .chip, [role="button"],
+  .featured-product-tabs a, .category-filters .btn { -webkit-tap-highlight-color: transparent; }
+  .btn:active, .icon-button:active, .nav-link:active,
+  .featured-product-tabs a:active, .category-filters .btn:active { transform: scale(.97); }
+}
+
+/* ── Phase 2 · Readability micro-tweaks ──────────────────────────────────── */
+/* Foundation is already solid (antialiased smoothing, 1.65 body line-height, AA
+   colors, fluid heading clamps), so only the two smallest overlay labels get a
+   small legibility bump on the narrowest phones. */
+@media (max-width: 560px) {
+  .tm-mini-label { font-size: .75rem; }           /* 11.2px → 12px stat labels */
+  .featured-product-badge { font-size: .72rem; }  /* 10.7px → 11.5px image badge */
+}
+
+/* ── Phase 3 · Spacing rhythm ─────────────────────────────────────────────── */
+/* --section-y floors at 56px, double-padding every section ~112px and making the
+   homepage ~14,000px tall on phones. Step it down for tablet/phone to tighten the
+   vertical rhythm (app-like); desktop (>768px) keeps the original clamp. */
+@media (max-width: 768px) { :root { --section-y: 50px; } }
+@media (max-width: 560px) { :root { --section-y: 38px; } }
+
+/* Phase 4: fixed-action hierarchy and first-screen polish. */
+@media (max-width: 768px) {
+  body.has-sticky-bottom-cta {
+    padding-bottom: calc(92px + env(safe-area-inset-bottom, 0px));
+  }
+
+  body.has-sticky-bottom-cta .mobile-bottom-nav,
+  body.has-sticky-bottom-cta .whatsapp-float,
+  body.has-tracker-hero .whatsapp-float {
+    display: none !important;
+  }
+
+  body.has-sticky-bottom-cta .sticky-bottom-cta {
+    left: 12px;
+    right: 12px;
+    bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+    min-height: 68px;
+    padding: 10px 12px 10px 14px;
+    border-radius: 18px;
+    border: 1px solid rgba(255,255,255,.13);
+    box-shadow: 0 -10px 34px rgba(7,17,30,.28);
+  }
+
+  body.has-sticky-bottom-cta .sticky-bottom-cta .btn-primary {
+    min-height: 48px;
+    padding-inline: 18px !important;
+    border-radius: 12px !important;
+  }
+}
+
+@media (max-width: 720px) {
+  .whatsapp-float {
+    width: 48px;
+    height: 48px;
+    padding: 0;
+    justify-content: center;
+    border-radius: 50%;
+  }
+
+  .whatsapp-float span {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 560px) {
+  .top-contact-inner {
+    padding: 4px 16px;
+  }
+
+  .top-contact-links {
+    gap: 12px;
+  }
+
+  .top-contact-link {
+    min-height: 36px;
+    font-size: .76rem;
+  }
+
+  .nav-bar {
+    gap: 8px;
+    padding: 8px 16px;
+  }
+
+  .brand-logo-header {
+    height: 38px;
+  }
+
+  .nav-actions {
+    gap: 8px;
+  }
+
+  .nav-actions .btn-gold {
+    min-height: 44px;
+    padding-inline: 14px;
+    font-size: .9rem;
+  }
+
+  .hero,
+  .page-hero-service {
+    padding-top: 40px;
+    padding-bottom: 44px;
+  }
+
+  .hero h1,
+  .page-hero-title {
+    font-size: clamp(2rem, 9vw, 2.45rem);
+  }
+
+  .page-hero-copy > p {
+    margin-bottom: 18px;
+  }
+
+  .page-hero-service .hero-actions {
+    gap: 12px;
+    margin-bottom: 18px;
+  }
+
+  .hero-trust-strip {
+    gap: 8px;
+  }
+
+  .hero-trust-badge {
+    padding: 7px 11px;
+    font-size: .78rem;
+  }
+}
+
+@media (max-width: 560px) {
+  body.online-services-page .tracker-hero {
+    padding-top: 28px !important;
+    padding-bottom: 36px !important;
+  }
+
+  body.online-services-page .tracker-hero .tracker-unified-card {
+    border-radius: 22px;
+    padding: 20px !important;
+  }
+
+  body.online-services-page .tracker-hero .tracker-card-grid {
+    gap: 18px;
+  }
+
+  body.online-services-page .tracker-hero .tracker-card-right {
+    max-height: 270px;
+    overflow-y: auto;
+    padding-top: 18px !important;
+    overscroll-behavior: contain;
+  }
+
+  body.online-services-page .tracker-hero .tracker-card-right .command-topbar {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    margin-bottom: 12px;
+  }
 }

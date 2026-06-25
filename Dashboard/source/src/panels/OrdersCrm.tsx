@@ -923,7 +923,7 @@ export const OrdersCrmPanels = ({ activePanel }: any) => {
           </div>
         </div>
       )}
-      {activePanel === 'crm' && (
+      {activePanel === 'crm' && !isCustomer && (
         <div className="panel active">
           <CrmAdminView
             CUSTOMERS={CUSTOMERS}
@@ -939,6 +939,7 @@ export const OrdersCrmPanels = ({ activePanel }: any) => {
           />
         </div>
       )}
+      {activePanel === 'crm' && isCustomer && (() => { setActivePanel('customer-home'); return null; })()}
       {activePanel === 'customer-home' && (
         <div className="panel active">
           <PanelHeader
