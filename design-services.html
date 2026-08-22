@@ -1,15 +1,1857 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Design services by One Point Digital Services including logo design, flex design, visiting cards, banners and social media posts.">
-    <title>Design Services | One Point Digital Services</title>
+    <meta name="description" content="Professional graphic design, website design, and custom full-stack development for businesses, brands, and startups by One Point Digital Services with transparent pricing and master source deliverables.">
+    <title>Design &amp; Web Development Services | One Point Digital Services</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-        <link rel="stylesheet" href="assets/onepoint.css?v=2"></head>
+    <script src="assets/opds-boot.js?v=anti-fouc-79"></script>
+    <link rel="stylesheet" href="assets/onepoint.css?v=customer-checkout-94">
+
+    <style>
+      /* ==========================================================================
+         ONE POINT DESIGN & WEB DEV SERVICES - SIGNATURE MASTERPIECE SYSTEM
+         ========================================================================== */
+      :root {
+        --ds-primary: #075092;
+        --ds-primary-deep: #053b6c;
+        --ds-primary-dark: #082548;
+        --ds-gold: #d2a12a;
+        --ds-gold-hover: #b88a1e;
+        --ds-emerald: #059669;
+        --ds-slate: #0b1f35;
+        --ds-body: #475569;
+        --ds-muted: #64748b;
+        --ds-border: #e2e8f0;
+        --ds-border-focus: #94a3b8;
+        --ds-bg-light: #f8fbff;
+        --ds-bg-alt: #f8fafc;
+        --ds-bg-card: #ffffff;
+        --r-sm: 8px;
+        --r-md: 12px;
+        --r-lg: 16px;
+        --r-pill: 9999px;
+        --ds-shadow-sm: 0 1px 3px rgba(11, 31, 53, 0.04), 0 1px 2px rgba(11, 31, 53, 0.02);
+        --ds-shadow-md: 0 4px 16px rgba(7, 80, 146, 0.06), 0 1px 3px rgba(7, 80, 146, 0.04);
+        --ds-shadow-hover: 0 10px 28px rgba(7, 80, 146, 0.10);
+        --ds-transition: 180ms cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+          scroll-behavior: auto !important;
+        }
+      }
+
+      /* ── Spacing Tokens & Container Strategy ─────────────────────── */
+      .ds-section {
+        padding: clamp(64px, 7vw, 92px) 0;
+        position: relative;
+      }
+      .ds-bg-white { background: #ffffff; }
+      .ds-bg-pale-blue { background: var(--ds-bg-light); border-top: 1px solid var(--ds-border); border-bottom: 1px solid var(--ds-border); }
+      .ds-bg-soft-grey { background: var(--ds-bg-alt); border-top: 1px solid var(--ds-border); border-bottom: 1px solid var(--ds-border); }
+
+      .ds-container {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 clamp(16px, 3vw, 28px);
+        box-sizing: border-box;
+      }
+      .ds-container-estimator,
+      .ds-container-process,
+      .ds-container-brief,
+      .ds-container-faq {
+        max-width: 1200px;
+      }
+
+      /* ── Section Header Typography & Rhythm ──────────────────────── */
+      .ds-header {
+        text-align: center;
+        max-width: 760px;
+        margin: 0 auto clamp(28px, 4vw, 42px);
+      }
+      .ds-kicker {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 11.5px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--ds-primary);
+        background: #eff6ff;
+        border: 1px solid #bfdbfe;
+        padding: 4px 12px;
+        border-radius: var(--r-pill);
+        margin-bottom: 10px;
+      }
+      .ds-kicker.gold-kicker {
+        color: #855800;
+        background: #fef9c3;
+        border-color: #fde047;
+      }
+      .ds-kicker i, .ds-kicker svg {
+        width: 13px;
+        height: 13px;
+      }
+      .ds-title {
+        font-size: clamp(1.7rem, 3.2vw, 2.25rem);
+        font-weight: 850;
+        color: var(--ds-slate);
+        line-height: 1.25;
+        margin: 0 0 10px;
+        letter-spacing: -0.02em;
+      }
+      .ds-sub {
+        font-size: 15px;
+        color: var(--ds-body);
+        line-height: 1.55;
+        margin: 0;
+      }
+
+      /* ── ZONE 1: DISCOVER (CURATED SHOWCASE) ─────────────────────── */
+      
+      /* Refined Category Selector */
+      .ds-seg-control-wrap {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 14px;
+        margin-bottom: 36px;
+      }
+      .ds-seg-control {
+        background: #f1f5f9;
+        padding: 6px;
+        border-radius: var(--r-md);
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        border: 1.5px solid var(--ds-border);
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .ds-seg-btn {
+        all: unset;
+        cursor: pointer;
+        padding: 9px 18px;
+        border-radius: var(--r-sm);
+        font-size: 13.5px;
+        font-weight: 700;
+        color: #475569;
+        background: #ffffff;
+        border: 1.5px solid transparent;
+        transition: all var(--ds-transition);
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        min-height: 20px;
+      }
+      .ds-seg-btn:hover {
+        color: var(--ds-slate);
+        border-color: #cbd5e1;
+      }
+      .ds-seg-btn.active {
+        background: var(--ds-primary);
+        color: #ffffff;
+        border-color: var(--ds-primary);
+        box-shadow: 0 4px 14px rgba(7, 80, 146, 0.22);
+      }
+      .ds-seg-btn.active i, .ds-seg-btn.active svg {
+        color: #ffffff;
+      }
+
+      /* Contextual Sub-category Chips (Progressive Disclosure) */
+      .ds-sub-chips {
+        display: none;
+        align-items: center;
+        gap: 8px;
+        flex-wrap: wrap;
+        justify-content: center;
+        animation: dsFadeIn 0.2s ease forwards;
+      }
+      .ds-sub-chips.show {
+        display: flex;
+      }
+      .ds-sub-chip {
+        all: unset;
+        cursor: pointer;
+        padding: 5px 14px;
+        border-radius: var(--r-pill);
+        font-size: 12px;
+        font-weight: 650;
+        color: #475569;
+        background: #ffffff;
+        border: 1px solid var(--ds-border);
+        transition: all var(--ds-transition);
+      }
+      .ds-sub-chip:hover {
+        border-color: #cbd5e1;
+        background: #f8fafc;
+      }
+      .ds-sub-chip.active {
+        background: #eff6ff;
+        border-color: #bfdbfe;
+        color: var(--ds-primary);
+        font-weight: 750;
+      }
+
+      /* Service Showcase Grid (3 Cards Per Row on Desktop) */
+      .ds-cards-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+      }
+      @media (max-width: 960px) {
+        .ds-cards-grid { grid-template-columns: repeat(2, 1fr); gap: 18px; }
+      }
+      @media (max-width: 580px) {
+        .ds-cards-grid { grid-template-columns: 1fr; gap: 16px; }
+      }
+
+      .ds-service-card {
+        background: #ffffff;
+        border: 1px solid var(--ds-border);
+        border-radius: var(--r-md);
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        transition: transform var(--ds-transition), box-shadow var(--ds-transition), border-color var(--ds-transition);
+        position: relative;
+      }
+      .ds-service-card:hover {
+        transform: translateY(-3px);
+        border-color: #cbd5e1;
+        box-shadow: var(--ds-shadow-hover);
+      }
+
+      /* Flagship Hierarchy Accent (Row 1 Featured) */
+      .ds-service-card.flagship {
+        border-color: #bfdbfe;
+        box-shadow: var(--ds-shadow-md);
+      }
+      .ds-service-card.flagship:hover {
+        border-color: #93c5fd;
+        box-shadow: 0 12px 32px rgba(7, 80, 146, 0.12);
+      }
+
+      .ds-card-thumb {
+        width: 100%;
+        height: 175px;
+        position: relative;
+        background: #f1f5f9;
+        overflow: hidden;
+      }
+      .ds-service-card.flagship .ds-card-thumb {
+        height: 190px;
+      }
+      .ds-card-thumb img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        transition: transform 0.3s ease;
+      }
+      .ds-service-card:hover .ds-card-thumb img {
+        transform: scale(1.025);
+      }
+
+      /* Single Badge Top Right */
+      .ds-card-badge {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        font-size: 10.5px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        padding: 4px 9px;
+        border-radius: 6px;
+        background: rgba(11, 31, 53, 0.85);
+        color: #ffffff;
+        backdrop-filter: blur(4px);
+      }
+      .ds-card-badge.gold {
+        background: var(--ds-gold);
+        color: #0b1f35;
+      }
+      .ds-card-badge.flagship-badge {
+        background: var(--ds-primary);
+        color: #ffffff;
+      }
+
+      .ds-card-body {
+        padding: 18px 20px 14px;
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+      }
+
+      /* Category Marker Eyebrow (No Rainbow Colors) */
+      .ds-card-cat-marker {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        font-size: 11px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: var(--ds-primary);
+        margin-bottom: 6px;
+      }
+      .ds-card-cat-marker i, .ds-card-cat-marker svg {
+        width: 12px;
+        height: 12px;
+      }
+
+      .ds-card-body h3 {
+        font-size: 17.5px;
+        font-weight: 750;
+        color: var(--ds-slate);
+        margin: 0 0 6px;
+        line-height: 1.3;
+      }
+      .ds-card-desc {
+        font-size: 13.5px;
+        color: var(--ds-body);
+        line-height: 1.45;
+        margin: 0 0 14px;
+        min-height: 38px;
+      }
+      .ds-card-meta {
+        margin-top: auto;
+        padding-top: 10px;
+        border-top: 1px solid #f1f5f9;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 12px;
+        color: var(--ds-muted);
+        font-weight: 600;
+      }
+      .ds-card-meta strong {
+        font-size: 14.5px;
+        font-weight: 800;
+        color: var(--ds-slate);
+      }
+
+      .ds-card-footer {
+        padding: 12px 20px 16px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .ds-card-cta {
+        flex: 1;
+        padding: 9px 14px;
+        background: #f1f5f9;
+        color: var(--ds-primary);
+        border-radius: var(--r-sm);
+        font-size: 13px;
+        font-weight: 750;
+        text-decoration: none;
+        text-align: center;
+        transition: all var(--ds-transition);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        min-height: 20px;
+      }
+      .ds-card-cta:hover {
+        background: var(--ds-primary);
+        color: #ffffff;
+      }
+      .ds-card-cta:hover i, .ds-card-cta:hover svg {
+        transform: translateX(3px);
+      }
+      .ds-card-cta i, .ds-card-cta svg {
+        width: 14px;
+        height: 14px;
+        transition: transform var(--ds-transition);
+      }
+      .ds-card-wa {
+        width: 38px;
+        height: 38px;
+        background: #f0fdf4;
+        border: 1px solid #bbf7d0;
+        color: var(--ds-emerald);
+        border-radius: var(--r-sm);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        transition: all var(--ds-transition);
+        flex-shrink: 0;
+      }
+      .ds-card-wa:hover {
+        background: var(--ds-emerald);
+        color: #ffffff;
+        border-color: var(--ds-emerald);
+      }
+      .ds-card-wa i, .ds-card-wa svg { width: 17px; height: 17px; }
+
+      /* Empty State */
+      .ds-empty-state {
+        grid-column: 1 / -1;
+        text-align: center;
+        padding: 48px 24px;
+        background: #ffffff;
+        border: 1.5px dashed var(--ds-border);
+        border-radius: var(--r-lg);
+      }
+      .ds-empty-state i, .ds-empty-state svg {
+        width: 44px;
+        height: 44px;
+        color: #94a3b8;
+        margin-bottom: 12px;
+      }
+      .ds-empty-state h3 {
+        font-size: 1.2rem;
+        color: var(--ds-slate);
+        margin: 0 0 6px;
+      }
+      .ds-empty-state p {
+        font-size: 14px;
+        color: var(--ds-body);
+        margin: 0 0 18px;
+      }
+      .ds-empty-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 10px 20px;
+        background: var(--ds-primary);
+        color: #ffffff;
+        font-size: 13.5px;
+        font-weight: 750;
+        border-radius: var(--r-sm);
+        text-decoration: none;
+      }
+
+      /* ── ZONE 2: DECIDE ──────────────────────────────────────────── */
+      
+      /* ── Enhanced Transparent Project Estimator (USP Signature Tool) ── */
+      .ds-est-container {
+        background: #ffffff;
+        border: 1.5px solid #bfdbfe;
+        border-radius: 20px;
+        display: grid;
+        grid-template-columns: 1.25fr 0.85fr;
+        overflow: hidden;
+        box-shadow: 0 12px 36px rgba(7, 80, 146, 0.08);
+      }
+      @media (max-width: 900px) {
+        .ds-est-container { grid-template-columns: 1fr; }
+      }
+      .ds-est-form {
+        padding: clamp(24px, 4vw, 36px);
+        display: flex;
+        flex-direction: column;
+        gap: 22px;
+      }
+      .ds-est-field {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .ds-est-label-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .ds-est-label {
+        font-size: 12px;
+        font-weight: 850;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: var(--ds-slate);
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .ds-est-label span.step-num {
+        width: 18px;
+        height: 18px;
+        background: #eff6ff;
+        color: var(--ds-primary);
+        border: 1px solid #bfdbfe;
+        border-radius: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 11px;
+        font-weight: 800;
+      }
+      .ds-est-hint {
+        font-size: 11.5px;
+        font-weight: 600;
+        color: #64748b;
+      }
+      /* Custom Luxury Service Selector Dropdown */
+      .ds-cselect-wrap {
+        position: relative;
+        width: 100%;
+        user-select: none;
+      }
+      .ds-cselect-trigger {
+        all: unset;
+        width: 100%;
+        min-height: 52px;
+        padding: 8px 16px;
+        border: 1.5px solid #cbd5e1;
+        border-radius: var(--r-md);
+        background: #ffffff;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        box-sizing: border-box;
+        cursor: pointer;
+        transition: all var(--ds-transition);
+      }
+      .ds-cselect-trigger:hover {
+        border-color: #94a3b8;
+        background: #f8fafc;
+      }
+      .ds-cselect-wrap.open .ds-cselect-trigger {
+        border-color: var(--ds-primary);
+        box-shadow: 0 0 0 3px rgba(7, 80, 146, 0.12);
+        background: #ffffff;
+      }
+      .ds-cselect-val {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        text-align: left;
+      }
+      .ds-cselect-icon {
+        width: 36px;
+        height: 36px;
+        border-radius: var(--r-sm);
+        background: #eff6ff;
+        border: 1px solid #bfdbfe;
+        color: var(--ds-primary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+      .ds-cselect-icon i, .ds-cselect-icon svg {
+        width: 18px;
+        height: 18px;
+      }
+      .ds-cselect-text {
+        display: flex;
+        flex-direction: column;
+        gap: 1px;
+      }
+      .ds-cselect-title {
+        font-size: 14px;
+        font-weight: 800;
+        color: var(--ds-slate);
+      }
+      .ds-cselect-cat {
+        font-size: 11px;
+        font-weight: 700;
+        color: #64748b;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+      }
+      .ds-cselect-right {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex-shrink: 0;
+      }
+      .ds-cselect-price-tag {
+        font-size: 12px;
+        font-weight: 800;
+        color: var(--ds-primary);
+        background: #eff6ff;
+        border: 1px solid #bfdbfe;
+        padding: 3px 8px;
+        border-radius: 999px;
+      }
+      .ds-cselect-arrow {
+        width: 18px;
+        height: 18px;
+        color: #64748b;
+        transition: transform 0.25s ease;
+      }
+      .ds-cselect-wrap.open .ds-cselect-arrow {
+        transform: rotate(180deg);
+        color: var(--ds-primary);
+      }
+
+      /* Dropdown Menu */
+      .ds-cselect-dropdown {
+        position: absolute;
+        top: calc(100% + 6px);
+        left: 0;
+        right: 0;
+        z-index: 60;
+        background: #ffffff;
+        border: 1.5px solid #bfdbfe;
+        border-radius: 16px;
+        box-shadow: 0 16px 40px rgba(7, 80, 146, 0.14);
+        max-height: 340px;
+        overflow-y: auto;
+        display: none;
+        animation: dsFadeIn 0.2s ease forwards;
+      }
+      .ds-cselect-wrap.open .ds-cselect-dropdown {
+        display: block;
+      }
+      .ds-cselect-group {
+        border-bottom: 1px solid #f1f5f9;
+      }
+      .ds-cselect-group:last-child {
+        border-bottom: none;
+      }
+      .ds-cselect-group-title {
+        font-size: 10.5px;
+        font-weight: 850;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: #1e40af;
+        background: #f8fafc;
+        padding: 8px 14px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        border-bottom: 1px solid #e2e8f0;
+      }
+      .ds-cselect-group-title i, .ds-cselect-group-title svg {
+        width: 13px;
+        height: 13px;
+      }
+      .ds-cselect-opt {
+        padding: 10px 14px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        cursor: pointer;
+        transition: all 0.15s ease;
+        border-bottom: 1px solid #f8fafc;
+      }
+      .ds-cselect-opt:last-child {
+        border-bottom: none;
+      }
+      .ds-cselect-opt:hover {
+        background: #f0f7ff;
+      }
+      .ds-cselect-opt.active {
+        background: #eff6ff;
+      }
+      .ds-cselect-opt-icon {
+        width: 32px;
+        height: 32px;
+        border-radius: var(--r-sm);
+        background: #f1f5f9;
+        border: 1px solid #e2e8f0;
+        color: #475569;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        transition: all 0.15s ease;
+      }
+      .ds-cselect-opt:hover .ds-cselect-opt-icon,
+      .ds-cselect-opt.active .ds-cselect-opt-icon {
+        background: #eff6ff;
+        border-color: #bfdbfe;
+        color: var(--ds-primary);
+      }
+      .ds-cselect-opt-icon i, .ds-cselect-opt-icon svg {
+        width: 16px;
+        height: 16px;
+      }
+      .ds-cselect-opt-info {
+        display: flex;
+        flex-direction: column;
+        gap: 1px;
+        flex: 1;
+        text-align: left;
+      }
+      .ds-cselect-opt-info strong {
+        font-size: 13.5px;
+        font-weight: 800;
+        color: var(--ds-slate);
+      }
+      .ds-cselect-opt.active .ds-cselect-opt-info strong {
+        color: var(--ds-primary);
+      }
+      .ds-cselect-opt-info span {
+        font-size: 11.5px;
+        color: var(--ds-body);
+      }
+      .ds-cselect-opt-price {
+        font-size: 12px;
+        font-weight: 800;
+        color: var(--ds-primary);
+        background: #ffffff;
+        border: 1px solid #bfdbfe;
+        padding: 2px 7px;
+        border-radius: 999px;
+        flex-shrink: 0;
+      }
+      .ds-cselect-check {
+        width: 16px;
+        height: 16px;
+        color: var(--ds-primary);
+        opacity: 0;
+        transition: opacity 0.15s ease;
+        flex-shrink: 0;
+      }
+      .ds-cselect-opt.active .ds-cselect-check {
+        opacity: 1;
+      }
+
+      /* Scope Tier Cards */
+      .ds-est-tier-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+      }
+      @media (max-width: 560px) {
+        .ds-est-tier-grid { grid-template-columns: 1fr; }
+      }
+      .ds-est-tier-card {
+        all: unset;
+        cursor: pointer;
+        padding: 12px 14px;
+        border: 1.5px solid #cbd5e1;
+        border-radius: var(--r-md);
+        background: #f8fafc;
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+        transition: all var(--ds-transition);
+        box-sizing: border-box;
+        position: relative;
+      }
+      .ds-est-tier-card:hover {
+        border-color: #94a3b8;
+        background: #ffffff;
+      }
+      .ds-est-tier-card.active {
+        background: #eff6ff;
+        border-color: var(--ds-primary);
+        box-shadow: 0 4px 14px rgba(7, 80, 146, 0.12);
+      }
+      .ds-est-tier-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .ds-est-tier-title {
+        font-size: 13.5px;
+        font-weight: 800;
+        color: var(--ds-slate);
+      }
+      .ds-est-tier-card.active .ds-est-tier-title {
+        color: var(--ds-primary);
+      }
+      .ds-est-tier-tag {
+        font-size: 10px;
+        font-weight: 800;
+        text-transform: uppercase;
+        background: #dbeafe;
+        color: #1e40af;
+        padding: 2px 6px;
+        border-radius: 999px;
+      }
+      .ds-est-tier-sub {
+        font-size: 11.5px;
+        color: var(--ds-body);
+        line-height: 1.3;
+      }
+
+      /* Delivery Schedule Cards */
+      .ds-est-schedule-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+      }
+      @media (max-width: 560px) {
+        .ds-est-schedule-grid { grid-template-columns: 1fr; }
+      }
+      .ds-est-sched-card {
+        all: unset;
+        cursor: pointer;
+        padding: 12px 14px;
+        border: 1.5px solid #cbd5e1;
+        border-radius: var(--r-md);
+        background: #f8fafc;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        transition: all var(--ds-transition);
+        box-sizing: border-box;
+      }
+      .ds-est-sched-card:hover {
+        border-color: #94a3b8;
+        background: #ffffff;
+      }
+      .ds-est-sched-card.active {
+        background: #eff6ff;
+        border-color: var(--ds-primary);
+        box-shadow: 0 4px 14px rgba(7, 80, 146, 0.12);
+      }
+      .ds-est-sched-icon {
+        width: 34px;
+        height: 34px;
+        border-radius: var(--r-sm);
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--ds-primary);
+        flex-shrink: 0;
+      }
+      .ds-est-sched-card.active .ds-est-sched-icon {
+        background: #ffffff;
+        border-color: #bfdbfe;
+      }
+      .ds-est-sched-icon i, .ds-est-sched-icon svg { width: 18px; height: 18px; }
+      .ds-est-sched-info {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+      }
+      .ds-est-sched-name {
+        font-size: 13px;
+        font-weight: 800;
+        color: var(--ds-slate);
+      }
+      .ds-est-sched-card.active .ds-est-sched-name {
+        color: var(--ds-primary);
+      }
+      .ds-est-sched-sub {
+        font-size: 11.5px;
+        color: var(--ds-body);
+      }
+
+      /* Add-on Interactive Cards */
+      .ds-est-addons-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+      }
+      @media (max-width: 560px) {
+        .ds-est-addons-grid { grid-template-columns: 1fr; }
+      }
+      .ds-est-addon-tile {
+        border: 1.5px solid #cbd5e1;
+        border-radius: var(--r-md);
+        background: #f8fafc;
+        padding: 12px 14px;
+        cursor: pointer;
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        transition: all var(--ds-transition);
+        user-select: none;
+      }
+      .ds-est-addon-tile:hover {
+        border-color: #94a3b8;
+        background: #ffffff;
+      }
+      .ds-est-addon-tile.checked {
+        background: #f0fdf4;
+        border-color: #86efac;
+        box-shadow: 0 2px 10px rgba(22, 163, 74, 0.08);
+      }
+      .ds-est-addon-tile input[type="checkbox"] {
+        accent-color: #16a34a;
+        width: 17px;
+        height: 17px;
+        margin-top: 2px;
+        cursor: pointer;
+      }
+      .ds-est-addon-body {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+      }
+      .ds-est-addon-title-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 6px;
+      }
+      .ds-est-addon-title {
+        font-size: 12.5px;
+        font-weight: 800;
+        color: var(--ds-slate);
+      }
+      .ds-est-addon-chip {
+        font-size: 11px;
+        font-weight: 800;
+        color: #166534;
+        background: #dcfce7;
+        padding: 1px 6px;
+        border-radius: 999px;
+      }
+      .ds-est-addon-desc {
+        font-size: 11px;
+        color: var(--ds-body);
+        line-height: 1.35;
+      }
+
+      /* Right Pale Blue Receipt Panel */
+      .ds-est-receipt {
+        background: #f0f7ff;
+        border-left: 1.5px solid #bfdbfe;
+        padding: clamp(24px, 4vw, 36px);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 24px;
+      }
+      @media (max-width: 900px) {
+        .ds-est-receipt { border-left: none; border-top: 1.5px solid #bfdbfe; }
+      }
+      .ds-est-receipt-head {
+        border-bottom: 1px solid #bfdbfe;
+        padding-bottom: 14px;
+        margin-bottom: 16px;
+      }
+      .ds-est-receipt-kicker {
+        font-size: 11px;
+        font-weight: 850;
+        text-transform: uppercase;
+        color: var(--ds-primary);
+        letter-spacing: 0.06em;
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        margin-bottom: 4px;
+      }
+      .ds-est-receipt-head h3 {
+        font-size: 1.2rem;
+        font-weight: 850;
+        color: var(--ds-slate);
+        margin: 0 0 4px;
+      }
+      .ds-est-receipt-head p {
+        font-size: 13px;
+        color: #64748b;
+        margin: 0;
+        font-weight: 600;
+      }
+      .ds-est-summary-rows {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      .ds-est-sum-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 13px;
+        color: var(--ds-body);
+        padding-bottom: 8px;
+        border-bottom: 1px dashed #bfdbfe;
+      }
+      .ds-est-sum-row strong {
+        color: var(--ds-slate);
+        font-weight: 750;
+      }
+      .ds-est-total-box {
+        background: #ffffff;
+        border: 1.5px solid #bfdbfe;
+        border-radius: var(--r-md);
+        padding: 16px 20px;
+        margin-bottom: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        box-shadow: 0 4px 14px rgba(7, 80, 146, 0.06);
+      }
+      .ds-est-total-box span {
+        font-size: 12px;
+        font-weight: 800;
+        text-transform: uppercase;
+        color: var(--ds-slate);
+        letter-spacing: 0.04em;
+      }
+      .ds-est-total-price {
+        font-size: 1.65rem;
+        font-weight: 900;
+        color: var(--ds-primary);
+        letter-spacing: -0.02em;
+        transition: opacity 0.15s ease, transform 0.15s ease;
+      }
+      .ds-est-trust-note {
+        font-size: 11.5px;
+        color: #64748b;
+        text-align: center;
+        margin: 0 0 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+      }
+      .ds-est-wa-btn {
+        width: 100%;
+        padding: 14px 20px;
+        background: #25D366;
+        color: #ffffff !important;
+        border-radius: var(--r-md);
+        font-size: 14px;
+        font-weight: 800;
+        text-align: center;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        transition: all var(--ds-transition);
+        box-sizing: border-box;
+        box-shadow: 0 4px 16px rgba(37, 211, 102, 0.28);
+      }
+      .ds-est-wa-btn:hover {
+        background: #1eb956;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(37, 211, 102, 0.36);
+      }
+      .ds-est-wa-btn i, .ds-est-wa-btn svg { width: 18px; height: 18px; }
+
+      /* Editorial Case Studies (3 Large Authority Cards) */
+      .ds-editorial-port-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+        margin-bottom: 24px;
+      }
+      @media (max-width: 900px) {
+        .ds-editorial-port-grid { grid-template-columns: 1fr; }
+      }
+      .ds-editorial-card {
+        background: #ffffff;
+        border: 1px solid var(--ds-border);
+        border-radius: var(--r-lg);
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        transition: transform var(--ds-transition), box-shadow var(--ds-transition), border-color var(--ds-transition);
+      }
+      .ds-editorial-card:hover {
+        transform: translateY(-4px);
+        border-color: #cbd5e1;
+        box-shadow: var(--ds-shadow-hover);
+      }
+      .ds-editorial-img {
+        width: 100%;
+        height: 220px;
+        background: #f1f5f9;
+        overflow: hidden;
+      }
+      .ds-editorial-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        transition: transform 0.35s ease;
+      }
+      .ds-editorial-card:hover .ds-editorial-img img {
+        transform: scale(1.03);
+      }
+      .ds-editorial-body {
+        padding: 22px 24px;
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+      }
+      .ds-editorial-tag {
+        font-size: 11px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: var(--ds-primary);
+        margin-bottom: 6px;
+      }
+      .ds-editorial-body h3 {
+        font-size: 1.15rem;
+        font-weight: 800;
+        color: var(--ds-slate);
+        margin: 0 0 8px;
+        line-height: 1.3;
+      }
+      .ds-editorial-body p {
+        font-size: 13.5px;
+        color: var(--ds-body);
+        line-height: 1.45;
+        margin: 0 0 16px;
+      }
+      .ds-editorial-link {
+        margin-top: auto;
+        font-size: 13px;
+        font-weight: 800;
+        color: var(--ds-primary);
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        transition: gap var(--ds-transition);
+      }
+      .ds-editorial-link:hover {
+        gap: 10px;
+      }
+      .ds-editorial-link i, .ds-editorial-link svg {
+        width: 15px;
+        height: 15px;
+      }
+      .ds-proof-line {
+        text-align: center;
+        font-size: 13px;
+        color: var(--ds-muted);
+        font-weight: 600;
+        margin-top: 14px;
+      }
+
+      /* Connecting 4-Step Process Visual Journey */
+      .ds-timeline-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+        position: relative;
+      }
+      @media (max-width: 960px) {
+        .ds-timeline-grid { grid-template-columns: repeat(2, 1fr); }
+      }
+      @media (max-width: 540px) {
+        .ds-timeline-grid { grid-template-columns: 1fr; }
+      }
+      .ds-timeline-step {
+        background: #ffffff;
+        border: 1.5px solid #e2e8f0;
+        border-radius: var(--r-lg);
+        padding: 24px 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        position: relative;
+        box-shadow: 0 4px 16px rgba(7, 80, 146, 0.04);
+        transition: transform var(--ds-transition), box-shadow var(--ds-transition), border-color var(--ds-transition);
+      }
+      .ds-timeline-step:hover {
+        transform: translateY(-4px);
+        border-color: var(--ds-primary);
+        box-shadow: 0 10px 28px rgba(7, 80, 146, 0.10);
+      }
+      .ds-step-top-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .ds-step-icon-wrap {
+        width: 40px;
+        height: 40px;
+        border-radius: var(--r-sm);
+        background: #eff6ff;
+        border: 1px solid #bfdbfe;
+        color: var(--ds-primary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .ds-step-icon-wrap i, .ds-step-icon-wrap svg {
+        width: 20px;
+        height: 20px;
+      }
+      .ds-step-badge {
+        font-size: 11px;
+        font-weight: 850;
+        text-transform: uppercase;
+        color: #1e40af;
+        background: #dbeafe;
+        padding: 3px 8px;
+        border-radius: 999px;
+        letter-spacing: 0.04em;
+      }
+      .ds-timeline-step h3 {
+        font-size: 1.12rem;
+        font-weight: 800;
+        color: var(--ds-slate);
+        margin: 0;
+        line-height: 1.3;
+      }
+      .ds-timeline-step p {
+        font-size: 13px;
+        color: var(--ds-body);
+        margin: 0;
+        line-height: 1.5;
+        flex: 1;
+      }
+      .ds-step-micro-tag {
+        font-size: 11.5px;
+        font-weight: 700;
+        color: var(--ds-primary);
+        background: #f8fafc;
+        border-top: 1px dashed #e2e8f0;
+        padding-top: 10px;
+        margin-top: 4px;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+
+      /* ── ZONE 3: START PROJECT ───────────────────────────────────── */
+      
+      /* Enhanced Multi-Step Wizard Project Brief */
+      .ds-wizard-container {
+        background: #ffffff;
+        border: 1.5px solid #bfdbfe;
+        border-radius: 20px;
+        box-shadow: 0 12px 36px rgba(7, 80, 146, 0.08);
+        position: relative;
+      }
+      .ds-wizard-head {
+        padding: 18px clamp(20px, 3vw, 32px);
+        background: #f8fafc;
+        border-bottom: 1.5px solid #e2e8f0;
+        border-top-left-radius: 19px;
+        border-top-right-radius: 19px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+      }
+      .ds-wizard-steps-pills {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .ds-wizard-step-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 12px;
+        font-weight: 800;
+        color: #64748b;
+        padding: 5px 12px;
+        border-radius: 999px;
+        background: #f1f5f9;
+        transition: all var(--ds-transition);
+      }
+      .ds-wizard-step-pill.active {
+        background: #eff6ff;
+        color: var(--ds-primary);
+        border: 1px solid #bfdbfe;
+      }
+      .ds-wizard-step-pill.completed {
+        background: #f0fdf4;
+        color: #166534;
+      }
+      .ds-wizard-progress-wrap {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .ds-wizard-progress {
+        width: 130px;
+        height: 6px;
+        background: #e2e8f0;
+        border-radius: 999px;
+        overflow: hidden;
+      }
+      .ds-wizard-bar {
+        height: 100%;
+        background: var(--ds-primary);
+        width: 33.33%;
+        transition: width 0.35s ease;
+      }
+      .ds-wizard-body {
+        padding: clamp(24px, 4vw, 36px);
+      }
+      .ds-wizard-panel {
+        display: none;
+        flex-direction: column;
+        gap: 20px;
+        animation: dsFadeIn 0.25s ease forwards;
+      }
+      .ds-wizard-panel.active {
+        display: flex;
+      }
+      .ds-wizard-cards-opt {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 14px;
+      }
+      @media (max-width: 720px) {
+        .ds-wizard-cards-opt { grid-template-columns: 1fr; }
+      }
+      .ds-wizard-card-opt {
+        border: 1.5px solid #cbd5e1;
+        border-radius: var(--r-md);
+        background: #f8fafc;
+        padding: 20px 18px;
+        cursor: pointer;
+        transition: all var(--ds-transition);
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .ds-wizard-card-opt:hover {
+        border-color: #94a3b8;
+        background: #ffffff;
+      }
+      .ds-wizard-card-opt.active {
+        border-color: var(--ds-primary);
+        background: #eff6ff;
+        box-shadow: 0 4px 16px rgba(7, 80, 146, 0.12);
+      }
+      .ds-wizard-card-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: var(--r-sm);
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        color: var(--ds-primary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .ds-wizard-card-opt.active .ds-wizard-card-icon {
+        border-color: #bfdbfe;
+        background: #ffffff;
+      }
+      .ds-wizard-card-icon i, .ds-wizard-card-icon svg {
+        width: 20px;
+        height: 20px;
+      }
+      .ds-wizard-card-opt strong {
+        font-size: 15px;
+        font-weight: 800;
+        color: var(--ds-slate);
+      }
+      .ds-wizard-card-opt.active strong {
+        color: var(--ds-primary);
+      }
+      .ds-wizard-card-opt span {
+        font-size: 12.5px;
+        color: var(--ds-body);
+        line-height: 1.4;
+      }
+
+      .ds-wizard-grid-2 {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+      }
+      @media (max-width: 640px) {
+        .ds-wizard-grid-2 { grid-template-columns: 1fr; }
+      }
+
+      .ds-wizard-input-wrap {
+        display: flex;
+        flex-direction: column;
+        gap: 7px;
+      }
+      .ds-wizard-label {
+        font-size: 12px;
+        font-weight: 850;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--ds-slate);
+      }
+      .ds-wizard-input {
+        width: 100%;
+        height: 52px;
+        padding: 0 16px;
+        border: 1.5px solid #cbd5e1;
+        border-radius: var(--r-md);
+        font-size: 14px;
+        font-weight: 600;
+        font-family: inherit;
+        box-sizing: border-box;
+        outline: none;
+        background: #ffffff;
+        transition: all var(--ds-transition);
+      }
+      .ds-wizard-textarea {
+        width: 100%;
+        padding: 12px 16px;
+        border: 1.5px solid #cbd5e1;
+        border-radius: var(--r-md);
+        font-size: 14px;
+        font-weight: 600;
+        font-family: inherit;
+        box-sizing: border-box;
+        outline: none;
+        background: #ffffff;
+        transition: all var(--ds-transition);
+      }
+      .ds-wizard-input:focus, .ds-wizard-textarea:focus {
+        border-color: var(--ds-primary);
+        box-shadow: 0 0 0 3px rgba(7, 80, 146, 0.12);
+      }
+
+      /* Live Project Summary Box */
+      .ds-wizard-summary-box {
+        background: #f0fdf4;
+        border: 1.5px solid #bbf7d0;
+        border-radius: var(--r-md);
+        padding: 16px 20px;
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        font-size: 13.5px;
+        color: #166534;
+        box-shadow: 0 2px 8px rgba(22, 163, 74, 0.06);
+      }
+      .ds-wizard-summary-box i, .ds-wizard-summary-box svg {
+        width: 22px;
+        height: 22px;
+        color: #16a34a;
+        flex-shrink: 0;
+      }
+
+      .ds-wizard-actions {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 10px;
+        padding-top: 16px;
+        border-top: 1px solid #f1f5f9;
+      }
+      .ds-wizard-btn-prev {
+        all: unset;
+        cursor: pointer;
+        padding: 12px 22px;
+        border-radius: var(--r-md);
+        font-size: 13.5px;
+        font-weight: 800;
+        color: #475569;
+        background: #f1f5f9;
+        transition: all var(--ds-transition);
+      }
+      .ds-wizard-btn-prev:hover {
+        background: #e2e8f0;
+      }
+      .ds-wizard-btn-next {
+        all: unset;
+        cursor: pointer;
+        padding: 12px 26px;
+        border-radius: var(--r-md);
+        font-size: 13.5px;
+        font-weight: 800;
+        color: #ffffff;
+        background: var(--ds-primary);
+        transition: all var(--ds-transition);
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        box-shadow: 0 4px 14px rgba(7, 80, 146, 0.22);
+      }
+      .ds-wizard-btn-next:hover {
+        background: var(--ds-primary-deep);
+        transform: translateY(-1px);
+        box-shadow: 0 6px 18px rgba(7, 80, 146, 0.30);
+      }
+      .ds-wizard-btn-next.wa-submit {
+        background: #25D366;
+        box-shadow: 0 4px 16px rgba(37, 211, 102, 0.28);
+      }
+      .ds-wizard-btn-next.wa-submit:hover {
+        background: #1eb956;
+        box-shadow: 0 6px 20px rgba(37, 211, 102, 0.36);
+      }
+
+      /* Dynamic Handover Section (Design vs Web Tabs) */
+      .ds-handover-toggle {
+        display: flex;
+        justify-content: center;
+        gap: 8px;
+        margin-bottom: 24px;
+      }
+      .ds-handover-tab {
+        all: unset;
+        cursor: pointer;
+        padding: 7px 16px;
+        border-radius: var(--r-pill);
+        font-size: 12.5px;
+        font-weight: 750;
+        color: #475569;
+        background: #ffffff;
+        border: 1px solid var(--ds-border);
+        transition: all var(--ds-transition);
+      }
+      .ds-handover-tab.active {
+        background: var(--ds-primary);
+        color: #ffffff;
+        border-color: var(--ds-primary);
+      }
+      .ds-handover-compact-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 18px;
+      }
+      @media (max-width: 960px) {
+        .ds-handover-compact-grid { grid-template-columns: repeat(2, 1fr); }
+      }
+      @media (max-width: 520px) {
+        .ds-handover-compact-grid { grid-template-columns: 1fr; }
+      }
+      .ds-handover-item-card {
+        background: #ffffff;
+        border: 1px solid var(--ds-border);
+        border-radius: var(--r-md);
+        padding: 20px 18px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .ds-handover-item-card i, .ds-handover-item-card svg {
+        width: 24px;
+        height: 24px;
+        color: var(--ds-primary);
+      }
+      .ds-handover-item-card h3 {
+        font-size: 1.05rem;
+        font-weight: 800;
+        color: var(--ds-slate);
+        margin: 0;
+      }
+      .ds-handover-item-card p {
+        font-size: 13px;
+        color: var(--ds-body);
+        margin: 0;
+        line-height: 1.45;
+      }
+
+      /* ── 2-Column Tabbed FAQ with Real-Time Search (Screenshot #2) ── */
+      .ds-faq-search-wrap {
+        position: relative;
+        max-width: 100%;
+        margin-bottom: 24px;
+        display: block;
+      }
+      .ds-faq-search-wrap i,
+      .ds-faq-search-wrap svg {
+        position: absolute;
+        left: 18px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 18px;
+        height: 18px;
+        color: #64748b;
+        pointer-events: none;
+      }
+      .ds-faq-search-wrap input {
+        width: 100%;
+        height: 52px;
+        padding: 0 20px 0 48px;
+        border-radius: 14px;
+        border: 1.5px solid #cbd5e1;
+        background: #ffffff;
+        font-size: 0.95rem;
+        color: #0f172a;
+        outline: none;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+        transition: all var(--ds-transition);
+        box-sizing: border-box;
+      }
+      .ds-faq-search-wrap input:focus {
+        border-color: var(--ds-primary);
+        box-shadow: 0 0 0 3px rgba(7, 80, 146, 0.12);
+      }
+
+      .ds-cfaq-wrapper {
+        display: grid !important;
+        grid-template-columns: 260px 1fr !important;
+        gap: 0 !important;
+        background: #ffffff !important;
+        border: 1.5px solid #e2e8f0 !important;
+        border-radius: 18px !important;
+        box-shadow: 0 4px 24px rgba(8, 37, 72, 0.06) !important;
+        overflow: hidden !important;
+      }
+      @media (max-width: 860px) {
+        .ds-cfaq-wrapper { grid-template-columns: 1fr !important; }
+      }
+
+      .ds-cfaq-sidebar {
+        background: #f8fafc !important;
+        border-right: 1.5px solid #e2e8f0 !important;
+        padding: 16px 12px 20px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 6px !important;
+      }
+      .ds-cfaq-sidebar .cfaq-tab {
+        display: flex !important;
+        align-items: center !important;
+        gap: 10px !important;
+        padding: 12px 14px !important;
+        border-radius: 12px !important;
+        background: transparent !important;
+        color: #475569 !important;
+        font-size: 13.5px !important;
+        font-weight: 700 !important;
+        border: none !important;
+        cursor: pointer !important;
+        text-align: left !important;
+        transition: all 0.18s ease !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+      }
+      .ds-cfaq-sidebar .cfaq-tab:hover {
+        background: #f1f5f9 !important;
+        color: var(--ds-primary) !important;
+      }
+      .ds-cfaq-sidebar .cfaq-tab.active {
+        background: #ffffff !important;
+        color: var(--ds-primary) !important;
+        font-weight: 850 !important;
+        border: 1.5px solid #e2e8f0 !important;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05) !important;
+      }
+      .ds-cfaq-sidebar .cfaq-tab i,
+      .ds-cfaq-sidebar .cfaq-tab svg {
+        width: 16px !important;
+        height: 16px !important;
+        color: var(--ds-primary) !important;
+        flex-shrink: 0 !important;
+      }
+      .cfaq-sidebar-bottom-link {
+        margin-top: auto;
+        padding-top: 14px;
+        border-top: 1px solid #e2e8f0;
+        text-align: center;
+      }
+      .cfaq-sidebar-bottom-link a {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 12px;
+        font-weight: 700;
+        color: #64748b;
+        text-decoration: none;
+        transition: color 0.15s ease;
+      }
+      .cfaq-sidebar-bottom-link a:hover {
+        color: var(--ds-primary);
+      }
+
+      .ds-cfaq-panels {
+        padding: 24px 32px !important;
+        background: #ffffff !important;
+        min-width: 0 !important;
+      }
+      @media (max-width: 640px) {
+        .ds-cfaq-panels { padding: 18px 16px !important; }
+      }
+      .ds-cfaq-panels .cfaq-panel {
+        display: none;
+      }
+      .ds-cfaq-panels .cfaq-panel.active {
+        display: block;
+      }
+      /* Clean Divided Rows without individual box borders (Exact Screenshot #2 match) */
+      :root body .ds-cfaq-panels .faq-item,
+      .ds-cfaq-panels .faq-item,
+      .ds-cfaq-wrapper .faq-item {
+        margin: 0 !important;
+        margin-bottom: 0 !important;
+        border: 0 !important;
+        border-top: 0 !important;
+        border-left: 0 !important;
+        border-right: 0 !important;
+        border-bottom: 1px solid #eef2f6 !important;
+        border-radius: 0 !important;
+        background: transparent !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        overflow: visible !important;
+        transition: background 0.15s ease;
+      }
+      :root body .ds-cfaq-panels .faq-item:hover,
+      .ds-cfaq-panels .faq-item:hover {
+        background: transparent !important;
+        border-color: #eef2f6 !important;
+        box-shadow: none !important;
+      }
+      :root body .ds-cfaq-panels .faq-item.open,
+      .ds-cfaq-panels .faq-item.open {
+        background: transparent !important;
+        border-top: 0 !important;
+        border-left: 0 !important;
+        border-right: 0 !important;
+        border-bottom: 1px solid #eef2f6 !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+      }
+      :root body .ds-cfaq-panels .faq-item:last-child,
+      .ds-cfaq-panels .faq-item:last-child {
+        border-bottom: 0 !important;
+      }
+
+      /* Full-Width Clickable Question Button with Cursor Pointer */
+      :root body .ds-cfaq-panels .faq-question,
+      .ds-cfaq-panels .faq-question {
+        width: 100% !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        gap: 16px !important;
+        background: transparent !important;
+        border: 0 !important;
+        cursor: pointer !important;
+        text-align: left !important;
+        padding: 16px 0 !important;
+        margin: 0 !important;
+        user-select: none;
+        outline: none !important;
+      }
+      :root body .ds-cfaq-panels .faq-question:hover .pfaq-q-text,
+      .ds-cfaq-panels .faq-question:hover .pfaq-q-text {
+        color: var(--ds-primary) !important;
+      }
+      :root body .ds-cfaq-panels .faq-question .pfaq-q-text,
+      .ds-cfaq-panels .faq-question .pfaq-q-text {
+        font-size: 15px !important;
+        font-weight: 800 !important;
+        color: #0b1f35 !important;
+        line-height: 1.4 !important;
+        transition: color 0.15s ease !important;
+        pointer-events: none;
+      }
+      :root body .ds-cfaq-panels .faq-item.open .faq-question .pfaq-q-text,
+      .ds-cfaq-panels .faq-item.open .faq-question .pfaq-q-text {
+        color: #075092 !important;
+      }
+
+      /* Rotating Circular Chevron Badge */
+      :root body .ds-cfaq-panels .faq-question i,
+      :root body .ds-cfaq-panels .faq-question svg,
+      .ds-cfaq-panels .faq-question i,
+      .ds-cfaq-panels .faq-question svg {
+        width: 24px !important;
+        height: 24px !important;
+        min-width: 24px !important;
+        border-radius: 50% !important;
+        background: #f1f5f9 !important;
+        border: 1px solid #e2e8f0 !important;
+        color: #075092 !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        padding: 4px !important;
+        transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease !important;
+        box-sizing: border-box !important;
+        pointer-events: none;
+      }
+      :root body .ds-cfaq-panels .faq-item.open .faq-question i,
+      :root body .ds-cfaq-panels .faq-item.open .faq-question svg,
+      .ds-cfaq-panels .faq-item.open .faq-question i,
+      .ds-cfaq-panels .faq-item.open .faq-question svg {
+        transform: rotate(180deg) !important;
+        background: #eff6ff !important;
+        border-color: #bfdbfe !important;
+        color: #075092 !important;
+      }
+
+      /* Expandable Answer Content */
+      :root body .ds-cfaq-panels .faq-answer,
+      .ds-cfaq-panels .faq-answer {
+        display: none !important;
+        max-height: none !important;
+        overflow: visible !important;
+        padding: 0 0 16px 0 !important;
+        margin: 0 !important;
+        border: 0 !important;
+      }
+      :root body .ds-cfaq-panels .faq-item.open .faq-answer,
+      .ds-cfaq-panels .faq-item.open .faq-answer {
+        display: block !important;
+      }
+      :root body .ds-cfaq-panels .faq-answer p,
+      .ds-cfaq-panels .faq-answer p {
+        font-size: 14px !important;
+        color: #475569 !important;
+        line-height: 1.6 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        border: 0 !important;
+      }
+
+      /* Solid Deep Navy Final Pre-Footer CTA */
+      .ds-final-cta-banner {
+        background: linear-gradient(135deg, var(--ds-primary) 0%, var(--ds-primary-dark) 100%);
+        border-radius: var(--r-lg);
+        padding: clamp(36px, 5vw, 54px) clamp(20px, 4vw, 40px);
+        color: #ffffff;
+        text-align: center;
+      }
+      .ds-final-cta-banner h2 {
+        font-size: clamp(1.75rem, 3vw, 2.3rem);
+        font-weight: 900;
+        margin: 0 0 10px;
+        color: #ffffff;
+      }
+      .ds-final-cta-banner p {
+        font-size: 15px;
+        color: rgba(255, 255, 255, 0.85);
+        max-width: 640px;
+        margin: 0 auto 24px;
+        line-height: 1.5;
+      }
+      .ds-final-cta-btns {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+      .ds-cta-btn-gold {
+        padding: 12px 24px;
+        border-radius: var(--r-sm);
+        background: var(--ds-gold);
+        color: #0b1f35 !important;
+        font-size: 14px;
+        font-weight: 850;
+        text-decoration: none;
+        transition: transform var(--ds-transition);
+      }
+      .ds-cta-btn-gold:hover {
+        transform: translateY(-2px);
+      }
+      .ds-cta-btn-glass {
+        padding: 12px 22px;
+        border-radius: var(--r-sm);
+        background: rgba(255, 255, 255, 0.12);
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        color: #ffffff !important;
+        font-size: 14px;
+        font-weight: 750;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .ds-cta-btn-glass:hover {
+        background: rgba(255, 255, 255, 0.2);
+      }
+
+      @keyframes dsFadeIn {
+        from { opacity: 0; transform: translateY(4px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+    </style>
+  </head>
   <body class="online-services-page">
     <div data-site-nav>
       <header class="site-header fallback-site-header">
@@ -20,338 +1862,2131 @@
           <div class="fallback-nav-links">
             <a class="nav-link" href="index.html">Home</a>
             <a class="nav-link" href="services.html">Services</a>
-            <a class="nav-link" href="products.html">Store</a>
-            <a class="nav-link" href="track-application.html">Track</a>
+            <a class="nav-link active" href="design-services.html">Design &amp; Dev</a>
             <a class="nav-link" href="contact.html">Contact</a>
           </div>
         </nav>
       </header>
     </div>
+
     <main class="page-shell">
+      <!-- ── Hero Section ───────────────────────────────────────────── -->
       <section class="page-hero page-hero-service premium-service-hero online-services-hero">
-        <!-- Background Video -->
         <video class="hero-video-bg" autoplay loop muted playsinline>
           <source src="assets/Hero section home page.mp4" type="video/mp4">
         </video>
         <div class="hero-video-overlay"></div>
         <div class="page-hero-grid">
           <div class="page-hero-copy">
-            <p class="eyebrow">Design Services</p>
+            <p class="eyebrow">Creative Design &amp; Full-Stack Web Solutions</p>
             <h1 class="page-hero-title">
-              <span class="service-title-static">Print-ready design for</span>
-              <span class="animated-word service-animated-word" data-animated-word data-words="local businesses.|logo design support.|flex print layouts.|clean visiting cards.|custom shop banners.|social media posts.">local businesses.</span>
+              <span class="service-title-static">Crafted design &amp; modern web development for</span>
+              <span class="animated-word service-animated-word" data-animated-word data-words="growing businesses.|brand logo identities.|responsive websites.|custom web apps.|commercial e-commerce.|high-converting landing pages.">growing businesses.</span>
             </h1>
-            <p>Logo, flex, visiting card, banner and social media creatives with clear pricing and WhatsApp-first delivery.</p>
+            <p>Professional graphic design, website design and custom full-stack development for businesses, brands and startups — engineered for high conversion and seamless performance.</p>
+            
             <div class="hero-actions">
-              <a class="btn btn-primary" href="design-services.html?service=Logo+Design#apply-now">Start Design Request</a>
-              <a class="btn btn-glass" href="#pricing">View Pricing</a>
+              <a class="btn btn-primary" href="#services">Browse All Services</a>
+              <a class="btn btn-glass" href="#estimator">Configure Live Estimate</a>
             </div>
+            
             <div class="hero-trust-strip">
-              <span class="hero-trust-badge badge-upi">
-                <i data-lucide="palette"></i> <strong>Logo</strong> brand-ready
+              <span class="hero-trust-badge">
+                <i data-lucide="palette"></i> <strong>Creative Design</strong>
               </span>
-              <span class="hero-trust-badge badge-speed">
-                <i data-lucide="image"></i> <strong>Flex</strong> print-scale
+              <span class="hero-trust-badge">
+                <i data-lucide="layout"></i> <strong>Website UI/UX</strong>
               </span>
-              <span class="hero-trust-badge badge-whatsapp">
-                <i data-lucide="clock"></i> <strong>Fast</strong> WhatsApp
+              <span class="hero-trust-badge">
+                <i data-lucide="code-2"></i> <strong>Full-Stack Web Apps</strong>
               </span>
             </div>
           </div>
+
           <div class="page-hero-console">
             <article class="hero-command-center dark-mockup">
               <div class="command-topbar">
                 <span></span><span></span><span></span>
-                <strong>Design OS</strong>
+                <strong>Studio &amp; Dev Engine</strong>
               </div>
               <div class="command-grid">
                 <div class="command-main">
-                  <span class="tag">Creative queue</span>
-                  <h3>Brand kit in review</h3>
-                  <p>Logo draft approved. Print file exports underway.</p>
+                  <span class="tag">Studio Queue</span>
+                  <h3>Website &amp; Brand System</h3>
+                  <p>Vector logo approved. Responsive UI &amp; full-stack backend ready for deployment.</p>
                   <div class="command-progress"><span></span></div>
                 </div>
                 <div class="command-tile">
                   <i data-lucide="pen-tool"></i>
-                  <strong>Logo</strong>
-                  <small>vector ready</small>
+                  <strong>Logo &amp; Brand</strong>
+                  <small>AI / SVG Vector</small>
                 </div>
                 <div class="command-tile">
-                  <i data-lucide="panel-top"></i>
-                  <strong>Flex</strong>
-                  <small>print export</small>
+                  <i data-lucide="globe"></i>
+                  <strong>Website UI</strong>
+                  <small>Figma &amp; Responsive</small>
                 </div>
               </div>
               <div class="command-list">
-                <div><span><i data-lucide="contact"></i></span><strong>Visiting Card</strong><small>final text set</small></div>
-                <div><span><i data-lucide="image"></i></span><strong>Banner Design</strong><small>size locked</small></div>
-                <div><span><i data-lucide="share-2"></i></span><strong>Social Post</strong><small>delivery ready</small></div>
+                <div><span><i data-lucide="layout-template"></i></span><strong>Landing Page</strong><small>High Conversion</small></div>
+                <div><span><i data-lucide="shopping-cart"></i></span><strong>E-commerce</strong><small>Razorpay &amp; Cart</small></div>
+                <div><span><i data-lucide="server"></i></span><strong>Web App / SaaS</strong><small>Node &amp; Database</small></div>
               </div>
             </article>
             <article class="hero-mini-card hero-mini-card-one dark-mockup">
-              <span>Design flow</span>
-              <strong>Draft, approve, export</strong>
+              <span>Ecosystem Workflow</span>
+              <strong>Brief ➔ UI/Code ➔ Live Handover</strong>
             </article>
             <article class="hero-mini-card hero-mini-card-two dark-mockup">
-              <span>Delivery</span>
-              <strong>Print + digital assets</strong>
+              <span>Full Ownership</span>
+              <strong>100% Master Files &amp; Source Code</strong>
             </article>
           </div>
         </div>
       </section>
 
-      <section class="section reveal edupoint-trending-services online-services-trending" id="service-options" data-edupoint-service-carousel>
-        <div class="section-head edupoint-trending-head">
-          <div>
-            <p class="section-kicker">Services</p>
-            <h2>Choose the exact design help <span class="h2-gold">you need.</span></h2>
+      <!-- ══════════════════════════════════════════════════════════════
+           ZONE 1 — DISCOVER: SERVICE SHOWCASE (CURATED 3+9 HIERARCHY)
+           ══════════════════════════════════════════════════════════════ -->
+      <section class="ds-section ds-bg-white" id="services">
+        <div class="ds-container">
+          
+          <div class="ds-header">
+            <span class="ds-kicker"><i data-lucide="grid"></i> Curated Showcase</span>
+            <h2 class="ds-title">Choose the exact service you need.</h2>
+            <p class="ds-sub">Select a category below to explore featured design, UI/UX, and development solutions.</p>
           </div>
-          <button class="btn btn-soft edupoint-view-all-btn" type="button" data-edupoint-view-all aria-expanded="false">
-            <span>View All</span> <i data-lucide="arrow-right"></i>
-          </button>
-        </div>
 
-        <div class="category-filters edupoint-category-filters" data-edupoint-service-filters>
-          <button class="btn btn-soft active" type="button" data-edupoint-filter="all">All Services</button>
-          <button class="btn btn-ghost" type="button" data-edupoint-filter="brand">Brand</button>
-          <button class="btn btn-ghost" type="button" data-edupoint-filter="print">Print Layouts</button>
-          <button class="btn btn-ghost" type="button" data-edupoint-filter="business">Business</button>
-          <button class="btn btn-ghost" type="button" data-edupoint-filter="digital">Digital</button>
-        </div>
+          <!-- Top-Level Refined Segmented Control -->
+          <div class="ds-seg-control-wrap">
+            <div class="ds-seg-control" id="ds-seg-control" role="tablist">
+              <button type="button" class="ds-seg-btn active" data-filter="all" role="tab" aria-selected="true">
+                <i data-lucide="layers"></i> All Services (12)
+              </button>
+              <button type="button" class="ds-seg-btn" data-filter="graphic" role="tab" aria-selected="false">
+                <i data-lucide="palette"></i> Graphic Design
+              </button>
+              <button type="button" class="ds-seg-btn" data-filter="web-design" role="tab" aria-selected="false">
+                <i data-lucide="layout"></i> Website Design
+              </button>
+              <button type="button" class="ds-seg-btn" data-filter="web-dev" role="tab" aria-selected="false">
+                <i data-lucide="code-2"></i> Web Development
+              </button>
+            </div>
 
-        <div class="services-carousel-container edupoint-carousel-shell">
-          <button type="button" class="carousel-arrow prev edupoint-carousel-arrow" data-edupoint-carousel-prev aria-label="Previous service">
-            <i data-lucide="chevron-left"></i>
-          </button>
-          <div class="services-carousel-viewport edupoint-carousel-viewport">
-            <div class="services-carousel-track edupoint-service-track" data-edupoint-service-track>
-              <a class="service-option-card service-card" id="logo-design" href="design-services.html?service=Logo+Design#apply-now" data-edupoint-service-card data-edupoint-categories="brand popular">
-                <div class="service-top service-card-top">
-                  <div class="service-icon"><i data-lucide="pen-tool"></i></div>
-                  <div class="service-card-badges"><span class="tag">1-2 days</span><span class="tag price-tag">&#8377;299+</span></div>
+            <!-- Progressively Disclosed Secondary Chips -->
+            <div class="ds-sub-chips" id="ds-sub-chips"></div>
+          </div>
+
+          <!-- 3-Column Curated Showcase Grid (Flagship First Row + 9 Standard) -->
+          <div class="ds-cards-grid" id="ds-cards-grid">
+            
+            <!-- ── ROW 1: 3 FLAGSHIP SERVICES (SLIGHTLY PROMINENT) ── -->
+            
+            <!-- Flagship 1: Logo & Brand Identity -->
+            <div class="ds-service-card flagship" data-category="graphic" data-sub="branding">
+              <div class="ds-card-thumb">
+                <img src="https://images.unsplash.com/photo-1626785774573-4b799315345d?auto=format&fit=crop&w=800&q=80" alt="Logo & Brand Identity Design" loading="lazy">
+                <span class="ds-card-badge flagship-badge">Flagship</span>
+              </div>
+              <div class="ds-card-body">
+                <div class="ds-card-cat-marker">
+                  <i data-lucide="palette"></i> DESIGN
                 </div>
-                <h3>Logo Design</h3>
-                <p>Simple logo concepts for local shops, pages and business profiles.</p>
-                <span class="btn btn-primary btn-service-select" data-service="Logo Design">Book Now</span>
-              </a>
-              <a class="service-option-card service-card" id="flex-design" href="design-services.html?service=Flex+Design#apply-now" data-edupoint-service-card data-edupoint-categories="print popular">
-                <div class="service-top service-card-top">
-                  <div class="service-icon"><i data-lucide="image"></i></div>
-                  <div class="service-card-badges"><span class="tag">1-2 days</span><span class="tag price-tag">&#8377;249+</span></div>
+                <h3>Logo &amp; Brand Identity</h3>
+                <p class="ds-card-desc">Complete vector logo, brand guide &amp; multi-format stationery kit.</p>
+                <div class="ds-card-meta">
+                  <span>2 Concepts · 2 Revisions</span>
+                  <strong>From ₹299</strong>
                 </div>
-                <h3>Flex Design</h3>
-                <p>Print-ready flex layouts for shops, events and promotions.</p>
-                <span class="btn btn-primary btn-service-select" data-service="Flex Design">Book Now</span>
-              </a>
-              <a class="service-option-card service-card" id="visiting-card" href="design-services.html?service=Visiting+Card#apply-now" data-edupoint-service-card data-edupoint-categories="business print popular">
-                <div class="service-top service-card-top">
-                  <div class="service-icon"><i data-lucide="contact"></i></div>
-                  <div class="service-card-badges"><span class="tag">1-2 days</span><span class="tag price-tag">&#8377;199+</span></div>
+              </div>
+              <div class="ds-card-footer">
+                <a href="#brief-builder" class="ds-card-cta" data-prefill="Logo & Brand Identity">Start Project <i data-lucide="arrow-right"></i></a>
+                <a href="https://wa.me/919473946181?text=Hi%20One%20Point,%20I%20need%20Logo%20%26%20Brand%20Identity" class="ds-card-wa" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><i data-lucide="message-circle"></i></a>
+              </div>
+            </div>
+
+            <!-- Flagship 2: Website UI/UX Design -->
+            <div class="ds-service-card flagship" data-category="web-design" data-sub="ui-ux">
+              <div class="ds-card-thumb">
+                <img src="https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?auto=format&fit=crop&w=800&q=80" alt="Website UI/UX Design" loading="lazy">
+                <span class="ds-card-badge gold">Popular</span>
+              </div>
+              <div class="ds-card-body">
+                <div class="ds-card-cat-marker">
+                  <i data-lucide="layout"></i> WEB
                 </div>
-                <h3>Visiting Card</h3>
-                <p>Clean business card design with print support.</p>
-                <span class="btn btn-primary btn-service-select" data-service="Visiting Card">Book Now</span>
-              </a>
-              <a class="service-option-card service-card" id="banner-design" href="design-services.html?service=Banner+Design#apply-now" data-edupoint-service-card data-edupoint-categories="print">
-                <div class="service-top service-card-top">
-                  <div class="service-icon"><i data-lucide="panel-top"></i></div>
-                  <div class="service-card-badges"><span class="tag">1-2 days</span><span class="tag price-tag">&#8377;249+</span></div>
+                <h3>Website UI/UX Design</h3>
+                <p class="ds-card-desc">Interactive Figma master wireframes, design system tokens &amp; layout.</p>
+                <div class="ds-card-meta">
+                  <span>Mobile First · Design System</span>
+                  <strong>From ₹1,499</strong>
                 </div>
-                <h3>Banner Design</h3>
-                <p>Social, shop and event banners with clear offer messaging.</p>
-                <span class="btn btn-primary btn-service-select" data-service="Banner Design">Book Now</span>
-              </a>
-              <a class="service-option-card service-card" id="social-media-post" href="design-services.html?service=Social+Media+Post#apply-now" data-edupoint-service-card data-edupoint-categories="digital popular">
-                <div class="service-top service-card-top">
-                  <div class="service-icon"><i data-lucide="share-2"></i></div>
-                  <div class="service-card-badges"><span class="tag">1-2 days</span><span class="tag price-tag">&#8377;149+</span></div>
+              </div>
+              <div class="ds-card-footer">
+                <a href="#brief-builder" class="ds-card-cta" data-prefill="Website UI/UX Design">Start Project <i data-lucide="arrow-right"></i></a>
+                <a href="https://wa.me/919473946181?text=Hi%20One%20Point,%20I%20need%20Website%20UI%2FUX%20Design" class="ds-card-wa" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><i data-lucide="message-circle"></i></a>
+              </div>
+            </div>
+
+            <!-- Flagship 3: Custom Business Website -->
+            <div class="ds-service-card flagship" data-category="web-dev" data-sub="business">
+              <div class="ds-card-thumb">
+                <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=80" alt="Custom Business Website" loading="lazy">
+                <span class="ds-card-badge flagship-badge">Full Stack</span>
+              </div>
+              <div class="ds-card-body">
+                <div class="ds-card-cat-marker">
+                  <i data-lucide="code-2"></i> DEVELOPMENT
                 </div>
-                <h3>Social Media Post</h3>
-                <p>Offer posts, announcement creatives and festival greetings.</p>
-                <span class="btn btn-primary btn-service-select" data-service="Social Media Post">Book Now</span>
+                <h3>Custom Business Website</h3>
+                <p class="ds-card-desc">Fast, modern responsive site with WhatsApp lead capture &amp; SEO setup.</p>
+                <div class="ds-card-meta">
+                  <span>SSL · SEO · Fast CDN</span>
+                  <strong>From ₹3,999</strong>
+                </div>
+              </div>
+              <div class="ds-card-footer">
+                <a href="#brief-builder" class="ds-card-cta" data-prefill="Custom Business Website">Start Project <i data-lucide="arrow-right"></i></a>
+                <a href="https://wa.me/919473946181?text=Hi%20One%20Point,%20I%20need%20Custom%20Business%20Website" class="ds-card-wa" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><i data-lucide="message-circle"></i></a>
+              </div>
+            </div>
+
+            <!-- ── 9 STANDARD SERVICES ── -->
+
+            <!-- Standard 4: Shop Flex & Outdoor Banner -->
+            <div class="ds-service-card" data-category="graphic" data-sub="print">
+              <div class="ds-card-thumb">
+                <img src="https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&w=800&q=80" alt="Shop Flex & Outdoor Banner" loading="lazy">
+              </div>
+              <div class="ds-card-body">
+                <div class="ds-card-cat-marker">
+                  <i data-lucide="palette"></i> DESIGN
+                </div>
+                <h3>Shop Flex &amp; Outdoor Banner</h3>
+                <p class="ds-card-desc">High-visibility storefront flex signage &amp; outdoor billboard creatives.</p>
+                <div class="ds-card-meta">
+                  <span>Ft×Ft Scale · 300 DPI</span>
+                  <strong>From ₹199</strong>
+                </div>
+              </div>
+              <div class="ds-card-footer">
+                <a href="#brief-builder" class="ds-card-cta" data-prefill="Shop Flex & Outdoor Banner">Start Project <i data-lucide="arrow-right"></i></a>
+                <a href="https://wa.me/919473946181?text=Hi%20One%20Point,%20I%20need%20Shop%20Banner" class="ds-card-wa" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><i data-lucide="message-circle"></i></a>
+              </div>
+            </div>
+
+            <!-- Standard 5: Visiting Card & Stationery -->
+            <div class="ds-service-card" data-category="graphic" data-sub="print">
+              <div class="ds-card-thumb">
+                <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=800&q=80" alt="Visiting Card & Stationery" loading="lazy">
+              </div>
+              <div class="ds-card-body">
+                <div class="ds-card-cat-marker">
+                  <i data-lucide="palette"></i> DESIGN
+                </div>
+                <h3>Visiting Card &amp; Stationery</h3>
+                <p class="ds-card-desc">Double-sided business cards, corporate letterheads &amp; envelope design.</p>
+                <div class="ds-card-meta">
+                  <span>Press-Ready · CMYK PDF</span>
+                  <strong>From ₹149</strong>
+                </div>
+              </div>
+              <div class="ds-card-footer">
+                <a href="#brief-builder" class="ds-card-cta" data-prefill="Visiting Card & Stationery">Start Project <i data-lucide="arrow-right"></i></a>
+                <a href="https://wa.me/919473946181?text=Hi%20One%20Point,%20I%20need%20Visiting%20Card" class="ds-card-wa" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><i data-lucide="message-circle"></i></a>
+              </div>
+            </div>
+
+            <!-- Standard 6: Packaging & Label Design -->
+            <div class="ds-service-card" data-category="graphic" data-sub="packaging">
+              <div class="ds-card-thumb">
+                <img src="https://images.unsplash.com/photo-1547949003-9792a18a2601?auto=format&fit=crop&w=800&q=80" alt="Packaging & Label Design" loading="lazy">
+              </div>
+              <div class="ds-card-body">
+                <div class="ds-card-cat-marker">
+                  <i data-lucide="palette"></i> DESIGN
+                </div>
+                <h3>Packaging &amp; Label Design</h3>
+                <p class="ds-card-desc">Retail product labels, pouch stickers &amp; custom box diecut lines.</p>
+                <div class="ds-card-meta">
+                  <span>Vector Cutlines · 3D Proof</span>
+                  <strong>From ₹249</strong>
+                </div>
+              </div>
+              <div class="ds-card-footer">
+                <a href="#brief-builder" class="ds-card-cta" data-prefill="Packaging & Label Design">Start Project <i data-lucide="arrow-right"></i></a>
+                <a href="https://wa.me/919473946181?text=Hi%20One%20Point,%20I%20need%20Packaging%20Design" class="ds-card-wa" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><i data-lucide="message-circle"></i></a>
+              </div>
+            </div>
+
+            <!-- Standard 7: High-Converting Landing Page -->
+            <div class="ds-service-card" data-category="web-design" data-sub="landing">
+              <div class="ds-card-thumb">
+                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80" alt="High-Converting Landing Page" loading="lazy">
+                <span class="ds-card-badge gold">Featured</span>
+              </div>
+              <div class="ds-card-body">
+                <div class="ds-card-cat-marker">
+                  <i data-lucide="layout"></i> WEB
+                </div>
+                <h3>High-Converting Landing Page</h3>
+                <p class="ds-card-desc">Direct-response sales funnel layout, offer framing &amp; lead capture.</p>
+                <div class="ds-card-meta">
+                  <span>Mobile First · CTA Focused</span>
+                  <strong>From ₹1,999</strong>
+                </div>
+              </div>
+              <div class="ds-card-footer">
+                <a href="#brief-builder" class="ds-card-cta" data-prefill="High-Converting Landing Page">Start Project <i data-lucide="arrow-right"></i></a>
+                <a href="https://wa.me/919473946181?text=Hi%20One%20Point,%20I%20need%20Landing%20Page" class="ds-card-wa" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><i data-lucide="message-circle"></i></a>
+              </div>
+            </div>
+
+            <!-- Standard 8: Dashboard & SaaS UI/UX -->
+            <div class="ds-service-card" data-category="web-design" data-sub="dashboard">
+              <div class="ds-card-thumb">
+                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80" alt="Dashboard & SaaS UI/UX" loading="lazy">
+              </div>
+              <div class="ds-card-body">
+                <div class="ds-card-cat-marker">
+                  <i data-lucide="layout"></i> WEB
+                </div>
+                <h3>Dashboard &amp; SaaS UI/UX</h3>
+                <p class="ds-card-desc">Clean data tables, analytics views &amp; internal admin interface systems.</p>
+                <div class="ds-card-meta">
+                  <span>Component Tokens · Pro</span>
+                  <strong>From ₹2,499</strong>
+                </div>
+              </div>
+              <div class="ds-card-footer">
+                <a href="#brief-builder" class="ds-card-cta" data-prefill="Dashboard UI/UX Design">Start Project <i data-lucide="arrow-right"></i></a>
+                <a href="https://wa.me/919473946181?text=Hi%20One%20Point,%20I%20need%20Dashboard%20UI" class="ds-card-wa" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><i data-lucide="message-circle"></i></a>
+              </div>
+            </div>
+
+            <!-- Standard 9: Website Redesign -->
+            <div class="ds-service-card" data-category="web-design" data-sub="redesign">
+              <div class="ds-card-thumb">
+                <img src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=800&q=80" alt="Website Redesign" loading="lazy">
+              </div>
+              <div class="ds-card-body">
+                <div class="ds-card-cat-marker">
+                  <i data-lucide="layout"></i> WEB
+                </div>
+                <h3>Website Redesign</h3>
+                <p class="ds-card-desc">Modernize outdated websites with fresh typography, speed &amp; layout.</p>
+                <div class="ds-card-meta">
+                  <span>UX Audit · Speed Boost</span>
+                  <strong>From ₹1,799</strong>
+                </div>
+              </div>
+              <div class="ds-card-footer">
+                <a href="#brief-builder" class="ds-card-cta" data-prefill="Website Speed & Maintenance">Start Project <i data-lucide="arrow-right"></i></a>
+                <a href="https://wa.me/919473946181?text=Hi%20One%20Point,%20I%20need%20Website%20Redesign" class="ds-card-wa" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><i data-lucide="message-circle"></i></a>
+              </div>
+            </div>
+
+            <!-- Standard 10: Online Store & E-commerce -->
+            <div class="ds-service-card" data-category="web-dev" data-sub="ecom">
+              <div class="ds-card-thumb">
+                <img src="https://images.unsplash.com/photo-1556740738-b6a63e27c4df?auto=format&fit=crop&w=800&q=80" alt="Online Store &amp; E-commerce" loading="lazy">
+                <span class="ds-card-badge">Full Stack</span>
+              </div>
+              <div class="ds-card-body">
+                <div class="ds-card-cat-marker">
+                  <i data-lucide="code-2"></i> DEVELOPMENT
+                </div>
+                <h3>Online Store &amp; E-commerce</h3>
+                <p class="ds-card-desc">Shopping cart, Razorpay / UPI payment gateway &amp; admin order management.</p>
+                <div class="ds-card-meta">
+                  <span>Cart · Gateway · Admin</span>
+                  <strong>From ₹7,999</strong>
+                </div>
+              </div>
+              <div class="ds-card-footer">
+                <a href="#brief-builder" class="ds-card-cta" data-prefill="Online Store & E-commerce">Start Project <i data-lucide="arrow-right"></i></a>
+                <a href="https://wa.me/919473946181?text=Hi%20One%20Point,%20I%20need%20E-commerce%20Store" class="ds-card-wa" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><i data-lucide="message-circle"></i></a>
+              </div>
+            </div>
+
+            <!-- Standard 11: Custom Web App / SaaS -->
+            <div class="ds-service-card" data-category="web-dev" data-sub="webapp">
+              <div class="ds-card-thumb">
+                <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=800&q=80" alt="Custom Web App / SaaS" loading="lazy">
+              </div>
+              <div class="ds-card-body">
+                <div class="ds-card-cat-marker">
+                  <i data-lucide="code-2"></i> DEVELOPMENT
+                </div>
+                <h3>Custom Web App / SaaS</h3>
+                <p class="ds-card-desc">Full-stack customer portal, database &amp; authenticated business systems.</p>
+                <div class="ds-card-meta">
+                  <span>Node.js · PostgreSQL · Auth</span>
+                  <strong>Custom Quote</strong>
+                </div>
+              </div>
+              <div class="ds-card-footer">
+                <a href="#brief-builder" class="ds-card-cta" data-prefill="Custom Web Application / SaaS">Start Project <i data-lucide="arrow-right"></i></a>
+                <a href="https://wa.me/919473946181?text=Hi%20One%20Point,%20I%20need%20Custom%20Web%20App" class="ds-card-wa" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><i data-lucide="message-circle"></i></a>
+              </div>
+            </div>
+
+            <!-- Standard 12: Payment & API Integration -->
+            <div class="ds-service-card" data-category="web-dev" data-sub="integration">
+              <div class="ds-card-thumb">
+                <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=800&q=80" alt="Payment & API Integration" loading="lazy">
+              </div>
+              <div class="ds-card-body">
+                <div class="ds-card-cat-marker">
+                  <i data-lucide="code-2"></i> DEVELOPMENT
+                </div>
+                <h3>Payment &amp; API Integration</h3>
+                <p class="ds-card-desc">Razorpay, WhatsApp Business API, webhook &amp; automated lead pipelines.</p>
+                <div class="ds-card-meta">
+                  <span>Secure Webhooks · Fast</span>
+                  <strong>From ₹999</strong>
+                </div>
+              </div>
+              <div class="ds-card-footer">
+                <a href="#brief-builder" class="ds-card-cta" data-prefill="Payment Gateway & WhatsApp">Start Project <i data-lucide="arrow-right"></i></a>
+                <a href="https://wa.me/919473946181?text=Hi%20One%20Point,%20I%20need%20API%20Integration" class="ds-card-wa" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><i data-lucide="message-circle"></i></a>
+              </div>
+            </div>
+
+            <!-- Empty State -->
+            <div class="ds-empty-state" id="ds-empty-state" style="display:none;">
+              <i data-lucide="folder-search"></i>
+              <h3>Can't find exactly what you need?</h3>
+              <p>Tell us your custom project goals and we will structure a clear proposal with timeline &amp; quote.</p>
+              <a href="#brief-builder" class="ds-empty-btn">Request Custom Service <i data-lucide="arrow-right"></i></a>
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════════════════════════════
+           ZONE 2 — DECIDE: ESTIMATOR + EDITORIAL PORTFOLIO + TIMELINE
+           ══════════════════════════════════════════════════════════════ -->
+
+      <!-- 1. Transparent Project Estimator (USP Signature Tool) -->
+      <section class="ds-section ds-bg-pale-blue" id="estimator">
+        <div class="ds-container ds-container-estimator">
+          <div class="ds-header">
+            <span class="ds-kicker"><i data-lucide="calculator"></i> Transparent Pricing</span>
+            <h2 class="ds-title">Transparent Project <span class="h2-gold">Estimate</span></h2>
+            <p class="ds-sub">Select your project requirements to calculate an instant scope, delivery timeline, and upfront estimate.</p>
+          </div>
+
+          <div class="ds-est-container">
+            <!-- Left Side Configurator Form -->
+            <div class="ds-est-form">
+              
+              <!-- 1. Service Track Custom Luxury Selector -->
+              <div class="ds-est-field">
+                <div class="ds-est-label-row">
+                  <label class="ds-est-label" id="est-service-track-label">
+                    <span class="step-num">1</span> Service Track
+                  </label>
+                  <span class="ds-est-hint">Choose design or dev requirement</span>
+                </div>
+                
+                <div class="ds-cselect-wrap" id="est-cselect-wrap">
+                  <button type="button" class="ds-cselect-trigger" id="est-cselect-trigger" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="est-service-track-label">
+                    <div class="ds-cselect-val">
+                      <div class="ds-cselect-icon" id="est-cs-icon">
+                        <i data-lucide="palette"></i>
+                      </div>
+                      <div class="ds-cselect-text">
+                        <span class="ds-cselect-title" id="est-cs-title">Logo &amp; Brand Identity</span>
+                        <span class="ds-cselect-cat" id="est-cs-cat">Graphic Design</span>
+                      </div>
+                    </div>
+                    <div class="ds-cselect-right">
+                      <span class="ds-cselect-price-tag" id="est-cs-price-tag">From ₹299</span>
+                      <i data-lucide="chevron-down" class="ds-cselect-arrow"></i>
+                    </div>
+                  </button>
+
+                  <div class="ds-cselect-dropdown" id="est-cselect-dropdown" role="listbox">
+                    
+                    <!-- Group 1: Graphic Design -->
+                    <div class="ds-cselect-group">
+                      <div class="ds-cselect-group-title">
+                        <i data-lucide="palette"></i> Graphic Design &amp; Print
+                      </div>
+                      <div class="ds-cselect-opt active" data-value="logo" data-name="Logo &amp; Brand Identity" data-base="299" data-type="fixed" data-icon="palette" data-cat="Graphic Design" data-price="From ₹299" role="option" aria-selected="true">
+                        <div class="ds-cselect-opt-icon">
+                          <i data-lucide="palette"></i>
+                        </div>
+                        <div class="ds-cselect-opt-info">
+                          <strong>Logo &amp; Brand Identity</strong>
+                          <span>Vector logo, typography &amp; brand guidelines</span>
+                        </div>
+                        <span class="ds-cselect-opt-price">₹299</span>
+                        <i data-lucide="check" class="ds-cselect-check"></i>
+                      </div>
+
+                      <div class="ds-cselect-opt" data-value="banner" data-name="Shop Flex &amp; Outdoor Banner" data-base="199" data-type="fixed" data-icon="image" data-cat="Graphic Design" data-price="From ₹199" role="option" aria-selected="false">
+                        <div class="ds-cselect-opt-icon">
+                          <i data-lucide="image"></i>
+                        </div>
+                        <div class="ds-cselect-opt-info">
+                          <strong>Shop Flex &amp; Outdoor Banner</strong>
+                          <span>HD billboard, flex board &amp; storefront print</span>
+                        </div>
+                        <span class="ds-cselect-opt-price">₹199</span>
+                        <i data-lucide="check" class="ds-cselect-check"></i>
+                      </div>
+
+                      <div class="ds-cselect-opt" data-value="card" data-name="Visiting Card &amp; Stationery" data-base="149" data-type="fixed" data-icon="credit-card" data-cat="Graphic Design" data-price="From ₹149" role="option" aria-selected="false">
+                        <div class="ds-cselect-opt-icon">
+                          <i data-lucide="credit-card"></i>
+                        </div>
+                        <div class="ds-cselect-opt-info">
+                          <strong>Visiting Card &amp; Stationery</strong>
+                          <span>Business cards, letterheads &amp; envelopes</span>
+                        </div>
+                        <span class="ds-cselect-opt-price">₹149</span>
+                        <i data-lucide="check" class="ds-cselect-check"></i>
+                      </div>
+
+                      <div class="ds-cselect-opt" data-value="pack" data-name="Packaging &amp; Label Design" data-base="249" data-type="fixed" data-icon="package" data-cat="Graphic Design" data-price="From ₹249" role="option" aria-selected="false">
+                        <div class="ds-cselect-opt-icon">
+                          <i data-lucide="package"></i>
+                        </div>
+                        <div class="ds-cselect-opt-info">
+                          <strong>Packaging &amp; Label Design</strong>
+                          <span>Product box packaging, pouches &amp; jar labels</span>
+                        </div>
+                        <span class="ds-cselect-opt-price">₹249</span>
+                        <i data-lucide="check" class="ds-cselect-check"></i>
+                      </div>
+                    </div>
+
+                    <!-- Group 2: Website UI/UX -->
+                    <div class="ds-cselect-group">
+                      <div class="ds-cselect-group-title">
+                        <i data-lucide="layout"></i> Website UI/UX &amp; Landing Pages
+                      </div>
+                      <div class="ds-cselect-opt" data-value="landing" data-name="High-Converting Landing Page" data-base="1999" data-type="range" data-icon="rocket" data-cat="Website UI/UX" data-price="From ₹1,999" role="option" aria-selected="false">
+                        <div class="ds-cselect-opt-icon">
+                          <i data-lucide="rocket"></i>
+                        </div>
+                        <div class="ds-cselect-opt-info">
+                          <strong>High-Converting Landing Page</strong>
+                          <span>Lead generation page with animations &amp; speed</span>
+                        </div>
+                        <span class="ds-cselect-opt-price">₹1,999</span>
+                        <i data-lucide="check" class="ds-cselect-check"></i>
+                      </div>
+
+                      <div class="ds-cselect-opt" data-value="uiux" data-name="Website UI/UX Design (Figma)" data-base="1499" data-type="range" data-icon="layout" data-cat="Website UI/UX" data-price="From ₹1,499" role="option" aria-selected="false">
+                        <div class="ds-cselect-opt-icon">
+                          <i data-lucide="layout"></i>
+                        </div>
+                        <div class="ds-cselect-opt-info">
+                          <strong>Website UI/UX Design (Figma)</strong>
+                          <span>Modern responsive layout wireframes &amp; prototypes</span>
+                        </div>
+                        <span class="ds-cselect-opt-price">₹1,499</span>
+                        <i data-lucide="check" class="ds-cselect-check"></i>
+                      </div>
+                    </div>
+
+                    <!-- Group 3: Web Development -->
+                    <div class="ds-cselect-group">
+                      <div class="ds-cselect-group-title">
+                        <i data-lucide="code-2"></i> Custom Web Development &amp; SaaS
+                      </div>
+                      <div class="ds-cselect-opt" data-value="site" data-name="Custom Business Website" data-base="3999" data-type="range" data-icon="globe" data-cat="Web Development" data-price="From ₹3,999" role="option" aria-selected="false">
+                        <div class="ds-cselect-opt-icon">
+                          <i data-lucide="globe"></i>
+                        </div>
+                        <div class="ds-cselect-opt-info">
+                          <strong>Custom Business Website</strong>
+                          <span>5–8 page SEO-optimized responsive company portal</span>
+                        </div>
+                        <span class="ds-cselect-opt-price">₹3,999</span>
+                        <i data-lucide="check" class="ds-cselect-check"></i>
+                      </div>
+
+                      <div class="ds-cselect-opt" data-value="ecom" data-name="Online Store &amp; E-commerce" data-base="7999" data-type="range" data-icon="shopping-bag" data-cat="Web Development" data-price="From ₹7,999" role="option" aria-selected="false">
+                        <div class="ds-cselect-opt-icon">
+                          <i data-lucide="shopping-bag"></i>
+                        </div>
+                        <div class="ds-cselect-opt-info">
+                          <strong>Online Store &amp; E-commerce</strong>
+                          <span>Catalog, cart, Razorpay payment &amp; order dashboard</span>
+                        </div>
+                        <span class="ds-cselect-opt-price">₹7,999</span>
+                        <i data-lucide="check" class="ds-cselect-check"></i>
+                      </div>
+
+                      <div class="ds-cselect-opt" data-value="webapp" data-name="Custom Web Application / SaaS" data-base="9999" data-type="range" data-icon="code-2" data-cat="Web Development" data-price="From ₹9,999" role="option" aria-selected="false">
+                        <div class="ds-cselect-opt-icon">
+                          <i data-lucide="code-2"></i>
+                        </div>
+                        <div class="ds-cselect-opt-info">
+                          <strong>Custom Web Application / SaaS</strong>
+                          <span>Node.js / database portal, user authentication &amp; APIs</span>
+                        </div>
+                        <span class="ds-cselect-opt-price">₹9,999</span>
+                        <i data-lucide="check" class="ds-cselect-check"></i>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+
+              <!-- 2. Project Scope / Complexity Tier Cards -->
+              <div class="ds-est-field">
+                <div class="ds-est-label-row">
+                  <label class="ds-est-label">
+                    <span class="step-num">2</span> Project Scope &amp; Concepts
+                  </label>
+                  <span class="ds-est-hint">Select complexity tier</span>
+                </div>
+                <div class="ds-est-tier-grid" id="est-scope-pills">
+                  <button type="button" class="ds-est-tier-card active" data-scope="starter" data-mult="1.0" data-label="Starter (1 Concept)">
+                    <div class="ds-est-tier-head">
+                      <span class="ds-est-tier-title">Starter</span>
+                    </div>
+                    <span class="ds-est-tier-sub">1 Master Concept · Essential</span>
+                  </button>
+                  <button type="button" class="ds-est-tier-card" data-scope="standard" data-mult="1.35" data-label="Standard (3 Concepts)">
+                    <div class="ds-est-tier-head">
+                      <span class="ds-est-tier-title">Standard</span>
+                      <span class="ds-est-tier-tag">Popular</span>
+                    </div>
+                    <span class="ds-est-tier-sub">3 Concepts + Full Revisions</span>
+                  </button>
+                  <button type="button" class="ds-est-tier-card" data-scope="pro" data-mult="1.8" data-label="Pro Suite (5 Concepts)">
+                    <div class="ds-est-tier-head">
+                      <span class="ds-est-tier-title">Pro Suite</span>
+                    </div>
+                    <span class="ds-est-tier-sub">5 Concepts + Extended Files</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- 3. Delivery Schedule -->
+              <div class="ds-est-field">
+                <div class="ds-est-label-row">
+                  <label class="ds-est-label">
+                    <span class="step-num">3</span> Delivery Schedule
+                  </label>
+                  <span class="ds-est-hint">Standard or priority fast-track</span>
+                </div>
+                <div class="ds-est-schedule-grid">
+                  <button type="button" class="ds-est-sched-card active" data-urgency="std">
+                    <div class="ds-est-sched-icon">
+                      <i data-lucide="clock"></i>
+                    </div>
+                    <div class="ds-est-sched-info">
+                      <span class="ds-est-sched-name">Standard Schedule</span>
+                      <span class="ds-est-sched-sub">3–5 Business Days</span>
+                    </div>
+                  </button>
+                  <button type="button" class="ds-est-sched-card" data-urgency="rush">
+                    <div class="ds-est-sched-icon" style="color:#d97706;">
+                      <i data-lucide="zap"></i>
+                    </div>
+                    <div class="ds-est-sched-info">
+                      <span class="ds-est-sched-name">Express Priority</span>
+                      <span class="ds-est-sched-sub">24–48h Slot (+₹250)</span>
+                    </div>
+                  </button>
+                </div>
+              </div>
+
+              <!-- 4. Add-ons Interactive Tiles -->
+              <div class="ds-est-field">
+                <div class="ds-est-label-row">
+                  <label class="ds-est-label">
+                    <span class="step-num">4</span> Optional Add-ons
+                  </label>
+                  <span class="ds-est-hint">Click to include in scope</span>
+                </div>
+                <div class="ds-est-addons-grid">
+                  <label class="ds-est-addon-tile" id="est-addon-mockup-tile">
+                    <input type="checkbox" id="est-addon-mockup" value="149">
+                    <div class="ds-est-addon-body">
+                      <div class="ds-est-addon-title-row">
+                        <span class="ds-est-addon-title">3D Mockup Pack</span>
+                        <span class="ds-est-addon-chip">+₹149</span>
+                      </div>
+                      <span class="ds-est-addon-desc">High-res 3D presentation mockups</span>
+                    </div>
+                  </label>
+                  <label class="ds-est-addon-tile" id="est-addon-seo-tile">
+                    <input type="checkbox" id="est-addon-seo" value="299">
+                    <div class="ds-est-addon-body">
+                      <div class="ds-est-addon-title-row">
+                        <span class="ds-est-addon-title">SEO &amp; Speed Boost</span>
+                        <span class="ds-est-addon-chip">+₹299</span>
+                      </div>
+                      <span class="ds-est-addon-desc">Meta tags &amp; asset compression</span>
+                    </div>
+                  </label>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Right Light Blue Receipt Panel -->
+            <div class="ds-est-receipt">
+              <div>
+                <div class="ds-est-receipt-head">
+                  <span class="ds-est-receipt-kicker"><i data-lucide="file-text" style="width:13px;height:13px;"></i> Live Estimate Statement</span>
+                  <h3>Estimated Project Scope</h3>
+                  <p id="est-rec-track">Logo &amp; Brand Identity</p>
+                </div>
+
+                <div class="ds-est-summary-rows">
+                  <div class="ds-est-sum-row">
+                    <span>Base Deliverable</span>
+                    <strong id="est-rec-base">₹299</strong>
+                  </div>
+                  <div class="ds-est-sum-row">
+                    <span>Scope Level</span>
+                    <strong id="est-rec-scope-level">Starter (1 Concept)</strong>
+                  </div>
+                  <div class="ds-est-sum-row">
+                    <span>Estimated Timeline</span>
+                    <strong id="est-rec-speed">Standard (3–5 Days)</strong>
+                  </div>
+                  <div class="ds-est-sum-row" id="est-rec-addon-row" style="display:none;">
+                    <span>Selected Add-ons</span>
+                    <strong id="est-rec-addons">+₹0</strong>
+                  </div>
+                  <div class="ds-est-sum-row">
+                    <span>Master Vector Assets</span>
+                    <strong style="color:var(--ds-emerald);">100% Free Handover</strong>
+                  </div>
+                  <div class="ds-est-sum-row">
+                    <span>Dedicated Support</span>
+                    <strong style="color:var(--ds-emerald);">Included</strong>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <div class="ds-est-total-box">
+                  <span>Starting Estimate</span>
+                  <div class="ds-est-total-price" id="est-rec-total">₹299</div>
+                </div>
+                <p class="ds-est-trust-note"><i data-lucide="shield-check" style="width:14px;height:14px;color:#16a34a;"></i> No hidden fees · Full commercial rights upon delivery</p>
+                <a href="#" id="est-rec-wa-btn" class="ds-est-wa-btn" target="_blank" rel="noopener">
+                  <i data-lucide="message-circle"></i> Get Detailed Estimate on WhatsApp
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. Selected Work / Authority Case Studies (3 Large 16:10 Cards) -->
+      <section class="ds-section ds-bg-white" id="portfolio">
+        <div class="ds-container">
+          <div class="ds-header">
+            <span class="ds-kicker"><i data-lucide="folder-check"></i> Selected Work</span>
+            <h2 class="ds-title">Recent work for real businesses.</h2>
+            <p class="ds-sub">A curated selection of our branding, website design, and full-stack web applications.</p>
+          </div>
+
+          <div class="ds-editorial-port-grid">
+            
+            <!-- Case Study 1 -->
+            <div class="ds-editorial-card">
+              <div class="ds-editorial-img">
+                <img src="https://images.unsplash.com/photo-1542744094-3a31f272c490?auto=format&fit=crop&w=800&q=80" alt="Apex Electronics Storefront Kit" loading="lazy">
+              </div>
+              <div class="ds-editorial-body">
+                <span class="ds-editorial-tag">Brand Identity · Outdoor Print</span>
+                <h3>Apex Electronics Storefront Kit</h3>
+                <p>Complete logo identity, outdoor billboard flex signage &amp; embossed corporate stationery.</p>
+                <a href="#brief-builder" class="ds-editorial-link" data-prefill="Logo & Brand Identity">View Scope &amp; Order <i data-lucide="arrow-right"></i></a>
+              </div>
+            </div>
+
+            <!-- Case Study 2 -->
+            <div class="ds-editorial-card">
+              <div class="ds-editorial-img">
+                <img src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=800&q=80" alt="Aura Healthcare Platform" loading="lazy">
+              </div>
+              <div class="ds-editorial-body">
+                <span class="ds-editorial-tag">UI/UX · Figma Web Design</span>
+                <h3>Aura Healthcare Platform</h3>
+                <p>Clean responsive UI/UX system, clinic service flow &amp; mobile-first interactive booking prototype.</p>
+                <a href="#brief-builder" class="ds-editorial-link" data-prefill="Website UI/UX Design">View Scope &amp; Order <i data-lucide="arrow-right"></i></a>
+              </div>
+            </div>
+
+            <!-- Case Study 3 -->
+            <div class="ds-editorial-card">
+              <div class="ds-editorial-img">
+                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80" alt="FleetTrack Logistics Dashboard" loading="lazy">
+              </div>
+              <div class="ds-editorial-body">
+                <span class="ds-editorial-tag">Full-Stack · SaaS Portal</span>
+                <h3>FleetTrack Logistics Dashboard</h3>
+                <p>Customer booking portal, real-time database management &amp; automated invoice generation.</p>
+                <a href="#brief-builder" class="ds-editorial-link" data-prefill="Custom Web Application / SaaS">View Scope &amp; Order <i data-lucide="arrow-right"></i></a>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="ds-proof-line">
+            Selected work across branding, print, web UI and custom development. Master source files and commercial rights transferred upon delivery.
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. Connecting 4-Step Process Visual Journey -->
+      <section class="ds-section ds-bg-soft-grey" id="workflow">
+        <div class="ds-container ds-container-process">
+          <div class="ds-header">
+            <span class="ds-kicker"><i data-lucide="zap"></i> Agile Workflow</span>
+            <h2 class="ds-title">Four simple steps to <span class="h2-gold">project delivery</span>.</h2>
+            <p class="ds-sub">Our streamlined milestone process ensures clear communication, agile turnaround, and 100% transparent delivery.</p>
+          </div>
+
+          <div class="ds-timeline-grid">
+            <div class="ds-timeline-step">
+              <div class="ds-step-top-row">
+                <div class="ds-step-icon-wrap">
+                  <i data-lucide="file-edit"></i>
+                </div>
+                <span class="ds-step-badge">Step 01</span>
+              </div>
+              <h3>Submit Details</h3>
+              <p>Share your business name, style preferences, existing assets, and core project goals.</p>
+              <div class="ds-step-micro-tag">
+                <i data-lucide="clock" style="width:13px;height:13px;"></i> Quick 5-Min Brief
+              </div>
+            </div>
+
+            <div class="ds-timeline-step">
+              <div class="ds-step-top-row">
+                <div class="ds-step-icon-wrap">
+                  <i data-lucide="calculator"></i>
+                </div>
+                <span class="ds-step-badge">Step 02</span>
+              </div>
+              <h3>Confirm Estimate</h3>
+              <p>Review fixed upfront quote, milestone schedule, and agreed deliverable specifications.</p>
+              <div class="ds-step-micro-tag">
+                <i data-lucide="shield-check" style="width:13px;height:13px;color:#16a34a;"></i> 100% Fixed Quote
+              </div>
+            </div>
+
+            <div class="ds-timeline-step">
+              <div class="ds-step-top-row">
+                <div class="ds-step-icon-wrap">
+                  <i data-lucide="palette"></i>
+                </div>
+                <span class="ds-step-badge">Step 03</span>
+              </div>
+              <h3>Design &amp; Code</h3>
+              <p>Receive visual drafts, UI wireframe prototypes, and modern custom agile development.</p>
+              <div class="ds-step-micro-tag">
+                <i data-lucide="sparkles" style="width:13px;height:13px;color:#d97706;"></i> Live Previews &amp; Edits
+              </div>
+            </div>
+
+            <div class="ds-timeline-step">
+              <div class="ds-step-top-row">
+                <div class="ds-step-icon-wrap">
+                  <i data-lucide="rocket"></i>
+                </div>
+                <span class="ds-step-badge">Step 04</span>
+              </div>
+              <h3>Master Handover</h3>
+              <p>Receive vector source files, live cloud hosting deployment, and full admin ownership.</p>
+              <div class="ds-step-micro-tag">
+                <i data-lucide="check-circle-2" style="width:13px;height:13px;color:#16a34a;"></i> Commercial Rights
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════════════════════════════
+           ZONE 3 — START PROJECT: BRIEF WIZARD + HANDOVER + FAQ + CTA
+           ══════════════════════════════════════════════════════════════ -->
+
+      <!-- 1. Interactive 3-Step Project Brief Wizard -->
+      <section class="ds-section ds-bg-white" id="brief-builder">
+        <div class="ds-container ds-container-brief">
+          <div class="ds-header">
+            <span class="ds-kicker gold-kicker"><i data-lucide="file-text"></i> Structured Brief</span>
+            <h2 class="ds-title">Start Your Project <span class="h2-gold">Brief</span></h2>
+            <p class="ds-sub">Answer 3 simple questions to generate an instant structured brief &amp; direct WhatsApp quote.</p>
+          </div>
+
+          <div class="ds-wizard-container">
+            <div class="ds-wizard-head">
+              <div class="ds-wizard-steps-pills">
+                <span class="ds-wizard-step-pill active" id="wz-pill-1"><i data-lucide="layers" style="width:13px;height:13px;"></i> 1. Discipline</span>
+                <span class="ds-wizard-step-pill" id="wz-pill-2"><i data-lucide="package" style="width:13px;height:13px;"></i> 2. Scope &amp; Brand</span>
+                <span class="ds-wizard-step-pill" id="wz-pill-3"><i data-lucide="send" style="width:13px;height:13px;"></i> 3. Style &amp; Submit</span>
+              </div>
+              <div class="ds-wizard-progress-wrap">
+                <div class="ds-wizard-progress">
+                  <div class="ds-wizard-bar" id="wz-progress-bar"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="ds-wizard-body">
+              
+              <!-- Step 1: Discipline -->
+              <div class="ds-wizard-panel active" id="wz-panel-1">
+                <label class="ds-wizard-label">What type of creative service do you need?</label>
+                <div class="ds-wizard-cards-opt">
+                  <div class="ds-wizard-card-opt active" data-discipline="graphic">
+                    <div class="ds-wizard-card-icon">
+                      <i data-lucide="palette"></i>
+                    </div>
+                    <strong>Graphic Design</strong>
+                    <span>Logo identity, flex banner, shop signage &amp; packaging</span>
+                  </div>
+                  <div class="ds-wizard-card-opt" data-discipline="web-design">
+                    <div class="ds-wizard-card-icon">
+                      <i data-lucide="layout"></i>
+                    </div>
+                    <strong>Website UI/UX</strong>
+                    <span>Landing pages, Figma UI kits &amp; clickable prototypes</span>
+                  </div>
+                  <div class="ds-wizard-card-opt" data-discipline="web-dev">
+                    <div class="ds-wizard-card-icon">
+                      <i data-lucide="code-2"></i>
+                    </div>
+                    <strong>Web Development</strong>
+                    <span>Business websites, e-commerce stores &amp; custom SaaS apps</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Step 2: Specific Service & Scope -->
+              <div class="ds-wizard-panel" id="wz-panel-2">
+                <div class="ds-wizard-grid-2">
+                  <div class="ds-wizard-input-wrap">
+                    <label class="ds-wizard-label" id="wz-service-sel-label">Select Specific Deliverable</label>
+                    <div class="ds-cselect-wrap" id="wz-service-cselect-wrap">
+                      <button type="button" class="ds-cselect-trigger" id="wz-service-cselect-trigger" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="wz-service-sel-label">
+                        <div class="ds-cselect-val">
+                          <div class="ds-cselect-icon" id="wz-cs-service-icon">
+                            <i data-lucide="palette"></i>
+                          </div>
+                          <div class="ds-cselect-text">
+                            <span class="ds-cselect-title" id="wz-cs-service-title">Logo &amp; Brand Identity</span>
+                            <span class="ds-cselect-cat" id="wz-cs-service-cat">Graphic Design</span>
+                          </div>
+                        </div>
+                        <div class="ds-cselect-right">
+                          <i data-lucide="chevron-down" class="ds-cselect-arrow"></i>
+                        </div>
+                      </button>
+
+                      <div class="ds-cselect-dropdown" id="wz-service-cselect-dropdown" role="listbox">
+                        <!-- Group 1: Graphic Design -->
+                        <div class="ds-cselect-group">
+                          <div class="ds-cselect-group-title">
+                            <i data-lucide="palette"></i> Graphic Design &amp; Print
+                          </div>
+                          <div class="ds-cselect-opt active" data-value="Logo &amp; Brand Identity" data-icon="palette" data-cat="Graphic Design" role="option" aria-selected="true">
+                            <div class="ds-cselect-opt-icon"><i data-lucide="palette"></i></div>
+                            <div class="ds-cselect-opt-info">
+                              <strong>Logo &amp; Brand Identity</strong>
+                              <span>Vector logo, typography &amp; brand guidelines</span>
+                            </div>
+                            <i data-lucide="check" class="ds-cselect-check"></i>
+                          </div>
+                          <div class="ds-cselect-opt" data-value="Shop Flex &amp; Outdoor Banner" data-icon="image" data-cat="Graphic Design" role="option" aria-selected="false">
+                            <div class="ds-cselect-opt-icon"><i data-lucide="image"></i></div>
+                            <div class="ds-cselect-opt-info">
+                              <strong>Shop Flex &amp; Outdoor Banner</strong>
+                              <span>HD billboard, flex board &amp; storefront print</span>
+                            </div>
+                            <i data-lucide="check" class="ds-cselect-check"></i>
+                          </div>
+                          <div class="ds-cselect-opt" data-value="Visiting Card &amp; Stationery" data-icon="credit-card" data-cat="Graphic Design" role="option" aria-selected="false">
+                            <div class="ds-cselect-opt-icon"><i data-lucide="credit-card"></i></div>
+                            <div class="ds-cselect-opt-info">
+                              <strong>Visiting Card &amp; Stationery</strong>
+                              <span>Business cards, letterheads &amp; envelopes</span>
+                            </div>
+                            <i data-lucide="check" class="ds-cselect-check"></i>
+                          </div>
+                          <div class="ds-cselect-opt" data-value="Packaging &amp; Label Design" data-icon="package" data-cat="Graphic Design" role="option" aria-selected="false">
+                            <div class="ds-cselect-opt-icon"><i data-lucide="package"></i></div>
+                            <div class="ds-cselect-opt-info">
+                              <strong>Packaging &amp; Label Design</strong>
+                              <span>Product box packaging, pouches &amp; jar labels</span>
+                            </div>
+                            <i data-lucide="check" class="ds-cselect-check"></i>
+                          </div>
+                        </div>
+
+                        <!-- Group 2: Website UI/UX -->
+                        <div class="ds-cselect-group">
+                          <div class="ds-cselect-group-title">
+                            <i data-lucide="layout"></i> Website UI/UX &amp; Landing Pages
+                          </div>
+                          <div class="ds-cselect-opt" data-value="High-Converting Landing Page" data-icon="rocket" data-cat="Website UI/UX" role="option" aria-selected="false">
+                            <div class="ds-cselect-opt-icon"><i data-lucide="rocket"></i></div>
+                            <div class="ds-cselect-opt-info">
+                              <strong>High-Converting Landing Page</strong>
+                              <span>Lead generation page with animations &amp; speed</span>
+                            </div>
+                            <i data-lucide="check" class="ds-cselect-check"></i>
+                          </div>
+                          <div class="ds-cselect-opt" data-value="Website UI/UX Design" data-icon="layout" data-cat="Website UI/UX" role="option" aria-selected="false">
+                            <div class="ds-cselect-opt-icon"><i data-lucide="layout"></i></div>
+                            <div class="ds-cselect-opt-info">
+                              <strong>Website UI/UX Design (Figma)</strong>
+                              <span>Modern responsive layout wireframes &amp; prototypes</span>
+                            </div>
+                            <i data-lucide="check" class="ds-cselect-check"></i>
+                          </div>
+                          <div class="ds-cselect-opt" data-value="Dashboard UI/UX Design" data-icon="layout-dashboard" data-cat="Website UI/UX" role="option" aria-selected="false">
+                            <div class="ds-cselect-opt-icon"><i data-lucide="layout-dashboard"></i></div>
+                            <div class="ds-cselect-opt-info">
+                              <strong>Dashboard UI/UX Design</strong>
+                              <span>Admin interface &amp; web application UX flows</span>
+                            </div>
+                            <i data-lucide="check" class="ds-cselect-check"></i>
+                          </div>
+                        </div>
+
+                        <!-- Group 3: Web Development -->
+                        <div class="ds-cselect-group">
+                          <div class="ds-cselect-group-title">
+                            <i data-lucide="code-2"></i> Custom Web Development &amp; SaaS
+                          </div>
+                          <div class="ds-cselect-opt" data-value="Custom Business Website" data-icon="globe" data-cat="Web Development" role="option" aria-selected="false">
+                            <div class="ds-cselect-opt-icon"><i data-lucide="globe"></i></div>
+                            <div class="ds-cselect-opt-info">
+                              <strong>Custom Business Website</strong>
+                              <span>5–8 page SEO-optimized responsive company portal</span>
+                            </div>
+                            <i data-lucide="check" class="ds-cselect-check"></i>
+                          </div>
+                          <div class="ds-cselect-opt" data-value="Online Store &amp; E-commerce" data-icon="shopping-bag" data-cat="Web Development" role="option" aria-selected="false">
+                            <div class="ds-cselect-opt-icon"><i data-lucide="shopping-bag"></i></div>
+                            <div class="ds-cselect-opt-info">
+                              <strong>Online Store &amp; E-commerce</strong>
+                              <span>Catalog, cart, Razorpay payment &amp; order dashboard</span>
+                            </div>
+                            <i data-lucide="check" class="ds-cselect-check"></i>
+                          </div>
+                          <div class="ds-cselect-opt" data-value="Custom Web Application / SaaS" data-icon="code-2" data-cat="Web Development" role="option" aria-selected="false">
+                            <div class="ds-cselect-opt-icon"><i data-lucide="code-2"></i></div>
+                            <div class="ds-cselect-opt-info">
+                              <strong>Custom Web Application / SaaS</strong>
+                              <span>Node.js / database portal, user authentication &amp; APIs</span>
+                            </div>
+                            <i data-lucide="check" class="ds-cselect-check"></i>
+                          </div>
+                          <div class="ds-cselect-opt" data-value="Payment Gateway &amp; WhatsApp" data-icon="credit-card" data-cat="Web Development" role="option" aria-selected="false">
+                            <div class="ds-cselect-opt-icon"><i data-lucide="credit-card"></i></div>
+                            <div class="ds-cselect-opt-info">
+                              <strong>Payment Gateway &amp; API Integration</strong>
+                              <span>Razorpay, WhatsApp Business API &amp; webhooks</span>
+                            </div>
+                            <i data-lucide="check" class="ds-cselect-check"></i>
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+                  <div class="ds-wizard-input-wrap">
+                    <label class="ds-wizard-label" for="wz-name">Business / Brand Name</label>
+                    <input type="text" class="ds-wizard-input" id="wz-name" placeholder="e.g. Apex Retail, Aura Healthcare">
+                  </div>
+                </div>
+              </div>
+
+              <!-- Step 3: Style & Notes + Live Summary -->
+              <div class="ds-wizard-panel" id="wz-panel-3">
+                <div class="ds-wizard-grid-2">
+                  <div class="ds-wizard-input-wrap">
+                    <label class="ds-wizard-label" id="wz-tone-label">Visual Style / Aesthetic Tone</label>
+                    <div class="ds-cselect-wrap" id="wz-tone-cselect-wrap">
+                      <button type="button" class="ds-cselect-trigger" id="wz-tone-cselect-trigger" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="wz-tone-label">
+                        <div class="ds-cselect-val">
+                          <div class="ds-cselect-icon" id="wz-cs-tone-icon">
+                            <i data-lucide="sparkles"></i>
+                          </div>
+                          <div class="ds-cselect-text">
+                            <span class="ds-cselect-title" id="wz-cs-tone-title">Modern &amp; Clean</span>
+                            <span class="ds-cselect-cat">Aesthetic Style</span>
+                          </div>
+                        </div>
+                        <div class="ds-cselect-right">
+                          <i data-lucide="chevron-down" class="ds-cselect-arrow"></i>
+                        </div>
+                      </button>
+
+                      <div class="ds-cselect-dropdown" id="wz-tone-cselect-dropdown" role="listbox">
+                        <div class="ds-cselect-opt active" data-value="Modern &amp; Clean" data-icon="sparkles" role="option" aria-selected="true">
+                          <div class="ds-cselect-opt-icon"><i data-lucide="sparkles"></i></div>
+                          <div class="ds-cselect-opt-info">
+                            <strong>Modern &amp; Clean</strong>
+                            <span>Crisp layout, contemporary typography &amp; soft contrast</span>
+                          </div>
+                          <i data-lucide="check" class="ds-cselect-check"></i>
+                        </div>
+                        <div class="ds-cselect-opt" data-value="Bold &amp; Vibrant" data-icon="flame" role="option" aria-selected="false">
+                          <div class="ds-cselect-opt-icon"><i data-lucide="flame"></i></div>
+                          <div class="ds-cselect-opt-info">
+                            <strong>Bold &amp; Vibrant</strong>
+                            <span>High-impact colors, dynamic gradients &amp; energetic look</span>
+                          </div>
+                          <i data-lucide="check" class="ds-cselect-check"></i>
+                        </div>
+                        <div class="ds-cselect-opt" data-value="Minimal &amp; Premium" data-icon="gem" role="option" aria-selected="false">
+                          <div class="ds-cselect-opt-icon"><i data-lucide="gem"></i></div>
+                          <div class="ds-cselect-opt-info">
+                            <strong>Minimal &amp; Premium</strong>
+                            <span>Luxury editorial spacing, refined aesthetics &amp; elegance</span>
+                          </div>
+                          <i data-lucide="check" class="ds-cselect-check"></i>
+                        </div>
+                        <div class="ds-cselect-opt" data-value="Corporate &amp; Traditional" data-icon="landmark" role="option" aria-selected="false">
+                          <div class="ds-cselect-opt-icon"><i data-lucide="landmark"></i></div>
+                          <div class="ds-cselect-opt-info">
+                            <strong>Corporate &amp; Traditional</strong>
+                            <span>Structured corporate hierarchy, trusted tones &amp; balance</span>
+                          </div>
+                          <i data-lucide="check" class="ds-cselect-check"></i>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="ds-wizard-input-wrap">
+                    <label class="ds-wizard-label" id="wz-urgency-label">Estimated Timeline Preference</label>
+                    <div class="ds-cselect-wrap" id="wz-urgency-cselect-wrap">
+                      <button type="button" class="ds-cselect-trigger" id="wz-urgency-cselect-trigger" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="wz-urgency-label">
+                        <div class="ds-cselect-val">
+                          <div class="ds-cselect-icon" id="wz-cs-urgency-icon">
+                            <i data-lucide="clock"></i>
+                          </div>
+                          <div class="ds-cselect-text">
+                            <span class="ds-cselect-title" id="wz-cs-urgency-title">Standard Timeline (3–5 Days)</span>
+                            <span class="ds-cselect-cat">Turnaround</span>
+                          </div>
+                        </div>
+                        <div class="ds-cselect-right">
+                          <i data-lucide="chevron-down" class="ds-cselect-arrow"></i>
+                        </div>
+                      </button>
+
+                      <div class="ds-cselect-dropdown" id="wz-urgency-cselect-dropdown" role="listbox">
+                        <div class="ds-cselect-opt active" data-value="Standard Timeline (3–5 Days)" data-icon="clock" role="option" aria-selected="true">
+                          <div class="ds-cselect-opt-icon"><i data-lucide="clock"></i></div>
+                          <div class="ds-cselect-opt-info">
+                            <strong>Standard Timeline (3–5 Days)</strong>
+                            <span>Normal turnaround with scheduled milestone reviews</span>
+                          </div>
+                          <i data-lucide="check" class="ds-cselect-check"></i>
+                        </div>
+                        <div class="ds-cselect-opt" data-value="Express Priority (24–48h)" data-icon="zap" role="option" aria-selected="false">
+                          <div class="ds-cselect-opt-icon"><i data-lucide="zap"></i></div>
+                          <div class="ds-cselect-opt-info">
+                            <strong>Express Priority (24–48h)</strong>
+                            <span>Fast-track rush sprint with dedicated daily focus</span>
+                          </div>
+                          <i data-lucide="check" class="ds-cselect-check"></i>
+                        </div>
+                        <div class="ds-cselect-opt" data-value="Flexible / Milestone Schedule" data-icon="calendar" role="option" aria-selected="false">
+                          <div class="ds-cselect-opt-icon"><i data-lucide="calendar"></i></div>
+                          <div class="ds-cselect-opt-info">
+                            <strong>Flexible / Milestone Schedule</strong>
+                            <span>Iterative multi-phase development timeline</span>
+                          </div>
+                          <i data-lucide="check" class="ds-cselect-check"></i>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="ds-wizard-input-wrap">
+                  <label class="ds-wizard-label" for="wz-notes">Project Notes or Reference Requirements (Optional)</label>
+                  <textarea class="ds-wizard-textarea" id="wz-notes" rows="3" placeholder="Describe any specific colors, page sections, features, or design references..."></textarea>
+                </div>
+
+                <!-- Live Project Summary Confirmation Box -->
+                <div class="ds-wizard-summary-box">
+                  <i data-lucide="check-circle-2"></i>
+                  <div>
+                    <strong style="display:block;margin-bottom:2px;">Live Brief Statement:</strong>
+                    <div id="wz-live-summary" style="font-size:13px; opacity:0.95;">Apex Retail · Logo &amp; Brand Identity · Modern &amp; Clean</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="ds-wizard-actions">
+                <button type="button" class="ds-wizard-btn-prev" id="wz-prev-btn" style="visibility:hidden;">← Back</button>
+                <button type="button" class="ds-wizard-btn-next" id="wz-next-btn">Continue →</button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. Dynamic Deliverables & Handover Section -->
+      <section class="ds-section ds-bg-pale-blue" id="handover">
+        <div class="ds-container">
+          <div class="ds-header">
+            <span class="ds-kicker"><i data-lucide="package-check"></i> Deliverables</span>
+            <h2 class="ds-title">Everything you need at handover.</h2>
+            <p class="ds-sub">Every project includes full commercial ownership and production-ready source assets.</p>
+          </div>
+
+          <!-- Dynamic Handover Category Toggle -->
+          <div class="ds-handover-toggle">
+            <button type="button" class="ds-handover-tab active" data-handover="all">All Handover Assets</button>
+            <button type="button" class="ds-handover-tab" data-handover="design">Design Deliverables</button>
+            <button type="button" class="ds-handover-tab" data-handover="web">Web &amp; Dev Deliverables</button>
+          </div>
+
+          <div class="ds-handover-compact-grid" id="ds-handover-grid">
+            <div class="ds-handover-item-card" data-type="design">
+              <i data-lucide="palette"></i>
+              <h3>Design Source Files</h3>
+              <p>Master editable vectors (.AI, .SVG, .EPS), transparent PNGs and 300 DPI print-ready PDFs.</p>
+            </div>
+
+            <div class="ds-handover-item-card" data-type="design">
+              <i data-lucide="file-check"></i>
+              <h3>Brand Guidelines</h3>
+              <p>Color codes (HEX, CMYK, RGB), typography hierarchy, and logo spacing usage rules.</p>
+            </div>
+
+            <div class="ds-handover-item-card" data-type="web">
+              <i data-lucide="code-2"></i>
+              <h3>Production Source Code</h3>
+              <p>Clean, semantic HTML5/CSS3/JS, Node.js backend files, and GitHub repository access.</p>
+            </div>
+
+            <div class="ds-handover-item-card" data-type="web">
+              <i data-lucide="shield-check"></i>
+              <h3>Cloud Deployment &amp; SSL</h3>
+              <p>Live domain configuration, fast cloud hosting, free SSL certificate &amp; admin dashboard setup.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. 2-Column Tabbed FAQ with Real-Time Search (Screenshot #2) -->
+      <section class="ds-section ds-bg-white" id="faqs">
+        <div class="ds-container">
+          <div class="ds-header">
+            <span class="ds-kicker"><i data-lucide="help-circle"></i> FAQS</span>
+            <h2 class="ds-title">Common Design &amp; Development <span class="h2-gold">Questions</span></h2>
+            <p class="ds-sub">Everything you need to know about our design and web development services — answered clearly.</p>
+          </div>
+
+          <!-- FAQ Search Bar Matching Screenshot #2 -->
+          <div class="ds-faq-search-wrap">
+            <i data-lucide="search"></i>
+            <input type="text" id="ds-faq-search-input" placeholder="Search FAQs, documents, payment or status..." aria-label="Search FAQs">
+          </div>
+
+          <!-- 2-Column Tabbed FAQ Matching Screenshot #2 -->
+          <div class="cfaq-wrap ds-cfaq-wrapper">
+            
+            <!-- Left: Category Tabs Sidebar -->
+            <div class="cfaq-sidebar ds-cfaq-sidebar">
+              <button class="cfaq-tab active" data-tab="timeline" type="button">
+                <i data-lucide="clock"></i> <span>Processing &amp; Timeline</span>
+              </button>
+              <button class="cfaq-tab" data-tab="documents" type="button">
+                <i data-lucide="file-text"></i> <span>Documents Required</span>
+              </button>
+              <button class="cfaq-tab" data-tab="pricing" type="button">
+                <i data-lucide="indian-rupee"></i> <span>Fees &amp; Payment</span>
+              </button>
+              <button class="cfaq-tab" data-tab="ownership" type="button">
+                <i data-lucide="folder-check"></i> <span>Source Files &amp; Code</span>
+              </button>
+              <button class="cfaq-tab" data-tab="delivery" type="button">
+                <i data-lucide="download"></i> <span>e-Delivery &amp; Handover</span>
+              </button>
+              <div class="cfaq-sidebar-bottom-link">
+                <a href="https://wa.me/919473946181?text=Hi%20One%20Point%2C%20I%20have%20a%20question%20about%20Design%20or%20Web%20Development." target="_blank" rel="noopener">
+                  <i data-lucide="message-circle" style="width:13px;height:13px;"></i> Need help? Chat with us
+                </a>
+              </div>
+            </div>
+
+            <!-- Right: Content Panels -->
+            <div class="cfaq-panels ds-cfaq-panels">
+
+              <!-- Panel 1: Processing & Timeline -->
+              <div class="cfaq-panel active" data-panel="timeline">
+                <div class="faq" data-faqs-bound="custom">
+                  <div class="faq-item open">
+                    <button class="faq-question" data-faq-question type="button">
+                      <span class="pfaq-q-text">How long does graphic design and website development take?</span>
+                      <i data-lucide="chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                      <p>Standard graphic design deliverables (logos, shop flex banners, visiting cards) take 24–48 hours. Landing pages and business websites are delivered within 3–5 business days. Custom full-stack web applications take 1–2 weeks depending on database and API scope.</p>
+                    </div>
+                  </div>
+                  <div class="faq-item">
+                    <button class="faq-question" data-faq-question type="button">
+                      <span class="pfaq-q-text">Is express 24–48h fast turnaround delivery available?</span>
+                      <i data-lucide="chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                      <p>Yes! For urgent campaigns, shop openings, and event graphics, we provide priority 24–48h express delivery slots with dedicated live designer attention.</p>
+                    </div>
+                  </div>
+                  <div class="faq-item">
+                    <button class="faq-question" data-faq-question type="button">
+                      <span class="pfaq-q-text">What is the milestone process from brief to delivery?</span>
+                      <i data-lucide="chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                      <p>Our structured 4-step milestone flow includes: 1. Project Brief &amp; Discovery → 2. Scope &amp; Quote Confirmation → 3. Design Drafts &amp; Agile Development with WhatsApp previews → 4. Master Deliverables Handover.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Panel 2: Documents Required -->
+              <div class="cfaq-panel" data-panel="documents">
+                <div class="faq" data-faqs-bound="custom">
+                  <div class="faq-item open">
+                    <button class="faq-question" data-faq-question type="button">
+                      <span class="pfaq-q-text">What information and details will I need to submit?</span>
+                      <i data-lucide="chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                      <p>You only need your business/brand name, preferred colors, content text, dimensions or page requirements, and reference sample links if you have any in mind.</p>
+                    </div>
+                  </div>
+                  <div class="faq-item">
+                    <button class="faq-question" data-faq-question type="button">
+                      <span class="pfaq-q-text">Can you design in Hindi, Urdu, or English with regional fonts?</span>
+                      <i data-lucide="chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                      <p>Yes! We regularly design for local and regional businesses in Hindi (Devanagari), Urdu, and English with clean typography and accurate spelling.</p>
+                    </div>
+                  </div>
+                  <div class="faq-item">
+                    <button class="faq-question" data-faq-question type="button">
+                      <span class="pfaq-q-text">What if I only have a rough sketch or concept idea?</span>
+                      <i data-lucide="chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                      <p>That is completely fine. Share your rough sketch, handwritten notes, or photo on WhatsApp, and our senior design team will convert it into high-definition vector artwork.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Panel 3: Fees & Payment -->
+              <div class="cfaq-panel" data-panel="pricing">
+                <div class="faq" data-faqs-bound="custom">
+                  <div class="faq-item open">
+                    <button class="faq-question" data-faq-question type="button">
+                      <span class="pfaq-q-text">Are prices fixed transparently with zero hidden charges?</span>
+                      <i data-lucide="chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                      <p>Yes, 100%. All prices displayed on our transparent project estimator include full revisions and commercial file handover with no surprise charges.</p>
+                    </div>
+                  </div>
+                  <div class="faq-item">
+                    <button class="faq-question" data-faq-question type="button">
+                      <span class="pfaq-q-text">What payment methods and gateways do you support?</span>
+                      <i data-lucide="chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                      <p>We support UPI QR payments (Google Pay, PhonePe, Paytm), Net Banking, Debit/Credit Cards via secure Razorpay checkout, and digital cash counter receipts.</p>
+                    </div>
+                  </div>
+                  <div class="faq-item">
+                    <button class="faq-question" data-faq-question type="button">
+                      <span class="pfaq-q-text">What happens if project scope changes midway?</span>
+                      <i data-lucide="chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                      <p>If you decide to add new pages, extra integrations, or additional branding formats beyond the initial brief, we provide a clear incremental estimate before starting extra work.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Panel 4: Source Files & Code Ownership -->
+              <div class="cfaq-panel" data-panel="ownership">
+                <div class="faq" data-faqs-bound="custom">
+                  <div class="faq-item open">
+                    <button class="faq-question" data-faq-question type="button">
+                      <span class="pfaq-q-text">Do I own 100% of the full source files, code, and master assets?</span>
+                      <i data-lucide="chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                      <p><strong>Yes, 100% commercial ownership.</strong> For graphic design, you receive editable master vector files (AI, SVG, EPS, 300 DPI PDF). For websites and web apps, you receive full production source code, database scripts, and administrative ownership with zero recurring vendor lock-in fees.</p>
+                    </div>
+                  </div>
+                  <div class="faq-item">
+                    <button class="faq-question" data-faq-question type="button">
+                      <span class="pfaq-q-text">Do you build custom responsive code or use heavy pre-made templates?</span>
+                      <i data-lucide="chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                      <p>We build lightweight, modern custom-coded web solutions using clean semantic HTML5, modern CSS3, JavaScript, Node.js, and modern APIs for sub-second load times and zero plugin vulnerabilities.</p>
+                    </div>
+                  </div>
+                  <div class="faq-item">
+                    <button class="faq-question" data-faq-question type="button">
+                      <span class="pfaq-q-text">Will I receive Figma master UI artboards?</span>
+                      <i data-lucide="chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                      <p>Yes. All website UI/UX design packages include organized Figma artboards, component style tokens, typography hierarchies, and responsive web assets.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Panel 5: e-Delivery & Handover -->
+              <div class="cfaq-panel" data-panel="delivery">
+                <div class="faq" data-faqs-bound="custom">
+                  <div class="faq-item open">
+                    <button class="faq-question" data-faq-question type="button">
+                      <span class="pfaq-q-text">How will I receive the completed design files and website credentials?</span>
+                      <i data-lucide="chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                      <p>All finished master files are packaged in organized cloud folders (Google Drive / WhatsApp link) with vector masters, print PDFs, high-res web PNGs, source code archives, and admin login documentation.</p>
+                    </div>
+                  </div>
+                  <div class="faq-item">
+                    <button class="faq-question" data-faq-question type="button">
+                      <span class="pfaq-q-text">Do you provide post-launch maintenance, domain, and SSL support?</span>
+                      <i data-lucide="chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                      <p>Yes. We assist you in linking your custom domain (.com, .in), configure high-speed cloud hosting, activate free SSL/HTTPS security certificates, and provide ongoing maintenance support.</p>
+                    </div>
+                  </div>
+                  <div class="faq-item">
+                    <button class="faq-question" data-faq-question type="button">
+                      <span class="pfaq-q-text">Can branding graphics and website development be bundled together?</span>
+                      <i data-lucide="chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                      <p>Yes, absolutely. Bundling your logo identity, visiting cards, promotional banners, and website development ensures a cohesive brand image and saves significant coordination time and cost.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. Solid Deep Navy Final CTA Banner -->
+      <section class="ds-section" style="padding-top:0; background:#ffffff;">
+        <div class="ds-container">
+          <div class="ds-final-cta-banner">
+            <h2>Have a project in mind?</h2>
+            <p>Tell us what you need and get a clear scope, schedule, and estimate for your project.</p>
+            <div class="ds-final-cta-btns">
+              <a href="#brief-builder" class="ds-cta-btn-gold">Start a Project Brief</a>
+              <a href="https://wa.me/919473946181?text=Hi%20One%20Point,%20I%20have%20a%20design%20or%20web%20development%20requirement" class="ds-cta-btn-glass" target="_blank" rel="noopener">
+                <i data-lucide="message-circle"></i> Chat on WhatsApp
               </a>
             </div>
           </div>
-          <button type="button" class="carousel-arrow next edupoint-carousel-arrow" data-edupoint-carousel-next aria-label="Next service">
-            <i data-lucide="chevron-right"></i>
-          </button>
         </div>
       </section>
 
-      <section class="design-process-section reveal" id="creative-process">
-        <!-- Subtle Glowing Background Orbs -->
-        <div class="design-section-orb"></div>
-        <div class="design-section-orb"></div>
-
-        <div class="design-section-container">
-          <div class="premium-header">
-            <span class="premium-badge-pill"><i data-lucide="zap"></i> Design Flow</span>
-            <h2 class="premium-headline text-left">Four simple steps to your <span class="h2-gold">final design.</span></h2>
-            <p class="premium-subhead-new">Our human-assisted design workflow ensures you get custom creatives that fit your brand perfectly.</p>
-          </div>
-          
-          <div class="process-stepper-grid">
-            <article class="process-step-card">
-              <span class="process-step-num">Step 01</span>
-              <div class="process-step-icon">
-                <i data-lucide="clipboard-list"></i>
-              </div>
-              <h3>Briefing &amp; Details</h3>
-              <p>Share your business name, tagline, color preference, and style ideas on WhatsApp or our form.</p>
-            </article>
-
-            <article class="process-step-card">
-              <span class="process-step-num">Step 02</span>
-              <div class="process-step-icon">
-                <i data-lucide="paintbrush"></i>
-              </div>
-              <h3>Initial Concepts</h3>
-              <p>Our designers create 2-3 custom concept drafts and share them with you on WhatsApp within 24-48 hours.</p>
-            </article>
-
-            <article class="process-step-card">
-              <span class="process-step-num">Step 03</span>
-              <div class="process-step-icon">
-                <i data-lucide="message-square"></i>
-              </div>
-              <h3>Collaborative Revisions</h3>
-              <p>Suggest adjustments to text, layout, or colors. We refine the design until it matches your brand vision.</p>
-            </article>
-
-            <article class="process-step-card">
-              <span class="process-step-num">Step 04</span>
-              <div class="process-step-icon">
-                <i data-lucide="file-check"></i>
-              </div>
-              <h3>Print-Ready Delivery</h3>
-              <p>Once approved, receive high-resolution print PDFs, vector SVGs (for logos), and web formats (PNG/JPEG).</p>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section class="design-pricing-section reveal" id="pricing">
-        <!-- Subtle Glowing Background Orbs -->
-        <div class="design-section-orb"></div>
-
-        <div class="design-section-container">
-          <div class="premium-header text-center">
-            <span class="premium-badge-pill"><i data-lucide="gem"></i> Transparent Pricing</span>
-            <h2 class="premium-headline text-center">Simple design rates with zero <span class="h2-gold">hidden charges.</span></h2>
-            <p class="premium-subhead-new">Honest prices, premium results, and source files included. No surprise fees.</p>
-          </div>
-
-          <div class="pricing-cards-grid">
-            <!-- Card 1: Logo Design (Highlighted) -->
-            <article class="premium-pricing-card popular">
-              <span class="pricing-card-badge">Most Popular</span>
-              <div class="pricing-card-header">
-                <h3>Logo Design</h3>
-                <p>Custom branding identity for local shops, pages, and businesses.</p>
-              </div>
-              <div class="pricing-card-price-box">
-                <span class="pricing-card-price">&#8377;299</span>
-                <span>/ design</span>
-              </div>
-              <ul class="pricing-card-features">
-                <li><i data-lucide="check"></i> 2 Concept drafts included</li>
-                <li><i data-lucide="check"></i> Scalable SVG Vector source</li>
-                <li><i data-lucide="check"></i> High-res PNG/JPEG (Transparent)</li>
-                <li><i data-lucide="check"></i> WhatsApp proofing &amp; support</li>
-              </ul>
-              <a class="btn btn-primary pricing-card-btn" href="design-services.html?service=Logo+Design#apply-now">Book Logo Design</a>
-            </article>
-
-            <!-- Card 2: Visiting Card -->
-            <article class="premium-pricing-card">
-              <div class="pricing-card-header">
-                <h3>Visiting Card</h3>
-                <p>Professional corporate layouts ready to hand over to customers.</p>
-              </div>
-              <div class="pricing-card-price-box">
-                <span class="pricing-card-price">&#8377;199</span>
-                <span>/ design</span>
-              </div>
-              <ul class="pricing-card-features">
-                <li><i data-lucide="check"></i> Single or double-sided layouts</li>
-                <li><i data-lucide="check"></i> Print-ready PDF formats</li>
-                <li><i data-lucide="check"></i> Standard typography &amp; layout</li>
-                <li><i data-lucide="check"></i> Design proof in 1-2 days</li>
-              </ul>
-              <a class="btn btn-soft pricing-card-btn" href="design-services.html?service=Visiting+Card#apply-now">Book Visiting Card</a>
-            </article>
-
-            <!-- Card 3: Flex & Banner -->
-            <article class="premium-pricing-card">
-              <div class="pricing-card-header">
-                <h3>Flex &amp; Banners</h3>
-                <p>High-impact outdoor promotional layouts for shopfronts and events.</p>
-              </div>
-              <div class="pricing-card-price-box">
-                <span class="pricing-card-price">&#8377;249</span>
-                <span>/ design</span>
-              </div>
-              <ul class="pricing-card-features">
-                <li><i data-lucide="check"></i> Scaled to exact print sizes</li>
-                <li><i data-lucide="check"></i> CMYK color mode optimized</li>
-                <li><i data-lucide="check"></i> High-res assets utilized</li>
-                <li><i data-lucide="check"></i> Design proof in 1-2 days</li>
-              </ul>
-              <a class="btn btn-soft pricing-card-btn" href="design-services.html?service=Flex+Design#apply-now">Book Banner Design</a>
-            </article>
-
-            <!-- Card 4: Social Media Post -->
-            <article class="premium-pricing-card">
-              <div class="pricing-card-header">
-                <h3>Social Media Post</h3>
-                <p>Custom festival wishes, announcement graphics, and digital offers.</p>
-              </div>
-              <div class="pricing-card-price-box">
-                <span class="pricing-card-price">&#8377;149</span>
-                <span>/ design</span>
-              </div>
-              <ul class="pricing-card-features">
-                <li><i data-lucide="check"></i> Optimized social aspect ratios</li>
-                <li><i data-lucide="check"></i> Eye-catching headings &amp; graphics</li>
-                <li><i data-lucide="check"></i> Facebook/Instagram/WA ready</li>
-                <li><i data-lucide="check"></i> Fast delivery within 24 hours</li>
-              </ul>
-              <a class="btn btn-soft pricing-card-btn" href="design-services.html?service=Social+Media+Post#apply-now">Book Social Post</a>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <div data-unified-apply-slot></div>
     </main>
+
     <div data-site-footer></div>
+
+    <!-- Scripts -->
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
-    <script src="assets/app.js?v=clean_js_v11" defer></script>
-  
-<script id="line-alignment-script">
-  document.addEventListener("DOMContentLoaded", function() {
-    setTimeout(() => {
-      document.querySelectorAll(".section-head h2").forEach(h2 => {
-        let align = window.getComputedStyle(h2).textAlign;
-        let parent = h2.closest('.section-head');
-        if (parent) {
-          if (align === "center") {
-            parent.classList.add("center-line");
-          } else {
-            parent.classList.add("left-line");
+    <script src="assets/app.js?v=customer-checkout-94" defer></script>
+
+    <script defer>
+      /* ==========================================================================
+         DESIGN & WEB DEV SERVICES - MASTERPIECE INTERACTION JAVASCRIPT
+         ========================================================================== */
+      document.addEventListener('DOMContentLoaded', function() {
+        if (window.lucide) window.lucide.createIcons();
+
+        // ── Event Dispatcher for Analytics Architecture ───────────────────
+        function trackEvent(eventName, payload) {
+          try {
+            window.dispatchEvent(new CustomEvent('opds_analytics', { detail: { event: eventName, ...payload } }));
+          } catch(e){}
+        }
+
+        // ── 1. Refined Segmented Control & Service Showcase Filtering ───────
+        const segBtns = document.querySelectorAll('.ds-seg-btn');
+        const subChipsContainer = document.getElementById('ds-sub-chips');
+        const serviceCards = document.querySelectorAll('.ds-service-card');
+        const emptyState = document.getElementById('ds-empty-state');
+
+        const subCategories = {
+          graphic: [
+            { id: 'all', label: 'All Graphic' },
+            { id: 'branding', label: 'Logo & Branding' },
+            { id: 'print', label: 'Shop Banner & Print' },
+            { id: 'packaging', label: 'Packaging & Labels' }
+          ],
+          'web-design': [
+            { id: 'all', label: 'All UI/UX' },
+            { id: 'ui-ux', label: 'Website UI/UX' },
+            { id: 'landing', label: 'Landing Pages' },
+            { id: 'dashboard', label: 'Dashboard UI' }
+          ],
+          'web-dev': [
+            { id: 'all', label: 'All Development' },
+            { id: 'business', label: 'Business Websites' },
+            { id: 'ecom', label: 'E-commerce' },
+            { id: 'webapp', label: 'Web Applications' }
+          ]
+        };
+
+        let currentCategory = 'all';
+        let currentSub = 'all';
+
+        function renderSubChips(cat) {
+          if (cat === 'all' || !subCategories[cat]) {
+            subChipsContainer.classList.remove('show');
+            subChipsContainer.innerHTML = '';
+            return;
+          }
+
+          const chips = subCategories[cat];
+          subChipsContainer.innerHTML = chips.map((c, i) => `
+            <button type="button" class="ds-sub-chip ${i === 0 ? 'active' : ''}" data-sub="${c.id}">
+              ${c.label}
+            </button>
+          `).join('');
+          subChipsContainer.classList.add('show');
+
+          subChipsContainer.querySelectorAll('.ds-sub-chip').forEach(btn => {
+            btn.addEventListener('click', () => {
+              subChipsContainer.querySelectorAll('.ds-sub-chip').forEach(b => b.classList.remove('active'));
+              btn.classList.add('active');
+              currentSub = btn.dataset.sub;
+              filterCards();
+            });
+          });
+        }
+
+        function filterCards() {
+          let visibleCount = 0;
+          serviceCards.forEach(card => {
+            const cat = card.dataset.category;
+            const sub = card.dataset.sub;
+
+            const matchCat = (currentCategory === 'all') || (cat === currentCategory);
+            const matchSub = (currentSub === 'all') || (sub === currentSub);
+
+            if (matchCat && matchSub) {
+              card.style.display = 'flex';
+              visibleCount++;
+            } else {
+              card.style.display = 'none';
+            }
+          });
+
+          if (emptyState) {
+            emptyState.style.display = (visibleCount === 0) ? 'block' : 'none';
           }
         }
-      });
-    }, 100); // small delay to ensure CSS is applied
-  });
-</script>
-    <div class="sticky-bottom-cta">
-      <div class="sticky-cta-content">
-        <h4 class="sticky-cta-title">Design Service</h4>
-        <span class="sticky-cta-price">Rs. 199+ <small>Service Fee</small></span>
-      </div>
-      <a class="btn btn-primary" href="#apply-now">Request Design</a>
-    </div>
-</body>
-</html>
 
+        segBtns.forEach(btn => {
+          btn.addEventListener('click', () => {
+            segBtns.forEach(b => {
+              b.classList.remove('active');
+              b.setAttribute('aria-selected', 'false');
+            });
+            btn.classList.add('active');
+            btn.setAttribute('aria-selected', 'true');
+            currentCategory = btn.dataset.filter;
+            currentSub = 'all';
+            renderSubChips(currentCategory);
+            filterCards();
+            trackEvent('category_selected', { category: currentCategory });
+          });
+        });
+
+        // Prefill brief on card CTA clicks
+        document.querySelectorAll('.ds-card-cta[data-prefill], .ds-editorial-link[data-prefill]').forEach(cta => {
+          cta.addEventListener('click', () => {
+            const prefillVal = cta.dataset.prefill;
+            const wzSel = document.getElementById('wz-service-sel');
+            if (wzSel) {
+              for (let i = 0; i < wzSel.options.length; i++) {
+                if (wzSel.options[i].value === prefillVal) {
+                  wzSel.selectedIndex = i;
+                  break;
+                }
+              }
+              updateWizardSummary();
+            }
+          });
+        });
+
+        // ── 2. Progressive Project Estimator (USP Signature Tool) ─────────
+        const cselectWrap = document.getElementById('est-cselect-wrap');
+        const cselectTrigger = document.getElementById('est-cselect-trigger');
+        const cselectOpts = document.querySelectorAll('.ds-cselect-opt');
+        const csIcon = document.getElementById('est-cs-icon');
+        const csTitle = document.getElementById('est-cs-title');
+        const csCat = document.getElementById('est-cs-cat');
+        const csPriceTag = document.getElementById('est-cs-price-tag');
+
+        let selectedServiceData = {
+          value: 'logo',
+          name: 'Logo & Brand Identity',
+          base: 299,
+          type: 'fixed',
+          icon: 'palette',
+          cat: 'Graphic Design',
+          price: 'From ₹299'
+        };
+
+        if (cselectTrigger && cselectWrap) {
+          cselectTrigger.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const isOpen = cselectWrap.classList.toggle('open');
+            cselectTrigger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+          });
+
+          // Close on clicking outside
+          document.addEventListener('click', (e) => {
+            if (!cselectWrap.contains(e.target)) {
+              cselectWrap.classList.remove('open');
+              cselectTrigger.setAttribute('aria-expanded', 'false');
+            }
+          });
+
+          // Close on Escape key
+          document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && cselectWrap.classList.contains('open')) {
+              cselectWrap.classList.remove('open');
+              cselectTrigger.setAttribute('aria-expanded', 'false');
+              cselectTrigger.focus();
+            }
+          });
+        }
+
+        cselectOpts.forEach(opt => {
+          opt.addEventListener('click', () => {
+            cselectOpts.forEach(o => {
+              o.classList.remove('active');
+              o.setAttribute('aria-selected', 'false');
+            });
+            opt.classList.add('active');
+            opt.setAttribute('aria-selected', 'true');
+
+            selectedServiceData = {
+              value: opt.dataset.value,
+              name: opt.dataset.name,
+              base: parseInt(opt.dataset.base, 10) || 0,
+              type: opt.dataset.type || 'fixed',
+              icon: opt.dataset.icon || 'palette',
+              cat: opt.dataset.cat || 'Graphic Design',
+              price: opt.dataset.price || 'From ₹299'
+            };
+
+            if (csIcon) {
+              csIcon.innerHTML = `<i data-lucide="${selectedServiceData.icon}"></i>`;
+              if (window.lucide) window.lucide.createIcons();
+            }
+            if (csTitle) csTitle.textContent = selectedServiceData.name;
+            if (csCat) csCat.textContent = selectedServiceData.cat;
+            if (csPriceTag) csPriceTag.textContent = selectedServiceData.price;
+
+            if (cselectWrap) {
+              cselectWrap.classList.remove('open');
+              if (cselectTrigger) cselectTrigger.setAttribute('aria-expanded', 'false');
+            }
+
+            updateEstimator();
+          });
+        });
+
+        const estScopeBtns = document.querySelectorAll('#est-scope-pills .ds-est-tier-card');
+        const estUrgBtns = document.querySelectorAll('.ds-est-schedule-grid .ds-est-sched-card');
+        const estMockup = document.getElementById('est-addon-mockup');
+        const estSeo = document.getElementById('est-addon-seo');
+        const estMockupTile = document.getElementById('est-addon-mockup-tile');
+        const estSeoTile = document.getElementById('est-addon-seo-tile');
+
+        const recTrack = document.getElementById('est-rec-track');
+        const recBase = document.getElementById('est-rec-base');
+        const recScopeLevel = document.getElementById('est-rec-scope-level');
+        const recSpeed = document.getElementById('est-rec-speed');
+        const recAddonRow = document.getElementById('est-rec-addon-row');
+        const recAddons = document.getElementById('est-rec-addons');
+        const recTotal = document.getElementById('est-rec-total');
+        const recWaBtn = document.getElementById('est-rec-wa-btn');
+
+        function updateEstimator() {
+          const name = selectedServiceData.name;
+          const base = selectedServiceData.base;
+          const type = selectedServiceData.type;
+
+          const activeScope = document.querySelector('#est-scope-pills .ds-est-tier-card.active');
+          const mult = activeScope ? parseFloat(activeScope.dataset.mult) || 1.0 : 1.0;
+          const scopeLabel = activeScope ? activeScope.dataset.label || 'Starter (1 Concept)' : 'Starter (1 Concept)';
+
+          const activeUrg = document.querySelector('.ds-est-schedule-grid .ds-est-sched-card.active');
+          const isRush = activeUrg && activeUrg.dataset.urgency === 'rush';
+          const fee = isRush ? 250 : 0;
+
+          const hasMockup = estMockup ? estMockup.checked : false;
+          const hasSeo = estSeo ? estSeo.checked : false;
+          const addonsFee = (hasMockup ? 149 : 0) + (hasSeo ? 299 : 0);
+
+          if (estMockupTile) estMockupTile.classList.toggle('checked', hasMockup);
+          if (estSeoTile) estSeoTile.classList.toggle('checked', hasSeo);
+
+          const calculatedBase = Math.round(base * mult);
+          const total = calculatedBase + fee + addonsFee;
+
+          if (recTrack) recTrack.textContent = name;
+          if (recBase) recBase.textContent = '₹' + calculatedBase.toLocaleString('en-IN');
+          if (recScopeLevel) recScopeLevel.textContent = scopeLabel;
+          if (recSpeed) recSpeed.textContent = isRush ? 'Express 24–48h (+₹250)' : 'Standard (3–5 Days)';
+
+          if (addonsFee > 0 && recAddonRow) {
+            recAddonRow.style.display = 'flex';
+            if (recAddons) recAddons.textContent = '+₹' + addonsFee;
+          } else if (recAddonRow) {
+            recAddonRow.style.display = 'none';
+          }
+
+          if (recTotal) {
+            recTotal.style.opacity = '0.4';
+            recTotal.style.transform = 'scale(0.97)';
+            setTimeout(() => {
+              if (type === 'range') {
+                const high = Math.round(total * 1.35);
+                recTotal.textContent = `₹${total.toLocaleString('en-IN')} – ₹${high.toLocaleString('en-IN')}`;
+              } else {
+                recTotal.textContent = '₹' + total.toLocaleString('en-IN');
+              }
+              recTotal.style.opacity = '1';
+              recTotal.style.transform = 'scale(1)';
+            }, 100);
+          }
+
+          const waMsg = `Hi One Point! I configured an estimate on your website:\n\n🎯 *Service:* ${name}\n📊 *Scope:* ${scopeLabel}\n⏱️ *Timeline:* ${isRush ? 'Express 24–48h' : 'Standard 3–5 Days'}\n${addonsFee > 0 ? '✨ *Add-ons:* Included (+₹' + addonsFee + ')\n' : ''}💰 *Starting Estimate:* ₹${total.toLocaleString('en-IN')}\n\nPlease confirm availability and start!`;
+          if (recWaBtn) recWaBtn.href = 'https://wa.me/919473946181?text=' + encodeURIComponent(waMsg);
+
+          trackEvent('estimate_changed', { service: name, total: total });
+        }
+
+        estScopeBtns.forEach(btn => {
+          btn.addEventListener('click', () => {
+            estScopeBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            updateEstimator();
+          });
+        });
+        estUrgBtns.forEach(btn => {
+          btn.addEventListener('click', () => {
+            estUrgBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            updateEstimator();
+          });
+        });
+        if (estMockup) estMockup.addEventListener('change', updateEstimator);
+        if (estSeo) estSeo.addEventListener('change', updateEstimator);
+        updateEstimator();
+
+        // ── 3. Multi-Step Brief Wizard with Live Summary & Custom Selects ──
+        let currentStep = 1;
+        const totalSteps = 3;
+
+        const stepIndicator = document.getElementById('wz-step-indicator');
+        const progressBar = document.getElementById('wz-progress-bar');
+        const prevBtn = document.getElementById('wz-prev-btn');
+        const nextBtn = document.getElementById('wz-next-btn');
+
+        const panels = [
+          document.getElementById('wz-panel-1'),
+          document.getElementById('wz-panel-2'),
+          document.getElementById('wz-panel-3')
+        ];
+
+        const wzCards = document.querySelectorAll('.ds-wizard-card-opt');
+        const wzName = document.getElementById('wz-name');
+        const wzNotes = document.getElementById('wz-notes');
+        const wzLiveSummary = document.getElementById('wz-live-summary');
+
+        const pill1 = document.getElementById('wz-pill-1');
+        const pill2 = document.getElementById('wz-pill-2');
+        const pill3 = document.getElementById('wz-pill-3');
+
+        // Helper to initialize custom dropdowns
+        function setupCustomSelect(wrapId, triggerId, optSelector, onChange) {
+          const wrap = document.getElementById(wrapId);
+          const trigger = document.getElementById(triggerId);
+          if (!wrap || !trigger) return null;
+
+          const opts = wrap.querySelectorAll(optSelector);
+
+          trigger.addEventListener('click', (e) => {
+            e.stopPropagation();
+            // Close other open custom selects
+            document.querySelectorAll('.ds-cselect-wrap.open').forEach(w => {
+              if (w !== wrap) {
+                w.classList.remove('open');
+                const tr = w.querySelector('.ds-cselect-trigger');
+                if (tr) tr.setAttribute('aria-expanded', 'false');
+              }
+            });
+            const isOpen = wrap.classList.toggle('open');
+            trigger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+          });
+
+          opts.forEach(opt => {
+            opt.addEventListener('click', (e) => {
+              e.stopPropagation();
+              opts.forEach(o => {
+                o.classList.remove('active');
+                o.setAttribute('aria-selected', 'false');
+              });
+              opt.classList.add('active');
+              opt.setAttribute('aria-selected', 'true');
+
+              wrap.classList.remove('open');
+              trigger.setAttribute('aria-expanded', 'false');
+
+              if (onChange) onChange(opt);
+            });
+          });
+
+          return {
+            selectByValue: (val) => {
+              opts.forEach(o => {
+                if (o.dataset.value === val) {
+                  opts.forEach(other => {
+                    other.classList.remove('active');
+                    other.setAttribute('aria-selected', 'false');
+                  });
+                  o.classList.add('active');
+                  o.setAttribute('aria-selected', 'true');
+                  if (onChange) onChange(o);
+                }
+              });
+            }
+          };
+        }
+
+        // 1. Wizard Deliverable Custom Select (Step 2)
+        let wizardService = 'Logo & Brand Identity';
+        const wzServiceIcon = document.getElementById('wz-cs-service-icon');
+        const wzServiceTitle = document.getElementById('wz-cs-service-title');
+        const wzServiceCat = document.getElementById('wz-cs-service-cat');
+
+        const wzServiceSelectCtrl = setupCustomSelect(
+          'wz-service-cselect-wrap',
+          'wz-service-cselect-trigger',
+          '#wz-service-cselect-dropdown .ds-cselect-opt',
+          (opt) => {
+            wizardService = opt.dataset.value;
+            const icon = opt.dataset.icon || 'palette';
+            const cat = opt.dataset.cat || 'Graphic Design';
+
+            if (wzServiceIcon) {
+              wzServiceIcon.innerHTML = `<i data-lucide="${icon}"></i>`;
+              if (window.lucide) window.lucide.createIcons();
+            }
+            if (wzServiceTitle) wzServiceTitle.textContent = wizardService;
+            if (wzServiceCat) wzServiceCat.textContent = cat;
+
+            updateWizardSummary();
+          }
+        );
+
+        // 2. Wizard Tone Custom Select (Step 3)
+        let wizardTone = 'Modern & Clean';
+        const wzToneIcon = document.getElementById('wz-cs-tone-icon');
+        const wzToneTitle = document.getElementById('wz-cs-tone-title');
+
+        setupCustomSelect(
+          'wz-tone-cselect-wrap',
+          'wz-tone-cselect-trigger',
+          '#wz-tone-cselect-dropdown .ds-cselect-opt',
+          (opt) => {
+            wizardTone = opt.dataset.value;
+            const icon = opt.dataset.icon || 'sparkles';
+
+            if (wzToneIcon) {
+              wzToneIcon.innerHTML = `<i data-lucide="${icon}"></i>`;
+              if (window.lucide) window.lucide.createIcons();
+            }
+            if (wzToneTitle) wzToneTitle.textContent = wizardTone;
+
+            updateWizardSummary();
+          }
+        );
+
+        // 3. Wizard Urgency Custom Select (Step 3)
+        let wizardUrgency = 'Standard Timeline (3–5 Days)';
+        const wzUrgencyIcon = document.getElementById('wz-cs-urgency-icon');
+        const wzUrgencyTitle = document.getElementById('wz-cs-urgency-title');
+
+        setupCustomSelect(
+          'wz-urgency-cselect-wrap',
+          'wz-urgency-cselect-trigger',
+          '#wz-urgency-cselect-dropdown .ds-cselect-opt',
+          (opt) => {
+            wizardUrgency = opt.dataset.value;
+            const icon = opt.dataset.icon || 'clock';
+
+            if (wzUrgencyIcon) {
+              wzUrgencyIcon.innerHTML = `<i data-lucide="${icon}"></i>`;
+              if (window.lucide) window.lucide.createIcons();
+            }
+            if (wzUrgencyTitle) wzUrgencyTitle.textContent = wizardUrgency;
+
+            updateWizardSummary();
+          }
+        );
+
+        // Discipline selection in Step 1
+        wzCards.forEach(c => {
+          c.addEventListener('click', () => {
+            wzCards.forEach(card => card.classList.remove('active'));
+            c.classList.add('active');
+            const disc = c.dataset.discipline;
+            if (disc === 'graphic' && wzServiceSelectCtrl) {
+              wzServiceSelectCtrl.selectByValue('Logo & Brand Identity');
+            } else if (disc === 'web-design' && wzServiceSelectCtrl) {
+              wzServiceSelectCtrl.selectByValue('Website UI/UX Design');
+            } else if (disc === 'web-dev' && wzServiceSelectCtrl) {
+              wzServiceSelectCtrl.selectByValue('Custom Business Website');
+            }
+          });
+        });
+
+        // Prefill brief on card CTA clicks
+        document.querySelectorAll('.ds-card-cta[data-prefill], .ds-editorial-link[data-prefill]').forEach(cta => {
+          cta.addEventListener('click', () => {
+            const prefillVal = cta.dataset.prefill;
+            if (wzServiceSelectCtrl) {
+              wzServiceSelectCtrl.selectByValue(prefillVal);
+            }
+          });
+        });
+
+        function updateWizardStep(step) {
+          currentStep = step;
+          panels.forEach((p, i) => {
+            if (p) p.classList.toggle('active', i === step - 1);
+          });
+
+          if (pill1) {
+            pill1.classList.toggle('active', step === 1);
+            pill1.classList.toggle('completed', step > 1);
+          }
+          if (pill2) {
+            pill2.classList.toggle('active', step === 2);
+            pill2.classList.toggle('completed', step > 2);
+          }
+          if (pill3) {
+            pill3.classList.toggle('active', step === 3);
+          }
+
+          if (progressBar) progressBar.style.width = `${(step / totalSteps) * 100}%`;
+          if (prevBtn) prevBtn.style.visibility = step > 1 ? 'visible' : 'hidden';
+
+          if (nextBtn) {
+            if (step === totalSteps) {
+              nextBtn.classList.add('wa-submit');
+              nextBtn.innerHTML = '<i data-lucide="message-circle" style="width:16px;height:16px;"></i> Send Brief on WhatsApp';
+              if (window.lucide) window.lucide.createIcons();
+            } else {
+              nextBtn.classList.remove('wa-submit');
+              nextBtn.textContent = 'Continue →';
+            }
+          }
+
+          updateWizardSummary();
+          trackEvent('brief_step_changed', { step: currentStep });
+        }
+
+        function updateWizardSummary() {
+          const name = (wzName?.value || '').trim() || 'Apex Retail Store';
+          const service = wizardService;
+          const tone = wizardTone;
+          const urgency = wizardUrgency;
+          const notes = (wzNotes?.value || '').trim();
+
+          if (wzLiveSummary) {
+            wzLiveSummary.textContent = `${name} · ${service} · ${tone} · ${urgency}`;
+          }
+
+          return `Hi One Point! Here is my project brief:\n\n🏢 *Brand:* ${name}\n🎯 *Service:* ${service}\n🎨 *Style:* ${tone}\n⏱️ *Timeline:* ${urgency}\n${notes ? '📝 *Notes:* ' + notes + '\n' : ''}\nPlease review and let me know the scope & estimate!`;
+        }
+
+        if (nextBtn) {
+          nextBtn.addEventListener('click', () => {
+            if (currentStep < totalSteps) {
+              updateWizardStep(currentStep + 1);
+            } else {
+              // Final Step: Submit to WhatsApp
+              const text = updateWizardSummary();
+              trackEvent('whatsapp_brief_clicked', { summary: text });
+              window.open('https://wa.me/919473946181?text=' + encodeURIComponent(text), '_blank');
+            }
+          });
+        }
+
+        if (prevBtn) {
+          prevBtn.addEventListener('click', () => {
+            if (currentStep > 1) {
+              updateWizardStep(currentStep - 1);
+            }
+          });
+        }
+
+        [wzName, wzNotes].forEach(el => {
+          if (el) el.addEventListener('input', updateWizardSummary);
+          if (el) el.addEventListener('change', updateWizardSummary);
+        });
+
+        // ── 4. Dynamic Handover Tab Toggle ───────────────────────────────
+        const handoverTabs = document.querySelectorAll('.ds-handover-tab');
+        const handoverCards = document.querySelectorAll('.ds-handover-item-card');
+
+        handoverTabs.forEach(tab => {
+          tab.addEventListener('click', () => {
+            handoverTabs.forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+            const target = tab.dataset.handover;
+
+            handoverCards.forEach(card => {
+              if (target === 'all' || card.dataset.type === target) {
+                card.style.display = 'flex';
+              } else {
+                card.style.display = 'none';
+              }
+            });
+          });
+        });
+
+        // ── 5. 2-Column FAQ Tabs, Accordions & Real-Time Search ───────────
+        const faqTabs = document.querySelectorAll('.ds-cfaq-sidebar .cfaq-tab');
+        const faqPanels = document.querySelectorAll('.ds-cfaq-panels .cfaq-panel');
+        const faqSearchInput = document.getElementById('ds-faq-search-input');
+
+        // Sidebar Tabs Switcher
+        faqTabs.forEach(tab => {
+          tab.addEventListener('click', function () {
+            faqTabs.forEach(t => t.classList.remove('active'));
+            faqPanels.forEach(p => p.classList.remove('active'));
+
+            this.classList.add('active');
+            const targetTab = this.getAttribute('data-tab');
+            const targetPanel = document.querySelector('.ds-cfaq-panels .cfaq-panel[data-panel="' + targetTab + '"]');
+            if (targetPanel) {
+              targetPanel.classList.add('active');
+            }
+            trackEvent('faq_tab_clicked', { tab: targetTab });
+          });
+        });
+
+        // Accordion Toggle
+        const faqQuestions = document.querySelectorAll('.ds-cfaq-panels .faq-question');
+        faqQuestions.forEach(btn => {
+          btn.addEventListener('click', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            const item = this.closest('.faq-item');
+            if (!item) return;
+            const isOpen = item.classList.contains('open');
+            
+            // Close other items in the same panel
+            const currentPanel = item.closest('.cfaq-panel');
+            if (currentPanel) {
+              currentPanel.querySelectorAll('.faq-item.open').forEach(i => {
+                if (i !== item) i.classList.remove('open');
+              });
+            }
+
+            item.classList.toggle('open', !isOpen);
+            if (!isOpen) {
+              const qTitle = item.querySelector('.pfaq-q-text')?.textContent || '';
+              trackEvent('faq_question_opened', { question: qTitle });
+            }
+          });
+        });
+
+        // FAQ Real-Time Search Filter
+        if (faqSearchInput) {
+          faqSearchInput.addEventListener('input', function () {
+            const query = this.value.toLowerCase().trim();
+            const allItems = document.querySelectorAll('.ds-cfaq-panels .faq-item');
+
+            if (!query) {
+              // Restore tab view
+              faqPanels.forEach(p => p.style.display = '');
+              allItems.forEach(item => {
+                item.style.display = '';
+              });
+              const activeTab = document.querySelector('.ds-cfaq-sidebar .cfaq-tab.active')?.getAttribute('data-tab');
+              faqPanels.forEach(p => {
+                if (p.getAttribute('data-panel') === activeTab) {
+                  p.classList.add('active');
+                } else {
+                  p.classList.remove('active');
+                }
+              });
+              return;
+            }
+
+            // In search mode, show all matching panels
+            faqPanels.forEach(p => {
+              p.classList.add('active');
+              p.style.display = 'block';
+            });
+
+            allItems.forEach(item => {
+              const qText = item.querySelector('.pfaq-q-text')?.textContent.toLowerCase() || '';
+              const aText = item.querySelector('.faq-answer')?.textContent.toLowerCase() || '';
+              if (qText.includes(query) || aText.includes(query)) {
+                item.style.display = 'block';
+                item.classList.add('open');
+              } else {
+                item.style.display = 'none';
+              }
+            });
+            trackEvent('faq_searched', { query: query });
+          });
+        }
+
+      });
+    </script>
+  </body>
+</html>
