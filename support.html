@@ -9,10 +9,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-        <link rel="stylesheet" href="assets/onepoint.css?v=2">
+        <script src="assets/opds-boot.js?v=anti-fouc-79"></script>
+        <link rel="stylesheet" href="assets/onepoint.css?v=customer-checkout-94">
 
     <style>
-      /* â”€â”€â”€ Brand tokens â”€â”€â”€ */
+      /* ─── Brand tokens ─── */
       :root {
         --brand-blue:      #125696;
         --brand-blue-dark: #0c4da2;
@@ -26,7 +27,7 @@
         --page-bg:         #f5f8fe;
       }
 
-      /* â”€â”€â”€ Hero â”€â”€â”€ */
+      /* ─── Hero ─── */
       .compact-hero {
         background:
           linear-gradient(90deg, rgba(18,86,150,0.97) 0%, rgba(18,86,150,0.88) 50%, rgba(18,86,150,0.60) 100%),
@@ -39,21 +40,21 @@
       .compact-hero p:not(.eyebrow) { text-align: left !important; margin-inline: 0 !important; }
       .compact-hero .hero-actions { justify-content: flex-start !important; }
 
-      /* â”€â”€â”€ Page shell â”€â”€â”€ */
-      /* â”€â”€â”€ Section band backgrounds â”€â”€â”€ */
+      /* ─── Page shell ─── */
+      /* ─── Section band backgrounds ─── */
       /* padding comes from global: section { padding-top:64px; padding-bottom:64px } */
       .sp-band-white { background: #ffffff; padding-bottom: clamp(56px, 8vw, 88px); }
       .unified-apply-section { padding-top: clamp(64px, 8vw, 96px) !important; }
       .sp-band-tint  { background: #f5f8fe; }
 
-      /* â”€â”€â”€ Section sub-heading under h2 â”€â”€â”€ */
+      /* ─── Section sub-heading under h2 ─── */
       .sp-intro-p {
         margin: 0 0 32px;
       }
 
-      /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+      /* ══════════════════════════════
          1. CHANNEL CARDS
-      â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+      ══════════════════════════════ */
       .sp-channels {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
@@ -146,9 +147,9 @@
         color: #8a6008;
       }
 
-      /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+      /* ══════════════════════════════
          2. CONTACT ROWS TABLE
-      â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+      ══════════════════════════════ */
       .sp-contacts {
         background: var(--surface);
         border: 1px solid var(--border);
@@ -240,9 +241,9 @@
       }
       .sp-hours-row svg { width:14px; height:14px; color: var(--brand-gold-light); flex-shrink: 0; }
 
-      /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+      /* ══════════════════════════════
          3. QUICK FAQ
-      â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+      ══════════════════════════════ */
       .sp-faq-grid {
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -312,9 +313,9 @@
       }
       .sp-faq-answer a { color: var(--brand-blue); font-weight: 600; text-decoration: underline; }
 
-      /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+      /* ══════════════════════════════
          4. BOTTOM CTA STRIP
-      â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+      ══════════════════════════════ */
       .sp-cta {
         background: var(--brand-blue);
         border-radius: 16px;
@@ -404,7 +405,7 @@
 
     <main>
 
-      <!-- â•â• Hero â•â• -->
+      <!-- ══ Hero ══ -->
       <div class="page-shell">
         <section class="compact-hero">
           <div class="site-container">
@@ -412,14 +413,14 @@
             <h1>Fast help for forms, payments &amp; documents.</h1>
             <p>Reach us before payment, after application, or during document review &mdash; every day, 9 AM to 8 PM.</p>
             <div class="hero-actions">
-              <a class="btn btn-primary" href="https://wa.me/919473946181" target="_blank" rel="noopener"><i data-lucide="message-circle"></i> WhatsApp Us</a>
+              <a class="btn btn-primary" href="https://wa.me/919473946181" target="_blank" rel="noopener" data-conversation-entry data-communication-channel="WhatsApp"><i data-lucide="message-circle"></i> WhatsApp Us</a>
               <a class="btn btn-ghost" href="track-application.html"><i data-lucide="search"></i> Track Request</a>
             </div>
           </div>
         </section>
       </div>
 
-      <!-- â•â• Section 1 &middot; Get in Touch â•â• -->
+      <!-- ══ Section 1 &middot; Get in Touch ══ -->
       <section class="sp-band-white reveal">
         <div class="site-container">
           <p class="section-kicker">Get in Touch</p>
@@ -433,7 +434,7 @@
               <h3>WhatsApp Support</h3>
               <p>Send documents, ask fees, check application status &mdash; all on WhatsApp in minutes.</p>
               <div class="sp-ch-meta"><i data-lucide="clock"></i> Avg. reply &lt; 10 minutes</div>
-              <a class="sp-ch-btn blue" href="https://wa.me/919473946181" target="_blank" rel="noopener">
+              <a class="sp-ch-btn blue" href="https://wa.me/919473946181" target="_blank" rel="noopener" data-conversation-entry data-communication-channel="WhatsApp">
                 <i data-lucide="message-circle"></i> Chat on WhatsApp
               </a>
             </div>
@@ -443,7 +444,7 @@
               <h3>Call Support</h3>
               <p>Call us directly for step-by-step guidance on any government, student or business service.</p>
               <div class="sp-ch-meta"><i data-lucide="clock"></i> Available 9 AM &mdash; 8 PM daily</div>
-              <a class="sp-ch-btn blue" href="tel:+919473946181">
+              <a class="sp-ch-btn blue" href="tel:+919473946181" data-conversation-entry data-communication-channel="Phone">
                 <i data-lucide="phone"></i> Call Now
               </a>
             </div>
@@ -462,7 +463,7 @@
         </div>
       </section>
 
-      <!-- â•â• Section 2 &middot; Contact Details â•â• -->
+      <!-- ══ Section 2 &middot; Contact Details ══ -->
       <section class="sp-band-tint reveal">
         <div class="site-container">
           <p class="section-kicker">Contact Details</p>
@@ -510,7 +511,7 @@
         </div>
       </section>
 
-      <!-- â•â• Section 3 &middot; Quick Answers + CTA â•â• -->
+      <!-- ══ Section 3 &middot; Quick Answers + CTA ══ -->
       <section class="sp-band-white reveal">
         <div class="site-container">
           <p class="section-kicker">Quick Answers</p>
@@ -616,24 +617,6 @@
 
     <div data-site-footer></div>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
-    <script src="assets/app.js?v=clean_js_v11" defer></script>
-  
-<script id="line-alignment-script">
-  document.addEventListener("DOMContentLoaded", function() {
-    setTimeout(() => {
-      document.querySelectorAll(".section-head h2").forEach(h2 => {
-        let align = window.getComputedStyle(h2).textAlign;
-        let parent = h2.closest('.section-head');
-        if (parent) {
-          if (align === "center") {
-            parent.classList.add("center-line");
-          } else {
-            parent.classList.add("left-line");
-          }
-        }
-      });
-    }, 100); // small delay to ensure CSS is applied
-  });
-</script>
+    <script src="assets/app.js?v=customer-checkout-94" defer></script>
 </body>
 </html>

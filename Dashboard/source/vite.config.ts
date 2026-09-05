@@ -32,8 +32,13 @@ export default defineConfig(({mode}) => {
       emptyOutDir: true,
       rollupOptions: {
         output: {
-          format: 'iife',
-          inlineDynamicImports: true,
+          manualChunks(id) {
+            if (!id.includes('node_modules')) return undefined;
+            if (id.includes('recharts') || id.includes('d3-')) return 'charts';
+            if (id.includes('lucide-react') || id.includes('motion')) return 'ui';
+            if (id.includes('@dnd-kit')) return 'drag-drop';
+            return 'vendor';
+          },
         },
       },
     },

@@ -1,58 +1,1574 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Student Digital Help Center for exam forms, admit card download, result download, scholarship, print services, CCC, Tally, O Level and resume builder.">
-    <title>Student Services: Exam Forms, Admit Card, Scholarship, Resume | One Point Lucknow</title>
+    <meta name="description" content="EduPoint Student Digital Center - 10 Service Categories for Admissions, Competitive Exams, University Services, Scholarships, Admit Cards, Payments, Printing and Career Support.">
+    <title>EduPoint Services Hub: Admissions, Exams, Scholarships & Printing | One Point</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-        <link rel="stylesheet" href="assets/onepoint.css?v=2">
-</head>
+    <script src="assets/opds-boot.js?v=anti-fouc-79"></script>
+    <link rel="stylesheet" href="assets/onepoint.css?v=doc-flat-fix-99">
+    <style>
+      /* ==========================================================================
+         EDUPOINT STUDENT SERVICES HUB - DESIGN SYSTEM & LUXURY STYLING
+         ========================================================================== */
+      :root {
+        --edu-primary: #075092;
+        --edu-primary-deep: #053b6c;
+        --edu-primary-dark: #061527;
+        --edu-gold: #d2a12a;
+        --edu-gold-glow: #f59e0b;
+        --edu-emerald: #059669;
+        --edu-slate: #0b1f35;
+        --edu-body: #475569;
+        --edu-border: #e2e8f0;
+        --edu-bg-soft: #f8fafc;
+        --edu-card-bg: #ffffff;
+      }
+
+      /* Section Common Layout & Typography */
+      .edu-section {
+        padding: clamp(48px, 6vw, 84px) 0;
+        position: relative;
+        overflow: hidden;
+      }
+      .edu-section-alt {
+        background: #f8fafc;
+        border-top: 1px solid #eef2f6;
+        border-bottom: 1px solid #eef2f6;
+      }
+      .edu-container {
+        width: min(1240px, calc(100% - 48px));
+        max-width: 1240px;
+        margin: 0 auto;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      .edu-header {
+        text-align: center;
+        max-width: 780px;
+        margin: 0 auto clamp(32px, 4vw, 48px);
+      }
+      .edu-header.text-left {
+        text-align: left;
+        margin-left: 0;
+      }
+      .edu-kicker {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 0.76rem;
+        font-weight: 850;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--edu-primary);
+        background: #eff6ff;
+        border: 1px solid #bfdbfe;
+        padding: 5px 12px;
+        border-radius: 999px;
+        margin-bottom: 12px;
+      }
+      .edu-title {
+        font-size: clamp(1.65rem, 3vw, 2.35rem);
+        font-weight: 900;
+        color: var(--edu-slate);
+        line-height: 1.25;
+        margin: 0 0 10px;
+        letter-spacing: -0.02em;
+      }
+      .edu-title .gold-text {
+        background: linear-gradient(135deg, #d2a12a 0%, #f59e0b 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .edu-sub {
+        font-size: clamp(0.92rem, 1.4vw, 1.05rem);
+        color: var(--edu-body);
+        line-height: 1.55;
+        margin: 0;
+      }
+
+      /* ── 1. Search Toolbar & Filter Chips (Exact Screenshot 1 Match) ── */
+      .edu-search-toolbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 14px 18px;
+        background: #f8fbfe;
+        border: 1.5px solid rgba(13, 52, 92, 0.12);
+        border-radius: 18px;
+        box-shadow: 0 4px 16px rgba(8, 31, 58, 0.03);
+        margin-bottom: 20px;
+        width: 100%;
+        box-sizing: border-box;
+      }
+      @media (max-width: 860px) {
+        .edu-search-toolbar {
+          flex-direction: column;
+          align-items: stretch;
+        }
+        .edu-toolbar-filters {
+          width: 100%;
+        }
+        .edu-select {
+          flex: 1;
+        }
+      }
+      .edu-search-input-wrap {
+        position: relative;
+        flex: 1;
+      }
+      .edu-search-input-wrap i, .edu-search-input-wrap svg {
+        position: absolute;
+        left: 14px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 16px;
+        height: 16px;
+        color: #64748b;
+      }
+      .edu-search-input-wrap input {
+        width: 100%;
+        height: 42px;
+        padding: 0 34px 0 38px;
+        background: #ffffff;
+        border: 1.5px solid rgba(13, 52, 92, 0.14);
+        border-radius: 10px;
+        font-size: 0.88rem;
+        color: #0f172a;
+        box-sizing: border-box;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      }
+      .edu-search-input-wrap input:focus {
+        outline: none;
+        border-color: #075092;
+        box-shadow: 0 0 0 3px rgba(7, 80, 146, 0.12);
+      }
+      .edu-search-clear {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: #f1f5f9;
+        border: none;
+        border-radius: 50%;
+        width: 22px;
+        height: 22px;
+        cursor: pointer;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        color: #64748b;
+        font-size: 13px;
+        padding: 0;
+      }
+      .edu-search-clear.visible { display: flex; }
+      .edu-toolbar-filters {
+        display: flex;
+        gap: 10px;
+      }
+      .edu-select {
+        height: 42px;
+        padding: 0 32px 0 14px;
+        background: #ffffff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23475569' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") no-repeat right 10px center;
+        border: 1.5px solid rgba(13, 52, 92, 0.14);
+        border-radius: 10px;
+        font-size: 0.84rem;
+        font-weight: 600;
+        color: #334155;
+        cursor: pointer;
+        appearance: none;
+        -webkit-appearance: none;
+        transition: border-color 0.2s ease;
+      }
+      .edu-select:focus {
+        outline: none;
+        border-color: #075092;
+      }
+
+      /* Browse By Need Quick Chips */
+      .edu-chips-wrap {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        justify-content: center;
+        width: 100%;
+        margin: 0 auto 32px;
+      }
+      .edu-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 7px 14px;
+        border-radius: 999px;
+        background: #ffffff;
+        border: 1.5px solid #e2e8f0;
+        font-size: 0.82rem;
+        font-weight: 700;
+        color: #334155;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        text-decoration: none;
+      }
+      .edu-chip i, .edu-chip svg {
+        width: 14px;
+        height: 14px;
+      }
+      .edu-chip:hover {
+        background: #f1f5f9;
+        border-color: #94a3b8;
+        color: var(--edu-primary);
+        transform: translateY(-1px);
+      }
+      .edu-chip.active {
+        background: var(--edu-primary);
+        border-color: var(--edu-primary);
+        color: #ffffff;
+        box-shadow: 0 3px 10px rgba(7, 80, 146, 0.25);
+      }
+
+      /* ── Enterprise Trust Band ─────────────────────────────────── */
+      :root body .enterprise-trust-band,
+      .enterprise-trust-band {
+        display: grid !important;
+        grid-template-columns: repeat(5, 1fr) !important;
+        gap: 14px !important;
+        width: min(1240px, calc(100% - 48px)) !important;
+        max-width: 1240px !important;
+        margin: clamp(28px, 3.5vw, 42px) auto clamp(24px, 3vw, 36px) !important;
+        padding: 0 !important;
+        box-sizing: border-box !important;
+      }
+      @media (max-width: 1040px) {
+        :root body .enterprise-trust-band,
+        .enterprise-trust-band { grid-template-columns: repeat(3, 1fr) !important; }
+      }
+      @media (max-width: 640px) {
+        :root body .enterprise-trust-band,
+        .enterprise-trust-band { grid-template-columns: 1fr !important; }
+      }
+      :root body .etb-item,
+      .etb-item {
+        background: #ffffff !important;
+        border: 1.5px solid #e2e8f0 !important;
+        border-radius: 14px !important;
+        padding: 16px 12px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center !important;
+        justify-content: center !important;
+        min-height: 104px !important;
+        box-shadow: none !important;
+        filter: none !important;
+        transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1) !important;
+        position: relative !important;
+        overflow: hidden !important;
+      }
+      :root body .etb-item:hover,
+      .etb-item:hover {
+        border-color: #93c5fd !important;
+        transform: translateY(-2px) !important;
+        box-shadow: 0 10px 24px rgba(7, 80, 146, 0.08) !important;
+      }
+      .etb-icon-chip {
+        width: 36px;
+        height: 36px;
+        border-radius: 10px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 8px;
+        flex-shrink: 0;
+        transition: transform 0.2s ease;
+      }
+      .etb-item:hover .etb-icon-chip {
+        transform: scale(1.08);
+      }
+      .etb-chip-emerald {
+        background: #ecfdf5 !important;
+        color: #059669 !important;
+        border: 1px solid #a7f3d0 !important;
+      }
+      .etb-chip-blue {
+        background: #eff6ff !important;
+        color: #0284c7 !important;
+        border: 1px solid #bae6fd !important;
+      }
+      .etb-chip-purple {
+        background: #f5f3ff !important;
+        color: #7c3aed !important;
+        border: 1px solid #ddd6fe !important;
+      }
+      .etb-chip-amber {
+        background: #fffbeb !important;
+        color: #d97706 !important;
+        border: 1px solid #fde68a !important;
+      }
+      .etb-chip-indigo {
+        background: #eef2ff !important;
+        color: #4f46e5 !important;
+        border: 1px solid #c7d2fe !important;
+      }
+      .etb-icon-chip svg,
+      .etb-icon-chip i {
+        width: 18px !important;
+        height: 18px !important;
+        stroke-width: 2.2 !important;
+        margin-bottom: 0 !important;
+      }
+      .etb-content {
+        text-align: center !important;
+        width: 100%;
+      }
+      .etb-content strong {
+        display: block;
+        color: #0f172a !important;
+        font-size: 0.88rem !important;
+        font-weight: 800 !important;
+        line-height: 1.25 !important;
+        margin-bottom: 3px !important;
+      }
+      .etb-content span {
+        display: block;
+        color: #64748b !important;
+        font-size: 0.75rem !important;
+        line-height: 1.35 !important;
+        max-width: 180px;
+        margin: 0 auto;
+      }
+
+      /* ── 2. Explore 10 Categories (3-Column Desktop Grid) ────────── */
+      .edu-cats-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+        margin-top: 36px;
+      }
+      @media (max-width: 1040px) {
+        .edu-cats-grid { grid-template-columns: repeat(2, 1fr); }
+      }
+      @media (max-width: 640px) {
+        .edu-cats-grid { grid-template-columns: 1fr; }
+      }
+      .edu-cat-card {
+        background: #ffffff;
+        border: 1.5px solid #e2e8f0;
+        border-radius: 18px;
+        padding: 22px 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+      }
+      .edu-cat-card:hover {
+        border-color: #93c5fd;
+        transform: translateY(-4px);
+        box-shadow: 0 14px 32px rgba(7, 80, 146, 0.10);
+      }
+      .edu-cat-card.is-featured {
+        border-color: #bfdbfe;
+        background: linear-gradient(180deg, #fafcff 0%, #ffffff 100%);
+      }
+      .edu-cat-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 14px;
+        gap: 8px;
+      }
+      .edu-cat-icon {
+        width: 44px;
+        height: 44px;
+        border-radius: 12px;
+        background: #eff6ff;
+        color: var(--edu-primary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        border: 1.5px solid #dbeafe;
+      }
+      .edu-cat-icon i, .edu-cat-icon svg {
+        width: 22px;
+        height: 22px;
+        stroke-width: 2.2;
+      }
+      .edu-cat-meta {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+      }
+      .edu-featured-badge {
+        font-size: 0.66rem;
+        font-weight: 850;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        background: linear-gradient(135deg, #d2a12a 0%, #f59e0b 100%);
+        color: #061527;
+        padding: 3px 8px;
+        border-radius: 6px;
+        box-shadow: 0 2px 6px rgba(210, 161, 42, 0.28);
+        white-space: nowrap;
+      }
+      .edu-cat-count {
+        font-size: 0.72rem;
+        font-weight: 800;
+        padding: 3px 9px;
+        border-radius: 999px;
+        background: #fef9c3;
+        color: #855800;
+        border: 1px solid #fde047;
+        white-space: nowrap;
+      }
+      .edu-cat-title {
+        font-size: 1.12rem;
+        font-weight: 850;
+        color: var(--edu-slate);
+        margin: 0 0 6px 0;
+        line-height: 1.32;
+        letter-spacing: -0.01em;
+        min-height: 2.6em;
+      }
+      .edu-cat-desc {
+        font-size: 0.84rem;
+        color: var(--edu-body);
+        line-height: 1.48;
+        margin: 0 0 14px 0;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        min-height: 2.8em;
+      }
+      .edu-cat-samples {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+        margin-bottom: 18px;
+      }
+      .edu-sample-chip {
+        font-size: 0.71rem;
+        font-weight: 650;
+        color: #334155;
+        background: #f8fafc;
+        padding: 3px 7px;
+        border-radius: 6px;
+        border: 1px solid #e2e8f0;
+      }
+      .edu-cat-cta {
+        width: 100%;
+        height: 40px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 14px;
+        border-radius: 10px;
+        background: #eff6ff;
+        color: var(--edu-primary);
+        font-weight: 800;
+        font-size: 0.84rem;
+        text-decoration: none;
+        border: 1px solid #bfdbfe;
+        transition: all 0.2s ease;
+        box-sizing: border-box;
+      }
+      .edu-cat-cta:hover {
+        background: var(--edu-primary);
+        color: #ffffff !important;
+        border-color: var(--edu-primary);
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(7, 80, 146, 0.2);
+      }
+      .edu-cat-cta i, .edu-cat-cta svg {
+        width: 15px;
+        height: 15px;
+        transition: transform 0.2s ease;
+      }
+      .edu-cat-cta:hover i, .edu-cat-cta:hover svg {
+        transform: translateX(3px);
+      }
+
+      /* Zero Result Search State */
+      .edu-search-empty {
+        display: none;
+        text-align: center;
+        padding: 48px 20px;
+        background: #ffffff;
+        border: 1.5px dashed #cbd5e1;
+        border-radius: 18px;
+        margin-top: 24px;
+      }
+      .edu-search-empty.visible { display: block; }
+      .edu-search-empty h3 {
+        font-size: 1.2rem;
+        font-weight: 850;
+        color: var(--edu-slate);
+        margin: 0 0 6px;
+      }
+      .edu-search-empty p {
+        font-size: 0.90rem;
+        color: var(--edu-body);
+        margin: 0 0 18px;
+      }
+
+      /* ── 3. Popular Right Now (Seasonal Student Services) ────────── */
+      .edu-pop-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 18px;
+      }
+      @media (max-width: 1024px) {
+        .edu-pop-grid { grid-template-columns: repeat(2, 1fr); }
+      }
+      @media (max-width: 600px) {
+        .edu-pop-grid { grid-template-columns: 1fr; }
+      }
+      .edu-pop-card {
+        background: #ffffff;
+        border: 1.5px solid #e2e8f0;
+        border-radius: 18px;
+        padding: 22px 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+        transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        position: relative;
+        overflow: hidden;
+      }
+      .edu-pop-card:hover {
+        border-color: #93c5fd;
+        transform: translateY(-4px);
+        box-shadow: 0 14px 30px rgba(7, 80, 146, 0.10);
+      }
+      .edu-pop-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 14px;
+        gap: 8px;
+      }
+      .edu-pop-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 12px;
+        background: #eff6ff;
+        color: var(--edu-primary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        border: 1.5px solid #dbeafe;
+      }
+      .edu-pop-icon i, .edu-pop-icon svg {
+        width: 20px;
+        height: 20px;
+        stroke-width: 2.2;
+      }
+      .edu-pop-status {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 0.68rem;
+        font-weight: 850;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        padding: 4px 10px;
+        border-radius: 999px;
+        width: fit-content;
+        white-space: nowrap;
+      }
+      .edu-pop-dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        display: inline-block;
+      }
+      .edu-pop-status.open {
+        background: #ecfdf5;
+        color: #047857;
+        border: 1px solid #a7f3d0;
+      }
+      .edu-pop-status.open .edu-pop-dot {
+        background: #059669;
+        box-shadow: 0 0 0 2px rgba(5, 150, 105, 0.25);
+        animation: eduPulseGreen 2s infinite;
+      }
+      .edu-pop-status.closing {
+        background: #fef2f2;
+        color: #b91c1c;
+        border: 1px solid #fecaca;
+      }
+      .edu-pop-status.closing .edu-pop-dot {
+        background: #dc2626;
+        box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.25);
+        animation: eduPulseRed 2s infinite;
+      }
+      .edu-pop-status.live {
+        background: #eff6ff;
+        color: var(--edu-primary);
+        border: 1px solid #bfdbfe;
+      }
+      .edu-pop-status.live .edu-pop-dot {
+        background: #075092;
+        box-shadow: 0 0 0 2px rgba(7, 80, 146, 0.25);
+        animation: eduPulseBlue 2s infinite;
+      }
+      .edu-pop-status.active {
+        background: #fffbeb;
+        color: #92400e;
+        border: 1px solid #fde68a;
+      }
+      .edu-pop-status.active .edu-pop-dot {
+        background: #d97706;
+        box-shadow: 0 0 0 2px rgba(217, 119, 6, 0.25);
+        animation: eduPulseAmber 2s infinite;
+      }
+      @keyframes eduPulseGreen {
+        0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(5, 150, 105, 0.4); }
+        70% { transform: scale(1); box-shadow: 0 0 0 5px rgba(5, 150, 105, 0); }
+        100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(5, 150, 105, 0); }
+      }
+      @keyframes eduPulseRed {
+        0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.4); }
+        70% { transform: scale(1); box-shadow: 0 0 0 5px rgba(220, 38, 38, 0); }
+        100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(220, 38, 38, 0); }
+      }
+      @keyframes eduPulseAmber {
+        0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(217, 119, 6, 0.4); }
+        70% { transform: scale(1); box-shadow: 0 0 0 5px rgba(217, 119, 6, 0); }
+        100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(217, 119, 6, 0); }
+      }
+      @keyframes eduPulseBlue {
+        0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(7, 80, 146, 0.4); }
+        70% { transform: scale(1); box-shadow: 0 0 0 5px rgba(7, 80, 146, 0); }
+        100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(7, 80, 146, 0); }
+      }
+      .edu-pop-title {
+        font-size: 1.08rem;
+        font-weight: 850;
+        color: var(--edu-slate);
+        margin: 0 0 6px;
+        line-height: 1.32;
+        letter-spacing: -0.01em;
+        min-height: 2.6em;
+      }
+      .edu-pop-desc {
+        font-size: 0.84rem;
+        color: var(--edu-body);
+        line-height: 1.48;
+        margin: 0 0 12px;
+        min-height: 2.8em;
+      }
+      .edu-pop-features {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+        margin-bottom: 18px;
+      }
+      .edu-pop-feat-tag {
+        font-size: 0.70rem;
+        font-weight: 700;
+        color: #475569;
+        background: #f8fafc;
+        padding: 2px 7px;
+        border-radius: 5px;
+        border: 1px solid #e2e8f0;
+      }
+      .edu-pop-cta {
+        width: 100%;
+        height: 38px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 14px;
+        border-radius: 10px;
+        background: #eff6ff;
+        color: var(--edu-primary);
+        font-weight: 800;
+        font-size: 0.84rem;
+        text-decoration: none;
+        border: 1px solid #bfdbfe;
+        transition: all 0.2s ease;
+        box-sizing: border-box;
+      }
+      .edu-pop-cta:hover {
+        background: var(--edu-primary);
+        color: #ffffff !important;
+        border-color: var(--edu-primary);
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(7, 80, 146, 0.2);
+      }
+      .edu-pop-cta i, .edu-pop-cta svg {
+        width: 15px;
+        height: 15px;
+        transition: transform 0.2s ease;
+      }
+      .edu-pop-cta:hover i, .edu-pop-cta:hover svg {
+        transform: translateX(3px);
+      }
+
+      /* ── 4. Why Students Choose One Point (Trust Strip & Parent Box) ── */
+      .edu-trust-cards-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+        margin-bottom: 24px;
+      }
+      @media (max-width: 900px) {
+        .edu-trust-cards-grid { grid-template-columns: repeat(2, 1fr); }
+      }
+      @media (max-width: 520px) {
+        .edu-trust-cards-grid { grid-template-columns: 1fr; }
+      }
+      .edu-trust-card {
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 14px;
+        padding: 18px 16px;
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+      }
+      .edu-tc-icon {
+        width: 24px;
+        height: 24px;
+        background: transparent;
+        color: var(--edu-primary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        border: none;
+      }
+      .edu-tc-icon i, .edu-tc-icon svg { width: 22px; height: 22px; stroke-width: 2.2; }
+      .edu-tc-body strong {
+        display: block;
+        font-size: 0.90rem;
+        font-weight: 850;
+        color: var(--edu-slate);
+        margin-bottom: 2px;
+      }
+      .edu-tc-body span {
+        font-size: 0.78rem;
+        color: #64748b;
+        line-height: 1.35;
+        display: block;
+      }
+
+      /* Parent Reassurance Strip */
+      .edu-parent-reassurance {
+        background: #ffffff;
+        border: 1.5px solid #e2e8f0;
+        border-radius: 14px;
+        padding: 14px 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        box-shadow: none !important;
+        margin-top: 24px;
+      }
+      .edu-parent-left {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        flex: 1;
+        min-width: 0;
+      }
+      .edu-parent-badge {
+        font-size: 0.72rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        background: var(--edu-primary) !important;
+        color: #ffffff !important;
+        padding: 5px 10px;
+        border-radius: 6px;
+        white-space: nowrap;
+        flex-shrink: 0;
+      }
+      .edu-parent-left span:not(.edu-parent-badge) {
+        font-size: 0.88rem;
+        color: #334155;
+        font-weight: 600;
+        line-height: 1.4;
+      }
+      .edu-parent-pills {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-shrink: 0;
+      }
+      .edu-parent-pills span {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        font-size: 0.78rem;
+        font-weight: 700;
+        padding: 4px 11px;
+        border-radius: 999px;
+        background: #f8fafc;
+        border: 1px solid #e2e8f0;
+        color: #334155;
+        white-space: nowrap;
+      }
+      .edu-parent-pills i, .edu-parent-pills svg {
+        width: 14px;
+        height: 14px;
+        color: var(--edu-emerald);
+        stroke-width: 2.5;
+      }
+      @media (max-width: 980px) {
+        .edu-parent-reassurance {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 12px;
+        }
+      }
+
+
+
+      /* ── 5. Dynamic Document Checklist (Balanced Master Checklist) ── */
+      .edu-doc-tabs {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 28px;
+      }
+      .edu-dtab-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        padding: 9px 18px;
+        border-radius: 999px;
+        background: #ffffff;
+        border: 1.5px solid #cbd5e1;
+        font-size: 0.86rem;
+        font-weight: 750;
+        color: #334155;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        box-shadow: none;
+      }
+      .edu-dtab-btn:hover {
+        background: #f8fafc;
+        border-color: #94a3b8;
+        color: var(--edu-primary);
+        transform: translateY(-1px);
+        box-shadow: none;
+      }
+      .edu-dtab-btn.active {
+        background: var(--edu-primary);
+        border-color: var(--edu-primary);
+        color: #ffffff;
+        box-shadow: none;
+      }
+      .edu-dtab-btn i, .edu-dtab-btn svg {
+        width: 16px;
+        height: 16px;
+      }
+      :root body .edu-dtab-panel,
+      .edu-dtab-panel {
+        display: none;
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+        filter: none !important;
+      }
+      :root body .edu-dtab-panel.active,
+      .edu-dtab-panel.active {
+        display: block;
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+        filter: none !important;
+      }
+      :root body .edu-doc-cards-grid,
+      .edu-doc-cards-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+        margin-bottom: 28px;
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+        filter: none !important;
+      }
+      @media (max-width: 1040px) {
+        .edu-doc-cards-grid { grid-template-columns: repeat(2, 1fr); }
+      }
+      @media (max-width: 580px) {
+        .edu-doc-cards-grid { grid-template-columns: 1fr; }
+      }
+      :root body .edu-doc-card,
+      :root body [class$="-card"].edu-doc-card,
+      .edu-doc-card {
+        background: #ffffff !important;
+        border: 1.5px solid #e2e8f0 !important;
+        border-radius: 16px !important;
+        padding: 20px 18px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: space-between !important;
+        box-shadow: none !important;
+        filter: none !important;
+        overflow: hidden !important;
+        transition: all 0.2s ease !important;
+      }
+      :root body .edu-doc-card:hover,
+      .edu-doc-card:hover {
+        border-color: #93c5fd !important;
+        transform: translateY(-2px) !important;
+        box-shadow: none !important;
+        filter: none !important;
+      }
+      :root body .edu-doc-card *,
+      .edu-doc-card * {
+        box-shadow: none !important;
+        filter: none !important;
+      }
+      .edu-doc-card-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 12px;
+        gap: 8px;
+      }
+      .edu-doc-icon {
+        width: 24px;
+        height: 24px;
+        background: transparent;
+        color: var(--edu-primary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        border: none;
+      }
+      .edu-doc-icon i, .edu-doc-icon svg { width: 22px; height: 22px; stroke-width: 2.2; }
+      .edu-doc-badge {
+        font-size: 0.70rem;
+        font-weight: 850;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        padding: 0;
+        background: transparent !important;
+        border: none !important;
+        white-space: nowrap;
+      }
+      .edu-doc-badge.required { color: var(--edu-primary); }
+      .edu-doc-badge.conditional { color: #d97706; }
+      .edu-doc-badge.optional { color: #64748b; }
+      .edu-doc-card strong {
+        font-size: 0.94rem;
+        font-weight: 850;
+        color: var(--edu-slate);
+        margin-bottom: 6px;
+        line-height: 1.32;
+        display: block;
+        min-height: 2.5em;
+      }
+      .edu-doc-card p {
+        font-size: 0.82rem;
+        color: var(--edu-body);
+        line-height: 1.48;
+        margin: 0;
+        min-height: 2.8em;
+      }
+
+      /* Full-Width Horizontal Concierge Strip - Clean Logo Blue */
+      .edu-doc-concierge-strip {
+        background: linear-gradient(135deg, #075092 0%, #0a63b5 100%);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 18px;
+        padding: 20px 24px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        box-shadow: 0 12px 32px rgba(7, 80, 146, 0.22);
+        flex-wrap: wrap;
+        position: relative;
+        overflow: hidden;
+      }
+      .edu-doc-concierge-strip::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 220px;
+        height: 100%;
+        background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, transparent 70%);
+        pointer-events: none;
+      }
+      .edu-dcs-left {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        flex: 1;
+        min-width: 280px;
+        position: relative;
+        z-index: 1;
+      }
+      .edu-dcs-img {
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 3px solid #d2a12a;
+        box-shadow: 0 0 16px rgba(210, 161, 42, 0.45);
+        flex-shrink: 0;
+      }
+      .edu-dcs-copy h3 {
+        font-size: 1.12rem;
+        font-weight: 850;
+        color: #ffffff;
+        margin: 0 0 4px;
+        letter-spacing: -0.01em;
+      }
+      .edu-dcs-copy p {
+        font-size: 0.86rem;
+        color: #f0f7ff;
+        margin: 0;
+        line-height: 1.42;
+      }
+      .edu-dcs-action {
+        position: relative;
+        z-index: 1;
+      }
+      .edu-btn-concierge-gold {
+        padding: 12px 24px;
+        background: linear-gradient(135deg, #d2a12a 0%, #f59e0b 100%);
+        color: #061527 !important;
+        font-weight: 850;
+        font-size: 0.90rem;
+        border-radius: 10px;
+        text-decoration: none;
+        box-shadow: 0 4px 16px rgba(210, 161, 42, 0.4);
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        transition: all 0.2s ease;
+        white-space: nowrap;
+        border: 1px solid #fde047;
+      }
+      .edu-btn-concierge-gold:hover {
+        background: linear-gradient(135deg, #f59e0b 0%, #d2a12a 100%);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 22px rgba(210, 161, 42, 0.55);
+      }
+      @media (max-width: 768px) {
+        .edu-doc-concierge-strip {
+          flex-direction: column;
+          align-items: flex-start;
+          padding: 20px 18px;
+        }
+        .edu-dcs-action {
+          width: 100%;
+        }
+        .edu-btn-concierge-gold {
+          width: 100%;
+          justify-content: center;
+        }
+      }
+
+      /* ── 6. Universal 4-Step Connected Journey (Flat & Minimal) ── */
+      .edu-steps-wrap {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 18px;
+        position: relative;
+      }
+      @media (max-width: 1040px) {
+        .edu-steps-wrap { grid-template-columns: repeat(2, 1fr); }
+      }
+      @media (max-width: 540px) {
+        .edu-steps-wrap { grid-template-columns: 1fr; }
+      }
+      .edu-step-card {
+        background: #ffffff;
+        border: 1.5px solid #e2e8f0;
+        border-radius: 16px;
+        padding: 20px 18px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        position: relative;
+        transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        box-shadow: none !important;
+        overflow: hidden;
+      }
+      .edu-step-card:hover {
+        border-color: #93c5fd;
+        transform: translateY(-3px);
+        box-shadow: 0 12px 28px rgba(7, 80, 146, 0.08) !important;
+      }
+      .edu-step-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 14px;
+        gap: 8px;
+      }
+      .edu-step-icon {
+        width: 38px;
+        height: 38px;
+        border-radius: 10px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        transition: transform 0.2s ease;
+      }
+      .edu-step-card:hover .edu-step-icon {
+        transform: scale(1.08);
+      }
+      .edu-step-icon.edu-sc-blue {
+        background: #eff6ff;
+        color: #0284c7;
+        border: 1px solid #bae6fd;
+      }
+      .edu-step-icon.edu-sc-indigo {
+        background: #eef2ff;
+        color: #4f46e5;
+        border: 1px solid #c7d2fe;
+      }
+      .edu-step-icon.edu-sc-emerald {
+        background: #ecfdf5;
+        color: #059669;
+        border: 1px solid #a7f3d0;
+      }
+      .edu-step-icon.edu-sc-amber {
+        background: #fffbeb;
+        color: #d97706;
+        border: 1px solid #fde68a;
+      }
+      .edu-step-icon i, .edu-step-icon svg {
+        width: 19px;
+        height: 19px;
+        stroke-width: 2.2;
+      }
+      .edu-step-badge-strip {
+        display: inline-flex;
+        align-items: center;
+        background: #f8fafc;
+        border: 1px solid #e2e8f0;
+        border-radius: 999px;
+        padding: 2px 3px 2px 8px;
+        gap: 6px;
+      }
+      .edu-sb-step {
+        font-size: 0.68rem;
+        font-weight: 850;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        color: var(--edu-primary);
+      }
+      .edu-sb-info {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        font-size: 0.70rem;
+        font-weight: 700;
+        color: #475569;
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        padding: 2px 7px;
+        border-radius: 999px;
+      }
+      .edu-sb-info i, .edu-sb-info svg {
+        width: 11px;
+        height: 11px;
+        color: var(--edu-primary);
+      }
+      .edu-step-card h3 {
+        font-size: 0.96rem;
+        font-weight: 800;
+        color: #0f172a;
+        margin: 0 0 6px;
+        letter-spacing: -0.01em;
+        line-height: 1.3;
+      }
+      .edu-step-card p {
+        font-size: 0.82rem;
+        color: #64748b;
+        line-height: 1.48;
+        margin: 0;
+      }
+
+      /* ── 8. 2-Column Tabbed FAQ with Real-Time Search (Exact Screenshot 1 Match) ── */
+      .edu-faq-section-wrap {
+        width: 100%;
+        max-width: 1220px;
+        margin: 0 auto;
+      }
+      .edu-faq-search-wrap {
+        position: relative;
+        max-width: 100%;
+        margin-bottom: 24px;
+        display: block;
+      }
+      .edu-faq-search-wrap i,
+      .edu-faq-search-wrap svg {
+        position: absolute;
+        left: 18px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 18px;
+        height: 18px;
+        color: #64748b;
+        pointer-events: none;
+      }
+      .edu-faq-search-wrap input {
+        width: 100%;
+        height: 52px;
+        padding: 0 20px 0 48px;
+        border-radius: 14px;
+        border: 1.5px solid #cbd5e1;
+        background: #ffffff;
+        font-size: 0.95rem;
+        color: #0f172a;
+        outline: none;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+        transition: all 0.2s ease;
+        box-sizing: border-box;
+      }
+      .edu-faq-search-wrap input:focus {
+        border-color: var(--edu-primary);
+        box-shadow: 0 0 0 3px rgba(7, 80, 146, 0.12);
+      }
+
+      .edu-cfaq-wrapper {
+        display: grid !important;
+        grid-template-columns: 260px 1fr !important;
+        gap: 0 !important;
+        background: #ffffff !important;
+        border: 1.5px solid #e2e8f0 !important;
+        border-radius: 18px !important;
+        box-shadow: 0 4px 24px rgba(8, 37, 72, 0.06) !important;
+        overflow: hidden !important;
+      }
+      @media (max-width: 860px) {
+        .edu-cfaq-wrapper { grid-template-columns: 1fr !important; }
+      }
+
+      .edu-cfaq-sidebar {
+        background: #f8fafc !important;
+        border-right: 1.5px solid #e2e8f0 !important;
+        padding: 16px 12px 20px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 6px !important;
+      }
+      .edu-cfaq-sidebar::after {
+        display: none !important;
+      }
+      .edu-cfaq-sidebar .cfaq-tab {
+        display: flex !important;
+        align-items: center !important;
+        gap: 10px !important;
+        padding: 12px 14px !important;
+        border-radius: 12px !important;
+        background: transparent !important;
+        color: #475569 !important;
+        font-size: 13.5px !important;
+        font-weight: 700 !important;
+        border: none !important;
+        cursor: pointer !important;
+        text-align: left !important;
+        transition: all 0.18s ease !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+      }
+      .edu-cfaq-sidebar .cfaq-tab:hover {
+        background: #f1f5f9 !important;
+        color: var(--edu-primary) !important;
+      }
+      .edu-cfaq-sidebar .cfaq-tab.active {
+        background: #ffffff !important;
+        color: var(--edu-primary) !important;
+        font-weight: 850 !important;
+        border: 1.5px solid #e2e8f0 !important;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05) !important;
+      }
+      .edu-cfaq-sidebar .cfaq-tab i,
+      .edu-cfaq-sidebar .cfaq-tab svg {
+        width: 16px !important;
+        height: 16px !important;
+        color: var(--edu-primary) !important;
+        flex-shrink: 0 !important;
+      }
+      .cfaq-sidebar-bottom-link {
+        margin-top: auto;
+        padding-top: 14px;
+        border-top: 1px solid #e2e8f0;
+        text-align: center;
+      }
+      .cfaq-sidebar-bottom-link a {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 12px;
+        font-weight: 700;
+        color: #64748b;
+        text-decoration: none;
+        transition: color 0.15s ease;
+      }
+      .cfaq-sidebar-bottom-link a:hover {
+        color: var(--edu-primary);
+      }
+
+      .edu-cfaq-panels {
+        padding: 24px 32px !important;
+        background: #ffffff !important;
+        min-width: 0 !important;
+      }
+      @media (max-width: 640px) {
+        .edu-cfaq-panels { padding: 18px 16px !important; }
+      }
+      .edu-cfaq-panels .cfaq-panel {
+        display: none;
+      }
+      .edu-cfaq-panels .cfaq-panel.active {
+        display: block;
+      }
+
+      :root body .edu-cfaq-panels .faq-item,
+      .edu-cfaq-panels .faq-item,
+      .edu-cfaq-wrapper .faq-item {
+        margin: 0 !important;
+        margin-bottom: 0 !important;
+        border: 0 !important;
+        border-top: 0 !important;
+        border-left: 0 !important;
+        border-right: 0 !important;
+        border-bottom: 1px solid #eef2f6 !important;
+        border-radius: 0 !important;
+        background: transparent !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        overflow: visible !important;
+        transition: background 0.15s ease;
+      }
+      :root body .edu-cfaq-panels .faq-item:hover,
+      .edu-cfaq-panels .faq-item:hover {
+        background: transparent !important;
+        border-color: #eef2f6 !important;
+        box-shadow: none !important;
+      }
+      :root body .edu-cfaq-panels .faq-item.open,
+      .edu-cfaq-panels .faq-item.open {
+        background: transparent !important;
+        border-top: 0 !important;
+        border-left: 0 !important;
+        border-right: 0 !important;
+        border-bottom: 1px solid #eef2f6 !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+      }
+      :root body .edu-cfaq-panels .faq-item:last-child,
+      .edu-cfaq-panels .faq-item:last-child {
+        border-bottom: 0 !important;
+      }
+
+      :root body .edu-cfaq-panels .faq-question,
+      .edu-cfaq-panels .faq-question {
+        width: 100% !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        gap: 16px !important;
+        background: transparent !important;
+        border: 0 !important;
+        cursor: pointer !important;
+        text-align: left !important;
+        padding: 16px 0 !important;
+        margin: 0 !important;
+        user-select: none;
+        outline: none !important;
+      }
+      :root body .edu-cfaq-panels .faq-question:hover .pfaq-q-text,
+      .edu-cfaq-panels .faq-question:hover .pfaq-q-text {
+        color: var(--edu-primary) !important;
+      }
+      :root body .edu-cfaq-panels .faq-question .pfaq-q-text,
+      .edu-cfaq-panels .faq-question .pfaq-q-text {
+        font-size: 15px !important;
+        font-weight: 800 !important;
+        color: #0b1f35 !important;
+        line-height: 1.4 !important;
+        transition: color 0.15s ease !important;
+        pointer-events: none;
+      }
+      :root body .edu-cfaq-panels .faq-item.open .faq-question .pfaq-q-text,
+      .edu-cfaq-panels .faq-item.open .faq-question .pfaq-q-text {
+        color: #075092 !important;
+      }
+
+      :root body .edu-cfaq-panels .faq-question i,
+      :root body .edu-cfaq-panels .faq-question svg,
+      .edu-cfaq-panels .faq-question i,
+      .edu-cfaq-panels .faq-question svg {
+        width: 24px !important;
+        height: 24px !important;
+        min-width: 24px !important;
+        border-radius: 50% !important;
+        background: #f1f5f9 !important;
+        border: 1px solid #e2e8f0 !important;
+        color: #075092 !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        padding: 4px !important;
+        transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease !important;
+        box-sizing: border-box !important;
+        pointer-events: none;
+      }
+      :root body .edu-cfaq-panels .faq-item.open .faq-question i,
+      :root body .edu-cfaq-panels .faq-item.open .faq-question svg,
+      .edu-cfaq-panels .faq-item.open .faq-question i,
+      .edu-cfaq-panels .faq-item.open .faq-question svg {
+        transform: rotate(180deg) !important;
+        background: #eff6ff !important;
+        border-color: #bfdbfe !important;
+        color: #075092 !important;
+      }
+
+      :root body .edu-cfaq-panels .faq-answer,
+      .edu-cfaq-panels .faq-answer {
+        display: none !important;
+        max-height: none !important;
+        overflow: visible !important;
+        padding: 0 0 16px 0 !important;
+        margin: 0 !important;
+        border: 0 !important;
+      }
+      :root body .edu-cfaq-panels .faq-item.open .faq-answer,
+      .edu-cfaq-panels .faq-item.open .faq-answer {
+        display: block !important;
+      }
+      :root body .edu-cfaq-panels .faq-answer p,
+      .edu-cfaq-panels .faq-answer p {
+        font-size: 14px !important;
+        color: #475569 !important;
+        line-height: 1.6 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        border: 0 !important;
+      }
+
+      /* ── 9. Final Pre-Footer Conversion Box ──────────────────────── */
+      .edu-cta-banner {
+        background: linear-gradient(135deg, #075092 0%, #0a63b5 100%);
+        border-radius: 24px;
+        padding: clamp(36px, 5vw, 54px) clamp(24px, 4vw, 48px);
+        color: #ffffff;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 14px 40px rgba(7, 80, 146, 0.25);
+        border: none;
+      }
+      .edu-cta-banner h2 {
+        font-size: clamp(1.75rem, 3vw, 2.4rem);
+        font-weight: 900;
+        margin: 0 0 10px;
+        color: #ffffff;
+        letter-spacing: -0.02em;
+      }
+      .edu-cta-banner p {
+        font-size: clamp(0.92rem, 1.4vw, 1.05rem);
+        color: #e2e8f0;
+        max-width: 640px;
+        margin: 0 auto 26px;
+        line-height: 1.55;
+      }
+      .edu-cta-actions {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+      .edu-btn-gold {
+        padding: 14px 28px;
+        border-radius: 12px;
+        background: linear-gradient(135deg, #d2a12a 0%, #f59e0b 100%);
+        color: #061527 !important;
+        font-size: 0.95rem;
+        font-weight: 850;
+        text-decoration: none;
+        box-shadow: 0 4px 16px rgba(210, 161, 42, 0.4);
+        transition: all 0.2s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .edu-btn-gold:hover {
+        background: linear-gradient(135deg, #e5b338 0%, #d2a12a 100%);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(210, 161, 42, 0.55);
+      }
+      .edu-btn-glass {
+        padding: 14px 24px;
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.15);
+        color: #ffffff !important;
+        border: 1.5px solid rgba(255, 255, 255, 0.3);
+        font-size: 0.95rem;
+        font-weight: 800;
+        text-decoration: none;
+        transition: all 0.2s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .edu-btn-glass:hover {
+        background: rgba(255, 255, 255, 0.25);
+        transform: translateY(-2px);
+      }
+    </style>
+  </head>
   <body class="student-corner-page">
-    <div data-site-nav>
-      <header class="site-header fallback-site-header">
-        <nav class="nav-bar" aria-label="Primary fallback">
-          <a class="brand" href="index.html" aria-label="One Point Digital Services home">
-            <img class="brand-logo brand-logo-header" src="assets/logo-bisen-one-point-footer.svg" alt="Bisen One Point Suvidha Kendra">
-          </a>
-          <div class="fallback-nav-links">
-            <a class="nav-link" href="index.html">Home</a>
-            <a class="nav-link" href="services.html">Services</a>
-            <a class="nav-link" href="products.html">Store</a>
-            <a class="nav-link" href="track-application.html">Track</a>
-            <a class="nav-link" href="contact.html">Contact</a>
-          </div>
-        </nav>
-      </header>
-    </div>
+    <div data-site-nav></div>
     <main class="page-shell">
+      <!-- ── Preserved Hero Section ─────────────────────────────────── -->
       <section class="page-hero page-hero-service premium-service-hero student-hero edupoint-hero">
-        <!-- Background Video -->
         <video class="hero-video-bg" autoplay loop muted playsinline>
           <source src="assets/Hero section home page.mp4" type="video/mp4">
         </video>
         <div class="hero-video-overlay"></div>
         <div class="page-hero-grid">
           <div class="student-hero-copy page-hero-copy">
-            <p class="eyebrow">EduPoint Services</p>
-            <h1 class="page-hero-title">One trusted place for student applications.</h1>
-            <p>Submit student details, upload documents, track requests live, and receive download or completion updates directly from One Point.</p>
+            <p class="eyebrow">EduPoint Digital Student Center</p>
+            <h1 class="page-hero-title">10 Categories for All Student Needs.</h1>
+            <p>Guided assistance for admissions, competitive exams, university certificates, scholarships, admit cards, online fee payments, academic printing and career documentation.</p>
             <div class="hero-actions">
-              <a class="btn btn-primary" href="#service-options"><i data-lucide="file-pen-line"></i> Apply for Student Service</a>
-              <a class="btn btn-ghost" href="#required-documents"><i data-lucide="search"></i> Check Required Documents</a>
+              <a class="btn btn-primary" href="#service-options"><i data-lucide="layout-grid"></i> Explore 10 Categories</a>
+              <a class="btn btn-ghost" href="#required-documents"><i data-lucide="search"></i> Required Documents</a>
             </div>
-                        <div class="hero-trust-strip">
-              <span class="hero-trust-badge badge-upi">
-                <i data-lucide="graduation-cap"></i> <strong>10+</strong> Student Services
+            <div class="hero-trust-strip">
+              <span class="hero-trust-badge">
+                <i data-lucide="badge-check"></i> <strong>Verified Portal</strong>
               </span>
-              <span class="hero-trust-badge badge-speed">
-                <i data-lucide="image-up"></i> <strong>Docs Ready</strong> Photo/Signature
+              <span class="hero-trust-badge">
+                <i data-lucide="clock"></i> <strong>Same Day Filing</strong>
               </span>
-              <span class="hero-trust-badge badge-whatsapp">
-                <i data-lucide="message-circle"></i> <strong>WhatsApp</strong> Status Live
+              <span class="hero-trust-badge">
+                <i data-lucide="lock"></i> <strong>100% Secure</strong>
               </span>
             </div>
           </div>
@@ -64,26 +1580,26 @@
               </div>
               <div class="command-grid">
                 <div class="command-main">
-                  <span class="tag tag-premium">Live Tracker</span>
+                  <span class="tag tag-premium">10 Categories Active</span>
                   <h3>OPDS2026-EDU</h3>
                   <p>Student request received. Form details and document checklist are in operator review.</p>
-                  <div class="command-progress"><span></span></div>
+                  <div class="command-progress"><span style="--progress:85%"></span></div>
                 </div>
                 <div class="command-tile">
-                  <i data-lucide="file-check-2"></i>
-                  <strong>Forms</strong>
-                  <small>Ready list</small>
+                  <i data-lucide="school"></i>
+                  <strong>Categories</strong>
+                  <small>10 Dedicated</small>
                 </div>
                 <div class="command-tile">
                   <i data-lucide="download-cloud"></i>
-                  <strong>Downloads</strong>
-                  <small>Admit/result</small>
+                  <strong>Services</strong>
+                  <small>140+ Total</small>
                 </div>
               </div>
               <div class="command-list">
-                <div><span><i data-lucide="clipboard-pen"></i></span><strong>Exam Form</strong><small class="status-complete">Guided</small></div>
-                <div><span><i data-lucide="ticket-check"></i></span><strong>Admit Card</strong><small class="status-pending">Instant</small></div>
-                <div><span><i data-lucide="file-user"></i></span><strong>Resume Builder</strong><small class="status-complete">Ready</small></div>
+                <div><span><i data-lucide="school"></i></span><strong>Admission Assistance</strong><small class="status-complete">15 Services</small></div>
+                <div><span><i data-lucide="award"></i></span><strong>Competitive Exams</strong><small class="status-complete">24 Services</small></div>
+                <div><span><i data-lucide="building-2"></i></span><strong>University Services</strong><small class="status-pending">15 Services</small></div>
               </div>
             </article>
             <article class="hero-mini-card hero-mini-card-one dark-mockup">
@@ -98,6 +1614,7 @@
         </div>
       </section>
 
+      <!-- ── Preserved Trust Strip ──────────────────────────────────── -->
       <div class="trust-strip-outer">
         <div class="trust-strip">
           <div class="trust-strip-item">
@@ -144,397 +1661,1167 @@
         </div>
       </div>
 
-      <section class="section reveal edupoint-trending-services" id="service-options" data-edupoint-service-carousel>
-        <div class="section-head edupoint-trending-head">
-          <div>
-            <p class="section-kicker">Trending Services</p>
-            <h2>Quick services students need <span class="h2-gold">daily</span></h2>
+      <!-- ── 1. Find a Student Service: Search Hub & Need Chips ─────── -->
+      <section class="edu-section" id="service-options" style="background:#ffffff; padding-bottom: 30px;">
+        <div class="edu-container">
+          <div class="edu-header">
+            <span class="edu-kicker"><i data-lucide="search"></i> FIND A STUDENT SERVICE</span>
+            <h2 class="edu-title">Search or Browse <span class="gold-text">10 Categories (140+ Services)</span></h2>
+            <p class="edu-sub">Search any exam, scholarship, admission or certificate to jump straight to the right service.</p>
           </div>
-          <button class="btn btn-soft edupoint-view-all-btn" type="button" data-edupoint-view-all aria-expanded="false">
-            <span>View All</span> <i data-lucide="arrow-right"></i>
-          </button>
-        </div>
 
-        <div class="category-filters edupoint-category-filters" data-edupoint-service-filters>
-          <button class="btn btn-soft active" type="button" data-edupoint-filter="all">All Services</button>
-          <button class="btn btn-ghost" type="button" data-edupoint-filter="government-exams">Government Exams</button>
-          <button class="btn btn-ghost" type="button" data-edupoint-filter="university">University Services</button>
-          <button class="btn btn-ghost" type="button" data-edupoint-filter="print">Print Services</button>
-          <button class="btn btn-ghost" type="button" data-edupoint-filter="skills">Skill Courses</button>
-        </div>
+          <!-- 1-Line Intelligent Search & Filter Toolbar (Screenshot 1 Match) -->
+          <div class="edu-search-toolbar">
+            <div class="edu-search-input-wrap">
+              <i data-lucide="search" class="edu-search-icon"></i>
+              <input type="text" id="edu-search-input" class="edu-search-input" placeholder="Search by service name, exam, admission, scholarship or certificate..." aria-label="Search student services">
+              <button type="button" id="edu-search-clear" class="edu-search-clear" style="display:none;" aria-label="Clear search">
+                <i data-lucide="x"></i>
+              </button>
+            </div>
+            
+            <div class="edu-toolbar-filters">
+              <select id="edu-cat-select" class="edu-select" aria-label="Filter by category">
+                <option value="all">All Categories (10)</option>
+                <option value="admission">Admissions (15)</option>
+                <option value="exam">Exam Forms (22)</option>
+                <option value="scholarship">Scholarships (18)</option>
+                <option value="admit">Admit Cards (14)</option>
+                <option value="result">Results (12)</option>
+                <option value="university">University Services (16)</option>
+                <option value="counseling">Counseling &amp; Quota (10)</option>
+                <option value="payment">Fee &amp; Challan (11)</option>
+                <option value="study">Study Materials (12)</option>
+                <option value="career">Career Services (10)</option>
+              </select>
 
-        <div class="services-carousel-container edupoint-carousel-shell">
-          <button type="button" class="carousel-arrow prev edupoint-carousel-arrow" data-edupoint-carousel-prev aria-label="Previous EduPoint service">
-            <i data-lucide="chevron-left"></i>
-          </button>
-          <div class="services-carousel-viewport edupoint-carousel-viewport">
-            <div class="services-carousel-track edupoint-service-track" data-edupoint-service-track>
-              <a class="service-option-card service-card" id="exam-form-filling" href="edupoint.html?service=Exam%20Form%20Filling#apply-now" data-edupoint-service-card data-edupoint-categories="government-exams popular">
-                <div class="service-top service-card-top">
-                  <div class="service-icon"><i data-lucide="clipboard-pen"></i></div>
-                  <div class="service-card-badges"><span class="tag">20 min</span><span class="tag price-tag">&#8377;100 - &#8377;200</span></div>
-                </div>
-                <h3>Exam Form Filling</h3>
-                <p>SSC, Railway, Police, UPSC and university form filling with photo/signature checks.</p>
-                <span class="btn btn-primary btn-service-select" data-service="Exam Form Filling">Apply Now</span>
-              </a>
-              <a class="service-option-card service-card" id="admit-card-download" href="edupoint.html?service=Admit%20Card%20Download#apply-now" data-edupoint-service-card data-edupoint-categories="government-exams popular">
-                <div class="service-top service-card-top">
-                  <div class="service-icon"><i data-lucide="ticket-check"></i></div>
-                  <div class="service-card-badges"><span class="tag">15 min</span><span class="tag price-tag">&#8377;49 - &#8377;99</span></div>
-                </div>
-                <h3>Admit Card Download</h3>
-                <p>Download, save, print and share admit cards from one assisted flow.</p>
-                <span class="btn btn-primary btn-service-select" data-service="Admit Card Download">Download</span>
-              </a>
-              <a class="service-option-card service-card" id="result-download" href="edupoint.html?service=Result%20Download#apply-now" data-edupoint-service-card data-edupoint-categories="government-exams">
-                <div class="service-top service-card-top">
-                  <div class="service-icon"><i data-lucide="chart-no-axes-combined"></i></div>
-                  <div class="service-card-badges"><span class="tag">15 min</span><span class="tag price-tag">&#8377;49 - &#8377;99</span></div>
-                </div>
-                <h3>Result Download</h3>
-                <p>Result search, marksheet PDF save, printout and WhatsApp sharing.</p>
-                <span class="btn btn-primary btn-service-select" data-service="Result Download">Open Result</span>
-              </a>
-              <a class="service-option-card service-card" id="scholarship-form" href="edupoint.html?service=Scholarship%20Form#apply-now" data-edupoint-service-card data-edupoint-categories="government-exams popular">
-                <div class="service-top service-card-top">
-                  <div class="service-icon"><i data-lucide="badge-indian-rupee"></i></div>
-                  <div class="service-card-badges"><span class="tag">30 min</span><span class="tag price-tag">&#8377;99 - &#8377;199</span></div>
-                </div>
-                <h3>Scholarship Form</h3>
-                <p>Student profile, bank details, income proof and tracking support.</p>
-                <span class="btn btn-primary btn-service-select" data-service="Scholarship Form">Apply Now</span>
-              </a>
-              <a class="service-option-card service-card" id="ccc-o-level" href="edupoint.html?service=CCC%20%2F%20O%20Level#apply-now" data-edupoint-service-card data-edupoint-categories="skills">
-                <div class="service-top service-card-top">
-                  <div class="service-icon"><i data-lucide="monitor-check"></i></div>
-                  <div class="service-card-badges"><span class="tag">Support</span><span class="tag price-tag">&#8377;99 - &#8377;199</span></div>
-                </div>
-                <h3>CCC / O Level</h3>
-                <p>NIELIT registration, exam form, admit card and study support flow.</p>
-                <span class="btn btn-primary btn-service-select" data-service="CCC / O Level">Start</span>
-              </a>
-              <a class="service-option-card service-card" id="university-services" href="edupoint.html?service=University%20Services#apply-now" data-edupoint-service-card data-edupoint-categories="university">
-                <div class="service-top service-card-top">
-                  <div class="service-icon"><i data-lucide="school"></i></div>
-                  <div class="service-card-badges"><span class="tag">Support</span><span class="tag price-tag">&#8377;99 - &#8377;199</span></div>
-                </div>
-                <h3>University Services</h3>
-                <p>Registration, enrollment, migration, fee receipt and portal support.</p>
-                <span class="btn btn-primary btn-service-select" data-service="University Services">Start</span>
-              </a>
-              <a class="service-option-card service-card" id="photocopy-printing" href="service-photocopy-printing.html" data-edupoint-service-card data-edupoint-categories="print popular">
-                <div class="service-top service-card-top">
-                  <div class="service-icon"><i data-lucide="printer"></i></div>
-                  <div class="service-card-badges"><span class="tag">Quick</span><span class="tag price-tag">&#8377;2 - &#8377;20</span></div>
-                </div>
-                <h3>Photocopy & Printing</h3>
-                <p>Black and white prints, color prints, scanning and document copies.</p>
-                <span class="btn btn-primary btn-service-select" data-service="Photocopy & Printing">Order Print</span>
-              </a>
-              <a class="service-option-card service-card" id="lamination" href="service-lamination.html" data-edupoint-service-card data-edupoint-categories="print">
-                <div class="service-top service-card-top">
-                  <div class="service-icon"><i data-lucide="layers"></i></div>
-                  <div class="service-card-badges"><span class="tag">Quick</span><span class="tag price-tag">&#8377;20 - &#8377;80</span></div>
-                </div>
-                <h3>Lamination</h3>
-                <p>Protect certificates, ID cards, admit cards and important documents.</p>
-                <span class="btn btn-primary btn-service-select" data-service="Lamination">Request</span>
-              </a>
-              <a class="service-option-card service-card" id="online-test" href="edupoint.html?service=Online%20Test#apply-now" data-edupoint-service-card data-edupoint-categories="skills">
-                <div class="service-top service-card-top">
-                  <div class="service-icon"><i data-lucide="clipboard-check"></i></div>
-                  <div class="service-card-badges"><span class="tag">30 min</span><span class="tag price-tag">&#8377;49 - &#8377;99</span></div>
-                </div>
-                <h3>Online Test</h3>
-                <p>Practice tests, student portal login support and exam readiness help.</p>
-                <span class="btn btn-primary btn-service-select" data-service="Online Test">Start Test</span>
-              </a>
-              <a class="service-option-card service-card" id="resume" href="edupoint.html?service=Resume%20Builder#apply-now" data-edupoint-service-card data-edupoint-categories="skills popular">
-                <div class="service-top service-card-top">
-                  <div class="service-icon"><i data-lucide="file-user"></i></div>
-                  <div class="service-card-badges"><span class="tag">30 min</span><span class="tag price-tag">&#8377;99 - &#8377;149</span></div>
-                </div>
-                <h3>Resume Builder</h3>
-                <p>Clean student resumes for internships, jobs and course applications.</p>
-                <span class="btn btn-primary btn-service-select" data-service="Resume Builder">Build Resume</span>
-              </a>
+              <select id="edu-mode-select" class="edu-select" aria-label="Filter by delivery mode">
+                <option value="all">All Delivery Modes</option>
+                <option value="online">100% Online / Remote</option>
+                <option value="urgent">Same-Day Urgent</option>
+                <option value="desk">In-Center / Local Desk</option>
+              </select>
             </div>
           </div>
-          <button type="button" class="carousel-arrow next edupoint-carousel-arrow" data-edupoint-carousel-next aria-label="Next EduPoint service">
-            <i data-lucide="chevron-right"></i>
-          </button>
-        </div>
-      </section>
 
-      <section class="premium-story-showcase required-documents-section reveal" id="required-documents">
-        <div class="ambient-orb"></div>
-        <div class="ambient-orb"></div>
-
-        <div class="premium-container">
-          <div class="premium-header text-left">
-            <span class="premium-badge-pill"><i data-lucide="files"></i> Required Documents</span>
-            <h2 class="premium-headline">Upload only what is <span class="h2-gold">needed.</span></h2>
-            <p class="premium-subhead-new">Select a category below to see typical documents needed before operator review. Final requirements are confirmed after request submission.</p>
+          <!-- Quick Discovery Filter Chips -->
+          <div class="edu-chips-wrap" id="edu-chips-wrap">
+            <button type="button" class="edu-chip active" data-need="all"><i data-lucide="layers"></i> All Services</button>
+            <button type="button" class="edu-chip" data-need="popular"><i data-lucide="flame"></i> Popular</button>
+            <button type="button" class="edu-chip" data-need="admission"><i data-lucide="school"></i> Admissions</button>
+            <button type="button" class="edu-chip" data-need="exam"><i data-lucide="award"></i> Exam Forms</button>
+            <button type="button" class="edu-chip" data-need="scholarship"><i data-lucide="badge-indian-rupee"></i> Scholarships</button>
+            <button type="button" class="edu-chip" data-need="admit"><i data-lucide="ticket-check"></i> Admit Cards</button>
+            <button type="button" class="edu-chip" data-need="result"><i data-lucide="file-check"></i> Results</button>
+            <button type="button" class="edu-chip" data-need="university"><i data-lucide="building-2"></i> Certificates</button>
+            <button type="button" class="edu-chip" data-need="payment"><i data-lucide="credit-card"></i> Payments</button>
+            <button type="button" class="edu-chip" data-need="study"><i data-lucide="book-open"></i> Study &amp; Print</button>
           </div>
 
-          <div class="pan-doc-tabs-shell" data-pan-doc-tabs>
-            <div class="pan-doc-tablist" role="tablist" aria-label="EduPoint document categories">
-              <button class="pan-doc-tab active" type="button" role="tab" id="edu-tab-exam" aria-selected="true" aria-controls="edu-panel-exam" data-pan-doc-tab="edu-panel-exam"><i data-lucide="graduation-cap"></i><span>Exam Forms</span></button>
-              <button class="pan-doc-tab" type="button" role="tab" id="edu-tab-scholarship" aria-selected="false" aria-controls="edu-panel-scholarship" data-pan-doc-tab="edu-panel-scholarship"><i data-lucide="badge-indian-rupee"></i><span>Scholarship</span></button>
-              <button class="pan-doc-tab" type="button" role="tab" id="edu-tab-admission" aria-selected="false" aria-controls="edu-panel-admission" data-pan-doc-tab="edu-panel-admission"><i data-lucide="school"></i><span>Admission &amp; Result</span></button>
-            </div>
+          <!-- ── 2. Explore 10 Categories (3-Column Grid) ──────────── -->
+          <div class="edu-cats-grid" id="edu-cats-grid">
 
-            <div class="pan-doc-tabs-layout">
-              <div class="pan-doc-panels">
-
-                <!-- Panel Exam Forms -->
-                <div class="pan-doc-panel active" id="edu-panel-exam" role="tabpanel" aria-labelledby="edu-tab-exam" data-pan-doc-panel="edu-panel-exam">
-                  <div class="pan-doc-panel-head"><span>Exam Forms</span><h3>Admit card &amp; exam fee checklist</h3></div>
-                  <div class="pan-doc-list">
-                    <div class="pan-doc-item">
-                      <i data-lucide="id-card"></i>
-                      <div>
-                        <strong>Aadhaar / Student ID</strong>
-                        <p>Identity details for student profile matching on exam portals.</p>
-                      </div>
-                    </div>
-                    <div class="pan-doc-item">
-                      <i data-lucide="graduation-cap"></i>
-                      <div>
-                        <strong>Previous Marksheet &amp; Roll Number</strong>
-                        <p>Board or university roll number required for exam form and admit card.</p>
-                      </div>
-                    </div>
-                    <div class="pan-doc-item">
-                      <i data-lucide="image-up"></i>
-                      <div>
-                        <strong>Student Photo &amp; Signature Scan</strong>
-                        <p>Correct size and clear scan required for error-free form uploads.</p>
-                      </div>
-                    </div>
-                    <div class="pan-doc-item">
-                      <i data-lucide="receipt"></i>
-                      <div>
-                        <strong>Exam Fee Receipt (if prepaid)</strong>
-                        <p>Required when portal payment is already done by the student.</p>
-                      </div>
-                    </div>
+            <!-- 1. Admission Assistance (Featured) -->
+            <div class="edu-cat-card is-featured" data-category="admission" data-keywords="admission school college university iti polytechnic b.ed d.el.ed nursing pharmacy paramedical nios distance lateral quota cuet">
+              <div>
+                <div class="edu-cat-top">
+                  <div class="edu-cat-icon"><i data-lucide="school"></i></div>
+                  <div class="edu-cat-meta">
+                    <span class="edu-featured-badge">MOST USED</span>
+                    <span class="edu-cat-count">15 Services</span>
                   </div>
                 </div>
+                <h3 class="edu-cat-title">Admission Assistance</h3>
+                <p class="edu-cat-desc">School, college, university, ITI, polytechnic, NIOS &amp; distance education admission guidance.</p>
+                <div class="edu-cat-samples">
+                  <span class="edu-sample-chip">NIOS Admission</span>
+                  <span class="edu-sample-chip">College &amp; University</span>
+                  <span class="edu-sample-chip">B.Ed / Polytechnic</span>
+                </div>
+              </div>
+              <a class="edu-cat-cta" href="edupoint-admission-assistance.html">
+                <span>Explore Admission Services</span>
+                <i data-lucide="arrow-right"></i>
+              </a>
+            </div>
 
-                <!-- Panel Scholarship -->
-                <div class="pan-doc-panel" id="edu-panel-scholarship" role="tabpanel" aria-labelledby="edu-tab-scholarship" data-pan-doc-panel="edu-panel-scholarship">
-                  <div class="pan-doc-panel-head"><span>Scholarship</span><h3>Scholarship application checklist</h3></div>
-                  <div class="pan-doc-list">
-                    <div class="pan-doc-item">
-                      <i data-lucide="id-card"></i>
-                      <div>
-                        <strong>Aadhaar Card of Student</strong>
-                        <p>Necessary for applying to scholarship portals and college enrollment benefits.</p>
-                      </div>
-                    </div>
-                    <div class="pan-doc-item">
-                      <i data-lucide="badge-indian-rupee"></i>
-                      <div>
-                        <strong>Income Certificate of Family</strong>
-                        <p>Required to verify eligibility and claim scholarship benefits.</p>
-                      </div>
-                    </div>
-                    <div class="pan-doc-item">
-                      <i data-lucide="file-badge"></i>
-                      <div>
-                        <strong>Caste Certificate (if applicable)</strong>
-                        <p>Needed for OBC/SC/ST category scholarships.</p>
-                      </div>
-                    </div>
-                    <div class="pan-doc-item">
-                      <i data-lucide="file-text"></i>
-                      <div>
-                        <strong>Previous Year Marksheet</strong>
-                        <p>Proof of academic eligibility for the scholarship applied.</p>
-                      </div>
-                    </div>
+            <!-- 2. Competitive Exam Applications (Featured) -->
+            <div class="edu-cat-card is-featured" data-category="exam" data-keywords="competitive exam upsc ssc rrb ibps sbi police army navy air force nda cds cuet neet jee main advanced cat clat ctet uptet">
+              <div>
+                <div class="edu-cat-top">
+                  <div class="edu-cat-icon"><i data-lucide="award"></i></div>
+                  <div class="edu-cat-meta">
+                    <span class="edu-featured-badge">STUDENT FAVOURITE</span>
+                    <span class="edu-cat-count">24 Services</span>
                   </div>
                 </div>
+                <h3 class="edu-cat-title">Competitive Exam Applications</h3>
+                <p class="edu-cat-desc">Complete error-free form filling for national &amp; state level government entrance examinations.</p>
+                <div class="edu-cat-samples">
+                  <span class="edu-sample-chip">UPSC / SSC / RRB</span>
+                  <span class="edu-sample-chip">CUET / NEET / JEE</span>
+                  <span class="edu-sample-chip">Police &amp; Defence</span>
+                </div>
+              </div>
+              <a class="edu-cat-cta" href="edupoint-competitive-exams.html">
+                <span>View Exam Services</span>
+                <i data-lucide="arrow-right"></i>
+              </a>
+            </div>
 
-                <!-- Panel Admission & Result -->
-                <div class="pan-doc-panel" id="edu-panel-admission" role="tabpanel" aria-labelledby="edu-tab-admission" data-pan-doc-panel="edu-panel-admission">
-                  <div class="pan-doc-panel-head"><span>Admission &amp; Result</span><h3>College admission &amp; result checklist</h3></div>
-                  <div class="pan-doc-list">
-                    <div class="pan-doc-item">
-                      <i data-lucide="school"></i>
-                      <div>
-                        <strong>Institute Details &amp; Course</strong>
-                        <p>Enrollment ID, college name, class and course or registration info.</p>
-                      </div>
-                    </div>
-                    <div class="pan-doc-item">
-                      <i data-lucide="file-check-2"></i>
-                      <div>
-                        <strong>Transfer Certificate (if applicable)</strong>
-                        <p>Required when changing board, school or college for admission.</p>
-                      </div>
-                    </div>
-                    <div class="pan-doc-item">
-                      <i data-lucide="image-up"></i>
-                      <div>
-                        <strong>Student Photo &amp; Signature</strong>
-                        <p>Correct aspect ratio scans as per admission portal requirements.</p>
-                      </div>
-                    </div>
-                    <div class="pan-doc-item">
-                      <i data-lucide="receipt"></i>
-                      <div>
-                        <strong>Payment Receipt (if already paid)</strong>
-                        <p>Required if portal fee is already paid before form submission.</p>
-                      </div>
-                    </div>
+            <!-- 3. University & Academic Services (Featured) -->
+            <div class="edu-cat-card is-featured" data-category="university" data-keywords="university academic semester back paper revaluation scrutiny migration degree duplicate marksheet provisional character transcript convocation">
+              <div>
+                <div class="edu-cat-top">
+                  <div class="edu-cat-icon"><i data-lucide="building-2"></i></div>
+                  <div class="edu-cat-meta">
+                    <span class="edu-featured-badge">POPULAR</span>
+                    <span class="edu-cat-count">15 Services</span>
                   </div>
                 </div>
-
-              </div>
-
-              <article class="premium-large-card pan-doc-side-card">
-                <div class="large-card-icon"><i data-lucide="files"></i></div>
-                <h3 class="large-card-title">Student Checklist</h3>
-                <p class="large-card-desc">Select a category tab to view typical documents needed for student and exam services.</p>
-                <a class="large-card-cta" href="#service-options">Browse EduPoint <i data-lucide="arrow-right"></i></a>
-              </article>
-            </div>
-          </div>
-
-          <div class="document-notice-box">
-            <span class="notice-icon-wrap"><i data-lucide="shield-check"></i></span>
-            <div class="notice-body">
-              <strong class="notice-label">Important Note</strong>
-              <p>Document requirements may vary depending on your specific case. Our operator will confirm the final checklist after reviewing your submission.</p>
-            </div>
-            <div class="notice-badges">
-              <span class="notice-badge"><i data-lucide="check-circle-2"></i> Operator Verified</span>
-              <span class="notice-badge"><i data-lucide="clock-4"></i> Confirmed at Submission</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <div class="page-pan-card dark-how-it-works">
-        <section class="section reveal" id="how-it-works">
-          <div class="section-head">
-            <div>
-              <p class="section-kicker">Simple Process</p>
-              <h2>How it <span class="h2-gold">Works</span></h2>
-              <p class="how-it-works-subtitle"">From request submission to download or tracking, everything stays simple and transparent.</p>
-            </div>
-          </div>
-          <div class="how-it-works-grid">
-            <div class="step-card"><span class="step-number">01</span><h3><i data-lucide="file-text"></i> Submit Request</h3><p>Add student details and select the required EduPoint service.</p></div>
-            <div class="step-card"><span class="step-number">02</span><h3><i data-lucide="folder-up"></i> Upload Documents</h3><p>Attach photo, signature, ID proof or paste a Drive link.</p></div>
-            <div class="step-card"><span class="step-number">03</span><h3><i data-lucide="credit-card"></i> Secure Payment</h3><p>Pay only after the request and checklist are confirmed.</p></div>
-            <div class="step-card"><span class="step-number">04</span><h3><i data-lucide="bell"></i> Track Progress</h3><p>Get receipt, download link or status update on WhatsApp.</p></div>
-          </div>
-          <div class="how-it-works-trust">
-            <span class="trust-pill"><i data-lucide="check"></i> Student Checklist</span>
-            <span class="trust-pill"><i data-lucide="check"></i> Verified Support</span>
-            <span class="trust-pill"><i data-lucide="check"></i> WhatsApp Updates</span>
-            <span class="trust-pill"><i data-lucide="check"></i> Local Review</span>
-          </div>
-        </section>
-      </div>
-
-      <div data-unified-apply-slot></div>
-
-      <section class="premium-story-showcase reveal edupoint-review-section" id="edupoint-review">
-        <div class="premium-container edupoint-review-container">
-          <div class="premium-header text-left edupoint-review-header">
-            <span class="premium-badge-pill edupoint-review-badge">Saved Flow &bull; Repeat Visits</span>
-            <h2 class="premium-headline">Repeat student work is easier <span class="h2-gold">to continue.</span></h2>
-            <p class="premium-subhead-new">When a student comes back for another service, earlier context and center notes stay easier to reference, so the next request starts with less back-and-forth.</p>
-          </div>
-
-          <div class="premium-staggered-layout edupoint-review-layout">
-            <div class="premium-large-card premium-showcase-card edupoint-review-card" onclick="document.querySelector('#service-options')?.scrollIntoView({behavior:'smooth'})" aria-label="Student Corner Service Info">
-              <div class="showcase-card-bg"></div>
-              <div class="large-card-badge">Student Special</div>
-              <h3 class="large-card-title">Continue without <span class="h2-gold">starting over.</span></h3>
-              <p class="large-card-desc">For repeat visits, the center can work from the previous service context, pending notes and applicant basics instead of rebuilding everything from zero.</p>
-              <a class="btn btn-primary" href="#service-options">Open Student Corner <i data-lucide="arrow-right"></i></a>
-            </div>
-
-            <div class="premium-small-features-list edupoint-review-list">
-              <div class="small-feature-item edupoint-review-item">
-                <div class="small-feature-icon">
-                  <i data-lucide="history"></i>
-                </div>
-                <div class="small-feature-body">
-                  <h4 class="small-feature-title">Request History</h4>
-                  <p class="small-feature-desc">Earlier exam, admit card, scholarship or resume work is easier to discuss.</p>
+                <h3 class="edu-cat-title">University &amp; Academic Services</h3>
+                <p class="edu-cat-desc">Semester exam forms, back papers, migration certificates, degree applications &amp; revaluation.</p>
+                <div class="edu-cat-samples">
+                  <span class="edu-sample-chip">Degree &amp; Marksheet</span>
+                  <span class="edu-sample-chip">Migration Certificate</span>
+                  <span class="edu-sample-chip">Back Paper &amp; Scrutiny</span>
                 </div>
               </div>
-
-              <div class="small-feature-item edupoint-review-item">
-                <div class="small-feature-icon">
-                  <i data-lucide="user-round-check"></i>
-                </div>
-                <div class="small-feature-body">
-                  <h4 class="small-feature-title">Student Basics</h4>
-                  <p class="small-feature-desc">Name, course and institute context can stay consistent across services.</p>
-                </div>
-              </div>
-
-              <div class="small-feature-item edupoint-review-item">
-                <div class="small-feature-icon">
-                  <i data-lucide="notebook-tabs"></i>
-                </div>
-                <div class="small-feature-body">
-                  <h4 class="small-feature-title">Center Notes</h4>
-                  <p class="small-feature-desc">Pending points and follow-up remarks stay easy to pick up later.</p>
-                </div>
-              </div>
-
-              <div class="small-feature-item edupoint-review-item">
-                <div class="small-feature-icon">
-                  <i data-lucide="route"></i>
-                </div>
-                <div class="small-feature-body">
-                  <h4 class="small-feature-title">Visit Continuity</h4>
-                  <p class="small-feature-desc">The next visit can begin from the last confirmed service context.</p>
-                </div>
-              </div>
+              <a class="edu-cat-cta" href="edupoint-university-services.html">
+                <span>Browse University Services</span>
+                <i data-lucide="arrow-right"></i>
+              </a>
             </div>
+
+            <!-- 4. Scholarship Assistance -->
+            <div class="edu-cat-card" data-category="scholarship" data-keywords="scholarship nsp up state minority obc sc st merit post-matric pre-matric renewal fresh pfms dbt">
+              <div>
+                <div class="edu-cat-top">
+                  <div class="edu-cat-icon"><i data-lucide="badge-indian-rupee"></i></div>
+                  <div class="edu-cat-meta">
+                    <span class="edu-cat-count">12 Services</span>
+                  </div>
+                </div>
+                <h3 class="edu-cat-title">Scholarship Assistance</h3>
+                <p class="edu-cat-desc">NSP central, UP state &amp; category scholarships with Aadhaar-DBT bank verification check.</p>
+                <div class="edu-cat-samples">
+                  <span class="edu-sample-chip">UP State Scholarship</span>
+                  <span class="edu-sample-chip">NSP National Portal</span>
+                  <span class="edu-sample-chip">Pre &amp; Post Matric</span>
+                </div>
+              </div>
+              <a class="edu-cat-cta" href="edupoint-scholarship-assistance.html">
+                <span>Explore Scholarship Services</span>
+                <i data-lucide="arrow-right"></i>
+              </a>
+            </div>
+
+            <!-- 5. Student Digital Services -->
+            <div class="edu-cat-card" data-category="university" data-keywords="student digital digilocker abc id apaar email workspace microsoft 365 erp portal lms otr one time registration">
+              <div>
+                <div class="edu-cat-top">
+                  <div class="edu-cat-icon"><i data-lucide="layout-grid"></i></div>
+                  <div class="edu-cat-meta">
+                    <span class="edu-cat-count">11 Services</span>
+                  </div>
+                </div>
+                <h3 class="edu-cat-title">Student Digital Services</h3>
+                <p class="edu-cat-desc">DigiLocker setup, APAAR/ABC ID generation, academic email creation &amp; OTR profile registration.</p>
+                <div class="edu-cat-samples">
+                  <span class="edu-sample-chip">ABC / APAAR ID</span>
+                  <span class="edu-sample-chip">DigiLocker Account</span>
+                  <span class="edu-sample-chip">Govt OTR Registration</span>
+                </div>
+              </div>
+              <a class="edu-cat-cta" href="edupoint-student-digital-services.html">
+                <span>Explore Digital ID Services</span>
+                <i data-lucide="arrow-right"></i>
+              </a>
+            </div>
+
+            <!-- 6. Admit Card & Result Assistance -->
+            <div class="edu-cat-card" data-category="admit result" data-keywords="admit card hall ticket board result score card rank merit list counselling choice filling seat allotment">
+              <div>
+                <div class="edu-cat-top">
+                  <div class="edu-cat-icon"><i data-lucide="ticket-check"></i></div>
+                  <div class="edu-cat-meta">
+                    <span class="edu-cat-count">10 Services</span>
+                  </div>
+                </div>
+                <h3 class="edu-cat-title">Admit Card &amp; Result Assistance</h3>
+                <p class="edu-cat-desc">Fast hall ticket download, board/university scorecards, merit lists &amp; counselling choice filling.</p>
+                <div class="edu-cat-samples">
+                  <span class="edu-sample-chip">Hall Ticket Download</span>
+                  <span class="edu-sample-chip">Result &amp; Scorecard</span>
+                  <span class="edu-sample-chip">Counselling Choice Filling</span>
+                </div>
+              </div>
+              <a class="edu-cat-cta" href="edupoint-admit-card-results.html">
+                <span>Get Admit Card &amp; Results</span>
+                <i data-lucide="arrow-right"></i>
+              </a>
+            </div>
+
+            <!-- 7. Online Payment Assistance -->
+            <div class="edu-cat-card" data-category="payment" data-keywords="online payment tuition university exam fee hostel mess charges counselling challan upi fee receipt">
+              <div>
+                <div class="edu-cat-top">
+                  <div class="edu-cat-icon"><i data-lucide="credit-card"></i></div>
+                  <div class="edu-cat-meta">
+                    <span class="edu-cat-count">8 Services</span>
+                  </div>
+                </div>
+                <h3 class="edu-cat-title">Online Payment Assistance</h3>
+                <p class="edu-cat-desc">Secure payment facilitation for college tuition, university exam fee challans &amp; instant receipts.</p>
+                <div class="edu-cat-samples">
+                  <span class="edu-sample-chip">College Tuition Fee</span>
+                  <span class="edu-sample-chip">Exam Fee Challan</span>
+                  <span class="edu-sample-chip">Instant Fee Receipt</span>
+                </div>
+              </div>
+              <a class="edu-cat-cta" href="edupoint-online-payments.html">
+                <span>Pay Online Fees</span>
+                <i data-lucide="arrow-right"></i>
+              </a>
+            </div>
+
+            <!-- 8. Study & Academic Support -->
+            <div class="edu-cat-card" data-category="study" data-keywords="study academic support assignment formatting practical file project report thesis dissertation hard binding citation plagiarism ppt">
+              <div>
+                <div class="edu-cat-top">
+                  <div class="edu-cat-icon"><i data-lucide="book-open"></i></div>
+                  <div class="edu-cat-meta">
+                    <span class="edu-cat-count">14 Services</span>
+                  </div>
+                </div>
+                <h3 class="edu-cat-title">Study &amp; Academic Support</h3>
+                <p class="edu-cat-desc">Assignment formatting, project file compilation, thesis hard binding &amp; presentation design.</p>
+                <div class="edu-cat-samples">
+                  <span class="edu-sample-chip">Project Report Binding</span>
+                  <span class="edu-sample-chip">Assignment Formatting</span>
+                  <span class="edu-sample-chip">Thesis &amp; Plagiarism</span>
+                </div>
+              </div>
+              <a class="edu-cat-cta" href="edupoint-study-academic-support.html">
+                <span>Get Academic Support</span>
+                <i data-lucide="arrow-right"></i>
+              </a>
+            </div>
+
+            <!-- 9. Printing & Documentation Services -->
+            <div class="edu-cat-card" data-category="study" data-keywords="printing documentation b&w color print xerox scan pdf merge split photo print id card spiral binding lamination">
+              <div>
+                <div class="edu-cat-top">
+                  <div class="edu-cat-icon"><i data-lucide="printer"></i></div>
+                  <div class="edu-cat-meta">
+                    <span class="edu-cat-count">21 Services</span>
+                  </div>
+                </div>
+                <h3 class="edu-cat-title">Printing &amp; Documentation</h3>
+                <p class="edu-cat-desc">High-speed color/B&amp;W printing, photocopy, HD scan, document laminations &amp; spiral binding.</p>
+                <div class="edu-cat-samples">
+                  <span class="edu-sample-chip">Color / B&amp;W Print</span>
+                  <span class="edu-sample-chip">Spiral &amp; Hard Binding</span>
+                  <span class="edu-sample-chip">HD Scan &amp; Lamination</span>
+                </div>
+              </div>
+              <a class="edu-cat-cta" href="edupoint-printing-documentation.html">
+                <span>Explore Print Services</span>
+                <i data-lucide="arrow-right"></i>
+              </a>
+            </div>
+
+            <!-- 10. Career Services -->
+            <div class="edu-cat-card" data-category="study" data-keywords="career services ats resume cv biodata cover letter sop statement of purpose lor formatting linkedin">
+              <div>
+                <div class="edu-cat-top">
+                  <div class="edu-cat-icon"><i data-lucide="briefcase"></i></div>
+                  <div class="edu-cat-meta">
+                    <span class="edu-cat-count">11 Services</span>
+                  </div>
+                </div>
+                <h3 class="edu-cat-title">Career Services</h3>
+                <p class="edu-cat-desc">Professional ATS resume writing, academic CV design, custom cover letters &amp; SOP formatting.</p>
+                <div class="edu-cat-samples">
+                  <span class="edu-sample-chip">ATS Resume / CV</span>
+                  <span class="edu-sample-chip">SOP &amp; Cover Letter</span>
+                  <span class="edu-sample-chip">Internship Report</span>
+                </div>
+              </div>
+              <a class="edu-cat-cta" href="edupoint-career-services.html">
+                <span>Explore Career Services</span>
+                <i data-lucide="arrow-right"></i>
+              </a>
+            </div>
+
           </div>
 
-          <div role="note" style="margin-top:2.5rem;display:flex;align-items:center;gap:16px;padding:16px 24px;background:rgba(18,86,150,0.06);border:1px solid rgba(18,86,150,0.15);border-radius:12px;width:100%;box-sizing:border-box;">
-            <span style="flex-shrink:0;width:38px;height:38px;background:rgba(201,146,26,0.12);border:1px solid rgba(201,146,26,0.3);border-radius:10px;display:flex;align-items:center;justify-content:center;">
-              <i data-lucide="shield-check" style="width:18px;height:18px;color:#C9921A;display:block;flex-shrink:0;"></i>
-            </span>
-            <span style="color:rgba(18,86,150,0.72);font-size:12.5px;font-weight:500;line-height:1.6;">Assisted student service. Final submission, approval, dates, downloads and fees depend on official portal rules, document readiness and operator verification.</span>
+          <!-- Zero Results State -->
+          <div class="edu-search-empty" id="edu-search-empty">
+            <i data-lucide="help-circle" style="width:40px;height:40px;color:#94a3b8;margin-bottom:10px;"></i>
+            <h3>Can't find the exact student service?</h3>
+            <p>Tell our student helpdesk what you are looking for, and an operator will guide you with the exact form and link.</p>
+            <a class="btn btn-primary" href="https://wa.me/919473946181?text=Hi%20One%20Point,%20I%20could%20not%20find%20a%20specific%20student%20service%20on%20your%20website.%20Please%20help%20me." target="_blank" rel="noopener">
+              <i data-lucide="message-circle"></i> Ask Student Support on WhatsApp
+            </a>
           </div>
 
         </div>
       </section>
 
+      <!-- ── 3. Popular Right Now (Seasonal Student Services) ────────── -->
+      <section class="edu-section edu-section-alt" id="popular-services">
+        <div class="edu-container">
+          <div class="edu-header">
+            <span class="edu-kicker"><i data-lucide="flame"></i> Active Deadlines</span>
+            <h2 class="edu-title">Popular with Students <span class="gold-text">Right Now</span></h2>
+            <p class="edu-sub">High-demand active admission cycles, scholarship windows, and examination forms.</p>
+          </div>
+
+          <div class="edu-pop-grid">
+            <!-- 1. CUET Application -->
+            <div class="edu-pop-card">
+              <div>
+                <div class="edu-pop-top">
+                  <div class="edu-pop-icon"><i data-lucide="graduation-cap"></i></div>
+                  <span class="edu-pop-status open"><span class="edu-pop-dot"></span> Applications Open</span>
+                </div>
+                <h3 class="edu-pop-title">CUET Application Assistance</h3>
+                <p class="edu-pop-desc">NTA registration, domain subject selection &amp; photo/signature dimension audit.</p>
+                <div class="edu-pop-features">
+                  <span class="edu-pop-feat-tag">NTA Portal</span>
+                  <span class="edu-pop-feat-tag">Photo &amp; Sign Check</span>
+                  <span class="edu-pop-feat-tag">Same Day</span>
+                </div>
+              </div>
+              <a class="edu-pop-cta" href="edupoint-competitive-exams.html">
+                <span>Start CUET Filing</span>
+                <i data-lucide="arrow-right"></i>
+              </a>
+            </div>
+
+            <!-- 2. Scholarship Forms -->
+            <div class="edu-pop-card">
+              <div>
+                <div class="edu-pop-top">
+                  <div class="edu-pop-icon"><i data-lucide="badge-indian-rupee"></i></div>
+                  <span class="edu-pop-status closing"><span class="edu-pop-dot"></span> Active Cycle</span>
+                </div>
+                <h3 class="edu-pop-title">UP &amp; NSP Scholarship Form</h3>
+                <p class="edu-pop-desc">Fresh &amp; renewal filing with income certificate and Aadhaar-seeded DBT bank verification.</p>
+                <div class="edu-pop-features">
+                  <span class="edu-pop-feat-tag">Pre &amp; Post Matric</span>
+                  <span class="edu-pop-feat-tag">DBT Bank Check</span>
+                  <span class="edu-pop-feat-tag">Renewal</span>
+                </div>
+              </div>
+              <a class="edu-pop-cta" href="edupoint-scholarship-assistance.html">
+                <span>Apply Scholarship</span>
+                <i data-lucide="arrow-right"></i>
+              </a>
+            </div>
+
+            <!-- 3. College Admission -->
+            <div class="edu-pop-card">
+              <div>
+                <div class="edu-pop-top">
+                  <div class="edu-pop-icon"><i data-lucide="school"></i></div>
+                  <span class="edu-pop-status active"><span class="edu-pop-dot"></span> Admissions Open</span>
+                </div>
+                <h3 class="edu-pop-title">College &amp; University Admission</h3>
+                <p class="edu-pop-desc">Merit list registration, counselling form guidance &amp; document compilation for admissions.</p>
+                <div class="edu-pop-features">
+                  <span class="edu-pop-feat-tag">Merit Registration</span>
+                  <span class="edu-pop-feat-tag">Counselling</span>
+                  <span class="edu-pop-feat-tag">UG / PG</span>
+                </div>
+              </div>
+              <a class="edu-pop-cta" href="edupoint-admission-assistance.html">
+                <span>Get Admission Help</span>
+                <i data-lucide="arrow-right"></i>
+              </a>
+            </div>
+
+            <!-- 4. Admit Card & Results -->
+            <div class="edu-pop-card">
+              <div>
+                <div class="edu-pop-top">
+                  <div class="edu-pop-icon"><i data-lucide="ticket-check"></i></div>
+                  <span class="edu-pop-status live"><span class="edu-pop-dot"></span> Live Downloads</span>
+                </div>
+                <h3 class="edu-pop-title">Admit Card &amp; Result Retrieval</h3>
+                <p class="edu-pop-desc">Instant hall ticket download, marksheet PDF export &amp; counselling choice filling assistance.</p>
+                <div class="edu-pop-features">
+                  <span class="edu-pop-feat-tag">Instant PDF</span>
+                  <span class="edu-pop-feat-tag">Scorecard Export</span>
+                  <span class="edu-pop-feat-tag">Fast Desk</span>
+                </div>
+              </div>
+              <a class="edu-pop-cta" href="edupoint-admit-card-results.html">
+                <span>Download Hall Ticket</span>
+                <i data-lucide="arrow-right"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── 4. Why Students Choose One Point (Trust Strip + Parent) ─── -->
+      <section class="edu-section" style="background:#ffffff;">
+        <div class="edu-container">
+          <div class="edu-header">
+            <span class="edu-kicker"><i data-lucide="shield-check"></i> Quality &amp; Accuracy</span>
+            <h2 class="edu-title">Why Students Trust <span class="gold-text">One Point Suvidha</span></h2>
+            <p class="edu-sub">Zero-error document verification and assisted support before final portal submission.</p>
+          </div>
+
+          <div class="edu-trust-cards-grid">
+            <div class="edu-trust-card">
+              <div class="edu-tc-icon"><i data-lucide="file-check-2"></i></div>
+              <div class="edu-tc-body">
+                <strong>Document Pre-Check</strong>
+                <span>Reduces avoidable mistakes before official portal submission.</span>
+              </div>
+            </div>
+            <div class="edu-trust-card">
+              <div class="edu-tc-icon"><i data-lucide="receipt"></i></div>
+              <div class="edu-tc-body">
+                <strong>Fee Clarity</strong>
+                <span>Official exam fees and assistance charges separated transparently.</span>
+              </div>
+            </div>
+            <div class="edu-trust-card">
+              <div class="edu-tc-icon"><i data-lucide="message-circle"></i></div>
+              <div class="edu-tc-body">
+                <strong>Status Updates</strong>
+                <span>Know exact stage of your request with live WhatsApp alerts.</span>
+              </div>
+            </div>
+            <div class="edu-trust-card">
+              <div class="edu-tc-icon"><i data-lucide="users"></i></div>
+              <div class="edu-tc-body">
+                <strong>Human Support</strong>
+                <span>Direct operator help whenever portal forms become confusing.</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Parent Reassurance Banner -->
+          <div class="edu-parent-reassurance">
+            <div class="edu-parent-left">
+              <span class="edu-parent-badge">For Students &amp; Parents</span>
+              <span>Clear checklist, transparent rates, and verified operator assistance from start to completion.</span>
+            </div>
+            <div class="edu-parent-pills">
+              <span><i data-lucide="check"></i> Transparent Charges</span>
+              <span><i data-lucide="check"></i> Official Receipts</span>
+              <span><i data-lucide="check"></i> Verified SLA</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── 5. What Documents Will I Need? (Dynamic Checklist) ──────── -->
+      <section class="edu-section edu-section-alt" id="required-documents">
+        <div class="edu-container">
+          <div class="edu-header text-center">
+            <span class="edu-kicker"><i data-lucide="files"></i> Required Documents</span>
+            <h2 class="edu-title">Upload only what is <span class="gold-text">needed.</span></h2>
+            <p class="edu-sub">Select your service journey below to see exact typical documents required. Avoid unnecessary paperwork.</p>
+          </div>
+
+          <!-- Centered Student Journey Tabs -->
+          <div class="edu-doc-tabs" id="edu-doc-tabs">
+            <button type="button" class="edu-dtab-btn active" data-tab="tab-admissions"><i data-lucide="school"></i> Admissions</button>
+            <button type="button" class="edu-dtab-btn" data-tab="tab-scholarships"><i data-lucide="badge-indian-rupee"></i> Scholarships</button>
+            <button type="button" class="edu-dtab-btn" data-tab="tab-exams"><i data-lucide="award"></i> Exam Forms</button>
+            <button type="button" class="edu-dtab-btn" data-tab="tab-university"><i data-lucide="building-2"></i> University Services</button>
+            <button type="button" class="edu-dtab-btn" data-tab="tab-career"><i data-lucide="briefcase"></i> Study &amp; Career</button>
+          </div>
+
+          <!-- 1. Admissions Panel -->
+          <div class="edu-dtab-panel active" id="tab-admissions">
+            <div class="edu-doc-cards-grid">
+              <div class="edu-doc-card">
+                <div class="edu-doc-card-top">
+                  <div class="edu-doc-icon"><i data-lucide="id-card"></i></div>
+                  <span class="edu-doc-badge required">Required</span>
+                </div>
+                <strong>Aadhaar Card / Photo ID</strong>
+                <p>Primary identity proof required for registration on state and central admission portals.</p>
+              </div>
+              <div class="edu-doc-card">
+                <div class="edu-doc-card-top">
+                  <div class="edu-doc-icon"><i data-lucide="graduation-cap"></i></div>
+                  <span class="edu-doc-badge required">Required</span>
+                </div>
+                <strong>Previous Academic Marksheets</strong>
+                <p>10th, 12th, or graduation marksheets and passing certificates for eligibility verification.</p>
+              </div>
+              <div class="edu-doc-card">
+                <div class="edu-doc-card-top">
+                  <div class="edu-doc-icon"><i data-lucide="image-up"></i></div>
+                  <span class="edu-doc-badge required">Required</span>
+                </div>
+                <strong>Passport Photo &amp; Signature</strong>
+                <p>Recent passport photo on white background and clear signature scan.</p>
+              </div>
+              <div class="edu-doc-card">
+                <div class="edu-doc-card-top">
+                  <div class="edu-doc-icon"><i data-lucide="file-text"></i></div>
+                  <span class="edu-doc-badge conditional">If Applicable</span>
+                </div>
+                <strong>Transfer / Migration Certificate</strong>
+                <p>Required for university changes, interstate admissions or regular college enrollment.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2. Scholarships Panel -->
+          <div class="edu-dtab-panel" id="tab-scholarships">
+            <div class="edu-doc-cards-grid">
+              <div class="edu-doc-card">
+                <div class="edu-doc-card-top">
+                  <div class="edu-doc-icon"><i data-lucide="badge-indian-rupee"></i></div>
+                  <span class="edu-doc-badge required">Required</span>
+                </div>
+                <strong>Income Certificate (Aay Praman)</strong>
+                <p>Valid family income certificate issued by Tehsildar/Revenue department.</p>
+              </div>
+              <div class="edu-doc-card">
+                <div class="edu-doc-card-top">
+                  <div class="edu-doc-icon"><i data-lucide="wallet-cards"></i></div>
+                  <span class="edu-doc-badge required">Required</span>
+                </div>
+                <strong>Aadhaar-Seeded Bank Passbook</strong>
+                <p>Student's active bank account with Direct Benefit Transfer (DBT) enabled for credit.</p>
+              </div>
+              <div class="edu-doc-card">
+                <div class="edu-doc-card-top">
+                  <div class="edu-doc-icon"><i data-lucide="file-badge"></i></div>
+                  <span class="edu-doc-badge conditional">If Applicable</span>
+                </div>
+                <strong>Caste &amp; Domicile Certificate</strong>
+                <p>Required for OBC, SC, ST category-based scholarships and state domicile proof.</p>
+              </div>
+              <div class="edu-doc-card">
+                <div class="edu-doc-card-top">
+                  <div class="edu-doc-icon"><i data-lucide="receipt"></i></div>
+                  <span class="edu-doc-badge required">Required</span>
+                </div>
+                <strong>Current Year Fee Receipt</strong>
+                <p>Official admission fee receipt showing student enrollment number and fees paid.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3. Exam Forms Panel -->
+          <div class="edu-dtab-panel" id="tab-exams">
+            <div class="edu-doc-cards-grid">
+              <div class="edu-doc-card">
+                <div class="edu-doc-card-top">
+                  <div class="edu-doc-icon"><i data-lucide="id-card"></i></div>
+                  <span class="edu-doc-badge required">Required</span>
+                </div>
+                <strong>Aadhaar / Government Photo ID</strong>
+                <p>Matches exact spelling of name, father's name &amp; DOB on 10th certificate.</p>
+              </div>
+              <div class="edu-doc-card">
+                <div class="edu-doc-card-top">
+                  <div class="edu-doc-icon"><i data-lucide="image-up"></i></div>
+                  <span class="edu-doc-badge required">Required</span>
+                </div>
+                <strong>Portal-Sized Photo &amp; Signature</strong>
+                <p>We resize and compress as per strict NTA, UPSC, SSC and board guidelines.</p>
+              </div>
+              <div class="edu-doc-card">
+                <div class="edu-doc-card-top">
+                  <div class="edu-doc-icon"><i data-lucide="file-check"></i></div>
+                  <span class="edu-doc-badge conditional">If Applicable</span>
+                </div>
+                <strong>Category / EWS / PwD Certificate</strong>
+                <p>Current financial year valid category certificate for reservation claims.</p>
+              </div>
+              <div class="edu-doc-card">
+                <div class="edu-doc-card-top">
+                  <div class="edu-doc-icon"><i data-lucide="smartphone"></i></div>
+                  <span class="edu-doc-badge required">Required</span>
+                </div>
+                <strong>Aadhaar-Linked Mobile Number</strong>
+                <p>For receiving instant OTP verification during OTR profile and portal submission.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 4. University Services Panel -->
+          <div class="edu-dtab-panel" id="tab-university">
+            <div class="edu-doc-cards-grid">
+              <div class="edu-doc-card">
+                <div class="edu-doc-card-top">
+                  <div class="edu-doc-icon"><i data-lucide="school"></i></div>
+                  <span class="edu-doc-badge required">Required</span>
+                </div>
+                <strong>University Enrollment / Roll Number</strong>
+                <p>Accurate registration number from your university admit card or marksheet.</p>
+              </div>
+              <div class="edu-doc-card">
+                <div class="edu-doc-card-top">
+                  <div class="edu-doc-icon"><i data-lucide="file-text"></i></div>
+                  <span class="edu-doc-badge required">Required</span>
+                </div>
+                <strong>Last Semester / Final Marksheet</strong>
+                <p>Clear scan or photocopy of marksheet for degree, migration or revaluation forms.</p>
+              </div>
+              <div class="edu-doc-card">
+                <div class="edu-doc-card-top">
+                  <div class="edu-doc-icon"><i data-lucide="qr-code"></i></div>
+                  <span class="edu-doc-badge optional">May Be Needed</span>
+                </div>
+                <strong>ABC / APAAR ID (DigiLocker)</strong>
+                <p>Academic Bank of Credits ID mandatory for credit transfers and degree mapping.</p>
+              </div>
+              <div class="edu-doc-card">
+                <div class="edu-doc-card-top">
+                  <div class="edu-doc-icon"><i data-lucide="file-badge"></i></div>
+                  <span class="edu-doc-badge conditional">If Applicable</span>
+                </div>
+                <strong>No Objection Certificate (NOC)</strong>
+                <p>Required only for migration transfer between two affiliated universities.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 5. Study & Career Panel -->
+          <div class="edu-dtab-panel" id="tab-career">
+            <div class="edu-doc-cards-grid">
+              <div class="edu-doc-card">
+                <div class="edu-doc-card-top">
+                  <div class="edu-doc-icon"><i data-lucide="book-open"></i></div>
+                  <span class="edu-doc-badge required">Required</span>
+                </div>
+                <strong>Project / Assignment Draft File</strong>
+                <p>Word document (.docx) or PDF for report formatting, citation check &amp; binding.</p>
+              </div>
+              <div class="edu-doc-card">
+                <div class="edu-doc-card-top">
+                  <div class="edu-doc-icon"><i data-lucide="briefcase"></i></div>
+                  <span class="edu-doc-badge required">Required</span>
+                </div>
+                <strong>Academic Qualifications &amp; Skills</strong>
+                <p>Education, projects, internships, and certifications for professional ATS Resume/CV.</p>
+              </div>
+              <div class="edu-doc-card">
+                <div class="edu-doc-card-top">
+                  <div class="edu-doc-icon"><i data-lucide="printer"></i></div>
+                  <span class="edu-doc-badge optional">May Be Needed</span>
+                </div>
+                <strong>Print Specs &amp; Page Requirements</strong>
+                <p>Specify B&amp;W or color, single/double sided, and spiral or hard bound requirements.</p>
+              </div>
+              <div class="edu-doc-card">
+                <div class="edu-doc-card-top">
+                  <div class="edu-doc-icon"><i data-lucide="file-check-2"></i></div>
+                  <span class="edu-doc-badge optional">May Be Needed</span>
+                </div>
+                <strong>College Guidelines / Format Template</strong>
+                <p>University specific formatting guideline document for thesis or synopsis compilation.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Full-Width Horizontal Concierge Reassurance Strip -->
+          <div class="edu-doc-concierge-strip">
+            <div class="edu-dcs-left">
+              <img class="edu-dcs-img" src="assets/indian_student_study_bg.png" alt="Student assistance operator">
+              <div class="edu-dcs-copy">
+                <h3>Not sure what documents you need?</h3>
+                <p>Send your specific course, college, or exam name. Our student helpdesk will share the exact verified checklist before you apply.</p>
+              </div>
+            </div>
+            <div class="edu-dcs-action">
+              <a class="edu-btn-concierge-gold" href="https://wa.me/919473946181?text=Hi%20One%20Point,%20I%20need%20help%20with%20the%20exact%20document%20checklist%20for%20my%20student%20form." target="_blank" rel="noopener">
+                <i data-lucide="message-circle"></i> Check My Requirements on WhatsApp
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ── 6. Universal 4-Step How It Works ────────────────────────── -->
+      <section class="edu-section edu-section-alt" id="how-it-works">
+        <div class="edu-container">
+          <div class="edu-header">
+            <span class="edu-kicker"><i data-lucide="route"></i> Simple Process</span>
+            <h2 class="edu-title">How It <span class="gold-text">Works</span></h2>
+            <p class="edu-sub">From service selection to final receipt or download — a transparent, connected journey.</p>
+          </div>
+
+          <div class="edu-steps-wrap">
+            <!-- Step 1 -->
+            <div class="edu-step-card">
+              <div class="edu-step-top">
+                <div class="edu-step-icon edu-sc-blue"><i data-lucide="mouse-pointer-click"></i></div>
+                <div class="edu-step-badge-strip">
+                  <span class="edu-sb-step">STEP 01</span>
+                  <span class="edu-sb-info"><i data-lucide="clock"></i> 2–5 Mins</span>
+                </div>
+              </div>
+              <h3>Choose Service</h3>
+              <p>Select your required student service category from admissions, exams, scholarships or printing.</p>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="edu-step-card">
+              <div class="edu-step-top">
+                <div class="edu-step-icon edu-sc-indigo"><i data-lucide="file-up"></i></div>
+                <div class="edu-step-badge-strip">
+                  <span class="edu-sb-step">STEP 02</span>
+                  <span class="edu-sb-info"><i data-lucide="shield-check"></i> Pre-Audit</span>
+                </div>
+              </div>
+              <h3>Submit Details &amp; Docs</h3>
+              <p>Share marksheet scans, photos, or text details securely on our website or WhatsApp desk.</p>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="edu-step-card">
+              <div class="edu-step-top">
+                <div class="edu-step-icon edu-sc-emerald"><i data-lucide="shield-check"></i></div>
+                <div class="edu-step-badge-strip">
+                  <span class="edu-sb-step">STEP 03</span>
+                  <span class="edu-sb-info"><i data-lucide="receipt"></i> Transparent Fee</span>
+                </div>
+              </div>
+              <h3>Review &amp; Confirm</h3>
+              <p>Review draft form preview, checklist verification, and confirm transparent fee breakdown.</p>
+            </div>
+
+            <!-- Step 4 -->
+            <div class="edu-step-card">
+              <div class="edu-step-top">
+                <div class="edu-step-icon edu-sc-amber"><i data-lucide="badge-check"></i></div>
+                <div class="edu-step-badge-strip">
+                  <span class="edu-sb-step">STEP 04</span>
+                  <span class="edu-sb-info"><i data-lucide="download"></i> Instant URN</span>
+                </div>
+              </div>
+              <h3>Submission &amp; Tracking</h3>
+              <p>Receive official acknowledgment receipt, downloadable PDF card, and real-time status updates.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── 8. Student FAQs Section (Exact Screenshot 1 Match) ── -->
+      <section class="edu-section" id="faqs" style="background:#ffffff;">
+        <div class="edu-container edu-faq-section-wrap">
+          
+          <div class="edu-header text-center" style="margin-bottom: 28px;">
+            <span class="edu-kicker"><i data-lucide="help-circle"></i> FAQS</span>
+            <h2 class="edu-title">Common Student <span class="gold-text">Questions</span></h2>
+            <p class="edu-sub">Everything you need to know about our student application assistance — answered clearly.</p>
+          </div>
+
+          <!-- FAQ Search Bar Matching Screenshot 1 -->
+          <div class="edu-faq-search-wrap">
+            <i data-lucide="search"></i>
+            <input type="text" id="edu-faq-search-input" placeholder="Search FAQs, documents, payment or status..." aria-label="Search FAQs">
+          </div>
+
+          <!-- 2-Column Tabbed FAQ Matching Screenshot 1 -->
+          <div class="cfaq-wrap edu-cfaq-wrapper">
+            
+            <!-- Left: Category Tabs Sidebar -->
+            <div class="cfaq-sidebar edu-cfaq-sidebar">
+              <button class="cfaq-tab active" data-tab="timeline" type="button">
+                <i data-lucide="clock"></i> <span>Processing &amp; Timeline</span>
+              </button>
+              <button class="cfaq-tab" data-tab="documents" type="button">
+                <i data-lucide="file-text"></i> <span>Documents Required</span>
+              </button>
+              <button class="cfaq-tab" data-tab="payment" type="button">
+                <i data-lucide="indian-rupee"></i> <span>Fees &amp; Payment</span>
+              </button>
+              <button class="cfaq-tab" data-tab="correction" type="button">
+                <i data-lucide="pencil"></i> <span>Corrections &amp; Updates</span>
+              </button>
+              <button class="cfaq-tab" data-tab="delivery" type="button">
+                <i data-lucide="download"></i> <span>Receipts &amp; Delivery</span>
+              </button>
+              <div class="cfaq-sidebar-bottom-link">
+                <a href="https://wa.me/919473946181?text=Hi%20One%20Point%20Student%20Desk,%20I%20have%20a%20question." target="_blank" rel="noopener">
+                  <i data-lucide="message-circle" style="width:13px;height:13px;"></i> Need help? Chat with us
+                </a>
+              </div>
+            </div>
+
+            <!-- Right: Content Panels -->
+            <div class="cfaq-panels edu-cfaq-panels">
+
+              <!-- Panel 1: Processing & Timeline -->
+              <div class="cfaq-panel active" data-panel="timeline">
+                <div class="faq">
+                  <div class="faq-item open">
+                    <button class="faq-question" data-faq-question type="button">
+                      <span class="pfaq-q-text">How long does student application processing take?</span>
+                      <i data-lucide="chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                      <p>Form submissions, formatting, and verification are completed within 2–5 hours on our desk. University merit lists, scholarship disbursals, and exam admit card releases follow the statutory timetable gazetted by the respective board or university.</p>
+                    </div>
+                  </div>
+                  <div class="faq-item">
+                    <button class="faq-question" data-faq-question type="button">
+                      <span class="pfaq-q-text">Can urgent application filings or closing date forms be expedited?</span>
+                      <i data-lucide="chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                      <p>Yes. For same-day deadlines or closing registration windows (such as CUET, SSC, or Board exam submissions), our operators provide immediate priority queue processing to ensure zero-error submission before the official server cutoff.</p>
+                    </div>
+                  </div>
+                  <div class="faq-item">
+                    <button class="faq-question" data-faq-question type="button">
+                      <span class="pfaq-q-text">What factors cause unexpected delays on university or exam portals?</span>
+                      <i data-lucide="chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                      <p>Official server heavy loads on closing dates, portal maintenance windows, delayed OTP delivery from Aadhaar/DigiLocker servers, or pending bank payment gateway reconciliation are the primary external timeline factors.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Panel 2: Documents Required -->
+              <div class="cfaq-panel" data-panel="documents">
+                <div class="faq">
+                  <div class="faq-item open">
+                    <button class="faq-question" data-faq-question type="button">
+                      <span class="pfaq-q-text">Which documents do I need to prepare before starting?</span>
+                      <i data-lucide="chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                      <p>Most student forms require your Aadhaar Card, previous educational marksheets (10th, 12th, or Degree), recent passport photo on a clear background, signature scan, and an active mobile number linked to Aadhaar for instant OTP verification.</p>
+                    </div>
+                  </div>
+                  <div class="faq-item">
+                    <button class="faq-question" data-faq-question type="button">
+                      <span class="pfaq-q-text">What happens if my marksheet name and Aadhaar details have a spelling mismatch?</span>
+                      <i data-lucide="chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                      <p>Our operator pre-audits all documents before portal submission. If any mismatch is identified (such as spelling or surname difference between Aadhaar and 10th marksheet), we guide you on the exact affidavit or profile correction path to eliminate rejection risk.</p>
+                    </div>
+                  </div>
+                  <div class="faq-item">
+                    <button class="faq-question" data-faq-question type="button">
+                      <span class="pfaq-q-text">Do you resize photos and signatures as per strict NTA &amp; UPSC rules?</span>
+                      <i data-lucide="chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                      <p>Yes, absolutely. We compress and format passport photos, thumb impressions, and signatures strictly according to the exact pixel dimensions, KB file size limits, and DPI specifications mandated by NTA, UPSC, SSC, and State Board portals.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Panel 3: Fees & Payment -->
+              <div class="cfaq-panel" data-panel="payment">
+                <div class="faq">
+                  <div class="faq-item open">
+                    <button class="faq-question" data-faq-question type="button">
+                      <span class="pfaq-q-text">Are official exam and university fees included in your assistance charge?</span>
+                      <i data-lucide="chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                      <p>No. Our assistance charge covers operator form-filling, pre-audit of photo/signature specifications, document compression, and tracking. Official statutory government, university, or exam fees are charged at actuals as gazetted by the respective board and are shown clearly before final submission.</p>
+                    </div>
+                  </div>
+                  <div class="faq-item">
+                    <button class="faq-question" data-faq-question type="button">
+                      <span class="pfaq-q-text">When do I pay the assistance fee?</span>
+                      <i data-lucide="chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                      <p>Payment is collected only after our operator reviews your documents, confirms checklist eligibility, and previews your draft form. No advance payment is required to start your request.</p>
+                    </div>
+                  </div>
+                  <div class="faq-item">
+                    <button class="faq-question" data-faq-question type="button">
+                      <span class="pfaq-q-text">Is the assistance fee refundable if my form cannot be processed?</span>
+                      <i data-lucide="chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                      <p>Yes — 100% full refund of assistance charges is issued if we cannot process your request during our operator pre-check. Once submitted to the official portal, statutory board/university fees are non-refundable.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Panel 4: Corrections & Updates -->
+              <div class="cfaq-panel" data-panel="correction">
+                <div class="faq">
+                  <div class="faq-item open">
+                    <button class="faq-question" data-faq-question type="button">
+                      <span class="pfaq-q-text">Can I get help if my exam form or previous application has an error?</span>
+                      <i data-lucide="chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                      <p>Yes. During official board correction windows (such as CUET, SSC, or UP Scholarship correction periods), our operators help you edit incorrect details, re-upload proper photos/signatures, and file correction challans.</p>
+                    </div>
+                  </div>
+                  <div class="faq-item">
+                    <button class="faq-question" data-faq-question type="button">
+                      <span class="pfaq-q-text">Can I apply for university migration, revaluation, or duplicate marksheets?</span>
+                      <i data-lucide="chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                      <p>Yes. We assist regular and private university students with migration certificate applications, degree issuance, semester copy revaluation forms, and duplicate marksheet requests across major affiliated universities.</p>
+                    </div>
+                  </div>
+                  <div class="faq-item">
+                    <button class="faq-question" data-faq-question type="button">
+                      <span class="pfaq-q-text">Can you assist with scholarship objection correction and re-upload?</span>
+                      <i data-lucide="chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                      <p>Yes. If your state or NSP scholarship portal shows an objection (such as bank NPCI mapping mismatch, attendance defect, or income certificate renewal), our desk guides and resolves the required re-upload.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Panel 5: Receipts & Delivery -->
+              <div class="cfaq-panel" data-panel="delivery">
+                <div class="faq">
+                  <div class="faq-item open">
+                    <button class="faq-question" data-faq-question type="button">
+                      <span class="pfaq-q-text">Will I receive authentic proof or receipt of submission?</span>
+                      <i data-lucide="chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                      <p>Immediately after successful portal submission, you receive the official computer-generated acknowledgment receipt containing your application number, transaction reference, and submission timestamp in PDF format directly on WhatsApp.</p>
+                    </div>
+                  </div>
+                  <div class="faq-item">
+                    <button class="faq-question" data-faq-question type="button">
+                      <span class="pfaq-q-text">Can I track my application status on WhatsApp?</span>
+                      <i data-lucide="chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                      <p>Yes. You can message our dedicated Student Desk at +91 9473946181 with your Application / URN number anytime to receive real-time status updates and download alerts when admit cards or results are announced.</p>
+                    </div>
+                  </div>
+                  <div class="faq-item">
+                    <button class="faq-question" data-faq-question type="button">
+                      <span class="pfaq-q-text">Is admission or exam selection guaranteed?</span>
+                      <i data-lucide="chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                      <p>No. One Point Digital Services is an independent citizen &amp; student facilitation center. We guarantee 100% error-free technical application submission and document formatting, but admission, examination acceptance, scholarship approval, and selection decisions remain strictly under the statutory jurisdiction of the respective university, board, or government department.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+        </div>
+      </section>
+
+      <!-- ── 9. Final Pre-Footer Conversion Box ──────────────────────── -->
+      <section class="edu-section" style="padding-top: 0; background: #ffffff;">
+        <div class="edu-container">
+          <div class="edu-cta-banner">
+            <h2>Can't find the student service you need?</h2>
+            <p>Tell us what you're trying to apply for, and our student desk will guide you to the exact form, checklist, and deadlines.</p>
+            <div class="edu-cta-actions">
+              <a class="edu-btn-gold" href="#service-options">
+                <i data-lucide="search"></i> Find My Service
+              </a>
+              <a class="edu-btn-glass" href="https://wa.me/919473946181?text=Hi%20One%20Point%20Student%20Desk,%20I%20need%20help%20with%20a%20student%20service." target="_blank" rel="noopener">
+                <i data-lucide="message-circle"></i> Ask on WhatsApp
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
+
     <div data-site-footer></div>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
-    <script src="assets/app.js?v=clean_js_v11" defer></script>
-  
-<script id="line-alignment-script">
-  document.addEventListener("DOMContentLoaded", function() {
-    setTimeout(() => {
-      document.querySelectorAll(".section-head h2").forEach(h2 => {
-        let align = window.getComputedStyle(h2).textAlign;
-        let parent = h2.closest('.section-head');
-        if (parent) {
-          if (align === "center") {
-            parent.classList.add("center-line");
+    <script src="assets/app.js?v=customer-checkout-94" defer></script>
+
+    <!-- ── Interactive EduPoint Client Script ───────────────────────── -->
+    <script defer>
+      document.addEventListener('DOMContentLoaded', () => {
+        if (window.lucide) {
+          lucide.createIcons();
+        }
+
+        // 1. Live Search & Category Filter
+        const searchInput = document.getElementById('edu-search-input');
+        const clearBtn = document.getElementById('edu-search-clear');
+        const catSelect = document.getElementById('edu-cat-select');
+        const modeSelect = document.getElementById('edu-mode-select');
+        const chips = document.querySelectorAll('.edu-chip');
+        const catCards = document.querySelectorAll('.edu-cat-card');
+        const emptyState = document.getElementById('edu-search-empty');
+
+        let activeNeed = 'all';
+
+        function filterCategories() {
+          const query = (searchInput?.value || '').trim().toLowerCase();
+          const selectedCat = catSelect?.value || 'all';
+          const selectedMode = modeSelect?.value || 'all';
+          let visibleCount = 0;
+
+          if (query.length > 0) {
+            clearBtn.style.display = 'flex';
           } else {
-            parent.classList.add("left-line");
+            clearBtn.style.display = 'none';
+          }
+
+          catCards.forEach(card => {
+            const title = (card.querySelector('.edu-cat-title')?.textContent || '').toLowerCase();
+            const desc = (card.querySelector('.edu-cat-desc')?.textContent || '').toLowerCase();
+            const samples = (card.querySelector('.edu-cat-samples')?.textContent || '').toLowerCase();
+            const keywords = (card.getAttribute('data-keywords') || '').toLowerCase();
+            const category = (card.getAttribute('data-category') || '').toLowerCase();
+            const isFeatured = card.classList.contains('is-featured');
+
+            const matchesQuery = !query || title.includes(query) || desc.includes(query) || samples.includes(query) || keywords.includes(query);
+            const matchesNeed = activeNeed === 'all' || (activeNeed === 'popular' ? isFeatured : (category.includes(activeNeed) || keywords.includes(activeNeed)));
+            const matchesCat = selectedCat === 'all' || category.includes(selectedCat) || keywords.includes(selectedCat);
+            const matchesMode = selectedMode === 'all' || (selectedMode === 'featured' ? isFeatured : true);
+
+            if (matchesQuery && matchesNeed && matchesCat && matchesMode) {
+              card.style.display = 'flex';
+              visibleCount++;
+            } else {
+              card.style.display = 'none';
+            }
+          });
+
+          if (visibleCount === 0) {
+            emptyState?.classList.add('visible');
+          } else {
+            emptyState?.classList.remove('visible');
           }
         }
+
+        if (searchInput) {
+          searchInput.addEventListener('input', filterCategories);
+        }
+
+        if (clearBtn) {
+          clearBtn.addEventListener('click', () => {
+            searchInput.value = '';
+            filterCategories();
+            searchInput.focus();
+          });
+        }
+
+        if (catSelect) {
+          catSelect.addEventListener('change', () => {
+            activeNeed = catSelect.value;
+            chips.forEach(c => {
+              c.classList.toggle('active', (c.getAttribute('data-need') || 'all') === activeNeed);
+            });
+            filterCategories();
+          });
+        }
+
+        if (modeSelect) {
+          modeSelect.addEventListener('change', filterCategories);
+        }
+
+        chips.forEach(chip => {
+          chip.addEventListener('click', () => {
+            chips.forEach(c => c.classList.remove('active'));
+            chip.classList.add('active');
+            activeNeed = chip.getAttribute('data-need') || 'all';
+            if (catSelect) {
+              catSelect.value = activeNeed === 'popular' ? 'all' : (activeNeed || 'all');
+            }
+            filterCategories();
+          });
+        });
+
+        // 2. Dynamic Document Tabs Switching
+        const docTabBtns = document.querySelectorAll('.edu-dtab-btn');
+        const docPanels = document.querySelectorAll('.edu-dtab-panel');
+
+        docTabBtns.forEach(btn => {
+          btn.addEventListener('click', () => {
+            const targetId = btn.getAttribute('data-tab');
+            docTabBtns.forEach(b => b.classList.remove('active'));
+            docPanels.forEach(p => p.classList.remove('active'));
+
+            btn.classList.add('active');
+            const activePanel = document.getElementById(targetId);
+            if (activePanel) {
+              activePanel.classList.add('active');
+            }
+            if (window.lucide) lucide.createIcons();
+          });
+        });
+
+        // 3. FAQ Categorized Tabs & Accordion Toggle (Matching design-services.html)
+        const faqTabs = document.querySelectorAll('.edu-cfaq-sidebar .cfaq-tab');
+        const faqPanels = document.querySelectorAll('.edu-cfaq-panels .cfaq-panel');
+        faqTabs.forEach(tab => {
+          tab.addEventListener('click', () => {
+            const target = tab.getAttribute('data-tab');
+            faqTabs.forEach(t => t.classList.remove('active'));
+            faqPanels.forEach(p => p.classList.remove('active'));
+            tab.classList.add('active');
+            const activePanel = document.querySelector(`.edu-cfaq-panels .cfaq-panel[data-panel="${target}"]`);
+            if (activePanel) activePanel.classList.add('active');
+            if (window.lucide) lucide.createIcons();
+          });
+        });
+
+        // FAQ Live Search Filter
+        const faqSearchInput = document.getElementById('edu-faq-search-input');
+        if (faqSearchInput) {
+          faqSearchInput.addEventListener('input', () => {
+            const term = faqSearchInput.value.trim().toLowerCase();
+            const allFaqItems = document.querySelectorAll('.edu-cfaq-panels .faq-item');
+            if (term) {
+              faqPanels.forEach(p => p.classList.add('active'));
+              allFaqItems.forEach(item => {
+                const text = item.textContent.toLowerCase();
+                const match = text.includes(term);
+                item.style.display = match ? 'block' : 'none';
+                if (match) item.classList.add('open');
+              });
+            } else {
+              allFaqItems.forEach(item => item.style.display = '');
+              const activeTab = document.querySelector('.edu-cfaq-sidebar .cfaq-tab.active');
+              const target = activeTab ? activeTab.getAttribute('data-tab') : 'timeline';
+              faqPanels.forEach(p => {
+                p.classList.toggle('active', p.getAttribute('data-panel') === target);
+              });
+            }
+          });
+        }
+
+        // FAQ Accordion Click Handler
+        document.querySelectorAll('.edu-cfaq-panels .faq-question').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const item = btn.closest('.faq-item');
+            if (item) {
+              const isOpen = item.classList.contains('open');
+              item.classList.toggle('open', !isOpen);
+            }
+          });
+        });
       });
-    }, 100); // small delay to ensure CSS is applied
-  });
-</script>
-</body>
+    </script>
+  </body>
 </html>

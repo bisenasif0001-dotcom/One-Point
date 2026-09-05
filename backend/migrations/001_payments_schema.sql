@@ -25,8 +25,56 @@ CREATE TABLE IF NOT EXISTS services (
   sla TEXT,
   required_docs_json TEXT NOT NULL DEFAULT '[]',
   automation_count INTEGER NOT NULL DEFAULT 0,
+  sub_category TEXT,
+  variant TEXT NOT NULL DEFAULT 'Standard',
+  pricing_model TEXT NOT NULL DEFAULT 'all_inclusive',
+  government_fee_paise INTEGER NOT NULL DEFAULT 0,
+  operator_fee_paise INTEGER NOT NULL DEFAULT 0,
+  convenience_fee_paise INTEGER NOT NULL DEFAULT 0,
+  gst_rate REAL NOT NULL DEFAULT 0,
+  offer_price_paise INTEGER,
+  display_price TEXT,
+  customer_price_note TEXT,
+  internal_notes TEXT,
+  popular INTEGER NOT NULL DEFAULT 0,
+  featured INTEGER NOT NULL DEFAULT 0,
+  homepage_visibility INTEGER NOT NULL DEFAULT 0,
+  last_updated TEXT,
   created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
+
+CREATE TABLE IF NOT EXISTS service_pricing_variants (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  parent_slug TEXT NOT NULL,
+  variant_slug TEXT NOT NULL UNIQUE,
+  service_name TEXT NOT NULL,
+  variant_name TEXT NOT NULL,
+  category TEXT,
+  sub_category TEXT,
+  pricing_model TEXT NOT NULL DEFAULT 'all_inclusive',
+  government_fee_paise INTEGER NOT NULL DEFAULT 0,
+  operator_fee_paise INTEGER NOT NULL DEFAULT 0,
+  convenience_fee_paise INTEGER NOT NULL DEFAULT 0,
+  gst_rate REAL NOT NULL DEFAULT 0,
+  offer_price_paise INTEGER,
+  price_paise INTEGER NOT NULL DEFAULT 0,
+  display_price TEXT,
+  customer_price_note TEXT,
+  duration TEXT,
+  required_docs_json TEXT NOT NULL DEFAULT '[]',
+  status TEXT NOT NULL DEFAULT 'active',
+  popular INTEGER NOT NULL DEFAULT 0,
+  featured INTEGER NOT NULL DEFAULT 0,
+  homepage_visibility INTEGER NOT NULL DEFAULT 0,
+  description TEXT,
+  internal_notes TEXT,
+  last_updated TEXT,
+  active INTEGER NOT NULL DEFAULT 1,
+  created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE INDEX IF NOT EXISTS idx_service_pricing_variants_parent ON service_pricing_variants(parent_slug);
+CREATE INDEX IF NOT EXISTS idx_service_pricing_variants_name ON service_pricing_variants(variant_name);
 
 CREATE TABLE IF NOT EXISTS products (
   id INTEGER PRIMARY KEY AUTOINCREMENT,

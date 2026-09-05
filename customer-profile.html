@@ -1,0 +1,543 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="One Point Account Settings — manage personal identity, verified addresses, security credentials, active sessions, and privacy data charter.">
+    <meta name="robots" content="noindex,nofollow">
+    <title>Account Settings | One Point Digital Services</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;850;900&display=swap" rel="stylesheet">
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+    <script src="assets/opds-boot.js?v=anti-fouc-79"></script>
+    <link rel="stylesheet" href="assets/onepoint.css?v=customer-checkout-94">
+    <link rel="stylesheet" href="assets/onepoint-customer-profile.css?v=20">
+    <link rel="stylesheet" href="assets/onepoint-customer-account.css?v=21">
+  </head>
+  <body class="elite-console-body enterprise-checkout-body" data-cpf-shell data-account-page="profile">
+    <div data-account-shell></div>
+
+    <main class="cpf-page acc-page" id="cpf-root" aria-labelledby="cpf-title" data-account-content hidden>
+      <div class="cpf-shell">
+        
+        <!-- Heading -->
+        <section class="cpf-page-heading">
+          <div>
+            <span class="acc-eyebrow"><i data-lucide="settings"></i> ACCOUNT SETTINGS</span>
+            <h1 id="cpf-title">Account Settings</h1>
+            <p>Manage your personal identity, verified addresses, account security, and data privacy controls.</p>
+          </div>
+          <a class="eds-btn eds-btn-secondary" href="customer-account-overview.html"><i data-lucide="layout-dashboard"></i> Back to Overview</a>
+        </section>
+
+        <div id="cpf-banner" class="cpf-banner" hidden></div>
+
+        <!-- "Secure Your Account" Stepper Strip -->
+        <div id="cpf-activation-card" class="cpf-card cpf-activation-stepper-card" hidden>
+          <div class="cpf-stepper-head">
+            <span class="cpf-stepper-icon"><i data-lucide="shield-alert"></i></span>
+            <div class="cpf-stepper-copy">
+              <strong>Secure Your Account</strong>
+              <div class="cpf-stepper-strip" id="cpf-security-stepper-strip">
+                <span class="cpf-step-item done" id="step-mobile"><i data-lucide="check"></i> 1. Mobile Verified</span>
+                <span class="cpf-step-sep">&rarr;</span>
+                <span class="cpf-step-item active" id="step-email">2. Verify Email</span>
+                <span class="cpf-step-sep">&rarr;</span>
+                <span class="cpf-step-item" id="step-password">3. Set Password</span>
+              </div>
+            </div>
+          </div>
+          <div class="cpf-stepper-action" id="cpf-stepper-action-box">
+            <button type="button" class="eds-btn eds-btn-primary" id="cpf-stepper-primary-cta" data-cpf-open="verify-email">
+              <i data-lucide="mail-check"></i> Verify Email Address
+            </button>
+            <button type="button" class="eds-btn eds-btn-ghost" id="cpf-activation-dismiss">Do This Later</button>
+          </div>
+        </div>
+
+        <!-- Identity Header Card -->
+        <section class="cpf-card cpf-header-card">
+          <div class="cpf-header-left">
+            <div class="cpf-avatar" id="cpf-avatar">--</div>
+            <div class="cpf-header-info">
+              <h2 id="cpf-name">Loading...</h2>
+              <div class="cpf-header-meta">
+                <span class="cpf-id-badge">
+                  <span>Customer ID:</span>
+                  <strong id="cpf-customer-id">--</strong>
+                  <button type="button" class="acc-copy-btn" id="cpf-copy-custid-btn" title="Copy Customer ID">
+                    <i data-lucide="copy" style="width: 12px; height: 12px;"></i>
+                  </button>
+                </span>
+                <span class="cpf-status-pill" id="cpf-status-pill"><i data-lucide="check-circle-2"></i> Active Account</span>
+              </div>
+              <div class="cpf-badge-row" id="cpf-badge-row"></div>
+              <div class="cpf-member-since" id="cpf-member-since"></div>
+            </div>
+          </div>
+          
+          <!-- Actionable Profile Completion Checklist Card -->
+          <div class="cpf-completion-box" id="cpf-completion" aria-live="polite"></div>
+        </section>
+
+        <!-- Sub-Navigation Horizontal Tabs / Mobile Segmented Selector -->
+        <nav class="cpf-tab-nav" role="tablist" aria-label="Account Settings Sections">
+          <button type="button" class="cpf-tab-btn active" data-tab="personal" role="tab" aria-selected="true" id="tab-btn-personal">
+            <i data-lucide="user-round"></i> Profile
+          </button>
+          <button type="button" class="cpf-tab-btn" data-tab="address" role="tab" aria-selected="false" id="tab-btn-address">
+            <i data-lucide="map-pin"></i> Addresses <span class="cpf-tab-count-badge" id="cpf-address-count-badge">1</span>
+          </button>
+          <button type="button" class="cpf-tab-btn" data-tab="security" role="tab" aria-selected="false" id="tab-btn-security">
+            <i data-lucide="shield-check"></i> Security
+          </button>
+          <button type="button" class="cpf-tab-btn" data-tab="privacy" role="tab" aria-selected="false" id="tab-btn-privacy">
+            <i data-lucide="shield-ellipsis"></i> Privacy &amp; Data
+          </button>
+        </nav>
+
+        <!-- ==================== TAB 1: PROFILE (PERSONAL DETAILS) ==================== -->
+        <div class="cpf-tab-panel active" id="cpf-panel-personal" role="tabpanel" aria-labelledby="tab-btn-personal">
+          <section class="cpf-card">
+            <div class="cpf-card-title-row">
+              <div class="cpf-card-title-left">
+                <span class="cpf-card-icon"><i data-lucide="user-round"></i></span>
+                <div>
+                  <h3>Personal Identity &amp; Contact</h3>
+                  <p class="cpf-muted">Used across citizen application drafts and Kendra communication.</p>
+                </div>
+              </div>
+              <button type="button" class="cpf-edit-btn" id="cpf-edit-personal-btn" data-cpf-edit="personal">
+                <i data-lucide="pencil"></i> Edit Details
+              </button>
+            </div>
+
+            <!-- VIEW MODE (Clean, Elegant Rows) -->
+            <div class="cpf-view-grid" id="cpf-personal-view">
+              <div class="cpf-view-row">
+                <small>Full Legal Name</small>
+                <strong id="cpf-view-name">--</strong>
+              </div>
+              <div class="cpf-view-row">
+                <small>Primary Mobile</small>
+                <div class="cpf-view-val-badge">
+                  <strong id="cpf-view-mobile">--</strong>
+                  <span id="cpf-view-mobile-status" class="cpf-tag ok"><i data-lucide="check"></i> Verified</span>
+                </div>
+              </div>
+              <div class="cpf-view-row">
+                <small>Primary Email Address</small>
+                <div class="cpf-view-val-badge">
+                  <strong id="cpf-view-email">--</strong>
+                  <span id="cpf-view-email-status" class="cpf-tag ok"><i data-lucide="check"></i> Verified</span>
+                </div>
+              </div>
+              <div class="cpf-view-row">
+                <small>Preferred Language</small>
+                <strong id="cpf-view-lang">Hindi / English</strong>
+              </div>
+              <div class="cpf-view-row">
+                <small>Date of Birth (Optional)</small>
+                <strong id="cpf-view-dob">Not specified</strong>
+              </div>
+            </div>
+
+            <!-- EDIT MODE FORM (Activated on Click) -->
+            <form id="cpf-personal-form" class="cpf-form-grid" data-mode="view" hidden>
+              <div class="cpf-field">
+                <label for="cpf-full-name">Full Legal Name</label>
+                <input class="eds-input" id="cpf-full-name" name="name" autocomplete="name" required>
+              </div>
+              <div class="cpf-field">
+                <label for="cpf-mobile">Registered Mobile Number</label>
+                <div style="display:flex; gap:8px;">
+                  <input class="eds-input" id="cpf-mobile" name="mobile" type="tel" inputmode="numeric" autocomplete="tel" aria-describedby="cpf-mobile-help">
+                  <button type="button" class="eds-btn eds-btn-secondary" id="cpf-mobile-change-btn" style="white-space:nowrap; font-size:.8rem;">
+                    Verify with OTP
+                  </button>
+                </div>
+                <small class="cpf-field-help" id="cpf-mobile-help">Changes require 6-digit SMS OTP verification.</small>
+              </div>
+              <div class="cpf-field">
+                <label for="cpf-email">Email Address</label>
+                <div style="display:flex; gap:8px;">
+                  <input class="eds-input" id="cpf-email" name="email" type="email" autocomplete="email" placeholder="Add your email address">
+                  <button type="button" class="eds-btn eds-btn-secondary" id="cpf-email-change-btn" style="white-space:nowrap; font-size:.8rem;">
+                    Verify
+                  </button>
+                </div>
+              </div>
+              <div class="cpf-field">
+                <label for="cpf-lang">Preferred Communication Language</label>
+                <select class="eds-input" id="cpf-lang" name="language">
+                  <option value="hi_en">Hindi / English (Bilingual)</option>
+                  <option value="hi">Hindi Only</option>
+                  <option value="en">English Only</option>
+                </select>
+              </div>
+              <div class="cpf-field">
+                <label for="cpf-dob">Date of Birth <span>(Optional)</span></label>
+                <input class="eds-input" id="cpf-dob" name="dob" type="text" placeholder="DD/MM/YYYY">
+              </div>
+
+              <!-- Form Actions Sticky Bar -->
+              <div class="cpf-form-actions" id="cpf-personal-form-actions">
+                <button type="submit" class="eds-btn eds-btn-primary">Save Changes</button>
+                <button type="button" class="eds-btn eds-btn-secondary" data-cpf-cancel="personal">Cancel</button>
+              </div>
+            </form>
+          </section>
+        </div>
+
+        <!-- ==================== TAB 2: ADDRESSES (REUSABLE SAVED SYSTEM) ==================== -->
+        <div class="cpf-tab-panel" id="cpf-panel-address" role="tabpanel" aria-labelledby="tab-btn-address" hidden>
+          <section class="cpf-card">
+            <div class="cpf-card-title-row">
+              <div class="cpf-card-title-left">
+                <span class="cpf-card-icon"><i data-lucide="map-pin"></i></span>
+                <div>
+                  <h3>Saved Addresses</h3>
+                  <p class="cpf-muted">Used for PVC certificate delivery, postal communications, and application domicile addresses.</p>
+                </div>
+              </div>
+              <button type="button" class="eds-btn eds-btn-primary" id="cpf-add-address-btn" style="font-size:.82rem; min-height:36px;">
+                <i data-lucide="plus"></i> Add New Address
+              </button>
+            </div>
+
+            <!-- Saved Address Cards List -->
+            <div class="cpf-address-cards-grid" id="cpf-address-cards-grid">
+              <!-- Rendered dynamically -->
+            </div>
+
+            <!-- Empty State for Addresses -->
+            <div class="cpf-address-empty" id="cpf-address-empty" hidden>
+              <span><i data-lucide="map-pin-plus"></i></span>
+              <div>
+                <strong>No saved address yet</strong>
+                <p>Save an address to make future citizen applications and physical certificate deliveries faster.</p>
+              </div>
+              <button type="button" class="eds-btn eds-btn-primary" id="cpf-empty-add-address-btn">
+                <i data-lucide="plus"></i> Add Address
+              </button>
+            </div>
+          </section>
+        </div>
+
+        <!-- ==================== TAB 3: SECURITY & VERIFICATION ==================== -->
+        <div class="cpf-tab-panel" id="cpf-panel-security" role="tabpanel" aria-labelledby="tab-btn-security" hidden>
+          
+          <!-- Password Management Card -->
+          <section class="cpf-card">
+            <div class="cpf-card-title-row">
+              <div class="cpf-card-title-left">
+                <span class="cpf-card-icon"><i data-lucide="key-round"></i></span>
+                <div>
+                  <h3>Password &amp; Credentials</h3>
+                  <p class="cpf-muted">Manage your permanent password and authentication settings.</p>
+                </div>
+              </div>
+            </div>
+            <div class="cpf-security-row">
+              <div>
+                <strong id="cpf-password-status-text">Password set 45 days ago</strong>
+                <p class="cpf-muted">Keep your account secure with a strong 8-character password.</p>
+              </div>
+              <button type="button" class="eds-btn eds-btn-secondary" id="cpf-password-action-btn" data-cpf-open="create-password">
+                <i data-lucide="shield-check"></i> Change Password
+              </button>
+            </div>
+          </section>
+
+          <!-- Verified Contact Methods -->
+          <section class="cpf-card">
+            <div class="cpf-card-title-row">
+              <div class="cpf-card-title-left">
+                <span class="cpf-card-icon"><i data-lucide="badge-check"></i></span>
+                <div>
+                  <h3>Verified Contact Methods</h3>
+                  <p class="cpf-muted">Official mobile and email channels linked to your account.</p>
+                </div>
+              </div>
+            </div>
+            <div class="cpf-verify-list">
+              <div class="cpf-verify-item">
+                <div class="cpf-verify-item-left">
+                  <span class="cpf-verify-icon ok"><i data-lucide="smartphone"></i></span>
+                  <div>
+                    <strong>Mobile Number (+91 <span id="cpf-sec-mobile-num">9473946181</span>)</strong>
+                    <small class="cpf-muted">Primary login method and OTP verification channel.</small>
+                  </div>
+                </div>
+                <div class="cpf-verify-item-right">
+                  <span class="cpf-tag ok" id="cpf-sec-mobile-tag">Verified</span>
+                  <button type="button" class="cpf-inline-action" data-cpf-open="verify-mobile">Update Phone</button>
+                </div>
+              </div>
+
+              <div class="cpf-verify-item">
+                <div class="cpf-verify-item-left">
+                  <span class="cpf-verify-icon ok"><i data-lucide="mail"></i></span>
+                  <div>
+                    <strong>Email Address (<span id="cpf-sec-email-val">asif@bisen.in</span>)</strong>
+                    <small class="cpf-muted">Used for GST tax invoices and application acknowledgement slips.</small>
+                  </div>
+                </div>
+                <div class="cpf-verify-item-right">
+                  <span class="cpf-tag ok" id="cpf-sec-email-tag">Verified</span>
+                  <button type="button" class="cpf-inline-action" data-cpf-open="verify-email">Update Email</button>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Active Login Sessions & Devices -->
+          <section class="cpf-card">
+            <div class="cpf-card-title-row">
+              <div class="cpf-card-title-left">
+                <span class="cpf-card-icon"><i data-lucide="laptop"></i></span>
+                <div>
+                  <h3>Active Sessions &amp; Devices</h3>
+                  <p class="cpf-muted">Manage devices that are currently logged into your One Point account.</p>
+                </div>
+              </div>
+              <button type="button" class="eds-btn eds-btn-secondary" id="cpf-signout-all-devices-btn" style="font-size:.78rem; min-height:34px;">
+                <i data-lucide="log-out"></i> Sign Out All Other Devices
+              </button>
+            </div>
+            
+            <div class="cpf-session-list" id="cpf-session-list">
+              <div class="cpf-session-item current">
+                <div class="cpf-session-left">
+                  <span class="cpf-session-icon"><i data-lucide="monitor"></i></span>
+                  <div>
+                    <strong>Chrome on Windows <span class="cpf-session-curr-tag">Current Device</span></strong>
+                    <small class="cpf-muted">Lucknow, Uttar Pradesh &middot; Active Now</small>
+                  </div>
+                </div>
+                <div class="cpf-session-right">
+                  <span class="cpf-session-status-ok"><span class="acc-pulse-dot-green"></span> Online</span>
+                </div>
+              </div>
+
+              <div class="cpf-session-item">
+                <div class="cpf-session-left">
+                  <span class="cpf-session-icon"><i data-lucide="smartphone"></i></span>
+                  <div>
+                    <strong>Chrome on Android</strong>
+                    <small class="cpf-muted">Lucknow, Uttar Pradesh &middot; Last active 2 days ago</small>
+                  </div>
+                </div>
+                <div class="cpf-session-right">
+                  <button type="button" class="eds-btn eds-btn-ghost" style="font-size:.76rem; min-height:30px;" onclick="alert('Signed out Android device.')">
+                    Sign Out Device
+                  </button>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Security Activity Log (Audit Trail) -->
+          <section class="cpf-card">
+            <div class="cpf-card-title-row">
+              <div class="cpf-card-title-left">
+                <span class="cpf-card-icon"><i data-lucide="history"></i></span>
+                <div>
+                  <h3>Security Activity</h3>
+                  <p class="cpf-muted">Recent audit trail of sign-ins and credential updates.</p>
+                </div>
+              </div>
+            </div>
+            <div class="cpf-sec-activity-list" id="cpf-sec-activity-list">
+              <div class="cpf-sec-activity-item">
+                <i data-lucide="key" class="cpf-sec-act-icon"></i>
+                <div class="cpf-sec-act-body">
+                  <strong>Password Changed Successfully</strong>
+                  <small class="cpf-muted">12 Aug 2026 &middot; Authenticated via Mobile OTP</small>
+                </div>
+              </div>
+              <div class="cpf-sec-activity-item">
+                <i data-lucide="smartphone" class="cpf-sec-act-icon"></i>
+                <div class="cpf-sec-act-body">
+                  <strong>Registered Mobile Number Verified (+91 9473946181)</strong>
+                  <small class="cpf-muted">10 Jul 2026 &middot; OTP Verified</small>
+                </div>
+              </div>
+              <div class="cpf-sec-activity-item">
+                <i data-lucide="shield-check" class="cpf-sec-act-icon"></i>
+                <div class="cpf-sec-act-body">
+                  <strong>Account Created &amp; Initial Security Setup</strong>
+                  <small class="cpf-muted">10 Jul 2026 &middot; One Point Suvidha Kendra Lucknow</small>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Safe Sign Out Button (Neutral Outline) -->
+          <div style="display:flex; justify-content:flex-end;">
+            <button type="button" class="eds-btn eds-btn-secondary" id="cpf-logout-btn-2">
+              <i data-lucide="log-out"></i> Sign Out of Account
+            </button>
+          </div>
+        </div>
+
+        <!-- ==================== TAB 4: PRIVACY & DATA CHARTER ==================== -->
+        <div class="cpf-tab-panel" id="cpf-panel-privacy" role="tabpanel" aria-labelledby="tab-btn-privacy" hidden>
+          
+          <!-- Privacy Data Summary Cards -->
+          <section class="cpf-card">
+            <div class="cpf-card-title-row">
+              <div class="cpf-card-title-left">
+                <span class="cpf-card-icon"><i data-lucide="shield-ellipsis"></i></span>
+                <div>
+                  <h3>My Data Summary</h3>
+                  <p class="cpf-muted">Overview of your personal data records held with One Point Suvidha Kendra.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="cpf-data-summary-grid">
+              <div class="cpf-data-summary-card">
+                <i data-lucide="files" class="cpf-data-icon"></i>
+                <div>
+                  <strong>8 Stored Documents</strong>
+                  <small class="cpf-muted">Protected with 256-bit AES encryption</small>
+                </div>
+                <a href="customer-account-vault.html" class="cpf-data-link">Manage Vault &rarr;</a>
+              </div>
+
+              <div class="cpf-data-summary-card">
+                <i data-lucide="receipt" class="cpf-data-icon"></i>
+                <div>
+                  <strong>Tax Invoices &amp; Receipts</strong>
+                  <small class="cpf-muted">GST tax &amp; payment transaction records</small>
+                </div>
+                <a href="customer-account-invoices.html" class="cpf-data-link">View Invoices &rarr;</a>
+              </div>
+            </div>
+          </section>
+
+          <!-- Citizen Data Controls & Privacy Requests -->
+          <section class="cpf-card">
+            <div class="cpf-card-title-row">
+              <div class="cpf-card-title-left">
+                <span class="cpf-card-icon"><i data-lucide="user-check"></i></span>
+                <div>
+                  <h3>Citizen Privacy Rights &amp; Requests</h3>
+                  <p class="cpf-muted">Exercise your data protection rights under the One Point Privacy Charter.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="cpf-privacy-actions-list">
+              <div class="cpf-privacy-action-row">
+                <div>
+                  <strong>Request Document Removal / Purge</strong>
+                  <p class="cpf-muted">Request that an uploaded sensitive identity scan be hidden from your customer view immediately.</p>
+                </div>
+                <button type="button" class="eds-btn eds-btn-secondary" id="cpf-btn-req-removal">
+                  <i data-lucide="trash-2"></i> Request Removal
+                </button>
+              </div>
+
+              <div class="cpf-privacy-action-row">
+                <div>
+                  <strong>Request Personal Data Correction</strong>
+                  <p class="cpf-muted">Submit official corrections for legal name, father's name, or DOB on permanent records.</p>
+                </div>
+                <button type="button" class="eds-btn eds-btn-secondary" id="cpf-btn-req-correction">
+                  <i data-lucide="edit-3"></i> Request Correction
+                </button>
+              </div>
+
+              <div class="cpf-privacy-action-row">
+                <div>
+                  <strong>Export Account Data Summary</strong>
+                  <p class="cpf-muted">Download a complete portable summary of your service applications and audit history.</p>
+                </div>
+                <button type="button" class="eds-btn eds-btn-secondary" onclick="window.print()">
+                  <i data-lucide="download"></i> Export Summary
+                </button>
+              </div>
+            </div>
+
+            <!-- Active Privacy Requests Tracker -->
+            <div style="margin-top: 18px;">
+              <h4 style="font-size:.92rem; color:#071426; margin-bottom:8px;">Recent Privacy &amp; Data Requests</h4>
+              <div class="cpf-deletion-requests" id="cpf-deletion-requests"></div>
+            </div>
+
+            <p class="cpf-retention-note" style="margin-top:14px;">
+              <i data-lucide="info"></i>
+              Some minimal statutory transaction records (such as GST tax invoices and government submission timestamps) may need to be retained for accounting and compliance obligations.
+            </p>
+          </section>
+
+          <!-- Optional Danger Zone: Close Account -->
+          <section class="cpf-card cpf-danger-zone-card">
+            <div class="cpf-card-title-row">
+              <div class="cpf-card-title-left">
+                <span class="cpf-card-icon" style="background:#fee2e2; color:#b91c1c;"><i data-lucide="alert-octagon"></i></span>
+                <div>
+                  <h3 style="color:#b91c1c;">Account Closure Danger Zone</h3>
+                  <p class="cpf-muted">Permanent data purge and account termination controls.</p>
+                </div>
+              </div>
+            </div>
+            <p class="cpf-muted" style="font-size:.84rem;">
+              Closing your account permanently disables future portal sign-ins and purges all digital document vault files. Active requests must be completed first.
+            </p>
+            <div style="margin-top:10px;">
+              <button type="button" class="eds-btn cpf-danger-btn" onclick="alert('Account closure requires verified identity confirmation. Please contact privacy@bisen.in.')">
+                Close Account &amp; Purge Vault
+              </button>
+            </div>
+          </section>
+        </div>
+
+        <!-- Persistent Account Support Bar -->
+        <section class="acc-support-card">
+          <div class="acc-support-main">
+            <div class="acc-support-icon">
+              <i data-lucide="headphones"></i>
+            </div>
+            <div class="acc-support-copy">
+              <div class="acc-support-title-wrap">
+                <h3>Need Assistance with Account Settings?</h3>
+                <span class="acc-support-hours-pill">
+                  <span class="acc-pulse-dot-green"></span> 9:00 AM &ndash; 8:00 PM Support Desk
+                </span>
+              </div>
+              <p>One Point Suvidha Kendra Lucknow desk operators are available for profile verifications, identity updates, and security questions.</p>
+            </div>
+          </div>
+          <div class="cpf-support-links" aria-label="Support options">
+            <a href="https://wa.me/919473946181?text=Hi%2C%20I%20need%20help%20with%20my%20Account%20Settings." target="_blank" rel="noopener" class="cpf-support-btn cpf-support-btn-whatsapp">
+              <i data-lucide="message-circle"></i> <span>WhatsApp Support</span>
+            </a>
+            <a href="support.html?context=AccountSettings" class="cpf-support-btn">
+              <i data-lucide="life-buoy"></i> <span>Raise Support Ticket</span>
+            </a>
+            <a href="tel:+919473946181" class="cpf-support-btn">
+              <i data-lucide="phone"></i> <span>Call Kendra Desk</span>
+            </a>
+          </div>
+        </section>
+
+      </div>
+    </main>
+
+    <!-- Modal Backdrop for Address / Verification / Password -->
+    <div id="cpf-modal-backdrop" class="cpf-modal-backdrop" hidden>
+      <div class="cpf-modal" id="cpf-modal" role="dialog" aria-modal="true"></div>
+    </div>
+
+    <div data-account-footer></div>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+    <script src="assets/app.js?v=customer-checkout-94" defer></script>
+    <script src="assets/auth.js?v=cpf-1" defer></script>
+    <script src="assets/customer-account.js?v=20" defer></script>
+    <script src="assets/customer-profile.js?v=20" defer></script>
+  </body>
+</html>

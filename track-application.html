@@ -1,117 +1,797 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Track One Point Digital Services applications with Pending, Processing, Approved and Delivered status stages.">
-    <title>Track Application | One Point Digital Services</title>
+    <meta name="description" content="Track your One Point Digital Services applications, documents, and processing milestones in real-time.">
+    <title>Track Application Status | One Point Digital Services</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;650;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-        <link rel="stylesheet" href="assets/onepoint.css?v=2">
+    <script src="assets/opds-boot.js?v=anti-fouc-79"></script>
+    <link rel="stylesheet" href="assets/onepoint.css?v=customer-checkout-94">
+    <link rel="stylesheet" href="assets/enterprise-design-system.css?v=eds-2">
+    <link rel="stylesheet" href="assets/enterprise-visual-polish.css?v=polish-3">
     <style>
-      /* Search input wrapper — icon needs a positioned parent */
-      .premium-search-row > div {
+      /* ══════════════════════════════════════════════════════════════════════════
+         LIGHTWEIGHT, CONSISTENT LIVE TRACKING DASHBOARD (Clean Enterprise Design)
+         ══════════════════════════════════════════════════════════════════════════ */
+      body.online-services-page {
+        background-color: #f8fafc;
+        color: #0f172a;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      }
+
+      .tracker-page-shell {
+        max-width: 1140px;
+        margin: 0 auto;
+        padding: clamp(20px, 3vw, 40px) 16px 64px 16px;
+      }
+
+      /* ── Breadcrumb ── */
+      .track-breadcrumb {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 0.82rem;
+        color: #64748b;
+        margin-bottom: 20px;
+      }
+      .track-breadcrumb a {
+        color: #475569;
+        text-decoration: none;
+        transition: color 0.15s;
+      }
+      .track-breadcrumb a:hover { color: #0a5eb0; }
+      .track-breadcrumb i, .track-breadcrumb svg { width: 14px; height: 14px; color: #94a3b8; }
+      .track-breadcrumb span { color: #0f172a; font-weight: 600; }
+
+      /* ── Hero Search Box (Airy & Lightweight) ── */
+      .track-hero-box {
+        background: #ffffff;
+        border: 1px solid rgba(15, 23, 42, 0.08);
+        border-radius: 16px;
+        padding: clamp(24px, 4vw, 36px);
+        box-shadow: 0 1px 3px rgba(15, 23, 42, 0.03), 0 6px 18px rgba(10, 44, 88, 0.03);
+        margin-bottom: 24px;
+        transition: all 0.2s ease;
+      }
+      .track-hero-box.compact {
+        padding: 20px 24px;
+      }
+
+      .track-live-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: rgba(22, 163, 74, 0.08);
+        color: #15803d;
+        border: 1px solid rgba(22, 163, 74, 0.2);
+        padding: 3px 10px;
+        border-radius: 999px;
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        margin-bottom: 10px;
+      }
+      .pulse-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: #16a34a;
+        box-shadow: 0 0 0 0 rgba(22, 163, 74, 0.7);
+        animation: track-pulse 2s infinite;
+      }
+      @keyframes track-pulse {
+        0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(22, 163, 74, 0.7); }
+        70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(22, 163, 74, 0); }
+        100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(22, 163, 74, 0); }
+      }
+
+      .track-hero-title {
+        font-size: clamp(1.45rem, 2.8vw, 1.95rem);
+        font-weight: 800;
+        color: #0a2c58;
+        line-height: 1.25;
+        margin: 0 0 6px 0;
+      }
+      .track-hero-sub {
+        font-size: 0.9rem;
+        color: #64748b;
+        line-height: 1.5;
+        margin: 0 0 20px 0;
+        max-width: 680px;
+      }
+      .compact .track-hero-title { font-size: 1.25rem; }
+      .compact .track-hero-sub { display: none; }
+
+      /* Search Row */
+      .track-search-bar {
+        display: flex;
+        gap: 10px;
+        max-width: 680px;
+      }
+      .track-input-wrap {
         position: relative;
         flex: 1;
         display: flex;
         align-items: center;
       }
-      .premium-search-row > div .input { width: 100%; }
-
-      /* Command topbar — was designed for dark cards, needs its own dark pill here */
-      .tracker-card-right .command-topbar {
-        background: linear-gradient(120deg, #0a2c58 0%, #125696 100%);
-        border-radius: 12px;
-        padding: 10px 16px;
-        margin-bottom: 20px;
-        border-bottom: none;
+      .track-input-wrap .track-search-icon {
+        position: absolute;
+        left: 14px;
+        color: #94a3b8;
+        width: 18px;
+        height: 18px;
+        pointer-events: none;
       }
-      .tracker-card-right .command-topbar strong {
-        color: rgba(255,255,255,.85);
+      .track-input-wrap input {
+        width: 100%;
+        height: 46px;
+        padding-left: 42px;
+        padding-right: 14px;
+        border-radius: 10px;
+        border: 1px solid #cbd5e1;
+        background: #ffffff;
+        color: #0f172a;
+        font-size: 0.92rem;
+        font-family: inherit;
+        outline: none;
+        transition: border-color 0.18s, box-shadow 0.18s;
+      }
+      .track-input-wrap input:focus {
+        border-color: #0a5eb0;
+        box-shadow: 0 0 0 3px rgba(10, 94, 176, 0.12);
+      }
+      .track-search-btn {
+        height: 46px;
+        padding: 0 22px;
+        border-radius: 10px;
+        background: #0a5eb0;
+        color: #ffffff;
+        font-weight: 600;
+        font-size: 0.9rem;
+        border: none;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        transition: background 0.15s, transform 0.15s;
+        flex-shrink: 0;
+      }
+      .track-search-btn:hover {
+        background: #084c8d;
+        transform: translateY(-1px);
+      }
+      .track-search-btn:disabled {
+        opacity: 0.7;
+        cursor: not-allowed;
+        transform: none;
+      }
+
+      /* Recent Searches */
+      .track-recents {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 12px;
+      }
+      .track-recents-label {
         font-size: 0.75rem;
-        letter-spacing: 0.1em;
+        color: #94a3b8;
+        font-weight: 500;
+      }
+      .track-chip {
+        background: #f1f5f9;
+        border: 1px solid #e2e8f0;
+        color: #334155;
+        border-radius: 6px;
+        padding: 3px 10px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.15s;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+      }
+      .track-chip:hover {
+        background: #e2e8f0;
+        color: #0a5eb0;
       }
 
-      /* Icon box: centered icon + consistent border-radius on all 4 states */
-      .tracker-hero-timeline .status-step .status-dot {
+      /* Inline Feedback Message */
+      .track-status-message {
+        display: none;
+        align-items: flex-start;
+        gap: 10px;
+        margin-top: 14px;
+        padding: 10px 14px;
+        border-radius: 8px;
+        font-size: 0.84rem;
+        line-height: 1.45;
+      }
+      .track-status-message.info {
+        display: flex;
+        background: #f0f7ff;
+        border: 1px solid #bfdbfe;
+        color: #1e40af;
+      }
+      .track-status-message.error {
+        display: flex;
+        background: #fef2f2;
+        border: 1px solid #fecaca;
+        color: #991b1b;
+      }
+      .track-status-message.success {
+        display: flex;
+        background: #f0fdf4;
+        border: 1px solid #bbf7d0;
+        color: #166534;
+      }
+      .track-status-message i, .track-status-message svg {
+        width: 16px;
+        height: 16px;
+        flex-shrink: 0;
+        margin-top: 2px;
+      }
+
+      /* ── Tracked Request Header Card ── */
+      .track-header-card {
+        background: #ffffff;
+        border: 1px solid rgba(15, 23, 42, 0.08);
+        border-radius: 16px;
+        padding: 20px 24px;
+        box-shadow: 0 1px 3px rgba(15, 23, 42, 0.03);
+        margin-bottom: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 16px;
+      }
+      .track-header-left {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+      .track-meta-pills {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .track-id-btn {
+        background: #f1f5f9;
+        border: 1px solid #cbd5e1;
+        color: #0f172a;
+        padding: 3px 9px;
+        border-radius: 6px;
+        font-size: 0.8rem;
+        font-weight: 700;
+        font-family: monospace;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        transition: all 0.15s;
+      }
+      .track-id-btn:hover { background: #e2e8f0; }
+      .track-cat-pill {
+        background: rgba(10, 94, 176, 0.08);
+        color: #0a5eb0;
+        border: 1px solid rgba(10, 94, 176, 0.18);
+        padding: 3px 9px;
+        border-radius: 6px;
+        font-size: 0.74rem;
+        font-weight: 600;
+      }
+      .track-app-title {
+        font-size: 1.2rem;
+        font-weight: 800;
+        color: #0a2c58;
+        margin: 2px 0 0 0;
+      }
+      .track-app-meta {
+        font-size: 0.8rem;
+        color: #64748b;
+      }
+      .track-header-right {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .track-main-badge {
+        padding: 6px 14px;
+        border-radius: 999px;
+        font-size: 0.82rem;
+        font-weight: 700;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .badge-in-progress { background: #fef3c7; color: #92400e; border: 1px solid #fde68a; }
+      .badge-completed { background: #dcfce7; color: #166534; border: 1px solid #bbf7d0; }
+      .badge-attention { background: #fee2e2; color: #991b1b; border: 1px solid #fecaca; }
+
+      .btn-wa-header {
+        background: #22c55e;
+        color: #ffffff;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 8px;
+        font-size: 0.84rem;
+        font-weight: 600;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        transition: background 0.15s;
+      }
+      .btn-wa-header:hover { background: #16a34a; color: #ffffff; }
+
+      /* ── Two-Column Main Layout ── */
+      .track-grid {
+        display: grid;
+        grid-template-columns: 1.55fr 1fr;
+        gap: 24px;
+        align-items: start;
+      }
+      @media (max-width: 900px) {
+        .track-grid { grid-template-columns: 1fr; }
+      }
+
+      /* Clean Surface Card */
+      .track-card {
+        background: #ffffff;
+        border: 1px solid rgba(15, 23, 42, 0.08);
+        border-radius: 14px;
+        padding: 20px;
+        box-shadow: 0 1px 3px rgba(15, 23, 42, 0.02);
+        margin-bottom: 20px;
+      }
+      .track-card:last-child { margin-bottom: 0; }
+
+      .track-card-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-bottom: 12px;
+        margin-bottom: 16px;
+        border-bottom: 1px solid #f1f5f9;
+      }
+      .track-card-title {
+        font-size: 0.95rem;
+        font-weight: 700;
+        color: #0f172a;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .track-card-title i, .track-card-title svg {
+        color: #0a5eb0;
+        width: 18px;
+        height: 18px;
+      }
+
+      /* ── Minimal Connected Vertical Timeline ── */
+      .track-timeline {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+      .timeline-node {
+        position: relative;
+        display: flex;
+        align-items: flex-start;
+        gap: 14px;
+      }
+      .timeline-connector {
+        position: absolute;
+        left: 15px;
+        top: 30px;
+        bottom: -20px;
+        width: 2px;
+        background: #e2e8f0;
+      }
+      .timeline-node:last-child .timeline-connector { display: none; }
+      .timeline-node.done .timeline-connector { background: #0a5eb0; }
+      .timeline-node.active .timeline-connector { background: linear-gradient(180deg, #d97706 30%, #e2e8f0 100%); }
+
+      .timeline-dot {
+        position: relative;
+        z-index: 1;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background: #ffffff;
+        border: 2px solid #cbd5e1;
+        color: #94a3b8;
         display: flex;
         align-items: center;
         justify-content: center;
+        flex-shrink: 0;
+        font-size: 0.75rem;
+        transition: all 0.2s;
+      }
+      .timeline-node.done .timeline-dot {
+        background: #0a5eb0;
+        border-color: #0a5eb0;
+        color: #ffffff;
+      }
+      .timeline-node.active .timeline-dot {
+        background: #d97706;
+        border-color: #d97706;
+        color: #ffffff;
+        box-shadow: 0 0 0 4px rgba(217, 119, 6, 0.18);
+      }
+      .timeline-node.attention .timeline-dot {
+        background: #dc2626;
+        border-color: #dc2626;
+        color: #ffffff;
+      }
+
+      .timeline-body {
+        flex: 1;
+        padding-top: 2px;
+      }
+      .timeline-heading-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        margin-bottom: 2px;
+      }
+      .timeline-step-title {
+        font-size: 0.88rem;
+        font-weight: 700;
+        color: #0f172a;
+      }
+      .timeline-node.done .timeline-step-title { color: #0a5eb0; }
+      .timeline-node.active .timeline-step-title { color: #92400e; }
+      .timeline-node.attention .timeline-step-title { color: #991b1b; }
+
+      .timeline-step-badge {
+        font-size: 0.68rem;
+        font-weight: 600;
+        padding: 2px 7px;
+        border-radius: 4px;
+      }
+      .badge-step-done { background: #dcfce7; color: #15803d; }
+      .badge-step-current { background: #fef3c7; color: #92400e; }
+      .badge-step-upcoming { background: #f1f5f9; color: #64748b; }
+
+      .timeline-step-desc {
+        font-size: 0.8rem;
+        color: #475569;
+        line-height: 1.4;
+        margin: 2px 0 0 0;
+      }
+      .timeline-step-time {
+        font-size: 0.72rem;
+        color: #94a3b8;
+        margin-top: 3px;
+        display: block;
+      }
+
+      /* ── Next Step Callout Box ── */
+      .track-next-box {
         border-radius: 10px;
+        padding: 14px 16px;
+        margin-bottom: 20px;
+        font-size: 0.85rem;
+        line-height: 1.45;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
       }
-      /* Pending future steps: light tinted background so all boxes feel equally solid */
-      .tracker-hero-timeline .status-step:not(.done):not(.active) .status-dot {
-        background: rgba(18,86,150,.05);
-        border-color: rgba(18,86,150,.18);
-        color: rgba(18,86,150,.45);
+      .track-next-box.tone-info {
+        background: #f0f7ff;
+        border: 1px solid #bfdbfe;
+        color: #1e40af;
+      }
+      .track-next-box.tone-warning {
+        background: #fffbeb;
+        border: 1px solid #fde68a;
+        color: #92400e;
+      }
+      .track-next-box.tone-success {
+        background: #f0fdf4;
+        border: 1px solid #bbf7d0;
+        color: #166534;
+      }
+      .track-next-head {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-weight: 700;
+      }
+      .track-next-action-btn {
+        align-self: flex-start;
+        padding: 5px 12px;
+        border-radius: 6px;
+        background: #ffffff;
+        border: 1px solid currentColor;
+        color: inherit;
+        font-size: 0.78rem;
+        font-weight: 600;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        transition: all 0.15s;
+      }
+      .track-next-action-btn:hover {
+        background: currentColor;
+        color: #ffffff;
       }
 
-      /* Last step — hide the dangling connecting line below it */
-      .tracker-hero-timeline .status-step:last-child .status-track-line { display: none; }
+      /* ── Document Checklist (Clean Table List) ── */
+      .doc-list-clean {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin-bottom: 16px;
+      }
+      .doc-row-clean {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px 14px;
+        border-radius: 8px;
+        background: #f8fafc;
+        border: 1px solid #e2e8f0;
+        font-size: 0.84rem;
+        gap: 12px;
+        transition: border-color 0.15s;
+      }
+      .doc-row-clean:hover { border-color: #cbd5e1; }
+      .doc-left {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .doc-icon-subtle {
+        color: #64748b;
+        width: 16px;
+        height: 16px;
+        flex-shrink: 0;
+      }
+      .doc-name {
+        font-weight: 600;
+        color: #0f172a;
+      }
+      .doc-hint {
+        font-size: 0.72rem;
+        color: #64748b;
+      }
+      .doc-right {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-shrink: 0;
+      }
+      .doc-pill {
+        font-size: 0.7rem;
+        font-weight: 600;
+        padding: 2px 7px;
+        border-radius: 4px;
+      }
+      .doc-pill.verified { background: #dcfce7; color: #15803d; }
+      .doc-pill.review { background: #e0f2fe; color: #0369a1; }
+      .doc-pill.correction { background: #fee2e2; color: #991b1b; }
+      .doc-pill.required { background: #fef3c7; color: #92400e; }
+      .doc-pill.optional { background: #f1f5f9; color: #64748b; }
 
-      /* Active step — prominent left gold accent */
-      .tracker-hero-timeline .status-step.active {
-        border-left-width: 3px;
-        border-left-color: var(--brand-gold, #c8982e);
+      .btn-doc-action {
+        font-size: 0.74rem;
+        padding: 4px 10px;
+        border-radius: 6px;
+        border: 1px solid #cbd5e1;
+        background: #ffffff;
+        color: #334155;
+        font-weight: 600;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        transition: all 0.15s;
+      }
+      .btn-doc-action:hover {
+        background: #f1f5f9;
+        color: #0a5eb0;
+        border-color: #0a5eb0;
       }
 
-      /* Description spacing below title */
-      .tracker-hero-timeline .status-desc { margin-top: 5px; }
+      /* Compact Upload Drawer / Dropzone */
+      .track-dropzone {
+        border: 1.5px dashed #cbd5e1;
+        border-radius: 10px;
+        padding: 16px;
+        text-align: center;
+        background: #f8fafc;
+        cursor: pointer;
+        transition: all 0.18s;
+      }
+      .track-dropzone:hover, .track-dropzone.drag-over {
+        border-color: #0a5eb0;
+        background: #f0f7ff;
+      }
+      .dropzone-desc {
+        font-size: 0.8rem;
+        color: #475569;
+        margin-bottom: 8px;
+      }
+      .dropzone-actions {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+      .dropzone-select {
+        height: 32px;
+        border-radius: 6px;
+        border: 1px solid #cbd5e1;
+        background: #ffffff;
+        padding: 0 8px;
+        font-size: 0.78rem;
+        color: #0f172a;
+      }
+      .dropzone-btn-sm {
+        height: 32px;
+        padding: 0 12px;
+        border-radius: 6px;
+        background: #0a5eb0;
+        color: #ffffff;
+        font-size: 0.78rem;
+        font-weight: 600;
+        border: none;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+      }
 
-      /* Title + badge: allow wrap on narrow widths */
-      .tracker-hero-timeline .status-title { flex-wrap: wrap; gap: 4px 0; }
+      /* Upload Progress */
+      .track-progress {
+        display: none;
+        margin-top: 10px;
+      }
+      .track-progress-bar {
+        height: 5px;
+        border-radius: 999px;
+        background: #e2e8f0;
+        overflow: hidden;
+      }
+      .track-progress-fill {
+        height: 100%;
+        width: 0%;
+        background: #16a34a;
+        transition: width 0.3s;
+      }
+      .track-progress-text {
+        font-size: 0.72rem;
+        color: #475569;
+        margin-top: 3px;
+        display: block;
+      }
 
-      /* Doc upload card */
-      .doc-upload-card {
-        background: #fff;
-        border-radius: 18px;
-        border: 1px solid rgba(18,86,150,.09);
-        padding: clamp(24px, 3vw, 36px);
-        box-shadow: 0 1px 4px rgba(0,0,0,.04), 0 6px 24px rgba(0,0,0,.07);
-        max-width: var(--max, 1200px);
-        margin-inline: auto;
-        width: 100%;
-        box-sizing: border-box;
+      /* ── Key-Value Summary List (Sidebar) ── */
+      .summary-list {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
       }
-      .doc-upload-header {
-        display: flex; align-items: center; gap: 16px;
-        padding-bottom: 20px; margin-bottom: 24px;
-        border-bottom: 1px solid rgba(18,86,150,.08);
+      .summary-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 0.82rem;
+        padding-bottom: 8px;
+        border-bottom: 1px solid #f1f5f9;
       }
-      .doc-upload-icon {
-        width: 48px; height: 48px; border-radius: 12px;
-        background: rgba(18,86,150,.07); display: flex;
-        align-items: center; justify-content: center;
-        color: var(--primary, #0a2c58); flex-shrink: 0;
+      .summary-row:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
       }
-      .doc-upload-title { font-size: 1rem; font-weight: 700; color: var(--primary, #0a2c58); margin-bottom: 3px; }
-      .doc-upload-subtitle { font-size: 0.82rem; color: #6b7280; line-height: 1.4; }
-      #doc-upload-grid {
+      .summary-label { color: #64748b; }
+      .summary-value { font-weight: 600; color: #0f172a; text-align: right; }
+
+      /* ── Receipts & Deliverables ── */
+      .deliverable-clean-list {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .deliverable-clean-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px 12px;
+        border-radius: 8px;
+        background: #f8fafc;
+        border: 1px solid #e2e8f0;
+        font-size: 0.82rem;
+      }
+      .deliverable-btn-sm {
+        padding: 4px 10px;
+        border-radius: 6px;
+        font-size: 0.74rem;
+        font-weight: 600;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+      }
+      .deliverable-btn-sm.active { background: #0a5eb0; color: #ffffff; }
+      .deliverable-btn-sm.locked { background: #f1f5f9; color: #94a3b8; cursor: not-allowed; }
+
+      /* ── Activity History Log ── */
+      .activity-clean-list {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .activity-clean-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        font-size: 0.8rem;
+        padding: 6px 0;
+        border-bottom: 1px solid #f8fafc;
+      }
+      .activity-clean-item:last-child { border-bottom: none; }
+      .activity-icon-wrap {
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        background: #f1f5f9;
+        color: #0a5eb0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        margin-top: 1px;
+      }
+      .activity-content-wrap { flex: 1; }
+      .activity-headline { font-weight: 600; color: #0f172a; }
+      .activity-sub { color: #64748b; font-size: 0.74rem; }
+      .activity-date { font-size: 0.7rem; color: #94a3b8; white-space: nowrap; }
+
+      /* ── Idle Preview Cards ── */
+      .idle-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
-        gap: 12px; margin-bottom: 16px;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 16px;
       }
-      #doc-upload-grid label {
-        display: flex; align-items: center; gap: 12px;
-        padding: 13px 16px; border-radius: 10px;
-        border: 1.5px dashed rgba(18,86,150,.2);
-        cursor: pointer; font-size: 0.84rem; font-weight: 600;
-        color: var(--primary, #0a2c58); transition: all .18s;
+      .idle-card {
+        background: #ffffff;
+        border: 1px solid rgba(15, 23, 42, 0.08);
+        border-radius: 12px;
+        padding: 20px;
+        display: flex;
+        align-items: flex-start;
+        gap: 14px;
       }
-      #doc-upload-grid label:hover {
-        border-color: var(--accent, #c8982e);
-        background: #fffdf5; transform: translateY(-1px);
+      .idle-icon {
+        width: 38px;
+        height: 38px;
+        border-radius: 10px;
+        background: rgba(10, 94, 176, 0.08);
+        color: #0a5eb0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
       }
-      #doc-upload-grid label input[type="file"] { display: none; }
-      #doc-upload-status {
-        font-size: 0.84rem; padding: 11px 16px; border-radius: 9px;
-        background: rgba(18,86,150,.04); color: #374151;
-        border: 1px solid rgba(18,86,150,.08);
-      }
+      .idle-title { font-size: 0.9rem; font-weight: 700; color: #0f172a; margin-bottom: 3px; }
+      .idle-desc { font-size: 0.8rem; color: #64748b; line-height: 1.45; margin: 0; }
     </style>
-</head>
+  </head>
   <body class="online-services-page">
     <div data-site-nav>
       <header class="site-header fallback-site-header">
@@ -123,231 +803,290 @@
             <a class="nav-link" href="index.html">Home</a>
             <a class="nav-link" href="services.html">Services</a>
             <a class="nav-link" href="products.html">Store</a>
-            <a class="nav-link" href="track-application.html">Track</a>
+            <a class="nav-link active" href="track-application.html">Track Status</a>
             <a class="nav-link" href="contact.html">Contact</a>
           </div>
         </nav>
       </header>
     </div>
+
     <main class="page-shell">
-      <section class="page-hero page-hero-service premium-service-hero online-services-hero tracker-hero">
-        <div class="site-container">
-          <div class="tracker-unified-card">
-            <div class="tracker-card-grid">
-              <!-- Left Column: Form & Info -->
-              <div class="tracker-card-left">
-                <span class="status-live-badge"><i data-lucide="radio"></i> LIVE SYSTEM</span>
-                <p class="eyebrow">Track Application</p>
-                <h1 class="page-hero-title">Know exactly where your request stands.</h1>
-                <p class="hero-desc">Enter your transaction or application ID to view detailed real-time processing milestones.</p>
-                
-                <form class="input-row premium-search-row" data-tracker-form>
-                  <div>
-                    <input class="input" name="applicationId" placeholder="Example: OPDS-20260604-000002" aria-label="Application ID" autocomplete="off">
-                    <i data-lucide="search" class="search-icon-container"></i>
-                  </div>
-                  <button class="btn btn-primary" type="submit"><i data-lucide="compass"></i> Track</button>
-                </form>
-                
-                <div class="tracker-output-wrapper">
-                  <i data-lucide="info"></i>
-                  <div data-tracker-output role="status" aria-live="polite">Enter your tracking number to see live application status.</div>
-                </div>
+      <div class="tracker-page-shell">
+        
+        <!-- Breadcrumb -->
+        <nav class="track-breadcrumb" aria-label="Breadcrumb">
+          <a href="index.html">Home</a>
+          <i data-lucide="chevron-right"></i>
+          <span>Track Application Status</span>
+        </nav>
+
+        <!-- Search Box (Hero) -->
+        <section class="track-hero-box" id="tracker-search-header">
+          <div>
+            <span class="track-live-pill">
+              <span class="pulse-dot"></span>
+              LIVE TRACKING CONSOLE
+            </span>
+          </div>
+          <h1 class="track-hero-title">Track your service request in real-time.</h1>
+          <p class="track-hero-sub">Enter your Application Tracking ID or registered reference to view milestone progress, verify uploaded documents, and access official receipts.</p>
+          
+          <form class="track-search-bar" data-tracker-form>
+            <div class="track-input-wrap">
+              <i data-lucide="search" class="track-search-icon"></i>
+              <input name="applicationId" placeholder="Enter Application ID (e.g. OPDS-20260722-000001)" aria-label="Application ID" autocomplete="off">
+            </div>
+            <button class="track-search-btn" type="submit">
+              <i data-lucide="compass" style="width: 16px; height: 16px;"></i>
+              <span>Track</span>
+            </button>
+          </form>
+
+          <!-- Recent Tracking Searches Chips -->
+          <div class="track-recents" id="recent-track-container" style="display: none;"></div>
+
+          <!-- Inline Status / Error Message -->
+          <div class="track-status-message" id="tracker-output-wrapper">
+            <i data-lucide="info"></i>
+            <div data-tracker-output role="status" aria-live="polite">Enter your tracking ID to view live progress.</div>
+          </div>
+        </section>
+
+        <!-- Active Tracking Dashboard (Populated dynamically on search) -->
+        <div id="tracker-dashboard-grid" style="display: none;">
+          
+          <!-- Top Request Header Card -->
+          <section class="track-header-card">
+            <div class="track-header-left">
+              <div class="track-meta-pills">
+                <button type="button" class="track-id-btn" id="snap-order-id" title="Click to copy Request ID">
+                  <span id="snap-id-text">OPDS-20260722-000001</span>
+                  <i data-lucide="copy" style="width: 12px; height: 12px;"></i>
+                </button>
+                <span class="track-cat-pill" id="snap-service-cat">Government Services</span>
               </div>
+              <h2 class="track-app-title" id="snap-service-name">Service Application</h2>
+              <div class="track-app-meta">
+                <span id="snap-created-at">Submitted 22 Jul 2026</span> · <span id="snap-assigned-to">Operations Desk Queue</span>
+              </div>
+            </div>
+            <div class="track-header-right">
+              <span class="track-main-badge badge-in-progress" id="snap-status-badge">Processing</span>
+              <a href="https://wa.me/919473946181" target="_blank" rel="noopener" class="btn-wa-header" id="btn-support-whatsapp">
+                <i data-lucide="message-circle" style="width: 15px; height: 15px;"></i>
+                <span>Ask on WhatsApp</span>
+              </a>
+            </div>
+          </section>
+
+          <!-- Two-Column Main Content Grid -->
+          <div class="track-grid">
+            
+            <!-- Left Primary Column: Milestones, Next Step, Documents, Activity -->
+            <div class="track-col-main">
               
-              <!-- Right Column: Timeline -->
-              <div class="tracker-card-right">
-                <div class="command-topbar">
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                  <strong>LIVE STATUS CENTER</strong>
+              <!-- Card 1: Milestones Timeline -->
+              <section class="track-card" id="status-timeline">
+                <div class="track-card-head">
+                  <div class="track-card-title">
+                    <i data-lucide="git-commit"></i>
+                    <span>Processing Milestones</span>
+                  </div>
+                  <span style="font-size: 0.74rem; color: #64748b; font-weight: 500;">Live Progress</span>
                 </div>
-                
-                <div class="status-track tracker-hero-timeline">
-                  
-                  <div class="status-step done" data-status-step="Pending">
-                    <div class="status-track-line"></div>
-                    <div class="status-dot">
-                      <i data-lucide="clipboard-list"></i>
-                    </div>
-                    <div class="status-content">
-                      <strong class="status-title">Pending <span class="step-badge-done">Completed</span></strong>
-                      <p class="status-desc">Application request received & documents assigned to operator.</p>
-                    </div>
-                  </div>
-                  
-                  <div class="status-step active" data-status-step="Processing">
-                    <div class="status-track-line"></div>
-                    <div class="status-dot">
-                      <i data-lucide="settings"></i>
-                    </div>
-                    <div class="status-content">
-                      <strong class="status-title">Processing <span class="step-badge-active">Current</span></strong>
-                      <p class="status-desc">Operator validation, compliance check and processing underway.</p>
-                    </div>
-                  </div>
-                  
-                  <div class="status-step" data-status-step="Approved">
-                    <div class="status-track-line"></div>
-                    <div class="status-dot">
-                      <i data-lucide="shield-check"></i>
-                    </div>
-                    <div class="status-content">
-                      <strong class="status-title">Approved</strong>
-                      <p class="status-desc">Authority signature verified and certificate generated.</p>
-                    </div>
-                  </div>
-                  
-                  <div class="status-step" data-status-step="Delivered">
-                    <div class="status-track-line"></div>
-                    <div class="status-dot">
-                      <i data-lucide="package"></i>
-                    </div>
-                    <div class="status-content">
-                      <strong class="status-title">Delivered</strong>
-                      <p class="status-desc">Notification receipt issued & copy dispatched to your WhatsApp.</p>
-                    </div>
-                  </div>
-                  
+                <div class="track-timeline" id="vertical-timeline-container">
+                  <!-- Generated dynamically -->
                 </div>
+              </section>
+
+              <!-- Card 2: Next Step Contextual Callout -->
+              <div class="track-next-box tone-info" id="tracker-next-step-box">
+                <div class="track-next-head">
+                  <i data-lucide="sparkles" style="width: 16px; height: 16px;"></i>
+                  <span id="next-step-title">What happens next:</span>
+                </div>
+                <div id="next-step-msg">
+                  Our operations team is reviewing your documents for compliance.
+                </div>
+                <a href="#doc-upload-section" class="track-next-action-btn" id="next-step-btn">
+                  <span>View Action</span>
+                  <i data-lucide="arrow-right" style="width: 13px; height: 13px;"></i>
+                </a>
+              </div>
+
+              <!-- Card 3: Document Management & Checklist -->
+              <section class="track-card" id="doc-upload-section">
+                <div class="track-card-head">
+                  <div class="track-card-title">
+                    <i data-lucide="folder-check"></i>
+                    <span>Document Checklist & Verification</span>
+                  </div>
+                  <span class="doc-pill review" id="doc-stats-pill">Checklist Active</span>
+                </div>
+
+                <div class="doc-list-clean" id="doc-upload-grid">
+                  <!-- Generated dynamically -->
+                </div>
+
+                <!-- Sleek Upload Dropzone -->
+                <div class="track-dropzone" id="doc-dropzone">
+                  <div class="dropzone-desc">
+                    <i data-lucide="upload-cloud" style="width: 20px; height: 20px; vertical-align: middle; margin-right: 4px; color: #0a5eb0;"></i>
+                    <strong>Upload document:</strong> Drag file here or select file (PDF, JPG, PNG up to 5MB)
+                  </div>
+                  <div class="dropzone-actions" onclick="event.stopPropagation()">
+                    <select class="dropzone-select" id="dropzone-doc-type" aria-label="Document Type">
+                      <option value="aadhaar">Aadhaar Card</option>
+                      <option value="photo">Passport Photo</option>
+                      <option value="signature">Signature</option>
+                      <option value="address_proof">Address Proof</option>
+                      <option value="supporting_doc">Supporting Document</option>
+                    </select>
+                    <input type="file" id="dropzone-file-input" style="display: none;" accept=".jpg,.jpeg,.png,.pdf,.webp">
+                    <button type="button" class="dropzone-btn-sm" id="dropzone-browse-btn">
+                      <i data-lucide="paperclip" style="width: 13px; height: 13px;"></i>
+                      <span>Select File</span>
+                    </button>
+                  </div>
+
+                  <div class="track-progress" id="upload-progress-wrapper">
+                    <div class="track-progress-bar">
+                      <div class="track-progress-fill" id="upload-progress-fill"></div>
+                    </div>
+                    <span class="track-progress-text" id="upload-progress-text">Uploading…</span>
+                  </div>
+                </div>
+
+                <div style="font-size: 0.72rem; color: #94a3b8; margin-top: 10px; display: flex; align-items: center; gap: 5px;">
+                  <i data-lucide="lock" style="width: 12px; height: 12px;"></i>
+                  <span>256-bit encrypted upload per IT Act 2000 and OPDS Citizen Privacy Charter.</span>
+                </div>
+              </section>
+
+              <!-- Card 4: Activity & Event Log -->
+              <section class="track-card" id="activity-section">
+                <div class="track-card-head">
+                  <div class="track-card-title">
+                    <i data-lucide="clock"></i>
+                    <span>Activity & Audit Log</span>
+                  </div>
+                  <span style="font-size: 0.74rem; color: #94a3b8;">Latest events</span>
+                </div>
+                <div class="activity-clean-list" id="activity-feed-list">
+                  <!-- Generated dynamically -->
+                </div>
+              </section>
+
+            </div>
+
+            <!-- Right Sidebar Column: Summary, Deliverables, Support -->
+            <div class="track-col-sidebar">
+              
+              <!-- Sidebar 1: Request Summary -->
+              <section class="track-card">
+                <div class="track-card-head">
+                  <div class="track-card-title">
+                    <i data-lucide="file-spreadsheet"></i>
+                    <span>Request Details</span>
+                  </div>
+                </div>
+                <div class="summary-list">
+                  <div class="summary-row">
+                    <span class="summary-label">Application Fee</span>
+                    <span class="summary-value" id="snap-payment-status">₹100 (Paid)</span>
+                  </div>
+                  <div class="summary-row">
+                    <span class="summary-label">Estimated SLA</span>
+                    <span class="summary-value" id="snap-sla-time">24–48 Hours</span>
+                  </div>
+                  <div class="summary-row">
+                    <span class="summary-label">Current Stage</span>
+                    <span class="summary-value" id="snap-stage-text">Intake Review</span>
+                  </div>
+                  <div class="summary-row">
+                    <span class="summary-label">Filing Center</span>
+                    <span class="summary-value">LDA Colony, Lucknow</span>
+                  </div>
+                </div>
+              </section>
+
+              <!-- Sidebar 2: Receipts & Deliverables -->
+              <section class="track-card" id="deliverables-section">
+                <div class="track-card-head">
+                  <div class="track-card-title">
+                    <i data-lucide="file-down"></i>
+                    <span>Receipts & Downloads</span>
+                  </div>
+                </div>
+                <div class="deliverable-clean-list" id="deliverables-list">
+                  <!-- Generated dynamically -->
+                </div>
+              </section>
+
+              <!-- Sidebar 3: Direct Helpdesk -->
+              <section class="track-card">
+                <div class="track-card-head">
+                  <div class="track-card-title">
+                    <i data-lucide="headphones"></i>
+                    <span>Need Help?</span>
+                  </div>
+                </div>
+                <p style="font-size: 0.8rem; color: #64748b; line-height: 1.45; margin: 0 0 14px 0;">
+                  Questions regarding documents or processing? Our Lucknow Suvidha Kendra team is here to assist.
+                </p>
+                <div style="display: flex; flex-direction: column; gap: 8px;">
+                  <a href="https://wa.me/919473946181" target="_blank" rel="noopener" class="btn-wa-header" style="justify-content: center; width: 100%; box-sizing: border-box;">
+                    <i data-lucide="message-circle" style="width: 14px; height: 14px;"></i>
+                    <span>Chat on WhatsApp</span>
+                  </a>
+                  <a href="tel:+919473946181" class="btn-doc-action" style="justify-content: center; height: 34px; box-sizing: border-box; text-decoration: none;">
+                    <i data-lucide="phone" style="width: 13px; height: 13px;"></i>
+                    <span>Call +91 9473946181</span>
+                  </a>
+                </div>
+                <div style="font-size: 0.72rem; color: #94a3b8; margin-top: 10px; text-align: center;">
+                  Counter Hours: 9:00 AM – 8:00 PM (Mon–Sat)
+                </div>
+              </section>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- Idle State (Shown before search) -->
+        <div id="tracker-idle-preview">
+          <div class="idle-grid">
+            <div class="idle-card">
+              <div class="idle-icon"><i data-lucide="clock"></i></div>
+              <div>
+                <div class="idle-title">Real-Time Milestone Tracking</div>
+                <p class="idle-desc">View step-by-step progress from application intake to authority verification.</p>
+              </div>
+            </div>
+            <div class="idle-card">
+              <div class="idle-icon"><i data-lucide="shield-check"></i></div>
+              <div>
+                <div class="idle-title">Encrypted Document Vault</div>
+                <p class="idle-desc">Upload and review identity documents with automated verification checks.</p>
+              </div>
+            </div>
+            <div class="idle-card">
+              <div class="idle-icon"><i data-lucide="file-text"></i></div>
+              <div>
+                <div class="idle-title">Official Invoices & Slips</div>
+                <p class="idle-desc">Download payment receipts, intake acknowledgement slips, and final certificates.</p>
               </div>
             </div>
           </div>
         </div>
-      </section>
 
-      <!-- Document Upload Section -->
-      <section class="section reveal" id="doc-upload-section">
-        <div class="doc-upload-card">
-          <div class="doc-upload-header">
-            <div class="doc-upload-icon">
-              <i data-lucide="upload-cloud"></i>
-            </div>
-            <div>
-              <div class="doc-upload-title">Upload Required Documents</div>
-              <div class="doc-upload-subtitle">Upload documents to speed up verification. Bot will auto-check after each upload.</div>
-            </div>
-          </div>
-          <div id="doc-upload-grid"></div>
-          <div id="doc-upload-status"></div>
-        </div>
-      </section>
-
+      </div>
     </main>
+
     <div data-site-footer></div>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
-    <script src="assets/app.js?v=clean_js_v11" defer></script>
-    <script>
-    (function() {
-      const DOCS = [
-        { id: "aadhaar",       label: "Aadhaar Card" },
-        { id: "pan",           label: "PAN Card" },
-        { id: "photo",         label: "Passport Photo" },
-        { id: "birth_cert",    label: "Birth Certificate" },
-        { id: "income_cert",   label: "Income Certificate" },
-        { id: "address_proof", label: "Address Proof" },
-        { id: "signature",     label: "Signature" },
-      ];
-
-      async function getCsrf() {
-        try { const r = await fetch('/api/csrf'); const d = await r.json(); return d.csrfToken || ''; } catch { return ''; }
-      }
-
-      async function uploadDoc(orderId, docType, file) {
-        const csrf = await getCsrf();
-        const res = await fetch('/api/orders/documents', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'X-CSRF-Token': csrf },
-          body: JSON.stringify({ orderId, docType, fileName: file.name, fileUrl: '' }),
-        });
-        return res.json();
-      }
-
-      function buildGrid(orderId) {
-        const grid = document.getElementById('doc-upload-grid');
-        if (!grid) return;
-        grid.innerHTML = DOCS.map(doc => `
-          <label id="lbl-${doc.id}">
-            <i data-lucide="file-plus"></i>
-            <div>
-              <div>${doc.label}</div>
-              <div id="ds-${doc.id}">Click to upload</div>
-            </div>
-            <input type="file" accept=".jpg,.jpeg,.png,.pdf" onchange="window._trackUpload(event,'${orderId}','${doc.id}')">
-          </label>
-        `).join('');
-        if (window.lucide) window.lucide.createIcons();
-      }
-
-      window._trackUpload = async function(e, orderId, docType) {
-        const file = e.target.files && e.target.files[0];
-        if (!file) return;
-        const ds = document.getElementById('ds-' + docType);
-        const lbl = document.getElementById('lbl-' + docType);
-        const msg = document.getElementById('doc-upload-status');
-        if (ds) ds.textContent = 'Uploading…';
-        if (msg) msg.innerHTML = '<span>⏳ Uploading...</span>';
-        try {
-          const result = await uploadDoc(orderId, docType, file);
-          if (result.ok) {
-            if (ds)  { ds.textContent = '✓ Uploaded'; ds.style.color = '#22c55e'; }
-            if (lbl) { lbl.style.borderColor = '#22c55e'; lbl.style.background = '#f0fdf4'; }
-            if (msg) msg.innerHTML = '<span>✓ Document uploaded! Bot has been triggered to re-verify your application.</span>';
-          } else { throw new Error(result.message || 'Upload failed'); }
-        } catch (err) {
-          if (ds)  { ds.textContent = 'Failed'; ds.style.color = '#ef4444'; }
-          if (msg) msg.innerHTML = `<span>✗ ${err.message}</span>`;
-        }
-      };
-
-      document.addEventListener('DOMContentLoaded', function() {
-        const params = new URLSearchParams(window.location.search);
-        const orderId = params.get('id') || params.get('order') || '';
-        if (!orderId) return;
-        const section = document.getElementById('doc-upload-section');
-        if (section) section.style.display = 'block';
-        buildGrid(orderId);
-      });
-    })();
-    </script>
-  
-<script id="line-alignment-script">
-  document.addEventListener("DOMContentLoaded", function() {
-    setTimeout(() => {
-      document.querySelectorAll(".section-head h2").forEach(h2 => {
-        let align = window.getComputedStyle(h2).textAlign;
-        let parent = h2.closest('.section-head');
-        if (parent) {
-          if (align === "center") {
-            parent.classList.add("center-line");
-          } else {
-            parent.classList.add("left-line");
-          }
-        }
-      });
-    }, 100); // small delay to ensure CSS is applied
-  });
-</script>
-</body>
+    <script src="assets/app.js?v=customer-checkout-94" defer></script>
+  </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

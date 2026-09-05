@@ -1,16 +1,11 @@
 ﻿import React, { useState, useEffect } from 'react';
 import { Card, PanelHeader, Icon, Badge } from '../Shared';
+import { adminTokenHeader, getCsrfToken } from '../security/adminSession';
 
 const getAdminHeaders = () => ({
-  'X-Admin-Token': localStorage.getItem('opds_admin_token') || '',
+  ...adminTokenHeader(),
   'Content-Type': 'application/json',
 });
-
-async function getCsrf() {
-  const r = await fetch('/api/csrf');
-  const d = await r.json().catch(() => ({}));
-  return d.csrfToken || '';
-}
 
 // Map backend catalog item → OneMart product
 function mapCatalogItem(item: any) {
@@ -94,7 +89,7 @@ export const OneMartPanel = () => {
 
     if (!name) return;
     try {
-      const csrf = await getCsrf();
+      const csrf = await getCsrfToken();
       await fetch('/api/admin/catalog', {
         method: 'POST',
         headers: { ...getAdminHeaders(), 'X-CSRF-Token': csrf },
@@ -110,7 +105,7 @@ export const OneMartPanel = () => {
   async function deleteProduct(slug: string) {
     if (!confirm('Remove this item from the website catalog?')) return;
     try {
-      const csrf = await getCsrf();
+      const csrf = await getCsrfToken();
       await fetch('/api/admin/catalog', {
         method: 'DELETE',
         headers: { ...getAdminHeaders(), 'X-CSRF-Token': csrf },
@@ -121,7 +116,7 @@ export const OneMartPanel = () => {
   }
 
   return (
-    <div className="panel active" style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+    <div className="panel active" style={{ display: 'flex', flexDirection: 'column' }}>
       <PanelHeader
         title="OneMart Store"
         sub="Physical products catalog — gifts, printing, branding, stationery"
@@ -142,7 +137,7 @@ export const OneMartPanel = () => {
       <div className="panels" style={{ flex: 1, paddingBottom: 0, display: 'flex', flexDirection: 'column' }}>
 
         {/* Category filter */}
-        <div style={{ display: 'flex', gap: 8, marginBottom: 20, overflowX: 'auto', paddingBottom: 4, flexWrap: 'wrap' }}>
+        <div style={{ display: 'flex', gap: 8, marginBottom: 20, overflowX: 'auto', paddingBottom: 4, flexWrap: 'wrap', flexShrink: 0 }}>
           {categories.map(c => (
             <button key={c} className={`btn btn-sm ${activeCategory === c ? 'btn-primary' : 'btn-ghost'}`}
               style={activeCategory === c ? { background: 'var(--blue)', color: '#fff' } : { background: 'var(--bg-2)' }}
@@ -166,7 +161,7 @@ export const OneMartPanel = () => {
             </button>
           </div>
         ) : (
-          <div className="grid-4" style={{ overflowY: 'auto', paddingBottom: 24 }}>
+          <div className="grid-4" style={{ paddingBottom: 24 }}>
             {filteredProducts.map(p => (
               <Card key={p.id} bodyClass="card-body-flush" style={{ display: 'flex', flexDirection: 'column' }}>
                 <div style={{ height: 120, background: 'var(--bg-3)', display: 'flex', alignItems: 'center', justifyContent: 'center', borderBottom: '1px solid var(--border-1)', position: 'relative' }}>

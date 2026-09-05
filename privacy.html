@@ -1,30 +1,739 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Privacy Policy for One Point Digital Services covering document handling, payment proof, support contact and data deletion requests.">
-    <title>Privacy Policy | One Point Digital Services</title>
+    <meta name="description" content="Privacy Policy & Citizen Data Charter for One Point Digital Services Lucknow. Learn how we handle your identity documents, payment proofs, retention timelines, and data deletion requests.">
+    <title>Privacy Policy &amp; Citizen Data Charter | One Point Digital Services</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-        <link rel="stylesheet" href="assets/onepoint.css?v=2">
-
+    <script src="assets/opds-boot.js?v=anti-fouc-79"></script>
+    <link rel="stylesheet" href="assets/onepoint.css?v=customer-checkout-94">
+    <link rel="stylesheet" href="assets/enterprise-design-system.css?v=eds-2">
+    <link rel="stylesheet" href="assets/enterprise-visual-polish.css?v=polish-3">
     <style>
-      .compact-hero {
-        background:
-          linear-gradient(90deg, rgba(18, 86, 150, 0.98) 0%, rgba(18, 86, 150, 0.88) 45%, rgba(210, 161, 42, 0.3) 100%),
-          url('assets/security-shield.png') no-repeat center / cover !important;
+      /* ══════════════════════════════════════════════════════════════════════════
+         PRIVACY POLICY & CITIZEN DATA CHARTER — ENTERPRISE CLEAN DESIGN SYSTEM
+         ══════════════════════════════════════════════════════════════════════════ */
+      :root {
+        --privacy-navy: #125696;
+        --privacy-navy-mid: #0f4f8b;
+        --privacy-navy-dark: #082f61;
+        --privacy-gold: #f5c842;
+        --privacy-gold-text: #c58a10;
+        --privacy-border: #e2e8f0;
+        --privacy-border-subtle: #edf2f7;
+        --privacy-surface: #ffffff;
+        --privacy-bg: #f8fafc;
+        --privacy-tint: #f0f7ff;
       }
-      .compact-hero::before,
-      .compact-hero::after { display: none !important; }
-      .compact-hero { padding-inline: 0 !important; }
-      .compact-hero h1 { text-align: left !important; margin-inline: 0 !important; }
-      .compact-hero p:not(.eyebrow) { text-align: left !important; margin-inline: 0 !important; }
-      .compact-hero .hero-actions { justify-content: flex-start !important; }
-    </style></head>
-  <body class="online-services-page">
+
+      body.privacy-page-body {
+        background-color: #f8fafc;
+        color: #0f172a;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        scroll-behavior: smooth;
+      }
+
+      /* ── Top Hero Section ── */
+      .compact-hero.privacy-hero-bg {
+        background:
+          linear-gradient(100deg, rgba(11, 40, 88, 0.97) 0%, rgba(18, 86, 150, 0.92) 55%, rgba(12, 46, 98, 0.93) 100%),
+          linear-gradient(to bottom, rgba(8, 24, 60, 0.65) 0%, transparent 42%),
+          url('assets/disclaimer_human.png') no-repeat center/cover !important;
+        text-align: left !important;
+        padding-top: clamp(48px, 6vw, 76px) !important;
+        padding-bottom: clamp(48px, 6vw, 76px) !important;
+      }
+      .compact-hero.privacy-hero-bg::before,
+      .compact-hero.privacy-hero-bg::after { display: none !important; }
+      .compact-hero.privacy-hero-bg .site-container {
+        width: 100% !important;
+        max-width: var(--max, 1200px) !important;
+        margin-inline: auto !important;
+        padding-inline: var(--gutter, clamp(16px, 4vw, 32px)) !important;
+        box-sizing: border-box !important;
+        text-align: left !important;
+      }
+      .compact-hero.privacy-hero-bg h1 {
+        text-align: left !important;
+        margin-left: 0 !important;
+        font-size: clamp(2rem, 3.5vw, 2.75rem) !important;
+        font-weight: 800 !important;
+        letter-spacing: -0.025em !important;
+        color: #ffffff !important;
+      }
+      .compact-hero.privacy-hero-bg p:not(.eyebrow) {
+        text-align: left !important;
+        margin-left: 0 !important;
+        max-width: 680px !important;
+        font-size: 1rem !important;
+        line-height: 1.6 !important;
+        color: rgba(235, 245, 255, 0.88) !important;
+      }
+      .compact-hero.privacy-hero-bg .eyebrow {
+        margin-left: 0 !important;
+        margin-right: auto !important;
+        background: rgba(245, 200, 66, 0.15) !important;
+        border: 1px solid rgba(245, 200, 66, 0.35) !important;
+        color: #f5c842 !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        gap: 6px !important;
+        padding: 4px 12px !important;
+        border-radius: 999px !important;
+        font-size: 0.76rem !important;
+        font-weight: 700 !important;
+        letter-spacing: 0.06em !important;
+        text-transform: uppercase !important;
+        margin-bottom: 14px !important;
+      }
+      .compact-hero.privacy-hero-bg .hero-actions {
+        justify-content: flex-start !important;
+        margin-top: 24px !important;
+        display: flex !important;
+        gap: 12px !important;
+        flex-wrap: wrap !important;
+      }
+
+      /* ── Page Shell ── */
+      .privacy-page-shell {
+        width: 100%;
+        max-width: var(--max, 1200px);
+        margin-inline: auto;
+        padding-top: clamp(24px, 3.5vw, 36px);
+        padding-bottom: 72px;
+        padding-inline: var(--gutter, clamp(16px, 4vw, 32px));
+        box-sizing: border-box;
+      }
+
+      /* ── Meta Bar (Breadcrumb + Version Info + Print Action) ── */
+      .privacy-meta-bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-bottom: 24px;
+        padding-bottom: 14px;
+        border-bottom: 1px solid var(--privacy-border);
+      }
+      .privacy-breadcrumb {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 0.82rem;
+        color: #64748b;
+      }
+      .privacy-breadcrumb a { color: #475569; text-decoration: none; transition: color 0.15s; }
+      .privacy-breadcrumb a:hover { color: #0a5aa8; }
+      .privacy-breadcrumb i, .privacy-breadcrumb svg { width: 14px; height: 14px; color: #94a3b8; }
+      .privacy-breadcrumb span { color: #0f172a; font-weight: 600; }
+
+      .privacy-version-tag {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 0.78rem;
+        color: #64748b;
+      }
+      .version-badge {
+        background: #f1f5f9;
+        border: 1px solid #e2e8f0;
+        color: #334155;
+        font-weight: 700;
+        padding: 2px 8px;
+        border-radius: 6px;
+      }
+      .btn-print-policy {
+        background: #ffffff;
+        border: 1px solid #cbd5e1;
+        color: #334155;
+        font-size: 0.76rem;
+        font-weight: 600;
+        padding: 4px 10px;
+        border-radius: 6px;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        transition: all 0.15s ease;
+      }
+      .btn-print-policy:hover {
+        background: #f1f5f9;
+        color: #0a5aa8;
+        border-color: #0a5aa8;
+      }
+
+      /* ── 1. Privacy at a Glance (30-Sec Summary Box) ── */
+      .privacy-glance-card {
+        background: #ffffff;
+        border: 1px solid var(--privacy-border);
+        border-radius: 16px;
+        padding: clamp(20px, 3vw, 28px);
+        box-shadow: 0 1px 3px rgba(15, 23, 42, 0.03);
+        margin-bottom: 28px;
+      }
+      .glance-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 16px;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .glance-kicker {
+        font-size: 0.74rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: #0a5aa8;
+        background: rgba(10, 90, 168, 0.08);
+        border: 1px solid rgba(10, 90, 168, 0.18);
+        padding: 3px 10px;
+        border-radius: 999px;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .glance-title {
+        font-size: 1.15rem;
+        font-weight: 800;
+        color: #082f61;
+        margin: 4px 0 0 0;
+      }
+      .glance-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+      }
+      @media (max-width: 880px) {
+        .glance-grid { grid-template-columns: 1fr; }
+      }
+      .glance-item {
+        background: #f8fafc;
+        border: 1px solid #e2e8f0;
+        border-radius: 10px;
+        padding: 12px 14px;
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+      }
+      .glance-label {
+        font-size: 0.72rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: #0a5aa8;
+        letter-spacing: 0.04em;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+      .glance-desc {
+        font-size: 0.82rem;
+        color: #334155;
+        line-height: 1.45;
+        margin: 0;
+      }
+
+      /* ── 2. Top Core Principles (Concise TL;DR) ── */
+      .privacy-principles-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+        margin-bottom: 32px;
+      }
+      @media (max-width: 960px) {
+        .privacy-principles-grid { grid-template-columns: repeat(2, 1fr); }
+      }
+      @media (max-width: 540px) {
+        .privacy-principles-grid { grid-template-columns: 1fr; }
+      }
+
+      .principle-card {
+        background: #ffffff;
+        border: 1px solid var(--privacy-border);
+        border-radius: 14px;
+        padding: 18px 16px;
+        box-shadow: 0 1px 3px rgba(15, 23, 42, 0.02);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        transition: transform 0.2s ease, border-color 0.2s ease;
+      }
+      .principle-card:hover {
+        transform: translateY(-2px);
+        border-color: rgba(18, 86, 150, 0.28);
+      }
+      .principle-top {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 10px;
+      }
+      .principle-icon {
+        width: 34px;
+        height: 34px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(18, 86, 150, 0.08);
+        color: #125696;
+        flex-shrink: 0;
+      }
+      .principle-title {
+        font-size: 0.92rem;
+        font-weight: 750;
+        color: #082f61;
+        margin: 0;
+      }
+      .principle-desc {
+        font-size: 0.78rem;
+        color: #475569;
+        line-height: 1.45;
+        margin: 0;
+      }
+
+      /* ── 3. Interactive Data Flow & Retention Visual ── */
+      .dataflow-section {
+        background: #ffffff;
+        border: 1px solid var(--privacy-border);
+        border-radius: 16px;
+        padding: clamp(20px, 3vw, 28px);
+        box-shadow: 0 1px 3px rgba(15, 23, 42, 0.03);
+        margin-bottom: 32px;
+      }
+      .dataflow-title {
+        font-size: 1.05rem;
+        font-weight: 800;
+        color: #082f61;
+        margin: 0 0 4px 0;
+      }
+      .dataflow-sub {
+        font-size: 0.82rem;
+        color: #64748b;
+        margin: 0 0 18px 0;
+      }
+      .dataflow-timeline {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 10px;
+        position: relative;
+      }
+      @media (max-width: 880px) {
+        .dataflow-timeline { grid-template-columns: 1fr; }
+      }
+      .flow-step {
+        background: #f8fafc;
+        border: 1px solid #e2e8f0;
+        border-radius: 10px;
+        padding: 12px 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        position: relative;
+      }
+      .flow-step-num {
+        font-size: 0.68rem;
+        font-weight: 800;
+        color: #125696;
+        background: rgba(18, 86, 150, 0.08);
+        padding: 2px 6px;
+        border-radius: 4px;
+        margin-bottom: 6px;
+      }
+      .flow-step-title {
+        font-size: 0.82rem;
+        font-weight: 750;
+        color: #0f172a;
+        margin-bottom: 4px;
+      }
+      .flow-step-desc {
+        font-size: 0.72rem;
+        color: #64748b;
+        line-height: 1.35;
+        margin: 0;
+      }
+
+      /* ── 4. Main 2-Column Policy Hub Layout ── */
+      .privacy-main-grid {
+        display: grid;
+        grid-template-columns: 270px 1fr;
+        gap: 28px;
+        align-items: start;
+      }
+      @media (max-width: 880px) {
+        .privacy-main-grid { grid-template-columns: 1fr; }
+      }
+
+      /* Left Sidebar: Sticky Table of Contents & Data Control Center */
+      .privacy-sidebar {
+        position: sticky;
+        top: 84px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .toc-card {
+        background: #ffffff;
+        border: 1px solid var(--privacy-border);
+        border-radius: 14px;
+        padding: 16px;
+        box-shadow: 0 1px 3px rgba(15, 23, 42, 0.02);
+      }
+      .toc-head {
+        font-size: 0.74rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: #64748b;
+        margin-bottom: 10px;
+        padding-left: 6px;
+      }
+      .toc-nav-list {
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+      }
+      .toc-link {
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: #475569;
+        text-decoration: none;
+        padding: 6px 10px;
+        border-radius: 6px;
+        transition: all 0.15s ease;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .toc-link:hover, .toc-link.active {
+        background: rgba(18, 86, 150, 0.08);
+        color: #125696;
+        font-weight: 700;
+      }
+      .toc-num {
+        font-size: 0.68rem;
+        font-weight: 700;
+        color: #94a3b8;
+        background: #f8fafc;
+        border: 1px solid #e2e8f0;
+        padding: 1px 5px;
+        border-radius: 4px;
+      }
+      .toc-link.active .toc-num {
+        color: #125696;
+        background: #ffffff;
+        border-color: rgba(18, 86, 150, 0.3);
+      }
+
+      /* Data Control Center in Sidebar */
+      .datacontrol-card {
+        background: linear-gradient(145deg, #ffffff 0%, #f8fbff 100%);
+        border: 1px solid rgba(18, 86, 150, 0.2);
+        border-radius: 14px;
+        padding: 18px;
+        box-shadow: 0 1px 3px rgba(15, 23, 42, 0.02);
+      }
+      .datacontrol-kicker {
+        font-size: 0.7rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: #125696;
+        background: rgba(18, 86, 150, 0.08);
+        padding: 2px 7px;
+        border-radius: 4px;
+        margin-bottom: 8px;
+        display: inline-block;
+      }
+      .datacontrol-title {
+        font-size: 0.92rem;
+        font-weight: 750;
+        color: #082f61;
+        margin: 0 0 6px 0;
+      }
+      .datacontrol-desc {
+        font-size: 0.76rem;
+        color: #64748b;
+        line-height: 1.4;
+        margin: 0 0 12px 0;
+      }
+      .datacontrol-actions {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+      .btn-data-action {
+        font-size: 0.78rem;
+        font-weight: 600;
+        padding: 7px 10px;
+        border-radius: 6px;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 6px;
+        transition: all 0.15s;
+        border: 1px solid #cbd5e1;
+        background: #ffffff;
+        color: #334155;
+      }
+      .btn-data-action:hover {
+        background: #f0f7ff;
+        color: #125696;
+        border-color: #125696;
+      }
+      .btn-data-action.primary {
+        background: #125696;
+        color: #ffffff;
+        border-color: #125696;
+      }
+      .btn-data-action.primary:hover { background: #0b3f72; color: #ffffff; }
+      .datacontrol-note {
+        font-size: 0.68rem;
+        color: #94a3b8;
+        margin-top: 8px;
+        line-height: 1.35;
+      }
+
+      /* Fraud Prevention Callout */
+      .fraud-prevention-card {
+        background: #fffbeb;
+        border: 1px solid #fef3c7;
+        border-radius: 12px;
+        padding: 14px;
+      }
+      .fraud-title {
+        font-size: 0.78rem;
+        font-weight: 750;
+        color: #92400e;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        margin-bottom: 6px;
+      }
+      .fraud-list {
+        margin: 0;
+        padding-left: 14px;
+        font-size: 0.72rem;
+        color: #78350f;
+        line-height: 1.45;
+      }
+
+      /* Right Column: Policy Document Articles */
+      .privacy-doc-card {
+        background: #ffffff;
+        border: 1px solid var(--privacy-border);
+        border-radius: 16px;
+        padding: clamp(24px, 4vw, 44px);
+        box-shadow: 0 1px 3px rgba(15, 23, 42, 0.03);
+      }
+
+      .doc-section {
+        padding-bottom: 36px;
+        margin-bottom: 36px;
+        border-bottom: 1px solid var(--privacy-border-subtle);
+        scroll-margin-top: 96px;
+      }
+      .doc-section:last-child {
+        padding-bottom: 0;
+        margin-bottom: 0;
+        border-bottom: none;
+      }
+
+      .doc-section-head {
+        margin-bottom: 14px;
+      }
+      .doc-section-kicker {
+        font-size: 0.72rem;
+        font-weight: 750;
+        text-transform: uppercase;
+        color: #0a5aa8;
+        letter-spacing: 0.06em;
+        margin-bottom: 2px;
+        display: block;
+      }
+      .doc-section-title {
+        font-size: 1.25rem;
+        font-weight: 800;
+        color: #082f61;
+        margin: 0 0 6px 0;
+        line-height: 1.3;
+      }
+      .doc-section-summary {
+        font-size: 0.84rem;
+        color: #64748b;
+        margin: 0 0 14px 0;
+        font-weight: 500;
+      }
+
+      .doc-text {
+        font-size: 0.9rem;
+        color: #334155;
+        line-height: 1.7;
+        margin: 0 0 14px 0;
+      }
+
+      .doc-list {
+        margin: 8px 0 14px 20px;
+        padding: 0;
+        font-size: 0.88rem;
+        color: #334155;
+        line-height: 1.65;
+      }
+      .doc-list li { margin-bottom: 6px; }
+
+      /* Reassuring Sensitive Data Notice */
+      .doc-callout-sensitive {
+        background: #f0f7ff;
+        border: 1px solid #bfdbfe;
+        border-left: 4px solid #125696;
+        border-radius: 8px;
+        padding: 12px 16px;
+        margin: 14px 0;
+        font-size: 0.84rem;
+        color: #1e40af;
+        line-height: 1.55;
+      }
+      .doc-callout-sensitive strong { color: #082f61; }
+
+      /* Grievance Officer Card */
+      .grievance-contact-box {
+        background: #f8fafc;
+        border: 1px solid var(--privacy-border);
+        border-radius: 12px;
+        padding: 18px 20px;
+        margin-top: 16px;
+      }
+      .grievance-rows {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+        margin-top: 12px;
+      }
+      @media (max-width: 600px) {
+        .grievance-rows { grid-template-columns: 1fr; }
+      }
+      .grievance-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        font-size: 0.82rem;
+        color: #334155;
+      }
+      .grievance-item i { color: #125696; width: 16px; height: 16px; flex-shrink: 0; margin-top: 2px; }
+
+      /* ── 5. Bottom Trust Assurances Strip ── */
+      .privacy-trust-strip {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+        margin-top: 36px;
+      }
+      @media (max-width: 768px) {
+        .privacy-trust-strip { grid-template-columns: 1fr; }
+      }
+      .privacy-trust-card {
+        background: #ffffff;
+        border: 1px solid var(--privacy-border);
+        border-radius: 12px;
+        padding: 16px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .privacy-trust-icon {
+        width: 38px;
+        height: 38px;
+        border-radius: 8px;
+        background: rgba(18, 86, 150, 0.08);
+        color: #125696;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+      .privacy-trust-title {
+        font-size: 0.84rem;
+        font-weight: 700;
+        color: #0f172a;
+      }
+      .privacy-trust-sub {
+        font-size: 0.74rem;
+        color: #64748b;
+        display: block;
+      }
+
+      /* ── 6. Pre-Footer Direct Action Bar ── */
+      .privacy-prefooter {
+        background:
+          radial-gradient(circle at 14% 12%, rgba(210, 161, 42, 0.16), transparent 26rem),
+          radial-gradient(circle at 86% 80%, rgba(179, 218, 248, 0.16), transparent 28rem),
+          linear-gradient(180deg, #125696 0%, #0f4f8b 56%, #0b3f72 100%) !important;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        box-shadow: 0 16px 40px rgba(11, 63, 114, 0.18);
+        border-radius: 16px;
+        padding: clamp(24px, 3.5vw, 36px);
+        color: #ffffff;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 18px;
+        margin-top: 32px;
+      }
+      .prefooter-text h3 {
+        font-size: clamp(1.2rem, 2.2vw, 1.45rem);
+        font-weight: 800;
+        color: #ffffff;
+        margin: 0 0 4px 0;
+      }
+      .prefooter-text p {
+        font-size: 0.86rem;
+        color: rgba(235, 245, 255, 0.85);
+        margin: 0;
+      }
+      .prefooter-btns {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+      .btn-prefooter-gold {
+        background: #f5c842;
+        color: #082f61;
+        font-weight: 700;
+        font-size: 0.84rem;
+        padding: 9px 16px;
+        border-radius: 8px;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        transition: transform 0.15s;
+      }
+      .btn-prefooter-gold:hover { transform: translateY(-1px); background: #ffffff; }
+      .btn-prefooter-ghost {
+        background: rgba(255, 255, 255, 0.12);
+        color: #ffffff;
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        font-weight: 600;
+        font-size: 0.84rem;
+        padding: 9px 16px;
+        border-radius: 8px;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .btn-prefooter-ghost:hover { background: rgba(255, 255, 255, 0.22); color: #ffffff; }
+    </style>
+  </head>
+
+  <body class="privacy-page-body">
     <div data-site-nav>
       <header class="site-header fallback-site-header">
         <nav class="nav-bar" aria-label="Primary fallback">
@@ -41,144 +750,508 @@
         </nav>
       </header>
     </div>
-    <main class="page-shell">
-      <section class="compact-hero">
+
+    <main>
+      <!-- Signature Top Hero Section -->
+      <section class="compact-hero privacy-hero-bg">
         <div class="site-container">
-          <p class="eyebrow">Privacy Policy</p>
+          <p class="eyebrow"><i data-lucide="shield-check" style="width: 14px; height: 14px;"></i> Citizen Data Charter &amp; Privacy</p>
           <h1>Your documents deserve careful handling.</h1>
-          <p>Last updated: May 14, 2026. This page explains how service details, documents and payment proofs are handled securely.</p>
+          <p>Learn how One Point Digital Services safeguards your identity documents, payment proofs, and application records in strict compliance with the IT Act, 2000 and applicable regulatory guidelines.</p>
           <div class="hero-actions">
-            <a class="btn btn-primary" href="contact.html">Share Details Safely</a>
-            <a class="btn btn-ghost" href="support.html">Privacy Help</a>
+            <a class="btn btn-primary" href="https://wa.me/919473946181" target="_blank" rel="noopener"><i data-lucide="message-circle"></i> Ask Data Desk on WhatsApp</a>
+            <a class="btn btn-ghost" href="#sec-grievance"><i data-lucide="mail"></i> Contact Grievance Officer</a>
           </div>
         </div>
       </section>
 
-      <section class="section reveal light-blue-full-width-section" id="how-it-works">
-        <div>
-          <div class="premium-story-card">
-            <!-- Subtle ambient gradients for depth -->
-            <div></div>
-            <div></div>
-            
-            <div class="story-content">
-              <div class="story-brand">
-                <i data-lucide="shield"></i> <span>Privacy Shield</span>
-              </div>
-              <h2 class="story-title">Your Documents <br> Are <span class="h2-gold">Secure</span></h2>
-              <p class="story-desc">We prioritize data safety and maintain transparent handling procedures for all applications.</p>
-              
-              <div class="story-products">
-                <p class="story-products-label">Our Commitments</p>
-                <div>
-                  <div class="story-guarantee-item" onmouseover="this.style.transform='translateX(4px)'" onmouseout="this.style.transform=''">
-                    <div><i data-lucide="shield-check"></i></div>
-                    <span>Secure Handling</span>
-                  </div>
-                  <div class="story-guarantee-item" onmouseover="this.style.transform='translateX(4px)'" onmouseout="this.style.transform=''">
-                    <div><i data-lucide="trash-2"></i></div>
-                    <span>On-Demand Deletion</span>
-                  </div>
-                  <div class="story-guarantee-item" onmouseover="this.style.transform='translateX(4px)'" onmouseout="this.style.transform=''">
-                    <div><i data-lucide="lock"></i></div>
-                    <span>Encrypted Vault</span>
-                  </div>
-                  <div class="story-guarantee-item" onmouseover="this.style.transform='translateX(4px)'" onmouseout="this.style.transform=''">
-                    <div><i data-lucide="user-check"></i></div>
-                    <span>Staff Verification</span>
-                  </div>
-                </div>
-              </div>
+      <!-- Main Privacy Policy Shell -->
+      <div class="privacy-page-shell">
+        
+        <!-- Meta Bar (Breadcrumb + Version + Print) -->
+        <div class="privacy-meta-bar">
+          <nav class="privacy-breadcrumb" aria-label="Breadcrumb">
+            <a href="index.html">Home</a>
+            <i data-lucide="chevron-right"></i>
+            <span>Privacy Policy &amp; Data Charter</span>
+          </nav>
 
-              <a href="support.html" class="btn btn-primary story-btn"><i data-lucide="help-circle"></i> Privacy Help</a>
-            </div>
+          <div class="privacy-version-tag">
+            <span>Version <strong class="version-badge">2.4</strong></span>
+            <span>&middot;</span>
+            <span>Effective: <strong>July 2026</strong></span>
+            <button type="button" class="btn-print-policy" onclick="window.print()" title="Print this policy document">
+              <i data-lucide="printer" style="width: 13px; height: 13px;"></i>
+              <span>Print Policy</span>
+            </button>
+          </div>
+        </div>
 
-            <div class="story-steps-wrap">
-              <div class="story-step-item">
-                <div class="step-icon-container">
-                  <i data-lucide="database"></i>
-                </div>
-                <div class="step-card">
-                  <div class="step-card-header">
-                    <h4>Information We Collect</h4>
-                    <span class="step-number-tag">Section 01</span>
-                  </div>
-                  <p>We may collect your name, mobile number, selected service, application notes, document copies, payment transaction ID, and payment proof when you request a service.</p>
-                </div>
-              </div>
-
-              <div class="story-step-item">
-                <div class="step-icon-container">
-                  <i data-lucide="cpu"></i>
-                </div>
-                <div class="step-card">
-                  <div class="step-card-header">
-                    <h4>How We Use It</h4>
-                    <span class="step-number-tag">Section 02</span>
-                  </div>
-                  <p>Your information is used only for service assistance, document review, payment verification, application follow-up, invoice support, and customer communication.</p>
-                </div>
-              </div>
-
-              <div class="story-step-item">
-                <div class="step-icon-container">
-                  <i data-lucide="lock"></i>
-                </div>
-                <div class="step-card">
-                  <div class="step-card-header">
-                    <h4>Document Safety</h4>
-                    <span class="step-number-tag">Section 03</span>
-                  </div>
-                  <p>Sensitive documents should be shared only through verified support channels. Access must be limited to authorized operators after backend integration.</p>
-                </div>
-              </div>
-
-              <div class="story-step-item">
-                <div class="step-icon-container">
-                  <i data-lucide="trash-2"></i>
-                </div>
-                <div class="step-card">
-                  <div class="step-card-header">
-                    <h4>Deletion Requests</h4>
-                    <span class="step-number-tag">Section 04</span>
-                  </div>
-                  <p>You can request deletion of document copies after service completion, except records required for invoices, legal compliance, or dispute handling.</p>
-                </div>
-              </div>
+        <!-- 1. Privacy at a Glance (30-Second Summary Box) -->
+        <section class="privacy-glance-card">
+          <div class="glance-head">
+            <div>
+              <span class="glance-kicker"><i data-lucide="zap" style="width: 12px; height: 12px;"></i> Privacy at a Glance</span>
+              <h2 class="glance-title">Summary of our data practices in 30 seconds</h2>
             </div>
           </div>
+
+          <div class="glance-grid">
+            <div class="glance-item">
+              <span class="glance-label"><i data-lucide="file-text" style="width: 13px; height: 13px;"></i> What We Collect</span>
+              <p class="glance-desc">Name, contact details, application inputs, identity proofs, and billing transaction IDs.</p>
+            </div>
+
+            <div class="glance-item">
+              <span class="glance-label"><i data-lucide="target" style="width: 13px; height: 13px;"></i> Why We Collect</span>
+              <p class="glance-desc">To review, format, and submit your citizen, student, or tax requests to official portals.</p>
+            </div>
+
+            <div class="glance-item">
+              <span class="glance-label"><i data-lucide="clock" style="width: 13px; height: 13px;"></i> Retention Period</span>
+              <p class="glance-desc">Kept during active processing; scheduled for purge after delivery. Invoices kept as legally required.</p>
+            </div>
+
+            <div class="glance-item">
+              <span class="glance-label"><i data-lucide="users" style="width: 13px; height: 13px;"></i> Who Has Access</span>
+              <p class="glance-desc">Assigned Kendra operators and official destination portals only. Zero commercial data sale.</p>
+            </div>
+
+            <div class="glance-item">
+              <span class="glance-label"><i data-lucide="sliders" style="width: 13px; height: 13px;"></i> Citizen Controls</span>
+              <p class="glance-desc">Right to inspect your file, correct erroneous entries, or request on-demand document deletion.</p>
+            </div>
+
+            <div class="glance-item">
+              <span class="glance-label"><i data-lucide="help-circle" style="width: 13px; height: 13px;"></i> Grievance Desk</span>
+              <p class="glance-desc">Dedicated Grievance Officer in Lucknow: support@bisenonepoint.com &middot; +91 9473946181.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- 2. Top Core Principles (Concise TL;DR) -->
+        <section class="privacy-principles-grid">
           
-          <!-- Bottom Action Strip -->
-          <div class="legal-action-strip">
-            <span>
-              <i data-lucide="lock-keyhole"></i>
-              Share sensitive documents only through verified One Point support channels.
-            </span>
-            <a class="btn btn-soft" href="support.html" onmouseover="this.style.background='rgba(18, 86, 150, 0.12)'; this.style.color='#0c4da2';" onmouseout="this.style.background='rgba(18, 86, 150, 0.06)'; this.style.color='#125696';">Request Help</a>
+          <article class="principle-card">
+            <div class="principle-top">
+              <div class="principle-icon"><i data-lucide="shield-check"></i></div>
+              <h3 class="principle-title">Purpose-Bound Use</h3>
+            </div>
+            <p class="principle-desc">Documents are used strictly to execute the specific service you authorize.</p>
+          </article>
+
+          <article class="principle-card">
+            <div class="principle-top">
+              <div class="principle-icon"><i data-lucide="lock"></i></div>
+              <h3 class="principle-title">Secure Handling</h3>
+            </div>
+            <p class="principle-desc">Encrypted transmission via TLS 1.3 with restricted local operator authentication.</p>
+          </article>
+
+          <article class="principle-card">
+            <div class="principle-top">
+              <div class="principle-icon"><i data-lucide="trash-2"></i></div>
+              <h3 class="principle-title">On-Demand Purging</h3>
+            </div>
+            <p class="principle-desc">Request prompt deletion of your document scans once your service is delivered.</p>
+          </article>
+
+          <article class="principle-card">
+            <div class="principle-top">
+              <div class="principle-icon"><i data-lucide="user-x"></i></div>
+              <h3 class="principle-title">No Data Monetization</h3>
+            </div>
+            <p class="principle-desc">We never sell, rent, or distribute citizen information to marketing brokers.</p>
+          </article>
+
+        </section>
+
+        <!-- 3. Visual Data Flow & Lifecycle Timeline -->
+        <section class="dataflow-section">
+          <h3 class="dataflow-title">How your data moves through our assisted workflow</h3>
+          <p class="dataflow-sub">From initial document intake to final delivery and secure archiving.</p>
+
+          <div class="dataflow-timeline">
+            <div class="flow-step">
+              <span class="flow-step-num">Step 01</span>
+              <div class="flow-step-title">Citizen Intake</div>
+              <p class="flow-step-desc">You share files via WhatsApp, portal, or counter.</p>
+            </div>
+
+            <div class="flow-step">
+              <span class="flow-step-num">Step 02</span>
+              <div class="flow-step-title">Operator Check</div>
+              <p class="flow-step-desc">Operator reviews format, crop, and portal compliance.</p>
+            </div>
+
+            <div class="flow-step">
+              <span class="flow-step-num">Step 03</span>
+              <div class="flow-step-title">Official Filing</div>
+              <p class="flow-step-desc">Application is submitted directly to designated portal.</p>
+            </div>
+
+            <div class="flow-step">
+              <span class="flow-step-num">Step 04</span>
+              <div class="flow-step-title">Handover &amp; Receipt</div>
+              <p class="flow-step-desc">Deliverables and tax invoice delivered to citizen.</p>
+            </div>
+
+            <div class="flow-step">
+              <span class="flow-step-num">Step 05</span>
+              <div class="flow-step-title">Scheduled Purge</div>
+              <p class="flow-step-desc">Temporary files are archived/purged upon completion.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- 4. Main 2-Column Policy Hub Layout -->
+        <div class="privacy-main-grid">
+          
+          <!-- Left Column: Sticky Table of Contents & Data Control Center -->
+          <aside class="privacy-sidebar">
+            
+            <!-- Sticky Navigation -->
+            <nav class="toc-card" aria-label="Policy Table of Contents">
+              <div class="toc-head">Policy Navigation</div>
+              <div class="toc-nav-list" id="privacy-toc">
+                <a href="#sec-collection" class="toc-link active">
+                  <span class="toc-num">01</span>
+                  <span>Data Collection</span>
+                </a>
+                <a href="#sec-identity" class="toc-link">
+                  <span class="toc-num">02</span>
+                  <span>Identity Documents</span>
+                </a>
+                <a href="#sec-usage" class="toc-link">
+                  <span class="toc-num">03</span>
+                  <span>Purpose &amp; Processing</span>
+                </a>
+                <a href="#sec-payments" class="toc-link">
+                  <span class="toc-num">04</span>
+                  <span>Payments &amp; Invoices</span>
+                </a>
+                <a href="#sec-thirdparty" class="toc-link">
+                  <span class="toc-num">05</span>
+                  <span>Third-Party Processors</span>
+                </a>
+                <a href="#sec-retention" class="toc-link">
+                  <span class="toc-num">06</span>
+                  <span>Retention &amp; Purge</span>
+                </a>
+                <a href="#sec-cookies" class="toc-link">
+                  <span class="toc-num">07</span>
+                  <span>Cookies &amp; Analytics</span>
+                </a>
+                <a href="#sec-rights" class="toc-link">
+                  <span class="toc-num">08</span>
+                  <span>Citizen Rights &amp; Controls</span>
+                </a>
+                <a href="#sec-grievance" class="toc-link">
+                  <span class="toc-num">09</span>
+                  <span>Grievance Officer</span>
+                </a>
+              </div>
+            </nav>
+
+            <!-- Data Control Center -->
+            <div class="datacontrol-card">
+              <span class="datacontrol-kicker">Data Control Center</span>
+              <div class="datacontrol-title">Exercise Your Data Rights</div>
+              <p class="datacontrol-desc">Submit an immediate request to inspect, correct, or delete your files.</p>
+              
+              <div class="datacontrol-actions">
+                <a href="https://wa.me/919473946181?text=Hello%20One%20Point%2C%20I%20request%20a%20Data%20Summary%20for%20Request%20ID%3A%20" target="_blank" rel="noopener" class="btn-data-action">
+                  <i data-lucide="eye" style="width: 14px; height: 14px;"></i>
+                  <span>View My Data Summary</span>
+                </a>
+                <a href="https://wa.me/919473946181?text=Hello%20One%20Point%2C%20I%20need%20to%20Correct%20Information%20for%20Request%20ID%3A%20" target="_blank" rel="noopener" class="btn-data-action">
+                  <i data-lucide="edit-3" style="width: 14px; height: 14px;"></i>
+                  <span>Request Correction</span>
+                </a>
+                <a href="https://wa.me/919473946181?text=Hello%20One%20Point%2C%20I%20request%20Document%20Deletion%20for%20Request%20ID%3A%20" target="_blank" rel="noopener" class="btn-data-action primary">
+                  <i data-lucide="trash-2" style="width: 14px; height: 14px;"></i>
+                  <span>Request Document Purge</span>
+                </a>
+              </div>
+              <p class="datacontrol-note">Note: Verification of request ownership is required prior to fulfilling deletion requests.</p>
+            </div>
+
+            <!-- What We Never Ask For (Fraud Shield) -->
+            <div class="fraud-prevention-card">
+              <div class="fraud-title">
+                <i data-lucide="alert-triangle" style="width: 14px; height: 14px;"></i>
+                <span>What We Never Ask For</span>
+              </div>
+              <ul class="fraud-list">
+                <li>Your Net Banking passwords or UPI PINs</li>
+                <li>OTPs after transaction completion</li>
+                <li>Credit/Debit card CVV numbers</li>
+              </ul>
+            </div>
+
+          </aside>
+
+          <!-- Right Column: Document Policy Details -->
+          <article class="privacy-doc-card">
+            
+            <!-- Section 01: Information We Collect -->
+            <section class="doc-section" id="sec-collection">
+              <div class="doc-section-head">
+                <span class="doc-section-kicker">01 / Data Collection</span>
+                <h2 class="doc-section-title">Information We Collect</h2>
+                <p class="doc-section-summary">Scope of personal and application inputs collected during service fulfillment.</p>
+              </div>
+              <p class="doc-text">
+                When you initiate a service request online or walk in to our Lucknow Suvidha Kendra, we collect only the information necessary to prepare, verify, and complete your application:
+              </p>
+              <ul class="doc-list">
+                <li><strong>Contact Data:</strong> Full name, mobile / WhatsApp number, email address, and physical delivery address (for physical deliverables such as laminated PVC cards or framed photo prints).</li>
+                <li><strong>Application-Specific Inputs:</strong> Registration numbers, date of birth, educational marksheets, parent names, and category certificates requested by destination portals.</li>
+                <li><strong>Transaction Records:</strong> Payment gateway transaction reference numbers, billing timestamps, and invoice metadata for tax accounting.</li>
+              </ul>
+            </section>
+
+            <!-- Section 02: Identity Documents -->
+            <section class="doc-section" id="sec-identity">
+              <div class="doc-section-head">
+                <span class="doc-section-kicker">02 / Identity Document Handling</span>
+                <h2 class="doc-section-title">Identity Document Handling</h2>
+                <p class="doc-section-summary">Procedures for safeguarding Aadhaar, PAN, and government identification credentials.</p>
+              </div>
+              <p class="doc-text">
+                National identity documents are processed strictly in alignment with Section 43A of the Information Technology Act, 2000 and applicable department guidelines:
+              </p>
+              <div class="doc-callout-sensitive">
+                <strong>Identity Safety Protocol:</strong> Where full identity numbers are not mandated by the target portal, Masked Aadhaar is preferred. Live OTP verification is conducted only with your direct authorization.
+              </div>
+              <ul class="doc-list">
+                <li>Physical identity cards scanned at our counter are returned to you immediately after digitization.</li>
+                <li>Digital scans received via WhatsApp or portal are saved in isolated session directories accessible only to the assigned filing operator.</li>
+                <li>Citizens may request optional digital watermarking (*"For One Point Filing Only"*) on submitted scans.</li>
+              </ul>
+            </section>
+
+            <!-- Section 03: Purpose & Processing -->
+            <section class="doc-section" id="sec-usage">
+              <div class="doc-section-head">
+                <span class="doc-section-kicker">03 / Purpose &amp; Processing</span>
+                <h2 class="doc-section-title">How We Use Your Data</h2>
+                <p class="doc-section-summary">Specific operational purposes for which information is processed.</p>
+              </div>
+              <p class="doc-text">
+                Your data is purpose-bound and utilized exclusively for:
+              </p>
+              <ul class="doc-list">
+                <li>Filing government application forms and portal submissions on your behalf.</li>
+                <li>Document quality enhancement (cropping, photo resizing to board specifications).</li>
+                <li>Live milestone tracking and WhatsApp status dispatch.</li>
+                <li>Issuing official GST tax invoices and accounting records.</li>
+              </ul>
+              <p class="doc-text">
+                <strong>No Data Monetization:</strong> We do not sell, rent, or trade your personal information or contact details to third-party advertisers, lead brokers, or marketing networks.
+              </p>
+            </section>
+
+            <!-- Section 04: Payment & Invoices -->
+            <section class="doc-section" id="sec-payments">
+              <div class="doc-section-head">
+                <span class="doc-section-kicker">04 / Payments &amp; Invoices</span>
+                <h2 class="doc-section-title">Payment Security &amp; Invoicing</h2>
+                <p class="doc-section-summary">PCI-DSS compliant payment processing and statutory invoice records.</p>
+              </div>
+              <p class="doc-text">
+                Digital payments on One Point are processed through RBI-authorized payment gateways (Razorpay, verified UPI QR). All payment communications use HTTPS TLS 1.3 encryption.
+              </p>
+              <ul class="doc-list">
+                <li><strong>No Raw Card Storage:</strong> One Point does not store your credit/debit card numbers, CVVs, or net banking passwords. Card tokenization and authentication are handled entirely by the certified payment gateway.</li>
+                <li><strong>Tax Invoices:</strong> Official GST tax invoices are generated for every transaction and retained for statutory audits as required under Indian taxation laws.</li>
+              </ul>
+            </section>
+
+            <!-- Section 05: Third-Party Processors -->
+            <section class="doc-section" id="sec-thirdparty">
+              <div class="doc-section-head">
+                <span class="doc-section-kicker">05 / Third-Party Processors</span>
+                <h2 class="doc-section-title">Approved Service Processors</h2>
+                <p class="doc-section-summary">Infrastructure and gateway partners supporting service delivery.</p>
+              </div>
+              <p class="doc-text">
+                To execute digital operations, certain data is processed through verified third-party technical providers:
+              </p>
+              <ul class="doc-list">
+                <li><strong>Destination Government Portals:</strong> NSDL, UTIITSL, UPSSSC, SSC, DigiLocker, IRCTC (data submitted per citizen application).</li>
+                <li><strong>Payment Gateways:</strong> Razorpay / UPI rails for encrypted transaction processing.</li>
+                <li><strong>Communication Rails:</strong> WhatsApp Business API / SMS gateways for status notifications.</li>
+                <li><strong>Hosting &amp; Storage:</strong> Secure cloud infrastructure adhering to standard data encryption at rest.</li>
+              </ul>
+            </section>
+
+            <!-- Section 06: Retention & Purge -->
+            <section class="doc-section" id="sec-retention">
+              <div class="doc-section-head">
+                <span class="doc-section-kicker">06 / Retention &amp; Purge</span>
+                <h2 class="doc-section-title">Data Retention &amp; Scheduled Purge</h2>
+                <p class="doc-section-summary">Clear criteria defining how long files remain in active storage.</p>
+              </div>
+              <p class="doc-text">
+                We maintain a minimized lifecycle for citizen documents:
+              </p>
+              <ul class="doc-list">
+                <li><strong>Application Files:</strong> Retained in active operator storage only during the processing, verification, and deliverable delivery period.</li>
+                <li><strong>Scheduled Purging:</strong> Document scans are scheduled for secure archival or purge following delivery confirmation, unless earlier deletion is requested by the citizen.</li>
+                <li><strong>Statutory Invoices:</strong> Invoice metadata (Name, Service Name, Amount, Date) is retained solely for legal and tax accounting requirements.</li>
+              </ul>
+            </section>
+
+            <!-- Section 07: Cookies & Analytics -->
+            <section class="doc-section" id="sec-cookies">
+              <div class="doc-section-head">
+                <span class="doc-section-kicker">07 / Cookies &amp; Analytics</span>
+                <h2 class="doc-section-title">Cookies &amp; Technical Storage</h2>
+                <p class="doc-section-summary">Minimal essential browser storage for website functionality.</p>
+              </div>
+              <p class="doc-text">
+                Our website utilizes minimal, privacy-respecting technical storage:
+              </p>
+              <ul class="doc-list">
+                <li><strong>Session &amp; Cart State:</strong> LocalStorage is used to maintain your cart items, active application drafts, and tracking queries across page visits.</li>
+                <li><strong>No Invasive Ad Tracking:</strong> We do not run third-party tracking pixels or cross-site behavioral advertising cookies.</li>
+              </ul>
+            </section>
+
+            <!-- Section 08: Citizen Rights & Controls -->
+            <section class="doc-section" id="sec-rights">
+              <div class="doc-section-head">
+                <span class="doc-section-kicker">08 / Citizen Rights &amp; Controls</span>
+                <h2 class="doc-section-title">Your Rights &amp; Data Controls</h2>
+                <p class="doc-section-summary">Actionable rights you can exercise regarding your personal data.</p>
+              </div>
+              <p class="doc-text">
+                As a citizen utilizing One Point Digital Services, you have the full right to:
+              </p>
+              <ul class="doc-list">
+                <li><strong>Inspect:</strong> Request a summary of all document scans and application records on file for your Request ID.</li>
+                <li><strong>Correct:</strong> Request instant correction of misspelled names, dates, or address records prior to portal submission.</li>
+                <li><strong>Erase:</strong> Request on-demand deletion of all digitized identity documents upon order completion.</li>
+              </ul>
+            </section>
+
+            <!-- Section 09: Grievance Officer -->
+            <section class="doc-section" id="sec-grievance">
+              <div class="doc-section-head">
+                <span class="doc-section-kicker">09 / Grievance Officer</span>
+                <h2 class="doc-section-title">Grievance Officer &amp; Redressal</h2>
+                <p class="doc-section-summary">Official contact details for privacy and data governance concerns.</p>
+              </div>
+              <p class="doc-text">
+                In compliance with the Information Technology (Intermediary Guidelines and Digital Media Ethics Code) Rules, 2021, for any privacy queries or data requests, contact our designated Grievance Officer:
+              </p>
+
+              <div class="grievance-contact-box">
+                <div style="font-weight: 750; font-size: 0.92rem; color: #082f61;">One Point Suvidha Kendra — Grievance Redressal Desk</div>
+                <div class="grievance-rows">
+                  <div class="grievance-item">
+                    <i data-lucide="map-pin"></i>
+                    <span><strong>Address:</strong> Milan Tower, Kursi Rd, Adil Nagar, LDA Colony, Lucknow, UP &ndash; 226022</span>
+                  </div>
+                  <div class="grievance-item">
+                    <i data-lucide="mail"></i>
+                    <span><strong>Email:</strong> <a href="mailto:support@bisenonepoint.com" style="color: #125696; font-weight: 600;">support@bisenonepoint.com</a></span>
+                  </div>
+                  <div class="grievance-item">
+                    <i data-lucide="phone"></i>
+                    <span><strong>Helpline:</strong> +91 9473946181</span>
+                  </div>
+                  <div class="grievance-item">
+                    <i data-lucide="clock"></i>
+                    <span><strong>Desk Hours:</strong> Mon &ndash; Sat: 9:00 AM &ndash; 8:00 PM</span>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+          </article>
+
+        </div>
+
+        <!-- 5. Bottom Trust Assurances Strip -->
+        <section class="privacy-trust-strip">
+          <div class="privacy-trust-card">
+            <div class="privacy-trust-icon"><i data-lucide="shield-check"></i></div>
+            <div>
+              <div class="privacy-trust-title">Limited Data Sharing</div>
+              <span class="privacy-trust-sub">Shared only with necessary filing portals</span>
+            </div>
+          </div>
+
+          <div class="privacy-trust-card">
+            <div class="privacy-trust-icon"><i data-lucide="lock"></i></div>
+            <div>
+              <div class="privacy-trust-title">Secure Storage Protocols</div>
+              <span class="privacy-trust-sub">Encrypted transmission &amp; authenticated access</span>
+            </div>
+          </div>
+
+          <div class="privacy-trust-card">
+            <div class="privacy-trust-icon"><i data-lucide="trash-2"></i></div>
+            <div>
+              <div class="privacy-trust-title">Easy Data Requests</div>
+              <span class="privacy-trust-sub">Assisted file inspection and purge options</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- 6. Pre-Footer Direct Action Bar -->
+        <div class="privacy-prefooter">
+          <div class="prefooter-text">
+            <h3>Have a question about your document safety?</h3>
+            <p>Our Lucknow data governance desk is available for verification and assistance.</p>
+          </div>
+          <div class="prefooter-btns">
+            <a href="https://wa.me/919473946181" target="_blank" rel="noopener" class="btn-prefooter-gold">
+              <i data-lucide="message-circle" style="width: 14px; height: 14px;"></i>
+              <span>Ask Privacy Desk</span>
+            </a>
+            <a href="contact.html" class="btn-prefooter-ghost">
+              <i data-lucide="mail" style="width: 14px; height: 14px;"></i>
+              <span>Contact Kendra</span>
+            </a>
           </div>
         </div>
-      </section>
+
+      </div>
     </main>
+
     <div data-site-footer></div>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
-    <script src="assets/app.js?v=clean_js_v11" defer></script>
-  
-<script id="line-alignment-script">
-  document.addEventListener("DOMContentLoaded", function() {
-    setTimeout(() => {
-      document.querySelectorAll(".section-head h2").forEach(h2 => {
-        let align = window.getComputedStyle(h2).textAlign;
-        let parent = h2.closest('.section-head');
-        if (parent) {
-          if (align === "center") {
-            parent.classList.add("center-line");
-          } else {
-            parent.classList.add("left-line");
-          }
+    <script src="assets/app.js?v=customer-checkout-94" defer></script>
+    <script>
+      // Active link highlight on scroll (Scrollspy)
+      document.addEventListener('DOMContentLoaded', () => {
+        const sections = document.querySelectorAll('.doc-section');
+        const navLinks = document.querySelectorAll('#privacy-toc .toc-link');
+
+        function onScroll() {
+          let current = '';
+          const scrollPos = window.pageYOffset || document.documentElement.scrollTop;
+
+          sections.forEach(section => {
+            const sectionTop = section.offsetTop - 120;
+            if (scrollPos >= sectionTop) {
+              current = section.getAttribute('id');
+            }
+          });
+
+          navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === '#' + current) {
+              link.classList.add('active');
+            }
+          });
         }
+
+        window.addEventListener('scroll', onScroll);
       });
-    }, 100); // small delay to ensure CSS is applied
-  });
-</script>
-</body>
+    </script>
+  </body>
 </html>

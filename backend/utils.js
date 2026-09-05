@@ -90,15 +90,21 @@ function serverError(res, error) {
 
 function parseJsonBody(req, { limit = 1024 * 1024 } = {}) {
   return new Promise((resolve, reject) => {
-    let raw = "";
+    const chunks = [];
+    let size = 0;
     req.on("data", (chunk) => {
-      raw += chunk;
-      if (Buffer.byteLength(raw) > limit) {
+      size += chunk.length;
+      if (size > limit) {
         reject(new Error("Request body too large"));
         req.destroy();
+      } else {
+        chunks.push(chunk);
       }
     });
     req.on("end", () => {
+      // Concatenate raw bytes first, then decode once as UTF-8 so multi-byte
+      // characters (Hindi text, emoji, arrows) split across TCP chunks survive intact.
+      const raw = Buffer.concat(chunks).toString("utf8");
       if (!raw) return resolve({ raw: "", body: {} });
       try {
         resolve({ raw, body: JSON.parse(raw) });

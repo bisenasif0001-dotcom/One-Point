@@ -1,30 +1,702 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Disclaimer for One Point Digital Services regarding assisted services, official approvals, CSC claims, travel booking and third-party dependencies.">
-    <title>Disclaimer | One Point Digital Services</title>
+    <meta name="description" content="Legal Disclaimer for One Point Digital Services Lucknow. Learn about our private facilitation scope, government approval boundaries, and third-party dependencies.">
+    <title>Legal Disclaimer &amp; Service Scope | One Point Digital Services</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-        <link rel="stylesheet" href="assets/onepoint.css?v=2">
-
+    <script src="assets/opds-boot.js?v=anti-fouc-79"></script>
+    <link rel="stylesheet" href="assets/onepoint.css?v=customer-checkout-94">
+    <link rel="stylesheet" href="assets/enterprise-design-system.css?v=eds-2">
+    <link rel="stylesheet" href="assets/enterprise-visual-polish.css?v=polish-3">
     <style>
-      .compact-hero {
-        background:
-          linear-gradient(90deg, rgba(18, 86, 150, 0.98) 0%, rgba(18, 86, 150, 0.88) 45%, rgba(210, 161, 42, 0.3) 100%),
-          url('assets/disclaimer_human.png') no-repeat center / cover !important;
+      /* ══════════════════════════════════════════════════════════════════════════
+         LEGAL DISCLAIMER & SERVICE SCOPE — ENTERPRISE CLEAN DESIGN SYSTEM
+         ══════════════════════════════════════════════════════════════════════════ */
+      :root {
+        --disc-navy: #125696;
+        --disc-navy-mid: #0f4f8b;
+        --disc-navy-dark: #082f61;
+        --disc-gold: #f5c842;
+        --disc-gold-text: #c58a10;
+        --disc-border: #e2e8f0;
+        --disc-border-subtle: #edf2f7;
+        --disc-surface: #ffffff;
+        --disc-bg: #f8fafc;
       }
-      .compact-hero::before,
-      .compact-hero::after { display: none !important; }
-      .compact-hero { padding-inline: 0 !important; }
-      .compact-hero h1 { text-align: left !important; margin-inline: 0 !important; }
-      .compact-hero p:not(.eyebrow) { text-align: left !important; margin-inline: 0 !important; }
-      .compact-hero .hero-actions { justify-content: flex-start !important; }
-    </style></head>
-  <body class="online-services-page">
+
+      body.disclaimer-page-body {
+        background-color: #f8fafc;
+        color: #0f172a;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        scroll-behavior: smooth;
+      }
+
+      /* ── Top Hero Section ── */
+      .compact-hero.disclaimer-hero-bg {
+        background:
+          linear-gradient(100deg, rgba(11, 40, 88, 0.97) 0%, rgba(18, 86, 150, 0.92) 55%, rgba(12, 46, 98, 0.93) 100%),
+          linear-gradient(to bottom, rgba(8, 24, 60, 0.65) 0%, transparent 42%),
+          url('assets/disclaimer_human.png') no-repeat center/cover !important;
+        text-align: left !important;
+        padding-top: clamp(48px, 6vw, 76px) !important;
+        padding-bottom: clamp(48px, 6vw, 76px) !important;
+      }
+      .compact-hero.disclaimer-hero-bg::before,
+      .compact-hero.disclaimer-hero-bg::after { display: none !important; }
+      .compact-hero.disclaimer-hero-bg .site-container {
+        width: 100% !important;
+        max-width: var(--max, 1200px) !important;
+        margin-inline: auto !important;
+        padding-inline: var(--gutter, clamp(16px, 4vw, 32px)) !important;
+        box-sizing: border-box !important;
+        text-align: left !important;
+      }
+      .compact-hero.disclaimer-hero-bg h1 {
+        text-align: left !important;
+        margin-left: 0 !important;
+        font-size: clamp(2rem, 3.5vw, 2.75rem) !important;
+        font-weight: 800 !important;
+        letter-spacing: -0.025em !important;
+        color: #ffffff !important;
+      }
+      .compact-hero.disclaimer-hero-bg p:not(.eyebrow) {
+        text-align: left !important;
+        margin-left: 0 !important;
+        max-width: 680px !important;
+        font-size: 1rem !important;
+        line-height: 1.6 !important;
+        color: rgba(235, 245, 255, 0.88) !important;
+      }
+      .compact-hero.disclaimer-hero-bg .eyebrow {
+        margin-left: 0 !important;
+        margin-right: auto !important;
+        background: rgba(245, 200, 66, 0.15) !important;
+        border: 1px solid rgba(245, 200, 66, 0.35) !important;
+        color: #f5c842 !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        gap: 6px !important;
+        padding: 4px 12px !important;
+        border-radius: 999px !important;
+        font-size: 0.76rem !important;
+        font-weight: 700 !important;
+        letter-spacing: 0.06em !important;
+        text-transform: uppercase !important;
+        margin-bottom: 14px !important;
+      }
+      .compact-hero.disclaimer-hero-bg .hero-actions {
+        justify-content: flex-start !important;
+        margin-top: 24px !important;
+        display: flex !important;
+        gap: 12px !important;
+        flex-wrap: wrap !important;
+      }
+
+      /* ── Page Shell ── */
+      .disclaimer-page-shell {
+        width: 100%;
+        max-width: var(--max, 1200px);
+        margin-inline: auto;
+        padding-top: clamp(24px, 3.5vw, 36px);
+        padding-bottom: 72px;
+        padding-inline: var(--gutter, clamp(16px, 4vw, 32px));
+        box-sizing: border-box;
+      }
+
+      /* ── Meta Bar (Breadcrumb + Version Info + Print Action) ── */
+      .disclaimer-meta-bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-bottom: 24px;
+        padding-bottom: 14px;
+        border-bottom: 1px solid var(--disc-border);
+      }
+      .disclaimer-breadcrumb {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 0.82rem;
+        color: #64748b;
+      }
+      .disclaimer-breadcrumb a { color: #475569; text-decoration: none; transition: color 0.15s; }
+      .disclaimer-breadcrumb a:hover { color: #0a5aa8; }
+      .disclaimer-breadcrumb i, .disclaimer-breadcrumb svg { width: 14px; height: 14px; color: #94a3b8; }
+      .disclaimer-breadcrumb span { color: #0f172a; font-weight: 600; }
+
+      .disclaimer-version-tag {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 0.78rem;
+        color: #64748b;
+      }
+      .version-badge {
+        background: #f1f5f9;
+        border: 1px solid #e2e8f0;
+        color: #334155;
+        font-weight: 700;
+        padding: 2px 8px;
+        border-radius: 6px;
+      }
+      .btn-print-policy {
+        background: #ffffff;
+        border: 1px solid #cbd5e1;
+        color: #334155;
+        font-size: 0.76rem;
+        font-weight: 600;
+        padding: 4px 10px;
+        border-radius: 6px;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        transition: all 0.15s ease;
+      }
+      .btn-print-policy:hover {
+        background: #f1f5f9;
+        color: #0a5aa8;
+        border-color: #0a5aa8;
+      }
+
+      /* ── 1. Disclaimers at a Glance (30-Sec Summary Box) ── */
+      .disclaimer-glance-card {
+        background: #ffffff;
+        border: 1px solid var(--disc-border);
+        border-radius: 16px;
+        padding: clamp(20px, 3vw, 28px);
+        box-shadow: 0 1px 3px rgba(15, 23, 42, 0.03);
+        margin-bottom: 28px;
+      }
+      .glance-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 16px;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .glance-kicker {
+        font-size: 0.74rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: #0a5aa8;
+        background: rgba(10, 90, 168, 0.08);
+        border: 1px solid rgba(10, 90, 168, 0.18);
+        padding: 3px 10px;
+        border-radius: 999px;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .glance-title {
+        font-size: 1.15rem;
+        font-weight: 800;
+        color: #082f61;
+        margin: 4px 0 0 0;
+      }
+      .glance-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+      }
+      @media (max-width: 880px) {
+        .glance-grid { grid-template-columns: 1fr; }
+      }
+      .glance-item {
+        background: #f8fafc;
+        border: 1px solid #e2e8f0;
+        border-radius: 10px;
+        padding: 12px 14px;
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+      }
+      .glance-label {
+        font-size: 0.72rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: #0a5aa8;
+        letter-spacing: 0.04em;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+      .glance-desc {
+        font-size: 0.82rem;
+        color: #334155;
+        line-height: 1.45;
+        margin: 0;
+      }
+
+      /* ── 2. Top Core Principles (Concise TL;DR) ── */
+      .disclaimer-principles-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+        margin-bottom: 32px;
+      }
+      @media (max-width: 960px) {
+        .disclaimer-principles-grid { grid-template-columns: repeat(2, 1fr); }
+      }
+      @media (max-width: 540px) {
+        .disclaimer-principles-grid { grid-template-columns: 1fr; }
+      }
+
+      .principle-card {
+        background: #ffffff;
+        border: 1px solid var(--disc-border);
+        border-radius: 14px;
+        padding: 18px 16px;
+        box-shadow: 0 1px 3px rgba(15, 23, 42, 0.02);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        transition: transform 0.2s ease, border-color 0.2s ease;
+      }
+      .principle-card:hover {
+        transform: translateY(-2px);
+        border-color: rgba(18, 86, 150, 0.28);
+      }
+      .principle-top {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 10px;
+      }
+      .principle-icon {
+        width: 34px;
+        height: 34px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(18, 86, 150, 0.08);
+        color: #125696;
+        flex-shrink: 0;
+      }
+      .principle-title {
+        font-size: 0.92rem;
+        font-weight: 750;
+        color: #082f61;
+        margin: 0;
+      }
+      .principle-desc {
+        font-size: 0.78rem;
+        color: #475569;
+        line-height: 1.45;
+        margin: 0;
+      }
+
+      /* ── 3. Visual Authority Workflow ── */
+      .disc-flow-section {
+        background: #ffffff;
+        border: 1px solid var(--disc-border);
+        border-radius: 16px;
+        padding: clamp(20px, 3vw, 28px);
+        box-shadow: 0 1px 3px rgba(15, 23, 42, 0.03);
+        margin-bottom: 32px;
+      }
+      .disc-flow-title {
+        font-size: 1.05rem;
+        font-weight: 800;
+        color: #082f61;
+        margin: 0 0 4px 0;
+      }
+      .disc-flow-sub {
+        font-size: 0.82rem;
+        color: #64748b;
+        margin: 0 0 18px 0;
+      }
+      .disc-flow-timeline {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 10px;
+        position: relative;
+      }
+      @media (max-width: 880px) {
+        .disc-flow-timeline { grid-template-columns: 1fr; }
+      }
+      .disc-flow-step {
+        background: #f8fafc;
+        border: 1px solid #e2e8f0;
+        border-radius: 10px;
+        padding: 12px 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        position: relative;
+      }
+      .disc-step-num {
+        font-size: 0.68rem;
+        font-weight: 800;
+        color: #125696;
+        background: rgba(18, 86, 150, 0.08);
+        padding: 2px 6px;
+        border-radius: 4px;
+        margin-bottom: 6px;
+      }
+      .disc-step-title {
+        font-size: 0.82rem;
+        font-weight: 750;
+        color: #0f172a;
+        margin-bottom: 4px;
+      }
+      .disc-step-desc {
+        font-size: 0.72rem;
+        color: #64748b;
+        line-height: 1.35;
+        margin: 0;
+      }
+
+      /* ── 4. Main 2-Column Disclaimer Hub Layout ── */
+      .disclaimer-main-grid {
+        display: grid;
+        grid-template-columns: 270px 1fr;
+        gap: 28px;
+        align-items: start;
+      }
+      @media (max-width: 880px) {
+        .disclaimer-main-grid { grid-template-columns: 1fr; }
+      }
+
+      /* Left Sidebar: Sticky Navigation & Transparency Card */
+      .disclaimer-sidebar {
+        position: sticky;
+        top: 84px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .toc-card {
+        background: #ffffff;
+        border: 1px solid var(--disc-border);
+        border-radius: 14px;
+        padding: 16px;
+        box-shadow: 0 1px 3px rgba(15, 23, 42, 0.02);
+      }
+      .toc-head {
+        font-size: 0.74rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: #64748b;
+        margin-bottom: 10px;
+        padding-left: 6px;
+      }
+      .toc-nav-list {
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+      }
+      .toc-link {
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: #475569;
+        text-decoration: none;
+        padding: 6px 10px;
+        border-radius: 6px;
+        transition: all 0.15s ease;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .toc-link:hover, .toc-link.active {
+        background: rgba(18, 86, 150, 0.08);
+        color: #125696;
+        font-weight: 700;
+      }
+      .toc-num {
+        font-size: 0.68rem;
+        font-weight: 700;
+        color: #94a3b8;
+        background: #f8fafc;
+        border: 1px solid #e2e8f0;
+        padding: 1px 5px;
+        border-radius: 4px;
+      }
+      .toc-link.active .toc-num {
+        color: #125696;
+        background: #ffffff;
+        border-color: rgba(18, 86, 150, 0.3);
+      }
+
+      /* Notice Card */
+      .transparency-notice-card {
+        background: linear-gradient(145deg, #ffffff 0%, #f8fbff 100%);
+        border: 1px solid rgba(18, 86, 150, 0.2);
+        border-radius: 14px;
+        padding: 18px;
+        box-shadow: 0 1px 3px rgba(15, 23, 42, 0.02);
+      }
+      .notice-kicker {
+        font-size: 0.7rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: #125696;
+        background: rgba(18, 86, 150, 0.08);
+        padding: 2px 7px;
+        border-radius: 4px;
+        margin-bottom: 8px;
+        display: inline-block;
+      }
+      .notice-title {
+        font-size: 0.92rem;
+        font-weight: 750;
+        color: #082f61;
+        margin: 0 0 6px 0;
+      }
+      .notice-items {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin: 10px 0 14px 0;
+      }
+      .notice-chk {
+        display: flex;
+        align-items: flex-start;
+        gap: 6px;
+        font-size: 0.76rem;
+        color: #334155;
+        line-height: 1.4;
+      }
+      .notice-chk i { color: #0a5aa8; width: 14px; height: 14px; flex-shrink: 0; margin-top: 1px; }
+
+      .btn-notice-wa {
+        font-size: 0.78rem;
+        font-weight: 600;
+        padding: 8px 12px;
+        border-radius: 6px;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        background: #125696;
+        color: #ffffff;
+        transition: background 0.15s;
+      }
+      .btn-notice-wa:hover { background: #0b3f72; color: #ffffff; }
+
+      /* Right Column: Policy Document Articles */
+      .disclaimer-doc-card {
+        background: #ffffff;
+        border: 1px solid var(--disc-border);
+        border-radius: 16px;
+        padding: clamp(24px, 4vw, 44px);
+        box-shadow: 0 1px 3px rgba(15, 23, 42, 0.03);
+      }
+
+      .doc-section {
+        padding-bottom: 36px;
+        margin-bottom: 36px;
+        border-bottom: 1px solid var(--disc-border-subtle);
+        scroll-margin-top: 96px;
+      }
+      .doc-section:last-child {
+        padding-bottom: 0;
+        margin-bottom: 0;
+        border-bottom: none;
+      }
+
+      .doc-section-head {
+        margin-bottom: 14px;
+      }
+      .doc-section-kicker {
+        font-size: 0.72rem;
+        font-weight: 750;
+        text-transform: uppercase;
+        color: #0a5aa8;
+        letter-spacing: 0.06em;
+        margin-bottom: 2px;
+        display: block;
+      }
+      .doc-section-title {
+        font-size: 1.25rem;
+        font-weight: 800;
+        color: #082f61;
+        margin: 0 0 6px 0;
+        line-height: 1.3;
+      }
+      .doc-section-summary {
+        font-size: 0.84rem;
+        color: #64748b;
+        margin: 0 0 14px 0;
+        font-weight: 500;
+      }
+
+      .doc-text {
+        font-size: 0.9rem;
+        color: #334155;
+        line-height: 1.7;
+        margin: 0 0 14px 0;
+      }
+
+      .doc-list {
+        margin: 8px 0 14px 20px;
+        padding: 0;
+        font-size: 0.88rem;
+        color: #334155;
+        line-height: 1.65;
+      }
+      .doc-list li { margin-bottom: 6px; }
+
+      /* Reassuring Notice Box */
+      .doc-callout-disc {
+        background: #f0f7ff;
+        border: 1px solid #bfdbfe;
+        border-left: 4px solid #125696;
+        border-radius: 8px;
+        padding: 12px 16px;
+        margin: 14px 0;
+        font-size: 0.84rem;
+        color: #1e40af;
+        line-height: 1.55;
+      }
+      .doc-callout-disc strong { color: #082f61; }
+
+      /* Contact Grievance Box */
+      .disc-contact-box {
+        background: #f8fafc;
+        border: 1px solid var(--disc-border);
+        border-radius: 12px;
+        padding: 18px 20px;
+        margin-top: 16px;
+      }
+      .disc-contact-rows {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+        margin-top: 12px;
+      }
+      @media (max-width: 600px) {
+        .disc-contact-rows { grid-template-columns: 1fr; }
+      }
+      .disc-contact-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        font-size: 0.82rem;
+        color: #334155;
+      }
+      .disc-contact-item i { color: #125696; width: 16px; height: 16px; flex-shrink: 0; margin-top: 2px; }
+
+      /* ── 5. Bottom Trust Assurances Strip ── */
+      .disclaimer-trust-strip {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+        margin-top: 36px;
+      }
+      @media (max-width: 768px) {
+        .disclaimer-trust-strip { grid-template-columns: 1fr; }
+      }
+      .disclaimer-trust-card {
+        background: #ffffff;
+        border: 1px solid var(--disc-border);
+        border-radius: 12px;
+        padding: 16px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .disclaimer-trust-icon {
+        width: 38px;
+        height: 38px;
+        border-radius: 8px;
+        background: rgba(18, 86, 150, 0.08);
+        color: #125696;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+      .disclaimer-trust-title {
+        font-size: 0.84rem;
+        font-weight: 700;
+        color: #0f172a;
+      }
+      .disclaimer-trust-sub {
+        font-size: 0.74rem;
+        color: #64748b;
+        display: block;
+      }
+
+      /* ── 6. Pre-Footer Direct Action Bar ── */
+      .disclaimer-prefooter {
+        background:
+          radial-gradient(circle at 14% 12%, rgba(210, 161, 42, 0.16), transparent 26rem),
+          radial-gradient(circle at 86% 80%, rgba(179, 218, 248, 0.16), transparent 28rem),
+          linear-gradient(180deg, #125696 0%, #0f4f8b 56%, #0b3f72 100%) !important;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        box-shadow: 0 16px 40px rgba(11, 63, 114, 0.18);
+        border-radius: 16px;
+        padding: clamp(24px, 3.5vw, 36px);
+        color: #ffffff;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 18px;
+        margin-top: 32px;
+      }
+      .prefooter-text h3 {
+        font-size: clamp(1.2rem, 2.2vw, 1.45rem);
+        font-weight: 800;
+        color: #ffffff;
+        margin: 0 0 4px 0;
+      }
+      .prefooter-text p {
+        font-size: 0.86rem;
+        color: rgba(235, 245, 255, 0.85);
+        margin: 0;
+      }
+      .prefooter-btns {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+      .btn-prefooter-gold {
+        background: #f5c842;
+        color: #082f61;
+        font-weight: 700;
+        font-size: 0.84rem;
+        padding: 9px 16px;
+        border-radius: 8px;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        transition: transform 0.15s;
+      }
+      .btn-prefooter-gold:hover { transform: translateY(-1px); background: #ffffff; }
+      .btn-prefooter-ghost {
+        background: rgba(255, 255, 255, 0.12);
+        color: #ffffff;
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        font-weight: 600;
+        font-size: 0.84rem;
+        padding: 9px 16px;
+        border-radius: 8px;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .btn-prefooter-ghost:hover { background: rgba(255, 255, 255, 0.22); color: #ffffff; }
+    </style>
+  </head>
+
+  <body class="disclaimer-page-body">
     <div data-site-nav>
       <header class="site-header fallback-site-header">
         <nav class="nav-bar" aria-label="Primary fallback">
@@ -41,163 +713,446 @@
         </nav>
       </header>
     </div>
-    <main class="page-shell">
-      <section class="compact-hero">
+
+    <main>
+      <!-- Signature Top Hero Section -->
+      <section class="compact-hero disclaimer-hero-bg">
         <div class="site-container">
-          <p class="eyebrow">Disclaimer</p>
+          <p class="eyebrow"><i data-lucide="alert-circle" style="width: 14px; height: 14px;"></i> Service Scope &amp; Legal Disclaimers</p>
           <h1>Assistance, not official approval.</h1>
-          <p>Last updated: May 14, 2026. This website presents assisted service workflows and should not be read as a government guarantee.</p>
+          <p>Understand the clear boundaries between our private facilitation services and statutory government authority decisions before applying.</p>
           <div class="hero-actions">
-            <a class="btn btn-primary" href="services.html">View Assistance Services</a>
-            <a class="btn btn-ghost" href="contact.html">Confirm Before Payment</a>
+            <a class="btn btn-primary" href="https://wa.me/919473946181" target="_blank" rel="noopener"><i data-lucide="message-circle"></i> Ask Desk on WhatsApp</a>
+            <a class="btn btn-ghost" href="services.html"><i data-lucide="search"></i> Browse Assisted Services</a>
           </div>
         </div>
       </section>
 
-      <section class="section reveal light-blue-full-width-section" id="how-it-works">
-        <div>
-          <div class="premium-story-card">
-            <!-- Subtle ambient gradients for depth -->
-            <div></div>
-            <div></div>
-            
-            <div class="story-content">
-              <div class="story-brand">
-                <i data-lucide="zap"></i> <span>Important Notice</span>
-              </div>
-              <h2 class="story-title">Assistance, not <br> official <span class="h2-gold">approval</span></h2>
-              <p class="story-desc">Please read the following guidelines regarding the scope of our assisted services, official claims, and transaction policy.</p>
-              
-              <div class="story-products">
-                <p class="story-products-label">Service Scope</p>
-                <div>
-                  <div class="story-guarantee-item" onmouseover="this.style.transform='translateX(4px)'" onmouseout="this.style.transform=''">
-                    <div><i data-lucide="shield-check"></i></div>
-                    <span>Assistance Only</span>
-                  </div>
-                  <div class="story-guarantee-item" onmouseover="this.style.transform='translateX(4px)'" onmouseout="this.style.transform=''">
-                    <div><i data-lucide="check-square"></i></div>
-                    <span>Official Verification</span>
-                  </div>
-                  <div class="story-guarantee-item" onmouseover="this.style.transform='translateX(4px)'" onmouseout="this.style.transform=''">
-                    <div><i data-lucide="globe"></i></div>
-                    <span>Provider Policies</span>
-                  </div>
-                  <div class="story-guarantee-item" onmouseover="this.style.transform='translateX(4px)'" onmouseout="this.style.transform=''">
-                    <div><i data-lucide="help-circle"></i></div>
-                    <span>Support Pre-Check</span>
-                  </div>
-                </div>
-              </div>
+      <!-- Main Disclaimer Page Shell -->
+      <div class="disclaimer-page-shell">
+        
+        <!-- Meta Bar (Breadcrumb + Version + Print) -->
+        <div class="disclaimer-meta-bar">
+          <nav class="disclaimer-breadcrumb" aria-label="Breadcrumb">
+            <a href="index.html">Home</a>
+            <i data-lucide="chevron-right"></i>
+            <span>Disclaimers &amp; Service Boundaries</span>
+          </nav>
 
-              <a href="support.html" class="btn btn-primary story-btn"><i data-lucide="help-circle"></i> Ask Support</a>
-            </div>
+          <div class="disclaimer-version-tag">
+            <span>Version <strong class="version-badge">2.4</strong></span>
+            <span>&middot;</span>
+            <span>Effective: <strong>July 2026</strong></span>
+            <button type="button" class="btn-print-policy" onclick="window.print()" title="Print disclaimer document">
+              <i data-lucide="printer" style="width: 13px; height: 13px;"></i>
+              <span>Print Disclaimers</span>
+            </button>
+          </div>
+        </div>
 
-            <div class="story-steps-wrap">
-              <div class="story-step-item">
-                <div class="step-icon-container">
-                  <i data-lucide="landmark"></i>
-                </div>
-                <div class="step-card">
-                  <div class="step-card-header">
-                    <h4>Government Services</h4>
-                    <span class="step-number-tag">Step 01</span>
-                  </div>
-                  <p>We assist users with application preparation and processing. Final decision, approval, rejection or delivery timeline depends on the official department or portal.</p>
-                </div>
-              </div>
-
-              <div class="story-step-item">
-                <div class="step-icon-container">
-                  <i data-lucide="file-check"></i>
-                </div>
-                <div class="step-card">
-                  <div class="step-card-header">
-                    <h4>Authorization Claims</h4>
-                    <span class="step-number-tag">Step 02</span>
-                  </div>
-                  <p>Any CSC, government or partner authorization claim must be verified before production launch. If authorization is not legally confirmed, public text should say assistance only.</p>
-                </div>
-              </div>
-
-              <div class="story-step-item">
-                <div class="step-icon-container">
-                  <i data-lucide="plane"></i>
-                </div>
-                <div class="step-card">
-                  <div class="step-card-header">
-                    <h4>Travel and Products</h4>
-                    <span class="step-number-tag">Step 03</span>
-                  </div>
-                  <p>Travel booking availability, fares, cancellation rules, product stock, delivery timelines and returns depend on the relevant provider or local store policy.</p>
-                </div>
-              </div>
-
-              <div class="story-step-item">
-                <div class="step-icon-container">
-                  <i data-lucide="check-circle"></i>
-                </div>
-                <div class="step-card">
-                  <div class="step-card-header">
-                    <h4>Accuracy</h4>
-                    <span class="step-number-tag">Step 04</span>
-                  </div>
-                  <p>We try to keep service details, prices and timelines updated, but users should confirm final charges and requirements with support before payment.</p>
-                </div>
-              </div>
+        <!-- 1. Disclaimers at a Glance (30-Second Summary Box) -->
+        <section class="disclaimer-glance-card">
+          <div class="glance-head">
+            <div>
+              <span class="glance-kicker"><i data-lucide="zap" style="width: 12px; height: 12px;"></i> Disclaimers at a Glance</span>
+              <h2 class="glance-title">Summary of our service boundaries in 30 seconds</h2>
             </div>
           </div>
+
+          <div class="glance-grid">
+            <div class="glance-item">
+              <span class="glance-label"><i data-lucide="shield" style="width: 13px; height: 13px;"></i> Facilitation Scope</span>
+              <p class="glance-desc">We are an independent utility centre helping citizens fill and organize online application forms.</p>
+            </div>
+
+            <div class="glance-item">
+              <span class="glance-label"><i data-lucide="landmark" style="width: 13px; height: 13px;"></i> Sovereign Decisions</span>
+              <p class="glance-desc">Final approval, card issuance, or document sanctioning rests 100% with designated government departments.</p>
+            </div>
+
+            <div class="glance-item">
+              <span class="glance-label"><i data-lucide="clock" style="width: 13px; height: 13px;"></i> Processing Timelines</span>
+              <p class="glance-desc">Filing timelines depend on official government portal uptime, verification queues, and server speeds.</p>
+            </div>
+
+            <div class="glance-item">
+              <span class="glance-label"><i data-lucide="check-square" style="width: 13px; height: 13px;"></i> Applicant Genuineness</span>
+              <p class="glance-desc">Citizens bear full legal responsibility for providing genuine credentials and approving draft previews.</p>
+            </div>
+
+            <div class="glance-item">
+              <span class="glance-label"><i data-lucide="plane" style="width: 13px; height: 13px;"></i> Travel &amp; IRCTC</span>
+              <p class="glance-desc">Seat confirmations, dynamic Tatkal charges, and flight schedules follow official IRCTC/airline guidelines.</p>
+            </div>
+
+            <div class="glance-item">
+              <span class="glance-label"><i data-lucide="help-circle" style="width: 13px; height: 13px;"></i> Rate Cards</span>
+              <p class="glance-desc">Government portal fees are subject to revision by respective issuing boards and ministries without prior notice.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- 2. Top Core Principles (Concise TL;DR) -->
+        <section class="disclaimer-principles-grid">
           
-          <!-- Bottom Action Strip -->
-          <div class="legal-action-strip">
-            <span>
-              <i data-lucide="alert-triangle"></i>
-              Final requirements can change by official portal, provider or department.
-            </span>
-            <a class="btn btn-soft" href="support.html" onmouseover="this.style.background='rgba(18, 86, 150, 0.12)'; this.style.color='#0c4da2';" onmouseout="this.style.background='rgba(18, 86, 150, 0.06)'; this.style.color='#125696';">Ask Support</a>
+          <article class="principle-card">
+            <div class="principle-top">
+              <div class="principle-icon"><i data-lucide="shield-alert"></i></div>
+              <h3 class="principle-title">Private Entity</h3>
+            </div>
+            <p class="principle-desc">Independent utility assistance centre; not an official government department.</p>
+          </article>
+
+          <article class="principle-card">
+            <div class="principle-top">
+              <div class="principle-icon"><i data-lucide="landmark"></i></div>
+              <h3 class="principle-title">No Approval Guarantee</h3>
+            </div>
+            <p class="principle-desc">Issuance decisions remain under exclusive sovereign department jurisdiction.</p>
+          </article>
+
+          <article class="principle-card">
+            <div class="principle-top">
+              <div class="principle-icon"><i data-lucide="receipt"></i></div>
+              <h3 class="principle-title">Clear Fee Split</h3>
+            </div>
+            <p class="principle-desc">Transparent breakdown of government challans versus One Point facilitation fees.</p>
+          </article>
+
+          <article class="principle-card">
+            <div class="principle-top">
+              <div class="principle-icon"><i data-lucide="headphones"></i></div>
+              <h3 class="principle-title">Verified Assistance</h3>
+            </div>
+            <p class="principle-desc">Draft review and pre-payment inspection by trained Suvidha Kendra operators.</p>
+          </article>
+
+        </section>
+
+        <!-- 3. Visual Authority Workflow -->
+        <section class="disc-flow-section">
+          <h3 class="disc-flow-title">How assisted filing interfaces with government authorities</h3>
+          <p class="disc-flow-sub">Clear separation between our assistance layer and sovereign decision-making.</p>
+
+          <div class="disc-flow-timeline">
+            <div class="disc-flow-step">
+              <span class="disc-step-num">Stage 01</span>
+              <div class="disc-step-title">Citizen Intake</div>
+              <p class="disc-step-desc">Applicant shares credentials &amp; document scans.</p>
+            </div>
+
+            <div class="disc-flow-step">
+              <span class="disc-step-num">Stage 02</span>
+              <div class="disc-step-title">Assisted Drafting</div>
+              <p class="disc-step-desc">Operator prepares form draft &amp; crops photos.</p>
+            </div>
+
+            <div class="disc-flow-step">
+              <span class="disc-step-num">Stage 03</span>
+              <div class="disc-step-title">Applicant Sign-Off</div>
+              <p class="disc-step-desc">Citizen verifies data accuracy before submission.</p>
+            </div>
+
+            <div class="disc-flow-step">
+              <span class="disc-step-num">Stage 04</span>
+              <div class="disc-step-title">Govt Portal Filing</div>
+              <p class="disc-step-desc">Form filed directly on official department portal.</p>
+            </div>
+
+            <div class="disc-flow-step">
+              <span class="disc-step-num">Stage 05</span>
+              <div class="disc-step-title">Official Sanction</div>
+              <p class="disc-step-desc">Govt authority verifies, approves, and issues certificate.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- 4. Main 2-Column Disclaimer Hub Layout -->
+        <div class="disclaimer-main-grid">
+          
+          <!-- Left Column: Sticky Navigation & Transparency Card -->
+          <aside class="disclaimer-sidebar">
+            
+            <!-- Sticky Navigation -->
+            <nav class="toc-card" aria-label="Disclaimer Table of Contents">
+              <div class="toc-head">Disclaimer Navigation</div>
+              <div class="toc-nav-list" id="disc-toc">
+                <a href="#sec-status" class="toc-link active">
+                  <span class="toc-num">01</span>
+                  <span>Agency Status</span>
+                </a>
+                <a href="#sec-discretion" class="toc-link">
+                  <span class="toc-num">02</span>
+                  <span>Govt Discretion</span>
+                </a>
+                <a href="#sec-fees" class="toc-link">
+                  <span class="toc-num">03</span>
+                  <span>Portal Fee Updates</span>
+                </a>
+                <a href="#sec-obligations" class="toc-link">
+                  <span class="toc-num">04</span>
+                  <span>Applicant Liability</span>
+                </a>
+                <a href="#sec-travel" class="toc-link">
+                  <span class="toc-num">05</span>
+                  <span>Travel &amp; IRCTC Rules</span>
+                </a>
+                <a href="#sec-external" class="toc-link">
+                  <span class="toc-num">06</span>
+                  <span>External Portal Links</span>
+                </a>
+                <a href="#sec-contact" class="toc-link">
+                  <span class="toc-num">07</span>
+                  <span>Support &amp; Inquiries</span>
+                </a>
+              </div>
+            </nav>
+
+            <!-- Transparency Notice Card -->
+            <div class="transparency-notice-card">
+              <span class="notice-kicker">Transparency Notice</span>
+              <div class="notice-title">Important Operational Note</div>
+              
+              <div class="notice-items">
+                <div class="notice-chk">
+                  <i data-lucide="check-circle-2"></i>
+                  <span>Privately run facilitation Kendra</span>
+                </div>
+                <div class="notice-chk">
+                  <i data-lucide="check-circle-2"></i>
+                  <span>No sovereign approval guarantees</span>
+                </div>
+                <div class="notice-chk">
+                  <i data-lucide="check-circle-2"></i>
+                  <span>100% upfront pricing &amp; GST invoices</span>
+                </div>
+              </div>
+
+              <a href="https://wa.me/919473946181?text=Hello%20One%20Point%2C%20I%20have%20a%20question%20regarding%20service%20boundaries." target="_blank" rel="noopener" class="btn-notice-wa">
+                <i data-lucide="message-circle" style="width: 14px; height: 14px;"></i>
+                <span>Ask Desk on WhatsApp</span>
+              </a>
+            </div>
+
+          </aside>
+
+          <!-- Right Column: Disclaimer Document Articles -->
+          <article class="disclaimer-doc-card">
+            
+            <!-- Section 01: Agency Status -->
+            <section class="doc-section" id="sec-status">
+              <div class="doc-section-head">
+                <span class="doc-section-kicker">01 / Agency Status</span>
+                <h2 class="doc-section-title">Non-Government Entity &amp; Facilitation Scope</h2>
+                <p class="doc-section-summary">Clear clarification of our private enterprise operational boundaries.</p>
+              </div>
+              <p class="doc-text">
+                One Point Digital Services (Bisen One Point Suvidha Kendra) is an independent, privately owned customer service and utility facilitation enterprise based in Lucknow, Uttar Pradesh.
+              </p>
+              <div class="doc-callout-disc">
+                <strong>Non-Affiliation Disclosure:</strong> We are not affiliated with, endorsed by, or operating as an official arm of any Central or State Government Ministry, Department, or Statutory Board. All trademarks, logos, and portal names (e.g. NSDL, UTIITSL, UIDAI, UPSSSC, SSC, DigiLocker, IRCTC) belong exclusively to their respective government entities.
+              </div>
+              <p class="doc-text">
+                Our role is strictly limited to assisting citizens with data entry, document digitization, photograph formatting, fee routing, and milestone tracking.
+              </p>
+            </section>
+
+            <!-- Section 02: Govt Discretion -->
+            <section class="doc-section" id="sec-discretion">
+              <div class="doc-section-head">
+                <span class="doc-section-kicker">02 / Sovereign Discretion</span>
+                <h2 class="doc-section-title">Government Discretion &amp; No Approval Guarantee</h2>
+                <p class="doc-section-summary">Statutory approval limitations and processing timelines.</p>
+              </div>
+              <p class="doc-text">
+                While we ensure accurate preparation and timely portal submission:
+              </p>
+              <ul class="doc-list">
+                <li><strong>No Guaranteed Issuance:</strong> The grant, sanction, issuance, or approval of any government certificate, PAN card, Ayushman card, voter registration, or competitive exam admit card is solely at the discretion of the issuing government authority.</li>
+                <li><strong>Processing Timelines:</strong> Estimated processing days provided on our platform reflect typical historical turnaround times. Actual dispatch depends entirely on departmental verifications and official server load.</li>
+                <li><strong>Server Downtime:</strong> We are not liable for delays resulting from official government server maintenance, gateway timeouts, or sudden portal deadline closures.</li>
+              </ul>
+            </section>
+
+            <!-- Section 03: Portal Fee Updates -->
+            <section class="doc-section" id="sec-fees">
+              <div class="doc-section-head">
+                <span class="doc-section-kicker">03 / Pricing &amp; Updates</span>
+                <h2 class="doc-section-title">Accuracy of Information &amp; Portal Fee Revisions</h2>
+                <p class="doc-section-summary">Policy regarding dynamic government challan revisions and notification updates.</p>
+              </div>
+              <p class="doc-text">
+                We make every effort to maintain accurate fee schedules, eligibility criteria, and examination dates. However:
+              </p>
+              <ul class="doc-list">
+                <li>Government departments and recruitment boards may revise statutory fee structures, eligibility guidelines, or document rules without prior notice.</li>
+                <li>In case of a statutory fee hike by an official board before final filing, the applicant will be informed to settle the exact difference prior to submission.</li>
+              </ul>
+            </section>
+
+            <!-- Section 04: Applicant Liability -->
+            <section class="doc-section" id="sec-obligations">
+              <div class="doc-section-head">
+                <span class="doc-section-kicker">04 / Applicant Liability</span>
+                <h2 class="doc-section-title">Customer Obligations &amp; Forged Document Liability</h2>
+                <p class="doc-section-summary">Legal responsibility regarding genuine credentials and draft inspection.</p>
+              </div>
+              <p class="doc-text">
+                Applicants bear full and exclusive legal responsibility for the validity of submitted credentials:
+              </p>
+              <ul class="doc-list">
+                <li><strong>Prohibition of Forgery:</strong> Submitting fake, altered, or forged documents is a punishable criminal offense under the Indian Penal Code (IPC) and the Information Technology Act, 2000. One Point immediately terminates assistance for any fraudulent requests.</li>
+                <li><strong>Draft Review Obligation:</strong> Applicants must thoroughly check draft previews before authorizing final payment and submission. One Point is not responsible for errors present in applicant-approved drafts.</li>
+              </ul>
+            </section>
+
+            <!-- Section 05: Travel & IRCTC Rules -->
+            <section class="doc-section" id="sec-travel">
+              <div class="doc-section-head">
+                <span class="doc-section-kicker">05 / Travel &amp; IRCTC</span>
+                <h2 class="doc-section-title">Travel Booking, IRCTC &amp; Third-Party Services</h2>
+                <p class="doc-section-summary">Disclaimers governing railway ticketing, airline bookings, and bus reservations.</p>
+              </div>
+              <p class="doc-text">
+                For assisted travel reservations (including train and flight bookings):
+              </p>
+              <ul class="doc-list">
+                <li><strong>No Guaranteed Seat Confirmations:</strong> Waitlisted train tickets and Tatkal availability depend entirely on live IRCTC inventory at the time of booking.</li>
+                <li><strong>Cancellation &amp; Refund Rules:</strong> Train cancellation charges, clerkage deductions, and airline cancellation fees are strictly regulated by IRCTC and respective airlines.</li>
+              </ul>
+            </section>
+
+            <!-- Section 06: External Portal Links -->
+            <section class="doc-section" id="sec-external">
+              <div class="doc-section-head">
+                <span class="doc-section-kicker">06 / External Links</span>
+                <h2 class="doc-section-title">External Government Links &amp; Third-Party Sites</h2>
+                <p class="doc-section-summary">Guidance on hyperlinks pointing to official state and central portals.</p>
+              </div>
+              <p class="doc-text">
+                Our platform may provide direct hyperlinks to official government websites (e.g. incometax.gov.in, ssc.gov.in, upsssc.gov.in) solely for customer convenience and status tracking.
+              </p>
+              <p class="doc-text">
+                One Point does not own, manage, or endorse third-party web content, server performance, or privacy practices on those external portals.
+              </p>
+            </section>
+
+            <!-- Section 07: Contact & Inquiries -->
+            <section class="doc-section" id="sec-contact">
+              <div class="doc-section-head">
+                <span class="doc-section-kicker">07 / Contact Desk</span>
+                <h2 class="doc-section-title">Contact Desk &amp; Clarifications</h2>
+                <p class="doc-section-summary">Official contact points for pre-application verification.</p>
+              </div>
+              <p class="doc-text">
+                If you have questions regarding our service scope or require verification before making a payment, contact our Lucknow desk:
+              </p>
+
+              <div class="disc-contact-box">
+                <div style="font-weight: 750; font-size: 0.92rem; color: #082f61;">One Point Suvidha Kendra — Information &amp; Legal Desk</div>
+                <div class="disc-contact-rows">
+                  <div class="disc-contact-item">
+                    <i data-lucide="map-pin"></i>
+                    <span><strong>Address:</strong> Milan Tower, Kursi Rd, Adil Nagar, LDA Colony, Lucknow, UP &ndash; 226022</span>
+                  </div>
+                  <div class="disc-contact-item">
+                    <i data-lucide="mail"></i>
+                    <span><strong>Email:</strong> <a href="mailto:support@bisenonepoint.com" style="color: #125696; font-weight: 600;">support@bisenonepoint.com</a></span>
+                  </div>
+                  <div class="disc-contact-item">
+                    <i data-lucide="phone"></i>
+                    <span><strong>Helpline:</strong> +91 9473946181</span>
+                  </div>
+                  <div class="disc-contact-item">
+                    <i data-lucide="clock"></i>
+                    <span><strong>Desk Hours:</strong> Mon &ndash; Sat: 9:00 AM &ndash; 8:00 PM</span>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+          </article>
+
+        </div>
+
+        <!-- 5. Bottom Trust Assurances Strip -->
+        <section class="disclaimer-trust-strip">
+          <div class="disclaimer-trust-card">
+            <div class="disclaimer-trust-icon"><i data-lucide="shield-alert"></i></div>
+            <div>
+              <div class="disclaimer-trust-title">Independent Facilitation</div>
+              <span class="disclaimer-trust-sub">Privately operated citizen assistance centre</span>
+            </div>
+          </div>
+
+          <div class="disclaimer-trust-card">
+            <div class="disclaimer-trust-icon"><i data-lucide="receipt"></i></div>
+            <div>
+              <div class="disclaimer-trust-title">Upfront Fee Transparency</div>
+              <span class="disclaimer-trust-sub">Clear split of portal fees and assistance costs</span>
+            </div>
+          </div>
+
+          <div class="disclaimer-trust-card">
+            <div class="disclaimer-trust-icon"><i data-lucide="check-square"></i></div>
+            <div>
+              <div class="disclaimer-trust-title">Draft Pre-Approval</div>
+              <span class="disclaimer-trust-sub">Applicant sign-off required prior to portal filing</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- 6. Pre-Footer Direct Action Bar -->
+        <div class="disclaimer-prefooter">
+          <div class="prefooter-text">
+            <h3>Have a query regarding service eligibility or portal requirements?</h3>
+            <p>Our Lucknow support desk is available on WhatsApp and phone for complete transparency.</p>
+          </div>
+          <div class="prefooter-btns">
+            <a href="https://wa.me/919473946181?text=Hello%20One%20Point%2C%20I%20have%20a%20question%20about%20service%20requirements." target="_blank" rel="noopener" class="btn-prefooter-gold">
+              <i data-lucide="message-circle" style="width: 14px; height: 14px;"></i>
+              <span>Consult with Operator</span>
+            </a>
+            <a href="contact.html" class="btn-prefooter-ghost">
+              <i data-lucide="mail" style="width: 14px; height: 14px;"></i>
+              <span>Contact Suvidha Kendra</span>
+            </a>
           </div>
         </div>
-      </section>
+
+      </div>
     </main>
+
     <div data-site-footer></div>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
-    <script src="assets/app.js?v=clean_js_v11" defer></script>
-  
-<script id="line-alignment-script">
-  document.addEventListener("DOMContentLoaded", function() {
-    setTimeout(() => {
-      document.querySelectorAll(".section-head h2").forEach(h2 => {
-        let align = window.getComputedStyle(h2).textAlign;
-        let parent = h2.closest('.section-head');
-        if (parent) {
-          if (align === "center") {
-            parent.classList.add("center-line");
-          } else {
-            parent.classList.add("left-line");
-          }
+    <script src="assets/app.js?v=customer-checkout-94" defer></script>
+    <script>
+      // Active link highlight on scroll (Scrollspy)
+      document.addEventListener('DOMContentLoaded', () => {
+        const sections = document.querySelectorAll('.doc-section');
+        const navLinks = document.querySelectorAll('#disc-toc .toc-link');
+
+        function onScroll() {
+          let current = '';
+          const scrollPos = window.pageYOffset || document.documentElement.scrollTop;
+
+          sections.forEach(section => {
+            const sectionTop = section.offsetTop - 120;
+            if (scrollPos >= sectionTop) {
+              current = section.getAttribute('id');
+            }
+          });
+
+          navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === '#' + current) {
+              link.classList.add('active');
+            }
+          });
         }
+
+        window.addEventListener('scroll', onScroll);
       });
-    }, 100); // small delay to ensure CSS is applied
-  });
-</script>
-</body>
+    </script>
+  </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

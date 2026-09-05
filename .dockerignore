@@ -1,0 +1,11 @@
+.git
+.agents
+.codex
+.env
+node_modules
+dashboard/source
+artifacts
+backend/tests
+backend/logs
+*.log
+*.zip

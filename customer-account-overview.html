@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="One Point Command Center — live request tracking, action items, payments, documents and account settings.">
+    <meta name="robots" content="noindex,nofollow">
+    <title>One Point Command Center | One Point Digital Services</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;850;900&display=swap" rel="stylesheet">
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+    <script src="assets/opds-boot.js?v=anti-fouc-79"></script>
+    <link rel="stylesheet" href="assets/onepoint.css?v=customer-checkout-94">
+    <link rel="stylesheet" href="assets/onepoint-customer-profile.css?v=20">
+    <link rel="stylesheet" href="assets/onepoint-customer-account.css?v=21">
+  </head>
+  <body class="elite-console-body enterprise-checkout-body" data-account-page="overview">
+    <div data-account-shell></div>
+
+    <div class="acc-page" data-account-content hidden>
+      
+      <!-- Greeting & Hierarchy Header (services.html hero inspired) -->
+      <section class="acc-greeting">
+        <div class="acc-greeting-copy">
+          <div class="acc-eyebrow-row">
+            <span class="acc-eyebrow"><i data-lucide="shield-check"></i> MY ACCOUNT</span>
+            <span class="acc-desk-live-pill" title="Suvidha Kendra Lucknow Online 9:00 AM – 8:00 PM">
+              <span class="acc-pulse-dot-green"></span>
+              <span>Lucknow Kendra Online</span>
+            </span>
+          </div>
+          <h1 id="acc-greeting-text">Welcome back</h1>
+          <p>Track requests, manage verified documents and take care of anything that needs your attention.</p>
+          <div class="acc-greeting-meta-strip" id="acc-greeting-meta">
+            <span><i data-lucide="clock"></i> Last active today</span>
+            <span><i data-lucide="map-pin"></i> Lucknow Kendra Desk</span>
+          </div>
+        </div>
+        <div class="acc-greeting-actions">
+          <a class="eds-btn eds-btn-primary acc-cta-primary" href="services.html"><i data-lucide="plus-circle"></i> <span>Start New Request</span></a>
+          <a class="acc-greeting-link" href="customer-profile.html"><i data-lucide="settings"></i> <span>Account Settings</span></a>
+        </div>
+      </section>
+
+      <!-- Smart "Action Required" Hub (#1 Priority Component) -->
+      <section id="acc-action-required-hub" class="acc-action-hub" aria-label="Action Required Items" hidden>
+        <!-- Injected dynamically based on live pending actions -->
+      </section>
+
+      <!-- Key Account Summary (5-card Trust Grid matching services.html) -->
+      <div class="acc-summary-grid" id="acc-summary-grid" aria-label="Account Summary Metrics"></div>
+
+      <!-- Active / Priority Requests -->
+      <section class="cpf-card">
+        <div class="cpf-card-title-row">
+          <div>
+            <h3><i data-lucide="package"></i> Active Requests</h3>
+            <p class="cpf-muted">Track applications, projects and orders currently in progress.</p>
+          </div>
+          <a href="customer-account-orders.html" class="cpf-edit-btn" id="acc-view-all-orders">View All Requests <i data-lucide="arrow-right"></i></a>
+        </div>
+        <div class="acc-order-list" id="acc-recent-orders"></div>
+      </section>
+
+      <!-- Quick Actions Grid (matching .shub-cat-grid from services.html) -->
+      <nav class="acc-quick-actions" aria-label="Quick actions">
+        <a href="services.html" class="acc-qa-card">
+          <span class="acc-qa-icon"><i data-lucide="plus-circle"></i></span>
+          <div class="acc-qa-text">
+            <strong>Start New Request</strong>
+            <small>Browse all 60+ services</small>
+          </div>
+          <i data-lucide="chevron-right" class="acc-qa-arrow"></i>
+        </a>
+        <a href="customer-account-orders.html" class="acc-qa-card">
+          <span class="acc-qa-icon"><i data-lucide="package"></i></span>
+          <div class="acc-qa-text">
+            <strong>My Requests</strong>
+            <small>Live progress &amp; updates</small>
+          </div>
+          <i data-lucide="chevron-right" class="acc-qa-arrow"></i>
+        </a>
+        <a href="customer-account-vault.html" class="acc-qa-card">
+          <span class="acc-qa-icon"><i data-lucide="shield-check"></i></span>
+          <div class="acc-qa-text">
+            <strong>Document Vault</strong>
+            <small>Verified digital certificates</small>
+          </div>
+          <i data-lucide="chevron-right" class="acc-qa-arrow"></i>
+        </a>
+        <a href="customer-account-payments.html" class="acc-qa-card">
+          <span class="acc-qa-icon"><i data-lucide="credit-card"></i></span>
+          <div class="acc-qa-text">
+            <strong>Payments &amp; Billing</strong>
+            <small>Receipts &amp; tax invoices</small>
+          </div>
+          <i data-lucide="chevron-right" class="acc-qa-arrow"></i>
+        </a>
+      </nav>
+
+      <!-- Recent Activity Feed -->
+      <section class="cpf-card">
+        <div class="cpf-card-title-row">
+          <div>
+            <h3><i data-lucide="activity"></i> Recent Activity</h3>
+            <p class="cpf-muted">Live timeline of operator verifications, payment receipts, and filings.</p>
+          </div>
+          <a href="customer-account-notifications.html" class="cpf-edit-btn">View All Notifications <i data-lucide="arrow-right"></i></a>
+        </div>
+        <div class="acc-activity-list" id="acc-overview-activity-feed">
+          <div class="acc-activity-row-rich">
+            <div class="acc-act-icon warn"><i data-lucide="alert-triangle"></i></div>
+            <div class="acc-act-body">
+              <div class="acc-act-head">
+                <strong>Photo Replacement Requested &middot; <code>OPDS-260824-00123</code></strong>
+                <small>18 mins ago</small>
+              </div>
+              <span class="acc-act-actor">Operator Note: Upload a clearer passport-size photograph with light background.</span>
+            </div>
+          </div>
+
+          <div class="acc-activity-row-rich">
+            <div class="acc-act-icon ok"><i data-lucide="credit-card"></i></div>
+            <div class="acc-act-body">
+              <div class="acc-act-head">
+                <strong>Payment Settled (₹399 via UPI) &middot; <code>TXN-260824-00123</code></strong>
+                <small>2 hours ago</small>
+              </div>
+              <span class="acc-act-actor">Facilitation fee confirmed &middot; Tax Invoice generated.</span>
+            </div>
+          </div>
+
+          <div class="acc-activity-row-rich">
+            <div class="acc-act-icon info"><i data-lucide="file-check"></i></div>
+            <div class="acc-act-body">
+              <div class="acc-act-head">
+                <strong>Official Filing Slip Uploaded &middot; <code>OPDS-260822-00045</code></strong>
+                <small>2 days ago</small>
+              </div>
+              <span class="acc-act-actor">Kendra Operator saved UPSSSC confirmation slip to Document Vault.</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contextual Support Desk Card (matching services.html) -->
+      <section class="acc-support-card">
+        <div class="acc-support-main">
+          <div class="acc-support-icon">
+            <i data-lucide="headphones"></i>
+          </div>
+          <div class="acc-support-copy">
+            <div class="acc-support-title-wrap">
+              <h3>Need Assistance with an Application?</h3>
+              <span class="acc-support-hours-pill">
+                <span class="acc-pulse-dot-green"></span> 9:00 AM &ndash; 8:00 PM Active Desk
+              </span>
+            </div>
+            <p>Our Lucknow Kendra desk operators are available for document verification, filing status, or payment queries.</p>
+          </div>
+        </div>
+        <div class="cpf-support-links" aria-label="Support options">
+          <a href="https://wa.me/919473946181?text=Hello%20One%20Point%20Suvidha%20Kendra%2C%20I%20need%20help%20with%20my%20account" target="_blank" rel="noopener" class="cpf-support-btn cpf-support-btn-whatsapp">
+            <i data-lucide="message-circle"></i> <span>WhatsApp Desk</span>
+          </a>
+          <a href="tel:+919473946181" class="cpf-support-btn">
+            <i data-lucide="phone"></i> <span>Call Kendra</span>
+          </a>
+          <a href="support.html" class="cpf-support-btn">
+            <i data-lucide="life-buoy"></i> <span>Support Helpdesk</span>
+          </a>
+        </div>
+      </section>
+    </div>
+
+    <div data-account-footer></div>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+    <script src="assets/app.js?v=customer-checkout-94" defer></script>
+    <script src="assets/auth.js?v=cpf-1" defer></script>
+    <script src="assets/customer-account.js?v=20" defer></script>
+    <script src="assets/customer-account-overview.js?v=20" defer></script>
+  </body>
+</html>

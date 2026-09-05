@@ -1,0 +1,29 @@
+groups:
+  - name: EROS_Alert_Rules
+    rules:
+      - alert: HighSLAViolationRate
+        expr: rate(sla_violations_total[5m]) > 0.05
+        for: 2m
+        labels:
+          severity: CRITICAL
+        annotations:
+          summary: "SLA Response Violation rate exceeds 5 percent"
+          description: "Transaction processing lag above SLA budget detected in active branches."
+
+      - alert: DatabaseConnectionFailure
+        expr: pg_pool_active_connections == 0
+        for: 1m
+        labels:
+          severity: EMERGENCY
+        annotations:
+          summary: "Database Pool is depleted"
+          description: "PostgreSQL active connections count is zero. Production requests are dropping."
+
+      - alert: HighAIFailureRate
+        expr: rate(ai_request_failures_total[5m]) > 0.10
+        for: 5m
+        labels:
+          severity: WARNING
+        annotations:
+          summary: "AI Agent executions failing above 10 percent"
+          description: "Prompt validation blocks or sandbox model service timeout violations detected."

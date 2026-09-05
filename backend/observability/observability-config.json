@@ -1,0 +1,24 @@
+{
+  "opentelemetry": {
+    "enabled": true,
+    "exporter": "jaeger",
+    "endpoint": "http://localhost:4317",
+    "samplingRate": 1.0
+  },
+  "prometheus": {
+    "enabled": true,
+    "port": 9090,
+    "path": "/metrics",
+    "scrapeIntervalMs": 15000
+  },
+  "loki": {
+    "enabled": true,
+    "endpoint": "http://localhost:3100/loki/api/v1/push",
+    "batchSize": 10
+  },
+  "alerts": {
+    "failureThreshold": 50,
+    "minimumRequests": 10,
+    "resetTimeoutMs": 30000
+  }
+}

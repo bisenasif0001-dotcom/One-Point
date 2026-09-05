@@ -102,11 +102,16 @@
     } catch { return ""; }
   }
 
+  function customerAuthHeaders() {
+    const token = localStorage.getItem("opds_customer_session") || "";
+    return token ? { "Authorization": `Bearer ${token}` } : {};
+  }
+
   async function uploadDocument(orderId, docType, fileName, fileUrl) {
     const csrf = await getCsrfToken();
     const res = await fetch("/api/orders/documents", {
       method: "POST",
-      headers: { "Content-Type": "application/json", "X-CSRF-Token": csrf },
+      headers: { "Content-Type": "application/json", "X-CSRF-Token": csrf, ...customerAuthHeaders() },
       body: JSON.stringify({ orderId, docType, fileName, fileUrl }),
     });
     return res.json();
@@ -306,7 +311,9 @@
       if (helper) helper.innerHTML = `<span class="info-text"><i data-lucide="loader-2" class="spin"></i> Fetching orders & profile from secure cloud database...</span>`;
       if (window.lucide) window.lucide.createIcons();
 
-      const response = await fetch(`/api/customer/dashboard?phone=${encodeURIComponent(phone)}`);
+      const response = await fetch(`/api/customer/dashboard?phone=${encodeURIComponent(phone)}`, {
+        headers: customerAuthHeaders()
+      });
       const data = await response.json();
 
       if (!response.ok) throw new Error(data.message || "Failed to load customer orders.");

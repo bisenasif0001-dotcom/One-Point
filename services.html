@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -9,7 +9,1274 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-        <link rel="stylesheet" href="assets/onepoint.css?v=2">
+<script src="assets/opds-boot.js?v=anti-fouc-79"></script>
+<link rel="stylesheet" href="assets/onepoint.css?v=customer-checkout-94">
+    <style>
+      /* ── One Point Services Discovery Hub Styles ──────────────────── */
+      :root {
+        --shub-primary: #075092;
+        --shub-primary-dark: #053b6d;
+        --shub-gold: #c58300;
+        --shub-gold-light: #fef9c3;
+        --shub-slate: #0b1f35;
+        --shub-body: #475569;
+        --shub-border: #e2e8f0;
+        --shub-radius-sm: 8px;
+        --shub-radius-md: 14px;
+        --shub-radius-lg: 20px;
+        --shub-shadow-sm: 0 2px 8px rgba(7, 80, 146, 0.04);
+        --shub-shadow-md: 0 8px 24px rgba(7, 80, 146, 0.08);
+        --shub-shadow-lg: 0 16px 36px rgba(7, 80, 146, 0.12);
+        --shub-transition: 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .shub-container {
+        width: 100%;
+        max-width: 1240px;
+        margin: 0 auto;
+        padding: 0 24px;
+        box-sizing: border-box;
+      }
+
+      .shub-section {
+        padding: clamp(48px, 6vw, 76px) 0;
+        position: relative;
+      }
+
+      .shub-bg-white { background: #ffffff; }
+      .shub-bg-slate { background: #f8fafc; border-top: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; }
+      .shub-bg-pale-blue { background: #f0f7ff; border-top: 1px solid #bfdbfe; border-bottom: 1px solid #bfdbfe; }
+
+      .shub-header {
+        margin-bottom: clamp(28px, 4vw, 40px);
+      }
+      .shub-header.text-center {
+        text-align: center;
+      }
+      .shub-header-row {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 20px;
+        margin-bottom: clamp(28px, 4vw, 40px);
+        flex-wrap: wrap;
+      }
+
+      .shub-kicker {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 11.5px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--shub-primary);
+        background: #eff6ff;
+        border: 1px solid #bfdbfe;
+        padding: 4px 12px;
+        border-radius: 999px;
+        margin-bottom: 10px;
+      }
+      .shub-kicker i, .shub-kicker svg { width: 13px; height: 13px; }
+
+      .shub-title {
+        font-size: clamp(1.75rem, 3.2vw, 2.35rem);
+        font-weight: 850;
+        color: var(--shub-slate);
+        line-height: 1.25;
+        margin: 0 0 8px;
+        letter-spacing: -0.02em;
+      }
+      .shub-sub {
+        font-size: clamp(14px, 1.4vw, 15.5px);
+        color: var(--shub-body);
+        line-height: 1.55;
+        margin: 0;
+        max-width: 740px;
+      }
+      .shub-header.text-center .shub-sub {
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .shub-header-link {
+        font-size: 14px;
+        font-weight: 800;
+        color: var(--shub-primary);
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        transition: transform var(--shub-transition);
+      }
+      .shub-header-link:hover {
+        transform: translateX(3px);
+        color: var(--shub-primary-dark);
+      }
+      .shub-header-link i, .shub-header-link svg { width: 16px; height: 16px; }
+
+      /* ── 1. Refined Trust Strip ── */
+      .shub-trust-section {
+        background: #ffffff;
+        border-bottom: 1px solid #e2e8f0;
+        padding: 20px 0;
+      }
+      .shub-trust-grid {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 12px;
+      }
+      @media (max-width: 960px) {
+        .shub-trust-grid { grid-template-columns: repeat(3, 1fr); }
+      }
+      @media (max-width: 600px) {
+        .shub-trust-grid { grid-template-columns: 1fr; }
+      }
+      .shub-trust-card {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 12px 14px;
+        border-radius: var(--shub-radius-sm);
+        background: #f8fafc;
+        border: 1px solid #e2e8f0;
+        min-height: 52px;
+        box-sizing: border-box;
+      }
+      .shub-trust-icon {
+        width: 34px;
+        height: 34px;
+        border-radius: 8px;
+        background: #eff6ff;
+        color: var(--shub-primary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+      .shub-trust-icon i, .shub-trust-icon svg { width: 18px; height: 18px; }
+      .shub-trust-content {
+        display: flex;
+        flex-direction: column;
+        gap: 1px;
+      }
+      .shub-trust-content strong {
+        font-size: 13px;
+        font-weight: 800;
+        color: var(--shub-slate);
+        line-height: 1.25;
+      }
+      .shub-trust-content span {
+        font-size: 11.5px;
+        color: #64748b;
+        line-height: 1.25;
+      }
+
+      /* ── 2. Discovery Toolbar & Search ── */
+      .shub-search-toolbar {
+        display: flex;
+        gap: 10px;
+        margin-top: 24px;
+        flex-wrap: wrap;
+      }
+      .shub-search-input-wrap {
+        flex: 1 1 340px;
+        position: relative;
+        display: flex;
+        align-items: center;
+      }
+      .shub-search-icon {
+        position: absolute;
+        left: 16px;
+        width: 18px;
+        height: 18px;
+        color: #64748b;
+        pointer-events: none;
+      }
+      #shub-search-input {
+        width: 100%;
+        height: 50px;
+        padding: 0 42px 0 46px;
+        border: 1.5px solid #cbd5e1;
+        border-radius: var(--shub-radius-md);
+        font-size: 14.5px;
+        font-weight: 600;
+        font-family: inherit;
+        outline: none;
+        background: #ffffff;
+        box-sizing: border-box;
+        transition: border-color 0.2s, box-shadow 0.2s;
+      }
+      #shub-search-input:focus {
+        border-color: var(--shub-primary);
+        box-shadow: 0 0 0 3px rgba(7, 80, 146, 0.12);
+      }
+      .shub-search-clear {
+        position: absolute;
+        right: 12px;
+        background: #f1f5f9;
+        border: none;
+        border-radius: 50%;
+        width: 24px;
+        height: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        color: #64748b;
+      }
+      .shub-search-clear:hover { background: #e2e8f0; color: #0b1f35; }
+      .shub-search-clear i, .shub-search-clear svg { width: 14px; height: 14px; }
+
+      .shub-toolbar-filters {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+      .shub-select {
+        height: 50px;
+        padding: 0 34px 0 14px;
+        border: 1.5px solid #cbd5e1;
+        border-radius: var(--shub-radius-md);
+        font-size: 13.5px;
+        font-weight: 700;
+        font-family: inherit;
+        color: #334155;
+        background: #ffffff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23475569' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") no-repeat right 12px center;
+        -webkit-appearance: none;
+        appearance: none;
+        cursor: pointer;
+        outline: none;
+        box-sizing: border-box;
+        transition: border-color 0.2s;
+      }
+      .shub-select:focus { border-color: var(--shub-primary); }
+
+      .shub-quick-chips {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin-top: 14px;
+        align-items: center;
+      }
+      .shub-chip {
+        padding: 6px 14px;
+        border-radius: 999px;
+        font-size: 12.5px;
+        font-weight: 700;
+        font-family: inherit;
+        color: #475569;
+        background: #ffffff;
+        border: 1.5px solid #e2e8f0;
+        cursor: pointer;
+        transition: all var(--shub-transition);
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .shub-chip i, .shub-chip svg { width: 13px; height: 13px; }
+      .shub-chip:hover {
+        border-color: #cbd5e1;
+        color: var(--shub-slate);
+        background: #f8fafc;
+      }
+      .shub-chip.active {
+        background: var(--shub-primary);
+        color: #ffffff;
+        border-color: var(--shub-primary);
+        box-shadow: 0 2px 8px rgba(7, 80, 146, 0.2);
+      }
+      .shub-chip.active i, .shub-chip.active svg { color: #ffffff; }
+
+      .shub-view-switcher {
+        display: inline-flex;
+        background: #e2e8f0;
+        padding: 4px;
+        border-radius: 12px;
+        margin: 28px 0 20px;
+        gap: 4px;
+      }
+      .shub-view-tab {
+        padding: 9px 18px;
+        border-radius: 9px;
+        font-size: 13.5px;
+        font-weight: 800;
+        font-family: inherit;
+        border: none;
+        cursor: pointer;
+        background: transparent;
+        color: #475569;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        transition: all 0.2s;
+      }
+      .shub-view-tab i, .shub-view-tab svg { width: 15px; height: 15px; }
+      .shub-view-tab.active {
+        background: #ffffff;
+        color: var(--shub-primary);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+      }
+
+      /* ── 8 Category Shortcut Tiles (4x2 Grid) ── */
+      .shub-cat-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+      }
+      @media (max-width: 960px) {
+        .shub-cat-grid { grid-template-columns: repeat(2, 1fr); }
+      }
+      @media (max-width: 480px) {
+        .shub-cat-grid { grid-template-columns: 1fr; }
+      }
+      .shub-cat-card {
+        background: #ffffff;
+        border: 1.5px solid #e2e8f0;
+        border-radius: var(--shub-radius-md);
+        padding: 18px;
+        text-decoration: none;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        transition: transform var(--shub-transition), box-shadow var(--shub-transition), border-color var(--shub-transition);
+        position: relative;
+      }
+      .shub-cat-card:hover {
+        transform: translateY(-3px);
+        border-color: #bfdbfe;
+        box-shadow: var(--shub-shadow-md);
+      }
+      .shub-cat-icon-wrap {
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .shub-cat-icon-wrap i, .shub-cat-icon-wrap svg { width: 20px; height: 20px; }
+      .shub-cat-info {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        flex: 1;
+      }
+      .shub-cat-info h3 {
+        font-size: 15px;
+        font-weight: 850;
+        color: var(--shub-slate);
+        margin: 0;
+        line-height: 1.3;
+      }
+      .shub-cat-info p {
+        font-size: 12.5px;
+        color: var(--shub-body);
+        margin: 0;
+        line-height: 1.45;
+        flex: 1;
+      }
+      .shub-cat-link {
+        font-size: 12.5px;
+        font-weight: 800;
+        color: var(--shub-primary);
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        margin-top: 6px;
+        transition: transform var(--shub-transition);
+      }
+      .shub-cat-card:hover .shub-cat-link {
+        transform: translateX(3px);
+      }
+      .shub-cat-link i, .shub-cat-link svg { width: 14px; height: 14px; }
+
+      /* ── Goals Grid ── */
+      .shub-goals-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+      }
+      @media (max-width: 860px) {
+        .shub-goals-grid { grid-template-columns: repeat(2, 1fr); }
+      }
+      @media (max-width: 540px) {
+        .shub-goals-grid { grid-template-columns: 1fr; }
+      }
+      .shub-goal-card {
+        background: #ffffff;
+        border: 1.5px solid #e2e8f0;
+        border-radius: var(--shub-radius-md);
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        transition: transform var(--shub-transition), box-shadow var(--shub-transition);
+      }
+      .shub-goal-card:hover {
+        transform: translateY(-3px);
+        box-shadow: var(--shub-shadow-md);
+        border-color: #bfdbfe;
+      }
+      .shub-goal-icon {
+        width: 38px;
+        height: 38px;
+        border-radius: 10px;
+        background: #eff6ff;
+        color: var(--shub-primary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .shub-goal-icon i, .shub-goal-icon svg { width: 18px; height: 18px; }
+      .shub-goal-body h4 {
+        font-size: 15px;
+        font-weight: 850;
+        color: var(--shub-slate);
+        margin: 0 0 4px;
+        line-height: 1.3;
+      }
+      .shub-goal-body p {
+        font-size: 12.5px;
+        color: var(--shub-body);
+        margin: 0;
+        line-height: 1.45;
+      }
+      .shub-goal-btn {
+        margin-top: auto;
+        padding: 9px 14px;
+        background: #f8fafc;
+        border: 1px solid #cbd5e1;
+        border-radius: var(--shub-radius-sm);
+        font-size: 13px;
+        font-weight: 800;
+        color: var(--shub-primary);
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        justify-content: space-between;
+        transition: all var(--shub-transition);
+      }
+      .shub-goal-btn:hover {
+        background: var(--shub-primary);
+        color: #ffffff;
+        border-color: var(--shub-primary);
+      }
+      .shub-goal-btn i, .shub-goal-btn svg { width: 14px; height: 14px; }
+
+      /* ── Live Search Results Panel ── */
+      .shub-search-results-panel {
+        margin-top: 28px;
+      }
+      .shub-results-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 18px;
+        padding-bottom: 12px;
+        border-bottom: 1.5px solid #e2e8f0;
+      }
+      .shub-results-head h3 {
+        font-size: 1.15rem;
+        font-weight: 850;
+        color: var(--shub-slate);
+        margin: 0;
+      }
+      .shub-results-reset {
+        all: unset;
+        font-size: 13px;
+        font-weight: 800;
+        color: var(--shub-primary);
+        cursor: pointer;
+        text-decoration: underline;
+      }
+      .shub-cards-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 18px;
+      }
+      @media (max-width: 1040px) {
+        .shub-cards-grid { grid-template-columns: repeat(3, 1fr); }
+      }
+      @media (max-width: 720px) {
+        .shub-cards-grid { grid-template-columns: repeat(2, 1fr); }
+      }
+      @media (max-width: 480px) {
+        .shub-cards-grid { grid-template-columns: 1fr; }
+      }
+
+      /* ── Clean Popular Service Cards (Reduced Load) ── */
+      .shub-popular-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 18px;
+      }
+      @media (max-width: 1040px) {
+        .shub-popular-grid { grid-template-columns: repeat(2, 1fr); }
+      }
+      @media (max-width: 580px) {
+        .shub-popular-grid { grid-template-columns: 1fr; }
+      }
+      .shub-card {
+        background: #ffffff;
+        border: 1.5px solid #e2e8f0;
+        border-radius: var(--shub-radius-md);
+        padding: 18px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        transition: transform var(--shub-transition), box-shadow var(--shub-transition), border-color var(--shub-transition);
+        position: relative;
+      }
+      .shub-card:hover {
+        transform: translateY(-3px);
+        border-color: #93c5fd;
+        box-shadow: var(--shub-shadow-md);
+      }
+      .shub-card-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+      }
+      .shub-card-icon {
+        width: 36px;
+        height: 36px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+      .shub-card-icon i, .shub-card-icon svg { width: 18px; height: 18px; }
+      .shub-card-badges {
+        display: flex;
+        gap: 5px;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+      }
+      .shub-badge {
+        font-size: 10.5px;
+        font-weight: 800;
+        padding: 2px 7px;
+        border-radius: 999px;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+      }
+      .badge-blue { background: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; }
+      .badge-green { background: #f0fdf4; color: #166534; border: 1px solid #bbf7d0; }
+      .badge-emerald { background: #ecfdf5; color: #047857; border: 1px solid #a7f3d0; }
+      .badge-purple { background: #faf5ff; color: #7e22ce; border: 1px solid #e9d5ff; }
+      .badge-amber { background: #fef3c7; color: #92400e; border: 1px solid #fde68a; }
+      .badge-orange { background: #fff7ed; color: #c2410c; border: 1px solid #fed7aa; }
+      .badge-pink { background: #fdf2f8; color: #be185d; border: 1px solid #fbcfe8; }
+      .badge-cyan { background: #ecfeff; color: #0e7490; border: 1px solid #a5f3fc; }
+      .badge-gold { background: #fef9c3; color: #854d0e; border: 1px solid #fde047; }
+
+      .shub-card-title {
+        font-size: 15px;
+        font-weight: 850;
+        color: var(--shub-slate);
+        margin: 0;
+        line-height: 1.3;
+      }
+      .shub-card-desc {
+        font-size: 12.5px;
+        color: var(--shub-body);
+        margin: 0;
+        line-height: 1.45;
+        flex: 1;
+      }
+      .shub-card-meta {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        padding: 8px 10px;
+        background: #f8fafc;
+        border-radius: var(--shub-radius-sm);
+        border: 1px dashed #e2e8f0;
+      }
+      .shub-meta-time {
+        font-size: 12px;
+        font-weight: 700;
+        color: #64748b;
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+      }
+      .shub-meta-time i, .shub-meta-time svg { width: 13px; height: 13px; }
+      .shub-meta-price {
+        font-size: 12px;
+        color: var(--shub-body);
+      }
+      .shub-meta-price strong {
+        font-size: 13.5px;
+        font-weight: 900;
+        color: var(--shub-primary);
+      }
+      .shub-card-footer {
+        display: flex;
+        gap: 8px;
+        margin-top: 2px;
+      }
+      .shub-btn-card {
+        flex: 1;
+        padding: 9px 12px;
+        background: #eff6ff;
+        color: var(--shub-primary);
+        border: 1px solid #bfdbfe;
+        border-radius: var(--shub-radius-sm);
+        font-size: 13px;
+        font-weight: 800;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        transition: all var(--shub-transition);
+      }
+      .shub-btn-card:hover {
+        background: var(--shub-primary);
+        color: #ffffff;
+        border-color: var(--shub-primary);
+      }
+      .shub-btn-card i, .shub-btn-card svg { width: 14px; height: 14px; }
+      .shub-btn-card-wa {
+        width: 38px;
+        height: 38px;
+        border-radius: var(--shub-radius-sm);
+        background: #f0fdf4;
+        border: 1px solid #bbf7d0;
+        color: #16a34a;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        flex-shrink: 0;
+        transition: all var(--shub-transition);
+      }
+      .shub-btn-card-wa:hover {
+        background: #25D366;
+        color: #ffffff;
+        border-color: #25D366;
+      }
+      .shub-btn-card-wa i, .shub-btn-card-wa svg { width: 17px; height: 17px; }
+
+      /* Zero State */
+      .shub-zero-state {
+        text-align: center;
+        padding: 42px 20px;
+        background: #ffffff;
+        border: 1.5px dashed #cbd5e1;
+        border-radius: var(--shub-radius-md);
+      }
+      .shub-zero-icon {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: #f1f5f9;
+        color: #64748b;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 12px;
+      }
+      .shub-zero-icon i, .shub-zero-icon svg { width: 24px; height: 24px; }
+      .shub-zero-state h3 { font-size: 1.25rem; font-weight: 850; color: var(--shub-slate); margin: 0 0 6px; }
+      .shub-zero-state p { font-size: 14px; color: var(--shub-body); margin: 0 0 20px; max-width: 560px; margin-left: auto; margin-right: auto; }
+      .shub-zero-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+      .shub-btn-wa {
+        padding: 10px 18px;
+        background: #25D366;
+        color: #ffffff !important;
+        border-radius: var(--shub-radius-sm);
+        font-size: 13.5px;
+        font-weight: 800;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .shub-btn-ghost {
+        padding: 10px 18px;
+        background: #f1f5f9;
+        color: var(--shub-slate);
+        border: 1px solid #cbd5e1;
+        border-radius: var(--shub-radius-sm);
+        font-size: 13.5px;
+        font-weight: 800;
+        text-decoration: none;
+      }
+
+      /* ── 4. Ecosystem Hubs ── */
+      .shub-hubs-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+      }
+      @media (max-width: 900px) {
+        .shub-hubs-grid { grid-template-columns: 1fr; }
+      }
+      .shub-hub-card {
+        background: #ffffff;
+        border: 1.5px solid #bfdbfe;
+        border-radius: var(--shub-radius-lg);
+        padding: 26px 22px;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        box-shadow: var(--shub-shadow-sm);
+        transition: transform var(--shub-transition), box-shadow var(--shub-transition);
+      }
+      .shub-hub-card:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--shub-shadow-lg);
+      }
+      .shub-hub-card.featured {
+        border-color: #93c5fd;
+        box-shadow: var(--shub-shadow-md);
+      }
+      .shub-hub-header {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+      .shub-hub-icon {
+        width: 44px;
+        height: 44px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+      .shub-hub-icon i, .shub-hub-icon svg { width: 22px; height: 22px; }
+      .shub-hub-badge {
+        font-size: 11px;
+        font-weight: 800;
+        text-transform: uppercase;
+        color: #64748b;
+        letter-spacing: 0.05em;
+      }
+      .shub-hub-badge.badge-primary { color: var(--shub-primary); }
+      .shub-hub-title {
+        font-size: 1.25rem;
+        font-weight: 850;
+        color: var(--shub-slate);
+        margin: 2px 0 0;
+      }
+      .shub-hub-desc {
+        font-size: 13.5px;
+        color: var(--shub-body);
+        margin: 0;
+        line-height: 1.5;
+        flex: 1;
+      }
+      .shub-hub-features {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        border-top: 1px solid #f1f5f9;
+        padding-top: 12px;
+      }
+      .shub-hub-features li {
+        font-size: 12.5px;
+        font-weight: 650;
+        color: #334155;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .shub-hub-features li i, .shub-hub-features li svg { width: 14px; height: 14px; color: #16a34a; flex-shrink: 0; }
+      .shub-hub-cta {
+        margin-top: 8px;
+        padding: 11px 16px;
+        border-radius: var(--shub-radius-sm);
+        background: #f8fafc;
+        border: 1.5px solid #cbd5e1;
+        font-size: 13.5px;
+        font-weight: 800;
+        color: var(--shub-primary);
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        justify-content: space-between;
+        transition: all var(--shub-transition);
+      }
+      .shub-hub-cta:hover {
+        background: var(--shub-primary);
+        color: #ffffff;
+        border-color: var(--shub-primary);
+      }
+      .shub-hub-cta.btn-primary {
+        background: var(--shub-primary);
+        color: #ffffff;
+        border-color: var(--shub-primary);
+      }
+      .shub-hub-cta.btn-primary:hover {
+        background: var(--shub-primary-dark);
+      }
+      .shub-hub-cta i, .shub-hub-cta svg { width: 15px; height: 15px; }
+
+      /* ── 5. How Our Pricing Works ── */
+      .shub-pricing-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+        margin-bottom: 28px;
+      }
+      @media (max-width: 960px) {
+        .shub-pricing-grid { grid-template-columns: repeat(2, 1fr); }
+      }
+      @media (max-width: 520px) {
+        .shub-pricing-grid { grid-template-columns: 1fr; }
+      }
+      .shub-pricing-pillar {
+        background: #f8fafc;
+        border: 1.5px solid #e2e8f0;
+        border-radius: var(--shub-radius-md);
+        padding: 20px 18px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .shub-pricing-icon {
+        width: 36px;
+        height: 36px;
+        border-radius: 8px;
+        background: #eff6ff;
+        color: var(--shub-primary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .shub-pricing-icon i, .shub-pricing-icon svg { width: 18px; height: 18px; }
+      .shub-pricing-pillar h3 {
+        font-size: 14.5px;
+        font-weight: 850;
+        color: var(--shub-slate);
+        margin: 0;
+      }
+      .shub-pricing-pillar p {
+        font-size: 12.5px;
+        color: var(--shub-body);
+        margin: 0;
+        line-height: 1.45;
+      }
+
+      .shub-pricing-lookup-box {
+        background: #ffffff;
+        border: 1.5px solid #bfdbfe;
+        border-radius: var(--shub-radius-lg);
+        box-shadow: 0 8px 30px rgba(7, 80, 146, 0.08);
+        overflow: hidden;
+      }
+      .shub-lookup-head {
+        background: #f0f7ff;
+        padding: 16px 22px;
+        border-bottom: 1.5px solid #bfdbfe;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        flex-wrap: wrap;
+      }
+      .shub-lookup-title {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .shub-lookup-title i, .shub-lookup-title svg {
+        width: 24px;
+        height: 24px;
+        color: var(--shub-primary);
+        flex-shrink: 0;
+      }
+      .shub-lookup-title strong {
+        font-size: 15px;
+        font-weight: 850;
+        color: var(--shub-slate);
+        display: block;
+      }
+      .shub-lookup-title span {
+        font-size: 12.5px;
+        color: #64748b;
+      }
+      .shub-lookup-select-wrap {
+        min-width: 260px;
+      }
+      .shub-lookup-result {
+        padding: 22px;
+        display: grid;
+        grid-template-columns: 1.5fr 1fr 1.2fr 1fr 1fr;
+        gap: 16px;
+        align-items: center;
+      }
+      @media (max-width: 960px) {
+        .shub-lookup-result { grid-template-columns: repeat(2, 1fr); }
+      }
+      @media (max-width: 540px) {
+        .shub-lookup-result { grid-template-columns: 1fr; }
+      }
+      .shub-lookup-col {
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+      }
+      .shub-col-label {
+        font-size: 11px;
+        font-weight: 800;
+        text-transform: uppercase;
+        color: #64748b;
+        letter-spacing: 0.05em;
+      }
+      .shub-lookup-col strong {
+        font-size: 14px;
+        font-weight: 800;
+        color: var(--shub-slate);
+      }
+      .shub-lookup-col strong#shub-lk-fee {
+        color: var(--shub-primary);
+        font-size: 16px;
+      }
+      .shub-btn-lookup-action {
+        padding: 10px 16px;
+        background: var(--shub-primary);
+        color: #ffffff !important;
+        border-radius: var(--shub-radius-sm);
+        font-size: 13px;
+        font-weight: 800;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        transition: background var(--shub-transition);
+        white-space: nowrap;
+      }
+      .shub-btn-lookup-action:hover { background: var(--shub-primary-dark); }
+      .shub-btn-lookup-action i, .shub-btn-lookup-action svg { width: 14px; height: 14px; }
+
+      /* ── 6. How One Point Works (4-Step Connected Flow) ── */
+      .shub-process-wrapper {
+        display: grid;
+        grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr;
+        gap: 12px;
+        align-items: center;
+        margin-top: 32px;
+      }
+      @media (max-width: 900px) {
+        .shub-process-wrapper {
+          grid-template-columns: 1fr;
+          gap: 20px;
+        }
+        .shub-process-connector { display: none; }
+      }
+      .shub-process-step {
+        background: #ffffff;
+        border: 1.5px solid #e2e8f0;
+        border-radius: var(--shub-radius-md);
+        padding: 22px 18px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        position: relative;
+        height: 100%;
+        box-sizing: border-box;
+      }
+      .shub-step-num-pill {
+        position: absolute;
+        top: 14px;
+        right: 14px;
+        font-size: 11px;
+        font-weight: 850;
+        color: var(--shub-primary);
+        background: #eff6ff;
+        border: 1px solid #bfdbfe;
+        padding: 2px 8px;
+        border-radius: 999px;
+      }
+      .shub-step-icon {
+        width: 38px;
+        height: 38px;
+        border-radius: 10px;
+        background: #f8fafc;
+        border: 1px solid #e2e8f0;
+        color: var(--shub-primary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .shub-step-icon i, .shub-step-icon svg { width: 18px; height: 18px; }
+      .shub-process-step h3 {
+        font-size: 15px;
+        font-weight: 850;
+        color: var(--shub-slate);
+        margin: 0;
+      }
+      .shub-process-step p {
+        font-size: 12.5px;
+        color: var(--shub-body);
+        margin: 0;
+        line-height: 1.45;
+      }
+      .shub-process-connector {
+        color: #94a3b8;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .shub-process-connector i, .shub-process-connector svg { width: 22px; height: 22px; }
+      .shub-process-badges {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        margin-top: 32px;
+        flex-wrap: wrap;
+      }
+      .shub-process-badges span {
+        font-size: 12.5px;
+        font-weight: 750;
+        color: #334155;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: #ffffff;
+        padding: 6px 14px;
+        border-radius: 999px;
+        border: 1px solid #e2e8f0;
+      }
+      .shub-process-badges span i, .shub-process-badges span svg { width: 14px; height: 14px; color: var(--shub-primary); }
+
+      /* ── 7. What You May Need (Dynamic Checklist) ── */
+      .shub-checklist-tabs {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-bottom: 24px;
+      }
+      .shub-doc-tab {
+        padding: 9px 16px;
+        border-radius: 999px;
+        font-size: 13.5px;
+        font-weight: 750;
+        font-family: inherit;
+        color: #475569;
+        background: #f8fafc;
+        border: 1.5px solid #cbd5e1;
+        cursor: pointer;
+        transition: all var(--shub-transition);
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .shub-doc-tab i, .shub-doc-tab svg { width: 14px; height: 14px; }
+      .shub-doc-tab:hover {
+        background: #f1f5f9;
+        color: var(--shub-slate);
+      }
+      .shub-doc-tab.active {
+        background: var(--shub-primary);
+        color: #ffffff;
+        border-color: var(--shub-primary);
+        box-shadow: 0 2px 10px rgba(7, 80, 146, 0.2);
+      }
+      .shub-doc-tab.active i, .shub-doc-tab.active svg { color: #ffffff; }
+
+      .shub-checklist-content {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+      }
+      @media (max-width: 960px) {
+        .shub-checklist-content { grid-template-columns: repeat(2, 1fr); }
+      }
+      @media (max-width: 520px) {
+        .shub-checklist-content { grid-template-columns: 1fr; }
+      }
+      .shub-check-item {
+        background: #f8fafc;
+        border: 1.5px solid #e2e8f0;
+        border-radius: var(--shub-radius-md);
+        padding: 18px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        animation: dsFadeIn 0.2s ease forwards;
+      }
+      .shub-check-icon {
+        width: 36px;
+        height: 36px;
+        border-radius: 8px;
+        background: #eff6ff;
+        color: var(--shub-primary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .shub-check-icon i, .shub-check-icon svg { width: 18px; height: 18px; }
+      .shub-check-item strong {
+        font-size: 14px;
+        font-weight: 850;
+        color: var(--shub-slate);
+        margin: 0;
+      }
+      .shub-check-item p {
+        font-size: 12px;
+        color: var(--shub-body);
+        margin: 0;
+        line-height: 1.45;
+      }
+
+      .shub-reassurance-bar {
+        margin-top: 24px;
+        background: #eff6ff;
+        border: 1px solid #bfdbfe;
+        border-radius: var(--shub-radius-md);
+        padding: 14px 18px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .shub-reassurance-bar i, .shub-reassurance-bar svg {
+        width: 20px;
+        height: 20px;
+        color: var(--shub-primary);
+        flex-shrink: 0;
+      }
+      .shub-reassurance-bar strong {
+        font-size: 13px;
+        color: var(--shub-slate);
+        display: inline;
+        margin-right: 4px;
+      }
+      .shub-reassurance-bar span {
+        font-size: 13px;
+        color: #475569;
+      }
+
+      /* ── 8. Need Help Choosing? Concierge Banner ── */
+      .shub-concierge-banner {
+        background: linear-gradient(135deg, #075092 0%, #032d56 100%);
+        border-radius: 20px;
+        padding: clamp(28px, 4vw, 42px);
+        color: #ffffff;
+        display: grid;
+        grid-template-columns: 1.4fr 1fr;
+        gap: 28px;
+        align-items: center;
+        box-shadow: 0 16px 36px rgba(7, 80, 146, 0.18);
+      }
+      @media (max-width: 860px) {
+        .shub-concierge-banner { grid-template-columns: 1fr; }
+      }
+      .shub-concierge-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 11.5px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: #fde047;
+        background: rgba(253, 224, 71, 0.15);
+        border: 1px solid rgba(253, 224, 71, 0.3);
+        padding: 4px 12px;
+        border-radius: 999px;
+        margin-bottom: 12px;
+      }
+      .shub-concierge-badge i, .shub-concierge-badge svg { width: 13px; height: 13px; }
+      .shub-concierge-body h2 {
+        font-size: clamp(1.6rem, 2.8vw, 2.1rem);
+        font-weight: 850;
+        color: #ffffff;
+        line-height: 1.25;
+        margin: 0 0 10px;
+      }
+      .shub-concierge-body p {
+        font-size: 14.5px;
+        color: #e2e8f0;
+        line-height: 1.55;
+        margin: 0 0 20px;
+      }
+      .shub-concierge-actions {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+      .shub-btn-concierge-gold {
+        padding: 12px 20px;
+        background: #25D366;
+        color: #ffffff !important;
+        border-radius: var(--shub-radius-sm);
+        font-size: 14px;
+        font-weight: 800;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        box-shadow: 0 4px 14px rgba(37, 211, 102, 0.35);
+        transition: transform 0.2s, background 0.2s;
+      }
+      .shub-btn-concierge-gold:hover {
+        background: #1eb956;
+        transform: translateY(-2px);
+      }
+      .shub-btn-concierge-gold i, .shub-btn-concierge-gold svg { width: 18px; height: 18px; }
+      .shub-btn-concierge-glass {
+        padding: 12px 18px;
+        background: rgba(255, 255, 255, 0.12);
+        color: #ffffff !important;
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        border-radius: var(--shub-radius-sm);
+        font-size: 14px;
+        font-weight: 800;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        transition: background 0.2s;
+      }
+      .shub-btn-concierge-glass:hover {
+        background: rgba(255, 255, 255, 0.2);
+      }
+      .shub-btn-concierge-glass i, .shub-btn-concierge-glass svg { width: 16px; height: 16px; }
+
+      .shub-concierge-card-preview {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .shub-concierge-mini-box {
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: var(--shub-radius-md);
+        padding: 14px 16px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        backdrop-filter: blur(8px);
+      }
+      .shub-concierge-mini-box i, .shub-concierge-mini-box svg {
+        width: 22px;
+        height: 22px;
+        color: #67e8f9;
+        flex-shrink: 0;
+      }
+      .shub-concierge-mini-box strong {
+        font-size: 13.5px;
+        color: #ffffff;
+        display: block;
+      }
+      .shub-concierge-mini-box span {
+        font-size: 12px;
+        color: #cbd5e1;
+      }
+    </style>
 </head>
   <body class="services-page">
     <div data-site-nav>
@@ -47,15 +1314,15 @@
               <a class="btn btn-primary" href="#service-options"><i data-lucide="grid-3x3"></i> Browse Services</a>
               <a class="btn btn-ghost" href="service-pan-card.html"><i data-lucide="id-card"></i> Apply PAN</a>
             </div>
-                        <div class="hero-trust-strip">
-              <span class="hero-trust-badge badge-upi">
-                <i data-lucide="layers-3"></i> <strong>9</strong> Categories
+            <div class="hero-trust-strip">
+              <span class="hero-trust-badge">
+                <i data-lucide="badge-check"></i> <strong>Verified Catalog</strong>
               </span>
-              <span class="hero-trust-badge badge-speed">
-                <i data-lucide="search-check"></i> <strong>Smart</strong> Service Routing
+              <span class="hero-trust-badge">
+                <i data-lucide="clock"></i> <strong>Fast SLA</strong>
               </span>
-              <span class="hero-trust-badge badge-whatsapp">
-                <i data-lucide="message-circle"></i> <strong>Local</strong> Operator Support
+              <span class="hero-trust-badge">
+                <i data-lucide="lock"></i> <strong>100% Secure</strong>
               </span>
             </div>
           </div>
@@ -105,501 +1372,1476 @@
         </div>
       </section>
 
-      <section class="section edupoint-trending-services services-catalog-section" id="service-options" data-edupoint-service-carousel>
-        <div class="section-head edupoint-trending-head">
-          <div>
-            <p class="section-kicker">Categories</p>
-            <h2>All services at <span class="h2-gold">OneTouch.</span></h2>
-          </div>
-          <button class="btn btn-soft edupoint-view-all-btn" type="button" data-edupoint-view-all aria-expanded="false">
-            <span>View All</span> <i data-lucide="arrow-right"></i>
-          </button>
-        </div>
-
-        <div class="category-filters edupoint-category-filters" data-edupoint-service-filters>
-          <button class="btn btn-soft active" type="button" data-edupoint-filter="all">All Services</button>
-          <button class="btn btn-ghost" type="button" data-edupoint-filter="digital">Digital</button>
-          <button class="btn btn-ghost" type="button" data-edupoint-filter="student">Student</button>
-          <button class="btn btn-ghost" type="button" data-edupoint-filter="business">Business</button>
-          <button class="btn btn-ghost" type="button" data-edupoint-filter="local">Local</button>
-          <button class="btn btn-ghost" type="button" data-edupoint-filter="store-travel">Store &amp; Travel</button>
-        </div>
-
-        <div class="services-carousel-container edupoint-carousel-shell">
-          <button type="button" class="carousel-arrow prev edupoint-carousel-arrow" data-edupoint-carousel-prev aria-label="Previous service category">
-            <i data-lucide="chevron-left"></i>
-          </button>
-          <div class="services-carousel-viewport edupoint-carousel-viewport">
-            <div class="services-carousel-track edupoint-service-track" data-edupoint-service-track>
-              <a class="service-option-card service-card" id="government-services" href="online-services.html" data-edupoint-service-card data-edupoint-categories="digital popular">
-                <div>
-                  <div class="service-top" style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:16px;">
-                    <span class="service-icon"><i data-lucide="landmark"></i></span>
-                    <div style="display:flex;gap:6px;align-items:center;flex-wrap:nowrap;justify-content:flex-end;overflow:hidden;">
-                      <span class="tag">Govt</span>
-                      <span class="tag badge-amber">10+ services</span>
-                    </div>
-                  </div>
-                  <h3 style="margin-bottom:8px;">E-Services</h3>
-                  <p>PAN card, Ayushman, voter ID, passport and all government certificates at one place.</p>
-                </div>
-                <div class="card-actions" style="display:flex;gap:10px;margin-top:auto;">
-                  <span class="btn btn-primary" style="flex:1;" data-service="E-Services">Explore</span>
-                </div>
-              </a>
-              <a class="service-option-card service-card" id="student-services" href="edupoint.html" data-edupoint-service-card data-edupoint-categories="student popular">
-                <div>
-                  <div class="service-top" style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:16px;">
-                    <span class="service-icon"><i data-lucide="graduation-cap"></i></span>
-                    <div style="display:flex;gap:6px;align-items:center;flex-wrap:nowrap;justify-content:flex-end;overflow:hidden;">
-                      <span class="tag">EduPoint</span>
-                      <span class="tag badge-amber">10+ services</span>
-                    </div>
-                  </div>
-                  <h3 style="margin-bottom:8px;">EduPoint</h3>
-                  <p>Exam forms, admit cards, results, scholarship support and student assistance services.</p>
-                </div>
-                <div class="card-actions" style="display:flex;gap:10px;margin-top:auto;">
-                  <span class="btn btn-primary" style="flex:1;" data-service="EduPoint">Start</span>
-                </div>
-              </a>
-              <a class="service-option-card service-card" id="business-services" href="business-solutions.html" data-edupoint-service-card data-edupoint-categories="business popular">
-                <div>
-                  <div class="service-top" style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:16px;">
-                    <span class="service-icon"><i data-lucide="briefcase-business"></i></span>
-                    <div style="display:flex;gap:6px;align-items:center;flex-wrap:nowrap;justify-content:flex-end;overflow:hidden;">
-                      <span class="tag">ProServe</span>
-                      <span class="tag badge-amber">8 services</span>
-                    </div>
-                  </div>
-                  <h3 style="margin-bottom:8px;">ProServe</h3>
-                  <p>GST registration, MSME, DSC, FSSAI, shop license and trademark filing support.</p>
-                </div>
-                <div class="card-actions" style="display:flex;gap:10px;margin-top:auto;">
-                  <span class="btn btn-primary" style="flex:1;" data-service="ProServe">Explore</span>
-                </div>
-              </a>
-              <a class="service-option-card service-card" id="store-services" href="products.html" data-edupoint-service-card data-edupoint-categories="store-travel">
-                <div>
-                  <div class="service-top" style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:16px;">
-                    <span class="service-icon"><i data-lucide="shopping-bag"></i></span>
-                    <div style="display:flex;gap:6px;align-items:center;flex-wrap:nowrap;justify-content:flex-end;overflow:hidden;">
-                      <span class="tag">OneMart</span>
-                      <span class="tag badge-amber">Store</span>
-                    </div>
-                  </div>
-                  <h3 style="margin-bottom:8px;">OneMart</h3>
-                  <p>Islamic products, stationery, printer ink, accessories and branded print supplies.</p>
-                </div>
-                <div class="card-actions" style="display:flex;gap:10px;margin-top:auto;">
-                  <span class="btn btn-primary" style="flex:1;" data-service="OneMart">Shop</span>
-                </div>
-              </a>
-              <a class="service-option-card service-card" id="travel-services" href="travel-services.html" data-edupoint-service-card data-edupoint-categories="store-travel">
-                <div>
-                  <div class="service-top" style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:16px;">
-                    <span class="service-icon"><i data-lucide="plane"></i></span>
-                    <div style="display:flex;gap:6px;align-items:center;flex-wrap:nowrap;justify-content:flex-end;overflow:hidden;">
-                      <span class="tag">Travel</span>
-                      <span class="tag badge-amber">Booking</span>
-                    </div>
-                  </div>
-                  <h3 style="margin-bottom:8px;">Travel Services</h3>
-                  <p>Bus, train, flight, hotel, tour packages and passport support from local helpdesk.</p>
-                </div>
-                <div class="card-actions" style="display:flex;gap:10px;margin-top:auto;">
-                  <span class="btn btn-primary" style="flex:1;" data-service="Travel Services">Book</span>
-                </div>
-              </a>
-              <a class="service-option-card service-card" id="csc-services" href="csc-services.html" data-edupoint-service-card data-edupoint-categories="digital local">
-                <div>
-                  <div class="service-top" style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:16px;">
-                    <span class="service-icon"><i data-lucide="network"></i></span>
-                    <div style="display:flex;gap:6px;align-items:center;flex-wrap:nowrap;justify-content:flex-end;overflow:hidden;">
-                      <span class="tag">CSC</span>
-                      <span class="tag badge-amber">Utility</span>
-                    </div>
-                  </div>
-                  <h3 style="margin-bottom:8px;">CSC &amp; Utility</h3>
-                  <p>PM Kisan, pension, insurance, banking, bill payment and CSC utility services.</p>
-                </div>
-                <div class="card-actions" style="display:flex;gap:10px;margin-top:auto;">
-                  <span class="btn btn-primary" style="flex:1;" data-service="CSC & Utility">Explore</span>
-                </div>
-              </a>
-              <a class="service-option-card service-card" id="printing" href="print-scan.html" data-edupoint-service-card data-edupoint-categories="local student">
-                <div>
-                  <div class="service-top" style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:16px;">
-                    <span class="service-icon"><i data-lucide="printer"></i></span>
-                    <div style="display:flex;gap:6px;align-items:center;flex-wrap:nowrap;justify-content:flex-end;overflow:hidden;">
-                      <span class="tag">Local</span>
-                      <span class="tag badge-amber">Quick</span>
-                    </div>
-                  </div>
-                  <h3 style="margin-bottom:8px;">Print &amp; Scan</h3>
-                  <p>Photocopy, color print, document scanning, lamination and ID card printing services.</p>
-                </div>
-                <div class="card-actions" style="display:flex;gap:10px;margin-top:auto;">
-                  <span class="btn btn-primary" style="flex:1;" data-service="Print & Scan">Open</span>
-                </div>
-              </a>
-              <a class="service-option-card service-card" id="design-services" href="design-services.html" data-edupoint-service-card data-edupoint-categories="local business">
-                <div>
-                  <div class="service-top" style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:16px;">
-                    <span class="service-icon"><i data-lucide="palette"></i></span>
-                    <div style="display:flex;gap:6px;align-items:center;flex-wrap:nowrap;justify-content:flex-end;overflow:hidden;">
-                      <span class="tag">Creative</span>
-                      <span class="tag badge-amber">Design</span>
-                    </div>
-                  </div>
-                  <h3 style="margin-bottom:8px;">Design Services</h3>
-                  <p>Visiting card, banner, flex board, logo design and complete brand identity support.</p>
-                </div>
-                <div class="card-actions" style="display:flex;gap:10px;margin-top:auto;">
-                  <span class="btn btn-primary" style="flex:1;" data-service="Design Services">Open</span>
-                </div>
-              </a>
-              <a class="service-option-card service-card" id="recharge-bills" href="csc-services.html#recharge-bills" data-edupoint-service-card data-edupoint-categories="digital local">
-                <div>
-                  <div class="service-top" style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:16px;">
-                    <span class="service-icon"><i data-lucide="receipt"></i></span>
-                    <div style="display:flex;gap:6px;align-items:center;flex-wrap:nowrap;justify-content:flex-end;overflow:hidden;">
-                      <span class="tag">Bills</span>
-                      <span class="tag badge-amber">Recharge</span>
-                    </div>
-                  </div>
-                  <h3 style="margin-bottom:8px;">Recharge &amp; Bills</h3>
-                  <p>Mobile recharge, electricity, DTH, internet and all utility bill payment support.</p>
-                </div>
-                <div class="card-actions" style="display:flex;gap:10px;margin-top:auto;">
-                  <span class="btn btn-primary" style="flex:1;" data-service="Recharge & Bills">Pay</span>
-                </div>
-              </a>
-            </div>
-          </div>
-          <button type="button" class="carousel-arrow next edupoint-carousel-arrow" data-edupoint-carousel-next aria-label="Next service category">
-            <i data-lucide="chevron-right"></i>
-          </button>
-        </div>
-      </section>
-
-      <!-- How It Works Section -->
-      <section class="section reveal hiw-section" id="how-it-works">
-        <div class="hiw-inner">
-          <div class="section-head">
-            <div>
-              <p class="section-kicker"><i data-lucide="route"></i> Simple Process</p>
-              <h2>How it <span class="h2-gold">works</span></h2>
-              <p class="how-it-works-subtitle">From request submission to live tracking, everything stays simple and transparent.</p>
-            </div>
-          </div>
-          <div class="how-it-works-grid">
-            <div class="step-card">
-              <div class="hiw-step-top">
-                <span class="hiw-step-icon"><i data-lucide="clipboard-list"></i></span>
-                <span class="hiw-step-num">01</span>
+      <!-- ── 1. Refined Trust Strip (Universal Metrics) ─────────────── -->
+      <section class="shub-trust-section">
+        <div class="shub-container">
+          <div class="shub-trust-grid">
+            <div class="shub-trust-card">
+              <div class="shub-trust-icon"><i data-lucide="badge-check"></i></div>
+              <div class="shub-trust-content">
+                <strong>Verified Process</strong>
+                <span>Standardized govt &amp; legal checks</span>
               </div>
-              <h3>Submit Details</h3>
-              <p>Share your KYC documents and service details. Our operator reviews your request and checks eligibility before proceeding.</p>
             </div>
-            <i class="hiw-connector" data-lucide="chevron-right"></i>
-            <div class="step-card">
-              <div class="hiw-step-top">
-                <span class="hiw-step-icon"><i data-lucide="file-check-2"></i></span>
-                <span class="hiw-step-num">02</span>
+            <div class="shub-trust-card">
+              <div class="shub-trust-icon"><i data-lucide="shield-check"></i></div>
+              <div class="shub-trust-content">
+                <strong>Secure Payments</strong>
+                <span>UPI QR &amp; Razorpay encrypted</span>
               </div>
-              <h3>Document Review</h3>
-              <p>We confirm address proof and business activity. Documents are verified by our local support operator before portal access.</p>
             </div>
-            <i class="hiw-connector" data-lucide="chevron-right"></i>
-            <div class="step-card">
-              <div class="hiw-step-top">
-                <span class="hiw-step-icon"><i data-lucide="send"></i></span>
-                <span class="hiw-step-num">03</span>
+            <div class="shub-trust-card">
+              <div class="shub-trust-icon"><i data-lucide="headphones"></i></div>
+              <div class="shub-trust-content">
+                <strong>Live Support</strong>
+                <span>Dedicated WhatsApp &amp; desk team</span>
               </div>
-              <h3>Portal Support</h3>
-              <p>We prepare and submit the application on the official government portal with all required and verified information.</p>
             </div>
-            <i class="hiw-connector" data-lucide="chevron-right"></i>
-            <div class="step-card">
-              <div class="hiw-step-top">
-                <span class="hiw-step-icon"><i data-lucide="bell-ring"></i></span>
-                <span class="hiw-step-num">04</span>
+            <div class="shub-trust-card">
+              <div class="shub-trust-icon"><i data-lucide="star"></i></div>
+              <div class="shub-trust-content">
+                <strong>4.8★ Rating</strong>
+                <span>1,200+ verified client reviews</span>
               </div>
-              <h3>Status Update</h3>
-              <p>Receive live status updates and compliance guidance on WhatsApp directly from your assigned local operator.</p>
             </div>
-          </div>
-          <div class="how-it-works-trust">
-            <span class="trust-pill"><i data-lucide="shield-check"></i> Secure Submission</span>
-            <span class="trust-pill"><i data-lucide="user-check"></i> Verified Support</span>
-            <span class="trust-pill"><i data-lucide="activity"></i> Real-Time Updates</span>
-            <span class="trust-pill"><i data-lucide="search-check"></i> Operator Review</span>
+            <div class="shub-trust-card">
+              <div class="shub-trust-icon"><i data-lucide="file-check"></i></div>
+              <div class="shub-trust-content">
+                <strong>12,000+ Service Requests</strong>
+                <span>Fulfilled across all categories</span>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      <!-- Required Documents Tabbed Checklist Section -->
-      <section class="premium-story-showcase required-documents-section reveal" id="required-documents">
-        <!-- Subtle Glowing Background Orbs (Combining Brand Blue and Gold) -->
-        <div class="ambient-orb"></div>
-        <div class="ambient-orb"></div>
-
-        <div class="premium-container">
-          <div class="premium-header text-left">
-            <span class="premium-badge-pill"><i data-lucide="files"></i> Required Documents</span>
-            <h2 class="premium-headline">Upload only what is <span class="h2-gold">needed.</span></h2>
-            <p class="premium-subhead-new">Select a category below to see typical documents needed before operator review. Final requirements are confirmed after request submission.</p>
-          </div>
+      <!-- ── 2. Service Discovery Engine (Search + 8 Category Tiles + Goal Switcher) ── -->
+      <section class="shub-section shub-bg-slate" id="find-service">
+        <div class="shub-container">
           
-          <div class="pan-doc-tabs-shell" data-pan-doc-tabs>
-            <div class="pan-doc-tablist" role="tablist" aria-label="Service category document list">
-              <button class="pan-doc-tab active" type="button" role="tab" id="category-tab-e-services" aria-selected="true" aria-controls="category-panel-e-services" data-pan-doc-tab="category-panel-e-services"><i data-lucide="landmark"></i><span>E-Services</span></button>
-              <button class="pan-doc-tab" type="button" role="tab" id="category-tab-edupoint" aria-selected="false" aria-controls="category-panel-edupoint" data-pan-doc-tab="category-panel-edupoint"><i data-lucide="graduation-cap"></i><span>EduPoint</span></button>
-              <button class="pan-doc-tab" type="button" role="tab" id="category-tab-proserve" aria-selected="false" aria-controls="category-panel-proserve" data-pan-doc-tab="category-panel-proserve"><i data-lucide="briefcase-business"></i><span>ProServe</span></button>
-              <button class="pan-doc-tab" type="button" role="tab" id="category-tab-csc-utility" aria-selected="false" aria-controls="category-panel-csc-utility" data-pan-doc-tab="category-panel-csc-utility"><i data-lucide="network"></i><span>CSC &amp; Utility</span></button>
-              <button class="pan-doc-tab" type="button" role="tab" id="category-tab-travel-print" aria-selected="false" aria-controls="category-panel-travel-print" data-pan-doc-tab="category-panel-travel-print"><i data-lucide="printer"></i><span>Travel &amp; Local</span></button>
+          <div class="shub-header text-center">
+            <span class="shub-kicker"><i data-lucide="compass"></i> Service Discovery Hub</span>
+            <h2 class="shub-title">Find every service without confusion.</h2>
+            <p class="shub-sub">Search across government, education, business, printing, creative design, and personalized product services.</p>
+          </div>
+
+          <!-- 1-Line Intelligent Search & Filter Toolbar -->
+          <div class="shub-search-toolbar">
+            <div class="shub-search-input-wrap">
+              <i data-lucide="search" class="shub-search-icon"></i>
+              <input type="text" id="shub-search-input" placeholder="Search by service name, keyword, or requirement (e.g. PAN, GST, admit card, flex banner, passport)..." aria-label="Search all services">
+              <button type="button" id="shub-search-clear" class="shub-search-clear" style="display:none;" aria-label="Clear search">
+                <i data-lucide="x"></i>
+              </button>
             </div>
             
-            <div class="pan-doc-tabs-layout">
-              <div class="pan-doc-panels">
-                
-                <!-- Panel E-Services -->
-                <div class="pan-doc-panel active" id="category-panel-e-services" role="tabpanel" aria-labelledby="category-tab-e-services" data-pan-doc-panel="category-panel-e-services">
-                  <div class="pan-doc-panel-head"><span>E-Services</span><h3>Govt ID &amp; Certificates checklist</h3></div>
-                  <div class="pan-doc-list">
-                    <div class="pan-doc-item">
-                      <i data-lucide="id-card"></i>
-                      <div>
-                        <strong>Aadhaar Card of Applicant</strong>
-                        <p>Mandatory for PAN, Ayushman, Domicile, Caste, Voter, and Passport services.</p>
-                      </div>
-                    </div>
-                    <div class="pan-doc-item">
-                      <i data-lucide="home"></i>
-                      <div>
-                        <strong>Address Proof &amp; Registry</strong>
-                        <p>Electricity bill, Rent agreement, or water bill required for Passport and certificates.</p>
-                      </div>
-                    </div>
-                    <div class="pan-doc-item">
-                      <i data-lucide="image"></i>
-                      <div>
-                        <strong>Applicant Photo &amp; Signature Scan</strong>
-                        <p>Keep a clear passport-size photo and signature ready for online upload.</p>
-                      </div>
-                    </div>
-                    <div class="pan-doc-item">
-                      <i data-lucide="smartphone"></i>
-                      <div>
-                        <strong>Aadhaar-Linked Mobile Number</strong>
-                        <p>Essential for receiving verification OTPs during official portal submissions.</p>
-                      </div>
-                    </div>
-                    <div class="pan-doc-item">
-                      <i data-lucide="file-check-2"></i>
-                      <div>
-                        <strong>Supporting Family Proofs</strong>
-                        <p>Ration card (for Ayushman PMJAY) or educational records (for Voter ID correction).</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+            <div class="shub-toolbar-filters">
+              <select id="shub-cat-select" class="shub-select" aria-label="Filter by category">
+                <option value="all">All Categories (8)</option>
+                <option value="govt">Government &amp; Citizen</option>
+                <option value="edu">Education &amp; Admissions</option>
+                <option value="business">Business &amp; Professional</option>
+                <option value="print">Print, Copy &amp; Scan</option>
+                <option value="design">Graphic Design &amp; Web</option>
+                <option value="onemart">OneMart Products</option>
+                <option value="legal">Documents &amp; Legal</option>
+                <option value="travel">Travel &amp; Local Services</option>
+              </select>
 
-                <!-- Panel EduPoint -->
-                <div class="pan-doc-panel" id="category-panel-edupoint" role="tabpanel" aria-labelledby="category-tab-edupoint" data-pan-doc-panel="category-panel-edupoint">
-                  <div class="pan-doc-panel-head"><span>EduPoint</span><h3>Student Form checklist</h3></div>
-                  <div class="pan-doc-list">
-                    <div class="pan-doc-item">
-                      <i data-lucide="graduation-cap"></i>
-                      <div>
-                        <strong>Previous Marksheets &amp; Roll IDs</strong>
-                        <p>Keep board or university roll numbers handy for admission and exam forms.</p>
-                      </div>
-                    </div>
-                    <div class="pan-doc-item">
-                      <i data-lucide="file-text"></i>
-                      <div>
-                        <strong>Aadhaar Card of the Student</strong>
-                        <p>Necessary for applying to scholarship benefits and college enrollment portals.</p>
-                      </div>
-                    </div>
-                    <div class="pan-doc-item">
-                      <i data-lucide="image-up"></i>
-                      <div>
-                        <strong>Student Photo &amp; Signature Scan</strong>
-                        <p>Correct size and aspect ratio scans are required for error-free form uploads.</p>
-                      </div>
-                    </div>
-                    <div class="pan-doc-item">
-                      <i data-lucide="badge-indian-rupee"></i>
-                      <div>
-                        <strong>Income &amp; Caste Certificates</strong>
-                        <p>Required for verifying eligibility and claiming scholarship benefits.</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Panel ProServe -->
-                <div class="pan-doc-panel" id="category-panel-proserve" role="tabpanel" aria-labelledby="category-tab-proserve" data-pan-doc-panel="category-panel-proserve">
-                  <div class="pan-doc-panel-head"><span>ProServe</span><h3>Business filing &amp; Licensing checklist</h3></div>
-                  <div class="pan-doc-list">
-                    <div class="pan-doc-item">
-                      <i data-lucide="briefcase"></i>
-                      <div>
-                        <strong>PAN Card of Proprietor or Firm</strong>
-                        <p>Required to start GST, MSME, DSC, and corporate registration filings.</p>
-                      </div>
-                    </div>
-                    <div class="pan-doc-item">
-                      <i data-lucide="user-check"></i>
-                      <div>
-                        <strong>Aadhaar of Owner / Directors</strong>
-                        <p>Linked mobile number is necessary for online verification and OTP signature check.</p>
-                      </div>
-                    </div>
-                    <div class="pan-doc-item">
-                      <i data-lucide="building-2"></i>
-                      <div>
-                        <strong>Business Address Proof</strong>
-                        <p>Electricity bill, rent agreement, or NOC from the property owner is mandatory.</p>
-                      </div>
-                    </div>
-                    <div class="pan-doc-item">
-                      <i data-lucide="receipt-text"></i>
-                      <div>
-                        <strong>Bank Details or Cancelled Cheque</strong>
-                        <p>Proof of active bank account required to update GST portal database.</p>
-                      </div>
-                    </div>
-                    <div class="pan-doc-item">
-                      <i data-lucide="activity"></i>
-                      <div>
-                        <strong>Firm Name &amp; Nature of Activity</strong>
-                        <p>Describe your trade name and services for accurate licensing and category setup.</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Panel CSC & Utility -->
-                <div class="pan-doc-panel" id="category-panel-csc-utility" role="tabpanel" aria-labelledby="category-tab-csc-utility" data-pan-doc-panel="category-panel-csc-utility">
-                  <div class="pan-doc-panel-head"><span>CSC &amp; Utility</span><h3>Govt Scheme &amp; Utility checklist</h3></div>
-                  <div class="pan-doc-list">
-                    <div class="pan-doc-item">
-                      <i data-lucide="id-card"></i>
-                      <div>
-                        <strong>Aadhaar Card of Beneficiary</strong>
-                        <p>Required for PM Kisan, Ayushman, pension registration, and all CSC scheme enrollments.</p>
-                      </div>
-                    </div>
-                    <div class="pan-doc-item">
-                      <i data-lucide="landmark"></i>
-                      <div>
-                        <strong>Bank Passbook or Account Details</strong>
-                        <p>Active bank account with IFSC code needed for PM Kisan and pension benefit transfers.</p>
-                      </div>
-                    </div>
-                    <div class="pan-doc-item">
-                      <i data-lucide="sprout"></i>
-                      <div>
-                        <strong>Land Records / Kisan ID (PM Kisan)</strong>
-                        <p>Khasra-Khatauni or Kisan registration number for PM Kisan Samman Nidhi scheme.</p>
-                      </div>
-                    </div>
-                    <div class="pan-doc-item">
-                      <i data-lucide="smartphone"></i>
-                      <div>
-                        <strong>Aadhaar-Linked Mobile Number</strong>
-                        <p>OTP verification is required on CSC portal for insurance and utility scheme enrollments.</p>
-                      </div>
-                    </div>
-                    <div class="pan-doc-item">
-                      <i data-lucide="file-badge-2"></i>
-                      <div>
-                        <strong>Existing Policy or Scheme Reference</strong>
-                        <p>Previous policy number or enrollment ID needed for insurance renewal or complaint tracking.</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Panel Travel & Local -->
-                <div class="pan-doc-panel" id="category-panel-travel-print" role="tabpanel" aria-labelledby="category-tab-travel-print" data-pan-doc-panel="category-panel-travel-print">
-                  <div class="pan-doc-panel-head"><span>Travel &amp; Local</span><h3>Booking, Print &amp; Design checklist</h3></div>
-                  <div class="pan-doc-list">
-                    <div class="pan-doc-item">
-                      <i data-lucide="plane"></i>
-                      <div>
-                        <strong>Passenger ID &amp; Travel Dates</strong>
-                        <p>Aadhaar, Voter ID, or passport details along with dates for train/bus/flight bookings.</p>
-                      </div>
-                    </div>
-                    <div class="pan-doc-item">
-                      <i data-lucide="printer"></i>
-                      <div>
-                        <strong>Print or Scan Source Files</strong>
-                        <p>Provide high-resolution PDF or JPEG files for clean photocopies, scans, or lamination.</p>
-                      </div>
-                    </div>
-                    <div class="pan-doc-item">
-                      <i data-lucide="palette"></i>
-                      <div>
-                        <strong>Design Brief &amp; Logos</strong>
-                        <p>Share a rough layout, color preferences, and text details for Banner, Card, or Flex design.</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-              
-              <article class="premium-large-card pan-doc-side-card">
-                <img class="pan-doc-side-img" src="assets/happy_indian_customer.png" alt="Assisted document support">
-                <div class="large-card-icon"><i data-lucide="files"></i></div>
-                <h3 class="large-card-title">Assisted Catalog</h3>
-                <p class="large-card-desc">Select a category tab to view typical documents needed for daily digital services.</p>
-                <a class="large-card-cta" href="#service-options">Browse Services <i data-lucide="arrow-right"></i></a>
-              </article>
+              <select id="shub-mode-select" class="shub-select" aria-label="Filter by delivery mode">
+                <option value="all">All Delivery Modes</option>
+                <option value="online">100% Online / Remote</option>
+                <option value="incenter">In-Center / Local Desk</option>
+                <option value="sameday">Same-Day Urgent</option>
+              </select>
             </div>
           </div>
-          
-          <div class="document-notice-box">
-            <span class="notice-icon-wrap"><i data-lucide="shield-check"></i></span>
-            <div class="notice-body">
-              <strong class="notice-label">Important Note</strong>
-              <p>Document requirements may vary depending on your specific case. Our operator will confirm the final checklist after reviewing your submission.</p>
+
+          <!-- Quick Discovery Chips -->
+          <div class="shub-quick-chips" id="shub-quick-chips">
+            <button type="button" class="shub-chip active" data-chip="all"><i data-lucide="layers"></i> All Services</button>
+            <button type="button" class="shub-chip" data-chip="popular"><i data-lucide="flame"></i> Popular</button>
+            <button type="button" class="shub-chip" data-chip="online"><i data-lucide="wifi"></i> 100% Online</button>
+            <button type="button" class="shub-chip" data-chip="sameday"><i data-lucide="zap"></i> Same-Day</button>
+            <button type="button" class="shub-chip" data-chip="govt"><i data-lucide="landmark"></i> Government</button>
+            <button type="button" class="shub-chip" data-chip="business"><i data-lucide="briefcase"></i> Business</button>
+            <button type="button" class="shub-chip" data-chip="edu"><i data-lucide="graduation-cap"></i> Student</button>
+            <button type="button" class="shub-chip" data-chip="design"><i data-lucide="palette"></i> Design &amp; Print</button>
+          </div>
+
+          <!-- Discovery View Mode Tabs: Categories vs Goal -->
+          <div class="shub-view-switcher">
+            <button type="button" class="shub-view-tab active" id="tab-btn-categories" data-view="categories">
+              <i data-lucide="grid-3x3"></i> Browse by Category (8)
+            </button>
+            <button type="button" class="shub-view-tab" id="tab-btn-goals" data-view="goals">
+              <i data-lucide="target"></i> Browse by Goal / Need
+            </button>
+          </div>
+
+          <!-- View 1: 8 Compact Category Shortcut Tiles (4x2 Desktop / 2-col Mobile) -->
+          <div class="shub-cat-grid" id="shub-cat-grid">
+            <a href="online-services.html" class="shub-cat-card" data-cat="govt">
+              <div class="shub-cat-icon-wrap" style="background:#eff6ff; color:#1d4ed8;">
+                <i data-lucide="landmark"></i>
+              </div>
+              <div class="shub-cat-info">
+                <h3>Government &amp; Citizen</h3>
+                <p>PAN, Ayushman, Voter ID, Domicile, Caste &amp; Income Certificates</p>
+                <span class="shub-cat-link">Explore 14+ Services <i data-lucide="arrow-right"></i></span>
+              </div>
+            </a>
+
+            <a href="edupoint.html" class="shub-cat-card" data-cat="edu">
+              <div class="shub-cat-icon-wrap" style="background:#f0fdf4; color:#15803d;">
+                <i data-lucide="graduation-cap"></i>
+              </div>
+              <div class="shub-cat-info">
+                <h3>Education &amp; Admissions</h3>
+                <p>CUET, Entrance Forms, Scholarship Applications &amp; Counseling</p>
+                <span class="shub-cat-link">Explore 12+ Services <i data-lucide="arrow-right"></i></span>
+              </div>
+            </a>
+
+            <a href="business-solutions.html" class="shub-cat-card" data-cat="business">
+              <div class="shub-cat-icon-wrap" style="background:#faf5ff; color:#7e22ce;">
+                <i data-lucide="briefcase"></i>
+              </div>
+              <div class="shub-cat-info">
+                <h3>Business &amp; Professional</h3>
+                <p>GST Registration, MSME/Udyam, Trade License, FSSAI &amp; Filings</p>
+                <span class="shub-cat-link">Explore 10+ Services <i data-lucide="arrow-right"></i></span>
+              </div>
+            </a>
+
+            <a href="print-scan.html" class="shub-cat-card" data-cat="print">
+              <div class="shub-cat-icon-wrap" style="background:#fff7ed; color:#c2410c;">
+                <i data-lucide="printer"></i>
+              </div>
+              <div class="shub-cat-info">
+                <h3>Print, Copy &amp; Scan</h3>
+                <p>High-Speed Document Print, Color Xerox, Spiral Binding &amp; Plans</p>
+                <span class="shub-cat-link">Explore 8+ Services <i data-lucide="arrow-right"></i></span>
+              </div>
+            </a>
+
+            <a href="design-services.html" class="shub-cat-card" data-cat="design">
+              <div class="shub-cat-icon-wrap" style="background:#fdf2f8; color:#be185d;">
+                <i data-lucide="palette"></i>
+              </div>
+              <div class="shub-cat-info">
+                <h3>Graphic Design &amp; Web</h3>
+                <p>Logo Branding, Flex Banners, Corporate UI/UX &amp; Custom Websites</p>
+                <span class="shub-cat-link">Explore 16 Services <i data-lucide="arrow-right"></i></span>
+              </div>
+            </a>
+
+            <a href="products.html" class="shub-cat-card" data-cat="onemart">
+              <div class="shub-cat-icon-wrap" style="background:#ecfeff; color:#0e7490;">
+                <i data-lucide="shopping-bag"></i>
+              </div>
+              <div class="shub-cat-info">
+                <h3>OneMart Personalized</h3>
+                <p>Custom T-Shirts, Photo Mugs, Corporate Gifts &amp; Branded Merch</p>
+                <span class="shub-cat-link">Explore Store <i data-lucide="arrow-right"></i></span>
+              </div>
+            </a>
+
+            <a href="online-services.html#legal" class="shub-cat-card" data-cat="legal">
+              <div class="shub-cat-icon-wrap" style="background:#f8fafc; color:#334155; border:1px solid #cbd5e1;">
+                <i data-lucide="scale"></i>
+              </div>
+              <div class="shub-cat-info">
+                <h3>Documents &amp; Legal</h3>
+                <p>Affidavit Drafting, Rent Agreements, Notary Support &amp; Gazette</p>
+                <span class="shub-cat-link">Explore Legal <i data-lucide="arrow-right"></i></span>
+              </div>
+            </a>
+
+            <a href="travel-services.html" class="shub-cat-card" data-cat="travel">
+              <div class="shub-cat-icon-wrap" style="background:#fefce8; color:#a16207;">
+                <i data-lucide="plane"></i>
+              </div>
+              <div class="shub-cat-info">
+                <h3>Travel &amp; Local Services</h3>
+                <p>Passport Assistance, IRCTC Train Booking, Bills &amp; Banking Kiosk</p>
+                <span class="shub-cat-link">Explore Travel <i data-lucide="arrow-right"></i></span>
+              </div>
+            </a>
+          </div>
+
+          <!-- View 2: Browse by Goal (Alternative tab) -->
+          <div class="shub-goals-grid" id="shub-goals-grid" style="display:none;">
+            <div class="shub-goal-card" data-filter-trigger="govt">
+              <div class="shub-goal-icon"><i data-lucide="id-card"></i></div>
+              <div class="shub-goal-body">
+                <h4>"I need a Government Document or ID"</h4>
+                <p>PAN Card, Ayushman, Voter ID, Domicile/Caste/Income Certificate</p>
+              </div>
+              <a href="online-services.html" class="shub-goal-btn">Get Document Help <i data-lucide="arrow-right"></i></a>
             </div>
-            <div class="notice-badges">
-              <span class="notice-badge"><i data-lucide="check-circle-2"></i> Operator Verified</span>
-              <span class="notice-badge"><i data-lucide="clock-4"></i> Confirmed at Submission</span>
+
+            <div class="shub-goal-card" data-filter-trigger="edu">
+              <div class="shub-goal-icon"><i data-lucide="graduation-cap"></i></div>
+              <div class="shub-goal-body">
+                <h4>"I am a Student Applying for College or Exams"</h4>
+                <p>CUET, University Admissions, Scholarships, Admit Cards &amp; Results</p>
+              </div>
+              <a href="edupoint.html" class="shub-goal-btn">Student Assistance <i data-lucide="arrow-right"></i></a>
+            </div>
+
+            <div class="shub-goal-card" data-filter-trigger="business">
+              <div class="shub-goal-icon"><i data-lucide="building"></i></div>
+              <div class="shub-goal-body">
+                <h4>"I am Starting or Running a Business"</h4>
+                <p>GST Registration, MSME/Udyam, Trademark, FSSAI &amp; Google Profile</p>
+              </div>
+              <a href="business-solutions.html" class="shub-goal-btn">Business Setup <i data-lucide="arrow-right"></i></a>
+            </div>
+
+            <div class="shub-goal-card" data-filter-trigger="print">
+              <div class="shub-goal-icon"><i data-lucide="printer"></i></div>
+              <div class="shub-goal-body">
+                <h4>"I Need Printing, Scanning, or Book Binding"</h4>
+                <p>Color Xerox, Spiral Binding, Thesis Printing, Lamination &amp; Scanning</p>
+              </div>
+              <a href="print-scan.html" class="shub-goal-btn">Print Now <i data-lucide="arrow-right"></i></a>
+            </div>
+
+            <div class="shub-goal-card" data-filter-trigger="design">
+              <div class="shub-goal-icon"><i data-lucide="layout"></i></div>
+              <div class="shub-goal-body">
+                <h4>"I Need a Logo, Banner, or Custom Website"</h4>
+                <p>Vector Branding, Shop Flex Banners, UI/UX &amp; Full-Stack Web Development</p>
+              </div>
+              <a href="design-services.html" class="shub-goal-btn">Design &amp; Code <i data-lucide="arrow-right"></i></a>
+            </div>
+
+            <div class="shub-goal-card" data-filter-trigger="onemart">
+              <div class="shub-goal-icon"><i data-lucide="gift"></i></div>
+              <div class="shub-goal-body">
+                <h4>"I Want Custom Gifts or Branded Merchandise"</h4>
+                <p>Personalized Mugs, Printed T-Shirts, Corporate Gifts &amp; Awards</p>
+              </div>
+              <a href="products.html" class="shub-goal-btn">Personalize Gifts <i data-lucide="arrow-right"></i></a>
+            </div>
+          </div>
+
+          <!-- Dynamic Live Search Results Container (Appears when user types in search or filters) -->
+          <div class="shub-search-results-panel" id="shub-search-results-panel" style="display:none;">
+            <div class="shub-results-head">
+              <h3 id="shub-results-heading">Matching Services (<span id="shub-results-count">0</span>)</h3>
+              <button type="button" id="shub-reset-search-btn" class="shub-results-reset">Clear Search &amp; Show Categories</button>
+            </div>
+            <div class="shub-cards-grid" id="shub-search-grid"></div>
+            
+            <!-- Smart Zero-Results Fallback -->
+            <div class="shub-zero-state" id="shub-zero-state" style="display:none;">
+              <div class="shub-zero-icon"><i data-lucide="folder-search"></i></div>
+              <h3>Can't find exactly what you need?</h3>
+              <p>Tell us what you want to get done and our helpdesk will guide you directly to the exact portal, documents &amp; processing steps.</p>
+              <div class="shub-zero-actions">
+                <a href="https://wa.me/919473946181?text=Hi%20One%20Point,%20I%20could%20not%20find%20a%20specific%20service%20on%20your%20website.%20My%20requirement%20is:%20" class="shub-btn-wa" target="_blank" rel="noopener">
+                  <i data-lucide="message-circle"></i> Describe Requirement on WhatsApp
+                </a>
+                <a href="contact.html" class="shub-btn-ghost">Contact Helpdesk</a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ── 3. Popular & High-Demand Services (8 Compact Flat Cards) ── -->
+      <section class="shub-section shub-bg-white" id="popular-services">
+        <div class="shub-container">
+          <div class="shub-header-row">
+            <div>
+              <span class="shub-kicker"><i data-lucide="flame"></i> High Demand</span>
+              <h2 class="shub-title">Popular Services across One Point</h2>
+              <p class="shub-sub">Instant access to our most frequently requested digital, business, student &amp; creative services.</p>
+            </div>
+            <a href="#find-service" class="shub-header-link">View All Categories <i data-lucide="arrow-right"></i></a>
+          </div>
+
+          <div class="shub-popular-grid">
+            <!-- 1. PAN Card -->
+            <div class="shub-card" data-category="govt">
+              <div class="shub-card-top">
+                <div class="shub-card-icon" style="background:#eff6ff; color:#1d4ed8;"><i data-lucide="id-card"></i></div>
+                <div class="shub-card-badges">
+                  <span class="shub-badge badge-blue">Govt &amp; Citizen</span>
+                  <span class="shub-badge badge-green">100% Online</span>
+                </div>
+              </div>
+              <h3 class="shub-card-title">PAN Card Application &amp; Correction</h3>
+              <p class="shub-card-desc">New instant e-PAN, minor to major conversion, address/name correction with biometric or OTP verification.</p>
+              <div class="shub-card-meta">
+                <span class="shub-meta-time"><i data-lucide="clock"></i> 2–3 Days</span>
+                <span class="shub-meta-price">From <strong>₹107</strong></span>
+              </div>
+              <div class="shub-card-footer">
+                <a href="service-pan-card.html" class="shub-btn-card">Get Assistance <i data-lucide="arrow-right"></i></a>
+                <a href="https://wa.me/919473946181?text=Hi%20One%20Point,%20I%20need%20help%20with%20PAN%20Card" class="shub-btn-card-wa" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><i data-lucide="message-circle"></i></a>
+              </div>
+            </div>
+
+            <!-- 2. Ayushman Card -->
+            <div class="shub-card" data-category="govt">
+              <div class="shub-card-top">
+                <div class="shub-card-icon" style="background:#ecfdf5; color:#059669;"><i data-lucide="heart-pulse"></i></div>
+                <div class="shub-card-badges">
+                  <span class="shub-badge badge-emerald">Govt Health</span>
+                  <span class="shub-badge badge-amber">Same Day</span>
+                </div>
+              </div>
+              <h3 class="shub-card-title">Ayushman Bharat Golden Card</h3>
+              <p class="shub-card-desc">PM-JAY ₹5 Lakh free health treatment card check, KYC verification, family addition &amp; PVC card print.</p>
+              <div class="shub-card-meta">
+                <span class="shub-meta-time"><i data-lucide="clock"></i> Same Day</span>
+                <span class="shub-meta-price"><strong>Free / ₹50</strong> Print</span>
+              </div>
+              <div class="shub-card-footer">
+                <a href="service-ayushman-card.html" class="shub-btn-card">Get Card <i data-lucide="arrow-right"></i></a>
+                <a href="https://wa.me/919473946181?text=Hi%20One%20Point,%20I%20need%20help%20with%20Ayushman%20Card" class="shub-btn-card-wa" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><i data-lucide="message-circle"></i></a>
+              </div>
+            </div>
+
+            <!-- 3. GST Registration -->
+            <div class="shub-card" data-category="business">
+              <div class="shub-card-top">
+                <div class="shub-card-icon" style="background:#faf5ff; color:#7e22ce;"><i data-lucide="building-2"></i></div>
+                <div class="shub-card-badges">
+                  <span class="shub-badge badge-purple">Business</span>
+                  <span class="shub-badge badge-blue">Taxation</span>
+                </div>
+              </div>
+              <h3 class="shub-card-title">GST Registration &amp; Compliance</h3>
+              <p class="shub-card-desc">New GSTIN registration for proprietorship, partnership, PVT LTD, with monthly return filing assistance.</p>
+              <div class="shub-card-meta">
+                <span class="shub-meta-time"><i data-lucide="clock"></i> 3–5 Days</span>
+                <span class="shub-meta-price">From <strong>₹499</strong></span>
+              </div>
+              <div class="shub-card-footer">
+                <a href="business-solutions.html" class="shub-btn-card">Start Filing <i data-lucide="arrow-right"></i></a>
+                <a href="https://wa.me/919473946181?text=Hi%20One%20Point,%20I%20need%20help%20with%20GST%20Registration" class="shub-btn-card-wa" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><i data-lucide="message-circle"></i></a>
+              </div>
+            </div>
+
+            <!-- 4. MSME / Udyam -->
+            <div class="shub-card" data-category="business">
+              <div class="shub-card-top">
+                <div class="shub-card-icon" style="background:#fef3c7; color:#b45309;"><i data-lucide="file-badge"></i></div>
+                <div class="shub-card-badges">
+                  <span class="shub-badge badge-amber">Govt MSME</span>
+                  <span class="shub-badge badge-green">Paperless</span>
+                </div>
+              </div>
+              <h3 class="shub-card-title">MSME / Udyam Registration</h3>
+              <p class="shub-card-desc">Official Ministry of MSME registration certificate for subsidies, government tenders &amp; bank loan eligibility.</p>
+              <div class="shub-card-meta">
+                <span class="shub-meta-time"><i data-lucide="clock"></i> 24–48h</span>
+                <span class="shub-meta-price">From <strong>₹299</strong></span>
+              </div>
+              <div class="shub-card-footer">
+                <a href="business-solutions.html" class="shub-btn-card">Get Udyam <i data-lucide="arrow-right"></i></a>
+                <a href="https://wa.me/919473946181?text=Hi%20One%20Point,%20I%20need%20help%20with%20Udyam%20Registration" class="shub-btn-card-wa" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><i data-lucide="message-circle"></i></a>
+              </div>
+            </div>
+
+            <!-- 5. College Admission & Entrance -->
+            <div class="shub-card" data-category="edu">
+              <div class="shub-card-top">
+                <div class="shub-card-icon" style="background:#f0fdf4; color:#15803d;"><i data-lucide="graduation-cap"></i></div>
+                <div class="shub-card-badges">
+                  <span class="shub-badge badge-green">Student Hub</span>
+                  <span class="shub-badge badge-blue">Verified</span>
+                </div>
+              </div>
+              <h3 class="shub-card-title">College Admission &amp; Entrance Forms</h3>
+              <p class="shub-card-desc">Accurate form filing for CUET, NEET, JEE, state universities, scholarship portals &amp; counseling choice filling.</p>
+              <div class="shub-card-meta">
+                <span class="shub-meta-time"><i data-lucide="clock"></i> Same Day</span>
+                <span class="shub-meta-price">From <strong>₹149</strong></span>
+              </div>
+              <div class="shub-card-footer">
+                <a href="edupoint.html" class="shub-btn-card">Fill Application <i data-lucide="arrow-right"></i></a>
+                <a href="https://wa.me/919473946181?text=Hi%20One%20Point,%20I%20need%20help%20with%20College%20or%20Exam%20Admission%20Form" class="shub-btn-card-wa" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><i data-lucide="message-circle"></i></a>
+              </div>
+            </div>
+
+            <!-- 6. Print, Scan & Binding -->
+            <div class="shub-card" data-category="print">
+              <div class="shub-card-top">
+                <div class="shub-card-icon" style="background:#fff7ed; color:#c2410c;"><i data-lucide="printer"></i></div>
+                <div class="shub-card-badges">
+                  <span class="shub-badge badge-orange">Print Lab</span>
+                  <span class="shub-badge badge-emerald">Instant</span>
+                </div>
+              </div>
+              <h3 class="shub-card-title">HD Document Print, Scan &amp; Binding</h3>
+              <p class="shub-card-desc">Laser B&amp;W/Color printouts, thesis hardbound, spiral binding, large format plan print &amp; high-DPI scanning.</p>
+              <div class="shub-card-meta">
+                <span class="shub-meta-time"><i data-lucide="clock"></i> Instant</span>
+                <span class="shub-meta-price">From <strong>₹2</strong>/page</span>
+              </div>
+              <div class="shub-card-footer">
+                <a href="print-scan.html" class="shub-btn-card">Order Prints <i data-lucide="arrow-right"></i></a>
+                <a href="https://wa.me/919473946181?text=Hi%20One%20Point,%20I%20need%20Printing%20or%20Scanning%20Service" class="shub-btn-card-wa" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><i data-lucide="message-circle"></i></a>
+              </div>
+            </div>
+
+            <!-- 7. Logo & Brand Identity -->
+            <div class="shub-card" data-category="design">
+              <div class="shub-card-top">
+                <div class="shub-card-icon" style="background:#fdf2f8; color:#be185d;"><i data-lucide="palette"></i></div>
+                <div class="shub-card-badges">
+                  <span class="shub-badge badge-pink">Creative</span>
+                  <span class="shub-badge badge-gold">Vector Master</span>
+                </div>
+              </div>
+              <h3 class="shub-card-title">Logo Design &amp; Brand Identity</h3>
+              <p class="shub-card-desc">Custom vector logo creation, typography palette, brand guidelines &amp; stationery kit with 100% ownership.</p>
+              <div class="shub-card-meta">
+                <span class="shub-meta-time"><i data-lucide="clock"></i> 24–48h</span>
+                <span class="shub-meta-price">From <strong>₹299</strong></span>
+              </div>
+              <div class="shub-card-footer">
+                <a href="design-services.html" class="shub-btn-card">Start Project <i data-lucide="arrow-right"></i></a>
+                <a href="https://wa.me/919473946181?text=Hi%20One%20Point,%20I%20need%20Logo%20Design" class="shub-btn-card-wa" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><i data-lucide="message-circle"></i></a>
+              </div>
+            </div>
+
+            <!-- 8. Custom Merchandise -->
+            <div class="shub-card" data-category="onemart">
+              <div class="shub-card-top">
+                <div class="shub-card-icon" style="background:#ecfeff; color:#0e7490;"><i data-lucide="gift"></i></div>
+                <div class="shub-card-badges">
+                  <span class="shub-badge badge-cyan">OneMart</span>
+                  <span class="shub-badge badge-blue">Customized</span>
+                </div>
+              </div>
+              <h3 class="shub-card-title">Personalized Gifts &amp; Merchandise</h3>
+              <p class="shub-card-desc">Custom printed ceramic mugs, cotton t-shirts, branded corporate pens, acrylic photo plaques &amp; gifts.</p>
+              <div class="shub-card-meta">
+                <span class="shub-meta-time"><i data-lucide="clock"></i> 2–3 Days</span>
+                <span class="shub-meta-price">From <strong>₹199</strong></span>
+              </div>
+              <div class="shub-card-footer">
+                <a href="products.html" class="shub-btn-card">Customize Now <i data-lucide="arrow-right"></i></a>
+                <a href="https://wa.me/919473946181?text=Hi%20One%20Point,%20I%20need%20Personalized%20Product" class="shub-btn-card-wa" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><i data-lucide="message-circle"></i></a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ── 4. Explore One Point Service Hubs (3 Vertical Pillars) ── -->
+      <section class="shub-section shub-bg-pale-blue" id="ecosystem-hubs">
+        <div class="shub-container">
+          <div class="shub-header text-center">
+            <span class="shub-kicker"><i data-lucide="layers"></i> Ecosystem Verticals</span>
+            <h2 class="shub-title">Explore One Point Service Hubs</h2>
+            <p class="shub-sub">Our ecosystem operates through specialized hubs designed for students, businesses, and everyday local needs.</p>
+          </div>
+
+          <div class="shub-hubs-grid">
+            <!-- Hub 1: EduPoint -->
+            <div class="shub-hub-card">
+              <div class="shub-hub-header">
+                <div class="shub-hub-icon" style="background:#f0fdf4; color:#16a34a;"><i data-lucide="graduation-cap"></i></div>
+                <div>
+                  <span class="shub-hub-badge">Student Hub</span>
+                  <h3 class="shub-hub-title">EduPoint</h3>
+                </div>
+              </div>
+              <p class="shub-hub-desc">Student &amp; education services: college admissions, scholarship forms, exam registration, career counseling &amp; university updates.</p>
+              <ul class="shub-hub-features">
+                <li><i data-lucide="check"></i> CUET, NEET &amp; JEE entrance assistance</li>
+                <li><i data-lucide="check"></i> State university admission form filling</li>
+                <li><i data-lucide="check"></i> UP / Central scholarship verification</li>
+              </ul>
+              <a href="edupoint.html" class="shub-hub-cta">Explore EduPoint <i data-lucide="arrow-right"></i></a>
+            </div>
+
+            <!-- Hub 2: ProServe -->
+            <div class="shub-hub-card featured">
+              <div class="shub-hub-header">
+                <div class="shub-hub-icon" style="background:#eff6ff; color:#2563eb;"><i data-lucide="briefcase"></i></div>
+                <div>
+                  <span class="shub-hub-badge badge-primary">Business Hub</span>
+                  <h3 class="shub-hub-title">ProServe</h3>
+                </div>
+              </div>
+              <p class="shub-hub-desc">Government, business &amp; professional assistance: GST, MSME, DSC, citizen certificates, legal drafting &amp; company compliance.</p>
+              <ul class="shub-hub-features">
+                <li><i data-lucide="check"></i> GST registration &amp; monthly filings</li>
+                <li><i data-lucide="check"></i> MSME / Udyam &amp; FSSAI licenses</li>
+                <li><i data-lucide="check"></i> Domicile, Caste &amp; Income certificates</li>
+              </ul>
+              <a href="business-solutions.html" class="shub-hub-cta btn-primary">Explore ProServe <i data-lucide="arrow-right"></i></a>
+            </div>
+
+            <!-- Hub 3: OneMart & Print Lab -->
+            <div class="shub-hub-card">
+              <div class="shub-hub-header">
+                <div class="shub-hub-icon" style="background:#ecfeff; color:#0891b2;"><i data-lucide="shopping-bag"></i></div>
+                <div>
+                  <span class="shub-hub-badge">Store &amp; Print</span>
+                  <h3 class="shub-hub-title">OneMart &amp; Print Lab</h3>
+                </div>
+              </div>
+              <p class="shub-hub-desc">Printing, products &amp; personalized services: laser document printing, custom gifts, promotional merchandise &amp; storefront signage.</p>
+              <ul class="shub-hub-features">
+                <li><i data-lucide="check"></i> High-speed color Xerox &amp; thesis binding</li>
+                <li><i data-lucide="check"></i> Custom printed mugs, t-shirts &amp; gifts</li>
+                <li><i data-lucide="check"></i> Storefront flex banners &amp; signage</li>
+              </ul>
+              <a href="products.html" class="shub-hub-cta">Explore OneMart <i data-lucide="arrow-right"></i></a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── 5. How Our Pricing Works (Transparent Universal Framework) ── -->
+      <section class="shub-section shub-bg-white" id="pricing-principles">
+        <div class="shub-container">
+          <div class="shub-header text-center">
+            <span class="shub-kicker"><i data-lucide="badge-percent"></i> Pricing Clarity</span>
+            <h2 class="shub-title">How our pricing works</h2>
+            <p class="shub-sub">Every service at One Point follows a 100% transparent fee structure with zero surprise charges.</p>
+          </div>
+
+          <div class="shub-pricing-grid">
+            <div class="shub-pricing-pillar">
+              <div class="shub-pricing-icon"><i data-lucide="check-circle-2"></i></div>
+              <h3>1. Service Charge</h3>
+              <p>Clearly disclosed upfront. This covers expert operator assistance, data entry verification, and application tracking.</p>
+            </div>
+            <div class="shub-pricing-pillar">
+              <div class="shub-pricing-icon"><i data-lucide="landmark"></i></div>
+              <h3>2. Official Govt Fees</h3>
+              <p>Charged strictly at actual government receipt rates. You receive the authentic official receipt with every submission.</p>
+            </div>
+            <div class="shub-pricing-pillar">
+              <div class="shub-pricing-icon"><i data-lucide="credit-card"></i></div>
+              <h3>3. Third-Party / Gateways</h3>
+              <p>Portal examination fees, board exam fees or payment gateway costs are shown clearly prior to final confirmation.</p>
+            </div>
+            <div class="shub-pricing-pillar">
+              <div class="shub-pricing-icon"><i data-lucide="shield-check"></i></div>
+              <h3>4. Zero Hidden Fees</h3>
+              <p>No sudden add-ons or unexpected charges. Once scope and quote are agreed, your fee remains locked.</p>
+            </div>
+          </div>
+
+          <!-- Interactive Live Service Fee Look-up Box -->
+          <div class="shub-pricing-lookup-box">
+            <div class="shub-lookup-head">
+              <div class="shub-lookup-title">
+                <i data-lucide="calculator"></i>
+                <div>
+                  <strong>Instant Fee Transparency Checker</strong>
+                  <span>Select any service to preview its typical fee breakdown &amp; processing time</span>
+                </div>
+              </div>
+              <div class="shub-lookup-select-wrap">
+                <select id="shub-pricing-service-select" class="shub-select" aria-label="Select service to check pricing">
+                  <option value="pan">PAN Card (New / Correction)</option>
+                  <option value="ayushman">Ayushman Bharat Card</option>
+                  <option value="gst">GST Registration &amp; Certificate</option>
+                  <option value="udyam">MSME / Udyam Registration</option>
+                  <option value="cuet">College Admission / Entrance Form</option>
+                  <option value="print">Document Print &amp; Thesis Binding</option>
+                  <option value="logo">Logo &amp; Brand Identity Design</option>
+                  <option value="mug">Personalized Photo Mug Print</option>
+                  <option value="affidavit">Affidavit / Legal Agreement</option>
+                  <option value="passport">Passport Online Application</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="shub-lookup-result" id="shub-lookup-result">
+              <div class="shub-lookup-col">
+                <span class="shub-col-label">Selected Service</span>
+                <strong id="shub-lk-name">PAN Card (New / Correction)</strong>
+              </div>
+              <div class="shub-lookup-col">
+                <span class="shub-col-label">Operator Service Fee</span>
+                <strong id="shub-lk-fee">From ₹107</strong>
+              </div>
+              <div class="shub-lookup-col">
+                <span class="shub-col-label">Government / Portal Fee</span>
+                <strong id="shub-lk-govt">Included in ₹107 (Govt Fee + SLA)</strong>
+              </div>
+              <div class="shub-lookup-col">
+                <span class="shub-col-label">Typical Turnaround</span>
+                <strong id="shub-lk-time">2–3 Business Days</strong>
+              </div>
+              <div class="shub-lookup-col-btn">
+                <a href="service-pan-card.html" id="shub-lk-btn" class="shub-btn-lookup-action">Start Service <i data-lucide="arrow-right"></i></a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ── 6. How One Point Works (4-Step Connected Universal Process) ── -->
+      <section class="shub-section shub-bg-slate" id="how-it-works">
+        <div class="shub-container">
+          <div class="shub-header text-center">
+            <span class="shub-kicker"><i data-lucide="route"></i> Seamless Workflow</span>
+            <h2 class="shub-title">How One Point works</h2>
+            <p class="shub-sub">From requirement submission to final completion, our structured 4-step workflow keeps you informed every step.</p>
+          </div>
+
+          <div class="shub-process-wrapper">
+            <div class="shub-process-step">
+              <div class="shub-step-num-pill">01</div>
+              <div class="shub-step-icon"><i data-lucide="search"></i></div>
+              <h3>Choose &amp; Submit</h3>
+              <p>Select your required service online or describe your requirement to our team with basic KYC details.</p>
+            </div>
+            
+            <div class="shub-process-connector"><i data-lucide="chevron-right"></i></div>
+
+            <div class="shub-process-step">
+              <div class="shub-step-num-pill">02</div>
+              <div class="shub-step-icon"><i data-lucide="file-check-2"></i></div>
+              <h3>Review &amp; Scope</h3>
+              <p>Receive a clear upfront fee quote, document requirements, and agreed turnaround schedule before starting.</p>
+            </div>
+
+            <div class="shub-process-connector"><i data-lucide="chevron-right"></i></div>
+
+            <div class="shub-process-step">
+              <div class="shub-step-num-pill">03</div>
+              <div class="shub-step-icon"><i data-lucide="sliders-horizontal"></i></div>
+              <h3>Processing &amp; Assistance</h3>
+              <p>Our dedicated operators handle your application, design, print, or filing with real-time WhatsApp updates.</p>
+            </div>
+
+            <div class="shub-process-connector"><i data-lucide="chevron-right"></i></div>
+
+            <div class="shub-process-step">
+              <div class="shub-step-num-pill">04</div>
+              <div class="shub-step-icon"><i data-lucide="check-circle-2"></i></div>
+              <h3>Delivery &amp; Completion</h3>
+              <p>Receive official acknowledgement receipts, digital certificates, master vector files, or dispatched prints.</p>
+            </div>
+          </div>
+
+          <div class="shub-process-badges">
+            <span><i data-lucide="shield-check"></i> 100% Data Confidentiality</span>
+            <span><i data-lucide="user-check"></i> Assisted Verification</span>
+            <span><i data-lucide="message-circle"></i> Live WhatsApp Tracking</span>
+            <span><i data-lucide="receipt"></i> Official Receipts</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── 7. What You May Need (Dynamic Category-Driven Requirement Checklist) ── -->
+      <section class="shub-section shub-bg-white" id="document-checklist">
+        <div class="shub-container">
+          <div class="shub-header text-center">
+            <span class="shub-kicker"><i data-lucide="clipboard-list"></i> Preparation Guide</span>
+            <h2 class="shub-title">Know what you may need</h2>
+            <p class="shub-sub">Requirements vary by service. Select a category below to preview the usual checklist before applying.</p>
+          </div>
+
+          <!-- Dynamic Checklist Tabs -->
+          <div class="shub-checklist-tabs" id="shub-checklist-tabs">
+            <button type="button" class="shub-doc-tab active" data-doctab="govt"><i data-lucide="landmark"></i> Government &amp; Citizen</button>
+            <button type="button" class="shub-doc-tab" data-doctab="edu"><i data-lucide="graduation-cap"></i> Student &amp; Exams</button>
+            <button type="button" class="shub-doc-tab" data-doctab="business"><i data-lucide="briefcase"></i> Business Setup</button>
+            <button type="button" class="shub-doc-tab" data-doctab="print"><i data-lucide="printer"></i> Print &amp; Scan</button>
+            <button type="button" class="shub-doc-tab" data-doctab="design"><i data-lucide="palette"></i> Design &amp; Web</button>
+            <button type="button" class="shub-doc-tab" data-doctab="onemart"><i data-lucide="shopping-bag"></i> Personalized Store</button>
+          </div>
+
+          <!-- Dynamic Checklist Cards Container -->
+          <div class="shub-checklist-content" id="shub-checklist-content">
+            <div class="shub-check-item">
+              <div class="shub-check-icon"><i data-lucide="id-card"></i></div>
+              <strong>Aadhaar Card of Applicant</strong>
+              <p>Primary identity &amp; address proof mandatory for PAN, Ayushman, Domicile, Caste &amp; Voter services.</p>
+            </div>
+            <div class="shub-check-item">
+              <div class="shub-check-icon"><i data-lucide="smartphone"></i></div>
+              <strong>Aadhaar-Linked Mobile Number</strong>
+              <p>Essential for receiving verification OTPs during official portal submissions and biometric e-Sign.</p>
+            </div>
+            <div class="shub-check-item">
+              <div class="shub-check-icon"><i data-lucide="image"></i></div>
+              <strong>Passport Size Photograph</strong>
+              <p>Recent colored photograph with white background for clear portal upload and physical card print.</p>
+            </div>
+            <div class="shub-check-item">
+              <div class="shub-check-icon"><i data-lucide="file-check-2"></i></div>
+              <strong>Supporting Family / Income Records</strong>
+              <p>Ration card (for Ayushman PMJAY) or previous certificates for correction and renewal flows.</p>
+            </div>
+          </div>
+
+          <!-- Reassurance Notice Bar (Lightweight Info Bar) -->
+          <div class="shub-reassurance-bar">
+            <i data-lucide="info"></i>
+            <div>
+              <strong>Requirements vary by specific service.</strong>
+              <span>You'll see the exact personalized checklist and document guidelines before confirming your request with our operator.</span>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ── 8. Need Help Choosing? Concierge Assistance CTA ── -->
+      <section class="shub-section" style="padding-top:0; background:#ffffff;" id="help-choose">
+        <div class="shub-container">
+          <div class="shub-concierge-banner">
+            <div class="shub-concierge-body">
+              <span class="shub-concierge-badge"><i data-lucide="sparkles"></i> Concierge Guidance</span>
+              <h2>Not sure which service to choose?</h2>
+              <p>Tell us what you want to accomplish. Our team will review your requirement, recommend the exact portal or service, and share a clear checklist with timeline.</p>
+              <div class="shub-concierge-actions">
+                <a href="https://wa.me/919473946181?text=Hi%20One%20Point,%20I%20need%20help%20choosing%20the%20right%20service%20for%20my%20requirement." class="shub-btn-concierge-gold" target="_blank" rel="noopener">
+                  <i data-lucide="message-circle"></i> Chat with Specialist on WhatsApp
+                </a>
+                <a href="contact.html" class="shub-btn-concierge-glass">
+                  <i data-lucide="phone-call"></i> Call Local Desk
+                </a>
+              </div>
+            </div>
+            <div class="shub-concierge-card-preview">
+              <div class="shub-concierge-mini-box">
+                <i data-lucide="check-circle-2"></i>
+                <div>
+                  <strong>Fast Consultation</strong>
+                  <span>Instant response on WhatsApp &amp; counter</span>
+                </div>
+              </div>
+              <div class="shub-concierge-mini-box">
+                <i data-lucide="file-text"></i>
+                <div>
+                  <strong>Personalized Checklist</strong>
+                  <span>Only the exact documents you actually need</span>
+                </div>
+              </div>
+              <div class="shub-concierge-mini-box">
+                <i data-lucide="shield-check"></i>
+                <div>
+                  <strong>Direct SLA Assurance</strong>
+                  <span>Transparent timeline &amp; fixed fees</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </section>
       </main>
-    <div data-site-footer></div>
-    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
-    <script src="assets/app.js?v=clean_js_v11" defer></script>
-  
-<script id="line-alignment-script">
-  document.addEventListener("DOMContentLoaded", function() {
-    setTimeout(() => {
-      document.querySelectorAll(".section-head h2").forEach(h2 => {
-        let align = window.getComputedStyle(h2).textAlign;
-        let parent = h2.closest('.section-head');
-        if (parent) {
-          if (align === "center") {
-            parent.classList.add("center-line");
-          } else {
-            parent.classList.add("left-line");
+
+    <!-- ── Services Hub Interactive Engine Script ──────────────────── -->
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        // ── Catalog Data Dictionary (24+ Core Services) ──
+        const SERVICES_CATALOG = [
+          {
+            id: 'pan',
+            title: 'PAN Card Application & Correction',
+            category: 'govt',
+            catName: 'Govt & Citizen',
+            desc: 'New instant e-PAN, minor to major conversion, address/name correction with biometric or OTP verification.',
+            price: '₹107',
+            time: '2–3 Days',
+            mode: 'online',
+            badge: '100% Online',
+            badgeClass: 'badge-green',
+            icon: 'id-card',
+            iconBg: '#eff6ff',
+            iconColor: '#1d4ed8',
+            url: 'service-pan-card.html',
+            cta: 'Get Assistance',
+            keywords: 'pan card nsdl uti e-pan tin new pan correction update change aadhar link',
+            popular: true
+          },
+          {
+            id: 'ayushman',
+            title: 'Ayushman Bharat Golden Card',
+            category: 'govt',
+            catName: 'Govt Health',
+            desc: 'PM-JAY ₹5 Lakh free health treatment card check, KYC verification, family addition & PVC card print.',
+            price: 'Free / ₹50 Print',
+            time: 'Same Day',
+            mode: 'sameday',
+            badge: 'Same Day',
+            badgeClass: 'badge-amber',
+            icon: 'heart-pulse',
+            iconBg: '#ecfdf5',
+            iconColor: '#059669',
+            url: 'service-ayushman-card.html',
+            cta: 'Get Card',
+            keywords: 'ayushman card pmjay golden card health scheme 5 lakh free hospital medical ration card',
+            popular: true
+          },
+          {
+            id: 'voter',
+            title: 'Voter ID Card (New & Shift)',
+            category: 'govt',
+            catName: 'Govt & Citizen',
+            desc: 'New voter card (Form 6), constituency shift (Form 8), correction and PVC digital EPIC download.',
+            price: '₹50',
+            time: '3–7 Days',
+            mode: 'online',
+            badge: 'Govt Portal',
+            badgeClass: 'badge-blue',
+            icon: 'vote',
+            iconBg: '#eff6ff',
+            iconColor: '#1d4ed8',
+            url: 'service-voter-id.html',
+            cta: 'Apply Voter',
+            keywords: 'voter id election card epic form 6 form 8 vote chunav identity nvsp',
+            popular: false
+          },
+          {
+            id: 'certificates',
+            title: 'Domicile, Caste & Income Certificates',
+            category: 'govt',
+            catName: 'State Govt',
+            desc: 'Official Edistrict state certificates: Niwas Praman Patra, Jati Praman Patra & Aay Praman Patra.',
+            price: '₹80',
+            time: '3–5 Days',
+            mode: 'online',
+            badge: 'Edistrict',
+            badgeClass: 'badge-blue',
+            icon: 'file-text',
+            iconBg: '#eff6ff',
+            iconColor: '#1d4ed8',
+            url: 'online-services.html',
+            cta: 'Apply Certificate',
+            keywords: 'niwas jati aay praman patra domicile caste income certificate edistrict tehsildar sdm',
+            popular: false
+          },
+          {
+            id: 'gst',
+            title: 'GST Registration & Filings',
+            category: 'business',
+            catName: 'Business & Tax',
+            desc: 'New GSTIN registration for proprietorship, partnership, PVT LTD, with monthly return filing assistance.',
+            price: '₹499',
+            time: '3–5 Days',
+            mode: 'online',
+            badge: 'Taxation',
+            badgeClass: 'badge-purple',
+            icon: 'building-2',
+            iconBg: '#faf5ff',
+            iconColor: '#7e22ce',
+            url: 'business-solutions.html',
+            cta: 'Start Filing',
+            keywords: 'gst registration gstin tax gstr-1 gstr-3b invoice business firm compliance',
+            popular: true
+          },
+          {
+            id: 'udyam',
+            title: 'MSME / Udyam Registration',
+            category: 'business',
+            catName: 'Govt MSME',
+            desc: 'Official Ministry of MSME registration certificate for subsidies, government tenders & bank loan eligibility.',
+            price: '₹299',
+            time: '24–48h',
+            mode: 'online',
+            badge: 'Paperless',
+            badgeClass: 'badge-green',
+            icon: 'file-badge',
+            iconBg: '#fef3c7',
+            iconColor: '#b45309',
+            url: 'business-solutions.html',
+            cta: 'Get Udyam',
+            keywords: 'udyam msme registration certificate udyog aadhar subsidy loan bank tender small business',
+            popular: true
+          },
+          {
+            id: 'fssai',
+            title: 'FSSAI Food License & Registration',
+            category: 'business',
+            catName: 'Business Food',
+            desc: 'Mandatory food business operator (FBO) registration & state license for restaurants, cloud kitchens & shops.',
+            price: '₹599',
+            time: '3–5 Days',
+            mode: 'online',
+            badge: 'Compliance',
+            badgeClass: 'badge-amber',
+            icon: 'utensils',
+            iconBg: '#fff7ed',
+            iconColor: '#c2410c',
+            url: 'business-solutions.html',
+            cta: 'Get License',
+            keywords: 'fssai food license food registration foscos hotel restaurant cloud kitchen grocery cafe',
+            popular: false
+          },
+          {
+            id: 'gmb',
+            title: 'Google Business Profile Setup & SEO',
+            category: 'business',
+            catName: 'Local Marketing',
+            desc: 'Google Maps verification, local SEO keywords, review QR standee, phone number fix & catalog sync.',
+            price: '₹499',
+            time: '2–4 Days',
+            mode: 'online',
+            badge: 'Google Maps',
+            badgeClass: 'badge-blue',
+            icon: 'map-pin',
+            iconBg: '#eff6ff',
+            iconColor: '#2563eb',
+            url: 'business-online-setup-services.html',
+            cta: 'Setup Profile',
+            keywords: 'google my business gmb maps profile verification local seo reviews qr code shop on google',
+            popular: false
+          },
+          {
+            id: 'cuet',
+            title: 'College Admission & Entrance Forms',
+            category: 'edu',
+            catName: 'Student Hub',
+            desc: 'Accurate form filing for CUET, NEET, JEE, state universities, scholarship portals & counseling choice filling.',
+            price: '₹149',
+            time: 'Same Day',
+            mode: 'sameday',
+            badge: 'Verified',
+            badgeClass: 'badge-green',
+            icon: 'graduation-cap',
+            iconBg: '#f0fdf4',
+            iconColor: '#15803d',
+            url: 'edupoint.html',
+            cta: 'Fill Application',
+            keywords: 'cuet neet jee admission college university entrance exam form counseling scholarship',
+            popular: true
+          },
+          {
+            id: 'scholarship',
+            title: 'UP & National Scholarship Assistance',
+            category: 'edu',
+            catName: 'Student Grant',
+            desc: 'Complete scholarship form filling for Pre-Matric, Post-Matric, Dashmottar & NSP portals with fee verification.',
+            price: '₹120',
+            time: 'Same Day',
+            mode: 'online',
+            badge: 'Scholarship',
+            badgeClass: 'badge-green',
+            icon: 'award',
+            iconBg: '#f0fdf4',
+            iconColor: '#15803d',
+            url: 'edupoint.html',
+            cta: 'Apply Now',
+            keywords: 'scholarship up scholarship nsp pre-matric post-matric dashmottar student fee refund',
+            popular: false
+          },
+          {
+            id: 'print',
+            title: 'HD Document Print, Scan & Binding',
+            category: 'print',
+            catName: 'Print Lab',
+            desc: 'Laser B&W/Color printouts, thesis hardbound, spiral binding, large format plan print & high-DPI scanning.',
+            price: '₹2/page',
+            time: 'Instant',
+            mode: 'sameday',
+            badge: 'Instant',
+            badgeClass: 'badge-orange',
+            icon: 'printer',
+            iconBg: '#fff7ed',
+            iconColor: '#c2410c',
+            url: 'print-scan.html',
+            cta: 'Order Prints',
+            keywords: 'print printing xerox photocopy spiral binding thesis scan document project file color print',
+            popular: true
+          },
+          {
+            id: 'logo',
+            title: 'Logo Design & Brand Identity',
+            category: 'design',
+            catName: 'Creative Design',
+            desc: 'Custom vector logo creation, typography palette, brand guidelines & stationery kit with 100% ownership.',
+            price: '₹299',
+            time: '24–48h',
+            mode: 'online',
+            badge: 'Vector Master',
+            badgeClass: 'badge-pink',
+            icon: 'palette',
+            iconBg: '#fdf2f8',
+            iconColor: '#be185d',
+            url: 'design-services.html',
+            cta: 'Start Project',
+            keywords: 'logo design graphic design vector brand identity typography business card letterhead',
+            popular: true
+          },
+          {
+            id: 'flex',
+            title: 'Signage, Flex Banner & Hoardings',
+            category: 'design',
+            catName: 'Outdoor Print',
+            desc: 'High-impact shop front board designs, star flex banners, roll-up standees & exhibition graphics in vector CMYK.',
+            price: '₹349',
+            time: '24h Delivery',
+            mode: 'online',
+            badge: 'Outdoor HD',
+            badgeClass: 'badge-pink',
+            icon: 'image',
+            iconBg: '#fdf2f8',
+            iconColor: '#be185d',
+            url: 'design-services.html',
+            cta: 'Start Banner',
+            keywords: 'flex banner shop board hoarding standee poster flex print outdoor advertising signage',
+            popular: false
+          },
+          {
+            id: 'webdev',
+            title: 'Custom Website & Web Application',
+            category: 'design',
+            catName: 'Web & SaaS',
+            desc: 'Modern responsive websites, landing pages, e-commerce stores & scalable full-stack custom web apps.',
+            price: '₹1,999',
+            time: '3–7 Days',
+            mode: 'online',
+            badge: 'Full Stack',
+            badgeClass: 'badge-purple',
+            icon: 'code',
+            iconBg: '#eff6ff',
+            iconColor: '#2563eb',
+            url: 'design-services.html',
+            cta: 'Start Website',
+            keywords: 'website development web design ecommerce react node custom app landing page web app',
+            popular: false
+          },
+          {
+            id: 'onemart',
+            title: 'Personalized Gifts & Merchandise',
+            category: 'onemart',
+            catName: 'Custom Store',
+            desc: 'Custom printed ceramic mugs, cotton t-shirts, branded corporate pens, acrylic photo plaques & gifts.',
+            price: '₹199',
+            time: '2–3 Days',
+            mode: 'online',
+            badge: 'Customized',
+            badgeClass: 'badge-cyan',
+            icon: 'gift',
+            iconBg: '#ecfeff',
+            iconColor: '#0e7490',
+            url: 'products.html',
+            cta: 'Customize Now',
+            keywords: 'custom mug personalized gift photo mug printed t-shirt customized gift onemart merchandise',
+            popular: true
+          },
+          {
+            id: 'passport',
+            title: 'Passport Online Application & Appointment',
+            category: 'travel',
+            catName: 'Travel Desk',
+            desc: 'Fresh passport application, Tatkaal appointment booking, renewal & document checklist assistance.',
+            price: '₹250',
+            time: '1–2 Days',
+            mode: 'online',
+            badge: 'Passport Seva',
+            badgeClass: 'badge-gold',
+            icon: 'plane',
+            iconBg: '#fefce8',
+            iconColor: '#a16207',
+            url: 'travel-services.html',
+            cta: 'Book Passport',
+            keywords: 'passport online seva kendra psk appointment tatkaal visa renewal travel document',
+            popular: false
+          },
+          {
+            id: 'train',
+            title: 'IRCTC Train, Bus & Flight Booking',
+            category: 'travel',
+            catName: 'Ticketing',
+            desc: 'Instant confirmed railway ticket booking, Tatkal assistance, flight reservations & bus ticketing.',
+            price: '₹30 / ticket',
+            time: 'Instant',
+            mode: 'sameday',
+            badge: 'Instant Ticket',
+            badgeClass: 'badge-gold',
+            icon: 'train',
+            iconBg: '#fefce8',
+            iconColor: '#a16207',
+            url: 'travel-services.html',
+            cta: 'Book Ticket',
+            keywords: 'irctc train ticket booking tatkal railway flight flight booking bus ticket travel',
+            popular: false
+          },
+          {
+            id: 'legal',
+            title: 'Affidavit Drafting & Legal Agreements',
+            category: 'legal',
+            catName: 'Legal Desk',
+            desc: 'Name change affidavit, income affidavit, rent agreement drafting, notary assistance & e-Stamp printing.',
+            price: '₹150',
+            time: 'Same Day',
+            mode: 'sameday',
+            badge: 'Notary Ready',
+            badgeClass: 'badge-purple',
+            icon: 'scale',
+            iconBg: '#f8fafc',
+            iconColor: '#334155',
+            url: 'online-services.html#legal',
+            cta: 'Draft Agreement',
+            keywords: 'affidavit agreement rent agreement e-stamp notary gazette legal drafting declaration',
+            popular: false
           }
+        ];
+
+        // ── Search & Filter Elements ──
+        const searchInput = document.getElementById('shub-search-input');
+        const searchClearBtn = document.getElementById('shub-search-clear');
+        const catSelect = document.getElementById('shub-cat-select');
+        const modeSelect = document.getElementById('shub-mode-select');
+        const quickChips = document.querySelectorAll('.shub-chip');
+        const catGrid = document.getElementById('shub-cat-grid');
+        const goalsGrid = document.getElementById('shub-goals-grid');
+        const viewSwitcher = document.querySelector('.shub-view-switcher');
+        const tabBtnCategories = document.getElementById('tab-btn-categories');
+        const tabBtnGoals = document.getElementById('tab-btn-goals');
+        const resultsPanel = document.getElementById('shub-search-results-panel');
+        const searchGrid = document.getElementById('shub-search-grid');
+        const resultsHeading = document.getElementById('shub-results-heading');
+        const resultsCount = document.getElementById('shub-results-count');
+        const resetSearchBtn = document.getElementById('shub-reset-search-btn');
+        const zeroState = document.getElementById('shub-zero-state');
+
+        let activeFilterChip = 'all';
+        let currentView = 'categories';
+
+        function renderSearchResults(items) {
+          if (!searchGrid) return;
+          searchGrid.innerHTML = '';
+          
+          if (items.length === 0) {
+            searchGrid.style.display = 'none';
+            if (zeroState) zeroState.style.display = 'block';
+            if (resultsCount) resultsCount.textContent = '0';
+            return;
+          }
+
+          if (zeroState) zeroState.style.display = 'none';
+          searchGrid.style.display = 'grid';
+          if (resultsCount) resultsCount.textContent = items.length;
+
+          items.forEach(function (s) {
+            const card = document.createElement('div');
+            card.className = 'shub-card';
+            card.innerHTML = `
+              <div class="shub-card-top">
+                <div class="shub-card-icon" style="background:${s.iconBg}; color:${s.iconColor};">
+                  <i data-lucide="${s.icon}"></i>
+                </div>
+                <div class="shub-card-badges">
+                  <span class="shub-badge badge-blue">${s.catName}</span>
+                  <span class="shub-badge ${s.badgeClass}">${s.badge}</span>
+                </div>
+              </div>
+              <h3 class="shub-card-title">${s.title}</h3>
+              <p class="shub-card-desc">${s.desc}</p>
+              <div class="shub-card-meta">
+                <span class="shub-meta-time"><i data-lucide="clock"></i> ${s.time}</span>
+                <span class="shub-meta-price">From <strong>${s.price}</strong></span>
+              </div>
+              <div class="shub-card-footer">
+                <a href="${s.url}" class="shub-btn-card">${s.cta} <i data-lucide="arrow-right"></i></a>
+                <a href="https://wa.me/919473946181?text=Hi%20One%20Point,%20I%20need%20help%20with%20${encodeURIComponent(s.title)}" class="shub-btn-card-wa" target="_blank" rel="noopener" aria-label="WhatsApp"><i data-lucide="message-circle"></i></a>
+              </div>
+            `;
+            searchGrid.appendChild(card);
+          });
+
+          if (window.lucide) window.lucide.createIcons();
+        }
+
+        function executeFilter() {
+          const query = (searchInput.value || '').trim().toLowerCase();
+          const selectedCat = catSelect.value;
+          const selectedMode = modeSelect.value;
+
+          const isFiltering = query.length > 0 || selectedCat !== 'all' || selectedMode !== 'all' || activeFilterChip !== 'all';
+
+          if (searchClearBtn) {
+            searchClearBtn.style.display = query.length > 0 ? 'flex' : 'none';
+          }
+
+          if (!isFiltering) {
+            // Restore standard views
+            if (resultsPanel) resultsPanel.style.display = 'none';
+            if (viewSwitcher) viewSwitcher.style.display = 'inline-flex';
+            if (currentView === 'categories') {
+              if (catGrid) catGrid.style.display = 'grid';
+              if (goalsGrid) goalsGrid.style.display = 'none';
+            } else {
+              if (catGrid) catGrid.style.display = 'none';
+              if (goalsGrid) goalsGrid.style.display = 'grid';
+            }
+            return;
+          }
+
+          // Active filter mode -> show results panel
+          if (catGrid) catGrid.style.display = 'none';
+          if (goalsGrid) goalsGrid.style.display = 'none';
+          if (viewSwitcher) viewSwitcher.style.display = 'none';
+          if (resultsPanel) resultsPanel.style.display = 'block';
+
+          let filtered = SERVICES_CATALOG.filter(function (s) {
+            // Text query
+            if (query.length > 0) {
+              const textMatch = s.title.toLowerCase().includes(query) ||
+                                s.desc.toLowerCase().includes(query) ||
+                                s.keywords.toLowerCase().includes(query) ||
+                                s.catName.toLowerCase().includes(query);
+              if (!textMatch) return false;
+            }
+
+            // Category select
+            if (selectedCat !== 'all' && s.category !== selectedCat) return false;
+
+            // Delivery Mode select
+            if (selectedMode === 'online' && s.mode !== 'online') return false;
+            if (selectedMode === 'sameday' && s.mode !== 'sameday') return false;
+
+            // Chips
+            if (activeFilterChip === 'popular' && !s.popular) return false;
+            if (activeFilterChip === 'online' && s.mode !== 'online') return false;
+            if (activeFilterChip === 'sameday' && s.mode !== 'sameday') return false;
+            if (activeFilterChip === 'govt' && s.category !== 'govt') return false;
+            if (activeFilterChip === 'business' && s.category !== 'business') return false;
+            if (activeFilterChip === 'edu' && s.category !== 'edu') return false;
+            if (activeFilterChip === 'design' && s.category !== 'design' && s.category !== 'print') return false;
+
+            return true;
+          });
+
+          renderSearchResults(filtered);
+        }
+
+        // Search events
+        if (searchInput) {
+          searchInput.addEventListener('input', executeFilter);
+        }
+        if (searchClearBtn) {
+          searchClearBtn.addEventListener('click', function () {
+            searchInput.value = '';
+            executeFilter();
+            searchInput.focus();
+          });
+        }
+        if (catSelect) catSelect.addEventListener('change', executeFilter);
+        if (modeSelect) modeSelect.addEventListener('change', executeFilter);
+
+        // Chip button click
+        quickChips.forEach(function (chip) {
+          chip.addEventListener('click', function () {
+            quickChips.forEach(c => c.classList.remove('active'));
+            chip.classList.add('active');
+            activeFilterChip = chip.getAttribute('data-chip');
+            executeFilter();
+          });
+        });
+
+        // Reset search button
+        if (resetSearchBtn) {
+          resetSearchBtn.addEventListener('click', function () {
+            if (searchInput) searchInput.value = '';
+            if (catSelect) catSelect.value = 'all';
+            if (modeSelect) modeSelect.value = 'all';
+            activeFilterChip = 'all';
+            quickChips.forEach(c => c.classList.toggle('active', c.getAttribute('data-chip') === 'all'));
+            executeFilter();
+          });
+        }
+
+        // View Switcher (Categories vs Goals)
+        if (tabBtnCategories && tabBtnGoals) {
+          tabBtnCategories.addEventListener('click', function () {
+            currentView = 'categories';
+            tabBtnCategories.classList.add('active');
+            tabBtnGoals.classList.remove('active');
+            if (catGrid) catGrid.style.display = 'grid';
+            if (goalsGrid) goalsGrid.style.display = 'none';
+          });
+
+          tabBtnGoals.addEventListener('click', function () {
+            currentView = 'goals';
+            tabBtnGoals.classList.add('active');
+            tabBtnCategories.classList.remove('active');
+            if (catGrid) catGrid.style.display = 'none';
+            if (goalsGrid) goalsGrid.style.display = 'grid';
+          });
+        }
+
+        // ── 5. Instant Fee Checker Dictionary ──
+        const PRICING_DICTIONARY = {
+          pan: {
+            name: 'PAN Card (New / Correction)',
+            fee: 'From ₹107',
+            govt: 'Included in ₹107 (Govt Fee + SLA)',
+            time: '2–3 Business Days',
+            url: 'service-pan-card.html'
+          },
+          ayushman: {
+            name: 'Ayushman Bharat Card',
+            fee: '₹0 (Free Govt Registration)',
+            govt: '₹0 Govt Fee / ₹50 PVC Card Print',
+            time: 'Same Day (Instant)',
+            url: 'service-ayushman-card.html'
+          },
+          gst: {
+            name: 'GST Registration & Certificate',
+            fee: 'From ₹499',
+            govt: '₹0 Govt Fee (Application filing)',
+            time: '3–5 Business Days',
+            url: 'business-solutions.html'
+          },
+          udyam: {
+            name: 'MSME / Udyam Registration',
+            fee: 'From ₹299',
+            govt: '₹0 Govt Fee (Official Portal)',
+            time: '24–48 Hours',
+            url: 'business-solutions.html'
+          },
+          cuet: {
+            name: 'College Admission / Entrance Form',
+            fee: 'From ₹149',
+            govt: 'At Actuals (Exam Board Fee)',
+            time: 'Same Day Verification',
+            url: 'edupoint.html'
+          },
+          print: {
+            name: 'Document Print & Thesis Binding',
+            fee: 'From ₹2 / page',
+            govt: '₹0 (Commercial print lab)',
+            time: 'Instant / Same Day',
+            url: 'print-scan.html'
+          },
+          logo: {
+            name: 'Logo & Brand Identity Design',
+            fee: 'From ₹299',
+            govt: '₹0 (100% Vector IP Handover)',
+            time: '24–48 Hours',
+            url: 'design-services.html'
+          },
+          mug: {
+            name: 'Personalized Photo Mug Print',
+            fee: 'From ₹199',
+            govt: '₹0 (Ceramic HD Sublimation)',
+            time: '2–3 Days',
+            url: 'products.html'
+          },
+          affidavit: {
+            name: 'Affidavit / Legal Agreement',
+            fee: 'From ₹150',
+            govt: '₹10/₹50/₹100 e-Stamp at actuals',
+            time: 'Same Day',
+            url: 'online-services.html#legal'
+          },
+          passport: {
+            name: 'Passport Online Application',
+            fee: 'From ₹250',
+            govt: '₹1,500 Govt Fee (Standard PSK)',
+            time: '1–2 Days (Appointment)',
+            url: 'travel-services.html'
+          }
+        };
+
+        const priceSelect = document.getElementById('shub-pricing-service-select');
+        const lkName = document.getElementById('shub-lk-name');
+        const lkFee = document.getElementById('shub-lk-fee');
+        const lkGovt = document.getElementById('shub-lk-govt');
+        const lkTime = document.getElementById('shub-lk-time');
+        const lkBtn = document.getElementById('shub-lk-btn');
+
+        if (priceSelect) {
+          priceSelect.addEventListener('change', function () {
+            const data = PRICING_DICTIONARY[priceSelect.value] || PRICING_DICTIONARY.pan;
+            if (lkName) lkName.textContent = data.name;
+            if (lkFee) lkFee.textContent = data.fee;
+            if (lkGovt) lkGovt.textContent = data.govt;
+            if (lkTime) lkTime.textContent = data.time;
+            if (lkBtn) lkBtn.setAttribute('href', data.url);
+          });
+        }
+
+        // ── 7. Dynamic Checklist Tabs Dictionary ──
+        const CHECKLIST_DICTIONARY = {
+          govt: [
+            { icon: 'id-card', title: 'Aadhaar Card of Applicant', desc: 'Primary identity & address proof mandatory for PAN, Ayushman, Domicile, Caste & Voter services.' },
+            { icon: 'smartphone', title: 'Aadhaar-Linked Mobile Number', desc: 'Essential for receiving verification OTPs during official portal submissions and biometric e-Sign.' },
+            { icon: 'image', title: 'Passport Size Photograph', desc: 'Recent colored photograph with white background for clear portal upload and physical card print.' },
+            { icon: 'file-check-2', title: 'Supporting Family / Income Records', desc: 'Ration card (for Ayushman PMJAY) or previous certificates for correction and renewal flows.' }
+          ],
+          edu: [
+            { icon: 'graduation-cap', title: 'Previous Academic Marksheets', desc: 'Class 10th & 12th marksheet scans, board roll numbers, and passing year details.' },
+            { icon: 'file-text', title: 'Student Aadhaar & Category Proof', desc: 'Aadhaar card along with Caste or EWS certificate if claiming reservation quotas.' },
+            { icon: 'image-up', title: 'Scanned Photo & Signature', desc: 'Clear JPEG scans strictly formatted to exam portal file size specifications.' },
+            { icon: 'badge-indian-rupee', title: 'Income Certificate (For Scholarships)', desc: 'Valid state income certificate required for fee reimbursement and scholarship schemes.' }
+          ],
+          business: [
+            { icon: 'briefcase', title: 'PAN of Proprietor or Enterprise', desc: 'Mandatory primary identifier required to start GST, MSME/Udyam, and FSSAI applications.' },
+            { icon: 'building-2', title: 'Business Place Address Proof', desc: 'Recent electricity bill, rent agreement, or property registry document with NOC.' },
+            { icon: 'receipt-text', title: 'Bank Proof or Cancelled Cheque', desc: 'Active business/savings bank account statement or cancelled cheque showing IFSC code.' },
+            { icon: 'user-check', title: 'Aadhaar with Linked Mobile', desc: 'For instant OTP verification during GST portal authorization and digital signature.' }
+          ],
+          print: [
+            { icon: 'file-type', title: 'Digital Source File (PDF / Word)', desc: 'High-resolution PDF or documents formatted to standard A4/A3 page dimensions.' },
+            { icon: 'printer', title: 'Print Specifications', desc: 'Mention Color or B&W preference, single/double sided, and 75/100 GSM paper grade.' },
+            { icon: 'layers', title: 'Binding Preference', desc: 'Choose between standard stapling, spiral coil binding, soft cover, or hard thesis binding.' },
+            { icon: 'scan-line', title: 'Original Physical Document (For Scanning)', desc: 'Uncreased original papers or IDs for clean high-DPI optical scanning and OCR.' }
+          ],
+          design: [
+            { icon: 'palette', title: 'Brand Name & Core Concept', desc: 'Your registered trade name, preferred color scheme, and aesthetic style preference.' },
+            { icon: 'file-text', title: 'Text Content & Contact Info', desc: 'Headline, services list, phone numbers, and address to be typeset on banner/brochure.' },
+            { icon: 'layout', title: 'Exact Dimensions & Aspect Ratio', desc: 'Width x Height (in feet or pixels) for flex banners, social media posts, or website.' },
+            { icon: 'sparkles', title: 'Inspiration Reference Links', desc: 'Any reference logos or competitor sample designs you admire for visual direction.' }
+          ],
+          onemart: [
+            { icon: 'gift', title: 'Product Selection', desc: 'Choose ceramic mug (white/magic), cotton t-shirt size, engraved pen, or wooden frame.' },
+            { icon: 'image', title: 'High-Resolution Photo or Artwork', desc: 'Clear JPEG/PNG photograph or vector logo for high-clarity heat transfer sublimation.' },
+            { icon: 'type', title: 'Custom Name / Text to Print', desc: 'Exact wording, date, or personal quote to be imprinted on the personalized gift.' },
+            { icon: 'map-pin', title: 'Delivery Pincode & Quantity', desc: 'Specify single piece or bulk corporate gift order with target delivery timeline.' }
+          ]
+        };
+
+        const docTabs = document.querySelectorAll('.shub-doc-tab');
+        const checklistContent = document.getElementById('shub-checklist-content');
+
+        docTabs.forEach(function (tab) {
+          tab.addEventListener('click', function () {
+            docTabs.forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+            const catKey = tab.getAttribute('data-doctab');
+            const items = CHECKLIST_DICTIONARY[catKey] || CHECKLIST_DICTIONARY.govt;
+
+            if (checklistContent) {
+              checklistContent.innerHTML = items.map(function (item) {
+                return `
+                  <div class="shub-check-item">
+                    <div class="shub-check-icon"><i data-lucide="${item.icon}"></i></div>
+                    <strong>${item.title}</strong>
+                    <p>${item.desc}</p>
+                  </div>
+                `;
+              }).join('');
+
+              if (window.lucide) window.lucide.createIcons();
+            }
+          });
+        });
+
+        // Initialize Lucide Icons
+        if (window.lucide) {
+          window.lucide.createIcons();
         }
       });
-    }, 100); // small delay to ensure CSS is applied
-  });
-</script>
+    </script>
+      </main>
+    <div data-site-footer></div>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+    <script src="assets/app.js?v=customer-checkout-94" defer></script>
 </body>
 </html>
-

@@ -3,18 +3,34 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="One Point Digital Services is a premium local and online platform for government services, student help, business registrations, printing and digital products.">
-    <meta property="og:title" content="One Point Digital Services">
-    <meta property="og:description" content="Digital, government, student, business and store services with local support and UPI verification.">
+    <meta name="description" content="One Point Digital Services — Easy online applications, essential citizen services, government forms, PAN card services, certificate services, banking & AEPS, student services, and printing services with trusted assistance.">
+    <meta property="og:title" content="One Point Digital Services | Citizen, Government & Student Services Platform">
+    <meta property="og:description" content="Apply for citizen services, government forms, PAN card services, student applications, certificate services, banking & AEPS, and printing services with One Point.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://bisenonepoint.com/">
     <meta property="og:image" content="https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=1200&q=82">
-    <title>One Point Digital Services | Smart Digital Service Platform</title>
+    <title>One Point Digital Services | Citizen, Government & Student Services Platform</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;650;700;800;900&display=swap" rel="stylesheet">
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-        <link rel="stylesheet" href="assets/onepoint.css?v=2">
+    <script src="assets/opds-boot.js?v=anti-fouc-79"></script>
+    <link rel="stylesheet" href="assets/onepoint.css?v=bento-smooth-57">
+    <link rel="stylesheet" href="assets/enterprise-visual-polish.css?v=polish-3">
+  <link rel="stylesheet" href="assets/onepoint-home.css?v=student-smooth-61">
+    <script id="opds-localization-config">
+      window.OPDS_LOCALIZATION = {
+        CITY: "Lucknow",
+        LOCALITY: "LDA Colony",
+        CSC_ID: "417409",
+        ADDRESS: "One Point Suvidha Kendra, LDA Colony, Lucknow",
+        PHONE: "+91 9473946181",
+        WHATSAPP: "https://wa.me/919473946181",
+        PROCESSING_TIME: "3-5 Business Days",
+        PRICE: "₹150",
+        SUPPORT_HOURS: "9:00 AM - 8:00 PM"
+      };
+    </script>
 </head>
   <body id="homepage-body">
     <div data-site-nav>
@@ -24,194 +40,278 @@
             <img class="brand-logo brand-logo-header" src="assets/logo-bisen-one-point-footer.svg" alt="Bisen One Point Suvidha Kendra">
           </a>
           <div class="fallback-nav-links">
-            <a class="nav-link" href="index.html">Home</a>
+            <a class="nav-link active" href="index.html">Home</a>
             <a class="nav-link" href="services.html">Services</a>
             <a class="nav-link" href="products.html">Store</a>
-            <a class="nav-link" href="track-application.html">Track</a>
+            <a class="nav-link" href="track-application.html">Track Status</a>
             <a class="nav-link" href="contact.html">Contact</a>
+          </div>
+          <div class="nav-actions">
+            <a class="eds-btn eds-btn-primary nav-cta-btn" href="#trending-services">Launch Console</a>
           </div>
         </nav>
       </header>
     </div>
 
     <main class="page-shell">
-      <section class="hero">
-        <!-- Background Video -->
-        <video class="hero-video-bg" autoplay loop muted playsinline>
-          <source src="assets/Hero section home page.mp4" type="video/mp4">
-        </video>
-        <div class="hero-video-overlay"></div>
-        <div class="hero-grid">
-          <div class="hero-copy">
-            <p class="eyebrow"><span class="text-sky">Local + Online</span> <span class="text-cream-gold">Hybrid Model</span></p>
-            <h1><span class="hero-title-static">One trusted place for</span><span class="animated-word" data-animated-word>essential government &amp; digital services.</span></h1>
-            
-            <div class="hero-search-box">
-              <div style="position: relative; display: flex; align-items: center;">
-                <input class="input" data-ai-search placeholder="Search services... (e.g. PAN card, Passport, GST, Income certificate)">
-                <i data-lucide="search" class="search-icon"></i>
-              </div>
-              <div class="ai-suggestions" data-ai-suggestions style="display: none;"></div>
+      <section class="hero hero-v3" aria-labelledby="homepage-hero-title">
+        <div class="hero-v3-bg" aria-hidden="true">
+          <div class="hero-india-map-host" data-hero-india-map>
+            <canvas id="hero-india-map-canvas" class="hero-india-map-canvas"></canvas>
+          </div>
+          <span class="hero-v3-glow hero-v3-glow-a"></span>
+          <span class="hero-v3-glow hero-v3-glow-b"></span>
+          <span class="hero-v3-glow hero-v3-glow-c"></span>
+          <span class="hero-v3-grid-layer"></span>
+          <span class="hero-v3-noise-layer"></span>
+        </div>
+
+        <div id="hero-india-badges-layer" class="hero-india-badges-layer" aria-hidden="true"></div>
+
+        <div class="hero-v3-shell">
+          <div class="hero-v3-copy">
+            <!-- DESIGN-NOTE (Audit Issues #3, #5, #7): Repeating trust sections (hero assurances, landing-trust, trust-band, and duplicated security icons) are deliberately repeated at different scroll depths for conversion optimization and trust reinforcement. Do not merge or remove without UX review. -->
+            <p class="hero-v3-badge"><span></span>One Point Digital Services &middot; Live Helpdesk</p>
+            <h1 id="homepage-hero-title" class="hero-v3-title">
+              <span class="hero-v3-title-line">All Your Digital and</span>
+              <span class="hero-v3-title-accent">Citizen Services</span>
+            </h1>
+            <p class="hero-v3-subtitle">Get expert assistance with essential government and citizen services, track your requests, and access trusted digital services, all from one convenient platform.</p>
+
+            <div class="hero-actions hero-actions-v3">
+              <a class="eds-btn eds-btn-primary hero-cta-primary" href="services.html"><i data-lucide="grid-3x3"></i> Explore Services</a>
+              <a class="eds-btn eds-btn-secondary hero-cta-secondary" href="track-application.html"><i data-lucide="compass"></i> Track Application</a>
+            </div>
+            <div class="hero-trust-strip">
+              <span class="hero-trust-badge hero-trust-badge-verified">
+                <i data-lucide="badge-check"></i> <strong>Verified Process</strong>
+              </span>
+              <span class="hero-trust-badge hero-trust-badge-speed">
+                <i data-lucide="clock"></i> <strong>Fast Turnaround</strong>
+              </span>
+              <span class="hero-trust-badge hero-trust-badge-privacy">
+                <i data-lucide="lock"></i> <strong>Privacy Protected</strong>
+              </span>
             </div>
 
-
-            <div class="hero-actions">
-              <a class="btn btn-primary" href="#trending-services"><i data-lucide="sparkles"></i> Get Started</a>
-              <a class="btn btn-ghost hero-secondary-btn" href="services.html"><i data-lucide="grid-3x3"></i> Browse Services</a>
+            <div class="hos-search">
+              <div class="hos-search-field">
+                <i data-lucide="search" class="hos-search-icon"></i>
+                <input class="eds-input hos-search-input" data-ai-search placeholder="Search services or applications" aria-label="Search services">
+                <button type="button" class="hos-search-voice" aria-label="Voice search" title="Voice search (Click to speak)"><i data-lucide="mic"></i></button>
+                <kbd class="hos-search-kbd">Ctrl&nbsp;K</kbd>
+              </div>
+              <div class="ai-suggestions hos-suggestions" data-ai-suggestions></div>
             </div>
           </div>
 
-          <div class="hero-panel hero-system-panel" aria-label="One Point service system preview">
-            <div class="hero-orbit-ring" aria-hidden="true"></div>
-            <article class="hero-command-center" style="border-radius: var(--radius-lg); border: 1px solid rgba(255,255,255,0.12); background: rgba(16, 36, 63, 0.65); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); color: #fff; padding: 15px; position: relative; z-index: 10;">
-              <div class="command-topbar" style="border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 8px; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
-                <span style="display: flex; gap: 6px;"><i class="os-dot"></i><i class="os-dot"></i><i class="os-dot"></i></span>
-                <strong style="margin-left: auto; font-size: 0.85rem; color: rgba(255,255,255,0.7); font-weight: 600;">One Point OS Live Dashboard</strong>
+          <div class="hos-stats hero-os-console" aria-label="Live application tracking preview">
+            <div class="hero-os-window">
+              <div class="hero-os-topbar">
+                <span class="hero-os-brand"><i data-lucide="layout-grid"></i> One Point Portal &middot; Digital Services Hub</span>
+                <span class="hero-os-state"><span></span> VERIFIED PLATFORM &middot; LIVE SUPPORT</span>
               </div>
-              <div class="command-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-                <div class="command-main" style="grid-column: 1 / -1; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.05); border-radius: 12px; padding: 12px;">
-                  <span class="tag" style="background: rgba(244,185,66,0.15); color: var(--accent-light); padding: 3px 8px; border-radius: var(--radius-xs); font-size: 0.7rem; font-weight: 700; margin-bottom: 8px; display: inline-block;">Live tracker</span>
-                  <h3 style="margin-bottom: 2px; font-size: 1rem; color: #fff;">OPDS2026-PAN</h3>
-                  <p style="color: rgba(255, 255, 255, 0.9); font-size: 0.8rem; margin-bottom: 8px; line-height: 1.4;">Documents verified. Review in progress.</p>
-                  <div class="command-progress" style="height: 5px; background: rgba(255,255,255,0.1); border-radius: 4px; overflow: hidden;"><span style="display: block; width: 68%; height: 100%; background: var(--accent-gold);"></span></div>
-                </div>
-                <div class="command-tile" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); border-radius: 12px; padding: 10px; text-align: center;">
-                  <i data-lucide="qr-code" style="color: var(--accent-gold); margin-bottom: 4px; width: 20px; height: 20px; display: inline-block;"></i>
-                  <strong style="display: block; font-size: 0.85rem; color: #fff;">UPI Proof</strong>
-                  <small style="color: rgba(255,255,255,0.5); font-size: 0.7rem;">Instant check</small>
-                </div>
-                <div class="command-tile" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); border-radius: 12px; padding: 10px; text-align: center;">
-                  <i data-lucide="file-check-2" style="color: var(--primary-light); margin-bottom: 4px; width: 20px; height: 20px; display: inline-block;"></i>
-                  <strong style="display: block; font-size: 0.85rem; color: #fff;">Docs AI</strong>
-                  <small style="color: rgba(255,255,255,0.5); font-size: 0.7rem;">Checklist ready</small>
-                </div>
+
+              <div class="hero-os-grid">
+                <section class="hero-os-workbench" aria-label="Application status tracker">
+                  <div class="hero-os-ticket">
+                    <span class="hero-os-eyebrow">ACTIVE REQUEST &middot; ID: OPDS-417409-PAN</span>
+                    <strong>Identity &amp; Document Review in Progress</strong>
+                    <div class="hero-os-progress" aria-hidden="true"><span class="progress-78" style="width: 78%; display: block; height: 100%;"></span></div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; gap: 8px; font-size: 0.72rem; color: #a1a1aa; margin-top: 6px; white-space: nowrap; overflow: hidden;">
+                      <span>Step 3 of 4: Operator Review</span>
+                      <span>Document Verification</span>
+                    </div>
+                  </div>
+
+                  <div class="hero-os-analytics live-performance-card" data-live-performance>
+                    <div class="hero-os-analytics-head">
+                      <span class="hero-os-analytics-title"><i aria-hidden="true"></i> Live Service Activity</span>
+                      <span class="hero-os-trend" aria-label="Daily volume increase"><strong data-live-trend>+18.4%</strong></span>
+                    </div>
+                    <div class="hero-os-chart-frame">
+                      <canvas class="os-stripe-burst-canvas" style="display: block; width: 100%; height: 100%;"></canvas>
+                      <div class="os-stripe-horizon-glow" aria-hidden="true"></div>
+                      <div class="os-chart-tooltip" data-chart-tooltip aria-hidden="true">
+                        <span class="tooltip-time">12:33 PM</span>
+                        <span class="tooltip-sep">&bull;</span>
+                        <strong class="tooltip-rate">26 req/min</strong>
+                        <span class="tooltip-status">Optimal</span>
+                      </div>
+                      <span class="os-chart-hover-dot" data-chart-hover-dot aria-hidden="true"></span>
+                    </div>
+                    <div class="hero-os-analytics-meta">
+                      <span class="meta-rate-group">
+                        <span class="apple-live-beacon" aria-hidden="true"></span>
+                        <span><b data-live-rate>26</b> req/min</span>
+                      </span>
+                      <span class="meta-badge-glass">Peak Throughput</span>
+                      <strong class="meta-live-pill"><i aria-hidden="true"></i> Live</strong>
+                    </div>
+                    <div class="hero-os-live-ticker" data-live-ticker aria-live="polite">
+                      <span class="ticker-dot"></span>
+                      <span class="ticker-text" data-ticker-text>Just now: PAN Card Application verified (Balaghat Center)</span>
+                    </div>
+                  </div>
+                </section>
+
+                <aside class="hero-os-telemetry" aria-label="Support desk status">
+                  <div>
+                    <div class="hero-os-metric">
+                      <span class="hero-os-metric-label">ACTIVE DESK</span>
+                      <strong class="metric-number hero-os-metric-value" data-target="24">24</strong>
+                      <span class="hero-os-metric-sub">Applications in review</span>
+                    </div>
+                    <div class="hero-os-metric">
+                      <span class="hero-os-metric-label">ASSISTANCE</span>
+                      <strong class="metric-number hero-os-metric-value" data-target="15">15m</strong>
+                      <span class="hero-os-metric-sub--muted">Avg operator response</span>
+                    </div>
+                  </div>
+                  <div class="hero-os-mini-metrics">
+                    <div>
+                      <span>Daily Support:</span>
+                      <strong>Active</strong>
+                    </div>
+                    <div>
+                      <span>Review:</span>
+                      <strong>1-on-1</strong>
+                    </div>
+                  </div>
+                </aside>
               </div>
-              <div class="command-list" style="margin-top: 12px; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 12px; display: flex; flex-direction: column; gap: 6px;">
-                <div style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.05); border-radius: 10px; padding: 8px 12px; display: flex; align-items: center; gap: 10px;"><span><i data-lucide="id-card" style="color: var(--accent-gold); width: 16px; height: 16px; display: block;"></i></span><strong style="font-size: 0.85rem; color: rgba(255,255,255,0.9);">PAN Card Application</strong><small style="margin-left: auto; color: var(--accent-gold); font-weight: 600; font-size: 0.8rem;">2-3 days</small></div>
-                <div style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.05); border-radius: 10px; padding: 8px 12px; display: flex; align-items: center; gap: 10px;"><span><i data-lucide="graduation-cap" style="color: var(--primary-light); width: 16px; height: 16px; display: block;"></i></span><strong style="font-size: 0.85rem; color: rgba(255,255,255,0.9);">Student Helpdesk</strong><small style="margin-left: auto; color: var(--primary-light); font-weight: 600; font-size: 0.8rem;">Instant</small></div>
-                <div style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.05); border-radius: 10px; padding: 8px 12px; display: flex; align-items: center; gap: 10px;"><span><i data-lucide="briefcase-business" style="color: var(--accent-gold); width: 16px; height: 16px; display: block;"></i></span><strong style="font-size: 0.85rem; color: rgba(255,255,255,0.9);">GST/MSME Filing</strong><small style="margin-left: auto; color: var(--accent-gold); font-weight: 600; font-size: 0.8rem;">Guided</small></div>
-              </div>
-            </article>
-            <article class="hero-mini-card hero-mini-card-one" style="position: absolute; right: -20px; top: 40px; background: rgba(16, 36, 63, 0.85); border: 1px solid rgba(255,255,255,0.15); backdrop-filter: blur(16px); padding: 16px; border-radius: 16px; z-index: 20;">
-              <span style="color: #34d399; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; display: block; margin-bottom: 4px;">Secure flow</span>
-              <strong style="font-size: 0.9rem; color: #fff;">Consent + receipt + tracking</strong>
-            </article>
-            <article class="hero-mini-card hero-mini-card-two" style="position: absolute; left: -30px; bottom: 80px; background: rgba(16, 36, 63, 0.85); border: 1px solid rgba(255,255,255,0.15); backdrop-filter: blur(16px); padding: 16px; border-radius: 16px; z-index: 20;">
-              <span style="color: var(--primary-light); font-size: 0.75rem; font-weight: 700; text-transform: uppercase; display: block; margin-bottom: 4px;">Local support</span>
-              <strong style="font-size: 0.9rem; color: #fff;">WhatsApp first assistance</strong>
-            </article>
+            </div>
           </div>
+
+          <ul class="hos-trust-strip" aria-label="Platform assurances">
+            <li><i data-lucide="shield-check"></i> Secure Submission</li>
+            <li><i data-lucide="file-check"></i> Document Review</li>
+            <li><i data-lucide="user-check"></i> Operator Assistance</li>
+            <li class="trust-subtle"><i data-lucide="headphones"></i> Helpdesk Support</li>
+            <li class="trust-subtle"><i data-lucide="badge-check"></i> Clear Pricing</li>
+            <li class="trust-subtle"><i data-lucide="compass"></i> Live Tracking</li>
+          </ul>
         </div>
       </section>
 
-      <div class="quick-strip reveal">
-        <a class="quick-pill" href="service-pan-card.html"><span><i data-lucide="badge-check"></i></span>PAN Card</a>
-        <a class="quick-pill" href="edupoint.html"><span><i data-lucide="graduation-cap"></i></span>Student Help</a>
-        <a class="quick-pill" href="business-solutions.html"><span><i data-lucide="briefcase-business"></i></span>GST Registration</a>
-        <a class="quick-pill" href="travel-services.html"><span><i data-lucide="plane"></i></span>Travel</a>
-        <a class="quick-pill" href="products.html"><span><i data-lucide="shopping-bag"></i></span>OneMart</a>
-        <a class="quick-pill" href="services.html#printing"><span><i data-lucide="printer"></i></span>Printing</a>
+      <!-- ══════════════ Premium Live Feed ══════════════ -->
+      <div class="live-feed-premium" aria-label="Live activity feed">
+        <div class="lfp-glow lfp-glow-a" aria-hidden="true"></div>
+        <div class="lfp-glow lfp-glow-b" aria-hidden="true"></div>
+        <div class="lfp-inner">
+          <div class="lfp-badge">
+            <span class="lfp-pulse" aria-hidden="true"></span>
+            <span class="lfp-pulse-ring" aria-hidden="true"></span>
+            <i data-lucide="radio" class="lfp-badge-icon"></i>
+            <span class="lfp-badge-text">LIVE FEED</span>
+          </div>
+          <div class="lfp-viewport">
+            <div class="lfp-track" data-activity-ticker>
+              <div class="lfp-card">
+                <div class="lfp-card-icon lfp-icon-ok"><i data-lucide="credit-card"></i></div>
+                <div class="lfp-card-body">
+                  <div class="lfp-card-top"><strong>PAN correction</strong><span class="lfp-status lfp-status-ok">Approved</span></div>
+                  <div class="lfp-card-meta"><i data-lucide="map-pin"></i> <em>LDA Colony</em> <time>10:42</time></div>
+                </div>
+              </div>
+              <div class="lfp-card">
+                <div class="lfp-card-icon lfp-icon-ok"><i data-lucide="file-check"></i></div>
+                <div class="lfp-card-body">
+                  <div class="lfp-card-top"><strong>Income certificate</strong><span class="lfp-status lfp-status-ok">Completed</span></div>
+                  <div class="lfp-card-meta"><i data-lucide="map-pin"></i> <em>Hazratganj</em> <time>10:41</time></div>
+                </div>
+              </div>
+              <div class="lfp-card">
+                <div class="lfp-card-icon lfp-icon-info"><i data-lucide="plane"></i></div>
+                <div class="lfp-card-body">
+                  <div class="lfp-card-top"><strong>Passport assistance</strong><span class="lfp-status lfp-status-info">Submitted</span></div>
+                  <div class="lfp-card-meta"><i data-lucide="map-pin"></i> <em>Aliganj</em> <time>10:39</time></div>
+                </div>
+              </div>
+              <div class="lfp-card">
+                <div class="lfp-card-icon lfp-icon-warn"><i data-lucide="building-2"></i></div>
+                <div class="lfp-card-body">
+                  <div class="lfp-card-top"><strong>GST registration</strong><span class="lfp-status lfp-status-warn">Verifying</span></div>
+                  <div class="lfp-card-meta"><i data-lucide="map-pin"></i> <em>Gomti Nagar</em> <time>10:37</time></div>
+                </div>
+              </div>
+              <div class="lfp-card">
+                <div class="lfp-card-icon lfp-icon-ok"><i data-lucide="scroll-text"></i></div>
+                <div class="lfp-card-body">
+                  <div class="lfp-card-top"><strong>Domicile certificate</strong><span class="lfp-status lfp-status-ok">Delivered</span></div>
+                  <div class="lfp-card-meta"><i data-lucide="map-pin"></i> <em>Indira Nagar</em> <time>10:35</time></div>
+                </div>
+              </div>
+              <div class="lfp-card">
+                <div class="lfp-card-icon lfp-icon-info"><i data-lucide="vote"></i></div>
+                <div class="lfp-card-body">
+                  <div class="lfp-card-top"><strong>Voter ID</strong><span class="lfp-status lfp-status-info">Dispatched</span></div>
+                  <div class="lfp-card-meta"><i data-lucide="map-pin"></i> <em>LDA Colony</em> <time>10:33</time></div>
+                </div>
+              </div>
+              <div class="lfp-card">
+                <div class="lfp-card-icon lfp-icon-ok"><i data-lucide="shield-check"></i></div>
+                <div class="lfp-card-body">
+                  <div class="lfp-card-top"><strong>Caste certificate</strong><span class="lfp-status lfp-status-ok">Approved</span></div>
+                  <div class="lfp-card-meta"><i data-lucide="map-pin"></i> <em>Rajajipuram</em> <time>10:30</time></div>
+                </div>
+              </div>
+              <div class="lfp-card">
+                <div class="lfp-card-icon lfp-icon-ok"><i data-lucide="globe"></i></div>
+                <div class="lfp-card-body">
+                  <div class="lfp-card-top"><strong>Google Business Setup</strong><span class="lfp-status lfp-status-ok">Published</span></div>
+                  <div class="lfp-card-meta"><i data-lucide="map-pin"></i> <em>Chinhat</em> <time>10:28</time></div>
+                </div>
+              </div>
+              <!-- Duplicate set for seamless infinite scroll loop is cloned dynamically in app.js -->
+            </div>
+          </div>
+          <div class="lfp-counter">
+            <i data-lucide="activity"></i>
+            <span><strong>Active</strong> Service Desk</span>
+          </div>
+        </div>
       </div>
 
-      <section class="section reveal tracker-redesign-section" id="tracker-section" style="position: relative;">
-        <!-- Glowing Background Orbs -->
-        <div style="position: absolute; top: -10%; left: -5%; width: 450px; height: 450px; background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, transparent 70%); pointer-events: none; filter: blur(55px); z-index: 1;"></div>
-        <div style="position: absolute; bottom: -10%; right: -5%; width: 450px; height: 450px; background: radial-gradient(circle, rgba(244, 185, 66, 0.08) 0%, transparent 70%); pointer-events: none; filter: blur(55px); z-index: 1;"></div>
-
-        <div class="tracker">
-          <div class="tracker-panel premium-tracker-card">
-            <span class="status-live-badge"><i data-lucide="radio" style="width: 14px; height: 14px; color: #ef4444; animation: pulse 1.5s infinite;"></i> LIVE SYSTEM</span>
-            <p class="section-kicker">Instant Verification</p>
-            <h2>Track any <span class="h2-gold">application.</span></h2>
-            <p class="section-desc">Enter your transaction or application ID to view detailed real-time processing milestones.</p>
-            
-            <form class="input-row premium-search-row" data-tracker-form style="margin-bottom: 12px;">
-              <div style="position: relative; flex-grow: 1;">
-                <i data-lucide="search" style="position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: var(--muted); width: 18px; height: 18px;"></i>
-                <input class="input" name="applicationId" placeholder="Example: OPDS2026-PAN" aria-label="Application ID">
-              </div>
-              <button class="btn btn-primary" type="submit" style="padding: 0 28px; display: inline-flex; align-items: center; gap: 8px;"><i data-lucide="compass" style="width: 16px; height: 16px;"></i> Track</button>
-            </form>
-            
-            <div class="tracker-output-wrapper">
-              <i data-lucide="info" style="color: var(--blue); width: 16px; height: 16px; flex-shrink: 0; margin-top: 2px;"></i>
-              <p data-tracker-output style="margin: 0; font-size: 0.9rem; font-weight: 550; color: #1e293b;">Application OPDS2026-PAN is currently Processing.</p>
-            </div>
-
-            <!-- Secure Payments & Trust Badge strip inside tracker -->
-            <div class="tracker-payment-badges" style="margin-top: 20px; border-top: 1px solid var(--border-slate-200); padding-top: 16px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
-              <span style="font-size: 0.8rem; color: var(--text-secondary); display: flex; align-items: center; gap: 6px; font-weight: 500;"><i data-lucide="lock" style="width: 12px; height: 12px; color: #16a34a;"></i> Secure SSL Doc Vault & Payments</span>
-              <div class="payment-logos" style="display: flex; gap: 8px; align-items: center; opacity: 0.8;">
-                <span style="font-size: 0.7rem; font-weight: 700; color: var(--text-secondary); letter-spacing: 0.05em;">UPI:</span>
-                <span style="font-size: 0.7rem; font-weight: 800; color: #4285F4; background: #e8f0fe; padding: 2px 6px; border-radius: 4px; display: inline-block;">GPay</span>
-                <span style="font-size: 0.7rem; font-weight: 800; color: #5f259f; background: #f2eefa; padding: 2px 6px; border-radius: 4px; display: inline-block;">PhonePe</span>
-                <span style="font-size: 0.7rem; font-weight: 800; color: #00baf2; background: #e5f8fe; padding: 2px 6px; border-radius: 4px; display: inline-block;">Paytm</span>
-              </div>
-            </div>
-          </div>
-          <div class="tracker-image-panel">
-            <img src="assets/happy_indian_customer.png" alt="Happy Customer Tracking Service" class="tracker-happy-customer-img">
-            <div class="tracker-image-overlay"></div>
-            <div class="tracker-badge-floating">
-              <span class="badge-icon"><i data-lucide="smile" style="width: 16px; height: 16px; color: #16a34a;"></i></span>
-              <div class="badge-text">
-                <strong>10k+ Happy Users</strong>
-                <span>Instant & Hassle-free Services</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-            <section class="section trust-metrics-section reveal" id="trust-metrics-section">
-        <div class="tm-split-wrap">
-          <div class="tm-hero-left">
-            <span class="tm-hero-kicker">Applications Processed</span>
-            <strong class="tm-hero-num metric-number" data-stat="processed" data-target="12000" data-suffix="+">12,000+</strong>
-            <div class="tm-hero-accent"></div>
-            <p class="tm-hero-sub">Govt &middot; student &middot; business<br>services since launch</p>
-          </div>
-          <div class="tm-narrative-right">
-            <div class="tm-narrative-top">
-              <p class="tm-kicker"><i data-lucide="shield-check"></i> Verified Track Record</p>
-              <h2 class="tm-title">Trusted by <span class="tm-title-gold">Thousands</span></h2>
-              <p class="tm-subtitle">Every application reviewed by our trained CSC operators before any payment is collected.</p>
-            </div>
-            <div class="tm-mini-grid">
-              <div class="tm-mini-stat tm-mini-gold">
-                <strong class="tm-mini-num metric-number" data-stat="success" data-target="99.2" data-suffix="%">99.2%</strong>
-                <span class="tm-mini-label">Success rate</span>
-              </div>
-              <div class="tm-mini-stat">
-                <strong class="tm-mini-num tm-static" data-stat="support">24/7</strong>
-                <span class="tm-mini-label">Support</span>
-              </div>
-              <div class="tm-mini-stat tm-mini-gold">
-                <strong class="tm-mini-num metric-number" data-stat="satisfaction" data-target="4.9" data-suffix=" &#9733;">4.9 &#9733;</strong>
-                <span class="tm-mini-label">Rating</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-
-      <section class="section reveal" id="trending-services">
+      <section class="section reveal landing-services-section" id="trending-services">
         <div class="section-head">
           <div>
-            <p class="section-kicker">Trending Services</p>
-            <h2>Quick apply services users <span class="h2-gold">need daily.</span></h2>
+            <p class="section-kicker">Citizen &amp; Digital Services Directory</p>
+            <h2>Find and Apply for <span class="h2-gold">Popular Services</span></h2>
           </div>
           <a class="btn btn-soft" href="services.html">View All <i data-lucide="arrow-right"></i></a>
         </div>
-        <div class="category-filters" data-service-filters style="display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 32px; justify-content: flex-start;">
-          <button class="btn btn-soft active" type="button" data-filter="all">All Services</button>
-          <button class="btn btn-ghost" type="button" data-filter="government">Government</button>
-          <button class="btn btn-ghost" type="button" data-filter="student">Student</button>
-          <button class="btn btn-ghost" type="button" data-filter="business">Business</button>
-          <button class="btn btn-ghost" type="button" data-filter="travel">Travel</button>
-          <button class="btn btn-ghost" type="button" data-filter="personal">Personal</button>
-          <button class="btn btn-ghost" type="button" data-filter="popular">Popular</button>
+        <div class="category-filters" data-service-filters>
+          <button class="btn btn-soft active" type="button" data-filter="popular">
+            <span class="category-card-icon"><i data-lucide="flame"></i></span>
+            <span class="category-card-copy"><strong>Popular Services</strong><small>Top requested</small></span>
+            <span class="category-card-meta"><em>Frequently applied</em><small>Priority flow</small></span>
+          </button>
+          <button class="btn btn-ghost" type="button" data-filter="government">
+            <span class="category-card-icon"><i data-lucide="landmark"></i></span>
+            <span class="category-card-copy"><strong>Govt Certificates</strong><small>42 services</small></span>
+            <span class="category-card-meta"><em>From Rs. 50</em><small>Same day</small></span>
+          </button>
+          <button class="btn btn-ghost" type="button" data-filter="student">
+            <span class="category-card-icon"><i data-lucide="graduation-cap"></i></span>
+            <span class="category-card-copy"><strong>Student Services</strong><small>18 services</small></span>
+            <span class="category-card-meta"><em>From Rs. 20</em><small>Instant</small></span>
+          </button>
+          <button class="btn btn-ghost" type="button" data-filter="business">
+            <span class="category-card-icon"><i data-lucide="briefcase-business"></i></span>
+            <span class="category-card-copy"><strong>Business Filings</strong><small>16 services</small></span>
+            <span class="category-card-meta"><em>From Rs. 199</em><small>1-3 days</small></span>
+          </button>
+          <button class="btn btn-ghost" type="button" data-filter="travel">
+            <span class="category-card-icon"><i data-lucide="plane"></i></span>
+            <span class="category-card-copy"><strong>Travel &amp; Booking</strong><small>8 services</small></span>
+            <span class="category-card-meta"><em>Fare actual</em><small>Assisted</small></span>
+          </button>
+          <button class="btn btn-ghost" type="button" data-filter="all">
+            <span class="category-card-icon"><i data-lucide="grid-3x3"></i></span>
+            <span class="category-card-copy"><strong>All Services</strong><small>100+ services</small></span>
+            <span class="category-card-meta"><em>From Rs. 0</em><small>Instant-5 days</small></span>
+          </button>
         </div>
         <div class="services-carousel-container">
           <button class="carousel-arrow prev" data-carousel-prev aria-label="Previous services">
@@ -229,25 +329,172 @@
           </button>
         </div>
       </section>
-      <section class="band process-apple-section reveal" id="process" style="background: linear-gradient(180deg, #092c4f 0%, #125696 100%); position: relative; overflow: hidden; border-top: 1px solid rgba(255, 255, 255, 0.08); border-bottom: 1px solid rgba(255, 255, 255, 0.08); padding: var(--section-y) var(--gutter);">
-      <!-- Glowing Background Orbs -->
-      <div style="position: absolute; top: -10%; left: -5%; width: 500px; height: 500px; background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, transparent 70%); pointer-events: none; filter: blur(60px);"></div>
-      <div style="position: absolute; bottom: -10%; right: -5%; width: 500px; height: 500px; background: radial-gradient(circle, rgba(210, 161, 42, 0.12) 0%, transparent 70%); pointer-events: none; filter: blur(60px);"></div>
+      <section class="band process-apple-section reveal" id="process">
 
-      <div class="section" style="width: min(var(--max), calc(100% - 32px)); margin: 0 auto; padding: 0; position: relative; z-index: 10;">
+      <div class="section process-inner-container">
         
         <!-- Section Header with Premium Hierarchy -->
-        <div style="margin-bottom: 72px; text-align: center;">
-          <span class="section-kicker section-kicker-dark">The One Point Experience</span>
-          <h2 class="text-white">How One Point <span class="h2-gold">Works</span></h2>
-          <p style="color: rgba(255, 255, 255, 0.8); font-size: 1.2rem; max-width: 600px; margin: 16px auto 0; line-height: 1.6;">A modern, encrypted, and real-time automated workflow designed for ultimate convenience.</p>
+        <div class="process-header-wrap">
+          <span class="section-kicker">How It Works</span>
+          <h2>From Request to <span class="h2-gold">Completion</span></h2>
+          <p class="process-subtitle">A simple 5-step journey to get your digital and citizen services completed smoothly.</p>
         </div>
 
-        <!-- Centered Widescreen Showcase & Stepper Cards Grid -->
+        <!-- Two-Panel: Selector LEFT + Preview RIGHT -->
         <div class="process-showcase-container">
-          
-          <!-- Top Element: Interactive Widescreen Showcase -->
-          <div class="showcase-canvas-wrapper centered-large">
+
+          <!-- LEFT PANEL: Vertical step selector -->
+          <div class="process-step-selector">
+
+            <!-- Panel header -->
+            <div class="stepper-panel-header">
+              <span class="stepper-panel-eyebrow"><i data-lucide="sparkles"></i> Customer Journey</span>
+              <h3 class="stepper-panel-title">Simple 5-Step Process</h3>
+              <p class="stepper-panel-sub">Easy to follow, transparent, and assisted by our trained operators from start to finish.</p>
+            </div>
+
+            <div class="stepper-cards-grid">
+
+              <!-- Step 1 -->
+              <div class="stepper-nav-card active" data-showcase="0">
+                <div class="step-spine-col">
+                  <div class="step-node-ring"><div class="step-node-core"></div></div>
+                  <div class="step-vline"></div>
+                </div>
+                <div class="stepper-body">
+                  <div class="stepper-card-header">
+                    <div class="step-icon-wrap">
+                      <i data-lucide="layout-grid"></i>
+                      <span class="step-num-pip">01</span>
+                    </div>
+                    <div class="stepper-title-group">
+                      <h3>Choose a Service</h3>
+                    </div>
+                    <i data-lucide="arrow-right" class="stepper-arrow-icon"></i>
+                  </div>
+                  <div class="stepper-nav-content">
+                    <p>Find the service you need.</p>
+                    <span class="stepper-nav-tag">Step 1</span>
+                  </div>
+                  <div class="nav-progress-track"><div class="nav-progress-bar"></div></div>
+                </div>
+              </div>
+
+              <!-- Step 2 -->
+              <div class="stepper-nav-card" data-showcase="1">
+                <div class="step-spine-col">
+                  <div class="step-node-ring"><div class="step-node-core"></div></div>
+                  <div class="step-vline"></div>
+                </div>
+                <div class="stepper-body">
+                  <div class="stepper-card-header">
+                    <div class="step-icon-wrap">
+                      <i data-lucide="upload-cloud"></i>
+                      <span class="step-num-pip">02</span>
+                    </div>
+                    <div class="stepper-title-group">
+                      <h3>Submit Your Details</h3>
+                    </div>
+                    <i data-lucide="arrow-right" class="stepper-arrow-icon"></i>
+                  </div>
+                  <div class="stepper-nav-content">
+                    <p>Upload the required information and documents.</p>
+                    <span class="stepper-nav-tag">Step 2</span>
+                  </div>
+                  <div class="nav-progress-track"><div class="nav-progress-bar"></div></div>
+                </div>
+              </div>
+
+              <!-- Step 3 -->
+              <div class="stepper-nav-card" data-showcase="2">
+                <div class="step-spine-col">
+                  <div class="step-node-ring"><div class="step-node-core"></div></div>
+                  <div class="step-vline"></div>
+                </div>
+                <div class="stepper-body">
+                  <div class="stepper-card-header">
+                    <div class="step-icon-wrap">
+                      <i data-lucide="user-check"></i>
+                      <span class="step-num-pip">03</span>
+                    </div>
+                    <div class="stepper-title-group">
+                      <h3>Operator Review</h3>
+                    </div>
+                    <i data-lucide="arrow-right" class="stepper-arrow-icon"></i>
+                  </div>
+                  <div class="stepper-nav-content">
+                    <p>We check your submission for completeness.</p>
+                    <span class="stepper-nav-tag">Step 3</span>
+                  </div>
+                  <div class="nav-progress-track"><div class="nav-progress-bar"></div></div>
+                </div>
+              </div>
+
+              <!-- Step 4 -->
+              <div class="stepper-nav-card" data-showcase="3">
+                <div class="step-spine-col">
+                  <div class="step-node-ring"><div class="step-node-core"></div></div>
+                  <div class="step-vline"></div>
+                </div>
+                <div class="stepper-body">
+                  <div class="stepper-card-header">
+                    <div class="step-icon-wrap">
+                      <i data-lucide="compass"></i>
+                      <span class="step-num-pip">04</span>
+                    </div>
+                    <div class="stepper-title-group">
+                      <h3>Track Progress</h3>
+                    </div>
+                    <i data-lucide="arrow-right" class="stepper-arrow-icon"></i>
+                  </div>
+                  <div class="stepper-nav-content">
+                    <p>Follow every status update online.</p>
+                    <span class="stepper-nav-tag">Step 4</span>
+                  </div>
+                  <div class="nav-progress-track"><div class="nav-progress-bar"></div></div>
+                </div>
+              </div>
+
+              <!-- Step 5 -->
+              <div class="stepper-nav-card" data-showcase="4">
+                <div class="step-spine-col">
+                  <div class="step-node-ring"><div class="step-node-core"></div></div>
+                  <div class="step-vline"></div>
+                </div>
+                <div class="stepper-body">
+                  <div class="stepper-card-header">
+                    <div class="step-icon-wrap">
+                      <i data-lucide="package-check"></i>
+                      <span class="step-num-pip">05</span>
+                    </div>
+                    <div class="stepper-title-group">
+                      <h3>Get Your Service</h3>
+                    </div>
+                    <i data-lucide="arrow-right" class="stepper-arrow-icon"></i>
+                  </div>
+                  <div class="stepper-nav-content">
+                    <p>Receive, download, or collect the final output as applicable.</p>
+                    <span class="stepper-nav-tag">Step 5</span>
+                  </div>
+                  <div class="nav-progress-track"><div class="nav-progress-bar"></div></div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Panel footer CTA -->
+            <div class="stepper-panel-footer">
+              <a href="services.html" class="stepper-cta-btn">
+                <i data-lucide="zap"></i>
+                Start Your Application
+              </a>
+              <span class="stepper-cta-note">Simple &bull; Transparent &bull; Assisted</span>
+            </div>
+
+          </div>
+
+          <!-- RIGHT PANEL: Macbook preview -->
+          <div class="showcase-canvas-wrapper">
             <div class="showcase-laptop-reflection"></div>
             <div class="showcase-macbook-frame">
               <div class="macbook-header">
@@ -262,13 +509,13 @@
                 </div>
               </div>
               <div class="macbook-screen-content">
-                
-                <!-- Pane 0: Select Service Demo -->
+
+                <!-- Pane 0: Choose Service Demo -->
                 <div class="showcase-pane active" id="pane-0">
                   <div class="portal-demo-widget">
                     <div class="portal-demo-header">
-                      <div class="portal-logo"><i data-lucide="layout-grid" style="width: 16px; height: 16px;"></i> One Point Portal</div>
-                      <div class="portal-user-badge"><i data-lucide="user" style="width: 12px; height: 12px;"></i> Quick Access</div>
+                      <div class="portal-logo"><i data-lucide="layout-grid" style="width: 16px; height: 16px;"></i> 1. Choose a Service</div>
+                      <div class="portal-user-badge"><i data-lucide="search" style="width: 12px; height: 12px;"></i> Service Catalog</div>
                     </div>
                     <div class="portal-search-box">
                       <div class="search-input-mock">
@@ -289,35 +536,32 @@
                       <div class="portal-result-card disabled">
                         <div class="result-card-icon"><i data-lucide="file-text" style="width: 18px; height: 18px;"></i></div>
                         <div class="result-card-info">
-                          <h4>GST Registration</h4>
-                          <p>New business tax application registration</p>
+                          <h4>Income & Domicile Certificate</h4>
+                          <p>State government certificate service</p>
                         </div>
                       </div>
                     </div>
-                    <!-- Simulated Pointer Click -->
                     <div class="simulated-pointer"><i data-lucide="mouse-pointer" style="width: 22px; height: 22px;"></i></div>
                   </div>
                 </div>
 
-                <!-- Pane 1: Secure Upload Demo -->
+                <!-- Pane 1: Submit Details Demo -->
                 <div class="showcase-pane" id="pane-1">
                   <div class="vault-demo-widget">
                     <div class="vault-header">
-                      <div class="vault-title"><i data-lucide="shield-check" style="color: var(--primary); width: 18px; height: 18px;"></i> Secure Vault Storage</div>
-                      <div class="vault-status-badge">AES-256 Active</div>
+                      <div class="vault-title"><i data-lucide="upload-cloud" style="color: var(--primary); width: 18px; height: 18px;"></i> 2. Submit Your Details</div>
+                      <div class="vault-status-badge">Secure Intake</div>
                     </div>
-                    
                     <div class="upload-dropzone-mock">
                       <i data-lucide="cloud-lightning" class="cloud-lightning-icon"></i>
-                      <p>Uploading verified documents...</p>
+                      <p>Uploading required documents & information...</p>
                     </div>
-                    
                     <div class="upload-files-list">
                       <div class="uploaded-file-row file-1">
                         <i data-lucide="file" class="file-icon"></i>
                         <div class="file-details">
                           <div class="file-header">
-                            <span class="file-name">aadhaar_card.pdf</span>
+                            <span class="file-name">identity_proof.pdf</span>
                             <span class="file-percentage">0%</span>
                           </div>
                           <div class="file-progress-track">
@@ -326,7 +570,6 @@
                         </div>
                         <i data-lucide="check" class="file-check-icon"></i>
                       </div>
-                      
                       <div class="uploaded-file-row file-2">
                         <i data-lucide="image" class="file-icon"></i>
                         <div class="file-details">
@@ -344,44 +587,34 @@
                   </div>
                 </div>
 
-                <!-- Pane 2: Verify & Pay Demo -->
+                <!-- Pane 2: Operator Review Demo -->
                 <div class="showcase-pane" id="pane-2">
-                  <div class="checkout-demo-widget">
-                    <div class="checkout-header">
-                      <div class="checkout-logo"><i data-lucide="wallet" style="width: 16px; height: 16px;"></i> Express Checkout</div>
-                      <span class="checkout-timer">Expires in 04:59</span>
+                  <div class="vault-demo-widget">
+                    <div class="vault-header">
+                      <div class="vault-title"><i data-lucide="user-check" style="color: var(--primary); width: 18px; height: 18px;"></i> 3. Operator Review</div>
+                      <div class="vault-status-badge" style="background: rgba(16, 185, 129, 0.15); color: #10b981;">Review Passed</div>
                     </div>
-                    
-                    <div class="order-summary-row">
-                      <span>PAN Card Update Fee</span>
-                      <strong>&#8377;107.00</strong>
+                    <div class="upload-dropzone-mock" style="padding: 16px 12px;">
+                      <i data-lucide="shield-check" class="cloud-lightning-icon" style="color: #10b981;"></i>
+                      <p style="color: #e4e4e7; font-weight: 500;">Completeness & Mismatch Check</p>
+                      <span style="font-size: 0.75rem; color: #a1a1aa;">Our operator verifies that all uploaded details are complete before processing.</span>
                     </div>
-                    
-                    <div class="payment-methods-grid">
-                      <div class="pay-method active">
-                        <div class="pay-dot"></div>
-                        <span>UPI (GPAY/PhonePe)</span>
-                      </div>
-                      <div class="pay-method">
-                        <div class="pay-dot"></div>
-                        <span>Credit/Debit Card</span>
-                      </div>
-                    </div>
-                    
-                    <div class="upi-gpay-simulate-box">
-                      <div class="upi-phone-frame">
-                        <div class="upi-phone-header">GPay Secure</div>
-                        <div class="upi-phone-body">
-                          <div class="merchant-badge">OP</div>
-                          <div class="merchant-details">
-                            <h5>One Point Services</h5>
-                            <p>onepoint@axisbank</p>
+                    <div class="upload-files-list">
+                      <div class="uploaded-file-row done">
+                        <i data-lucide="check-circle-2" class="file-icon" style="color: #10b981;"></i>
+                        <div class="file-details">
+                          <div class="file-header">
+                            <span class="file-name">Document quality & readability</span>
+                            <span class="file-percentage" style="color: #10b981;">Verified</span>
                           </div>
-                          <div class="pay-amount">&#8377;107.00</div>
-                          <div class="pay-loading-circle"></div>
-                          <div class="pay-success-badge">
-                            <div class="success-ring"><i data-lucide="check" style="width: 14px; height: 14px;"></i></div>
-                            <h6>Payment Successful</h6>
+                        </div>
+                      </div>
+                      <div class="uploaded-file-row done">
+                        <i data-lucide="check-circle-2" class="file-icon" style="color: #10b981;"></i>
+                        <div class="file-details">
+                          <div class="file-header">
+                            <span class="file-name">Mandatory fields complete</span>
+                            <span class="file-percentage" style="color: #10b981;">Verified</span>
                           </div>
                         </div>
                       </div>
@@ -389,42 +622,58 @@
                   </div>
                 </div>
 
-                <!-- Pane 3: Auto Delivery Demo -->
+                <!-- Pane 3: Track Progress Demo -->
                 <div class="showcase-pane" id="pane-3">
+                  <div class="checkout-demo-widget">
+                    <div class="checkout-header">
+                      <div class="checkout-logo"><i data-lucide="compass" style="width: 16px; height: 16px;"></i> 4. Track Progress</div>
+                      <span class="checkout-timer" style="color: #10b981;">Live Tracking</span>
+                    </div>
+                    <div class="order-summary-row">
+                      <span>Application Reference</span>
+                      <strong>OPDS-2026-PAN</strong>
+                    </div>
+                    <div style="padding: 16px 8px;">
+                      <div style="width: 100%; height: 6px; background: #27272a; border-radius: 4px; overflow: hidden; margin-bottom: 14px;">
+                        <div style="width: 80%; height: 100%; background: linear-gradient(90deg, #10b981, #f59e0b);"></div>
+                      </div>
+                      <div style="display: flex; justify-content: space-between; font-size: 0.72rem; color: #a1a1aa;">
+                        <span style="color: #10b981; font-weight: 600;">✓ Submitted</span>
+                        <span style="color: #10b981; font-weight: 600;">✓ Reviewed</span>
+                        <span style="color: #f59e0b; font-weight: 600;">● Processing</span>
+                        <span>○ Ready</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Pane 4: Get Your Service Demo -->
+                <div class="showcase-pane" id="pane-4">
                   <div class="whatsapp-pane-widget">
                     <div class="wa-chat-header">
                       <div class="wa-avatar-mock">OP</div>
                       <div class="wa-user-status">
-                        <h5>One Point Support</h5>
-                        <p>Online</p>
+                        <h5>5. Get Your Service</h5>
+                        <p>Delivered</p>
                       </div>
                       <div class="wa-actions-mock">
-                        <i data-lucide="phone" style="width: 16px; height: 16px;"></i>
-                        <i data-lucide="video" style="width: 16px; height: 16px;"></i>
+                        <i data-lucide="download" style="width: 16px; height: 16px;"></i>
                       </div>
                     </div>
-                    
                     <div class="wa-chat-body">
                       <div class="wa-chat-date">TODAY</div>
-                      
-                      <div class="wa-bubble inbound-wa">
-                        <p>Hello Amit! Your PAN Card correction request has been approved by NSDL. &#128640;</p>
+                      <div class="wa-bubble inbound-wa show-msg">
+                        <p>Hello! Your service application has been completed successfully! &#128640;</p>
                         <span class="wa-time">02:30 PM</span>
                       </div>
-                      
-                      <div class="wa-bubble inbound-wa pdf-bubble">
+                      <div class="wa-bubble inbound-wa pdf-bubble show-msg">
                         <div class="pdf-icon-box"><i data-lucide="file-text" style="width: 18px; height: 18px;"></i></div>
                         <div class="pdf-info-box">
-                          <h6>epan_amit_kumar.pdf</h6>
-                          <p>245 KB &#8226; PDF Document</p>
+                          <h6>final_output_receipt.pdf</h6>
+                          <p>Ready to download &#8226; Official Document</p>
                         </div>
                         <button class="pdf-download-btn"><i data-lucide="arrow-down" style="width: 16px; height: 16px;"></i></button>
                         <span class="wa-time">02:31 PM</span>
-                      </div>
-                      
-                      <div class="wa-bubble outbound-wa">
-                        <p>Wow, thank you! That was incredibly fast! &#128591;</p>
-                        <span class="wa-time">02:32 PM <i data-lucide="check-check" class="blue-ticks" style="width: 14px; height: 14px;"></i></span>
                       </div>
                     </div>
                   </div>
@@ -433,174 +682,120 @@
               </div>
             </div>
           </div>
-          
-          <!-- Bottom Element: Stepper Cards Horizontal Grid -->
-          <div class="stepper-cards-grid">
+
+        </div>
+
+      </div>
+    </section>
+
+      <section class="section reveal tracker-redesign-section" id="tracker-section">
+        <div class="tracker">
+          <div class="tracker-panel premium-tracker-card">
+            <span class="status-live-badge"><i data-lucide="radio"></i> LIVE SYSTEM</span>
+            <p class="section-kicker">Online Application Status</p>
+            <h2>Track Your Application <span class="h2-gold">at Every Step</span></h2>
+            <p class="section-desc">Know exactly where your request stands &mdash; submitted, under review, processing, completed, or ready for delivery.</p>
             
-            <!-- Step Card 1 -->
-            <div class="stepper-nav-card active" data-showcase="0">
-              <div class="stepper-card-header">
-                <span class="process-step-num"><i data-lucide="layout-grid"></i></span>
-                <h3>Select Service</h3>
+            <form class="input-row premium-search-row" data-tracker-form>
+              <div class="tracker-search-wrapper">
+                <i data-lucide="search" class="tracker-search-icon"></i>
+                <input class="input" name="applicationId" placeholder="Enter Application ID (e.g. OPDS2026-PAN)" aria-label="Application ID">
               </div>
-              <div class="stepper-nav-content">
-                <p>Choose from our verified database of 100+ services.</p>
-                <span class="stepper-nav-tag">E-Services Catalog</span>
-              </div>
-              <div class="nav-progress-track">
-                <div class="nav-progress-bar"></div>
-              </div>
+              <button class="btn btn-primary tracker-submit-btn" type="submit"><i data-lucide="compass"></i> Track Status</button>
+            </form>
+            
+            <div class="tracker-output-wrapper">
+              <i data-lucide="info" class="tracker-output-icon"></i>
+              <p data-tracker-output class="tracker-output-text">Application OPDS2026-PAN is currently Processing.</p>
             </div>
 
-            <!-- Step Card 2 -->
-            <div class="stepper-nav-card" data-showcase="1">
-              <div class="stepper-card-header">
-                <span class="process-step-num"><i data-lucide="shield-check"></i></span>
-                <h3>Secure Upload</h3>
-              </div>
-              <div class="stepper-nav-content">
-                <p>Share documents instantly with AES-256 protection.</p>
-                <span class="stepper-nav-tag">End-to-End Encrypted</span>
-              </div>
-              <div class="nav-progress-track">
-                <div class="nav-progress-bar"></div>
+            <!-- Secure Payments & Trust Badge strip inside tracker -->
+            <div class="tracker-payment-badges">
+              <span class="tracker-ssl-label"><i data-lucide="lock"></i> Secure SSL Doc Vault & Payments</span>
+              <div class="payment-logos">
+                <span class="payment-label">UPI:</span>
+                <span class="payment-badge payment-badge--gpay">GPay</span>
+                <span class="payment-badge payment-badge--phonpe">PhonePe</span>
+                <span class="payment-badge payment-badge--paytm">Paytm</span>
               </div>
             </div>
-
-            <!-- Step Card 3 -->
-            <div class="stepper-nav-card" data-showcase="2">
-              <div class="stepper-card-header">
-                <span class="process-step-num"><i data-lucide="credit-card"></i></span>
-                <h3>Verify & Pay</h3>
-              </div>
-              <div class="stepper-nav-content">
-                <p>Confirm inputs and pay via secure UPI gateways.</p>
-                <span class="stepper-nav-tag">PCI-DSS Safe Gateway</span>
-              </div>
-              <div class="nav-progress-track">
-                <div class="nav-progress-bar"></div>
-              </div>
-            </div>
-
-            <!-- Step Card 4 -->
-            <div class="stepper-nav-card" data-showcase="3">
-              <div class="stepper-card-header">
-                <span class="process-step-num"><i data-lucide="message-square"></i></span>
-                <h3>Auto Delivery</h3>
-              </div>
-              <div class="stepper-nav-content">
-                <p>Receive status tracking updates directly on WhatsApp.</p>
-                <span class="stepper-nav-tag">WhatsApp Dispatch</span>
-              </div>
-              <div class="nav-progress-track">
-                <div class="nav-progress-bar"></div>
-              </div>
-            </div>
-
           </div>
-          
-        </div>
-
-      </div>
-    </section>
-
-    <section class="trust-band reveal">
-      <div class="section">
-        <div class="section-head">
-          <div>
-            <p class="section-kicker">Trust & Security</p>
-            <h2>Confidence for sensitive <span class="h2-gold">services.</span></h2>
-          </div>
-          <a class="btn trust-cta" href="support.html">Support Center</a>
-        </div>
-        <div class="trust-grid">
-          <article class="trust-card"><span class="feature-icon"><i data-lucide="shield-check"></i></span><h3>Secure UPI Receipts</h3><p>Transaction ID and proof review before processing starts.</p></article>
-          <article class="trust-card"><span class="feature-icon"><i data-lucide="landmark"></i></span><h3>Assisted Services</h3><p>Clear steps for government and utility support requests.</p></article>
-          <article class="trust-card"><span class="feature-icon"><i data-lucide="lock-keyhole"></i></span><h3>Document Privacy</h3><p>Consent-led sharing with careful document handling.</p></article>
-          <article class="trust-card"><span class="feature-icon"><i data-lucide="headphones"></i></span><h3>Local Support</h3><p>WhatsApp, phone and center support for follow-up.</p></article>
-          <article class="trust-card"><span class="feature-icon"><i data-lucide="timer"></i></span><h3>Clear Timelines</h3><p>Processing estimates shown before users commit.</p></article>
-          <article class="trust-card"><span class="feature-icon"><i data-lucide="route"></i></span><h3>Tracking Ready</h3><p>Status stages keep requests easy to follow.</p></article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section reveal" id="student-corner-section">
-      <div class="student-band">
-        <div class="student-photo premium-showcase-card" id="homepage-student-card" onclick="location.href='edupoint.html'" aria-label="Student Digital Help Center">
-          <div class="showcase-card-bg" style="background-image: url('assets/indian_student_study.png');"></div>
-          <div class="large-card-badge">Student Special</div>
-          <h3 class="large-card-title">Student Digital Help <span class="h2-gold">Center</span></h3>
-          <p class="large-card-desc">Exam forms, admit cards, scholarships, resumes, and print support-get fast local assistance in one dedicated hub.</p>
-          <a class="btn btn-primary" href="edupoint.html">Open Student Corner <i data-lucide="arrow-right"></i></a>
-        </div>
-          <div class="student-cards">
-            <article class="mini-card" data-tone="green"><span class="feature-icon"><i data-lucide="clipboard-pen"></i></span><h3>Exam Form</h3><p>SSC, Railway, UP Police, UPSC and university form support.</p></article>
-            <article class="mini-card" data-tone="amber"><span class="feature-icon"><i data-lucide="ticket-check"></i></span><h3>Admit Card</h3><p>Download, print and save exam documents quickly.</p></article>
-            <article class="mini-card" data-tone="rose"><span class="feature-icon"><i data-lucide="printer"></i></span><h3>Print & Scan</h3><p>Photocopy, lamination, color print and document scanning.</p></article>
-            <article class="mini-card"><span class="feature-icon"><i data-lucide="book-open-check"></i></span><h3>Skill Courses</h3><p>CCC, Tally, O Level and online test assistance.</p></article>
+          <div class="tracker-image-panel">
+            <img src="assets/happy_indian_customer.png" alt="Happy Customer Tracking Service" class="tracker-happy-customer-img">
+            <div class="tracker-image-overlay"></div>
+            <div class="tracker-badge-floating">
+              <span class="badge-icon"><i data-lucide="shield-check"></i></span>
+              <div class="badge-text">
+                <strong>Experienced Assistance</strong>
+                <span>Assisted &amp; reliable service support</span>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-
-
-            <section class="section reveal">
+      <section class="section reveal why-choose-clean-section">
         <div class="section-head">
           <div>
-            <p class="section-kicker">Why Choose Us</p>
-            <h2>Built for trust, simplicity <span class="h2-gold">and speed.</span></h2>
+            <p class="section-kicker">Why One Point</p>
+            <h2>Why Customers <span class="h2-gold">Choose One Point</span></h2>
           </div>
         </div>
         <div class="bento-grid">
           
           <!-- Interactive Toggle Card -->
           <div class="bento-card bento-span-3">
+            <canvas id="bento-comparison-canvas" class="bento-comparison-canvas" aria-hidden="true"></canvas>
             <div class="comparison-widescreen-layout">
               <div class="comparison-left">
-                <span class="bento-card-kicker"><i data-lucide="shuffle" style="width: 14px; height: 14px;"></i> INTERACTIVE WORKFLOW</span>
-                <h3>How do we differ from typical service counters?</h3>
-                <p>Compare traditional service counters side-by-side with our modern One Point digital experience.</p>
+                <span class="bento-card-kicker"><i data-lucide="sparkles" style="width: 14px; height: 14px;"></i> THE ONE POINT EXPERIENCE</span>
+                <h3>Traditional Service-Centre Convenience, Now <span class="h2-gold">Digitally Connected</span></h3>
+                <p>Apply, track, communicate and manage your requests with less waiting and fewer repeated visits.</p>
               </div>
-              <div class="comparison-right" style="width: 100%;">
+              <div class="comparison-right">
                 <div class="bento-comparison-container">
                   
                   <!-- Left Column: Traditional Way -->
                   <div class="comparison-column-wrapper">
-                    <span class="bento-column-header-pill traditional-pill">Traditional Way</span>
+                    <span class="bento-column-header-pill traditional-pill">Standard Process</span>
                     <div class="bento-comparison-column traditional-column">
                       <ul class="faded-counter-list">
-                        <li><i data-lucide="x-circle"></i> Unclear document checklists (causes multiple return visits)</li>
-                        <li><i data-lucide="x-circle"></i> Purely cash transactions with no digital tracking receipts</li>
-                        <li><i data-lucide="x-circle"></i> Visited counters physically to enquire about progress</li>
-                        <li><i data-lucide="x-circle"></i> Split offices for student papers, registrations & business filings</li>
+                        <li><i data-lucide="x-circle"></i> Visiting multiple separate counters for different services</li>
+                        <li><i data-lucide="x-circle"></i> Filling complex forms without guided error checks</li>
+                        <li><i data-lucide="x-circle"></i> Uncertain progress without real-time online tracking</li>
+                        <li><i data-lucide="x-circle"></i> Disconnected channels for online and local assistance</li>
                       </ul>
+                      <div class="traditional-footer-stat">
+                        <i data-lucide="clock"></i>
+                        <span>Estimated 4-5 In-Person Visits &bull; Manual Paper Tracking</span>
+                      </div>
                     </div>
                   </div>
                   
                   <!-- Right Column: One Point Experience -->
                   <div class="comparison-column-wrapper">
-                    <span class="bento-column-header-pill onepoint-pill">One Point Experience</span>
+                    <span class="bento-column-header-pill onepoint-pill">One Point Platform</span>
                     <div class="bento-comparison-column onepoint-column">
                       
                       <!-- Premium Interactive Stepper Tab Headers -->
                       <div class="bento-stepper-header">
                         <button class="bento-stepper-btn active" data-step-target="0">
                           <span class="stepper-tab-num">01</span>
-                          <span class="stepper-tab-label">Pay & Start</span>
+                          <span class="stepper-tab-label">Many Services</span>
                           <span class="stepper-tab-progress-track">
                             <span class="stepper-tab-progress-fill"></span>
                           </span>
                         </button>
                         <button class="bento-stepper-btn" data-step-target="1">
                           <span class="stepper-tab-num">02</span>
-                          <span class="stepper-tab-label">Milestones</span>
+                          <span class="stepper-tab-label">Tracking</span>
                           <span class="stepper-tab-progress-track">
                             <span class="stepper-tab-progress-fill"></span>
                           </span>
                         </button>
                         <button class="bento-stepper-btn" data-step-target="2">
                           <span class="stepper-tab-num">03</span>
-                          <span class="stepper-tab-label">Alerts</span>
+                          <span class="stepper-tab-label">Local + Digital</span>
                           <span class="stepper-tab-progress-track">
                             <span class="stepper-tab-progress-fill"></span>
                           </span>
@@ -609,35 +804,35 @@
 
                       <div class="comparison-steps-carousel">
                       
-                        <!-- Step 1: Secure Checkout Card -->
+                        <!-- Step 1: One Place, Many Services -->
                         <div class="comparison-step-slide active" data-step-slide="0">
                           <div class="carousel-slide-inner-card">
-                            <span class="bento-step-badge"><i data-lucide="qr-code"></i> UPI Verified</span>
-                            <h3>Secure Checkout</h3>
-                            <p>Pay instantly via secure scanner with immediate digital receipts generated on completion.</p>
+                            <span class="bento-step-badge"><i data-lucide="layers"></i> One Place, Many Services</span>
+                            <h3>All Services Under One Roof</h3>
+                            <p>No need to visit multiple service providers. Access citizen, student, tax, utility and print services in one unified platform.</p>
                             <div class="bento-visual">
                               <div class="upi-qr-mock-wrapper">
                                 <div class="upi-qr-mock">
                                   <div class="upi-scan-line"></div>
-                                  <i data-lucide="qr-code" class="qr-svg-icon" style="width: 44px; height: 44px; color: #125696; opacity: 0.85;"></i>
+                                  <i data-lucide="layout-grid" class="qr-svg-icon" style="width: 44px; height: 44px; color: #125696; opacity: 0.85;"></i>
                                 </div>
                                 <div class="upi-success-overlay">
                                   <div class="success-checkmark-circle">
                                     <i data-lucide="check" style="width: 16px; height: 16px;"></i>
                                   </div>
-                                  <span>Payment Verified</span>
+                                  <span>Multi-Service Hub</span>
                                 </div>
                               </div>
                             </div>
                           </div>
                         </div>
                         
-                        <!-- Step 2: Milestone Mapping Card -->
+                        <!-- Step 2: Application Assistance & Online Tracking -->
                         <div class="comparison-step-slide" data-step-slide="1">
                           <div class="carousel-slide-inner-card">
-                            <span class="bento-step-badge"><i data-lucide="compass"></i> Real-time tracking</span>
-                            <h3>Milestone Mapping</h3>
-                            <p>Track documents in real time from operator dispatch to governmental authority approval.</p>
+                            <span class="bento-step-badge"><i data-lucide="compass"></i> Online Tracking</span>
+                            <h3>Application Assistance &amp; Tracking</h3>
+                            <p>Get help completing forms correctly. Know your request status in real time without repeated visits.</p>
                             <div class="bento-visual">
                               <div class="horizontal-timeline-container">
                                 <div class="horizontal-timeline">
@@ -655,7 +850,7 @@
                                   <div class="horizontal-step done">
                                     <div class="step-dot"><i data-lucide="check" style="width: 10px; height: 10px;"></i></div>
                                     <div class="horizontal-step-info">
-                                      <strong>Processed</strong>
+                                      <strong>Assisted</strong>
                                       <span>Checked</span>
                                     </div>
                                   </div>
@@ -683,34 +878,39 @@
                           </div>
                         </div>
 
-                        <!-- Step 3: Fast Notification Card -->
+                        <!-- Step 3: Digital + Local Support -->
                         <div class="comparison-step-slide" data-step-slide="2">
                           <div class="carousel-slide-inner-card">
-                            <span class="bento-step-badge"><i data-lucide="message-square"></i> WhatsApp dispatch</span>
-                            <h3>Fast Notification</h3>
-                            <p>Get automated WhatsApp alerts at each milestone. Download digital copies instantly.</p>
+                            <span class="bento-step-badge"><i data-lucide="message-square"></i> Digital + Local Support</span>
+                            <h3>Online Speed + Local Help</h3>
+                            <p>Use online convenience with human operator assistance whenever you need guidance or local pickup.</p>
                             <div class="bento-visual">
-                              <div class="wa-mock-box">
-                                <div class="wa-mock-header">
-                                  <div class="wa-avatar">OP</div>
-                                  <div class="wa-header-info">
-                                    <strong>One Point Updates</strong>
-                                    <span>Official Channel</span>
+                              <div class="step3-notif-card">
+                                <div class="step3-notif-top">
+                                  <div class="step3-notif-sender">
+                                    <span class="step3-wa-badge-icon" aria-label="WhatsApp">
+                                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" style="shape-rendering: geometricPrecision;">
+                                        <path fill="#25D366" d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2z"/>
+                                        <path fill="#FFFFFF" d="M16.56 16.15c-.21.58-1.2 1.11-1.68 1.18-.43.06-.97.09-1.56-.1-.36-.11-.82-.27-1.41-.52-2.48-1.07-4.1-3.56-4.22-3.73-.12-.17-1-1.34-1-2.56s.64-1.81.86-2.06c.23-.25.49-.31.66-.31h.48c.15.01.36-.05.56.43.21.5.71 1.73.77 1.85.06.12.1.26.02.43-.08.16-.13.26-.25.41-.12.14-.26.32-.37.43-.13.12-.25.25-.11.5.15.25.64 1.06 1.38 1.72.95.84 1.75 1.11 2 1.23.25.13.4.11.54-.06.15-.16.62-.72.79-.97.17-.24.33-.2.56-.12.23.09 1.45.69 1.7.81.25.12.42.18.48.28.07.11.07.6-.14 1.18z"/>
+                                      </svg>
+                                    </span>
+                                    <strong class="step3-sender-name">One Point Updates</strong>
+                                    <span class="step3-verified-chip"><i data-lucide="check-circle-2" style="width: 12px; height: 12px;"></i> Verified</span>
                                   </div>
-                                  <span class="wa-badge"><i data-lucide="check-circle-2" style="width: 12px; height: 12px; fill: #22c55e; color: white;"></i> Verified</span>
+                                  <span class="step3-notif-time">10:08 AM <i data-lucide="check-check" class="blue-ticks" style="width: 14px; height: 14px;"></i></span>
                                 </div>
-                                <div class="wa-mock-body">
-                                  <div class="wa-bubble-message">
-                                    <p>Your PAN card application is approved! &#128640; Download your digital e-PAN receipt below.</p>
-                                    <div class="wa-bubble-attachment">
-                                      <i data-lucide="file-text" class="wa-file-icon"></i>
-                                      <div class="wa-file-info">
-                                        <strong>e-PAN_Receipt.pdf</strong>
-                                        <span>245 KB &bull; PDF Document</span>
-                                      </div>
-                                      <button type="button" class="wa-download-btn-mock" aria-label="Download PDF"><i data-lucide="download" style="width: 14px; height: 14px;"></i></button>
+
+                                <div class="step3-notif-body">
+                                  <p class="step3-notif-text">Your application is approved! Download your receipt online or collect from desk. &#128640;</p>
+                                  <div class="step3-notif-file">
+                                    <div class="step3-file-icon-wrap"><i data-lucide="file-text" style="width: 16px; height: 16px;"></i></div>
+                                    <div class="step3-file-meta">
+                                      <strong>acknowledgement.pdf</strong>
+                                      <span>Document Ready &bull; 124 KB</span>
                                     </div>
-                                    <span class="wa-bubble-time">10:08 AM <i data-lucide="check-check" class="blue-ticks" style="width: 14px; height: 14px;"></i></span>
+                                    <button type="button" class="step3-file-dl-btn" aria-label="Download Receipt">
+                                      <i data-lucide="download" style="width: 14px; height: 14px;"></i>
+                                    </button>
                                   </div>
                                 </div>
                               </div>
@@ -718,6 +918,10 @@
                           </div>
                         </div>
 
+                      </div>
+                      <div class="onepoint-footer-stat">
+                        <i data-lucide="shield-check"></i>
+                        <span>Zero Physical Counter Queues &bull; 100% Online Tracking &amp; WhatsApp Updates</span>
                       </div>
                     </div>
                   </div>
@@ -730,20 +934,159 @@
         </div>
       </section>
 
+      <section class="landing-trust-section reveal" aria-label="Essential Citizen Services Support">
+        <div class="landing-trust-inner">
+          <div class="landing-trust-copy">
+            <span class="landing-trust-eyebrow"><i data-lucide="badge-check"></i> One Point Support</span>
+            <h2>Expert Help for <span class="h2-gold">Essential Citizen Services</span></h2>
+            <p>From government services and document applications to banking, AEPS and digital printing, our trained team helps you complete every step correctly.</p>
+          </div>
+          <div class="landing-trust-grid">
+            <article class="trust-proof-card trust-proof-primary">
+              <span class="trust-proof-icon trust-proof-icon-official"><i data-lucide="landmark"></i></span>
+              <div>
+                <strong>Government Services</strong>
+                <span>Aadhaar Appointment Booking, Voter ID, Ration card &amp; citizen portal assistance</span>
+              </div>
+            </article>
+            <article class="trust-proof-card">
+              <span class="trust-proof-icon"><i data-lucide="wallet-cards"></i></span>
+              <div>
+                <strong>Banking &amp; AEPS Services</strong>
+                <span>Cash withdrawal, balance check, mini statements &amp; money transfer</span>
+              </div>
+            </article>
+            <article class="trust-proof-card">
+              <span class="trust-proof-icon"><i data-lucide="file-check"></i></span>
+              <div>
+                <strong>Certificate Services</strong>
+                <span>Income, caste, domicile, birth &amp; death certificate applications</span>
+              </div>
+            </article>
+            <article class="trust-proof-card">
+              <span class="trust-proof-icon"><i data-lucide="credit-card"></i></span>
+              <div>
+                <strong>PAN Card &amp; Tax Services</strong>
+                <span>New PAN card, corrections, ITR filing &amp; GST registration</span>
+              </div>
+            </article>
+            <article class="trust-proof-card">
+              <span class="trust-proof-icon"><i data-lucide="zap"></i></span>
+              <div>
+                <strong>Utility &amp; Bill Services</strong>
+                <span>Electricity bill payments, water tax, FASTag &amp; recharges</span>
+              </div>
+            </article>
+            <article class="trust-proof-card trust-proof-satisfaction">
+              <span class="trust-proof-icon"><i data-lucide="printer"></i></span>
+              <div>
+                <strong>Printing &amp; Digital Services</strong>
+                <span>PVC card printing, photocopy, scanning &amp; lamination support</span>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section trust-metrics-section reveal" id="trust-metrics-section">
+        <div class="tm-split-wrap">
+          <div class="tm-hero-left">
+            <span class="tm-hero-kicker">Service Assistance</span>
+            <strong class="tm-hero-num tm-static">Thousands</strong>
+            <div class="tm-hero-accent"></div>
+            <p class="tm-hero-sub">Of citizen, student &amp; business<br>requests assisted</p>
+          </div>
+          <div class="tm-narrative-right">
+            <div class="tm-narrative-top">
+              <p class="tm-kicker"><i data-lucide="shield-check"></i> Operator Assistance</p>
+              <h2 class="tm-title">Every Request Is Checked <span class="tm-title-gold">Before Processing</span></h2>
+              <p class="tm-subtitle">Our trained operators review the information and documents you submit to help reduce avoidable errors before your request moves forward.</p>
+            </div>
+            <div class="tm-mini-grid">
+              <div class="tm-mini-stat tm-mini-gold">
+                <strong class="tm-mini-num tm-static">Multi-Service</strong>
+                <span class="tm-mini-label">Support available</span>
+              </div>
+              <div class="tm-mini-stat">
+                <strong class="tm-mini-num tm-static">Assisted</strong>
+                <span class="tm-mini-label">Operator review</span>
+              </div>
+              <div class="tm-mini-stat tm-mini-gold">
+                <strong class="tm-mini-num tm-static">Online + Local</strong>
+                <span class="tm-mini-label">Reliable assistance</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    <section class="trust-band reveal">
+      <div class="section">
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">Security &amp; Privacy</p>
+            <h2>Your Information Is <span class="h2-gold">Handled Securely</span></h2>
+          </div>
+          <a class="btn trust-cta" href="support.html">Support Center</a>
+        </div>
+        <div class="trust-dashboard-panel">
+          <div class="trust-dashboard-head">
+            <span class="trust-dashboard-status"><span class="hero-eyebrow-dot" aria-hidden="true"></span> Active Protection Safeguards</span>
+            <span class="trust-dashboard-updated"><i data-lucide="shield-check"></i> Verified Data Handling</span>
+          </div>
+          <div class="trust-dashboard-grid">
+            <article class="trust-tile"><span class="trust-tile-icon"><i data-lucide="lock-keyhole"></i></span><div><strong>Secure Submission</strong><span>Encrypted data transmission</span></div></article>
+            <article class="trust-tile"><span class="trust-tile-icon"><i data-lucide="user-check"></i></span><div><strong>Controlled Access</strong><span>Trained operator handling only</span></div></article>
+            <article class="trust-tile"><span class="trust-tile-icon"><i data-lucide="shield-check"></i></span><div><strong>Verification Checks</strong><span>Document accuracy checks</span></div></article>
+            <article class="trust-tile"><span class="trust-tile-icon"><i data-lucide="shield"></i></span><div><strong>Privacy-Focused Processing</strong><span>Zero unauthorized data sharing</span></div></article>
+            <article class="trust-tile"><span class="trust-tile-icon"><i data-lucide="wallet-cards"></i></span><div><strong>Secure Payment</strong><span>Direct UPI &amp; verified gateways</span></div></article>
+            <article class="trust-tile"><span class="trust-tile-icon"><i data-lucide="landmark"></i></span><div><strong>Portal Assistance</strong><span>Official portal submission support</span></div></article>
+            <article class="trust-tile"><span class="trust-tile-icon"><i data-lucide="badge-check"></i></span><div><strong>Standardized Review</strong><span>Step-by-step audit process</span></div></article>
+            <article class="trust-tile"><span class="trust-tile-icon"><i data-lucide="headphones"></i></span><div><strong>Helpdesk Support</strong><span>WhatsApp &amp; phone assistance</span></div></article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section reveal" id="student-corner-section">
+      <div class="stripe-hatched-backdrop" aria-hidden="true">
+        <div class="stripe-ambient-wash"></div>
+        <div class="stripe-glow-bottom-left"></div>
+        <div class="stripe-glow-top-right"></div>
+        <canvas id="student-stripe-curves-canvas" class="student-stripe-curves-canvas"></canvas>
+      </div>
+      <div class="student-band">
+        <div class="student-photo premium-showcase-card" id="homepage-student-card" onclick="location.href='edupoint.html'" aria-label="Student Digital Help Center">
+          <div class="showcase-card-bg" style="background-image: url('assets/indian_student_study.png');"></div>
+          <div class="large-card-badge">Student Corner</div>
+          <h3 class="large-card-title">Student Services &mdash; Admissions, Exams &amp; <span class="h2-gold">Scholarships</span></h3>
+          <p class="large-card-desc">Get help with student online applications, exam forms, admissions, scholarships, and educational certificate services.</p>
+          <a class="btn btn-primary" href="edupoint.html">Explore Student Services <i data-lucide="arrow-right"></i></a>
+        </div>
+          <div class="student-cards">
+            <article class="mini-card" data-tone="green"><span class="feature-icon"><i data-lucide="clipboard-pen"></i></span><h3>Exam Forms &amp; Results</h3><p>SSC, Railway, UP Police, UPSC, university forms &amp; admit cards.</p></article>
+            <article class="mini-card" data-tone="amber"><span class="feature-icon"><i data-lucide="graduation-cap"></i></span><h3>Admissions &amp; Counselling</h3><p>College, university, ITI &amp; polytechnic entrance registration.</p></article>
+            <article class="mini-card" data-tone="rose"><span class="feature-icon"><i data-lucide="award"></i></span><h3>Scholarships</h3><p>State &amp; National scholarship application, renewal &amp; tracking.</p></article>
+            <article class="mini-card" data-tone="blue"><span class="feature-icon"><i data-lucide="file-check"></i></span><h3>Student Certificates</h3><p>Income, caste, domicile &amp; educational document assistance.</p></article>
+          </div>
+        </div>
+      </section>
+
 
 
 
       <section class="section reveal featured-products-premium" id="featured-products">
         <div class="section-head">
           <div>
-            <p class="section-kicker">Featured Products</p>
-            <h2 class="one-mart-heading">One Mart Print, <span class="h2-gold">personalize, brand.</span></h2>
+            <p class="section-kicker">Printing &amp; Custom Products</p>
+            <h2 class="one-mart-heading">Need Something Printed Too? <span class="h2-gold">Visit One Mart</span></h2>
+            <p class="section-desc" style="margin-top: 6px; color: var(--muted); font-size: 0.95rem;">Custom cards, stationery, branding, personalized gifts and print products &mdash; available alongside our digital services.</p>
           </div>
           <a class="btn btn-soft" href="products.html">All Products <i data-lucide="arrow-right"></i></a>
         </div>
         <div class="featured-product-tabs" aria-label="OneMart featured categories">
           <a href="products.html#sticker-printing"><i data-lucide="tag"></i> Sticker Printing <span>Hot</span></a>
-          <a href="products.html#uv-dtf-printing"><i data-lucide="sparkles"></i> UV DTF Printing</a>
+          <a href="products.html#photo-fine-art-printing"><i data-lucide="image"></i> Photo Printing</a>
           <a href="products.html#t-shirt-printing"><i data-lucide="shirt"></i> T-Shirt Printing</a>
           <a href="products.html#personalized-gifts"><i data-lucide="gift"></i> Personalized Gifts</a>
           <a href="products.html#business-branding"><i data-lucide="briefcase-business"></i> Business Branding</a>
@@ -751,39 +1094,159 @@
         <div class="product-carousel-wrap" data-product-carousel>
           <button class="carousel-arrow carousel-prev" type="button" aria-label="Previous products"><i data-lucide="chevron-left"></i></button>
           <div class="product-carousel">
-            <article class="product-card featured-product-card">
-              <a class="product-image" href="product-detail.html?product=spotify-plaques"><img data-rotating-product="spotify-plaques" alt="Custom Spotify plaque gift" src="assets/happy_customer.png?v=product-local-1"></a>
-              <div class="product-body">
-                <a class="featured-product-info" href="product-detail.html?product=spotify-plaques"><span class="featured-product-badge"><i data-lucide="sparkles"></i> Trending</span><h3>Spotify Plaques</h3><p>Custom music scan plaque gift.</p></a>
-                <div class="price-row"><span class="price">Rs. 449</span><a class="btn btn-primary" href="product-detail.html?product=spotify-plaques">Order</a></div>
+            <!-- Card 1: Custom Die-Cut Vinyl Stickers -->
+            <article class="product-card featured-product-card om-product-card" data-tags="custom sticker logo under199 bests">
+              <div class="om-card-media">
+                <a href="product-detail.html?product=logo-stickers" class="om-card-media-link">
+                  <img data-rotating-product="logo-stickers" alt="Custom Die-Cut Vinyl Stickers" src="https://images.unsplash.com/photo-1572375992501-4b0892d50c69?auto=format&fit=crop&w=800&q=80" loading="lazy">
+                </a>
+                <span class="om-card-badge gold">BEST SELLER</span>
+                <span class="om-card-rating"><span>★</span> 4.9</span>
+              </div>
+              <div class="om-card-body">
+                <h3><a href="product-detail.html?product=logo-stickers">Custom Die-Cut Vinyl Stickers</a></h3>
+                <p class="om-card-desc">Waterproof, scratch-resistant vinyl stickers customized to your exact logo and artwork shape.</p>
+                <div class="om-card-turnaround"><i data-lucide="zap"></i> Same-Day Available</div>
+              </div>
+              <div class="om-card-footer">
+                <div class="om-card-price-block">
+                  <span class="om-price-from">STARTING FROM</span>
+                  <span class="om-price-val">&#8377;99</span>
+                </div>
+                <div class="om-card-btn-group">
+                  <a href="https://wa.me/919473946181?text=Hi%20One%20Point,%20I%20want%20to%20order%20Custom%20Die-Cut%20Stickers" class="om-card-wa-btn" target="_blank" rel="noopener" title="Order on WhatsApp"><i data-lucide="message-circle"></i></a>
+                  <a href="product-detail.html?product=logo-stickers" class="om-card-cta">Customize <i data-lucide="arrow-right"></i></a>
+                </div>
               </div>
             </article>
-            <article class="product-card featured-product-card">
-              <a class="product-image" href="product-detail.html?product=visiting-cards"><img data-rotating-product="visiting-cards" alt="Premium visiting cards" src="assets/csc_hero_bg.png?v=product-local-1"></a>
-              <div class="product-body">
-                <a class="featured-product-info" href="product-detail.html?product=visiting-cards"><span class="featured-product-badge best"><i data-lucide="flame"></i> Best Seller</span><h3>Visiting Cards</h3><p>Premium matte and glossy business cards.</p></a>
-                <div class="price-row"><span class="price">Rs. 299</span><a class="btn btn-primary" href="product-detail.html?product=visiting-cards">Order</a></div>
+
+            <!-- Card 2: A4/A3 Premium Wooden Photo Frame -->
+            <article class="product-card featured-product-card om-product-card" data-tags="photo frames wooden premium popular">
+              <div class="om-card-media">
+                <a href="product-detail.html?product=visiting-cards" class="om-card-media-link">
+                  <img data-rotating-product="visiting-cards" alt="A4/A3 Premium Wooden Photo Frame" src="https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?auto=format&fit=crop&w=800&q=80" loading="lazy">
+                </a>
+                <span class="om-card-badge blue">POPULAR</span>
+                <span class="om-card-rating"><span>★</span> 4.9</span>
+              </div>
+              <div class="om-card-body">
+                <h3><a href="product-detail.html?product=visiting-cards">A4/A3 Premium Wooden Photo Frame</a></h3>
+                <p class="om-card-desc">High-finish wooden frame with acrylic shatterproof glass and premium photo print included.</p>
+                <div class="om-card-turnaround blue-pill"><i data-lucide="clock"></i> Ready in 1–2 Days</div>
+              </div>
+              <div class="om-card-footer">
+                <div class="om-card-price-block">
+                  <span class="om-price-from">STARTING FROM</span>
+                  <span class="om-price-val">&#8377;149</span>
+                </div>
+                <div class="om-card-btn-group">
+                  <a href="https://wa.me/919473946181?text=Hi%20One%20Point,%20I%20want%20to%20order%20Photo%20Frames" class="om-card-wa-btn" target="_blank" rel="noopener" title="Order on WhatsApp"><i data-lucide="message-circle"></i></a>
+                  <a href="product-detail.html?product=visiting-cards" class="om-card-cta">Customize <i data-lucide="arrow-right"></i></a>
+                </div>
               </div>
             </article>
-            <article class="product-card featured-product-card">
-              <a class="product-image" href="product-detail.html?product=acrylic-name-plates"><img data-rotating-product="acrylic-name-plates" alt="Acrylic name plate branding" src="assets/contact_hero_bg.png?v=product-local-1"></a>
-              <div class="product-body">
-                <a class="featured-product-info" href="product-detail.html?product=acrylic-name-plates"><span class="featured-product-badge"><i data-lucide="sparkles"></i> Trending</span><h3>Acrylic Name Plates</h3><p>UV DTF printed premium name plates.</p></a>
-                <div class="price-row"><span class="price">Rs. 599</span><a class="btn btn-primary" href="product-detail.html?product=acrylic-name-plates">Order</a></div>
+
+            <!-- Card 3: Personalized Ceramic Photo Mug -->
+            <article class="product-card featured-product-card om-product-card" data-tags="personalized gifts ceramic photo mug fast">
+              <div class="om-card-media">
+                <a href="product-detail.html?product=photo-mug" class="om-card-media-link">
+                  <img data-rotating-product="photo-mug" alt="Personalized Ceramic Photo Mug" src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=800&q=80" loading="lazy">
+                </a>
+                <span class="om-card-badge green">FAST MOVING</span>
+                <span class="om-card-rating"><span>★</span> 4.8</span>
+              </div>
+              <div class="om-card-body">
+                <h3><a href="product-detail.html?product=photo-mug">Personalized Ceramic Photo Mug</a></h3>
+                <p class="om-card-desc">Glossy ceramic mug printed with your cherished photos, quotes, and custom anniversary designs.</p>
+                <div class="om-card-turnaround"><i data-lucide="zap"></i> Same-Day Available</div>
+              </div>
+              <div class="om-card-footer">
+                <div class="om-card-price-block">
+                  <span class="om-price-from">STARTING FROM</span>
+                  <span class="om-price-val">&#8377;149</span>
+                </div>
+                <div class="om-card-btn-group">
+                  <a href="https://wa.me/919473946181?text=Hi%20One%20Point,%20I%20want%20to%20order%20Personalized%20Photo%20Mug" class="om-card-wa-btn" target="_blank" rel="noopener" title="Order on WhatsApp"><i data-lucide="message-circle"></i></a>
+                  <a href="product-detail.html?product=photo-mug" class="om-card-cta">Customize <i data-lucide="arrow-right"></i></a>
+                </div>
               </div>
             </article>
-            <article class="product-card featured-product-card">
-              <a class="product-image" href="product-detail.html?product=anime-stickers"><img data-rotating-product="anime-stickers" alt="Anime sticker pack" src="assets/voter_review_bg.png?v=product-local-1"></a>
-              <div class="product-body">
-                <a class="featured-product-info" href="product-detail.html?product=anime-stickers"><span class="featured-product-badge hot"><i data-lucide="wand-sparkles"></i> Hot</span><h3>Anime Stickers</h3><p>Custom anime sticker packs.</p></a>
-                <div class="price-row"><span class="price">Rs. 149</span><a class="btn btn-primary" href="product-detail.html?product=anime-stickers">Order</a></div>
+
+            <!-- Card 4: Custom DTF Streetwear T-Shirt -->
+            <article class="product-card featured-product-card om-product-card" data-tags="tshirt apparel dtf streetwear trending">
+              <div class="om-card-media">
+                <a href="product-detail.html?product=custom-t-shirt" class="om-card-media-link">
+                  <img data-rotating-product="custom-t-shirt" alt="Custom DTF Streetwear T-Shirt" src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=800&q=80" loading="lazy">
+                </a>
+                <span class="om-card-badge gold">TRENDING</span>
+                <span class="om-card-rating"><span>★</span> 4.9</span>
+              </div>
+              <div class="om-card-body">
+                <h3><a href="product-detail.html?product=custom-t-shirt">Custom DTF Streetwear T-Shirt</a></h3>
+                <p class="om-card-desc">100% biowash cotton t-shirt with ultra-vibrant, wash-proof direct-to-film (DTF) color print.</p>
+                <div class="om-card-turnaround blue-pill"><i data-lucide="clock"></i> Ready in 2–3 Days</div>
+              </div>
+              <div class="om-card-footer">
+                <div class="om-card-price-block">
+                  <span class="om-price-from">STARTING FROM</span>
+                  <span class="om-price-val">&#8377;299</span>
+                </div>
+                <div class="om-card-btn-group">
+                  <a href="https://wa.me/919473946181?text=Hi%20One%20Point,%20I%20want%20to%20order%20Custom%20T-Shirt" class="om-card-wa-btn" target="_blank" rel="noopener" title="Order on WhatsApp"><i data-lucide="message-circle"></i></a>
+                  <a href="product-detail.html?product=custom-t-shirt" class="om-card-cta">Customize <i data-lucide="arrow-right"></i></a>
+                </div>
               </div>
             </article>
-            <article class="product-card featured-product-card">
-              <a class="product-image" href="product-detail.html?product=packaging-stickers"><img data-rotating-product="packaging-stickers" alt="Packaging labels for products" src="assets/pan-card-showcase.png?v=product-local-1"></a>
-              <div class="product-body">
-                <a class="featured-product-info" href="product-detail.html?product=packaging-stickers"><span class="featured-product-badge best"><i data-lucide="flame"></i> Best Seller</span><h3>Packaging Labels</h3><p>Custom brand labels for products.</p></a>
-                <div class="price-row"><span class="price">Rs. 179</span><a class="btn btn-primary" href="product-detail.html?product=packaging-stickers">Order</a></div>
+
+            <!-- Card 5: Ayatul Kursi Islamic Frame -->
+            <article class="product-card featured-product-card om-product-card" data-tags="islamic wall art frame premium">
+              <div class="om-card-media">
+                <a href="product-detail.html?product=ayatul-kursi-frame" class="om-card-media-link">
+                  <img data-rotating-product="ayatul-kursi-frame" alt="Ayatul Kursi Islamic wall art frame" src="assets/products_images/Islamic Wall Art/Ayatul Kursi Frame/image_1.png" loading="lazy">
+                </a>
+                <span class="om-card-badge green">PREMIUM ART</span>
+                <span class="om-card-rating"><span>★</span> 5.0</span>
+              </div>
+              <div class="om-card-body">
+                <h3><a href="product-detail.html?product=ayatul-kursi-frame">Ayatul Kursi Frame</a></h3>
+                <p class="om-card-desc">Laser-cut gold mirror acrylic Islamic wall art on polished wooden backboard.</p>
+                <div class="om-card-turnaround"><i data-lucide="zap"></i> Express Dispatch</div>
+              </div>
+              <div class="om-card-footer">
+                <div class="om-card-price-block">
+                  <span class="om-price-from">STARTING FROM</span>
+                  <span class="om-price-val">&#8377;499</span>
+                </div>
+                <div class="om-card-btn-group">
+                  <a href="https://wa.me/919473946181?text=Hi%20One%20Point,%20I%20want%20to%20order%20Ayatul%20Kursi%20Frame" class="om-card-wa-btn" target="_blank" rel="noopener" title="Order on WhatsApp"><i data-lucide="message-circle"></i></a>
+                  <a href="product-detail.html?product=ayatul-kursi-frame" class="om-card-cta">Customize <i data-lucide="arrow-right"></i></a>
+                </div>
+              </div>
+            </article>
+
+            <!-- Card 6: Personalized Acrylic Keychain -->
+            <article class="product-card featured-product-card om-product-card" data-tags="personalized gifts keychain under199">
+              <div class="om-card-media">
+                <a href="product-detail.html?product=acrylic-keychain" class="om-card-media-link">
+                  <img data-rotating-product="acrylic-keychain" alt="Personalized Acrylic Keychain" src="assets/products_images/Personalized Gifts/Acrylic Keychain/image_1.png" loading="lazy">
+                </a>
+                <span class="om-card-badge blue">POPULAR</span>
+                <span class="om-card-rating"><span>★</span> 4.8</span>
+              </div>
+              <div class="om-card-body">
+                <h3><a href="product-detail.html?product=acrylic-keychain">Acrylic Keychain</a></h3>
+                <p class="om-card-desc">High-clarity double-sided acrylic photo keychain with scratch-resistant coat.</p>
+                <div class="om-card-turnaround"><i data-lucide="zap"></i> Same-Day Available</div>
+              </div>
+              <div class="om-card-footer">
+                <div class="om-card-price-block">
+                  <span class="om-price-from">STARTING FROM</span>
+                  <span class="om-price-val">&#8377;79</span>
+                </div>
+                <div class="om-card-btn-group">
+                  <a href="https://wa.me/919473946181?text=Hi%20One%20Point,%20I%20want%20to%20order%20Acrylic%20Keychain" class="om-card-wa-btn" target="_blank" rel="noopener" title="Order on WhatsApp"><i data-lucide="message-circle"></i></a>
+                  <a href="product-detail.html?product=acrylic-keychain" class="om-card-cta">Customize <i data-lucide="arrow-right"></i></a>
+                </div>
               </div>
             </article>
           </div>
@@ -791,16 +1254,13 @@
         </div>
       </section>
 
-    <section class="section reveal">
+    <section class="section reveal landing-reviews-section">
       <div class="section-head">
         <div>
-          <p class="section-kicker" style="display: inline-flex; align-items: center; gap: 8px;">
-            <span>Customer Reviews</span>
-            <span style="background: rgba(22, 163, 74, 0.1); color: #16a34a; font-size: 0.75rem; padding: 2px 8px; border-radius: 99px; font-weight: 700; display: inline-flex; align-items: center; gap: 4px;">
-              <i data-lucide="star" style="width: 10px; height: 10px; fill: #16a34a;"></i> 4.9/5.0 Google Rated
-            </span>
+          <p class="section-kicker review-section-kicker">
+            <i data-lucide="star"></i> Verified Customer Reviews
           </p>
-          <h2>Google verified customer <span class="h2-gold">voices.</span></h2>
+          <h2>What Our <span class="h2-gold">Customers Say</span></h2>
         </div>
         <a class="btn btn-soft" href="https://share.google/G5WO0FWIbNHMtanQF" target="_blank" rel="noopener">Open Google Profile <i data-lucide="arrow-right"></i></a>
       </div>
@@ -809,19 +1269,22 @@
           <article class="review-card">
             <div class="review-header">
               <div class="review-person">
-                <span class="review-avatar">
-                  <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=48&q=80" alt="Customer">
-                </span>
+                <span class="review-avatar review-avatar-initials" data-tone="blue" aria-hidden="true">AK</span>
                 <div class="review-meta">
                   <strong class="review-name">Amit Kumar</strong>
                   <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
                 </div>
               </div>
             </div>
-            <p class="review-text">"Excellent service! My PAN card correction was completed in just 2 days. The team was very professional and responsive on WhatsApp."</p>
+            <p class="review-text">"PAN correction was handled like a proper ticket. I received the document checklist first, then WhatsApp updates until approval."</p>
+            <div class="review-service-meta">
+              <span><i data-lucide="briefcase-business"></i> PAN Card Correction</span>
+              <span><i data-lucide="clock-3"></i> 2 working days</span>
+              <span><i data-lucide="map-pin"></i> LDA Colony</span>
+            </div>
             <div class="review-footer">
-              <span class="review-date">2 weeks ago</span>
-              <span class="review-badge">Verified Customer</span>
+              <span class="review-date">OPDS-20260702-0104</span>
+              <span class="review-badge">Verified User</span>
             </div>
           </article>
 
@@ -829,19 +1292,22 @@
           <article class="review-card">
             <div class="review-header">
               <div class="review-person">
-                <span class="review-avatar">
-                  <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=48&q=80" alt="Customer">
-                </span>
+                <span class="review-avatar review-avatar-initials" data-tone="green" aria-hidden="true">PS</span>
                 <div class="review-meta">
                   <strong class="review-name">Priya Sharma</strong>
                   <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
                 </div>
               </div>
             </div>
-            <p class="review-text">"Used them for GST registration. The entire process was transparent and they guided me through every step. Highly recommended!"</p>
+            <p class="review-text">"GST registration felt transparent. The team shared the ARN, payment receipt and every pending document before submission."</p>
+            <div class="review-service-meta">
+              <span><i data-lucide="briefcase-business"></i> GST Registration</span>
+              <span><i data-lucide="clock-3"></i> 3 working days</span>
+              <span><i data-lucide="map-pin"></i> Hazratganj</span>
+            </div>
             <div class="review-footer">
-              <span class="review-date">1 month ago</span>
-              <span class="review-badge">Verified Customer</span>
+              <span class="review-date">OPDS-20260628-0087</span>
+              <span class="review-badge">Verified User</span>
             </div>
           </article>
 
@@ -849,19 +1315,22 @@
           <article class="review-card">
             <div class="review-header">
               <div class="review-person">
-                <span class="review-avatar">
-                  <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=48&q=80" alt="Customer">
-                </span>
+                <span class="review-avatar review-avatar-initials" data-tone="gold" aria-hidden="true">RS</span>
                 <div class="review-meta">
                   <strong class="review-name">Rajesh Singh</strong>
                   <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9734;</div>
                 </div>
               </div>
             </div>
-            <p class="review-text">"Great printing services with competitive pricing. They delivered my business cards within 24 hours. Very satisfied with the quality."</p>
+            <p class="review-text">"I ordered visiting cards after a GST update. Pricing was clear, proofing was quick and the pickup time was shared in advance."</p>
+            <div class="review-service-meta">
+              <span><i data-lucide="printer"></i> Visiting Cards</span>
+              <span><i data-lucide="clock-3"></i> 24 hours</span>
+              <span><i data-lucide="map-pin"></i> Aliganj</span>
+            </div>
             <div class="review-footer">
-              <span class="review-date">3 weeks ago</span>
-              <span class="review-badge">Verified Customer</span>
+              <span class="review-date">OPDS-20260621-0062</span>
+              <span class="review-badge">Verified User</span>
             </div>
           </article>
 
@@ -869,24 +1338,27 @@
           <article class="review-card">
             <div class="review-header">
               <div class="review-person">
-                <span class="review-avatar">
-                  <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=48&q=80" alt="Customer">
-                </span>
+                <span class="review-avatar review-avatar-initials" data-tone="violet" aria-hidden="true">NP</span>
                 <div class="review-meta">
                   <strong class="review-name">Neha Patel</strong>
                   <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
                 </div>
               </div>
             </div>
-            <p class="review-text">"Amazing student support! My admit card download was instant and they even helped with my scholarship form filing. Best service!"</p>
+            <p class="review-text">"The admit card was downloaded instantly, and the operator also checked my scholarship form documents before final upload."</p>
+            <div class="review-service-meta">
+              <span><i data-lucide="graduation-cap"></i> Admit Card Download</span>
+              <span><i data-lucide="clock-3"></i> Instant</span>
+              <span><i data-lucide="map-pin"></i> Gomti Nagar</span>
+            </div>
             <div class="review-footer">
-              <span class="review-date">5 days ago</span>
-              <span class="review-badge">Verified Customer</span>
+              <span class="review-date">OPDS-20260705-0129</span>
+              <span class="review-badge">Verified User</span>
             </div>
           </article>
         </div>
-        <div style="text-align: center; margin-top: 32px;">
-          <p style="color: #475569; margin-bottom: 16px; font-size: 0.95rem;">Want to share your experience? Leave a review on Google</p>
+        <div class="review-cta-wrap">
+          <p class="review-cta-text">Want to share your experience? Leave a review on Google</p>
           <a class="btn btn-soft" href="https://share.google/G5WO0FWIbNHMtanQF" target="_blank" rel="noopener">Write a Review on Google</a>
         </div>
       </section>
@@ -895,12 +1367,12 @@
         <div class="cta-bg-glow"></div>
         <div class="cta-gold-shimmer"></div>
         <div class="cta-inner-content">
-          <span class="cta-eyebrow"><i data-lucide="sparkles"></i> CSC Digital Services</span>
-          <h2>Ready to get <span class="cta-gold-word">started?</span></h2>
-          <p>Search for any service or browse our digital catalog to begin your application today.</p>
+          <span class="cta-eyebrow"><i data-lucide="sparkles"></i> Get Started Today</span>
+          <h2>Need a Service? <span class="cta-gold-word">Start Your Request in Minutes.</span></h2>
+          <p>Choose a service, submit your online application, and track its progress from one place.</p>
           <div class="cta-btn-group">
-            <a class="btn btn-primary cta-btn-primary" href="services.html"><i data-lucide="sparkles"></i> Explore E-Services</a>
-            <a class="btn cta-btn-outline" href="track-application.html"><i data-lucide="compass"></i> Track Application</a>
+            <a class="btn btn-primary cta-btn-primary" href="services.html"><i data-lucide="layout-grid"></i> Browse Services</a>
+            <a class="btn cta-btn-outline" href="track-application.html"><i data-lucide="compass"></i> Track Existing Request</a>
           </div>
         </div>
       </section>
@@ -908,49 +1380,8 @@
 
     <div data-site-footer></div>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
-    <script src="assets/app.js?v=clean_js_v11" defer></script>
+    <script src="assets/globe-land-points.js?v=chain-journey-17" defer></script>
+    <script src="assets/app.js?v=student-dense-fine-v1" defer></script>
   
-<style id="line-alignment-rules">
-  .section-head.center-line h2::after {
-    margin-left: auto !important;
-    margin-right: auto !important;
-  }
-  .section-head.left-line h2::after {
-    margin-left: 0 !important;
-    margin-right: auto !important;
-  }
-</style>
-<script id="line-alignment-script">
-  document.addEventListener("DOMContentLoaded", function() {
-    setTimeout(() => {
-      document.querySelectorAll(".section-head h2").forEach(h2 => {
-        let align = window.getComputedStyle(h2).textAlign;
-        let parent = h2.closest('.section-head');
-        if (parent) {
-          if (align === "center") {
-            parent.classList.add("center-line");
-          } else {
-            parent.classList.add("left-line");
-          }
-        }
-      });
-    }, 100); // small delay to ensure CSS is applied
-  });
-</script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -1,11 +1,11 @@
-﻿import React, { useState, useEffect } from 'react';
+﻿import { useState, useEffect } from 'react';
 import { PanelHeader, Card, Icon, Badge } from '../Shared';
 import { useApp } from '../AppContext';
+import { adminTokenHeader } from '../security/adminSession';
 
 export const SmsPanel = () => {
   const { customers, addActivity, addNotification } = useApp();
   const [activeTab, setActiveTab] = useState('logs');
-  const TOKEN = localStorage.getItem('opds_admin_token') || '';
 
   // Campaign State
   const [campaignName, setCampaignName] = useState('Festive Offer 2026');
@@ -17,20 +17,25 @@ export const SmsPanel = () => {
 
   const [logs, setLogs] = useState<any[]>([]);
 
-  // Load real SMS logs from backend
+  // Load SMS records through the governed conversation read model.
   const loadLogs = () => {
-    fetch('/api/admin/notifications?channel=sms&limit=50', { headers: { 'X-Admin-Token': TOKEN } })
+    fetch('/api/admin/conversations?channel=SMS&limit=50', { headers: adminTokenHeader() })
       .then(r => r.json())
       .then(d => {
-        if (d.logs) {
-          setLogs(d.logs.map((l: any) => ({
-            time: new Date(l.created_at).toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' }),
-            to: l.recipient,
-            msg: (() => { try { return JSON.parse(l.payload_json)?.message?.slice(0, 40) + '...' || l.event; } catch { return l.event; } })(),
+        if (d.conversations) {
+          setLogs(d.conversations.flatMap((conversation: any) => {
+            const channel = conversation.channels?.find((item: any) => item.channelType === 'SMS');
+            return (conversation.messages || [])
+              .filter((message: any) => message.channelType === 'SMS')
+              .map((message: any) => ({
+            time: new Date(message.occurredAt).toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' }),
+            to: channel?.channelReference || 'Customer',
+            msg: message.content?.slice(0, 40) + (message.content?.length > 40 ? '...' : '') || message.messageType,
             cost: '₹0.20',
-            status: l.status === 'sent' ? 'Delivered' : l.status === 'logged' ? 'Logged' : l.status === 'failed' ? 'Failed' : l.status,
-            tag: l.status === 'sent' ? 'success' : l.status === 'failed' ? 'danger' : 'info',
-          })));
+            status: message.lifecycleStatus,
+            tag: ['Sent', 'Delivered', 'Read'].includes(message.lifecycleStatus) ? 'success' : message.lifecycleStatus === 'Failed' ? 'danger' : 'info',
+              }));
+          }));
         }
       })
       .catch(() => {});
@@ -47,7 +52,7 @@ export const SmsPanel = () => {
       const csrf = document.cookie.split(';').find(c => c.trim().startsWith('opds_csrf='))?.split('=')[1] || '';
       const res = await fetch('/api/admin/notifications/send', {
         method: 'POST',
-        headers: { 'X-Admin-Token': TOKEN, 'Content-Type': 'application/json', 'X-CSRF-Token': csrf },
+        headers: { ...adminTokenHeader(), 'Content-Type': 'application/json', 'X-CSRF-Token': csrf },
         body: JSON.stringify({
           event: `sms_campaign_${campaignName.toLowerCase().replace(/\s+/g, '_')}`,
           message: customMessage,
@@ -72,18 +77,18 @@ export const SmsPanel = () => {
   };
 
   return (
-    <div className="panel active" style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
-      <PanelHeader 
-        title="SMS Notifications" 
-        sub="Manage SMS logs, bulk campaigns, and DLT approved templates" 
+    <div className="panel active" style={{ display: 'flex', flexDirection: 'column' }}>
+      <PanelHeader
+        title="SMS Notifications"
+        sub="Manage SMS logs, bulk campaigns, and DLT approved templates"
         actions={
           <button className="btn btn-primary btn-sm" onClick={() => setActiveTab('send')}>
             <Icon name="send" /> Send Bulk SMS
           </button>
-        } 
+        }
       />
       <div className="panels" style={{ flex: 1, paddingBottom: 0 }}>
-        
+
         <div style={{ marginBottom: 16, display: 'flex', gap: 8, borderBottom: '1px solid var(--border-1)', paddingBottom: 8 }}>
           <button className={`btn btn-sm ${activeTab === 'logs' ? 'btn-primary' : 'btn-ghost'}`} onClick={() => setActiveTab('logs')}>Delivery Logs</button>
           <button className={`btn btn-sm ${activeTab === 'send' ? 'btn-primary' : 'btn-ghost'}`} onClick={() => setActiveTab('send')}>Send Bulk SMS</button>
@@ -115,7 +120,7 @@ export const SmsPanel = () => {
                 </div>
               </Card>
             </div>
-            
+
             <Card title="Recent SMS Logs" bodyClass="card-body-flush">
               <table className="data-table">
                 <thead>
@@ -150,7 +155,7 @@ export const SmsPanel = () => {
                 <label className="form-label">Campaign Name</label>
                 <input type="text" className="form-input" value={campaignName} onChange={e => setCampaignName(e.target.value)} placeholder="E.g., Festive Offer 2026" />
               </div>
-              
+
               <div className="form-group">
                 <label className="form-label">Recipients Group</label>
                 <select className="form-input" value={recipientGroup} onChange={e => setRecipientGroup(e.target.value)}>
@@ -220,7 +225,7 @@ export const SmsPanel = () => {
                 </div>
               </div>
             </Card>
-            
+
             <Card title="Status Update" sub="Approved by TRAI (DLT)">
               <div className="card-body">
                 <div style={{ background: 'var(--bg-2)', padding: 12, borderRadius: 8, fontSize: 'var(--fs-sm)', border: '1px solid var(--border-1)' }}>
@@ -232,7 +237,7 @@ export const SmsPanel = () => {
                 </div>
               </div>
             </Card>
-            
+
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: 150, border: '1px dashed var(--border-2)', borderRadius: 'var(--radius-lg)', color: 'var(--text-3)', cursor: 'pointer' }} className="card hover-lift">
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>
                 <Icon name="plus" size={24} />

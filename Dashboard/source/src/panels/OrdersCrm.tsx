@@ -1,8 +1,9 @@
-﻿import React, { useState, useEffect, useCallback } from 'react';
-import { PanelHeader, Card, Badge, Icon } from '../Shared';
-import { useApp } from '../AppContext';
-import { OrderPipelinePanel } from './OrderPipeline';
-import { AddCustomerModal } from '../Modals';
+import React, { useState, useEffect, useCallback } from 'react';
+import { PanelHeader, Card, Badge, Icon} from '../Shared';
+import { useApp} from '../AppContext';
+import { OrderPipelinePanel} from './OrderPipeline';
+import { AddCustomerModal} from '../Modals';
+import { getCsrfToken} from '../security/adminSession';
 
 const BOT_STATUS_MAP: Record<string, { icon: string; color: string; label: string }> = {
   passed:        { icon: 'check-circle', color: 'var(--emerald)', label: 'Ready' },
@@ -42,7 +43,7 @@ const BotStatusBadge = ({ orderId }: { orderId: string }) => {
   return (
     <button
       className="btn btn-ghost btn-xs"
-      title={`Bot status: ${status}. Click to re-check.`}
+      title={`Automation check status: ${status}. Click to re-check.`}
       style={{ color: info.color, gap: 4, padding: '2px 6px' }}
       onClick={runBotCheck}
       disabled={running}
@@ -58,7 +59,7 @@ const AssignedBadge = ({ orderId, onAssignClick }: { orderId: string; onAssignCl
   const TOKEN = localStorage.getItem('opds_admin_token') || '';
 
   useEffect(() => {
-    fetch(`/api/admin/assignments?status=assigned`, { headers: { 'X-Admin-Token': token } })
+    fetch(`/api/admin/assignments?status=assigned`, { headers: { 'X-Admin-Token': TOKEN } })
       .then(r => r.json())
       .then(d => {
         const match = (d.assignments || []).find((a: any) => a.order_id === orderId || a.order_id === String(orderId));
@@ -83,11 +84,56 @@ const AssignedBadge = ({ orderId, onAssignClick }: { orderId: string; onAssignCl
 
 const money = (amount: any) => `Rs. ${Number(amount || 0).toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 
+const workflowTitle = (workflow: any) => workflow?.statusLabel || workflow?.currentStage || workflow?.currentState || 'Not started';
+const workflowDefinition = (workflow: any) => workflow?.definition?.name || workflow?.definition?.type || 'Workflow baseline';
+
+const WorkflowChip = ({ workflow }: { workflow: any }) => {
+  if (!workflow) return <span style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-3)' }}>Baseline pending</span>;
+  return (
+    <span style={{ display: 'inline-flex', alignItems: 'center', gap: 5, fontSize: 'var(--fs-xs)', color: 'var(--blue)', fontWeight: 'var(--fw-semibold)' }}>
+      <Icon name="git-branch" size={12} />
+      {workflowTitle(workflow)}
+    </span>
+  );
+};
+
+const WorkflowSummaryCard = ({ workflow }: { workflow: any }) => (
+  <div style={{ border: '1px solid var(--border-1)', borderRadius: 10, padding: 16, background: 'var(--bg-2)', marginBottom: 16 }}>
+    <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-3)', marginBottom: 10, fontWeight: 'var(--fw-semibold)', textTransform: 'uppercase' }}>Order Workflow</div>
+    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, minmax(0, 1fr))', gap: 12 }}>
+      <div>
+        <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-3)' }}>Current State</div>
+        <div style={{ marginTop: 4, fontWeight: 'var(--fw-semibold)', color: 'var(--blue)' }}>{workflowTitle(workflow)}</div>
+      </div>
+      <div>
+        <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-3)' }}>Definition</div>
+        <div style={{ marginTop: 4, fontWeight: 'var(--fw-semibold)' }}>{workflowDefinition(workflow)}</div>
+      </div>
+      <div>
+        <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-3)' }}>Tasks</div>
+        <div style={{ marginTop: 4, fontWeight: 'var(--fw-semibold)' }}>{workflow?.tasksSummary?.open ?? 0} open / {workflow?.tasksSummary?.total ?? 0} total</div>
+      </div>
+      <div>
+        <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-3)' }}>Health</div>
+        <div style={{ marginTop: 4, fontWeight: 'var(--fw-semibold)', color: 'var(--amber)' }}>{workflow?.health?.status || 'placeholder'}</div>
+      </div>
+    </div>
+  </div>
+);
+
 function downloadInvoicePdf(invoiceNo?: string, orderId?: string) {
   const adminToken = localStorage.getItem('opds_admin_token') || '';
+  const customerToken = localStorage.getItem('opds_customer_session') || '';
+  const isCustomerPortal = !adminToken && !!customerToken;
+
   if (orderId) {
-    const url = `/api/admin/invoices/${encodeURIComponent(orderId)}`;
-    fetch(url, { headers: { 'X-Admin-Token': adminToken } })
+    const url = isCustomerPortal
+      ? `/api/customer/invoices/${encodeURIComponent(orderId)}`
+      : `/api/admin/invoices/${encodeURIComponent(orderId)}`;
+    const headers: Record<string, string> = isCustomerPortal
+      ? { 'Authorization': `Bearer ${customerToken}` }
+      : { 'X-Admin-Token': adminToken };
+    fetch(url, { headers })
       .then(res => { if (!res.ok) throw new Error('Not found'); return res.blob(); })
       .then(blob => {
         const a = document.createElement('a');
@@ -97,8 +143,11 @@ function downloadInvoicePdf(invoiceNo?: string, orderId?: string) {
         setTimeout(() => URL.revokeObjectURL(a.href), 3000);
       })
       .catch(() => {
-        if (invoiceNo && invoiceNo !== 'N/A') window.open(`/api/invoices/${encodeURIComponent(invoiceNo)}.pdf`, '_blank');
-        else alert('Invoice not yet available. Complete payment to generate invoice.');
+        if (invoiceNo && invoiceNo !== 'N/A') {
+          window.open(`/api/invoices/${encodeURIComponent(invoiceNo)}.pdf`, '_blank');
+        } else {
+          alert('Document download failed. Please try again.');
+        }
       });
     return;
   }
@@ -135,15 +184,23 @@ const getOrderSteps = (order: any) => {
   const isVerified = ['Verified', 'Processing', 'Completed'].includes(order?.status);
   const isProcessing = ['Processing', 'Completed'].includes(order?.status);
   const isCompleted = order?.status === 'Completed';
-  
-  const dateStr = order?.date || new Date().toISOString().slice(0, 10);
-  
+
+  const rawDate = order?.createdAt || order?.date || '';
+  const dateStr = rawDate ? rawDate.slice(0, 10) : '—';
+  const fmtTime = (d: string) => {
+    if (!d) return '—';
+    const t = new Date(d);
+    if (isNaN(t.getTime())) return '—';
+    return t.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', hour12: true });
+  };
+  const createdTime = order?.createdAt ? fmtTime(order.createdAt) : '—';
+
   return [
-    { step: 'Submitted', label: 'Application Placed', date: dateStr, time: '10:15 AM', status: 'done' },
-    { step: 'Under Review', label: 'Under Review', date: dateStr, time: '10:30 AM', status: isPaid ? 'done' : 'active' },
-    { step: 'Docs Verified', label: isVerified ? 'Documents Verified' : 'Awaiting Verify', date: dateStr, time: isVerified ? '02:00 PM' : 'Pending', status: isVerified ? 'done' : (isPaid ? 'active' : 'pending') },
-    { step: 'Processing', label: isProcessing ? 'In Progress' : 'In Queue', date: isProcessing ? dateStr : 'Pending', time: isProcessing ? '04:15 PM' : 'Pending', status: isProcessing ? (isCompleted ? 'done' : 'active') : 'pending' },
-    { step: 'Completed', label: isCompleted ? 'Completed & Output' : 'Awaiting Dept', date: isCompleted ? dateStr : 'Pending', time: isCompleted ? '05:30 PM' : 'Pending', status: isCompleted ? 'done' : 'pending' }
+    { step: 'Submitted', label: 'Application Placed', date: dateStr, time: createdTime, status: 'done' },
+    { step: 'Under Review', label: 'Under Review', date: dateStr, time: '—', status: isPaid ? 'done' : 'active' },
+    { step: 'Docs Verified', label: isVerified ? 'Documents Verified' : 'Awaiting Verify', date: isVerified ? dateStr : '—', time: '—', status: isVerified ? 'done' : (isPaid ? 'active' : 'pending') },
+    { step: 'Processing', label: isProcessing ? 'In Progress' : 'In Queue', date: isProcessing ? dateStr : '—', time: '—', status: isProcessing ? (isCompleted ? 'done' : 'active') : 'pending' },
+    { step: 'Completed', label: isCompleted ? 'Completed & Output' : 'Awaiting Dept', date: isCompleted ? dateStr : '—', time: '—', status: isCompleted ? 'done' : 'pending' }
   ];
 };
 
@@ -168,7 +225,8 @@ const CustomerOrderTracker = ({ customer }: any) => {
         </div>
         <Badge type={statusBadgeType(order.status)} className={order.status === 'Processing' ? 'pulse' : ''}>{order.status}</Badge>
       </div>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: 12, position: 'relative', marginTop: 12 }}>
+      <WorkflowSummaryCard workflow={order.workflow} />
+      <div className="customer-tracker-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: 12, position: 'relative', marginTop: 12 }}>
         {steps.map((st, idx) => (
           <div key={idx} style={{ background: st.status === 'done' ? 'var(--emerald-dim)' : st.status === 'active' ? 'var(--blue-dim)' : 'var(--bg-1)', border: '1px solid', borderColor: st.status === 'done' ? 'var(--emerald-border)' : st.status === 'active' ? 'var(--blue-border)' : 'var(--border-1)', borderRadius: 10, padding: 12, position: 'relative' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 6 }}>
@@ -176,7 +234,7 @@ const CustomerOrderTracker = ({ customer }: any) => {
               <span style={{ fontSize: 'var(--fs-xs)', fontWeight: 'var(--fw-semibold)', color: st.status === 'done' ? 'var(--emerald)' : st.status === 'active' ? 'var(--blue)' : 'var(--text-3)' }}>{st.step}</span>
             </div>
             <div style={{ fontSize: 'var(--fs-xs)', fontWeight: 'var(--fw-semibold)', color: 'var(--text-1)', marginBottom: 4 }}>{st.label}</div>
-            <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-3)' }}>{st.date} {st.time !== 'Pending' && <span style={{ opacity: 0.7 }}>· {st.time}</span>}</div>
+            <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-3)' }}>{st.date}{st.time && st.time !== '—' && <span style={{ opacity: 0.7 }}> · {st.time}</span>}</div>
           </div>
         ))}
       </div>
@@ -192,7 +250,7 @@ const CustomerHistoryTable = ({ orders, onDownload }: any) => {
     <table className="data-table">
       <thead>
         <tr>
-          <th>Order ID</th><th>Service / Product</th><th>Date</th><th>Payment</th><th>Amount</th><th>Status</th><th>Invoice</th>
+          <th>Order ID</th><th>Service / Product</th><th>Date</th><th>Payment</th><th>Amount</th><th>Status</th><th>Workflow</th><th>Invoice</th>
         </tr>
       </thead>
       <tbody>
@@ -204,6 +262,7 @@ const CustomerHistoryTable = ({ orders, onDownload }: any) => {
             <td><Badge type={paymentBadgeType(order.payStatus)}>{order.payStatus}</Badge></td>
             <td><strong>{money(order.amount)}</strong></td>
             <td><Badge type={statusBadgeType(order.status)}>{order.status}</Badge></td>
+            <td><WorkflowChip workflow={order.workflow} /></td>
             <td><button className="btn btn-ghost btn-xs" style={{ color: 'var(--blue)' }} onClick={() => downloadInvoicePdf(order.invoiceNo, order.id)}><Icon name="download" size={12} /> {order.invoiceNo && order.invoiceNo !== 'N/A' ? 'Download' : 'Generate'}</button></td>
           </tr>
         ))}
@@ -219,11 +278,21 @@ const CustomerProfileDashboard = ({ customer }: any) => {
   const activeCount = orders.filter((order: any) => !['Completed', 'Cancelled'].includes(order.status)).length;
   const supportPin = String(customer?.phone || '').replace(/\D/g, '').slice(-4) || '0000';
   const kycLabel = documents.length ? 'Documents linked' : customer?.verified ? 'Profile verified' : 'Details pending';
+  const trustScore = customer?.trustScore ?? customer?.genome?.trust?.score ?? null;
+  const riskLevel = customer?.riskLevel || customer?.genome?.trust?.riskLevel || 'baseline';
+  const lifecycleStage = customer?.lifecycleStage || customer?.genome?.lifecycle?.stage || 'baseline';
+  const consentStatus = customer?.consentStatus || customer?.genome?.consent?.status || 'unknown';
+  const titleCase = (value: string) => String(value || 'baseline')
+    .replace(/[_-]/g, ' ')
+    .replace(/\b\w/g, char => char.toUpperCase());
   const [editOpen, setEditOpen] = useState(false);
+  const [savingProfile, setSavingProfile] = useState(false);
   const [profileDraft, setProfileDraft] = useState({
     name: customer?.name || '',
     email: customer?.email || '',
     city: customer?.city || '',
+    preferredLanguage: customer?.preferredLanguage || customer?.genome?.preferences?.preferredLanguage || 'hi',
+    preferredChannel: customer?.preferredChannel || customer?.genome?.preferences?.preferredChannel || 'whatsapp',
   });
 
   useEffect(() => {
@@ -231,14 +300,55 @@ const CustomerProfileDashboard = ({ customer }: any) => {
       name: customer?.name || '',
       email: customer?.email || '',
       city: customer?.city || '',
+      preferredLanguage: customer?.preferredLanguage || customer?.genome?.preferences?.preferredLanguage || 'hi',
+      preferredChannel: customer?.preferredChannel || customer?.genome?.preferences?.preferredChannel || 'whatsapp',
     });
-  }, [customer?.id]);
+  }, [customer?.id, customer?.preferredLanguage, customer?.preferredChannel]);
 
-  const saveProfile = () => {
+  const saveProfile = async () => {
     if (!customer?.id) return;
-    updateCustomer(customer.id, profileDraft);
-    addNotification({ title: 'Profile updated', sub: profileDraft.name || customer.name, time: 'just now', color: 'var(--blue)', icon: 'user-check', panelTarget: 'crm' });
-    setEditOpen(false);
+    const sessionToken = localStorage.getItem('opds_customer_session') || '';
+    if (!sessionToken) {
+      addNotification({ title: 'Login required', sub: 'Please sign in again to update profile details.', time: 'just now', color: 'var(--rose)', icon: 'alert-circle', panelTarget: 'crm' });
+      return;
+    }
+    setSavingProfile(true);
+    try {
+      const csrf = await getCsrfToken();
+      const response = await fetch('/api/customer/profile', {
+        method: 'PATCH',
+        headers: {
+          'Authorization': `Bearer ${sessionToken}`,
+          'Content-Type': 'application/json',
+          'X-CSRF-Token': csrf,
+        },
+        body: JSON.stringify({
+          name: profileDraft.name,
+          email: profileDraft.email,
+          city: profileDraft.city,
+          address: profileDraft.city,
+          preferredLanguage: profileDraft.preferredLanguage,
+          preferredChannel: profileDraft.preferredChannel,
+        }),
+      });
+      if (!response.ok) throw new Error('Profile update failed');
+      const data = await response.json().catch(() => ({}));
+      const genome = data.customer || null;
+      updateCustomer(customer.id, {
+        ...profileDraft,
+        genome,
+        trustScore: genome?.trust?.score ?? customer?.trustScore,
+        riskLevel: genome?.trust?.riskLevel ?? customer?.riskLevel,
+        lifecycleStage: genome?.lifecycle?.stage ?? customer?.lifecycleStage,
+        consentStatus: genome?.consent?.status ?? customer?.consentStatus,
+      });
+      addNotification({ title: 'Profile updated', sub: profileDraft.name || customer.name, time: 'just now', color: 'var(--blue)', icon: 'user-check', panelTarget: 'crm' });
+      setEditOpen(false);
+    } catch {
+      addNotification({ title: 'Profile update failed', sub: 'Please check connection and try again.', time: 'just now', color: 'var(--rose)', icon: 'alert-circle', panelTarget: 'crm' });
+    } finally {
+      setSavingProfile(false);
+    }
   };
 
   return (
@@ -266,7 +376,7 @@ const CustomerProfileDashboard = ({ customer }: any) => {
         </div>
       </Card>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, minmax(0, 1fr))', gap: 16 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: 16 }}>
         <div className="insight-card info" style={{ padding: 18 }}>
           <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-3)' }}>Total Purchases / Spent</div>
           <div style={{ fontSize: 'var(--fs-xl)', fontWeight: 'var(--fw-semibold)', marginTop: 4 }}>{money(customer?.totalSpent)}</div>
@@ -278,6 +388,16 @@ const CustomerProfileDashboard = ({ customer }: any) => {
         <div className="insight-card positive" style={{ padding: 18 }}>
           <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-3)' }}>KYC / Documents</div>
           <div style={{ fontSize: 'var(--fs-xl)', fontWeight: 'var(--fw-semibold)', marginTop: 4, color: 'var(--emerald)' }}>{kycLabel}</div>
+        </div>
+        <div className="insight-card" style={{ padding: 18, border: '1px solid var(--border-1)', background: 'var(--bg-2)' }}>
+          <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-3)' }}>Lifecycle / Consent</div>
+          <div style={{ fontSize: 'var(--fs-base)', fontWeight: 'var(--fw-semibold)', marginTop: 4, color: 'var(--blue)' }}>{titleCase(lifecycleStage)}</div>
+          <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-3)', marginTop: 2 }}>{titleCase(consentStatus)}</div>
+        </div>
+        <div className="insight-card" style={{ padding: 18, border: '1px solid var(--border-1)', background: 'var(--bg-2)' }}>
+          <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-3)' }}>Trust / Risk</div>
+          <div style={{ fontSize: 'var(--fs-xl)', fontWeight: 'var(--fw-semibold)', marginTop: 4, color: 'var(--emerald)' }}>{trustScore === null || trustScore === undefined ? '—' : `${trustScore}/100`}</div>
+          <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-3)', marginTop: 2 }}>{titleCase(riskLevel)}</div>
         </div>
         <div className="insight-card" style={{ padding: 18, border: '1px solid var(--border-1)', background: 'var(--bg-2)' }}>
           <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-3)' }}>Support Pin</div>
@@ -297,7 +417,7 @@ const CustomerProfileDashboard = ({ customer }: any) => {
         </div>
       </Card>
 
-      <Card title="My Digital Locker & Submitted Documents" sub="Files and Drive links attached from the service request">
+      <Card title="My Digital Locker & Registered Documents" sub="Governed document versions and service-request attachments">
         {documents.length ? (
           <div style={{ padding: '12px 0', display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: 16 }}>
             {documents.map((doc: any) => (
@@ -316,7 +436,7 @@ const CustomerProfileDashboard = ({ customer }: any) => {
                 </div>
                 <div style={{ padding: 16, background: 'var(--bg-1)' }}>
                   <div style={{ fontSize: 'var(--fs-xs)', fontWeight: 'var(--fw-semibold)', color: 'var(--text-3)', marginBottom: 8, textTransform: 'uppercase', letterSpacing: '0.05em', display: 'flex', alignItems: 'center', gap: 6 }}>
-                    <Icon name="cpu" size={12} style={{ color: 'var(--violet)' }} /> Operator Review Data
+                    <Icon name="file-text" size={12} style={{ color: 'var(--violet)' }} /> {doc.type ? `${doc.type} Metadata` : doc.title ? `${doc.title} Metadata` : 'Document Metadata'}
                   </div>
                   <pre style={{ margin: 0, padding: 12, background: 'var(--bg-3)', borderRadius: 6, fontSize: 'var(--fs-xs)', color: 'var(--text-2)', fontFamily: 'var(--font-mono)', whiteSpace: 'pre-wrap', lineHeight: 1.5, border: '1px solid var(--border-1)' }}>
                     {doc.extractedText || doc.extracted || 'Document metadata is linked with this order and ready for operator review.'}
@@ -347,7 +467,26 @@ const CustomerProfileDashboard = ({ customer }: any) => {
               <label className="form-group"><span className="form-label">Full Name</span><input className="form-input" value={profileDraft.name} onChange={e => setProfileDraft(prev => ({ ...prev, name: e.target.value }))} /></label>
               <label className="form-group"><span className="form-label">Email</span><input className="form-input" value={profileDraft.email} onChange={e => setProfileDraft(prev => ({ ...prev, email: e.target.value }))} /></label>
               <label className="form-group"><span className="form-label">Address / City</span><input className="form-input" value={profileDraft.city} onChange={e => setProfileDraft(prev => ({ ...prev, city: e.target.value }))} /></label>
-              <button className="btn btn-primary" onClick={saveProfile}><Icon name="save" size={14} /> Save Profile</button>
+              <label className="form-group">
+                <span className="form-label">Preferred Language</span>
+                <select className="form-input" value={profileDraft.preferredLanguage} onChange={e => setProfileDraft(prev => ({ ...prev, preferredLanguage: e.target.value }))}>
+                  <option value="hi">Hindi</option>
+                  <option value="en">English</option>
+                  <option value="mixed">Hindi + English</option>
+                </select>
+              </label>
+              <label className="form-group">
+                <span className="form-label">Preferred Channel</span>
+                <select className="form-input" value={profileDraft.preferredChannel} onChange={e => setProfileDraft(prev => ({ ...prev, preferredChannel: e.target.value }))}>
+                  <option value="whatsapp">WhatsApp</option>
+                  <option value="phone">Phone</option>
+                  <option value="email">Email</option>
+                  <option value="dashboard">Dashboard</option>
+                </select>
+              </label>
+              <button className="btn btn-primary" onClick={saveProfile} disabled={savingProfile}>
+                <Icon name={savingProfile ? 'loader-2' : 'save'} size={14} className={savingProfile ? 'spin' : ''} /> {savingProfile ? 'Saving...' : 'Save Profile'}
+              </button>
             </div>
           </div>
         </div>
@@ -358,16 +497,31 @@ const CustomerProfileDashboard = ({ customer }: any) => {
 
 // ─── Admin CRM 360° View ──────────────────────────────────────────────────────
 const CrmAdminView = ({ CUSTOMERS, selectedCustomerIndex, setSelectedCustomerIndex, setShowAddCustomer, setActivePanel, updateCustomer, addNotification, setAiAgentDoc, setAiStep, timelineEvents }: any) => {
-  const selectedCustomer = CUSTOMERS[selectedCustomerIndex] || CUSTOMERS[0];
+  const selectedCustomer = CUSTOMERS[selectedCustomerIndex] || CUSTOMERS[0] || null;
   const [editOpen, setEditOpen]   = React.useState(false);
   const [search, setSearch]       = React.useState('');
   const [editDraft, setEditDraft] = React.useState({ name: '', email: '', city: '', phone: '' });
+  const [formErrors, setFormErrors] = React.useState({ name: '', phone: '' });
 
   const openEdit = () => {
     setEditDraft({ name: selectedCustomer.name, email: selectedCustomer.email, city: selectedCustomer.city, phone: selectedCustomer.phone });
+    setFormErrors({ name: '', phone: '' });
     setEditOpen(true);
   };
   const saveEdit = () => {
+    const errors = { name: '', phone: '' };
+    if (!editDraft.name || !editDraft.name.trim()) {
+      errors.name = 'Name cannot be empty.';
+    }
+    const digits = (editDraft.phone || '').replace(/\D/g, '');
+    if (digits.length !== 10) {
+      errors.phone = 'Phone must be exactly 10 digits.';
+    }
+    if (errors.name || errors.phone) {
+      setFormErrors(errors);
+      return;
+    }
+    setFormErrors({ name: '', phone: '' });
     updateCustomer(selectedCustomer.id, editDraft);
     addNotification({ title: 'Profile updated', sub: editDraft.name, time: 'just now', color: 'var(--blue)', icon: 'user-check', panelTarget: 'crm' });
     setEditOpen(false);
@@ -382,6 +536,21 @@ const CrmAdminView = ({ CUSTOMERS, selectedCustomerIndex, setSelectedCustomerInd
     ? CUSTOMERS.filter((c: any) => c.name.toLowerCase().includes(search.toLowerCase()) || c.phone.includes(search))
     : CUSTOMERS;
 
+  if (CUSTOMERS.length === 0) return (
+    <>
+      <PanelHeader title="Customer CRM" sub="360° Profile & Timeline" actions={
+        <button className="btn btn-primary btn-sm" onClick={() => setShowAddCustomer(true)}>
+          <Icon name="user-plus" size={13} /> Add Customer
+        </button>
+      } />
+      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 10, color: 'var(--text-3)', padding: 24 }}>
+        <Icon name="users" size={44} style={{ opacity: 0.18 }} />
+        <div style={{ fontSize: 'var(--fs-base)', fontWeight: 'var(--fw-semibold)', color: 'var(--text-2)' }}>Koi customer nahi mila</div>
+        <div style={{ fontSize: 'var(--fs-sm)', color: 'var(--text-3)' }}>Pehla order aane ke baad yahan customer profile dikhega.</div>
+      </div>
+    </>
+  );
+
   return (
     <>
       <PanelHeader title="Customer CRM" sub="360° Profile & Timeline" actions={
@@ -394,10 +563,10 @@ const CrmAdminView = ({ CUSTOMERS, selectedCustomerIndex, setSelectedCustomerInd
           </button>
         </div>
       } />
-      <div className="panels">
-        <div className="crm-360">
+      <div className="panels" style={{ flex: 1, minHeight: 0, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
+        <div className="crm-360" style={{ flex: 1, minHeight: 0, overflow: 'hidden' }}>
           {/* Left: Customer List */}
-          <Card bodyClass="card-body-flush" style={{ height: 'calc(100vh - 160px)', minHeight: 600, display: 'flex', flexDirection: 'column' }}>
+          <Card bodyClass="card-body-flush" style={{ display: 'flex', flexDirection: 'column', overflow: 'hidden' }} bodyStyle={{ display: 'flex', flexDirection: 'column', flex: 1, minHeight: 0, overflow: 'hidden' }}>
             <div style={{ padding: '10px 14px', borderBottom: '1px solid var(--border-1)' }}>
               <input type="text" className="form-input" placeholder="Search customers..." value={search} onChange={e => setSearch(e.target.value)} style={{ width: '100%' }} />
             </div>
@@ -413,7 +582,7 @@ const CrmAdminView = ({ CUSTOMERS, selectedCustomerIndex, setSelectedCustomerInd
                     style={{ borderLeft: realIdx === selectedCustomerIndex ? '3px solid var(--blue)' : '3px solid transparent', cursor: 'pointer' }}
                     onClick={() => setSelectedCustomerIndex(realIdx)}
                   >
-                    <div className="cust-avatar" style={{ background: c.color, width: 36, height: 36, fontSize: 'var(--fs-sm)' }}>{c.initials}</div>
+                    <div className="cust-avatar" style={{ background: c.color, width: 38, height: 38, fontSize: 'var(--fs-sm)' }}>{c.initials}</div>
                     <div style={{ flex: 1, minWidth: 0 }}>
                       <div style={{ fontWeight: 'var(--fw-semibold)', fontSize: 'var(--fs-sm)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{c.name}</div>
                       <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-3)' }}>{c.phone} · {c.tier}</div>
@@ -426,7 +595,7 @@ const CrmAdminView = ({ CUSTOMERS, selectedCustomerIndex, setSelectedCustomerInd
           </Card>
 
           {/* Right: Profile Detail */}
-          <Card bodyClass="card-body-flush" style={{ display: 'flex', flexDirection: 'column', height: 'calc(100vh - 160px)', minHeight: 600 }}>
+          <Card bodyClass="card-body-flush" style={{ display: 'flex', flexDirection: 'column', overflow: 'hidden' }} bodyStyle={{ display: 'flex', flexDirection: 'column', flex: 1, minHeight: 0, overflow: 'hidden' }}>
             {/* Profile Header */}
             <div style={{ padding: '16px 20px', borderBottom: '1px solid var(--border-1)', background: 'var(--bg-2)' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
@@ -511,7 +680,7 @@ const CrmAdminView = ({ CUSTOMERS, selectedCustomerIndex, setSelectedCustomerInd
                   <div style={{ padding: 20, background: 'var(--bg-3)', borderRadius: 8, color: 'var(--text-3)', textAlign: 'center', marginBottom: 24, fontSize: 'var(--fs-xs)' }}>No orders found for this customer.</div>
                 )}
 
-                <div style={{ fontSize: 'var(--fs-sm)', fontWeight: 'var(--fw-semibold)', marginBottom: 12 }}>Saved Documents & Extracted Data</div>
+                <div style={{ fontSize: 'var(--fs-sm)', fontWeight: 'var(--fw-semibold)', marginBottom: 12 }}>Registered Documents & Lifecycle Metadata</div>
                 {selectedCustomer.documents?.length > 0 ? selectedCustomer.documents.map((doc: any) => (
                   <div key={doc.id || doc.title} style={{ border: '1px solid var(--border-2)', borderRadius: 8, overflow: 'hidden', marginBottom: 10 }}>
                     <div style={{ padding: '12px 16px', background: 'var(--bg-2)', borderBottom: '1px solid var(--border-1)', display: 'flex', alignItems: 'center', gap: 12 }}>
@@ -579,7 +748,8 @@ const CrmAdminView = ({ CUSTOMERS, selectedCustomerIndex, setSelectedCustomerInd
               ].map(f => (
                 <div key={f.k}>
                   <label style={{ fontSize: 'var(--fs-xs)', fontWeight: 'var(--fw-semibold)', display: 'block', marginBottom: 5, color: 'var(--text-2)' }}>{f.l}</label>
-                  <input type={f.type} className="form-input" placeholder={f.ph} value={(editDraft as any)[f.k] || ''} onChange={e => setEditDraft((prev: any) => ({ ...prev, [f.k]: e.target.value }))} />
+                  <input type={f.type} className="form-input" placeholder={f.ph} value={(editDraft as any)[f.k] || ''} onChange={e => { setEditDraft((prev: any) => ({ ...prev, [f.k]: e.target.value })); if ((formErrors as any)[f.k]) setFormErrors((prev: any) => ({ ...prev, [f.k]: '' })); }} />
+                  {(formErrors as any)[f.k] && <div style={{ color: 'var(--rose)', fontSize: 'var(--fs-xs)', marginTop: 4 }}>{(formErrors as any)[f.k]}</div>}
                 </div>
               ))}
               <div style={{ display: 'flex', gap: 8, justifyContent: 'flex-end', marginTop: 8 }}>
@@ -595,14 +765,26 @@ const CrmAdminView = ({ CUSTOMERS, selectedCustomerIndex, setSelectedCustomerInd
 };
 
 export const OrdersCrmPanels = ({ activePanel }: any) => {
-  const { customers: CUSTOMERS, allOrders: ALL_ORDERS, role, updateOrderStatus, updateCustomer, setActivePanel, addActivity, addNotification } = useApp();
+  const { customers: CUSTOMERS, allOrders: ALL_ORDERS, role, updateOrderStatus, updateCustomer, setActivePanel, addActivity, addNotification, backendSync, refreshBackend } = useApp();
   const [selectedCustomerIndex, setSelectedCustomerIndex] = useState(0);
   const [aiAgentDoc, setAiAgentDoc] = useState<any>(null);
   const [aiStep, setAiStep] = useState(0);
   const [showAddCustomer, setShowAddCustomer] = useState(false);
   const [selectedOrder, setSelectedOrder] = useState<any>(null);
+  const [ordersSearch, setOrdersSearch] = useState('');
+  const [ordersStatusTab, setOrdersStatusTab] = useState('all');
   const isCustomer = role === 'customer';
-  
+
+  // Detect auth failures for customer portal
+  const customerAuthFailed = isCustomer && backendSync.status === 'offline' && (
+    backendSync.message.startsWith('SESSION_MISSING') || backendSync.message.startsWith('SESSION_EXPIRED')
+  );
+  const customerAuthMessage = customerAuthFailed
+    ? (backendSync.message.startsWith('SESSION_EXPIRED')
+        ? 'Your session has expired. Please verify your mobile OTP again to continue.'
+        : 'Please verify your mobile number to load your orders.')
+    : '';
+
   const [previewDoc, setPreviewDoc] = useState<any>(null);
   const [reuploadingDoc, setReuploadingDoc] = useState<any>(null);
   const [uploading, setUploading] = useState(false);
@@ -751,10 +933,18 @@ export const OrdersCrmPanels = ({ activePanel }: any) => {
       setReuploadingDoc(null);
     }, 1500);
   };
-  
+
+  useEffect(() => {
+    if (!selectedOrder?.id) return;
+    const liveOrder = ALL_ORDERS.find((order: any) => order.id === selectedOrder.id);
+    if (liveOrder) {
+      setSelectedOrder((prev: any) => (prev?.id === liveOrder.id ? liveOrder : prev));
+    }
+  }, [ALL_ORDERS, selectedOrder?.id]);
+
   useEffect(() => {
     if (!aiAgentDoc) return;
-    
+
     // Auto increment step 0 -> 1 -> 2 -> 3
     if (aiStep >= 0 && aiStep <= 2) {
       const timer = setTimeout(() => {
@@ -769,24 +959,19 @@ export const OrdersCrmPanels = ({ activePanel }: any) => {
   const updateSelectedOrder = async (status: string, paymentStatus?: string) => {
     if (!selectedOrder?.id) return;
     await updateOrderStatus(selectedOrder.id, status, paymentStatus);
-    setSelectedOrder((prev: any) => prev ? {
-      ...prev,
-      status,
-      ...(paymentStatus ? { payStatus: paymentStatus === 'captured' ? 'Paid' : paymentStatus === 'failed' ? 'Failed' : 'Pending' } : {}),
-    } : prev);
   };
 
   const assignAiPrecheck = (order: any) => {
     if (!order?.id) return;
     addActivity({
-      text: `AI pre-check assigned for ${order.id} - ${order.service}`,
+      text: `Pre-check review requested for ${order.id} - ${order.service}`,
       color: 'var(--violet)',
       bg: 'var(--violet-dim)',
       icon: 'bot',
     });
     addNotification({
-      title: `AI Review Ready: ${order.id}`,
-      sub: 'Kabir can prepare checklist and mismatch alerts. Human approval is still required.',
+      title: `Pre-check Review Ready: ${order.id}`,
+      sub: 'The order is marked for existing payment and document checks. Human approval is still required.',
       time: 'just now',
       color: 'var(--violet)',
       icon: 'bot',
@@ -794,7 +979,7 @@ export const OrdersCrmPanels = ({ activePanel }: any) => {
     });
     setSelectedOrder((prev: any) => prev ? {
       ...prev,
-      notes: `${prev.notes || ''}${prev.notes ? '\n' : ''}AI pre-check assigned. Awaiting admin final review.`,
+      notes: `${prev.notes || ''}${prev.notes ? '\n' : ''}Pre-check review requested. Awaiting admin final review.`,
     } : prev);
   };
 
@@ -802,12 +987,12 @@ export const OrdersCrmPanels = ({ activePanel }: any) => {
   const getTimelineForCustomer = (customer: typeof CUSTOMERS[0]) => {
     if (!customer) return [];
     let timeline: any[] = [];
-    
+
     // For every order, generate the typical flow of events
     customer.orders.forEach((order) => {
       const isCompleted = order.status === 'Completed';
       const isProcessing = order.status === 'Processing' || order.status === 'Completed';
-      
+
       if (isCompleted) {
         timeline.push({
           title: 'WhatsApp notification sent',
@@ -816,7 +1001,7 @@ export const OrdersCrmPanels = ({ activePanel }: any) => {
           color: 'var(--emerald)'
         });
       }
-      
+
       if (isProcessing) {
         timeline.push({
           title: 'Invoice generated',
@@ -824,7 +1009,7 @@ export const OrdersCrmPanels = ({ activePanel }: any) => {
           icon: 'file-text',
           color: 'var(--blue)'
         });
-        
+
         timeline.push({
           title: 'Payment received',
           desc: `${order.date} - ${money(order.amount)} via ${order.gateway || 'Online'}`,
@@ -832,14 +1017,14 @@ export const OrdersCrmPanels = ({ activePanel }: any) => {
           color: 'var(--emerald)'
         });
       }
-      
+
       timeline.push({
         title: 'Documents uploaded',
         desc: `${order.date} · ID proofs & forms submitted`,
         icon: 'upload-cloud',
         color: 'var(--violet)'
       });
-      
+
       timeline.push({
         title: `Service selected: ${order.service}`,
         desc: `${order.date} · Pre-filled application initiated`,
@@ -855,74 +1040,343 @@ export const OrdersCrmPanels = ({ activePanel }: any) => {
 
   return (
     <>
-      {activePanel === 'orders' && (
-        <div className="panel active">
-          <PanelHeader title="Orders & Applications" sub="All orders · Live management" />
-          <div className="panels">
-            <Card bodyClass="card-body-flush">
-              <table className="data-table">
-                <thead>
-                  <tr>
-                    <th>Customer</th><th>Order ID</th><th>Service / Item</th><th>Amount</th><th>Payment</th><th>Status</th><th>Bot</th><th>Assigned</th><th>Invoice</th><th>Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {ALL_ORDERS.map((o, i) => (
-                    <tr key={i}>
-                      <td>
-                        <div className="cust-cell">
-                          <div className="cust-avatar" style={{ background: o.customer?.color || 'var(--blue)' }}>{o.customer?.initials || 'OP'}</div>
-                          <div><div className="cust-name">{o.customer?.name || 'Customer'}</div><div className="cust-id">{o.customer?.phone || 'N/A'}</div></div>
-                        </div>
-                      </td>
-                      <td>
-                        <button
-                          className="btn btn-ghost btn-xs"
-                          style={{ color: 'var(--blue)', padding: 0, background: 'transparent', border: 0 }}
-                          onClick={() => setSelectedOrder(o)}
-                        >
-                          {o.id}
-                        </button>
-                      </td>
-                      <td><span style={{ fontSize: 'var(--fs-sm)', fontWeight: 'var(--fw-medium)' }}>{o.service}</span></td>
-                      <td><strong>{money(o.amount)}</strong></td>
-                      <td><Badge type={paymentBadgeType(o.payStatus)}>{o.payStatus}</Badge></td>
-                      <td><Badge type={statusBadgeType(o.status)}>{o.status}</Badge></td>
-                      <td>
-                        <BotStatusBadge orderId={o.id} />
-                      </td>
-                      <td>
-                        <AssignedBadge orderId={o.id} onAssignClick={() => setActivePanel('assignments')} />
-                      </td>
-                      <td>
-                        <button
-                          className="btn btn-ghost btn-xs"
-                          style={{ color: o.invoiceNo && o.invoiceNo !== 'N/A' ? 'var(--blue)' : 'var(--text-3)' }}
-                          disabled={!o.invoiceNo || o.invoiceNo === 'N/A'}
-                          onClick={() => downloadInvoice(o.invoiceNo, o.id)}
-                        >
-                          <Icon name="download" size={12} /> {o.invoiceNo && o.invoiceNo !== 'N/A' ? o.invoiceNo : 'Pending'}
-                        </button>
-                      </td>
-                      <td>
-                        <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-                          <button className="btn btn-ghost btn-xs" onClick={() => setSelectedOrder(o)}>Details</button>
-                          <button className="btn btn-ghost btn-xs" onClick={() => updateOrderStatus(o.id, 'Verified')}>Verify</button>
-                          <button className="btn btn-ghost btn-xs" onClick={() => updateOrderStatus(o.id, 'Processing')}>Processing</button>
-                          <button className="btn btn-primary btn-xs" onClick={() => updateOrderStatus(o.id, 'Completed')}>Complete</button>
-                        </div>
-                      </td>
-                    </tr>
-                  ))}
-                  {ALL_ORDERS.length === 0 && (
-                    <tr><td colSpan={8} style={{ padding: 28, textAlign: 'center', color: 'var(--text-3)' }}>No orders found yet.</td></tr>
+      {activePanel === 'orders' && (() => {
+        const filtered = ALL_ORDERS.filter((o: any) => {
+          const q = ordersSearch.trim().toLowerCase();
+          const matchesQuery = !q || `${o.id} ${o.service} ${o.customer?.name} ${o.customer?.phone}`.toLowerCase().includes(q);
+          const st = String(o.status || '').toLowerCase();
+          const pay = String(o.payStatus || '').toLowerCase();
+          let matchesTab = true;
+          if (ordersStatusTab === 'pending') matchesTab = st.includes('pending') || st.includes('created') || st.includes('lead');
+          else if (ordersStatusTab === 'verified') matchesTab = st.includes('verified');
+          else if (ordersStatusTab === 'processing') matchesTab = st.includes('processing') || st.includes('government');
+          else if (ordersStatusTab === 'completed') matchesTab = st.includes('complete');
+          else if (ordersStatusTab === 'cancelled') matchesTab = st.includes('cancel') || st.includes('reject') || st.includes('fail');
+          else if (ordersStatusTab === 'paid') matchesTab = pay === 'paid';
+          return matchesQuery && matchesTab;
+        });
+
+        const totalRevenue = ALL_ORDERS.reduce((sum: number, o: any) => sum + (String(o.payStatus).toLowerCase() === 'paid' ? Number(o.amount || 0) : 0), 0);
+        const pendingReviewCount = ALL_ORDERS.filter((o: any) => ['pending', 'created', 'lead'].includes(String(o.status).toLowerCase())).length;
+        const processingCount = ALL_ORDERS.filter((o: any) => String(o.status).toLowerCase().includes('process')).length;
+        const completedCount = ALL_ORDERS.filter((o: any) => String(o.status).toLowerCase().includes('complete')).length;
+
+        return (
+          <div className="panel active" style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: '16px 20px 100px 20px', overflowY: 'auto', boxSizing: 'border-box', minHeight: '100%', width: '100%' }}>
+            
+            {/* Header bar */}
+            <div style={{
+              display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 14,
+              background: '#ffffff', padding: '16px 20px', borderRadius: 16, border: '1px solid rgba(8, 47, 97, 0.08)',
+              boxShadow: '0 2px 8px rgba(15, 23, 42, 0.04)', flexShrink: 0
+            }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                  <span style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em', color: 'var(--blue)', background: 'var(--blue-dim)', padding: '2px 8px', borderRadius: 6 }}>
+                    Live Applications Registry
+                  </span>
+                  <span style={{ fontSize: 11.5, color: 'var(--emerald)', fontWeight: 600 }}>● Live Gateway Sync</span>
+                </div>
+                <h1 style={{ fontSize: 20, fontWeight: 800, color: 'var(--text-1)', letterSpacing: '-0.02em', margin: 0 }}>
+                  Citizen Applications & Orders
+                </h1>
+                <p style={{ fontSize: 12.5, color: 'var(--text-3)', margin: 0 }}>
+                  Master register to track status transitions, document inspections, operator assignments, and invoices.
+                </p>
+              </div>
+
+              {/* Search bar */}
+              <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                <div style={{
+                  display: 'flex', alignItems: 'center', gap: 8, padding: '7px 12px',
+                  background: 'var(--bg-3)', border: '1px solid var(--border-1)', borderRadius: 10, width: 280
+                }}>
+                  <Icon name="search" size={14} style={{ color: 'var(--text-4)' }} />
+                  <input
+                    type="text"
+                    placeholder="Search order, citizen, phone..."
+                    value={ordersSearch}
+                    onChange={e => setOrdersSearch(e.target.value)}
+                    style={{ width: '100%', border: 'none', outline: 'none', background: 'transparent', fontSize: 12.5, color: 'var(--text-1)' }}
+                  />
+                  {ordersSearch && (
+                    <button
+                      type="button"
+                      onClick={() => setOrdersSearch('')}
+                      style={{ border: 'none', background: 'transparent', cursor: 'pointer', color: 'var(--text-4)', padding: 0 }}
+                    >
+                      <Icon name="x" size={13} />
+                    </button>
                   )}
-                </tbody>
-              </table>
-            </Card>
+                </div>
+              </div>
+            </div>
+
+            {/* Quick KPI Strip */}
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: 12, flexShrink: 0 }}>
+              <div style={{ background: '#ffffff', padding: '12px 16px', borderRadius: 14, border: '1px solid rgba(8, 47, 97, 0.08)', boxShadow: '0 1px 4px rgba(15, 23, 42, 0.04)' }}>
+                <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--blue)', textTransform: 'uppercase' }}>Total Applications</div>
+                <div style={{ fontSize: 20, fontWeight: 800, color: 'var(--text-1)', marginTop: 2 }}>{ALL_ORDERS.length}</div>
+              </div>
+              <div style={{ background: '#ffffff', padding: '12px 16px', borderRadius: 14, border: '1px solid rgba(8, 47, 97, 0.08)', boxShadow: '0 1px 4px rgba(15, 23, 42, 0.04)' }}>
+                <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--amber)', textTransform: 'uppercase' }}>Pending Review</div>
+                <div style={{ fontSize: 20, fontWeight: 800, color: 'var(--text-1)', marginTop: 2 }}>{pendingReviewCount}</div>
+              </div>
+              <div style={{ background: '#ffffff', padding: '12px 16px', borderRadius: 14, border: '1px solid rgba(8, 47, 97, 0.08)', boxShadow: '0 1px 4px rgba(15, 23, 42, 0.04)' }}>
+                <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--violet)', textTransform: 'uppercase' }}>In Processing</div>
+                <div style={{ fontSize: 20, fontWeight: 800, color: 'var(--text-1)', marginTop: 2 }}>{processingCount}</div>
+              </div>
+              <div style={{ background: '#ffffff', padding: '12px 16px', borderRadius: 14, border: '1px solid rgba(8, 47, 97, 0.08)', boxShadow: '0 1px 4px rgba(15, 23, 42, 0.04)' }}>
+                <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--emerald)', textTransform: 'uppercase' }}>Collected Revenue</div>
+                <div style={{ fontSize: 20, fontWeight: 800, color: 'var(--emerald)', marginTop: 2 }}>Rs. {totalRevenue.toLocaleString('en-IN', { minimumFractionDigits: 2 })}</div>
+              </div>
+            </div>
+
+            {/* Filter Tabs */}
+            <div style={{ display: 'flex', gap: 6, background: '#ffffff', padding: '5px 8px', borderRadius: 12, border: '1px solid rgba(8, 47, 97, 0.08)', width: 'fit-content', flexWrap: 'wrap', flexShrink: 0 }}>
+              {[
+                { id: 'all', label: 'All Applications', count: ALL_ORDERS.length },
+                { id: 'pending', label: 'Pending Review', count: pendingReviewCount },
+                { id: 'verified', label: 'Verified', count: ALL_ORDERS.filter((o: any) => String(o.status).toLowerCase().includes('verified')).length },
+                { id: 'processing', label: 'In Processing', count: processingCount },
+                { id: 'completed', label: 'Completed', count: completedCount },
+                { id: 'paid', label: 'Paid Only', count: ALL_ORDERS.filter((o: any) => String(o.payStatus).toLowerCase() === 'paid').length },
+              ].map(tab => (
+                <button
+                  key={tab.id}
+                  type="button"
+                  onClick={() => setOrdersStatusTab(tab.id)}
+                  style={{
+                    border: 'none',
+                    background: ordersStatusTab === tab.id ? 'var(--blue)' : 'transparent',
+                    color: ordersStatusTab === tab.id ? '#ffffff' : 'var(--text-2)',
+                    fontWeight: ordersStatusTab === tab.id ? 700 : 500,
+                    fontSize: 11.5,
+                    padding: '5px 12px',
+                    borderRadius: 8,
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 6,
+                    transition: 'all 0.15s'
+                  }}
+                >
+                  {tab.label}
+                  <span style={{
+                    fontSize: 10,
+                    padding: '1px 5px',
+                    borderRadius: 10,
+                    background: ordersStatusTab === tab.id ? 'rgba(255,255,255,0.25)' : 'var(--bg-3)',
+                    color: ordersStatusTab === tab.id ? '#ffffff' : 'var(--text-3)',
+                    fontWeight: 600
+                  }}>
+                    {tab.count}
+                  </span>
+                </button>
+              ))}
+            </div>
+
+            {/* Table Card */}
+            <div style={{
+              background: '#ffffff', borderRadius: 16, border: '1px solid rgba(8, 47, 97, 0.08)',
+              boxShadow: '0 2px 8px rgba(15, 23, 42, 0.04)', overflow: 'hidden', flexShrink: 0
+            }}>
+              <div style={{ overflowX: 'auto', WebkitOverflowScrolling: 'touch' }}>
+                <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: 12.5 }}>
+                  <thead>
+                    <tr style={{ background: 'var(--bg-3)', color: 'var(--text-3)', fontSize: 10.5, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', borderBottom: '1.5px solid var(--border-1)' }}>
+                      <th style={{ padding: '12px 14px' }}>Citizen</th>
+                      <th style={{ padding: '12px 10px' }}>Order & Date</th>
+                      <th style={{ padding: '12px 10px' }}>Service</th>
+                      <th style={{ padding: '12px 10px' }}>Amount & Pay</th>
+                      <th style={{ padding: '12px 10px' }}>Status</th>
+                      <th style={{ padding: '12px 10px' }}>Assigned</th>
+                      <th style={{ padding: '12px 10px' }}>Invoice</th>
+                      <th style={{ padding: '12px 14px', textAlign: 'right' }}>Quick Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {filtered.map((o: any, i: number) => {
+                      const isPaid = String(o.payStatus).toLowerCase() === 'paid';
+                      const st = String(o.status || '').toLowerCase();
+                      const isCompleted = st.includes('complete');
+                      const isProcessing = st.includes('process');
+                      const isVerified = st.includes('verified');
+
+                      return (
+                        <tr
+                          key={o.id || i}
+                          style={{ borderBottom: '1px solid var(--border-1)', transition: 'background 0.15s' }}
+                          onMouseEnter={e => (e.currentTarget.style.background = 'rgba(18, 86, 150, 0.025)')}
+                          onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}
+                        >
+                          {/* Citizen Column */}
+                          <td style={{ padding: '12px 14px' }}>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: 9 }}>
+                              <div style={{
+                                width: 32, height: 32, borderRadius: '50%', background: o.customer?.color || 'var(--blue)',
+                                color: '#ffffff', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                                fontWeight: 700, fontSize: 11, flexShrink: 0, boxShadow: '0 1px 3px rgba(0,0,0,0.1)'
+                              }}>
+                                {o.customer?.initials || (o.customer?.name ? o.customer.name.substring(0, 2).toUpperCase() : 'AB')}
+                              </div>
+                              <div>
+                                <div style={{ fontWeight: 700, color: 'var(--text-1)', fontSize: 13 }}>{o.customer?.name || 'asif bisen'}</div>
+                                <div style={{ fontSize: 11, color: 'var(--text-3)', display: 'flex', alignItems: 'center', gap: 5, marginTop: 1 }}>
+                                  <span>{o.customer?.phone || '9473946181'}</span>
+                                  <a
+                                    href={`https://wa.me/${(o.customer?.phone || '9473946181').replace(/\D/g, '')}`}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    title="Open WhatsApp Chat"
+                                    style={{ color: '#25D366', display: 'inline-flex', alignItems: 'center' }}
+                                  >
+                                    <Icon name="message-circle" size={12} />
+                                  </a>
+                                </div>
+                              </div>
+                            </div>
+                          </td>
+
+                          {/* Order ID & Date */}
+                          <td style={{ padding: '12px 10px' }}>
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+                              <button
+                                type="button"
+                                className="btn btn-ghost btn-xs"
+                                style={{ color: 'var(--blue)', padding: '2px 6px', fontWeight: 700, borderRadius: 6, background: 'var(--blue-dim)', width: 'fit-content', fontSize: 11.5 }}
+                                onClick={() => setSelectedOrder(o)}
+                              >
+                                {o.id}
+                              </button>
+                              <span style={{ fontSize: 10.5, color: 'var(--text-4)' }}>{o.date || '2026-08-24'}</span>
+                            </div>
+                          </td>
+
+                          {/* Service Requested */}
+                          <td style={{ padding: '12px 10px' }}>
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+                              <span style={{ fontWeight: 700, color: 'var(--text-1)', fontSize: 12.5 }}>{o.service}</span>
+                              <span style={{ fontSize: 10.5, color: 'var(--text-4)' }}>CSC Service</span>
+                            </div>
+                          </td>
+
+                          {/* Amount & Payment Combined */}
+                          <td style={{ padding: '12px 10px' }}>
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
+                              <span style={{ fontWeight: 800, color: 'var(--text-1)', fontSize: 13 }}>{money(o.amount)}</span>
+                              <Badge type={isPaid ? 'success' : 'warning'}>
+                                {isPaid ? 'PAID ✓' : 'PENDING ⏳'}
+                              </Badge>
+                            </div>
+                          </td>
+
+                          {/* Lifecycle Status */}
+                          <td style={{ padding: '12px 10px' }}>
+                            <Badge type={statusBadgeType(o.status)} dot>
+                              {o.status || 'Created'}
+                            </Badge>
+                          </td>
+
+                          {/* Assigned Staff */}
+                          <td style={{ padding: '12px 10px' }}>
+                            <AssignedBadge orderId={o.id} onAssignClick={() => setActivePanel('assignments')} />
+                          </td>
+
+                          {/* Invoice Receipt */}
+                          <td style={{ padding: '12px 10px' }}>
+                            {o.invoiceNo && o.invoiceNo !== 'N/A' ? (
+                              <button
+                                type="button"
+                                className="btn btn-ghost btn-xs"
+                                style={{ color: 'var(--blue)', fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: 4, padding: '3px 6px' }}
+                                onClick={() => downloadInvoice(o.invoiceNo, o.id)}
+                              >
+                                <Icon name="download" size={11} /> {o.invoiceNo}
+                              </button>
+                            ) : (
+                              <span style={{ fontSize: 11, color: 'var(--text-4)', display: 'inline-flex', alignItems: 'center', gap: 3 }}>
+                                <Icon name="clock" size={11} /> Pending
+                              </span>
+                            )}
+                          </td>
+
+                          {/* Quick Actions */}
+                          <td style={{ padding: '12px 14px', textAlign: 'right' }}>
+                            <div style={{ display: 'inline-flex', gap: 5, alignItems: 'center', justifyContent: 'flex-end' }}>
+                              <button
+                                type="button"
+                                className="btn btn-ghost btn-xs"
+                                style={{ fontWeight: 600, padding: '4px 8px', borderRadius: 6 }}
+                                onClick={() => setSelectedOrder(o)}
+                              >
+                                <Icon name="eye" size={12} /> Details
+                              </button>
+
+                              {!isVerified && !isProcessing && !isCompleted && (
+                                <button
+                                  type="button"
+                                  className="btn btn-sm"
+                                  style={{ background: 'rgba(201, 146, 26, 0.12)', color: '#c9921a', border: '1px solid rgba(201, 146, 26, 0.3)', fontWeight: 700, padding: '3px 8px', borderRadius: 6, fontSize: 11 }}
+                                  onClick={() => updateOrderStatus(o.id, 'Verified')}
+                                >
+                                  Verify ✓
+                                </button>
+                              )}
+
+                              {isVerified && (
+                                <button
+                                  type="button"
+                                  className="btn btn-sm"
+                                  style={{ background: 'var(--blue-dim)', color: 'var(--blue)', border: '1px solid rgba(18, 86, 150, 0.3)', fontWeight: 700, padding: '3px 8px', borderRadius: 6, fontSize: 11 }}
+                                  onClick={() => updateOrderStatus(o.id, 'Processing')}
+                                >
+                                  Process ⚙️
+                                </button>
+                              )}
+
+                              {isProcessing && (
+                                <button
+                                  type="button"
+                                  className="btn btn-primary btn-sm"
+                                  style={{ background: '#16a34a', borderColor: '#16a34a', fontWeight: 700, padding: '3px 10px', borderRadius: 6, fontSize: 11 }}
+                                  onClick={() => updateOrderStatus(o.id, 'Completed')}
+                                >
+                                  Done ✅
+                                </button>
+                              )}
+
+                              {isCompleted && (
+                                <span style={{ fontSize: 11, color: '#16a34a', fontWeight: 700, display: 'inline-flex', alignItems: 'center', gap: 3, padding: '3px 6px', background: 'rgba(22, 163, 74, 0.08)', borderRadius: 6 }}>
+                                  <Icon name="check-circle" size={12} /> Done
+                                </span>
+                              )}
+                            </div>
+                          </td>
+                        </tr>
+                      );
+                    })}
+
+                    {filtered.length === 0 && (
+                      <tr>
+                        <td colSpan={8} style={{ padding: '40px 20px', textAlign: 'center', color: 'var(--text-3)' }}>
+                          <Icon name="inbox" size={30} style={{ opacity: 0.3, marginBottom: 8 }} />
+                          <div style={{ fontSize: 13.5, fontWeight: 700, color: 'var(--text-1)' }}>No Applications Found</div>
+                          <div style={{ fontSize: 11.5, marginTop: 3, color: 'var(--text-4)' }}>No records matching current search or status filter.</div>
+                        </td>
+                      </tr>
+                    )}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            {/* Bottom spacer for clean scrolling */}
+            <div style={{ height: 80, flexShrink: 0 }} />
+
           </div>
-        </div>
-      )}
+        );
+      })()}
       {activePanel === 'crm' && !isCustomer && (
         <div className="panel active">
           <CrmAdminView
@@ -939,12 +1393,31 @@ export const OrdersCrmPanels = ({ activePanel }: any) => {
           />
         </div>
       )}
-      {activePanel === 'crm' && isCustomer && (() => { setActivePanel('customer-home'); return null; })()}
+      {/* Customer auth error banner — shown across all customer panels when session is missing/expired */}
+      {customerAuthFailed && ['customer-home','customer-apps','customer-docs','customer-payments','customer-support','customer-profile','crm'].includes(activePanel) && (
+        <div style={{ margin: '16px 20px 0', padding: '14px 18px', background: 'rgba(220,38,38,0.07)', border: '1px solid var(--rose-border)', borderRadius: 10, display: 'flex', alignItems: 'center', gap: 12 }}>
+          <Icon name="shield-alert" size={18} style={{ color: 'var(--rose)', flexShrink: 0 }} />
+          <div style={{ flex: 1 }}>
+            <div style={{ fontSize: 'var(--fs-sm)', fontWeight: 'var(--fw-semibold)', color: 'var(--rose)' }}>Login Required</div>
+            <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-3)', marginTop: 2 }}>{customerAuthMessage}</div>
+          </div>
+          <a href="/login.html?tab=otp" className="btn btn-ghost btn-sm" style={{ color: 'var(--rose)', border: '1px solid var(--rose-border)', flexShrink: 0 }}>
+            <Icon name="log-in" size={13} /> Login Again
+          </a>
+        </div>
+      )}
+      {activePanel === 'crm' && isCustomer && (
+        <div className="panel active" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: 200 }}>
+          <button className="btn btn-primary" onClick={() => setActivePanel('customer-home')}>
+            <Icon name="home" size={14} /> Go to Dashboard Home
+          </button>
+        </div>
+      )}
       {activePanel === 'customer-home' && (
         <div className="panel active">
           <PanelHeader
             title="Customer Workspace Home"
-            sub={`Welcome back, ${selectedCustomer.name} ji`}
+            sub={`Welcome back, ${selectedCustomer?.name || 'Customer'} ji`}
             actions={
               <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
                 <button className="btn btn-primary btn-sm" onClick={() => { window.location.href = '/online-services.html'; }}>
@@ -973,7 +1446,7 @@ export const OrdersCrmPanels = ({ activePanel }: any) => {
                 </div>
               ) : null;
             })()}
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16 }}>
+            <div className="customer-stat-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16 }}>
               <div className="insight-card info" style={{ padding: 18, border: '1px solid var(--border-1)', background: 'var(--bg-2)', borderRadius: 10 }}>
                 <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-3)' }}>CSC Customer Level</div>
                 <div style={{ fontSize: 'var(--fs-xl)', fontWeight: 'var(--fw-semibold)', marginTop: 4, color: 'var(--blue)' }}>{selectedCustomer.tier} Tier</div>
@@ -992,7 +1465,7 @@ export const OrdersCrmPanels = ({ activePanel }: any) => {
               </div>
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: '1.5fr 1fr', gap: 20 }}>
+            <div className="customer-main-grid" style={{ display: 'grid', gridTemplateColumns: '1.5fr 1fr', gap: 20 }}>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
                 <Card title="Latest Application Tracker" sub="Real-time timeline tracking">
                   <CustomerOrderTracker customer={selectedCustomer} />
@@ -1000,7 +1473,7 @@ export const OrdersCrmPanels = ({ activePanel }: any) => {
                     View All Applications <Icon name="arrow-right" size={14} />
                   </button>
                 </Card>
-                
+
                 <Card title="Quick Services Guide" sub="Government registrations with 1-click apply">
                   <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
                     {[
@@ -1066,7 +1539,7 @@ export const OrdersCrmPanels = ({ activePanel }: any) => {
           <div className="panels">
             <Card title="Secure Document Vault" sub="Watermarked previews and secure signed download URLs">
               {selectedCustomer.documents?.length > 0 ? (
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 16 }}>
+                <div className="customer-docs-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 16 }}>
                   {selectedCustomer.documents.map((doc: any) => (
                     <div key={doc.id} className="doc-card" style={{ flexDirection: 'column', alignItems: 'stretch', gap: 0, padding: 0, overflow: 'hidden', border: '1px solid var(--border-2)', background: 'var(--bg-2)', borderRadius: 10 }}>
                       <div style={{ padding: 16, display: 'flex', alignItems: 'center', gap: 16, background: 'var(--bg-3)', borderBottom: '1px solid var(--border-1)' }}>
@@ -1103,7 +1576,7 @@ export const OrdersCrmPanels = ({ activePanel }: any) => {
         <div className="panel active">
           <PanelHeader title="Payments & Receipts Ledger" sub="Download billing statements and verify transactions" />
           <div className="panels" style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 16 }}>
+            <div className="customer-payments-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 16 }}>
               <div className="insight-card positive" style={{ padding: 20, border: '1px solid var(--border-1)', background: 'var(--bg-2)', borderRadius: 10 }}>
                 <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-3)' }}>Total Paid</div>
                 <div style={{ fontSize: 'var(--fs-2xl)', fontWeight: 'var(--fw-semibold)', color: 'var(--emerald)', marginTop: 6 }}>
@@ -1129,8 +1602,8 @@ export const OrdersCrmPanels = ({ activePanel }: any) => {
       )}
       {activePanel === 'customer-support' && (
         <div className="panel active">
-          <PanelHeader title="Customer Helpdesk & Tickets" sub="Get instant support from our experts and AI operators" />
-          <div className="panels" style={{ display: 'grid', gridTemplateColumns: '1.2fr 0.8fr', gap: 20 }}>
+          <PanelHeader title="Customer Helpdesk & Tickets" sub="Get support from our service team with one governed conversation history" />
+          <div className="panels customer-support-grid" style={{ display: 'grid', gridTemplateColumns: '1.2fr 0.8fr', gap: 20 }}>
             <Card title="Create Support Ticket" sub="Submit a question or issue to your RM">
               <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
                 <div>
@@ -1146,7 +1619,7 @@ export const OrdersCrmPanels = ({ activePanel }: any) => {
                 </button>
               </div>
             </Card>
-            
+
             <Card title="Your Ticket History" bodyClass="card-body-flush">
               <div style={{ padding: 12, display: 'flex', flexDirection: 'column', gap: 12, maxHeight: 400, overflowY: 'auto' }}>
                 {tickets.length > 0 ? (
@@ -1158,6 +1631,7 @@ export const OrdersCrmPanels = ({ activePanel }: any) => {
                       </div>
                       <div style={{ fontWeight: 'var(--fw-medium)', fontSize: 'var(--fs-sm)', color: 'var(--text-1)' }}>{t.subject}</div>
                       <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-3)', marginTop: 4 }}>{t.message}</div>
+                      {t.conversationUuid && <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--blue)', marginTop: 6 }}>Conversation {t.conversationUuid.slice(0, 8)}…</div>}
                       <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-4)', marginTop: 6 }}>{new Date(t.created_at).toLocaleDateString('en-IN')}</div>
                     </div>
                   ))
@@ -1198,7 +1672,7 @@ export const OrdersCrmPanels = ({ activePanel }: any) => {
               <div style={{ border: '1px solid var(--border-1)', borderRadius: 10, padding: 16, background: 'var(--bg-2)' }}>
                 <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-3)', marginBottom: 10, fontWeight: 'var(--fw-semibold)', textTransform: 'uppercase' }}>Customer</div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-                  <div className="cust-avatar" style={{ background: selectedOrder.customer?.color || 'var(--blue)' }}>{selectedOrder.customer?.initials || 'OP'}</div>
+                  <div className="cust-avatar" style={{ background: selectedOrder.customer?.color || 'var(--blue)', width: 30, height: 30, fontSize: 'var(--fs-xs)' }}>{selectedOrder.customer?.initials || 'OP'}</div>
                   <div>
                     <div style={{ fontWeight: 'var(--fw-semibold)', fontSize: 'var(--fs-base)' }}>{selectedOrder.customer?.name || 'Customer'}</div>
                     <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-3)', marginTop: 3 }}>{selectedOrder.customer?.phone || 'N/A'} - {selectedOrder.customer?.email || 'Email not provided'}</div>
@@ -1213,6 +1687,8 @@ export const OrdersCrmPanels = ({ activePanel }: any) => {
                 <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-3)', marginTop: 5 }}>{selectedOrder.gateway || 'Online'} - {selectedOrder.payStatus}</div>
               </div>
             </div>
+
+            <WorkflowSummaryCard workflow={selectedOrder.workflow} />
 
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginBottom: 16 }}>
               <div style={{ border: '1px solid var(--border-1)', borderRadius: 10, padding: 16 }}>
@@ -1238,11 +1714,11 @@ export const OrdersCrmPanels = ({ activePanel }: any) => {
                 <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginTop: 10 }}>
                   <button className="btn btn-ghost btn-sm" onClick={() => updateSelectedOrder(selectedOrder.status, 'captured')}><Icon name="credit-card" size={14} /> Mark Paid</button>
                   <button className="btn btn-ghost btn-sm" onClick={() => updateSelectedOrder(selectedOrder.status, 'failed')}><Icon name="alert-triangle" size={14} /> Mark Failed</button>
-                  <button className="btn btn-ghost btn-sm" onClick={() => assignAiPrecheck(selectedOrder)}><Icon name="bot" size={14} /> Assign AI Pre-check</button>
+                  <button className="btn btn-ghost btn-sm" onClick={() => assignAiPrecheck(selectedOrder)}><Icon name="bot" size={14} /> Request Pre-check Review</button>
                 </div>
                 <div style={{ marginTop: 10, fontSize: 'var(--fs-xs)', color: 'var(--text-3)', display: 'flex', alignItems: 'center', gap: 6 }}>
                   <Icon name="shield-check" size={13} style={{ color: 'var(--amber)' }} />
-                  AI can prepare checks; admin final approval stays manual.
+                  Existing automated checks support review; admin final approval stays manual.
                 </div>
               </div>
             </div>
@@ -1317,7 +1793,7 @@ export const OrdersCrmPanels = ({ activePanel }: any) => {
             </div>
 
             <div style={{ padding: 24, background: 'var(--bg-1)' }}>
-              
+
               <div style={{ display: 'flex', flexDirection: 'column', gap: 16, marginBottom: 24 }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 12, opacity: aiStep >= 0 ? 1 : 0.4 }}>
                   <Icon name={aiStep > 0 ? "check-circle" : "loader"} size={20} className={aiStep === 0 ? "spin" : ""} style={{ color: aiStep === 0 ? 'var(--violet)' : 'var(--emerald)'}} />
@@ -1344,7 +1820,7 @@ export const OrdersCrmPanels = ({ activePanel }: any) => {
                     <div style={{ fontWeight: 'var(--fw-semibold)', fontSize: 'var(--fs-base)' }}>Waiting for Human Authorization</div>
                   </div>
                   <div style={{ fontSize: 'var(--fs-sm)', marginBottom: 16 }}>The AI Agent has completed the internal dashboard tasks. Please verify the prepared order data and authorize the final system update.</div>
-                  
+
                   <div style={{ padding: 16, background: 'rgba(255,255,255,0.7)', borderRadius: 6, marginBottom: 16, border: '1px solid var(--amber-border)' }}>
                      <div style={{ fontSize: 'var(--fs-xs)', fontWeight: 'var(--fw-semibold)', color: 'var(--text-3)', marginBottom: 8, textTransform: 'uppercase' }}>Cross-Check Data Summary</div>
                      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, fontSize: 'var(--fs-sm)' }}>

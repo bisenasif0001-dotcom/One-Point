@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="One Point Notifications &amp; Action Center — live alerts for citizen requests, document verification requirements, and payment confirmations.">
+    <meta name="robots" content="noindex,nofollow">
+    <title>Notifications &amp; Action Center | One Point Digital Services</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;850;900&display=swap" rel="stylesheet">
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+    <script src="assets/opds-boot.js?v=anti-fouc-79"></script>
+    <link rel="stylesheet" href="assets/onepoint.css?v=customer-checkout-94">
+    <link rel="stylesheet" href="assets/onepoint-customer-profile.css?v=20">
+    <link rel="stylesheet" href="assets/onepoint-customer-account.css?v=21">
+  </head>
+  <body class="elite-console-body enterprise-checkout-body" data-account-page="notifications">
+    <div data-account-shell></div>
+
+    <div class="acc-page" data-account-content hidden>
+      
+      <!-- Top Page Heading -->
+      <section class="acc-greeting">
+        <div>
+          <span class="acc-eyebrow"><i data-lucide="bell"></i> NOTIFICATIONS</span>
+          <h1>Notifications &amp; Action Center</h1>
+          <p>Real-time high-priority updates, document replacement requests, and payment confirmation receipts.</p>
+        </div>
+        <button type="button" class="eds-btn eds-btn-secondary" id="acc-notif-mark-all-read-btn">
+          <i data-lucide="check-check"></i> Mark All as Read
+        </button>
+      </section>
+
+      <!-- Category Filter Tabs -->
+      <nav class="cpf-tab-nav" role="tablist" aria-label="Notification Categories" style="margin-top:4px;">
+        <button type="button" class="cpf-tab-btn active" data-notif-tab="all" role="tab" aria-selected="true" id="tab-btn-all-notifs">
+          <i data-lucide="bell"></i> All <span class="cpf-tab-count-badge" id="notif-count-all">4</span>
+        </button>
+        <button type="button" class="cpf-tab-btn" data-notif-tab="action" role="tab" aria-selected="false" id="tab-btn-act-notifs">
+          <i data-lucide="alert-triangle"></i> Action Required <span class="cpf-tab-count-badge" id="notif-count-action">1</span>
+        </button>
+        <button type="button" class="cpf-tab-btn" data-notif-tab="requests" role="tab" aria-selected="false">
+          <i data-lucide="package"></i> Requests
+        </button>
+        <button type="button" class="cpf-tab-btn" data-notif-tab="payments" role="tab" aria-selected="false">
+          <i data-lucide="credit-card"></i> Payments &amp; Invoices
+        </button>
+        <button type="button" class="cpf-tab-btn" data-notif-tab="security" role="tab" aria-selected="false">
+          <i data-lucide="shield-check"></i> Security
+        </button>
+      </nav>
+
+      <!-- Notifications List Container -->
+      <section class="cpf-card" style="margin-top:14px; padding:0; overflow:hidden;">
+        <div class="acc-notifications-stream" id="acc-notifications-stream">
+          <!-- Rendered via JS -->
+        </div>
+      </section>
+
+    </div>
+
+    <div data-account-footer></div>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+    <script src="assets/app.js?v=customer-checkout-94" defer></script>
+    <script src="assets/auth.js?v=cpf-1" defer></script>
+    <script src="assets/customer-account.js?v=20" defer></script>
+    <script src="assets/customer-account-notifications.js?v=20" defer></script>
+  </body>
+</html>

@@ -1,11 +1,11 @@
 ﻿import React, { useState, useEffect } from 'react';
-import { DndContext, closestCenter, KeyboardSensor, PointerSensor, useSensor, useSensors, DragOverlay, useDraggable, useDroppable } from '@dnd-kit/core';
-import { arrayMove, SortableContext, sortableKeyboardCoordinates, verticalListSortingStrategy, useSortable } from '@dnd-kit/sortable';
-import { CSS } from '@dnd-kit/utilities';
-import { PanelHeader, Card, Badge, Icon } from '../Shared';
+import { DndContext, closestCenter, KeyboardSensor, PointerSensor, useSensor, useSensors, DragOverlay, useDraggable, useDroppable} from '@dnd-kit/core';
+import { arrayMove, SortableContext, sortableKeyboardCoordinates, verticalListSortingStrategy, useSortable} from '@dnd-kit/sortable';
+import { CSS} from '@dnd-kit/utilities';
+import { PanelHeader, Card, Icon} from '../Shared';
 
-const TOKEN = localStorage.getItem('opds_admin_token') || '';
-const ADMIN_HEADERS = { 'X-Admin-Token': TOKEN, 'Content-Type': 'application/json' };
+const getToken = () => localStorage.getItem('opds_admin_token') || '';
+const ADMIN_HEADERS = () => ({ 'X-Admin-Token': getToken(), 'Content-Type': 'application/json' });
 
 // Blocks available to add
 const AVAILABLE_BLOCKS = [
@@ -57,9 +57,9 @@ const DraggablePaletteBlock = ({ block, onAdd }: any) => {
   });
 
   return (
-    <div 
+    <div
       ref={setNodeRef}
-      className="palette-block" 
+      className="palette-block"
       onClick={() => onAdd(block)}
       style={{ opacity: isDragging ? 0.5 : 1, cursor: 'grab' }}
       {...listeners}
@@ -75,14 +75,14 @@ const DraggablePaletteBlock = ({ block, onAdd }: any) => {
 const WorkflowCanvasDroppable = ({ children }: any) => {
   const { setNodeRef, isOver } = useDroppable({ id: 'canvas' });
   return (
-    <div 
-      ref={setNodeRef} 
-      style={{ 
-        display: 'flex', 
-        flexDirection: 'column', 
-        gap: 16, 
-        alignItems: 'center', 
-        minHeight: '100%', 
+    <div
+      ref={setNodeRef}
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: 16,
+        alignItems: 'center',
+        minHeight: '100%',
         padding: 8,
         borderRadius: 8,
         backgroundColor: isOver ? 'var(--bg-3)' : 'transparent',
@@ -106,7 +106,7 @@ export const AutomationPanel = () => {
 
   // Load saved automation rules from backend on mount
   useEffect(() => {
-    fetch('/api/admin/automation-rules', { headers: ADMIN_HEADERS })
+    fetch('/api/admin/automation-rules', { headers: ADMIN_HEADERS() })
       .then(r => r.json())
       .then(d => setSavedRules(d.rules || []))
       .catch(() => {});
@@ -126,10 +126,10 @@ export const AutomationPanel = () => {
       const csrf = document.cookie.split(';').find(c => c.trim().startsWith('opds_csrf='))?.split('=')[1] || '';
       await fetch('/api/admin/automation-rules', {
         method: 'POST',
-        headers: { ...ADMIN_HEADERS, 'X-CSRF-Token': csrf },
+        headers: { ...ADMIN_HEADERS(), 'X-CSRF-Token': csrf },
         body: JSON.stringify({ name: ruleName, trigger, conditions: {}, actions, is_active: 1 }),
       });
-      const r = await fetch('/api/admin/automation-rules', { headers: ADMIN_HEADERS });
+      const r = await fetch('/api/admin/automation-rules', { headers: ADMIN_HEADERS() });
       const d = await r.json();
       setSavedRules(d.rules || []);
       setSaveMsg('✓ Workflow saved successfully!');
@@ -142,10 +142,10 @@ export const AutomationPanel = () => {
     const csrf = document.cookie.split(';').find(c => c.trim().startsWith('opds_csrf='))?.split('=')[1] || '';
     await fetch(`/api/admin/automation-rules/${ruleId}`, {
       method: 'PATCH',
-      headers: { ...ADMIN_HEADERS, 'X-CSRF-Token': csrf },
+      headers: { ...ADMIN_HEADERS(), 'X-CSRF-Token': csrf },
       body: JSON.stringify({ is_active: currentActive ? 0 : 1 }),
     });
-    const r = await fetch('/api/admin/automation-rules', { headers: ADMIN_HEADERS });
+    const r = await fetch('/api/admin/automation-rules', { headers: ADMIN_HEADERS() });
     const d = await r.json();
     setSavedRules(d.rules || []);
   };
@@ -192,7 +192,7 @@ export const AutomationPanel = () => {
         const newIndex = items.findIndex((i) => i.id === over.id);
 
         if (oldIndex === -1 || newIndex === -1) {
-          return items; 
+          return items;
         }
 
         return arrayMove(items, oldIndex, newIndex);
@@ -222,29 +222,43 @@ export const AutomationPanel = () => {
 
   return (
     <div className="panel active">
-      <PanelHeader 
-        title="Visual Rule Builder" 
-        sub="Create automation workflows with drag and drop" 
+      <PanelHeader
+        title="Visual Rule Builder"
+        sub="Create automation workflows with drag and drop"
         actions={
           <>
             <button className="btn btn-ghost btn-sm" onClick={() => loadTemplate('payment-whatsapp')} style={{ color: 'var(--emerald)', border: '1px solid var(--emerald-border)' }}>
               <Icon name="zap" size={14} /> Auto-Invoice WA Template
             </button>
-            <button className="btn btn-ghost btn-sm" onClick={() => setNodes([])}>Clear All</button>
+            <button className="btn btn-ghost btn-sm" onClick={() => {
+              if (!window.confirm('Kya aap sab workflow nodes clear karna chahte hain? Yeh action undo nahi hoga.')) return;
+              setNodes([]);
+            }}>Clear All</button>
+            <button className="btn btn-ghost btn-sm" style={{ color: 'var(--blue)', border: '1px solid var(--blue-border)' }} onClick={() => {
+              const triggerBlock = nodes.find(n => n.type === 'trigger');
+              const actionBlocks = nodes.filter(n => n.type !== 'trigger');
+              if (nodes.length === 0) { alert('Add at least one block to test.'); return; }
+              const triggerLabel = triggerBlock?.label || 'None';
+              const actionLabel = actionBlocks.map(a => a.label).join(', ') || 'None';
+              alert(`Rule Test:\nTrigger: '${triggerLabel}'\nAction: '${actionLabel}'\n\nSimulation only — no actual action taken.`);
+            }}>
+              <Icon name="play" size={14} /> Test Rule
+            </button>
             <button className="btn btn-primary btn-sm" onClick={handleSave} disabled={saving} style={{ opacity: saving ? 0.6 : 1 }}>
               {saving ? <Icon name="loader-2" size={14} className="spin" /> : <Icon name="save" size={14} />} Save Workflow
             </button>
           </>
-        } 
+        }
       />
-      
-      <DndContext 
-        sensors={sensors} 
-        collisionDetection={closestCenter} 
+
+      <DndContext
+        sensors={sensors}
+        collisionDetection={closestCenter}
         onDragStart={handleDragStart}
         onDragEnd={handleDragEnd}
       >
-        <div className="panels" style={{ flexDirection: 'row', alignItems: 'flex-start' }}>
+        <div className="panels">
+        <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'flex-start', gap: 14, flexShrink: 0 }}>
           {/* Left Palette */}
           <div style={{ width: 280, display: 'flex', flexDirection: 'column', gap: 16 }}>
             <Card title="Available Blocks" sub="Drag or click to add" bodyClass="card-body-flush" style={{ padding: 12 }}>
@@ -280,7 +294,7 @@ export const AutomationPanel = () => {
                 </WorkflowCanvasDroppable>
               </div>
             </Card>
-            
+
             {nodes.length > 0 && (
                <div style={{ marginTop: 16, padding: 16, background: 'var(--bg-2)', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-1)' }}>
                  <div style={{ fontSize: 'var(--fs-sm)', fontWeight: 'var(--fw-semibold)', marginBottom: 8 }}>Workflow Summary</div>
@@ -306,8 +320,7 @@ export const AutomationPanel = () => {
 
         {/* Saved Rules Table */}
         {savedRules.length > 0 && (
-          <div style={{ padding: '0 24px 24px' }}>
-            <Card title="Saved Automation Rules" sub="All active workflows. Toggle on/off anytime.">
+            <Card title="Saved Automation Rules" sub="All active workflows. Toggle on/off anytime." style={{ flexShrink: 0 }}>
               <table className="data-table">
                 <thead><tr><th>Rule Name</th><th>Trigger</th><th>Actions</th><th>Status</th><th>Toggle</th></tr></thead>
                 <tbody>
@@ -316,7 +329,19 @@ export const AutomationPanel = () => {
                       <td><strong style={{ fontSize: 'var(--fs-sm)' }}>{r.name}</strong></td>
                       <td><code style={{ fontSize: 'var(--fs-xs)', background: 'var(--bg-3)', padding: '2px 6px', borderRadius: 4 }}>{r.trigger}</code></td>
                       <td style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-3)' }}>
-                        {Array.isArray(r.actions) ? r.actions.map((a: any) => a.label || a.type).join(' → ') : JSON.stringify(r.actions).slice(0, 60)}
+                        {Array.isArray(r.actions)
+                          ? r.actions.map((a: any) => {
+                              const t = (a.type || '').toLowerCase();
+                              if (t.includes('whatsapp') || t.includes('wa') || t.includes('notify') || t.includes('message'))
+                                return `📱 WhatsApp: ${a.label || a.config?.[0]?.v || 'Send message'}`;
+                              if (t.includes('status'))
+                                return `🔄 Status → ${a.config?.find((c: any) => c.l === 'Status')?.v || a.label}`;
+                              if (t.includes('assign'))
+                                return `👤 Assign to ${a.config?.find((c: any) => c.l === 'Staff')?.v || 'agent'}`;
+                              return a.label || a.type;
+                            }).join(' → ')
+                          : <pre style={{ margin: 0, fontSize: 'var(--fs-xs)', whiteSpace: 'pre-wrap' }}>{JSON.stringify(r.actions, null, 2)}</pre>
+                        }
                       </td>
                       <td>
                         <span style={{ fontSize: 'var(--fs-xs)', fontWeight: 'var(--fw-semibold)', padding: '2px 8px', borderRadius: 20,
@@ -335,8 +360,8 @@ export const AutomationPanel = () => {
                 </tbody>
               </table>
             </Card>
-          </div>
         )}
+        </div>
 
         <DragOverlay>
           {activeNode ? (

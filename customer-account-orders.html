@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Manage all your citizen applications, government form filings, print jobs, and service requests in one unified dashboard.">
+    <meta name="robots" content="noindex,nofollow">
+    <title>My Requests &amp; Orders | One Point Digital Services</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;850;900&display=swap" rel="stylesheet">
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+    <script src="assets/opds-boot.js?v=anti-fouc-79"></script>
+    <link rel="stylesheet" href="assets/onepoint.css?v=customer-checkout-94">
+    <link rel="stylesheet" href="assets/onepoint-customer-profile.css?v=20">
+    <link rel="stylesheet" href="assets/onepoint-customer-account.css?v=21">
+  </head>
+  <body class="elite-console-body enterprise-checkout-body" data-account-page="orders">
+    <div data-account-shell></div>
+
+    <div class="acc-page" data-account-content hidden>
+      
+      <!-- Workspace Top Header -->
+      <section class="acc-greeting">
+        <div class="acc-greeting-copy">
+          <div class="acc-eyebrow-row">
+            <span class="acc-eyebrow"><i data-lucide="package"></i> MY REQUESTS</span>
+            <span class="acc-desk-live-pill" title="Suvidha Kendra Lucknow Online 9:00 AM – 8:00 PM">
+              <span class="acc-pulse-dot-green"></span>
+              <span>Lucknow Kendra Online</span>
+            </span>
+          </div>
+          <h1>My Requests &amp; Orders</h1>
+          <p>Track live application progress, fulfill action items, download delivery receipts and manage orders.</p>
+          <div class="acc-orders-mini-summary" id="acc-orders-mini-summary" aria-label="Requests summary"></div>
+        </div>
+        <div class="acc-greeting-actions">
+          <a class="eds-btn eds-btn-primary acc-cta-primary" href="services.html"><i data-lucide="plus-circle"></i> <span>Start New Request</span></a>
+        </div>
+      </section>
+
+      <!-- Compact Command Bar (Search + Inline Filter Dropdowns) -->
+      <div class="acc-command-bar">
+        <div class="acc-command-search-wrap">
+          <i data-lucide="search" class="acc-command-search-icon"></i>
+          <input class="acc-command-search-input" id="acc-order-search" placeholder="Search by Request ID, service title, or keyword...">
+        </div>
+        <div class="acc-command-filters">
+          <select id="filter-primary-status" class="acc-command-select" aria-label="Filter by Status">
+            <option value="all">Status: All</option>
+            <option value="action">Action Required</option>
+            <option value="active">In Progress</option>
+            <option value="completed">Completed</option>
+            <option value="cancelled">Cancelled</option>
+          </select>
+          <select id="filter-service-type" class="acc-command-select" aria-label="Filter by Category">
+            <option value="all">Category: All</option>
+            <option value="eservice">E-Service</option>
+            <option value="student">Student / Exam</option>
+            <option value="business">Business &amp; Tax</option>
+            <option value="print">Print &amp; Scan</option>
+            <option value="design">Graphic Design</option>
+            <option value="web">Web Dev</option>
+            <option value="product">OneMart</option>
+          </select>
+          <select id="filter-sort-order" class="acc-command-select" aria-label="Sort by Order">
+            <option value="newest">Sort: Newest</option>
+            <option value="oldest">Sort: Oldest</option>
+            <option value="updated">Sort: Recent Update</option>
+          </select>
+          <button type="button" class="acc-command-reset-btn" id="acc-clear-all-filters-btn" title="Reset all filters" aria-label="Reset Filters" hidden>
+            <i data-lucide="rotate-ccw"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Spotlight: Needs Attention / Action Required Case (Rendered dynamically) -->
+      <section id="acc-orders-spotlight" class="acc-spotlight-section" hidden></section>
+
+      <!-- Visual Journey Rows Output (In Progress & Completed) -->
+      <div id="acc-order-list" class="acc-journey-container"></div>
+
+      <!-- Quick Tools & Resources -->
+      <nav class="acc-quick-tools-strip" aria-label="Quick tools">
+        <span>Quick shortcuts:</span>
+        <a href="customer-account-vault.html"><i data-lucide="shield-check"></i> Document Vault</a>
+        <a href="customer-account-payments.html"><i data-lucide="credit-card"></i> Payments &amp; Billing</a>
+        <a href="customer-account-invoices.html"><i data-lucide="receipt"></i> Invoices &amp; Receipts</a>
+        <a href="support.html"><i data-lucide="life-buoy"></i> Kendra Helpdesk</a>
+      </nav>
+    </div>
+
+    <div data-account-footer></div>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+    <script src="assets/app.js?v=customer-checkout-94" defer></script>
+    <script src="assets/auth.js?v=cpf-1" defer></script>
+    <script src="assets/customer-account.js?v=20" defer></script>
+    <script src="assets/customer-account-orders.js?v=20" defer></script>
+  </body>
+</html>

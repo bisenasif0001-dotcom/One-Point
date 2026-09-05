@@ -323,8 +323,23 @@
         font-size: 13.5px;
         color: var(--ds-body);
         line-height: 1.45;
-        margin: 0 0 14px;
+        margin: 0 0 10px;
         min-height: 38px;
+      }
+      .ds-card-deliverables {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+        margin-bottom: 12px;
+      }
+      .ds-card-deliverable-tag {
+        font-size: 11px;
+        font-weight: 700;
+        color: #475569;
+        background: #f1f5f9;
+        padding: 2px 7px;
+        border-radius: 4px;
+        border: 1px solid #e2e8f0;
       }
       .ds-card-meta {
         margin-top: auto;
@@ -502,6 +517,9 @@
         width: 100%;
         user-select: none;
       }
+      .ds-cselect-wrap.open {
+        z-index: 1000;
+      }
       .ds-cselect-trigger {
         all: unset;
         width: 100%;
@@ -598,11 +616,11 @@
         top: calc(100% + 6px);
         left: 0;
         right: 0;
-        z-index: 60;
+        z-index: 10001;
         background: #ffffff;
         border: 1.5px solid #bfdbfe;
         border-radius: 16px;
-        box-shadow: 0 16px 40px rgba(7, 80, 146, 0.14);
+        box-shadow: 0 16px 40px rgba(7, 80, 146, 0.18);
         max-height: 340px;
         overflow-y: auto;
         display: none;
@@ -1210,6 +1228,18 @@
 
       /* ── ZONE 3: START PROJECT ───────────────────────────────────── */
       
+      /* Section Stacking Contexts to prevent dropdown overlap */
+      .ds-section {
+        position: relative;
+      }
+      #services { z-index: 5; }
+      #estimator { z-index: 20; }
+      #portfolio { z-index: 5; }
+      #workflow { z-index: 5; }
+      #brief-builder { z-index: 50; }
+      #handover { z-index: 5; }
+      #faqs { z-index: 5; }
+
       /* Enhanced Multi-Step Wizard Project Brief */
       .ds-wizard-container {
         background: #ffffff;
@@ -1217,6 +1247,7 @@
         border-radius: 20px;
         box-shadow: 0 12px 36px rgba(7, 80, 146, 0.08);
         position: relative;
+        z-index: 50;
       }
       .ds-wizard-head {
         padding: 18px clamp(20px, 3vw, 32px);
@@ -1280,10 +1311,15 @@
         display: none;
         flex-direction: column;
         gap: 20px;
+        position: relative;
+        z-index: 1;
         animation: dsFadeIn 0.25s ease forwards;
       }
       .ds-wizard-panel.active {
         display: flex;
+      }
+      .ds-wizard-panel:has(.ds-cselect-wrap.open) {
+        z-index: 1000;
       }
       .ds-wizard-cards-opt {
         display: grid;
@@ -1359,6 +1395,10 @@
         display: flex;
         flex-direction: column;
         gap: 7px;
+        position: relative;
+      }
+      .ds-wizard-input-wrap:has(.ds-cselect-wrap.open) {
+        z-index: 1000;
       }
       .ds-wizard-label {
         font-size: 12px;
@@ -1946,7 +1986,7 @@
       </section>
 
       <!-- ══════════════════════════════════════════════════════════════
-           ZONE 1 — DISCOVER: SERVICE SHOWCASE (CURATED 3+9 HIERARCHY)
+           ZONE 1 — DISCOVER: SERVICE SHOWCASE (16 CORE SERVICES IN 3-COL GRID)
            ══════════════════════════════════════════════════════════════ -->
       <section class="ds-section ds-bg-white" id="services">
         <div class="ds-container">
@@ -1954,23 +1994,26 @@
           <div class="ds-header">
             <span class="ds-kicker"><i data-lucide="grid"></i> Curated Showcase</span>
             <h2 class="ds-title">Choose the exact service you need.</h2>
-            <p class="ds-sub">Select a category below to explore featured design, UI/UX, and development solutions.</p>
+            <p class="ds-sub">Explore our full suite of 16 graphic design, UI/UX, full-stack web development, and maintenance solutions.</p>
           </div>
 
           <!-- Top-Level Refined Segmented Control -->
           <div class="ds-seg-control-wrap">
             <div class="ds-seg-control" id="ds-seg-control" role="tablist">
               <button type="button" class="ds-seg-btn active" data-filter="all" role="tab" aria-selected="true">
-                <i data-lucide="layers"></i> All Services (12)
+                <i data-lucide="layers"></i> All Services (16)
               </button>
               <button type="button" class="ds-seg-btn" data-filter="graphic" role="tab" aria-selected="false">
-                <i data-lucide="palette"></i> Graphic Design
+                <i data-lucide="palette"></i> Graphic Design (9)
               </button>
               <button type="button" class="ds-seg-btn" data-filter="web-design" role="tab" aria-selected="false">
-                <i data-lucide="layout"></i> Website Design
+                <i data-lucide="layout"></i> Website UI/UX (1)
               </button>
               <button type="button" class="ds-seg-btn" data-filter="web-dev" role="tab" aria-selected="false">
-                <i data-lucide="code-2"></i> Web Development
+                <i data-lucide="code-2"></i> Web Development (4)
+              </button>
+              <button type="button" class="ds-seg-btn" data-filter="integrations" role="tab" aria-selected="false">
+                <i data-lucide="zap"></i> Features &amp; Care (2)
               </button>
             </div>
 
@@ -1978,12 +2021,12 @@
             <div class="ds-sub-chips" id="ds-sub-chips"></div>
           </div>
 
-          <!-- 3-Column Curated Showcase Grid (Flagship First Row + 9 Standard) -->
+          <!-- 3-Column Curated Showcase Grid (16 Cards) -->
           <div class="ds-cards-grid" id="ds-cards-grid">
             
-            <!-- ── ROW 1: 3 FLAGSHIP SERVICES (SLIGHTLY PROMINENT) ── -->
-            
-            <!-- Flagship 1: Logo & Brand Identity -->
+            <!-- ── 1. GRAPHIC DESIGN SERVICES (9 CARDS) ── -->
+
+            <!-- Card 1: Logo & Brand Identity (Flagship) -->
             <div class="ds-service-card flagship" data-category="graphic" data-sub="branding">
               <div class="ds-card-thumb">
                 <img src="https://images.unsplash.com/photo-1626785774573-4b799315345d?auto=format&fit=crop&w=800&q=80" alt="Logo & Brand Identity Design" loading="lazy">
@@ -1991,10 +2034,16 @@
               </div>
               <div class="ds-card-body">
                 <div class="ds-card-cat-marker">
-                  <i data-lucide="palette"></i> DESIGN
+                  <i data-lucide="palette"></i> GRAPHIC DESIGN
                 </div>
                 <h3>Logo &amp; Brand Identity</h3>
-                <p class="ds-card-desc">Complete vector logo, brand guide &amp; multi-format stationery kit.</p>
+                <p class="ds-card-desc">Complete vector logo design, brand guidelines, typography, and stationery kit.</p>
+                <div class="ds-card-deliverables">
+                  <span class="ds-card-deliverable-tag">Logo Design</span>
+                  <span class="ds-card-deliverable-tag">Brand Identity</span>
+                  <span class="ds-card-deliverable-tag">Brand Guidelines</span>
+                  <span class="ds-card-deliverable-tag">Business Cards</span>
+                </div>
                 <div class="ds-card-meta">
                   <span>2 Concepts · 2 Revisions</span>
                   <strong>From ₹299</strong>
@@ -2006,112 +2055,114 @@
               </div>
             </div>
 
-            <!-- Flagship 2: Website UI/UX Design -->
-            <div class="ds-service-card flagship" data-category="web-design" data-sub="ui-ux">
-              <div class="ds-card-thumb">
-                <img src="https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?auto=format&fit=crop&w=800&q=80" alt="Website UI/UX Design" loading="lazy">
-                <span class="ds-card-badge gold">Popular</span>
-              </div>
-              <div class="ds-card-body">
-                <div class="ds-card-cat-marker">
-                  <i data-lucide="layout"></i> WEB
-                </div>
-                <h3>Website UI/UX Design</h3>
-                <p class="ds-card-desc">Interactive Figma master wireframes, design system tokens &amp; layout.</p>
-                <div class="ds-card-meta">
-                  <span>Mobile First · Design System</span>
-                  <strong>From ₹1,499</strong>
-                </div>
-              </div>
-              <div class="ds-card-footer">
-                <a href="#brief-builder" class="ds-card-cta" data-prefill="Website UI/UX Design">Start Project <i data-lucide="arrow-right"></i></a>
-                <a href="https://wa.me/919473946181?text=Hi%20One%20Point,%20I%20need%20Website%20UI%2FUX%20Design" class="ds-card-wa" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><i data-lucide="message-circle"></i></a>
-              </div>
-            </div>
-
-            <!-- Flagship 3: Custom Business Website -->
-            <div class="ds-service-card flagship" data-category="web-dev" data-sub="business">
-              <div class="ds-card-thumb">
-                <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=80" alt="Custom Business Website" loading="lazy">
-                <span class="ds-card-badge flagship-badge">Full Stack</span>
-              </div>
-              <div class="ds-card-body">
-                <div class="ds-card-cat-marker">
-                  <i data-lucide="code-2"></i> DEVELOPMENT
-                </div>
-                <h3>Custom Business Website</h3>
-                <p class="ds-card-desc">Fast, modern responsive site with WhatsApp lead capture &amp; SEO setup.</p>
-                <div class="ds-card-meta">
-                  <span>SSL · SEO · Fast CDN</span>
-                  <strong>From ₹3,999</strong>
-                </div>
-              </div>
-              <div class="ds-card-footer">
-                <a href="#brief-builder" class="ds-card-cta" data-prefill="Custom Business Website">Start Project <i data-lucide="arrow-right"></i></a>
-                <a href="https://wa.me/919473946181?text=Hi%20One%20Point,%20I%20need%20Custom%20Business%20Website" class="ds-card-wa" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><i data-lucide="message-circle"></i></a>
-              </div>
-            </div>
-
-            <!-- ── 9 STANDARD SERVICES ── -->
-
-            <!-- Standard 4: Shop Flex & Outdoor Banner -->
+            <!-- Card 2: Print Design & Collateral -->
             <div class="ds-service-card" data-category="graphic" data-sub="print">
               <div class="ds-card-thumb">
-                <img src="https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&w=800&q=80" alt="Shop Flex & Outdoor Banner" loading="lazy">
+                <img src="https://images.unsplash.com/photo-1541701494587-cb58502866ab?auto=format&fit=crop&w=800&q=80" alt="Print Design & Marketing Collateral" loading="lazy">
+                <span class="ds-card-badge">Print Ready</span>
               </div>
               <div class="ds-card-body">
                 <div class="ds-card-cat-marker">
-                  <i data-lucide="palette"></i> DESIGN
+                  <i data-lucide="printer"></i> PRINT DESIGN
                 </div>
-                <h3>Shop Flex &amp; Outdoor Banner</h3>
-                <p class="ds-card-desc">High-visibility storefront flex signage &amp; outdoor billboard creatives.</p>
+                <h3>Print &amp; Marketing Collateral</h3>
+                <p class="ds-card-desc">High-resolution flyers, tri-fold brochures, posters, catalogs, menus &amp; certificates.</p>
+                <div class="ds-card-deliverables">
+                  <span class="ds-card-deliverable-tag">Flyer Design</span>
+                  <span class="ds-card-deliverable-tag">Brochure Design</span>
+                  <span class="ds-card-deliverable-tag">Catalog Design</span>
+                  <span class="ds-card-deliverable-tag">Menu Design</span>
+                </div>
                 <div class="ds-card-meta">
-                  <span>Ft×Ft Scale · 300 DPI</span>
+                  <span>300 DPI CMYK · Press Ready</span>
                   <strong>From ₹199</strong>
                 </div>
               </div>
               <div class="ds-card-footer">
-                <a href="#brief-builder" class="ds-card-cta" data-prefill="Shop Flex & Outdoor Banner">Start Project <i data-lucide="arrow-right"></i></a>
-                <a href="https://wa.me/919473946181?text=Hi%20One%20Point,%20I%20need%20Shop%20Banner" class="ds-card-wa" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><i data-lucide="message-circle"></i></a>
+                <a href="#brief-builder" class="ds-card-cta" data-prefill="Print Design">Start Project <i data-lucide="arrow-right"></i></a>
+                <a href="https://wa.me/919473946181?text=Hi%20One%20Point,%20I%20need%20Print%20Design" class="ds-card-wa" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><i data-lucide="message-circle"></i></a>
               </div>
             </div>
 
-            <!-- Standard 5: Visiting Card & Stationery -->
-            <div class="ds-service-card" data-category="graphic" data-sub="print">
+            <!-- Card 3: Social Media Design -->
+            <div class="ds-service-card" data-category="graphic" data-sub="social">
               <div class="ds-card-thumb">
-                <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=800&q=80" alt="Visiting Card & Stationery" loading="lazy">
+                <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&w=800&q=80" alt="Social Media Design" loading="lazy">
+                <span class="ds-card-badge gold">Popular</span>
               </div>
               <div class="ds-card-body">
                 <div class="ds-card-cat-marker">
-                  <i data-lucide="palette"></i> DESIGN
+                  <i data-lucide="share-2"></i> SOCIAL MEDIA
                 </div>
-                <h3>Visiting Card &amp; Stationery</h3>
-                <p class="ds-card-desc">Double-sided business cards, corporate letterheads &amp; envelope design.</p>
+                <h3>Social Media Design</h3>
+                <p class="ds-card-desc">Scroll-stopping Instagram/FB creatives, stories, ad banners &amp; YouTube thumbnails.</p>
+                <div class="ds-card-deliverables">
+                  <span class="ds-card-deliverable-tag">IG/FB Creatives</span>
+                  <span class="ds-card-deliverable-tag">Story Templates</span>
+                  <span class="ds-card-deliverable-tag">Ad Creatives</span>
+                  <span class="ds-card-deliverable-tag">YouTube Thumbnails</span>
+                </div>
                 <div class="ds-card-meta">
-                  <span>Press-Ready · CMYK PDF</span>
+                  <span>Batch Bundles · Fast Turnaround</span>
                   <strong>From ₹149</strong>
                 </div>
               </div>
               <div class="ds-card-footer">
-                <a href="#brief-builder" class="ds-card-cta" data-prefill="Visiting Card & Stationery">Start Project <i data-lucide="arrow-right"></i></a>
-                <a href="https://wa.me/919473946181?text=Hi%20One%20Point,%20I%20need%20Visiting%20Card" class="ds-card-wa" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><i data-lucide="message-circle"></i></a>
+                <a href="#brief-builder" class="ds-card-cta" data-prefill="Social Media Design">Start Project <i data-lucide="arrow-right"></i></a>
+                <a href="https://wa.me/919473946181?text=Hi%20One%20Point,%20I%20need%20Social%20Media%20Design" class="ds-card-wa" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><i data-lucide="message-circle"></i></a>
               </div>
             </div>
 
-            <!-- Standard 6: Packaging & Label Design -->
-            <div class="ds-service-card" data-category="graphic" data-sub="packaging">
+            <!-- Card 4: Marketing & Advertising Design -->
+            <div class="ds-service-card" data-category="graphic" data-sub="ads">
               <div class="ds-card-thumb">
-                <img src="https://images.unsplash.com/photo-1547949003-9792a18a2601?auto=format&fit=crop&w=800&q=80" alt="Packaging & Label Design" loading="lazy">
+                <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=800&q=80" alt="Marketing & Advertising Design" loading="lazy">
+                <span class="ds-card-badge">High CTR</span>
               </div>
               <div class="ds-card-body">
                 <div class="ds-card-cat-marker">
-                  <i data-lucide="palette"></i> DESIGN
+                  <i data-lucide="megaphone"></i> ADVERTISING
+                </div>
+                <h3>Marketing &amp; Advertising Design</h3>
+                <p class="ds-card-desc">High-converting display ad banners, newspaper ads, campaign visuals &amp; event promos.</p>
+                <div class="ds-card-deliverables">
+                  <span class="ds-card-deliverable-tag">Digital Display Ads</span>
+                  <span class="ds-card-deliverable-tag">Campaign Graphics</span>
+                  <span class="ds-card-deliverable-tag">Newspaper Ads</span>
+                  <span class="ds-card-deliverable-tag">Event Promotions</span>
+                </div>
+                <div class="ds-card-meta">
+                  <span>Multi-Size Formats · Conversion-First</span>
+                  <strong>From ₹249</strong>
+                </div>
+              </div>
+              <div class="ds-card-footer">
+                <a href="#brief-builder" class="ds-card-cta" data-prefill="Marketing & Advertising Design">Start Project <i data-lucide="arrow-right"></i></a>
+                <a href="https://wa.me/919473946181?text=Hi%20One%20Point,%20I%20need%20Advertising%20Design" class="ds-card-wa" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><i data-lucide="message-circle"></i></a>
+              </div>
+            </div>
+
+            <!-- Card 5: Packaging & Label Design -->
+            <div class="ds-service-card" data-category="graphic" data-sub="packaging">
+              <div class="ds-card-thumb">
+                <img src="https://images.unsplash.com/photo-1589939705384-5185137a7f0f?auto=format&fit=crop&w=800&q=80" alt="Packaging & Label Design" loading="lazy">
+                <span class="ds-card-badge">Retail Ready</span>
+              </div>
+              <div class="ds-card-body">
+                <div class="ds-card-cat-marker">
+                  <i data-lucide="package"></i> PACKAGING
                 </div>
                 <h3>Packaging &amp; Label Design</h3>
-                <p class="ds-card-desc">Retail product labels, pouch stickers &amp; custom box diecut lines.</p>
+                <p class="ds-card-desc">Retail product packaging boxes, jar/bottle labels, pouch wrappers &amp; branded stickers.</p>
+                <div class="ds-card-deliverables">
+                  <span class="ds-card-deliverable-tag">Product Packaging</span>
+                  <span class="ds-card-deliverable-tag">Box Die-Lines</span>
+                  <span class="ds-card-deliverable-tag">Label Design</span>
+                  <span class="ds-card-deliverable-tag">Pouch Wrappers</span>
+                </div>
                 <div class="ds-card-meta">
-                  <span>Vector Cutlines · 3D Proof</span>
-                  <strong>From ₹249</strong>
+                  <span>Exact Die-Lines · 3D Proof</span>
+                  <strong>From ₹499</strong>
                 </div>
               </div>
               <div class="ds-card-footer">
@@ -2120,137 +2171,328 @@
               </div>
             </div>
 
-            <!-- Standard 7: High-Converting Landing Page -->
-            <div class="ds-service-card" data-category="web-design" data-sub="landing">
+            <!-- Card 6: Business & Corporate Design -->
+            <div class="ds-service-card" data-category="graphic" data-sub="corporate">
               <div class="ds-card-thumb">
-                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80" alt="High-Converting Landing Page" loading="lazy">
-                <span class="ds-card-badge gold">Featured</span>
+                <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=800&q=80" alt="Business & Corporate Design" loading="lazy">
+                <span class="ds-card-badge">Enterprise</span>
               </div>
               <div class="ds-card-body">
                 <div class="ds-card-cat-marker">
-                  <i data-lucide="layout"></i> WEB
+                  <i data-lucide="briefcase"></i> CORPORATE
                 </div>
-                <h3>High-Converting Landing Page</h3>
-                <p class="ds-card-desc">Direct-response sales funnel layout, offer framing &amp; lead capture.</p>
+                <h3>Business &amp; Corporate Design</h3>
+                <p class="ds-card-desc">Corporate company profiles, pitch decks, proposals, annual reports &amp; infographics.</p>
+                <div class="ds-card-deliverables">
+                  <span class="ds-card-deliverable-tag">Company Profile</span>
+                  <span class="ds-card-deliverable-tag">Pitch Decks</span>
+                  <span class="ds-card-deliverable-tag">Proposal Design</span>
+                  <span class="ds-card-deliverable-tag">Infographics</span>
+                </div>
                 <div class="ds-card-meta">
-                  <span>Mobile First · CTA Focused</span>
+                  <span>PowerPoint / PDF · Polished Layout</span>
+                  <strong>From ₹599</strong>
+                </div>
+              </div>
+              <div class="ds-card-footer">
+                <a href="#brief-builder" class="ds-card-cta" data-prefill="Business & Corporate Design">Start Project <i data-lucide="arrow-right"></i></a>
+                <a href="https://wa.me/919473946181?text=Hi%20One%20Point,%20I%20need%20Corporate%20Design" class="ds-card-wa" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><i data-lucide="message-circle"></i></a>
+              </div>
+            </div>
+
+            <!-- Card 7: Signage & Large Format Print -->
+            <div class="ds-service-card" data-category="graphic" data-sub="signage">
+              <div class="ds-card-thumb">
+                <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=800&q=80" alt="Signage & Large Format Print" loading="lazy">
+                <span class="ds-card-badge">Outdoor HD</span>
+              </div>
+              <div class="ds-card-body">
+                <div class="ds-card-cat-marker">
+                  <i data-lucide="image"></i> SIGNAGE
+                </div>
+                <h3>Signage &amp; Large Format</h3>
+                <p class="ds-card-desc">Storefront flex boards, outdoor hoardings, roll-up standees &amp; vehicle branding.</p>
+                <div class="ds-card-deliverables">
+                  <span class="ds-card-deliverable-tag">Shop Boards</span>
+                  <span class="ds-card-deliverable-tag">Flex Banners</span>
+                  <span class="ds-card-deliverable-tag">Roll-up Standees</span>
+                  <span class="ds-card-deliverable-tag">Hoardings</span>
+                </div>
+                <div class="ds-card-meta">
+                  <span>Ft×Ft Scalable · Ultra HD</span>
+                  <strong>From ₹349</strong>
+                </div>
+              </div>
+              <div class="ds-card-footer">
+                <a href="#brief-builder" class="ds-card-cta" data-prefill="Signage & Large Format">Start Project <i data-lucide="arrow-right"></i></a>
+                <a href="https://wa.me/919473946181?text=Hi%20One%20Point,%20I%20need%20Signage%20Design" class="ds-card-wa" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><i data-lucide="message-circle"></i></a>
+              </div>
+            </div>
+
+            <!-- Card 8: Merchandise & Custom Apparel -->
+            <div class="ds-service-card" data-category="graphic" data-sub="merch">
+              <div class="ds-card-thumb">
+                <img src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=800&q=80" alt="Merchandise & Custom Apparel" loading="lazy">
+                <span class="ds-card-badge">Custom Merch</span>
+              </div>
+              <div class="ds-card-body">
+                <div class="ds-card-cat-marker">
+                  <i data-lucide="shirt"></i> APPAREL
+                </div>
+                <h3>Merchandise &amp; Apparel</h3>
+                <p class="ds-card-desc">Custom t-shirt graphics, corporate mugs, caps, promotional merchandise &amp; gift artwork.</p>
+                <div class="ds-card-deliverables">
+                  <span class="ds-card-deliverable-tag">T-Shirt Graphics</span>
+                  <span class="ds-card-deliverable-tag">Mug Design</span>
+                  <span class="ds-card-deliverable-tag">Cap Graphics</span>
+                  <span class="ds-card-deliverable-tag">Gift Artworks</span>
+                </div>
+                <div class="ds-card-meta">
+                  <span>Screen/DTF Ready · 3D Mockups</span>
+                  <strong>From ₹249</strong>
+                </div>
+              </div>
+              <div class="ds-card-footer">
+                <a href="#brief-builder" class="ds-card-cta" data-prefill="Merchandise & Apparel">Start Project <i data-lucide="arrow-right"></i></a>
+                <a href="https://wa.me/919473946181?text=Hi%20One%20Point,%20I%20need%20Merchandise%20Design" class="ds-card-wa" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><i data-lucide="message-circle"></i></a>
+              </div>
+            </div>
+
+            <!-- Card 9: Editorial & Publication Design -->
+            <div class="ds-service-card" data-category="graphic" data-sub="editorial">
+              <div class="ds-card-thumb">
+                <img src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=800&q=80" alt="Editorial & Publication Design" loading="lazy">
+                <span class="ds-card-badge">Publishing</span>
+              </div>
+              <div class="ds-card-body">
+                <div class="ds-card-cat-marker">
+                  <i data-lucide="book-open"></i> EDITORIAL
+                </div>
+                <h3>Editorial &amp; Publication Design</h3>
+                <p class="ds-card-desc">Magazine layouts, book covers, multi-page report formatting, newsletters &amp; e-books.</p>
+                <div class="ds-card-deliverables">
+                  <span class="ds-card-deliverable-tag">Magazine Layout</span>
+                  <span class="ds-card-deliverable-tag">Book Covers</span>
+                  <span class="ds-card-deliverable-tag">Newsletters</span>
+                  <span class="ds-card-deliverable-tag">E-book Design</span>
+                </div>
+                <div class="ds-card-meta">
+                  <span>InDesign / PDF · Typeset Mastery</span>
+                  <strong>From ₹449</strong>
+                </div>
+              </div>
+              <div class="ds-card-footer">
+                <a href="#brief-builder" class="ds-card-cta" data-prefill="Editorial Design">Start Project <i data-lucide="arrow-right"></i></a>
+                <a href="https://wa.me/919473946181?text=Hi%20One%20Point,%20I%20need%20Editorial%20Design" class="ds-card-wa" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><i data-lucide="message-circle"></i></a>
+              </div>
+            </div>
+
+            <!-- ── 2. WEB DESIGN SERVICES (1 DESIGN-ONLY CARD) ── -->
+
+            <!-- Card 10: Website UI/UX Design (Flagship Design-Only) -->
+            <div class="ds-service-card flagship" data-category="web-design" data-sub="ui-ux">
+              <div class="ds-card-thumb">
+                <img src="https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?auto=format&fit=crop&w=800&q=80" alt="Website UI/UX Design" loading="lazy">
+                <span class="ds-card-badge gold">Design Only</span>
+              </div>
+              <div class="ds-card-body">
+                <div class="ds-card-cat-marker">
+                  <i data-lucide="layout"></i> UI/UX DESIGN
+                </div>
+                <h3>Website UI/UX Design</h3>
+                <p class="ds-card-desc">Interactive Figma master wireframes, landing page layouts, design systems &amp; dashboard UX.</p>
+                <div class="ds-card-deliverables">
+                  <span class="ds-card-deliverable-tag">Website UI</span>
+                  <span class="ds-card-deliverable-tag">Landing Page UI</span>
+                  <span class="ds-card-deliverable-tag">Dashboard UX</span>
+                  <span class="ds-card-deliverable-tag">Design Systems</span>
+                </div>
+                <div class="ds-card-meta">
+                  <span>Mobile First · Interactive Prototype</span>
+                  <strong>From ₹1,499</strong>
+                </div>
+              </div>
+              <div class="ds-card-footer">
+                <a href="#brief-builder" class="ds-card-cta" data-prefill="Website UI/UX Design">Start Website Design <i data-lucide="arrow-right"></i></a>
+                <a href="https://wa.me/919473946181?text=Hi%20One%20Point,%20I%20need%20Website%20UI%2FUX%20Design" class="ds-card-wa" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><i data-lucide="message-circle"></i></a>
+              </div>
+            </div>
+
+            <!-- ── 3. WEB DEVELOPMENT SERVICES (4 DEVELOPMENT CARDS) ── -->
+
+            <!-- Card 11: Business Website Development (Flagship Custom Coded) -->
+            <div class="ds-service-card flagship" data-category="web-dev" data-sub="business">
+              <div class="ds-card-thumb">
+                <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=80" alt="Business Website Development" loading="lazy">
+                <span class="ds-card-badge flagship-badge">Custom Coded</span>
+              </div>
+              <div class="ds-card-body">
+                <div class="ds-card-cat-marker">
+                  <i data-lucide="code-2"></i> WEB DEVELOPMENT
+                </div>
+                <h3>Business Website Development</h3>
+                <p class="ds-card-desc">Custom-coded responsive websites with fast loading, SEO foundations, and lead capture.</p>
+                <div class="ds-card-deliverables">
+                  <span class="ds-card-deliverable-tag">Corporate Sites</span>
+                  <span class="ds-card-deliverable-tag">Service Portals</span>
+                  <span class="ds-card-deliverable-tag">Portfolio Hubs</span>
+                  <span class="ds-card-deliverable-tag">Multi-Page</span>
+                </div>
+                <div class="ds-card-meta">
+                  <span>SSL · SEO · Fast Cloud CDN</span>
+                  <strong>From ₹3,999</strong>
+                </div>
+              </div>
+              <div class="ds-card-footer">
+                <a href="#brief-builder" class="ds-card-cta" data-prefill="Business Website Development">Start Project <i data-lucide="arrow-right"></i></a>
+                <a href="https://wa.me/919473946181?text=Hi%20One%20Point,%20I%20need%20Business%20Website%20Development" class="ds-card-wa" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><i data-lucide="message-circle"></i></a>
+              </div>
+            </div>
+
+            <!-- Card 12: Landing Pages & Marketing Websites -->
+            <div class="ds-service-card" data-category="web-dev" data-sub="landing">
+              <div class="ds-card-thumb">
+                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80" alt="Landing Pages & Marketing Websites" loading="lazy">
+                <span class="ds-card-badge gold">High Conversion</span>
+              </div>
+              <div class="ds-card-body">
+                <div class="ds-card-cat-marker">
+                  <i data-lucide="rocket"></i> MARKETING WEB
+                </div>
+                <h3>Landing Pages &amp; Funnels</h3>
+                <p class="ds-card-desc">High-impact landing pages built for product launches, paid ad funnels, and lead generation.</p>
+                <div class="ds-card-deliverables">
+                  <span class="ds-card-deliverable-tag">Product Landers</span>
+                  <span class="ds-card-deliverable-tag">Lead Gen Funnels</span>
+                  <span class="ds-card-deliverable-tag">Campaign Sites</span>
+                  <span class="ds-card-deliverable-tag">Sales Pages</span>
+                </div>
+                <div class="ds-card-meta">
+                  <span>Fast 48h Delivery · WhatsApp API</span>
                   <strong>From ₹1,999</strong>
                 </div>
               </div>
               <div class="ds-card-footer">
-                <a href="#brief-builder" class="ds-card-cta" data-prefill="High-Converting Landing Page">Start Project <i data-lucide="arrow-right"></i></a>
+                <a href="#brief-builder" class="ds-card-cta" data-prefill="Landing Pages & Marketing Websites">Start Project <i data-lucide="arrow-right"></i></a>
                 <a href="https://wa.me/919473946181?text=Hi%20One%20Point,%20I%20need%20Landing%20Page" class="ds-card-wa" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><i data-lucide="message-circle"></i></a>
               </div>
             </div>
 
-            <!-- Standard 8: Dashboard & SaaS UI/UX -->
-            <div class="ds-service-card" data-category="web-design" data-sub="dashboard">
-              <div class="ds-card-thumb">
-                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80" alt="Dashboard & SaaS UI/UX" loading="lazy">
-              </div>
-              <div class="ds-card-body">
-                <div class="ds-card-cat-marker">
-                  <i data-lucide="layout"></i> WEB
-                </div>
-                <h3>Dashboard &amp; SaaS UI/UX</h3>
-                <p class="ds-card-desc">Clean data tables, analytics views &amp; internal admin interface systems.</p>
-                <div class="ds-card-meta">
-                  <span>Component Tokens · Pro</span>
-                  <strong>From ₹2,499</strong>
-                </div>
-              </div>
-              <div class="ds-card-footer">
-                <a href="#brief-builder" class="ds-card-cta" data-prefill="Dashboard UI/UX Design">Start Project <i data-lucide="arrow-right"></i></a>
-                <a href="https://wa.me/919473946181?text=Hi%20One%20Point,%20I%20need%20Dashboard%20UI" class="ds-card-wa" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><i data-lucide="message-circle"></i></a>
-              </div>
-            </div>
-
-            <!-- Standard 9: Website Redesign -->
-            <div class="ds-service-card" data-category="web-design" data-sub="redesign">
-              <div class="ds-card-thumb">
-                <img src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=800&q=80" alt="Website Redesign" loading="lazy">
-              </div>
-              <div class="ds-card-body">
-                <div class="ds-card-cat-marker">
-                  <i data-lucide="layout"></i> WEB
-                </div>
-                <h3>Website Redesign</h3>
-                <p class="ds-card-desc">Modernize outdated websites with fresh typography, speed &amp; layout.</p>
-                <div class="ds-card-meta">
-                  <span>UX Audit · Speed Boost</span>
-                  <strong>From ₹1,799</strong>
-                </div>
-              </div>
-              <div class="ds-card-footer">
-                <a href="#brief-builder" class="ds-card-cta" data-prefill="Website Speed & Maintenance">Start Project <i data-lucide="arrow-right"></i></a>
-                <a href="https://wa.me/919473946181?text=Hi%20One%20Point,%20I%20need%20Website%20Redesign" class="ds-card-wa" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><i data-lucide="message-circle"></i></a>
-              </div>
-            </div>
-
-            <!-- Standard 10: Online Store & E-commerce -->
+            <!-- Card 13: E-commerce Website Development -->
             <div class="ds-service-card" data-category="web-dev" data-sub="ecom">
               <div class="ds-card-thumb">
-                <img src="https://images.unsplash.com/photo-1556740738-b6a63e27c4df?auto=format&fit=crop&w=800&q=80" alt="Online Store &amp; E-commerce" loading="lazy">
+                <img src="https://images.unsplash.com/photo-1556742049-0a67c5574f73?auto=format&fit=crop&w=800&q=80" alt="E-commerce Website Development" loading="lazy">
                 <span class="ds-card-badge">Full Stack</span>
               </div>
               <div class="ds-card-body">
                 <div class="ds-card-cat-marker">
-                  <i data-lucide="code-2"></i> DEVELOPMENT
+                  <i data-lucide="shopping-bag"></i> E-COMMERCE
                 </div>
-                <h3>Online Store &amp; E-commerce</h3>
-                <p class="ds-card-desc">Shopping cart, Razorpay / UPI payment gateway &amp; admin order management.</p>
+                <h3>E-commerce Development</h3>
+                <p class="ds-card-desc">Full-fledged online stores with product catalog, cart, Razorpay checkout, and order tracking.</p>
+                <div class="ds-card-deliverables">
+                  <span class="ds-card-deliverable-tag">Product Catalogs</span>
+                  <span class="ds-card-deliverable-tag">Cart &amp; Checkout</span>
+                  <span class="ds-card-deliverable-tag">Payment Gateway</span>
+                  <span class="ds-card-deliverable-tag">Order System</span>
+                </div>
                 <div class="ds-card-meta">
-                  <span>Cart · Gateway · Admin</span>
-                  <strong>From ₹7,999</strong>
+                  <span>Razorpay / PhonePe · Orders</span>
+                  <strong>From ₹6,999</strong>
                 </div>
               </div>
               <div class="ds-card-footer">
-                <a href="#brief-builder" class="ds-card-cta" data-prefill="Online Store & E-commerce">Start Project <i data-lucide="arrow-right"></i></a>
-                <a href="https://wa.me/919473946181?text=Hi%20One%20Point,%20I%20need%20E-commerce%20Store" class="ds-card-wa" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><i data-lucide="message-circle"></i></a>
+                <a href="#brief-builder" class="ds-card-cta" data-prefill="E-commerce Development">Start Project <i data-lucide="arrow-right"></i></a>
+                <a href="https://wa.me/919473946181?text=Hi%20One%20Point,%20I%20need%20E-commerce%20Development" class="ds-card-wa" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><i data-lucide="message-circle"></i></a>
               </div>
             </div>
 
-            <!-- Standard 11: Custom Web App / SaaS -->
+            <!-- Card 14: Custom Web Application Development -->
             <div class="ds-service-card" data-category="web-dev" data-sub="webapp">
               <div class="ds-card-thumb">
-                <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=800&q=80" alt="Custom Web App / SaaS" loading="lazy">
+                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80" alt="Custom Web Application Development" loading="lazy">
+                <span class="ds-card-badge">SaaS &amp; Portals</span>
               </div>
               <div class="ds-card-body">
                 <div class="ds-card-cat-marker">
-                  <i data-lucide="code-2"></i> DEVELOPMENT
+                  <i data-lucide="terminal"></i> FULL-STACK APPS
                 </div>
-                <h3>Custom Web App / SaaS</h3>
-                <p class="ds-card-desc">Full-stack customer portal, database &amp; authenticated business systems.</p>
+                <h3>Custom Web Applications</h3>
+                <p class="ds-card-desc">Bespoke web applications, client portals, admin dashboards, custom CRM tools, and SaaS MVPs.</p>
+                <div class="ds-card-deliverables">
+                  <span class="ds-card-deliverable-tag">Client Portals</span>
+                  <span class="ds-card-deliverable-tag">Admin Dashboards</span>
+                  <span class="ds-card-deliverable-tag">SaaS Platforms</span>
+                  <span class="ds-card-deliverable-tag">Role Permissions</span>
+                </div>
                 <div class="ds-card-meta">
-                  <span>Node.js · PostgreSQL · Auth</span>
-                  <strong>Custom Quote</strong>
+                  <span>Node.js / React / SQL · Scalable</span>
+                  <strong>From ₹9,999</strong>
                 </div>
               </div>
               <div class="ds-card-footer">
-                <a href="#brief-builder" class="ds-card-cta" data-prefill="Custom Web Application / SaaS">Start Project <i data-lucide="arrow-right"></i></a>
+                <a href="#brief-builder" class="ds-card-cta" data-prefill="Custom Web Application Development">Start Project <i data-lucide="arrow-right"></i></a>
                 <a href="https://wa.me/919473946181?text=Hi%20One%20Point,%20I%20need%20Custom%20Web%20App" class="ds-card-wa" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><i data-lucide="message-circle"></i></a>
               </div>
             </div>
 
-            <!-- Standard 12: Payment & API Integration -->
-            <div class="ds-service-card" data-category="web-dev" data-sub="integration">
+            <!-- ── 4. WEBSITE FEATURES & MAINTENANCE (2 CARDS) ── -->
+
+            <!-- Card 15: Website Features & Integrations -->
+            <div class="ds-service-card" data-category="integrations" data-sub="features">
               <div class="ds-card-thumb">
-                <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=800&q=80" alt="Payment & API Integration" loading="lazy">
+                <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=800&q=80" alt="Website Features & Integrations" loading="lazy">
+                <span class="ds-card-badge">Micro Dev</span>
               </div>
               <div class="ds-card-body">
                 <div class="ds-card-cat-marker">
-                  <i data-lucide="code-2"></i> DEVELOPMENT
+                  <i data-lucide="zap"></i> INTEGRATIONS
                 </div>
-                <h3>Payment &amp; API Integration</h3>
-                <p class="ds-card-desc">Razorpay, WhatsApp Business API, webhook &amp; automated lead pipelines.</p>
+                <h3>Features &amp; API Integrations</h3>
+                <p class="ds-card-desc">Add payment gateways, WhatsApp buttons, contact forms, Google Maps, or custom APIs to existing sites.</p>
+                <div class="ds-card-deliverables">
+                  <span class="ds-card-deliverable-tag">Payment Gateways</span>
+                  <span class="ds-card-deliverable-tag">WhatsApp API</span>
+                  <span class="ds-card-deliverable-tag">Custom Forms</span>
+                  <span class="ds-card-deliverable-tag">Maps &amp; Auth</span>
+                </div>
                 <div class="ds-card-meta">
-                  <span>Secure Webhooks · Fast</span>
-                  <strong>From ₹999</strong>
+                  <span>Plug &amp; Play · Quick Setup</span>
+                  <strong>From ₹499</strong>
                 </div>
               </div>
               <div class="ds-card-footer">
-                <a href="#brief-builder" class="ds-card-cta" data-prefill="Payment Gateway & WhatsApp">Start Project <i data-lucide="arrow-right"></i></a>
+                <a href="#brief-builder" class="ds-card-cta" data-prefill="Website Features & Integrations">Start Project <i data-lucide="arrow-right"></i></a>
                 <a href="https://wa.me/919473946181?text=Hi%20One%20Point,%20I%20need%20API%20Integration" class="ds-card-wa" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><i data-lucide="message-circle"></i></a>
+              </div>
+            </div>
+
+            <!-- Card 16: Website Maintenance & Optimization -->
+            <div class="ds-service-card" data-category="integrations" data-sub="maintenance">
+              <div class="ds-card-thumb">
+                <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=800&q=80" alt="Website Maintenance & Optimization" loading="lazy">
+                <span class="ds-card-badge">Care &amp; Speed</span>
+              </div>
+              <div class="ds-card-body">
+                <div class="ds-card-cat-marker">
+                  <i data-lucide="shield-check"></i> SUPPORT
+                </div>
+                <h3>Website Maintenance &amp; Speed</h3>
+                <p class="ds-card-desc">Speed optimization, security hardening, bug fixes, mobile layout corrections &amp; backups.</p>
+                <div class="ds-card-deliverables">
+                  <span class="ds-card-deliverable-tag">Speed Optimization</span>
+                  <span class="ds-card-deliverable-tag">Bug Fixes</span>
+                  <span class="ds-card-deliverable-tag">Security Updates</span>
+                  <span class="ds-card-deliverable-tag">Monthly Care</span>
+                </div>
+                <div class="ds-card-meta">
+                  <span>90+ PageSpeed · 24/7 Care</span>
+                  <strong>From ₹799</strong>
+                </div>
+              </div>
+              <div class="ds-card-footer">
+                <a href="#brief-builder" class="ds-card-cta" data-prefill="Website Maintenance & Optimization">Start Project <i data-lucide="arrow-right"></i></a>
+                <a href="https://wa.me/919473946181?text=Hi%20One%20Point,%20I%20need%20Website%20Maintenance" class="ds-card-wa" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><i data-lucide="message-circle"></i></a>
               </div>
             </div>
 
@@ -2312,15 +2554,13 @@
 
                   <div class="ds-cselect-dropdown" id="est-cselect-dropdown" role="listbox">
                     
-                    <!-- Group 1: Graphic Design -->
+                    <!-- Group 1: Graphic Design (9 Tracks) -->
                     <div class="ds-cselect-group">
                       <div class="ds-cselect-group-title">
-                        <i data-lucide="palette"></i> Graphic Design &amp; Print
+                        <i data-lucide="palette"></i> Graphic Design &amp; Print (9)
                       </div>
                       <div class="ds-cselect-opt active" data-value="logo" data-name="Logo &amp; Brand Identity" data-base="299" data-type="fixed" data-icon="palette" data-cat="Graphic Design" data-price="From ₹299" role="option" aria-selected="true">
-                        <div class="ds-cselect-opt-icon">
-                          <i data-lucide="palette"></i>
-                        </div>
+                        <div class="ds-cselect-opt-icon"><i data-lucide="palette"></i></div>
                         <div class="ds-cselect-opt-info">
                           <strong>Logo &amp; Brand Identity</strong>
                           <span>Vector logo, typography &amp; brand guidelines</span>
@@ -2329,111 +2569,171 @@
                         <i data-lucide="check" class="ds-cselect-check"></i>
                       </div>
 
-                      <div class="ds-cselect-opt" data-value="banner" data-name="Shop Flex &amp; Outdoor Banner" data-base="199" data-type="fixed" data-icon="image" data-cat="Graphic Design" data-price="From ₹199" role="option" aria-selected="false">
-                        <div class="ds-cselect-opt-icon">
-                          <i data-lucide="image"></i>
-                        </div>
+                      <div class="ds-cselect-opt" data-value="print" data-name="Print &amp; Marketing Collateral" data-base="199" data-type="fixed" data-icon="printer" data-cat="Graphic Design" data-price="From ₹199" role="option" aria-selected="false">
+                        <div class="ds-cselect-opt-icon"><i data-lucide="printer"></i></div>
                         <div class="ds-cselect-opt-info">
-                          <strong>Shop Flex &amp; Outdoor Banner</strong>
-                          <span>HD billboard, flex board &amp; storefront print</span>
+                          <strong>Print &amp; Marketing Collateral</strong>
+                          <span>Brochures, flyers, catalogs, posters &amp; menus</span>
                         </div>
                         <span class="ds-cselect-opt-price">₹199</span>
                         <i data-lucide="check" class="ds-cselect-check"></i>
                       </div>
 
-                      <div class="ds-cselect-opt" data-value="card" data-name="Visiting Card &amp; Stationery" data-base="149" data-type="fixed" data-icon="credit-card" data-cat="Graphic Design" data-price="From ₹149" role="option" aria-selected="false">
-                        <div class="ds-cselect-opt-icon">
-                          <i data-lucide="credit-card"></i>
-                        </div>
+                      <div class="ds-cselect-opt" data-value="social" data-name="Social Media Design" data-base="149" data-type="fixed" data-icon="share-2" data-cat="Graphic Design" data-price="From ₹149" role="option" aria-selected="false">
+                        <div class="ds-cselect-opt-icon"><i data-lucide="share-2"></i></div>
                         <div class="ds-cselect-opt-info">
-                          <strong>Visiting Card &amp; Stationery</strong>
-                          <span>Business cards, letterheads &amp; envelopes</span>
+                          <strong>Social Media Design</strong>
+                          <span>Instagram/FB posts, story templates &amp; thumbnails</span>
                         </div>
                         <span class="ds-cselect-opt-price">₹149</span>
                         <i data-lucide="check" class="ds-cselect-check"></i>
                       </div>
 
-                      <div class="ds-cselect-opt" data-value="pack" data-name="Packaging &amp; Label Design" data-base="249" data-type="fixed" data-icon="package" data-cat="Graphic Design" data-price="From ₹249" role="option" aria-selected="false">
-                        <div class="ds-cselect-opt-icon">
-                          <i data-lucide="package"></i>
-                        </div>
+                      <div class="ds-cselect-opt" data-value="ads" data-name="Marketing &amp; Advertising Design" data-base="249" data-type="fixed" data-icon="megaphone" data-cat="Graphic Design" data-price="From ₹249" role="option" aria-selected="false">
+                        <div class="ds-cselect-opt-icon"><i data-lucide="megaphone"></i></div>
                         <div class="ds-cselect-opt-info">
-                          <strong>Packaging &amp; Label Design</strong>
-                          <span>Product box packaging, pouches &amp; jar labels</span>
+                          <strong>Marketing &amp; Advertising Design</strong>
+                          <span>Campaign graphics, digital display &amp; print ads</span>
                         </div>
                         <span class="ds-cselect-opt-price">₹249</span>
                         <i data-lucide="check" class="ds-cselect-check"></i>
                       </div>
-                    </div>
 
-                    <!-- Group 2: Website UI/UX -->
-                    <div class="ds-cselect-group">
-                      <div class="ds-cselect-group-title">
-                        <i data-lucide="layout"></i> Website UI/UX &amp; Landing Pages
-                      </div>
-                      <div class="ds-cselect-opt" data-value="landing" data-name="High-Converting Landing Page" data-base="1999" data-type="range" data-icon="rocket" data-cat="Website UI/UX" data-price="From ₹1,999" role="option" aria-selected="false">
-                        <div class="ds-cselect-opt-icon">
-                          <i data-lucide="rocket"></i>
-                        </div>
+                      <div class="ds-cselect-opt" data-value="pack" data-name="Packaging &amp; Label Design" data-base="499" data-type="fixed" data-icon="package" data-cat="Graphic Design" data-price="From ₹499" role="option" aria-selected="false">
+                        <div class="ds-cselect-opt-icon"><i data-lucide="package"></i></div>
                         <div class="ds-cselect-opt-info">
-                          <strong>High-Converting Landing Page</strong>
-                          <span>Lead generation page with animations &amp; speed</span>
+                          <strong>Packaging &amp; Label Design</strong>
+                          <span>Product boxes, pouches, labels &amp; stickers</span>
                         </div>
-                        <span class="ds-cselect-opt-price">₹1,999</span>
+                        <span class="ds-cselect-opt-price">₹499</span>
                         <i data-lucide="check" class="ds-cselect-check"></i>
                       </div>
 
-                      <div class="ds-cselect-opt" data-value="uiux" data-name="Website UI/UX Design (Figma)" data-base="1499" data-type="range" data-icon="layout" data-cat="Website UI/UX" data-price="From ₹1,499" role="option" aria-selected="false">
-                        <div class="ds-cselect-opt-icon">
-                          <i data-lucide="layout"></i>
+                      <div class="ds-cselect-opt" data-value="corporate" data-name="Business &amp; Corporate Design" data-base="599" data-type="fixed" data-icon="briefcase" data-cat="Graphic Design" data-price="From ₹599" role="option" aria-selected="false">
+                        <div class="ds-cselect-opt-icon"><i data-lucide="briefcase"></i></div>
+                        <div class="ds-cselect-opt-info">
+                          <strong>Business &amp; Corporate Design</strong>
+                          <span>Company profiles, pitch decks &amp; annual reports</span>
                         </div>
+                        <span class="ds-cselect-opt-price">₹599</span>
+                        <i data-lucide="check" class="ds-cselect-check"></i>
+                      </div>
+
+                      <div class="ds-cselect-opt" data-value="signage" data-name="Signage &amp; Large Format Print" data-base="349" data-type="fixed" data-icon="image" data-cat="Graphic Design" data-price="From ₹349" role="option" aria-selected="false">
+                        <div class="ds-cselect-opt-icon"><i data-lucide="image"></i></div>
+                        <div class="ds-cselect-opt-info">
+                          <strong>Signage &amp; Large Format Print</strong>
+                          <span>Shop flex boards, standees &amp; outdoor hoardings</span>
+                        </div>
+                        <span class="ds-cselect-opt-price">₹349</span>
+                        <i data-lucide="check" class="ds-cselect-check"></i>
+                      </div>
+
+                      <div class="ds-cselect-opt" data-value="merch" data-name="Merchandise &amp; Custom Apparel" data-base="249" data-type="fixed" data-icon="shirt" data-cat="Graphic Design" data-price="From ₹249" role="option" aria-selected="false">
+                        <div class="ds-cselect-opt-icon"><i data-lucide="shirt"></i></div>
+                        <div class="ds-cselect-opt-info">
+                          <strong>Merchandise &amp; Custom Apparel</strong>
+                          <span>T-shirt graphics, corporate mugs, caps &amp; gifts</span>
+                        </div>
+                        <span class="ds-cselect-opt-price">₹249</span>
+                        <i data-lucide="check" class="ds-cselect-check"></i>
+                      </div>
+
+                      <div class="ds-cselect-opt" data-value="editorial" data-name="Editorial &amp; Publication Design" data-base="449" data-type="fixed" data-icon="book-open" data-cat="Graphic Design" data-price="From ₹449" role="option" aria-selected="false">
+                        <div class="ds-cselect-opt-icon"><i data-lucide="book-open"></i></div>
+                        <div class="ds-cselect-opt-info">
+                          <strong>Editorial &amp; Publication Design</strong>
+                          <span>Magazine layouts, book covers, reports &amp; e-books</span>
+                        </div>
+                        <span class="ds-cselect-opt-price">₹449</span>
+                        <i data-lucide="check" class="ds-cselect-check"></i>
+                      </div>
+                    </div>
+
+                    <!-- Group 2: Website UI/UX Design (1 Track) -->
+                    <div class="ds-cselect-group">
+                      <div class="ds-cselect-group-title">
+                        <i data-lucide="layout"></i> Website UI/UX Design (1)
+                      </div>
+                      <div class="ds-cselect-opt" data-value="uiux" data-name="Website UI/UX Design (Figma)" data-base="1499" data-type="range" data-icon="layout" data-cat="Website UI/UX" data-price="From ₹1,499" role="option" aria-selected="false">
+                        <div class="ds-cselect-opt-icon"><i data-lucide="layout"></i></div>
                         <div class="ds-cselect-opt-info">
                           <strong>Website UI/UX Design (Figma)</strong>
-                          <span>Modern responsive layout wireframes &amp; prototypes</span>
+                          <span>Interactive prototypes, landing UI &amp; design systems</span>
                         </div>
                         <span class="ds-cselect-opt-price">₹1,499</span>
                         <i data-lucide="check" class="ds-cselect-check"></i>
                       </div>
                     </div>
 
-                    <!-- Group 3: Web Development -->
+                    <!-- Group 3: Custom Web Development & SaaS (4 Tracks) -->
                     <div class="ds-cselect-group">
                       <div class="ds-cselect-group-title">
-                        <i data-lucide="code-2"></i> Custom Web Development &amp; SaaS
+                        <i data-lucide="code-2"></i> Web Development &amp; SaaS (4)
                       </div>
-                      <div class="ds-cselect-opt" data-value="site" data-name="Custom Business Website" data-base="3999" data-type="range" data-icon="globe" data-cat="Web Development" data-price="From ₹3,999" role="option" aria-selected="false">
-                        <div class="ds-cselect-opt-icon">
-                          <i data-lucide="globe"></i>
-                        </div>
+                      <div class="ds-cselect-opt" data-value="site" data-name="Business Website Development" data-base="3999" data-type="range" data-icon="code-2" data-cat="Web Development" data-price="From ₹3,999" role="option" aria-selected="false">
+                        <div class="ds-cselect-opt-icon"><i data-lucide="code-2"></i></div>
                         <div class="ds-cselect-opt-info">
-                          <strong>Custom Business Website</strong>
-                          <span>5–8 page SEO-optimized responsive company portal</span>
+                          <strong>Business Website Development</strong>
+                          <span>Custom responsive company platform with SEO &amp; speed</span>
                         </div>
                         <span class="ds-cselect-opt-price">₹3,999</span>
                         <i data-lucide="check" class="ds-cselect-check"></i>
                       </div>
 
-                      <div class="ds-cselect-opt" data-value="ecom" data-name="Online Store &amp; E-commerce" data-base="7999" data-type="range" data-icon="shopping-bag" data-cat="Web Development" data-price="From ₹7,999" role="option" aria-selected="false">
-                        <div class="ds-cselect-opt-icon">
-                          <i data-lucide="shopping-bag"></i>
-                        </div>
+                      <div class="ds-cselect-opt" data-value="landing" data-name="Landing Pages &amp; Marketing Websites" data-base="1999" data-type="range" data-icon="rocket" data-cat="Web Development" data-price="From ₹1,999" role="option" aria-selected="false">
+                        <div class="ds-cselect-opt-icon"><i data-lucide="rocket"></i></div>
                         <div class="ds-cselect-opt-info">
-                          <strong>Online Store &amp; E-commerce</strong>
-                          <span>Catalog, cart, Razorpay payment &amp; order dashboard</span>
+                          <strong>Landing Pages &amp; Funnels</strong>
+                          <span>High-converting lead gen page with WhatsApp API</span>
                         </div>
-                        <span class="ds-cselect-opt-price">₹7,999</span>
+                        <span class="ds-cselect-opt-price">₹1,999</span>
                         <i data-lucide="check" class="ds-cselect-check"></i>
                       </div>
 
-                      <div class="ds-cselect-opt" data-value="webapp" data-name="Custom Web Application / SaaS" data-base="9999" data-type="range" data-icon="code-2" data-cat="Web Development" data-price="From ₹9,999" role="option" aria-selected="false">
-                        <div class="ds-cselect-opt-icon">
-                          <i data-lucide="code-2"></i>
-                        </div>
+                      <div class="ds-cselect-opt" data-value="ecom" data-name="E-commerce Website Development" data-base="6999" data-type="range" data-icon="shopping-bag" data-cat="Web Development" data-price="From ₹6,999" role="option" aria-selected="false">
+                        <div class="ds-cselect-opt-icon"><i data-lucide="shopping-bag"></i></div>
                         <div class="ds-cselect-opt-info">
-                          <strong>Custom Web Application / SaaS</strong>
-                          <span>Node.js / database portal, user authentication &amp; APIs</span>
+                          <strong>E-commerce Development</strong>
+                          <span>Catalog, cart, Razorpay payments &amp; order dashboard</span>
+                        </div>
+                        <span class="ds-cselect-opt-price">₹6,999</span>
+                        <i data-lucide="check" class="ds-cselect-check"></i>
+                      </div>
+
+                      <div class="ds-cselect-opt" data-value="webapp" data-name="Custom Web Application / SaaS" data-base="9999" data-type="range" data-icon="terminal" data-cat="Web Development" data-price="From ₹9,999" role="option" aria-selected="false">
+                        <div class="ds-cselect-opt-icon"><i data-lucide="terminal"></i></div>
+                        <div class="ds-cselect-opt-info">
+                          <strong>Custom Web Applications / SaaS</strong>
+                          <span>Client portals, custom CRM dashboards &amp; secure APIs</span>
                         </div>
                         <span class="ds-cselect-opt-price">₹9,999</span>
+                        <i data-lucide="check" class="ds-cselect-check"></i>
+                      </div>
+                    </div>
+
+                    <!-- Group 4: Website Features & Maintenance (2 Tracks) -->
+                    <div class="ds-cselect-group">
+                      <div class="ds-cselect-group-title">
+                        <i data-lucide="zap"></i> Features &amp; Care (2)
+                      </div>
+                      <div class="ds-cselect-opt" data-value="features" data-name="Website Features &amp; Integrations" data-base="499" data-type="fixed" data-icon="zap" data-cat="Features & Support" data-price="From ₹499" role="option" aria-selected="false">
+                        <div class="ds-cselect-opt-icon"><i data-lucide="zap"></i></div>
+                        <div class="ds-cselect-opt-info">
+                          <strong>Features &amp; API Integrations</strong>
+                          <span>Payment gateways, WhatsApp buttons, maps &amp; forms</span>
+                        </div>
+                        <span class="ds-cselect-opt-price">₹499</span>
+                        <i data-lucide="check" class="ds-cselect-check"></i>
+                      </div>
+
+                      <div class="ds-cselect-opt" data-value="maintenance" data-name="Website Maintenance &amp; Speed" data-base="799" data-type="fixed" data-icon="shield-check" data-cat="Features & Support" data-price="From ₹799" role="option" aria-selected="false">
+                        <div class="ds-cselect-opt-icon"><i data-lucide="shield-check"></i></div>
+                        <div class="ds-cselect-opt-info">
+                          <strong>Website Maintenance &amp; Speed</strong>
+                          <span>90+ PageSpeed optimization, bug fixes &amp; security</span>
+                        </div>
+                        <span class="ds-cselect-opt-price">₹799</span>
                         <i data-lucide="check" class="ds-cselect-check"></i>
                       </div>
                     </div>
@@ -2754,14 +3054,14 @@
                       <i data-lucide="palette"></i>
                     </div>
                     <strong>Graphic Design</strong>
-                    <span>Logo identity, flex banner, shop signage &amp; packaging</span>
+                    <span>Logo identity, print collateral, social creatives &amp; packaging</span>
                   </div>
                   <div class="ds-wizard-card-opt" data-discipline="web-design">
                     <div class="ds-wizard-card-icon">
                       <i data-lucide="layout"></i>
                     </div>
                     <strong>Website UI/UX</strong>
-                    <span>Landing pages, Figma UI kits &amp; clickable prototypes</span>
+                    <span>Landing pages, Figma UI kits &amp; interactive prototypes</span>
                   </div>
                   <div class="ds-wizard-card-opt" data-discipline="web-dev">
                     <div class="ds-wizard-card-icon">
@@ -2769,6 +3069,13 @@
                     </div>
                     <strong>Web Development</strong>
                     <span>Business websites, e-commerce stores &amp; custom SaaS apps</span>
+                  </div>
+                  <div class="ds-wizard-card-opt" data-discipline="integrations">
+                    <div class="ds-wizard-card-icon">
+                      <i data-lucide="zap"></i>
+                    </div>
+                    <strong>Features &amp; Care</strong>
+                    <span>Payment gateways, API integrations, speed optimization &amp; maintenance</span>
                   </div>
                 </div>
               </div>
@@ -2795,10 +3102,11 @@
                       </button>
 
                       <div class="ds-cselect-dropdown" id="wz-service-cselect-dropdown" role="listbox">
-                        <!-- Group 1: Graphic Design -->
+                        
+                        <!-- Group 1: Graphic Design (9 Tracks) -->
                         <div class="ds-cselect-group">
                           <div class="ds-cselect-group-title">
-                            <i data-lucide="palette"></i> Graphic Design &amp; Print
+                            <i data-lucide="palette"></i> Graphic Design &amp; Print (9)
                           </div>
                           <div class="ds-cselect-opt active" data-value="Logo &amp; Brand Identity" data-icon="palette" data-cat="Graphic Design" role="option" aria-selected="true">
                             <div class="ds-cselect-opt-icon"><i data-lucide="palette"></i></div>
@@ -2808,19 +3116,27 @@
                             </div>
                             <i data-lucide="check" class="ds-cselect-check"></i>
                           </div>
-                          <div class="ds-cselect-opt" data-value="Shop Flex &amp; Outdoor Banner" data-icon="image" data-cat="Graphic Design" role="option" aria-selected="false">
-                            <div class="ds-cselect-opt-icon"><i data-lucide="image"></i></div>
+                          <div class="ds-cselect-opt" data-value="Print Design" data-icon="printer" data-cat="Graphic Design" role="option" aria-selected="false">
+                            <div class="ds-cselect-opt-icon"><i data-lucide="printer"></i></div>
                             <div class="ds-cselect-opt-info">
-                              <strong>Shop Flex &amp; Outdoor Banner</strong>
-                              <span>HD billboard, flex board &amp; storefront print</span>
+                              <strong>Print &amp; Marketing Collateral</strong>
+                              <span>Brochures, flyers, catalogs, posters &amp; menus</span>
                             </div>
                             <i data-lucide="check" class="ds-cselect-check"></i>
                           </div>
-                          <div class="ds-cselect-opt" data-value="Visiting Card &amp; Stationery" data-icon="credit-card" data-cat="Graphic Design" role="option" aria-selected="false">
-                            <div class="ds-cselect-opt-icon"><i data-lucide="credit-card"></i></div>
+                          <div class="ds-cselect-opt" data-value="Social Media Design" data-icon="share-2" data-cat="Graphic Design" role="option" aria-selected="false">
+                            <div class="ds-cselect-opt-icon"><i data-lucide="share-2"></i></div>
                             <div class="ds-cselect-opt-info">
-                              <strong>Visiting Card &amp; Stationery</strong>
-                              <span>Business cards, letterheads &amp; envelopes</span>
+                              <strong>Social Media Design</strong>
+                              <span>Instagram/FB creatives, stories &amp; thumbnails</span>
+                            </div>
+                            <i data-lucide="check" class="ds-cselect-check"></i>
+                          </div>
+                          <div class="ds-cselect-opt" data-value="Marketing &amp; Advertising Design" data-icon="megaphone" data-cat="Graphic Design" role="option" aria-selected="false">
+                            <div class="ds-cselect-opt-icon"><i data-lucide="megaphone"></i></div>
+                            <div class="ds-cselect-opt-info">
+                              <strong>Marketing &amp; Advertising Design</strong>
+                              <span>Campaign graphics, digital display &amp; print ads</span>
                             </div>
                             <i data-lucide="check" class="ds-cselect-check"></i>
                           </div>
@@ -2832,73 +3148,112 @@
                             </div>
                             <i data-lucide="check" class="ds-cselect-check"></i>
                           </div>
-                        </div>
-
-                        <!-- Group 2: Website UI/UX -->
-                        <div class="ds-cselect-group">
-                          <div class="ds-cselect-group-title">
-                            <i data-lucide="layout"></i> Website UI/UX &amp; Landing Pages
-                          </div>
-                          <div class="ds-cselect-opt" data-value="High-Converting Landing Page" data-icon="rocket" data-cat="Website UI/UX" role="option" aria-selected="false">
-                            <div class="ds-cselect-opt-icon"><i data-lucide="rocket"></i></div>
+                          <div class="ds-cselect-opt" data-value="Business &amp; Corporate Design" data-icon="briefcase" data-cat="Graphic Design" role="option" aria-selected="false">
+                            <div class="ds-cselect-opt-icon"><i data-lucide="briefcase"></i></div>
                             <div class="ds-cselect-opt-info">
-                              <strong>High-Converting Landing Page</strong>
-                              <span>Lead generation page with animations &amp; speed</span>
+                              <strong>Business &amp; Corporate Design</strong>
+                              <span>Company profiles, pitch decks &amp; annual reports</span>
                             </div>
                             <i data-lucide="check" class="ds-cselect-check"></i>
+                          </div>
+                          <div class="ds-cselect-opt" data-value="Signage &amp; Large Format" data-icon="image" data-cat="Graphic Design" role="option" aria-selected="false">
+                            <div class="ds-cselect-opt-icon"><i data-lucide="image"></i></div>
+                            <div class="ds-cselect-opt-info">
+                              <strong>Signage &amp; Large Format Print</strong>
+                              <span>Shop flex boards, standees &amp; hoardings</span>
+                            </div>
+                            <i data-lucide="check" class="ds-cselect-check"></i>
+                          </div>
+                          <div class="ds-cselect-opt" data-value="Merchandise &amp; Apparel" data-icon="shirt" data-cat="Graphic Design" role="option" aria-selected="false">
+                            <div class="ds-cselect-opt-icon"><i data-lucide="shirt"></i></div>
+                            <div class="ds-cselect-opt-info">
+                              <strong>Merchandise &amp; Custom Apparel</strong>
+                              <span>T-shirt graphics, corporate mugs, caps &amp; gifts</span>
+                            </div>
+                            <i data-lucide="check" class="ds-cselect-check"></i>
+                          </div>
+                          <div class="ds-cselect-opt" data-value="Editorial Design" data-icon="book-open" data-cat="Graphic Design" role="option" aria-selected="false">
+                            <div class="ds-cselect-opt-icon"><i data-lucide="book-open"></i></div>
+                            <div class="ds-cselect-opt-info">
+                              <strong>Editorial &amp; Publication Design</strong>
+                              <span>Magazine layouts, book covers, reports &amp; e-books</span>
+                            </div>
+                            <i data-lucide="check" class="ds-cselect-check"></i>
+                          </div>
+                        </div>
+
+                        <!-- Group 2: Website UI/UX Design (1 Track) -->
+                        <div class="ds-cselect-group">
+                          <div class="ds-cselect-group-title">
+                            <i data-lucide="layout"></i> Website UI/UX Design (1)
                           </div>
                           <div class="ds-cselect-opt" data-value="Website UI/UX Design" data-icon="layout" data-cat="Website UI/UX" role="option" aria-selected="false">
                             <div class="ds-cselect-opt-icon"><i data-lucide="layout"></i></div>
                             <div class="ds-cselect-opt-info">
                               <strong>Website UI/UX Design (Figma)</strong>
-                              <span>Modern responsive layout wireframes &amp; prototypes</span>
-                            </div>
-                            <i data-lucide="check" class="ds-cselect-check"></i>
-                          </div>
-                          <div class="ds-cselect-opt" data-value="Dashboard UI/UX Design" data-icon="layout-dashboard" data-cat="Website UI/UX" role="option" aria-selected="false">
-                            <div class="ds-cselect-opt-icon"><i data-lucide="layout-dashboard"></i></div>
-                            <div class="ds-cselect-opt-info">
-                              <strong>Dashboard UI/UX Design</strong>
-                              <span>Admin interface &amp; web application UX flows</span>
+                              <span>Interactive prototypes, landing UI &amp; design systems</span>
                             </div>
                             <i data-lucide="check" class="ds-cselect-check"></i>
                           </div>
                         </div>
 
-                        <!-- Group 3: Web Development -->
+                        <!-- Group 3: Web Development (4 Tracks) -->
                         <div class="ds-cselect-group">
                           <div class="ds-cselect-group-title">
-                            <i data-lucide="code-2"></i> Custom Web Development &amp; SaaS
+                            <i data-lucide="code-2"></i> Web Development &amp; SaaS (4)
                           </div>
-                          <div class="ds-cselect-opt" data-value="Custom Business Website" data-icon="globe" data-cat="Web Development" role="option" aria-selected="false">
-                            <div class="ds-cselect-opt-icon"><i data-lucide="globe"></i></div>
-                            <div class="ds-cselect-opt-info">
-                              <strong>Custom Business Website</strong>
-                              <span>5–8 page SEO-optimized responsive company portal</span>
-                            </div>
-                            <i data-lucide="check" class="ds-cselect-check"></i>
-                          </div>
-                          <div class="ds-cselect-opt" data-value="Online Store &amp; E-commerce" data-icon="shopping-bag" data-cat="Web Development" role="option" aria-selected="false">
-                            <div class="ds-cselect-opt-icon"><i data-lucide="shopping-bag"></i></div>
-                            <div class="ds-cselect-opt-info">
-                              <strong>Online Store &amp; E-commerce</strong>
-                              <span>Catalog, cart, Razorpay payment &amp; order dashboard</span>
-                            </div>
-                            <i data-lucide="check" class="ds-cselect-check"></i>
-                          </div>
-                          <div class="ds-cselect-opt" data-value="Custom Web Application / SaaS" data-icon="code-2" data-cat="Web Development" role="option" aria-selected="false">
+                          <div class="ds-cselect-opt" data-value="Business Website Development" data-icon="code-2" data-cat="Web Development" role="option" aria-selected="false">
                             <div class="ds-cselect-opt-icon"><i data-lucide="code-2"></i></div>
                             <div class="ds-cselect-opt-info">
-                              <strong>Custom Web Application / SaaS</strong>
-                              <span>Node.js / database portal, user authentication &amp; APIs</span>
+                              <strong>Business Website Development</strong>
+                              <span>Custom responsive company platform with SEO &amp; speed</span>
                             </div>
                             <i data-lucide="check" class="ds-cselect-check"></i>
                           </div>
-                          <div class="ds-cselect-opt" data-value="Payment Gateway &amp; WhatsApp" data-icon="credit-card" data-cat="Web Development" role="option" aria-selected="false">
-                            <div class="ds-cselect-opt-icon"><i data-lucide="credit-card"></i></div>
+                          <div class="ds-cselect-opt" data-value="Landing Pages &amp; Marketing Websites" data-icon="rocket" data-cat="Web Development" role="option" aria-selected="false">
+                            <div class="ds-cselect-opt-icon"><i data-lucide="rocket"></i></div>
                             <div class="ds-cselect-opt-info">
-                              <strong>Payment Gateway &amp; API Integration</strong>
-                              <span>Razorpay, WhatsApp Business API &amp; webhooks</span>
+                              <strong>Landing Pages &amp; Funnels</strong>
+                              <span>High-converting lead gen page with WhatsApp API</span>
+                            </div>
+                            <i data-lucide="check" class="ds-cselect-check"></i>
+                          </div>
+                          <div class="ds-cselect-opt" data-value="E-commerce Development" data-icon="shopping-bag" data-cat="Web Development" role="option" aria-selected="false">
+                            <div class="ds-cselect-opt-icon"><i data-lucide="shopping-bag"></i></div>
+                            <div class="ds-cselect-opt-info">
+                              <strong>E-commerce Development</strong>
+                              <span>Catalog, cart, Razorpay payments &amp; order dashboard</span>
+                            </div>
+                            <i data-lucide="check" class="ds-cselect-check"></i>
+                          </div>
+                          <div class="ds-cselect-opt" data-value="Custom Web Application Development" data-icon="terminal" data-cat="Web Development" role="option" aria-selected="false">
+                            <div class="ds-cselect-opt-icon"><i data-lucide="terminal"></i></div>
+                            <div class="ds-cselect-opt-info">
+                              <strong>Custom Web Applications / SaaS</strong>
+                              <span>Client portals, custom CRM dashboards &amp; secure APIs</span>
+                            </div>
+                            <i data-lucide="check" class="ds-cselect-check"></i>
+                          </div>
+                        </div>
+
+                        <!-- Group 4: Website Features & Maintenance (2 Tracks) -->
+                        <div class="ds-cselect-group">
+                          <div class="ds-cselect-group-title">
+                            <i data-lucide="zap"></i> Features &amp; Care (2)
+                          </div>
+                          <div class="ds-cselect-opt" data-value="Website Features &amp; Integrations" data-icon="zap" data-cat="Features & Support" role="option" aria-selected="false">
+                            <div class="ds-cselect-opt-icon"><i data-lucide="zap"></i></div>
+                            <div class="ds-cselect-opt-info">
+                              <strong>Features &amp; API Integrations</strong>
+                              <span>Payment gateways, WhatsApp buttons, maps &amp; forms</span>
+                            </div>
+                            <i data-lucide="check" class="ds-cselect-check"></i>
+                          </div>
+                          <div class="ds-cselect-opt" data-value="Website Maintenance &amp; Optimization" data-icon="shield-check" data-cat="Features & Support" role="option" aria-selected="false">
+                            <div class="ds-cselect-opt-icon"><i data-lucide="shield-check"></i></div>
+                            <div class="ds-cselect-opt-info">
+                              <strong>Website Maintenance &amp; Speed</strong>
+                              <span>90+ PageSpeed optimization, bug fixes &amp; security</span>
                             </div>
                             <i data-lucide="check" class="ds-cselect-check"></i>
                           </div>
@@ -3350,22 +3705,32 @@
 
         const subCategories = {
           graphic: [
-            { id: 'all', label: 'All Graphic' },
-            { id: 'branding', label: 'Logo & Branding' },
-            { id: 'print', label: 'Shop Banner & Print' },
-            { id: 'packaging', label: 'Packaging & Labels' }
+            { id: 'all', label: 'All Graphic Design (9)' },
+            { id: 'branding', label: 'Logo & Brand' },
+            { id: 'print', label: 'Print Collateral' },
+            { id: 'social', label: 'Social Media' },
+            { id: 'ads', label: 'Marketing & Ads' },
+            { id: 'packaging', label: 'Packaging & Labels' },
+            { id: 'corporate', label: 'Corporate & Reports' },
+            { id: 'signage', label: 'Signage & Large Format' },
+            { id: 'merch', label: 'Merchandise & Apparel' },
+            { id: 'editorial', label: 'Editorial & Publishing' }
           ],
           'web-design': [
-            { id: 'all', label: 'All UI/UX' },
-            { id: 'ui-ux', label: 'Website UI/UX' },
-            { id: 'landing', label: 'Landing Pages' },
-            { id: 'dashboard', label: 'Dashboard UI' }
+            { id: 'all', label: 'All UI/UX Design (1)' },
+            { id: 'ui-ux', label: 'Website UI/UX' }
           ],
           'web-dev': [
-            { id: 'all', label: 'All Development' },
+            { id: 'all', label: 'All Web Development (4)' },
             { id: 'business', label: 'Business Websites' },
-            { id: 'ecom', label: 'E-commerce' },
-            { id: 'webapp', label: 'Web Applications' }
+            { id: 'landing', label: 'Landing Pages & Funnels' },
+            { id: 'ecom', label: 'E-commerce Stores' },
+            { id: 'webapp', label: 'Custom Web Apps / SaaS' }
+          ],
+          integrations: [
+            { id: 'all', label: 'All Features & Care (2)' },
+            { id: 'features', label: 'Features & APIs' },
+            { id: 'maintenance', label: 'Website Care & Speed' }
           ]
         };
 
@@ -3785,7 +4150,9 @@
             } else if (disc === 'web-design' && wzServiceSelectCtrl) {
               wzServiceSelectCtrl.selectByValue('Website UI/UX Design');
             } else if (disc === 'web-dev' && wzServiceSelectCtrl) {
-              wzServiceSelectCtrl.selectByValue('Custom Business Website');
+              wzServiceSelectCtrl.selectByValue('Business Website Development');
+            } else if (disc === 'integrations' && wzServiceSelectCtrl) {
+              wzServiceSelectCtrl.selectByValue('Website Features & Integrations');
             }
           });
         });

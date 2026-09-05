@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Live progress timeline, document verification checklist, payments and activity log for your One Point service request.">
+    <meta name="robots" content="noindex,nofollow">
+    <title>Request Details | One Point Digital Services</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;850;900&display=swap" rel="stylesheet">
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+    <script src="assets/opds-boot.js?v=anti-fouc-79"></script>
+    <link rel="stylesheet" href="assets/onepoint.css?v=customer-checkout-94">
+    <link rel="stylesheet" href="assets/onepoint-customer-profile.css?v=20">
+    <link rel="stylesheet" href="assets/onepoint-customer-account.css?v=21">
+  </head>
+  <body class="elite-console-body enterprise-checkout-body" data-account-page="orders">
+    <div data-account-shell></div>
+
+    <div class="acc-page" data-account-content hidden>
+      
+      <!-- Back Navigation & Operator Status Bar -->
+      <div class="acc-detail-top-nav">
+        <a href="customer-account-orders.html" id="acc-detail-back-link" class="cpf-edit-btn">
+          <i data-lucide="arrow-left"></i> Back to Requests
+        </a>
+        <span class="acc-desk-live-pill"><span class="acc-pulse-dot-green"></span> Suvidha Kendra Lucknow Operator Active</span>
+      </div>
+
+      <div id="acc-banner" class="cpf-banner" hidden></div>
+
+      <!-- Request Not Found State -->
+      <section class="cpf-card" id="acc-order-not-found" hidden>
+        <div class="acc-empty-state acc-empty-state-rich">
+          <span><i data-lucide="alert-circle"></i></span>
+          <strong>Request Not Found</strong>
+          <p>We could not find this request on your account. Please check the Request ID.</p>
+          <a class="eds-btn eds-btn-primary" href="customer-account-orders.html">Back to All Requests</a>
+        </div>
+      </section>
+
+      <!-- Main 2-Column Dashboard Layout -->
+      <div id="acc-order-content" class="acc-detail-2col" hidden>
+        
+        <!-- Left Column: Primary Flow (68%) -->
+        <main class="acc-detail-main">
+          
+          <!-- Master Request Header Card -->
+          <section class="cpf-card acc-detail-header-card" id="acc-detail-master-header">
+            <!-- Rendered dynamically -->
+          </section>
+
+          <!-- 1. "What Happens Next?" Component -->
+          <section class="cpf-card acc-next-step-card" id="acc-next-step-box">
+            <!-- Contextual Next Step Banner -->
+          </section>
+
+          <!-- 2. Application Draft Review & Sign-Off Section (If applicable) -->
+          <section class="cpf-card acc-draft-card" id="acc-draft-section" hidden>
+            <div class="cpf-card-title-row">
+              <h3 style="color: #082f61;"><i data-lucide="file-check-2"></i> Application Draft Review &amp; Sign-Off</h3>
+              <span class="acc-status-badge acc-status-action">Sign-Off Needed</span>
+            </div>
+            <p class="cpf-muted" style="font-size: .84rem; margin-top: 4px;">
+              Please inspect the operator-filled application draft before it is submitted to the official government department portal.
+            </p>
+            <div class="acc-draft-grid" id="acc-draft-grid"></div>
+            <div class="acc-draft-actions">
+              <button type="button" class="eds-btn eds-btn-primary" id="acc-approve-draft-btn">
+                <i data-lucide="check-circle-2"></i> Approve &amp; Authorize Filing
+              </button>
+              <a href="https://wa.me/919473946181" target="_blank" rel="noopener" class="eds-btn eds-btn-ghost" id="acc-correction-draft-btn">
+                <i data-lucide="edit-3"></i> Request Correction via WhatsApp
+              </a>
+            </div>
+          </section>
+
+          <!-- 3. Progress Real Timeline -->
+          <section class="cpf-card">
+            <div class="cpf-card-title-row">
+              <h3 style="font-size: 1.05rem;"><i data-lucide="route"></i> Progress Timeline</h3>
+              <span class="acc-timeline-live-tag"><span class="acc-pulse-dot-green"></span> Live Updates</span>
+            </div>
+            <div class="acc-timeline" id="acc-order-timeline"></div>
+          </section>
+
+          <!-- 4. Documents Section (Checklist + Status) -->
+          <section class="cpf-card">
+            <div class="cpf-card-title-row">
+              <div>
+                <h3 style="font-size: 1.05rem;"><i data-lucide="files"></i> Required Documents &amp; Verification</h3>
+                <p class="cpf-muted" style="font-size: .8rem; margin: 0;">Verified and stored in your 256-bit AES encrypted Digital Document Vault.</p>
+              </div>
+            </div>
+            <div class="acc-doc-checklist" id="acc-order-documents"></div>
+          </section>
+
+          <!-- 5. Audit-Log Activity Stream -->
+          <section class="cpf-card">
+            <div class="cpf-card-title-row">
+              <h3 style="font-size: 1.05rem;"><i data-lucide="activity"></i> Audit Log &amp; Status Activity</h3>
+              <span class="cpf-muted" style="font-size:.76rem;">Newest first</span>
+            </div>
+            <div class="acc-activity-list" id="acc-order-activity"></div>
+          </section>
+
+        </main>
+
+        <!-- Right Column: Sidebar (32%) -->
+        <aside class="acc-detail-sidebar">
+          
+          <!-- 1. Compact Request Summary Grid -->
+          <section class="cpf-card">
+            <div class="cpf-card-title-row">
+              <h3 style="font-size: 1rem;"><i data-lucide="receipt-text"></i> Request Summary</h3>
+            </div>
+            <div class="acc-order-summary-grid" id="acc-order-summary-grid"></div>
+          </section>
+
+          <!-- 2. Premium Billing & Invoicing Card -->
+          <section class="cpf-card">
+            <div class="cpf-card-title-row">
+              <h3 style="font-size: 1rem;"><i data-lucide="credit-card"></i> Fee &amp; Payment Breakdown</h3>
+            </div>
+            <table class="acc-pay-breakdown" id="acc-payment-summary"></table>
+            <div class="acc-pay-card-actions" id="acc-payment-actions-box"></div>
+          </section>
+
+          <!-- 3. Downloads & Receipts Archive -->
+          <section class="cpf-card">
+            <div class="cpf-card-title-row">
+              <h3 style="font-size: 1rem;"><i data-lucide="download-cloud"></i> Downloads &amp; Receipts</h3>
+            </div>
+            <div class="acc-downloads-list" id="acc-downloads-list"></div>
+          </section>
+
+          <!-- 4. Request-Aware Support Box -->
+          <section class="cpf-card acc-sidebar-support-card">
+            <h3 style="font-size: 1rem;"><i data-lucide="headphones"></i> Need Help with This Request?</h3>
+            <p class="cpf-muted" style="font-size: .82rem; margin-bottom: 12px;">
+              Our Lucknow Suvidha Kendra team is actively monitoring this request. Chat or call directly:
+            </p>
+            <div class="cpf-support-links">
+              <a href="https://wa.me/919473946181" id="acc-order-wa-link" target="_blank" rel="noopener">
+                <i data-lucide="message-circle"></i> Ask on WhatsApp
+              </a>
+              <a href="support.html" id="acc-order-ticket-link">
+                <i data-lucide="ticket"></i> Raise Support Ticket
+              </a>
+              <a href="tel:+919473946181">
+                <i data-lucide="phone"></i> Call Kendra Desk
+              </a>
+            </div>
+          </section>
+
+        </aside>
+
+      </div>
+    </div>
+
+    <!-- Mobile Bottom Sticky Action Bar -->
+    <div class="acc-mobile-sticky-bar" id="acc-mobile-sticky-bar" hidden>
+      <!-- Rendered dynamically for smartphone viewports -->
+    </div>
+
+    <div id="cpf-modal-backdrop" class="cpf-modal-backdrop" hidden>
+      <div class="cpf-modal" id="cpf-modal" role="dialog" aria-modal="true"></div>
+    </div>
+
+    <div data-account-footer></div>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+    <script src="assets/app.js?v=customer-checkout-94" defer></script>
+    <script src="assets/auth.js?v=cpf-1" defer></script>
+    <script src="assets/customer-account.js?v=20" defer></script>
+    <script src="assets/customer-account-order-detail.js?v=20" defer></script>
+  </body>
+</html>

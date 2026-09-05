@@ -1,0 +1,3412 @@
+/* ============================================================================
+   ONE POINT DIGITAL SERVICES
+   Enterprise Visual Polish — Phase 8.1
+   Typography · Whitespace · Grid · Optical Alignment · Visual Rhythm
+   
+   Strategy : One file, loaded last. Refines — never redesigns.
+   Scope     : #homepage-body for page-specific; global only where safe.
+   Principle : Every value belongs to the spacing scale. Every weight has purpose.
+   
+   Spacing scale: 4 · 8 · 12 · 16 · 24 · 32 · 48 · 64 · 80 · 96 · 128
+   ============================================================================ */
+
+
+/* ============================================================================
+   PHASE A — TYPOGRAPHY HIERARCHY
+   Goal: One coherent hierarchy. Elegant headings. Readable body. Muted support.
+   ============================================================================ */
+
+/* --- Global: optical rendering for all headings --- */
+h1, h2, h3, h4, h5, h6 {
+  text-wrap: balance;
+  font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* --- Hero H1: confident, elegant, not compressed --- */
+#homepage-body .hero-v3-title {
+  font-size:      clamp(40px, 5vw, 72px) !important;
+  font-weight:    850 !important;
+  line-height:    1.12 !important;
+  letter-spacing: -0.035em !important;
+  max-width:      680px !important;
+  word-spacing:   0.01em;
+}
+
+/* Hero title gradient accent — preserve gradient, refine weight continuity */
+#homepage-body .hero-v3-title-accent {
+  font-weight: 800 !important;
+  background: linear-gradient(90deg, #075aa8 0%, #b98218 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+}
+
+/* --- Hero subtitle: secondary, never competes --- */
+#homepage-body .hero-v3-subtitle {
+  font-size:      16px !important;
+  line-height:    var(--lh-loose) !important;  /* was 1.68 — slightly more air */
+  letter-spacing: var(--ls-body-sm) !important;
+  max-width:      62ch !important;
+  color:          var(--h-ink-2);
+  margin-top:     var(--sp-5) !important;
+}
+
+/* --- Hero badge: compact identifier --- */
+#homepage-body .hero-v3-badge {
+  font-size:      10.5px !important;
+  font-weight:    700 !important;
+  letter-spacing: 0.07em !important;
+  margin-bottom:  var(--sp-5) !important;
+}
+
+/* --- Section kicker (eyebrow label): refined, not dominant --- */
+.section-kicker {
+  font-size:      0.72rem !important;
+  font-weight:    700 !important;
+  letter-spacing: var(--ls-kicker) !important;
+  padding:        var(--sp-1-5) var(--sp-3) !important;
+  margin-bottom:  var(--sp-3) !important;
+}
+
+/* --- Section H2: premium breathing, optically balanced --- */
+.section-head h2 {
+  font-size:      clamp(1.65rem, 3.2vw, 2.5rem) !important;
+  line-height:    1.22 !important;    /* was 1.18 — gains clarity */
+  letter-spacing: -0.022em !important;
+}
+
+/* Gold underline accent: slightly shorter, thinner — more refined */
+.section-head h2::after {
+  width:       44px !important;
+  height:      2.5px !important;
+  margin-top:  var(--sp-4) !important;
+  border-radius: var(--r-pill);
+}
+
+/* --- Section description text: reading-column constrained --- */
+.landing-trust-copy p,
+.tm-subtitle,
+.stepper-panel-sub,
+.process-subtitle {
+  font-size:      0.975rem !important;
+  line-height:    var(--lh-loose) !important;
+  max-width:      var(--rw-mid);
+  letter-spacing: 0.003em;
+  color:          var(--muted) !important;
+}
+
+/* --- CTA section description --- */
+.catch-all-cta-section p {
+  font-size:   1rem !important;
+  line-height: 1.68 !important;
+  max-width:   var(--rw-narrow);
+  margin-inline: auto;
+  color:       var(--muted) !important;
+}
+
+/* --- CTA section H2 --- */
+.catch-all-cta-section h2 {
+  font-size:      clamp(1.75rem, 3.4vw, 2.75rem) !important;
+  line-height:    1.15 !important;
+  letter-spacing: -0.028em !important;
+}
+
+/* --- Landing trust section H2 --- */
+.landing-trust-copy h2 {
+  font-size:      clamp(1.5rem, 2.8vw, 2.2rem) !important;
+  line-height:    var(--lh-subhead) !important;
+  letter-spacing: var(--ls-neg-sm) !important;
+}
+
+/* --- Trust metrics section --- */
+.tm-title {
+  font-size:      clamp(1.45rem, 2.7vw, 2.15rem) !important;
+  line-height:    var(--lh-subhead) !important;
+  letter-spacing: var(--ls-neg-sm) !important;
+}
+
+.tm-hero-num {
+  font-size:          clamp(2.2rem, 3.4vw, 3.4rem) !important;
+  font-weight:        850 !important;
+  letter-spacing:     -0.03em !important;
+  line-height:        1.08 !important;
+  font-feature-settings: "tnum" 1;
+}
+
+.tm-mini-num {
+  font-size:          clamp(1.05rem, 1.4vw, 1.35rem) !important;
+  font-weight:        800 !important;
+  letter-spacing:     -0.02em !important;
+  line-height:        1.2 !important;
+  white-space:        normal !important;
+  font-feature-settings: "tnum" 1;
+}
+
+/* --- Process stepper headings --- */
+.stepper-panel-title {
+  font-size:      1.12rem !important;
+  font-weight:    750 !important;
+  line-height:    1.32 !important;
+  letter-spacing: -0.015em !important;
+}
+
+/* --- Card and component H3 titles --- */
+.trust-proof-card strong,
+.trust-tile strong,
+.mini-card h3 {
+  font-size:      0.925rem !important;
+  font-weight:    700 !important;
+  letter-spacing: -0.012em !important;
+  line-height:    var(--lh-comp) !important;
+  color:          var(--ink) !important;
+}
+
+/* --- Secondary / supporting text: quieter, never competing --- */
+.trust-proof-card span,
+.trust-tile span,
+.mini-card p {
+  font-size:   0.8rem !important;
+  line-height: 1.58 !important;
+  color:       var(--muted-2) !important;
+  font-weight: 440 !important;
+}
+
+/* --- Stat label text: concise supporting role --- */
+.hos-stat-body span {
+  font-size:   0.74rem !important;
+  line-height: var(--lh-comp) !important;
+  color:       var(--muted-2);
+  font-weight: 500;
+  max-width:   14ch;
+}
+
+/* --- Stat metric number --- */
+.hos-stat-body strong {
+  font-size:   clamp(1.2rem, 2vw, 1.55rem);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  font-feature-settings: "tnum" 1;
+}
+
+/* --- Review text: legible, warm --- */
+.review-text {
+  font-size:      0.91rem !important;
+  line-height:    1.70 !important;
+  color:          var(--ink-2) !important;
+  letter-spacing: var(--ls-body-sm);
+}
+
+.review-name {
+  font-size:      0.91rem !important;
+  font-weight:    700 !important;
+  letter-spacing: -0.010em !important;
+  color:          var(--ink) !important;
+}
+
+/* --- Journey step labels ---
+   .journey-step's card background was switched to a light surface (line ~1236
+   below) but its text color was never overridden, so it kept inheriting
+   color:#fff from the dark .process-apple-section ancestor — white text on a
+   white card, i.e. invisible. */
+.journey-step strong {
+  font-size:   0.78rem !important;
+  font-weight: 700 !important;
+  line-height: 1.3;
+  color:       var(--ink) !important;
+}
+
+.journey-step small {
+  font-size: 0.68rem !important;
+  font-weight: 500 !important;
+  opacity: var(--o-dim);
+  color:     var(--muted-2) !important;
+}
+
+.journey-step-number {
+  font-size:      0.62rem !important;
+  font-weight:    800 !important;
+  letter-spacing: 0.08em !important;
+  color:          var(--primary) !important;
+}
+
+.journey-step svg {
+  color: var(--primary) !important;
+}
+
+/* --- Trust strip items --- */
+.hos-trust-strip li {
+  font-size:   11.5px !important;
+  font-weight: 600 !important;
+}
+
+/* --- Eyebrow text in CTA section --- */
+.cta-eyebrow {
+  font-size:      0.72rem !important;
+  font-weight:    700 !important;
+  letter-spacing: var(--ls-kicker) !important;
+}
+
+/* --- Section head: consistent spacing --- */
+.section-head {
+  margin-bottom:  clamp(28px, 3.8vw, 52px) !important;
+  gap:            var(--sp-5) !important;
+  align-items:    flex-end;
+}
+
+/* Center-aligned section heads */
+.section-head.center-line {
+  align-items:     center;
+  flex-direction:  column;
+  text-align:      center;
+}
+.section-head.center-line > div {
+  margin-inline: auto;
+  text-align: center;
+}
+.section-head.center-line h2::after {
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+.section-head.center-line .section-kicker {
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+.section-head.center-line p {
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* Section head CTA links: align to heading baseline */
+.section-head > a.btn,
+.section-head > a[class*="btn"] {
+  align-self:  flex-end !important;
+  flex-shrink: 0;
+}
+
+/* ============================================================================
+   PHASE B — WHITESPACE SYSTEM
+   Goal: Graduated vertical rhythm. Hero breathes most. Content breathes correctly.
+   ============================================================================ */
+
+/* --- Hero: most generous vertical breathing --- */
+#homepage-body .hero-v3 {
+  padding-top:    var(--sy-hero) !important;
+  padding-bottom: var(--sy-hero) !important;
+}
+
+/* --- CTA section: generous for impact --- */
+.catch-all-cta-section {
+  padding-block: var(--sy-hero) !important;
+}
+
+/* --- Primary content sections --- */
+.landing-trust-section {
+  padding-block: var(--sy-primary);
+}
+
+.trust-metrics-section {
+  padding-block: var(--sy-primary);
+}
+
+.landing-services-section {
+  padding-block: var(--sy-default);
+}
+
+.trust-band {
+  padding-block: var(--sy-default);
+}
+
+#student-corner-section {
+  padding-block: var(--sy-default);
+}
+
+.featured-products-premium {
+  padding-block: var(--sy-default);
+}
+
+.landing-reviews-section {
+  padding-block: var(--sy-default);
+}
+
+/* --- Hero stats strip: supporting, not dominant --- */
+.hos-stats:not(.hero-os-console) {
+  gap:        var(--sp-3) !important;
+  margin-top: var(--sp-5) !important;
+}
+
+.hos-stat {
+  padding: var(--sp-4) !important;
+  gap:     var(--sp-3) !important;
+  min-height: var(--stat-min-h);
+}
+
+/* --- Hero CTAs: intentional vertical rhythm --- */
+.hos-search {
+  margin-top: var(--sp-5) !important;
+}
+
+.hero-actions-v3 {
+  gap:        var(--sp-3) !important;
+  margin-top: var(--sp-5) !important;
+}
+
+.hero-cta-note {
+  margin-top: var(--sp-3) !important;
+}
+
+/* --- Hero trust strip --- */
+.hos-trust-strip {
+  margin-top:  var(--sp-7) !important;
+  padding-top: var(--sp-4) !important;
+  gap:         var(--sp-3) var(--sp-5) !important;
+}
+
+/* --- Landing trust inner: breathing between copy and grid --- */
+.landing-trust-inner {
+  gap: var(--sp-9) !important;
+}
+
+/* --- Trust proof cards --- */
+.landing-trust-grid {
+  gap: var(--sp-3);
+}
+
+.trust-proof-card {
+  padding: var(--sp-5) !important;
+  gap:     var(--sp-3) !important;
+}
+
+/* --- Trust metrics: internal spacing --- */
+.tm-split-wrap {
+  gap:         var(--sp-10) !important;
+  align-items: center;
+}
+
+.tm-hero-left {
+  padding-right: var(--sp-6);
+}
+
+.tm-hero-accent {
+  margin-block: var(--sp-3) !important;
+}
+
+.tm-hero-sub {
+  margin-top: var(--sp-3) !important;
+}
+
+.tm-narrative-top {
+  margin-bottom: var(--sp-5) !important;
+}
+
+.tm-mini-grid {
+  gap:        var(--sp-4) !important;
+  margin-top: var(--sp-5) !important;
+}
+
+.tm-mini-stat {
+  padding: var(--sp-4) var(--sp-5) !important;
+}
+
+.tm-kicker {
+  margin-bottom: var(--sp-2) !important;
+}
+
+/* --- Category filters --- */
+.category-filters {
+  gap:           var(--sp-2) !important;
+  margin-bottom: var(--sp-5) !important;
+}
+
+/* --- Process section: journey strip breathing --- */
+.landing-journey {
+  gap:           var(--sp-5) !important;
+  margin-bottom: var(--sp-9) !important;
+}
+
+.journey-step {
+  padding: var(--sp-3) var(--sp-2) !important;
+  gap:     var(--sp-2) !important;
+}
+
+/* Stepper panels */
+.process-showcase-container {
+  gap:        var(--sp-8) !important;
+  margin-top: var(--sp-7) !important;
+}
+
+.stepper-panel-header {
+  padding: var(--sp-5) var(--sp-5) var(--sp-4) !important;
+}
+
+.stepper-cards-grid {
+  padding: 0 var(--sp-4) !important;
+  gap:     var(--sp-2) !important;
+}
+
+.stepper-nav-card {
+  padding: var(--sp-4) !important;
+}
+
+.stepper-body {
+  gap: var(--sp-2) !important;
+}
+
+.stepper-nav-content {
+  margin-top: var(--sp-2) !important;
+}
+
+.stepper-panel-footer {
+  padding: var(--sp-4) var(--sp-5) var(--sp-5) !important;
+}
+
+.nav-progress-track {
+  margin-top: var(--sp-2) !important;
+}
+
+/* --- Security / Trust dashboard --- */
+.trust-dashboard-panel {
+  padding: var(--sp-5) !important;
+}
+
+.trust-dashboard-head {
+  margin-bottom: var(--sp-4) !important;
+  padding-bottom: var(--sp-3) !important;
+}
+
+.trust-dashboard-grid {
+  gap: var(--sp-3) !important;
+}
+
+.trust-tile {
+  padding: var(--sp-4) !important;
+  gap:     var(--sp-3) !important;
+}
+
+/* --- Student section --- */
+.student-band {
+  gap: var(--sp-5) !important;
+}
+
+.student-cards {
+  gap: var(--sp-4) !important;
+}
+
+.mini-card {
+  padding: var(--sp-5) !important;
+}
+
+.mini-card .feature-icon {
+  margin-bottom: var(--sp-3) !important;
+}
+
+.mini-card h3 {
+  margin-bottom: var(--sp-2) !important;
+}
+
+/* --- Bento grid --- */
+.bento-grid {
+  gap: var(--sp-4) !important;
+}
+
+.bento-card {
+  padding: var(--sp-6) !important;
+}
+
+/* --- Featured products section spacing --- */
+.featured-product-tabs {
+  gap:           var(--sp-2) !important;
+  margin-bottom: var(--sp-5) !important;
+}
+
+.featured-product-tabs a {
+  padding: var(--sp-2) var(--sp-4) !important;
+}
+
+/* --- Review section --- */
+.reviews {
+  gap: var(--sp-4) !important;
+}
+
+.review-card {
+  padding: var(--sp-5) !important;
+}
+
+.review-header {
+  gap:           var(--sp-3) !important;
+  margin-bottom: var(--sp-3) !important;
+}
+
+.review-person {
+  gap: var(--sp-3) !important;
+}
+
+.review-meta {
+  gap: var(--sp-1) !important;
+}
+
+.review-service-meta {
+  gap:            var(--sp-3) !important;
+  margin-top:     var(--sp-4) !important;
+  padding-top:    var(--sp-3) !important;
+}
+
+.review-footer {
+  margin-top:  var(--sp-3) !important;
+  padding-top: var(--sp-3) !important;
+}
+
+/* --- CTA section interior --- */
+.cta-inner-content {
+  display:        flex;
+  flex-direction: column;
+  align-items:    center;
+  gap:            var(--sp-4) !important;
+}
+
+.cta-eyebrow {
+  margin-bottom: var(--sp-1) !important;
+}
+
+.cta-inner-content h2 {
+  margin-bottom: var(--sp-2) !important;
+}
+
+.cta-inner-content p {
+  margin-bottom: var(--sp-4) !important;
+}
+
+.cta-btn-group {
+  gap: var(--sp-3) !important;
+}
+
+
+/* ============================================================================
+   PHASE C — GRID ALIGNMENT
+   Goal: Equal gutters. Equal padding. Perfect column alignment.
+   ============================================================================ */
+
+/* --- Stats grid: equal 4-column layout --- */
+.hos-stats:not(.hero-os-console) {
+  display:               grid !important;
+  grid-template-columns: repeat(4, 1fr) !important;
+  align-items:           stretch !important;
+}
+
+/* --- Trust proof cards grid --- */
+.landing-trust-grid {
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)) !important;
+  align-items:           stretch !important;
+}
+
+/* --- Trust tiles: auto-fill grid --- */
+.trust-dashboard-grid {
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)) !important;
+  align-items:           stretch !important;
+}
+
+/* --- Reviews: equal 4-column layout --- */
+.reviews.reviews-4col {
+  grid-template-columns: repeat(4, 1fr) !important;
+  align-items:           start !important;
+}
+
+/* --- Student mini-cards: consistent fill grid --- */
+.student-cards {
+  display:               grid !important;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)) !important;
+  align-items:           stretch !important;
+}
+
+/* --- Trust metrics: vertically centered two-column --- */
+.tm-split-wrap {
+  display:     flex !important;
+  align-items: center;
+}
+
+
+/* ============================================================================
+   PHASE H — SECTION RHYTHM (Background Alternation)
+   Goal: Continuous visual story. Subtle alternation — never harsh separation.
+   ============================================================================ */
+
+/* Page flow: 
+   Hero (gradient) → Ticker (dark) → Trust (canvas) → Tracker (surface) →
+   Metrics (canvas) → Services (surface) → Process (dark) → Security (canvas) →
+   Student (surface) → Why Choose (canvas) → Products (surface) →
+   Reviews (canvas) → CTA (gradient) → Footer (dark) */
+
+.landing-trust-section    { background: var(--canvas)  !important; }
+.trust-metrics-section    { background: var(--canvas)  !important; }
+.landing-services-section { background: var(--surface) !important; }
+/* process-apple-section: keep its own dark background — intentional contrast */
+.trust-band               { background: var(--canvas)  !important; }
+#student-corner-section   { background: var(--surface) !important; }
+.featured-products-premium{ background: var(--surface) !important; }
+.landing-reviews-section  { background: var(--canvas)  !important; }
+/* catch-all-cta-section: keep its own gradient — intentional contrast */
+
+/* Bento/Why Choose section: canvas */
+section.section.reveal:has(.bento-grid) {
+  background: var(--canvas);
+}
+
+/* --- Section dividers: hair-thin, never harsh --- */
+.landing-trust-section,
+.tracker-redesign-section,
+.trust-metrics-section,
+.landing-services-section,
+.trust-band,
+#student-corner-section,
+.featured-products-premium,
+.landing-reviews-section,
+section.section.reveal:has(.bento-grid) {
+  border-top: 1px solid var(--line-2) !important;
+}
+
+/* CTA section: remove border since it has its own distinct visual treatment */
+.catch-all-cta-section {
+  border-top: none !important;
+}
+
+/* Process section (dark): remove border — dark band creates its own separation */
+.process-apple-section {
+  border-top: none !important;
+}
+
+
+/* ============================================================================
+   PHASE — OPTICAL ALIGNMENT
+   Goal: Every element aligned by eye, not just by math.
+   ============================================================================ */
+
+/* --- Section kicker: inline-flex, no stray padding --- */
+.section-kicker {
+  display: inline-flex;
+}
+
+/* --- Section head CTA: optically seated at h2 baseline --- */
+.section-head > a.btn,
+.section-head > a[class*="btn"] {
+  align-self: flex-end !important;
+  flex-shrink: 0;
+  margin-bottom: 0;
+}
+
+/* --- Stat icon optical center --- */
+.hos-stat-icon {
+  display:     flex !important;
+  align-items: center !important;
+  flex-shrink: 0;
+}
+
+/* Stat body: stacked, vertically centered */
+.hos-stat-body {
+  display:        flex;
+  flex-direction: column;
+  justify-content: center;
+  gap:            var(--sp-1) !important;
+}
+
+/* --- Trust strip: optically distributed --- */
+.hos-trust-strip {
+  justify-content: flex-start !important;
+}
+
+/* --- Stat trend: vertically aligned to top of number --- */
+.hos-stat-trend {
+  align-self: flex-start;
+  margin-top: var(--sp-1);
+}
+
+/* --- Journey step numbers: optical baseline --- */
+.journey-step {
+  display:        flex;
+  flex-direction: column;
+  align-items:    center;
+  text-align:     center;
+}
+
+/* --- Trust tile icon and text: vertically aligned --- */
+.trust-tile {
+  display:     flex !important;
+  align-items: center !important;
+}
+
+/* --- Review person row: vertically centered --- */
+.review-person {
+  display:     flex !important;
+  align-items: center !important;
+}
+
+/* --- Review stars optical sizing --- */
+.review-stars {
+  font-size:   0.8rem !important;
+  line-height: 1 !important;
+  letter-spacing: 0.04em;
+}
+
+
+/* ============================================================================
+   PHASE — READING RHYTHM
+   Goal: 60–72 character line length. No orphan headings. Paragraph breathing.
+   ============================================================================ */
+
+/* Trust copy paragraph */
+.landing-trust-copy p {
+  max-width: var(--rw-mid);
+}
+
+/* Stepper description */
+.stepper-panel-sub {
+  max-width: var(--rw-mid);
+}
+
+/* Process subtitle */
+.process-subtitle {
+  max-width: var(--rw-mid);
+  margin-inline: auto;
+}
+
+/* CTA text */
+.catch-all-cta-section p {
+  max-width: var(--rw-narrow);
+}
+
+/* Hero subtitle reading width (already set above, reinforced) */
+#homepage-body .hero-v3-subtitle {
+  max-width: var(--rw-narrow);
+}
+
+
+/* ============================================================================
+   PHASE — VISUAL WEIGHT HIERARCHY
+   Goal: One dominant. One supporting. One resting. Per section.
+   ============================================================================ */
+
+/* Stats: supporting role — optically lighter than h1 */
+.hos-stats:not(.hero-os-console) {
+  opacity: var(--o-primary);
+} 
+/* Trust strip: resting role — quiet */
+.hos-trust-strip li {
+  opacity: var(--o-secondary);
+}
+
+.hos-trust-strip li.trust-subtle {
+  opacity: var(--o-muted) !important;
+}
+
+/* Section head CTA links: supporting role — never primary */
+.section-head > a.btn-soft,
+.section-head > a[class*="btn-soft"] {
+  font-size:   0.875rem !important;
+  font-weight: 600 !important;
+}
+
+/* Trust proof primary card: dominant within its grid */
+.trust-proof-card.trust-proof-primary {
+  border-left: 3px solid var(--primary) !important;
+}
+
+/* Satisfaction card: dominant within grid */
+.trust-proof-card.trust-proof-satisfaction {
+  border-left: 3px solid var(--accent) !important;
+}
+
+/* --- CTA inner: dominant h2, supporting p, primary button dominates --- */
+.cta-inner-content {
+  text-align: center;
+}
+
+
+/* ============================================================================
+   PHASE U — RESPONSIVE: MOBILE POLISH (Typography + Spacing)
+   Goal: Not scaled-down desktop. Optimized mobile reading experience.
+   ============================================================================ */
+
+@media (max-width: 1024px) {
+  /* Stats: 2×2 grid on tablet */
+  .hos-stats:not(.hero-os-console) {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  /* Reviews: 2-col on tablet */
+  .reviews.reviews-4col {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  /* Trust metrics: stack */
+  .tm-split-wrap {
+    flex-direction: column !important;
+    align-items:    flex-start !important;
+    gap:            var(--sp-7) !important;
+  }
+
+  /* Trust split: remove the border-right-style gap */
+  .tm-hero-left {
+    padding-right: 0;
+    padding-bottom: var(--sp-5);
+    border-bottom:  1px solid var(--line-2);
+  }
+
+  /* Landing trust inner: column on tablet */
+  .landing-trust-inner {
+    flex-direction: column !important;
+    gap:            var(--sp-7) !important;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Hero H1: mobile scale */
+  #homepage-body .hero-v3-title {
+    font-size:   clamp(28px, 8vw, 40px) !important;
+    line-height: 1.14 !important;
+    max-width:   100%;
+  }
+
+  /* Hero subtitle: full width on mobile */
+  #homepage-body .hero-v3-subtitle {
+    max-width: 100%;
+  }
+
+  /* Stats: 2×2 on mobile */
+  .hos-stats:not(.hero-os-console) {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: var(--sp-2) !important;
+  }
+
+  /* Section headings: tighter on mobile */
+  .section-head h2 {
+    font-size:   clamp(1.4rem, 6vw, 2rem) !important;
+    line-height: 1.26 !important;
+  }
+
+  /* Reviews: single column on mobile */
+  .reviews.reviews-4col {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Trust tiles: 2-col on mobile */
+  .trust-dashboard-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  /* Trust proof grid: 2-col on mobile */
+  .landing-trust-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  /* Student cards: 2-col on mobile */
+  .student-cards {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  /* Category filters: horizontal scroll on mobile */
+  .category-filters {
+    flex-wrap:      nowrap !important;
+    overflow-x:     auto;
+    padding-bottom: var(--sp-2);
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .category-filters::-webkit-scrollbar { display: none; }
+
+  /* Process showcase: stack on mobile */
+  .process-showcase-container {
+    flex-direction: column !important;
+    gap:            var(--sp-5) !important;
+  }
+
+  /* Journey steps: 4-col scrollable */
+  .landing-journey {
+    grid-template-columns: repeat(4, 80px) !important;
+    overflow-x:            auto !important;
+    padding-bottom:        var(--sp-3) !important;
+    margin-bottom:         var(--sp-7) !important;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .landing-journey::-webkit-scrollbar { display: none; }
+
+  /* TM hero number: mobile scale */
+  .tm-hero-num {
+    font-size: clamp(2.4rem, 10vw, 3.5rem) !important;
+  }
+
+  /* Section compact breathing on mobile */
+  .landing-trust-section,
+  .trust-metrics-section  {
+    padding-block: var(--sy-primary) !important;
+  }
+
+  .trust-band,
+  #student-corner-section,
+  .featured-products-premium,
+  .landing-reviews-section,
+  .landing-services-section {
+    padding-block: var(--sy-default) !important;
+  }
+
+  /* CTA buttons: full width stacked on mobile */
+  .cta-btn-group {
+    flex-direction: column !important;
+    width:          100%;
+    align-items:    center;
+  }
+  .cta-btn-group > a.btn,
+  .cta-btn-group > a[class*="btn"] {
+    width:           100% !important;
+    max-width:       var(--cta-btn-max);
+    justify-content: center;
+  }
+
+  /* Mini card: compressed on mobile */
+  .mini-card {
+    padding: var(--sp-4) !important;
+  }
+
+  /* Student band: column on mobile */
+  .student-band {
+    flex-direction: column !important;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Smallest screens */
+  #homepage-body .hero-v3-title {
+    font-size:   clamp(26px, 9vw, 34px) !important;
+    line-height: 1.16 !important;
+  }
+
+  .catch-all-cta-section h2 {
+    font-size: clamp(1.45rem, 7vw, 1.9rem) !important;
+  }
+
+  /* Trust proof: 1-col on xs */
+  .landing-trust-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Student cards: 1-col on xs */
+  .student-cards {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Trust tiles: 1-col on xs */
+  .trust-dashboard-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Bento: always 1-col on xs */
+  .bento-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Bento card: tighter padding */
+  .bento-card {
+    padding: var(--sp-5) !important;
+  }
+}
+
+
+/* ============================================================================
+   PHASE V — PERFORMANCE SAFEGUARDS
+   Goal: No layout-triggering properties animated. GPU composited only.
+   ============================================================================ */
+
+/* Ensure no transitions on layout properties */
+.landing-trust-section,
+.tracker-redesign-section,
+.trust-metrics-section,
+.landing-services-section {
+  will-change: auto; /* reset any stray will-change */
+}
+
+
+/* ============================================================================
+   PHASE 8.1.1 — ENTERPRISE VISUAL STABILIZATION PATCH
+   Resolves the 5 verified visual QA issues from Phase 8.1.
+   ============================================================================ */
+
+/* --- Issue 1: Hardware-safe clipping for hero glows --- */
+/* Layer 1: html/body — no horizontal scroll ever */
+html {
+  overflow-x: clip !important;
+}
+body {
+  overflow-x: clip !important;
+}
+
+/* Layer 2: page shell — paint containment */
+.page-shell {
+  overflow-x: clip !important;
+  overflow-y: visible !important;
+  contain: paint !important;
+  margin-top: 64px !important;
+}
+
+/* Layer 3: hero section — clip at outermost level */
+#homepage-body .hero-v3 {
+  overflow: hidden !important;
+  overflow: clip !important;          /* progressive enhancement */
+  contain: paint !important;
+}
+
+/* Layer 4: hero-v3-bg — the actual glow host; clip here is the decisive fix */
+/* Glows (.hero-v3-glow-a/b/c) live here with negative insets that cause bleed */
+#homepage-body .hero-v3-bg {
+  overflow: hidden !important;
+  overflow: clip !important;
+  contain: paint !important;
+}
+
+/* Layer 5: All landing sections — contain carousel arrows, negative margins, absolute decorators */
+/* This is the catch-all that stops scrollW > clientW at any nested level  */
+.hero.hero-v3,
+.activity-ticker-section,
+.landing-trust-section,
+.tracker-redesign-section,
+.trust-metrics-section,
+.landing-services-section,
+.process-apple-section,
+.trust-band,
+#student-corner-section,
+.featured-products-premium,
+.landing-reviews-section,
+.catch-all-cta-section,
+section.section.reveal {
+  overflow-x: clip !important;
+}
+
+/* --- Issue 2: Early switch to 2x2 stats layout ---
+   Covers the full crowded range: 992px–1280px.
+   At 1280px the 4-col layout causes 3-line text wrap ("Government & digital services").
+   Switching to 2×2 at ≤1280px gives each stat card enough width to breathe.          */
+@media (max-width: 1280px) {
+  #homepage-body .hos-stats:not(.hero-os-console) {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: var(--sp-3) !important;
+  }
+}
+
+/* --- Issue 3: Bento grid visual stabilization --- */
+/* The parent section also needs overflow-x clip (covered by Issue 1 above) */
+.bento-grid {
+  max-width:   100% !important;
+  width:       100% !important;
+  box-sizing:  border-box !important;
+  min-width:   0 !important;
+  overflow-x:  clip !important;   /* belt-and-suspenders in case section clip is overridden */
+}
+
+.bento-card {
+  box-sizing:  border-box !important;
+  max-width:   100% !important;
+  min-width:   0 !important;
+  overflow:    hidden !important; /* bento card content must never bleed */
+}
+
+/* --- Issue 4: Category filter buttons visual stabilization --- */
+#homepage-body #trending-services .category-filters {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(var(--category-col-min), 1fr)) !important;
+  align-items: stretch !important;
+  gap: var(--sp-3) !important;
+}
+
+#homepage-body #trending-services .category-filters button {
+  display: grid !important;
+  grid-template-columns: var(--icon-col-w) 1fr !important;
+  grid-template-rows: auto 1fr !important;
+  align-content: stretch !important;
+  height: 100% !important;
+  min-height: var(--category-btn-min-h) !important;
+  min-width: 0 !important;
+}
+
+#homepage-body .category-card-copy {
+  display:        flex !important;
+  flex-direction: column !important;
+  justify-content: flex-start !important;
+  min-width:      0 !important;
+  overflow:       hidden !important;
+}
+
+/* The key overflow fix: clip the label text at the grid cell boundary */
+#homepage-body .category-card-copy strong {
+  display:       block !important;
+  overflow:      hidden !important;
+  text-overflow: ellipsis !important;
+  white-space:   normal !important;   /* allow wrap — do NOT truncate single line */
+  word-break:    break-word !important;
+  max-width:     100% !important;
+}
+
+#homepage-body .category-card-copy small,
+#homepage-body .category-card-meta small {
+  display:       block !important;
+  overflow:      hidden !important;
+  max-width:     100% !important;
+}
+
+/* --- Issue 5: Softened Section dividers --- */
+.landing-trust-section,
+.tracker-redesign-section,
+.trust-metrics-section,
+.landing-services-section,
+.trust-band,
+#student-corner-section,
+.featured-products-premium,
+.landing-reviews-section,
+section.section.reveal:has(.bento-grid) {
+  border-top: 1px solid var(--hairline-soft) !important; /* softened from var(--line-2) */
+}
+
+
+/* ============================================================================
+   END — One Point Digital Services Enterprise Visual Polish v1.0.1
+   Phase 8.1.1: Typography · Whitespace · Grid · Optical Alignment · Rhythm
+   ============================================================================ */
+
+
+/* ============================================================================
+   PHASE 8.2B — ENTERPRISE COMPONENT DESIGN REFINEMENT
+   This section implements the approved Phase 8.2A design blueprint.
+   ============================================================================ */
+
+/* ----------------------------------------------------------------------------
+   8.2B.1 CARD HIERARCHY
+   Defining canonical Card classes L1 to L5 and mapping homepage components.
+   ---------------------------------------------------------------------------- */
+
+/* Level 1: Utility Card */
+.eds-card-l1 {
+  background: var(--surface) !important;
+  border: 1px solid var(--hairline) !important;
+  border-radius: var(--r-sm) !important;
+  box-shadow: var(--sh-xs) !important;
+  padding: var(--sp-4) !important;
+  transition: transform var(--motion-base) var(--ease-smooth),
+              box-shadow var(--motion-base) var(--ease-smooth),
+              border-color var(--motion-base) var(--ease-smooth) !important;
+}
+
+/* Level 2: Information Card */
+.eds-card-l2 {
+  background: var(--surface-2) !important;
+  border: 1px solid var(--hairline-soft) !important;
+  border-radius: var(--r-md) !important;
+  box-shadow: var(--sh-sm) !important;
+  padding: var(--sp-5) !important;
+  transition: transform var(--motion-base) var(--ease-smooth),
+              box-shadow var(--motion-base) var(--ease-smooth),
+              border-color var(--motion-base) var(--ease-smooth) !important;
+}
+
+/* Level 3: Interactive Card */
+.eds-card-l3 {
+  background: #ffffff !important;
+  border: 1.5px solid var(--line) !important;
+  border-radius: var(--r-lg) !important;
+  box-shadow: var(--sh-sm) !important;
+  padding: var(--sp-5) !important;
+  transition: transform var(--motion-base) var(--ease-smooth),
+              box-shadow var(--motion-base) var(--ease-smooth),
+              border-color var(--motion-base) var(--ease-smooth) !important;
+}
+
+/* Level 4: Premium Card */
+.eds-card-l4 {
+  background: rgba(255, 255, 255, 0.75) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  backdrop-filter: blur(12px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.4) !important;
+  border-radius: var(--r-xl) !important;
+  box-shadow: var(--sh-md) !important;
+  padding: var(--sp-6) !important;
+  transition: transform var(--motion-base) var(--ease-smooth),
+              box-shadow var(--motion-base) var(--ease-smooth),
+              border-color var(--motion-base) var(--ease-smooth) !important;
+}
+
+/* Level 5: Hero Card */
+.eds-card-l5 {
+  background: linear-gradient(180deg, var(--primary-deep), var(--navy-2)) !important;
+  border: 2px solid rgba(255, 255, 255, 0.8) !important;
+  border-radius: var(--r-xl) !important;
+  box-shadow: var(--sh-lg) !important;
+  padding: var(--sp-8) !important;
+  transition: transform var(--motion-base) var(--ease-smooth),
+              box-shadow var(--motion-base) var(--ease-smooth),
+              border-color var(--motion-base) var(--ease-smooth) !important;
+}
+
+/* --- Card Hierarchy Mapping --- */
+
+/* Level 1 Utility */
+#homepage-body .mini-card,
+#homepage-body .trust-tile,
+#homepage-body .trust-proof-card {
+  composes: eds-card-l1; /* semantic helper note */
+}
+#homepage-body .mini-card,
+#homepage-body .trust-tile,
+#homepage-body .trust-proof-card {
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-sm);
+  box-shadow: var(--sh-xs);
+  padding: var(--sp-4);
+}
+
+/* Level 2 Information */
+#homepage-body .review-card,
+#homepage-body .journey-step {
+  background: var(--surface-2) !important;
+  border: 1px solid var(--hairline-soft) !important;
+  border-radius: var(--r-md) !important;
+  box-shadow: var(--sh-sm) !important;
+  padding: var(--sp-5) !important;
+}
+
+/* Level 3 Interactive */
+#homepage-body .service-card,
+#homepage-body .product-card,
+#homepage-body .category-filters button {
+  background: #ffffff !important;
+  border: 1.5px solid var(--line) !important;
+  border-radius: var(--r-lg) !important;
+  box-shadow: var(--sh-sm) !important;
+  padding: var(--sp-5) !important;
+}
+
+/* Level 4 Premium */
+#homepage-body .premium-tracker-card,
+#homepage-body .stepper-nav-card {
+  background: rgba(255, 255, 255, 0.75) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  backdrop-filter: blur(12px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.4) !important;
+  border-radius: var(--r-xl) !important;
+  box-shadow: var(--sh-md) !important;
+  padding: var(--sp-6) !important;
+}
+
+/* Level 5 Hero */
+#homepage-body .student-photo.premium-showcase-card {
+  background: linear-gradient(180deg, var(--primary-deep), var(--navy-2)) !important;
+  border: 2px solid rgba(255, 255, 255, 0.8) !important;
+  border-radius: var(--r-xl) !important;
+  box-shadow: var(--sh-lg) !important;
+  padding: var(--sp-8) !important;
+}
+
+/* --- Nested Cards Rule (Cards inside Cards) --- */
+/* Reduces depth, radius, shadow, and padding by exactly one hierarchy level */
+
+/* Nested L5 Card -> degrades to L4 Card styling */
+.eds-card-l5 .eds-card-l5, .eds-card-l4 .eds-card-l5, .eds-card-l3 .eds-card-l5, .eds-card-l2 .eds-card-l5, .eds-card-l1 .eds-card-l5,
+.premium-showcase-card .eds-card-l5,
+.bento-card .eds-card-l5 {
+  padding: var(--sp-6) !important;
+  border-radius: var(--r-xl) !important;
+  box-shadow: var(--sh-md) !important;
+  border: 1px solid rgba(255, 255, 255, 0.4) !important;
+  background: rgba(255, 255, 255, 0.75) !important;
+}
+
+/* Nested L4 Card -> degrades to L3 Card styling */
+.eds-card-l5 .eds-card-l4, .eds-card-l4 .eds-card-l4, .eds-card-l3 .eds-card-l4, .eds-card-l2 .eds-card-l4, .eds-card-l1 .eds-card-l4,
+.premium-tracker-card .eds-card-l4,
+.stepper-nav-card .eds-card-l4,
+.bento-card .eds-card-l4 {
+  padding: var(--sp-5) !important;
+  border-radius: var(--r-lg) !important;
+  box-shadow: var(--sh-sm) !important;
+  border: 1.5px solid var(--line) !important;
+  background: #ffffff !important;
+}
+
+/* Nested L3 Card -> degrades to L2 Card styling */
+.eds-card-l5 .eds-card-l3, .eds-card-l4 .eds-card-l3, .eds-card-l3 .eds-card-l3, .eds-card-l2 .eds-card-l3, .eds-card-l1 .eds-card-l3,
+.premium-tracker-card .service-card, .premium-tracker-card .product-card,
+.stepper-nav-card .service-card, .stepper-nav-card .product-card,
+.bento-card .service-card, .bento-card .product-card {
+  padding: var(--sp-5) !important;
+  border-radius: var(--r-md) !important;
+  box-shadow: var(--sh-sm) !important;
+  border: 1px solid var(--hairline-soft) !important;
+  background: var(--surface-2) !important;
+}
+
+/* Nested L2 Card -> degrades to L1 Card styling */
+.eds-card-l5 .eds-card-l2, .eds-card-l4 .eds-card-l2, .eds-card-l3 .eds-card-l2, .eds-card-l2 .eds-card-l2, .eds-card-l1 .eds-card-l2,
+.premium-tracker-card .review-card, .premium-tracker-card .journey-step,
+.stepper-nav-card .review-card, .stepper-nav-card .journey-step,
+.bento-card .review-card, .bento-card .journey-step {
+  padding: var(--sp-4) !important;
+  border-radius: var(--r-sm) !important;
+  box-shadow: var(--sh-xs) !important;
+  border: 1px solid var(--hairline) !important;
+  background: var(--surface) !important;
+}
+
+/* ----------------------------------------------------------------------------
+   8.2B.2 SURFACE ASSIGNMENT
+   Defining visual styles for Surface 0 to Surface 4 and mapping layout sections.
+   ---------------------------------------------------------------------------- */
+
+/* Surface 0: Pure Canvas */
+.eds-surf-0 {
+  background: #f8fafc !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Surface 1: Hairline Solid */
+.eds-surf-1 {
+  background: #ffffff !important;
+  border: 1px solid var(--hairline) !important;
+  box-shadow: none !important;
+}
+
+/* Surface 2: Soft Elevation */
+.eds-surf-2 {
+  background: var(--surface) !important;
+  border: 1px solid var(--hairline-soft) !important;
+  box-shadow: var(--sh-sm) !important;
+}
+
+/* Surface 3: Interactive Elevation */
+.eds-surf-3 {
+  background: #ffffff !important;
+  border: 1.5px solid var(--line) !important;
+  box-shadow: var(--sh-sm) !important;
+  transition: transform var(--motion-base) var(--ease-smooth),
+              box-shadow var(--motion-base) var(--ease-smooth),
+              border-color var(--motion-base) var(--ease-smooth) !important;
+}
+
+/* Surface 4: Overlay Glass */
+.eds-surf-4 {
+  background: rgba(255, 255, 255, 0.75) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  backdrop-filter: blur(12px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.4) !important;
+  box-shadow: var(--sh-lg) !important;
+}
+
+/* --- Surface Mapping --- */
+
+/* Surface 0 Components */
+#homepage-body,
+#homepage-body .hero-v3 {
+  background: #f8fafc !important;
+}
+
+/* Surface 1 Components */
+#homepage-body .site-header,
+#homepage-body .footer,
+#homepage-body .hos-trust-strip {
+  background: #ffffff !important;
+  border-bottom: 1px solid var(--hairline) !important;
+  box-shadow: none !important;
+}
+
+/* Surface 2 Components */
+#homepage-body .review-card,
+#homepage-body .journey-step,
+#homepage-body .mini-card {
+  background: var(--surface) !important;
+  border: 1px solid var(--hairline-soft) !important;
+  box-shadow: var(--sh-sm) !important;
+}
+
+/* Surface 3 Components */
+#homepage-body .service-card,
+#homepage-body .product-card,
+#homepage-body .category-filters button {
+  background: #ffffff !important;
+  border: 1.5px solid var(--line) !important;
+  box-shadow: var(--sh-sm) !important;
+}
+
+/* Surface 4 Components */
+#homepage-body .premium-tracker-card,
+#homepage-body .ai-suggestions,
+#homepage-body .nav-group-panel {
+  background: rgba(255, 255, 255, 0.75) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  backdrop-filter: blur(12px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.4) !important;
+  box-shadow: var(--sh-lg) !important;
+}
+
+/* ----------------------------------------------------------------------------
+   8.2B.3 BORDER NORMALIZATION
+   Replacing arbitrary/raw borders with semantic tokens --hairline, --hairline-soft, --line.
+   ---------------------------------------------------------------------------- */
+
+#homepage-body .desktop-nav-menu .nav-link {
+  border: 1px solid transparent !important;
+}
+
+#homepage-body .site-header {
+  border-bottom: 1px solid var(--hairline) !important;
+}
+
+#homepage-body .nav-action-glass {
+  border: 1px solid var(--hairline-soft) !important;
+}
+
+#homepage-body .btn-gold {
+  border: 1px solid var(--primary) !important; /* using primary token for line-active style */
+}
+
+#homepage-body .hos-search-field {
+  border: 1.5px solid var(--line) !important;
+}
+
+#homepage-body .hos-stat {
+  border: 1px solid var(--hairline-soft) !important;
+}
+
+#homepage-body .premium-tracker-card {
+  border: 1px solid var(--hairline-soft) !important;
+}
+
+#homepage-body .service-card {
+  border: 1px solid var(--hairline) !important;
+}
+
+#homepage-body .journey-step {
+  border: 1px solid var(--hairline-soft) !important;
+}
+
+#homepage-body .bento-card {
+  border: 1.5px solid var(--line) !important;
+}
+
+#homepage-body .product-card {
+  border: 1.5px solid var(--line) !important;
+}
+
+#homepage-body .review-card {
+  border: 1px solid var(--hairline) !important;
+}
+
+#homepage-body .esc-badge {
+  border: 1px solid var(--hairline-soft) !important;
+}
+
+/* ----------------------------------------------------------------------------
+   8.2B.4 RADIUS NORMALIZATION
+   Enforcing corner radius tokens to replace arbitrary values and ensure nesting alignment.
+   ---------------------------------------------------------------------------- */
+
+#homepage-body .desktop-nav-menu .nav-link {
+  border-radius: var(--r-sm) !important;
+}
+
+#homepage-body .nav-action-glass {
+  border-radius: var(--r-sm) !important;
+}
+
+#homepage-body .btn-gold {
+  border-radius: var(--r-sm) !important;
+}
+
+#homepage-body .hos-search-field {
+  border-radius: var(--r-md) !important;
+}
+
+#homepage-body .hos-stat {
+  border-radius: var(--r-md) !important;
+}
+
+#homepage-body .tracker-panel {
+  border-radius: var(--r-lg) !important;
+}
+
+#homepage-body .service-card {
+  border-radius: var(--r-lg) !important;
+}
+
+#homepage-body .journey-step {
+  border-radius: var(--r-lg) !important;
+}
+
+#homepage-body .bento-card {
+  border-radius: var(--r-xl) !important;
+}
+
+#homepage-body .product-card {
+  border-radius: var(--r-lg) !important;
+}
+
+#homepage-body .review-card {
+  border-radius: var(--r-lg) !important;
+}
+
+#homepage-body .esc-badge {
+  border-radius: var(--r-pill) !important;
+}
+
+/* Enforcing nesting containment: child elements inside cards must not exceed parent's corner radius */
+#homepage-body .service-card img,
+#homepage-body .service-card .feature-icon,
+#homepage-body .service-card .carousel-slide-inner-card {
+  border-radius: var(--r-md) !important;
+}
+
+#homepage-body .product-card img,
+#homepage-body .product-card .product-image {
+  border-radius: var(--r-md) !important;
+}
+
+#homepage-body .review-card img,
+#homepage-body .review-card .avatar {
+  border-radius: var(--r-md) !important;
+}
+
+#homepage-body .bento-card .bento-comparison-column {
+  border-radius: var(--r-lg) !important;
+}
+
+/* ----------------------------------------------------------------------------
+   8.2B.5 SHADOW NORMALIZATION
+   Replacing all ad-hoc / raw box shadows with unified system shadow tokens.
+   ---------------------------------------------------------------------------- */
+
+#homepage-body .site-header {
+  box-shadow: none !important;
+}
+
+#homepage-body .hos-search-field {
+  box-shadow: none !important; /* using borders only for contrast */
+}
+
+#homepage-body .hos-stat {
+  box-shadow: var(--sh-xs) !important;
+}
+
+#homepage-body .premium-tracker-card {
+  box-shadow: var(--sh-lg) !important;
+}
+
+#homepage-body .service-card {
+  box-shadow: var(--sh-sm) !important;
+}
+#homepage-body .service-card:hover {
+  box-shadow: var(--sh-md) !important;
+}
+
+#homepage-body .journey-step {
+  box-shadow: var(--sh-xs) !important;
+}
+#homepage-body .journey-step:hover {
+  box-shadow: var(--sh-md) !important;
+}
+
+#homepage-body .bento-card {
+  box-shadow: var(--sh-md) !important;
+}
+
+#homepage-body .product-card {
+  box-shadow: var(--sh-sm) !important;
+}
+#homepage-body .product-card:hover {
+  box-shadow: var(--sh-lg) !important;
+}
+
+#homepage-body .review-card {
+  box-shadow: var(--sh-sm) !important;
+}
+#homepage-body .review-card:hover {
+  box-shadow: var(--sh-md) !important;
+}
+
+#homepage-body .ai-suggestions {
+  box-shadow: var(--sh-lg) !important;
+}
+
+#homepage-body .nav-group-panel {
+  box-shadow: var(--sh-lg) !important;
+}
+
+/* ----------------------------------------------------------------------------
+   8.2B.6 INTERACTION STATES
+   Standardizing interaction transitions across the 12 states in the state matrix.
+   ---------------------------------------------------------------------------- */
+
+/* Focus Visible state logic across interactive elements */
+#homepage-body :focus-visible {
+  outline: 2px solid var(--primary) !important;
+  outline-offset: 2px !important;
+}
+
+/* Standard transition overrides to ensure layout properties are NEVER animated */
+#homepage-body .btn,
+#homepage-body .category-filters button,
+#homepage-body .service-card,
+#homepage-body .product-card,
+#homepage-body .review-card,
+#homepage-body .journey-step,
+#homepage-body .carousel-arrow,
+#homepage-body .desktop-nav-menu .nav-link {
+  transition: transform var(--motion-base) var(--ease-smooth),
+              box-shadow var(--motion-base) var(--ease-smooth),
+              border-color var(--motion-base) var(--ease-smooth),
+              background-color var(--motion-base) var(--ease-smooth),
+              opacity var(--motion-base) var(--ease-smooth) !important;
+}
+
+/* Pressed / Active Click states */
+#homepage-body .btn:active,
+#homepage-body .category-filters button:active,
+#homepage-body .carousel-arrow:active,
+#homepage-body .desktop-nav-menu .nav-link:active {
+  transform: scale(0.98) !important;
+}
+
+/* Disabled state mapping */
+#homepage-body .btn:disabled,
+#homepage-body input:disabled,
+#homepage-body button:disabled,
+#homepage-body a.btn[disabled] {
+  opacity: 0.5 !important;
+  cursor: not-allowed !important;
+  pointer-events: none !important;
+}
+
+/* Skeletons pulse animation during Loading states */
+@keyframes edsSkeletonPulse {
+  0% { opacity: 0.6; }
+  50% { opacity: 1; }
+  100% { opacity: 0.6; }
+}
+#homepage-body .eds-skeleton {
+  animation: edsSkeletonPulse 1.5s infinite ease-in-out !important;
+  background: var(--surface-2) !important;
+  border-radius: var(--r-xs) !important;
+}
+
+/* ----------------------------------------------------------------------------
+   8.2B.7 IMAGE GOVERNANCE
+   Normalizing aspect ratios, crops, corner radii, fallbacks, brightness, and colors.
+   ---------------------------------------------------------------------------- */
+
+/* Product card images: square aspect, cropped cover, rounded */
+#homepage-body .product-card img,
+#homepage-body .product-card .product-image img {
+  aspect-ratio: 1 / 1 !important;
+  object-fit: cover !important;
+  object-position: center !important;
+  border-radius: var(--r-md) !important;
+  filter: contrast(1.02) saturate(0.95) !important; /* color normalization */
+}
+
+/* Tracker customer graphics: 4:3 aspect, cropped cover, rounded */
+#homepage-body .tracker-panel img,
+#homepage-body .tracker-image-panel img {
+  aspect-ratio: 4 / 3 !important;
+  object-fit: cover !important;
+  object-position: center !important;
+  border-radius: var(--r-lg) !important;
+  filter: contrast(1.02) saturate(0.95) !important; /* color normalization */
+}
+
+/* Student showcase graphics: 16:9 landscape aspect, cropped cover, rounded */
+#homepage-body .premium-showcase-card img,
+#homepage-body .student-photo.premium-showcase-card img {
+  aspect-ratio: 16 / 9 !important;
+  object-fit: cover !important;
+  object-position: center !important;
+  border-radius: var(--r-lg) !important;
+  filter: contrast(1.02) saturate(0.95) !important; /* color normalization */
+}
+
+/* Card background brightness normalization to maintain readability */
+#homepage-body .premium-showcase-card::before,
+#homepage-body .premium-tracker-card::before {
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 !important;
+  background: rgba(15, 23, 42, 0.45) !important; /* dark normalization overlay */
+  z-index: 1 !important;
+  pointer-events: none !important;
+  border-radius: inherit !important;
+}
+
+/* ----------------------------------------------------------------------------
+   8.2B.8 ICON RULES
+   Enforcing stroke-width, optical size, caps, joints, and color inheritance.
+   ---------------------------------------------------------------------------- */
+
+/* All icons in homepage context */
+#homepage-body svg,
+#homepage-body [data-lucide] {
+  stroke-width: 2 !important; /* single stroke width */
+  stroke-linecap: round !important;
+  stroke-linejoin: round !important;
+  stroke: currentColor !important; /* inherit semantic color */
+  fill: none;
+}
+
+/* Optical size classifications */
+#homepage-body .esc-badge svg,
+#homepage-body .review-service-meta svg,
+#homepage-body .journey-step svg {
+  width: 16px !important;
+  height: 16px !important;
+}
+
+#homepage-body .btn svg,
+#homepage-body .category-filters button svg,
+#homepage-body .hos-search-voice svg {
+  width: 20px !important;
+  height: 20px !important;
+}
+
+#homepage-body .section-head svg,
+#homepage-body .hero-v3-title svg {
+  width: 24px !important;
+  height: 24px !important;
+}
+
+/* ==========================================================================
+   EROS v2.0 Premium Design Transformation Overrides
+   ========================================================================== */
+
+/* 1. Typography Hierarchy & Spacing scale */
+#homepage-body h1, 
+#homepage-body .hero-v3-title {
+  font-family: 'Inter', sans-serif !important;
+  font-weight: 850 !important;
+  letter-spacing: -0.035em !important;
+  line-height: 1.12 !important;
+}
+
+#homepage-body h2, 
+#homepage-body .section-title {
+  font-family: 'Inter', sans-serif !important;
+  font-weight: 750 !important;
+  letter-spacing: -0.025em !important;
+  line-height: 1.2 !important;
+}
+
+#homepage-body .hero-v3-subtitle {
+  max-width: 62ch !important;
+  color: #52677f !important;
+  font-size: 17px !important;
+  line-height: 1.62 !important;
+  letter-spacing: -0.01em !important;
+  margin-inline: auto !important;
+}
+
+/* 2. Visual Noise Reduction (Borders, Glows, Gradients) */
+#homepage-body .hero-v3-glow {
+  opacity: 0.12 !important;
+  filter: blur(120px) !important;
+}
+
+#homepage-body .hero-v3-bg {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04) !important;
+}
+
+#homepage-body .eds-card, 
+#homepage-body .premium-tracker-card {
+  border: 1px solid rgba(255, 255, 255, 0.06) !important;
+  background: rgba(20, 20, 20, 0.6) !important;
+  backdrop-filter: blur(16px) !important;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4) !important;
+  border-radius: 8px !important;
+}
+
+/* 3. CTA & Buttons Focus/Hover Easing */
+#homepage-body .eds-btn {
+  font-family: 'Inter', sans-serif !important;
+  font-weight: 600 !important;
+  border-radius: 6px !important;
+  padding: 12px 24px !important;
+  font-size: 0.95rem !important;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+#homepage-body .eds-btn:focus-visible {
+  outline: 2px solid #3b82f6 !important;
+  outline-offset: 2px !important;
+}
+
+#homepage-body .hero-cta-primary {
+  background-color: #ffffff !important;
+  color: #0f0f11 !important;
+  border: 1px solid #ffffff !important;
+  box-shadow: 0 2px 8px rgba(255, 255, 255, 0.1) !important;
+}
+
+#homepage-body .hero-cta-primary:hover {
+  background-color: #e4e4e7 !important;
+  border-color: #e4e4e7 !important;
+  transform: translateY(-1px) !important;
+}
+
+#homepage-body .hero-cta-secondary {
+  background-color: transparent !important;
+  color: #a1a1aa !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+#homepage-body .hero-cta-secondary:hover {
+  color: #ffffff !important;
+  background-color: rgba(255, 255, 255, 0.04) !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
+  transform: translateY(-1px) !important;
+}
+
+/* 4. Dashboard Mockup OS Polish */
+#homepage-body .hero-os-window {
+  overflow: hidden !important;
+  border: 1px solid rgba(13, 52, 92, 0.14) !important;
+  border-radius: 16px !important;
+  background: #ffffff !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  box-shadow: 0 2px 4px rgba(8, 31, 58, 0.08), 0 1px 2px rgba(8, 31, 58, 0.04) !important;
+}
+
+#homepage-body .hero-os-topbar {
+  background: rgba(255, 255, 255, 0.02) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
+  padding: 10px 16px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+}
+
+#homepage-body .hero-os-brand {
+  font-weight: 600 !important;
+  color: #e4e4e7 !important;
+  letter-spacing: -0.02em !important;
+  font-size: 0.85rem !important;
+}
+
+#homepage-body .hero-os-state {
+  font-size: 0.75rem !important;
+  font-weight: 500 !important;
+  color: #10b981 !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+}
+
+#homepage-body .hero-os-state span {
+  display: inline-block !important;
+  width: 6px !important;
+  height: 6px !important;
+  background: #10b981 !important;
+  border-radius: 50% !important;
+  animation: pulse 2s infinite !important;
+}
+
+/* Hero OS grid styles managed by onepoint-home.css */
+
+/* 5. Clean Trust Section Grayscale */
+#homepage-body .hos-trust-strip {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 32px !important;
+  list-style: none !important;
+  padding: 0 !important;
+  margin-top: 40px !important;
+  flex-wrap: wrap !important;
+}
+
+#homepage-body .hos-trust-strip li {
+  font-size: 0.85rem !important;
+  font-weight: 500 !important;
+  color: #71717a !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  transition: color 0.2s ease !important;
+}
+
+#homepage-body .hos-trust-strip li:hover {
+  color: #e4e4e7 !important;
+}
+
+#homepage-body .hos-trust-strip li svg {
+  color: #52525b !important;
+  width: 16px !important;
+  height: 16px !important;
+}
+
+/* 6. Spacing margins */
+#homepage-body .section {
+  padding-block: clamp(64px, 8vw, 120px) !important;
+}
+
+/* ==========================================================================
+   EROS v2.0 Navigation & Header Visual Redesign
+   ========================================================================== */
+
+#homepage-body .fallback-site-header {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 64px !important;
+  z-index: 1000 !important;
+  background: rgba(10, 10, 12, 0.7) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+#homepage-body .nav-bar {
+  max-width: 1200px !important;
+  width: 100% !important;
+  margin: 0 auto !important;
+  padding-inline: 24px !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+}
+
+#homepage-body .fallback-nav-links {
+  display: flex !important;
+  gap: 28px !important;
+  align-items: center !important;
+}
+
+#homepage-body .nav-link {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 0.85rem !important;
+  font-weight: 550 !important;
+  color: #a1a1aa !important;
+  text-decoration: none !important;
+  letter-spacing: -0.01em !important;
+  transition: all 0.15s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  position: relative !important;
+  padding-block: 6px !important;
+}
+
+#homepage-body .nav-link:hover {
+  color: #ffffff !important;
+}
+
+#homepage-body .nav-link.active {
+  color: #ffffff !important;
+}
+
+#homepage-body .nav-link.active::after {
+  content: '' !important;
+  position: absolute !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 1.5px !important;
+  background-color: #3b82f6 !important;
+  border-radius: 1px !important;
+}
+
+#homepage-body .nav-actions {
+  display: flex !important;
+  align-items: center !important;
+  gap: 16px !important;
+}
+
+#homepage-body .nav-cta-btn {
+  background-color: #ffffff !important;
+  color: #0f0f11 !important;
+  border: 1px solid #ffffff !important;
+  font-size: 0.8rem !important;
+  font-weight: 600 !important;
+  padding: 8px 16px !important;
+  border-radius: 4px !important;
+  transition: all 0.15s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+#homepage-body .nav-cta-btn:hover {
+  background-color: #e4e4e7 !important;
+  border-color: #e4e4e7 !important;
+  transform: translateY(-0.5px) !important;
+}
+
+@media (max-width: 768px) {
+  #homepage-body .fallback-nav-links {
+    gap: 14px !important;
+  }
+  #homepage-body .nav-link {
+    font-size: 0.75rem !important;
+  }
+  #homepage-body .nav-actions {
+    display: none !important;
+  }
+}
+
+@media (max-width: 480px) {
+  #homepage-body .fallback-nav-links {
+    gap: 10px !important;
+    overflow-x: auto !important;
+    white-space: nowrap !important;
+    max-width: calc(100vw - 80px) !important;
+    scrollbar-width: none !important; /* Hide scrollbar in Firefox */
+  }
+  #homepage-body .fallback-nav-links::-webkit-scrollbar {
+    display: none !important; /* Hide scrollbar in Chrome/Safari */
+  }
+  #homepage-body .nav-link {
+    font-size: 0.72rem !important;
+    flex-shrink: 0 !important;
+  }
+}
+
+/* ==========================================================================
+   Enterprise Service Detail Command Component Polish (.enterprise-detail-command)
+   ========================================================================== */
+
+.enterprise-detail-command {
+  width: min(1360px, calc(100% - 32px)) !important;
+  max-width: 1360px !important;
+  margin: 24px auto 40px !important;
+  padding: 0 !important;
+}
+
+.enterprise-detail-command .edc-breadcrumb {
+  margin-bottom: 18px !important;
+  font-size: 0.82rem !important;
+  font-weight: 700 !important;
+  color: #64748b !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+}
+.enterprise-detail-command .edc-breadcrumb a {
+  color: #075092 !important;
+  text-decoration: none !important;
+}
+.enterprise-detail-command .edc-breadcrumb a:hover {
+  text-decoration: underline !important;
+}
+
+.enterprise-detail-command .edc-layout {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) minmax(310px, 360px) !important;
+  gap: 24px !important;
+  align-items: start !important;
+}
+
+.enterprise-detail-command .edc-main-stack {
+  display: grid !important;
+  gap: 20px !important;
+}
+
+/* Card Container Surfaces */
+.enterprise-detail-command .edc-summary,
+.enterprise-detail-command .edc-panel,
+.enterprise-detail-command .edc-timeline-card,
+.enterprise-detail-command .edc-recommendations {
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 16px !important;
+  box-shadow: 0 2px 12px rgba(8, 31, 58, 0.04) !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+/* 1. Summary Card */
+.enterprise-detail-command .edc-summary {
+  padding: 26px 28px !important;
+  background: #ffffff !important;
+  border-top: 3.5px solid #075092 !important;
+}
+.enterprise-detail-command .edc-kicker-row {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 6px !important;
+  margin-bottom: 14px !important;
+}
+.enterprise-detail-command .edc-kicker {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 5px !important;
+  padding: 4px 10px !important;
+  border-radius: 999px !important;
+  font-size: 0.72rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.02em !important;
+  text-transform: uppercase !important;
+  background: rgba(7, 80, 146, 0.08) !important;
+  color: #075092 !important;
+  border: 1px solid rgba(7, 80, 146, 0.18) !important;
+}
+.enterprise-detail-command .edc-kicker.edc-kicker-soft {
+  background: rgba(245, 158, 11, 0.08) !important;
+  color: #92400e !important;
+  border-color: rgba(245, 158, 11, 0.2) !important;
+}
+.enterprise-detail-command .edc-kicker.edc-kicker-emerald {
+  background: #ecfdf5 !important;
+  color: #065f46 !important;
+  border-color: #a7f3d0 !important;
+}
+.enterprise-detail-command .edc-summary h2 {
+  font-size: clamp(1.75rem, 2.8vw, 2.25rem) !important;
+  font-weight: 850 !important;
+  color: #0b1f35 !important;
+  line-height: 1.2 !important;
+  margin: 0 0 10px !important;
+  max-width: 720px !important;
+}
+.enterprise-detail-command .edc-summary p {
+  font-size: 0.9rem !important;
+  color: #52667d !important;
+  line-height: 1.55 !important;
+  margin: 0 0 20px !important;
+  max-width: 680px !important;
+}
+.enterprise-detail-command .edc-price-row {
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  gap: 10px !important;
+  margin-bottom: 20px !important;
+}
+.enterprise-detail-command .edc-price-row span {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 4px !important;
+  padding: 12px 14px !important;
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 12px !important;
+  box-shadow: 0 1px 4px rgba(8, 31, 58, 0.02) !important;
+}
+.enterprise-detail-command .edc-price-row span.edc-price-box-highlight {
+  background: #fffdf5 !important;
+  border: 1.5px solid #fde047 !important;
+}
+.enterprise-detail-command .edc-price-row small {
+  font-size: 0.68rem !important;
+  font-weight: 800 !important;
+  text-transform: uppercase !important;
+  color: #64748b !important;
+  letter-spacing: 0.03em !important;
+}
+.enterprise-detail-command .edc-price-row strong {
+  font-size: 1.05rem !important;
+  font-weight: 850 !important;
+  color: #0b1f35 !important;
+}
+.enterprise-detail-command .edc-price-row span.edc-price-box-highlight strong {
+  color: #075092 !important;
+  font-size: 1.22rem !important;
+}
+.enterprise-detail-command .edc-actions-wrap {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  gap: 10px !important;
+}
+.enterprise-detail-command .edc-actions {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  gap: 12px !important;
+}
+.enterprise-detail-command .edc-actions .edc-primary-action {
+  flex: 0 0 auto !important;
+  width: auto !important;
+  background: #075092 !important;
+  color: #ffffff !important;
+  border: 1.5px solid #075092 !important;
+  padding: 0 24px !important;
+  height: 46px !important;
+  font-size: 0.92rem !important;
+  font-weight: 750 !important;
+  border-radius: 10px !important;
+  box-shadow: 0 4px 14px rgba(7, 80, 146, 0.22) !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+}
+.enterprise-detail-command .edc-actions .edc-primary-action:hover {
+  background: #053b6d !important;
+  border-color: #053b6d !important;
+  transform: translateY(-1px) !important;
+}
+.enterprise-detail-command .edc-actions .edc-secondary-action {
+  flex: 0 0 auto !important;
+  width: auto !important;
+  background: #ffffff !important;
+  border: 1.5px solid #cbd5e1 !important;
+  color: #334155 !important;
+  padding: 0 20px !important;
+  height: 46px !important;
+  font-size: 0.9rem !important;
+  font-weight: 700 !important;
+  border-radius: 10px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  transition: all 0.2s ease !important;
+}
+.enterprise-detail-command .edc-actions .edc-secondary-action:hover {
+  background: #f8fafc !important;
+  border-color: #94a3b8 !important;
+  color: #0f172a !important;
+  transform: translateY(-1px) !important;
+}
+.enterprise-detail-command .edc-action-micro-hint {
+  font-size: 0.78rem !important;
+  color: #64748b !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 5px !important;
+  font-weight: 600 !important;
+}
+
+/* 2. Why Use One Point Assistance? Trust Pillars */
+.enterprise-detail-command .edc-trust-section {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 10px !important;
+}
+.enterprise-detail-command .edc-trust-section-head h3 {
+  font-size: 1.05rem !important;
+  font-weight: 800 !important;
+  color: #0b1f35 !important;
+  margin: 0 !important;
+}
+.enterprise-detail-command .edc-trust-layer {
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  gap: 12px !important;
+}
+.enterprise-detail-command .edc-trust-card {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  gap: 5px !important;
+  padding: 16px 14px !important;
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 14px !important;
+  box-shadow: 0 2px 8px rgba(8, 31, 58, 0.03) !important;
+  transition: transform 0.2s ease, border-color 0.2s ease !important;
+}
+.enterprise-detail-command .edc-trust-card:hover {
+  border-color: #bfdbfe !important;
+  transform: translateY(-2px) !important;
+}
+.enterprise-detail-command .edc-trust-icon-circle {
+  width: 40px !important;
+  height: 40px !important;
+  border-radius: 50% !important;
+  background: #eff6ff !important;
+  border: 1px solid #bfdbfe !important;
+  color: #075092 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin-bottom: 4px !important;
+}
+.enterprise-detail-command .edc-trust-icon-circle svg,
+.enterprise-detail-command .edc-trust-icon-circle i {
+  color: #075092 !important;
+  width: 20px !important;
+  height: 20px !important;
+}
+.enterprise-detail-command .edc-trust-card strong {
+  font-size: 0.92rem !important;
+  font-weight: 800 !important;
+  color: #0b1f35 !important;
+}
+.enterprise-detail-command .edc-trust-card small {
+  font-size: 0.74rem !important;
+  font-weight: 500 !important;
+  color: #64748b !important;
+  line-height: 1.35 !important;
+}
+
+/* 3. Merged Eligibility & Required Documents */
+.enterprise-detail-command .edc-eligibility-docs-card {
+  padding: 24px 26px !important;
+}
+.enterprise-detail-command .edc-two-col-grid {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 28px !important;
+}
+.enterprise-detail-command .edc-col-block h3 {
+  font-size: 1.08rem !important;
+  font-weight: 800 !important;
+  color: #0b1f35 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  margin: 0 0 10px !important;
+}
+.enterprise-detail-command .edc-col-block h3 svg,
+.enterprise-detail-command .edc-col-block h3 i {
+  color: #075092 !important;
+  width: 18px !important;
+  height: 18px !important;
+}
+.enterprise-detail-command .edc-section-header-row {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  margin-bottom: 2px !important;
+}
+.enterprise-detail-command .edc-sub-hint {
+  font-size: 0.76rem !important;
+  color: #475569 !important;
+  font-weight: 600 !important;
+  margin: 0 0 12px !important;
+}
+.enterprise-detail-command .edc-badge-pill {
+  font-size: 0.72rem !important;
+  font-weight: 800 !important;
+  background: #f1f5f9 !important;
+  color: #475569 !important;
+  padding: 2px 8px !important;
+  border-radius: 999px !important;
+}
+.enterprise-detail-command .edc-clean-list {
+  list-style: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 8px !important;
+}
+.enterprise-detail-command .edc-clean-list li {
+  display: flex !important;
+  align-items: flex-start !important;
+  gap: 10px !important;
+  padding: 10px 12px !important;
+  background: #f8fafc !important;
+  border: 1px solid #f1f5f9 !important;
+  border-radius: 10px !important;
+  font-size: 0.82rem !important;
+  color: #334155 !important;
+  line-height: 1.4 !important;
+}
+.enterprise-detail-command .edc-check-icon {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 18px !important;
+  height: 18px !important;
+  border-radius: 50% !important;
+  background: #ecfdf5 !important;
+  color: #059669 !important;
+  border: 1px solid #a7f3d0 !important;
+  flex-shrink: 0 !important;
+  margin-top: 1px !important;
+}
+.enterprise-detail-command .edc-check-icon svg {
+  width: 12px !important;
+  height: 12px !important;
+}
+.enterprise-detail-command .edc-doc-checklist-clean {
+  list-style: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 8px !important;
+}
+.enterprise-detail-command .edc-doc-checklist-clean li {
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  padding: 8px 12px !important;
+  background: #f8fafc !important;
+  border: 1px solid #f1f5f9 !important;
+  border-radius: 10px !important;
+}
+.enterprise-detail-command .edc-doc-req-tag {
+  font-size: 0.68rem !important;
+  font-weight: 850 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.03em !important;
+  padding: 2px 7px !important;
+  border-radius: 4px !important;
+  flex-shrink: 0 !important;
+}
+.enterprise-detail-command .edc-doc-req-tag.is-required {
+  background: #ecfdf5 !important;
+  color: #059669 !important;
+  border: 1px solid #a7f3d0 !important;
+}
+.enterprise-detail-command .edc-doc-req-tag.is-optional {
+  background: #f1f5f9 !important;
+  color: #64748b !important;
+  border: 1px solid #e2e8f0 !important;
+}
+.enterprise-detail-command .edc-doc-checklist-clean strong {
+  font-size: 0.84rem !important;
+  color: #0f172a !important;
+  font-weight: 600 !important;
+}
+
+/* 4. Consolidated Fee & Pricing Transparency */
+.enterprise-detail-command .edc-pricing-transparency-card {
+  padding: 24px 26px !important;
+}
+.enterprise-detail-command .edc-section-head {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  margin-bottom: 16px !important;
+}
+.enterprise-detail-command .edc-section-head span {
+  font-size: 1.08rem !important;
+  font-weight: 800 !important;
+  color: #0b1f35 !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+}
+.enterprise-detail-command .edc-section-head span svg {
+  color: #075092 !important;
+}
+.enterprise-detail-command .edc-section-head strong {
+  font-size: 0.74rem !important;
+  font-weight: 750 !important;
+  color: #075092 !important;
+  background: #f0f7ff !important;
+  padding: 3px 10px !important;
+  border-radius: 999px !important;
+  border: 1px solid rgba(7, 90, 168, 0.15) !important;
+}
+.enterprise-detail-command .edc-transparent-pricing-grid {
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  gap: 12px !important;
+}
+.enterprise-detail-command .edc-pricing-item {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 4px !important;
+  padding: 14px 12px !important;
+  background: #f8fafc !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 12px !important;
+}
+.enterprise-detail-command .edc-pricing-item.edc-pricing-highlight {
+  background: #fffdf5 !important;
+  border: 1.5px solid #075092 !important;
+  box-shadow: 0 4px 14px rgba(7, 90, 168, 0.08) !important;
+}
+.enterprise-detail-command .edc-pricing-item small {
+  font-size: 0.68rem !important;
+  font-weight: 800 !important;
+  text-transform: uppercase !important;
+  color: #64748b !important;
+  letter-spacing: 0.03em !important;
+}
+.enterprise-detail-command .edc-pricing-item strong {
+  font-size: 1.08rem !important;
+  font-weight: 850 !important;
+  color: #0b1f35 !important;
+}
+.enterprise-detail-command .edc-pricing-item.edc-pricing-highlight strong {
+  color: #075092 !important;
+  font-size: 1.25rem !important;
+}
+.enterprise-detail-command .edc-pricing-item span {
+  font-size: 0.72rem !important;
+  color: #64748b !important;
+  line-height: 1.3 !important;
+  margin-top: 2px !important;
+}
+.enterprise-detail-command .edc-pricing-statutory-note {
+  font-size: 0.76rem !important;
+  color: #64748b !important;
+  margin: 14px 0 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  line-height: 1.4 !important;
+  padding-top: 10px !important;
+  border-top: 1px solid #f1f5f9 !important;
+}
+.enterprise-detail-command .edc-pricing-statutory-note svg {
+  color: #d97706 !important;
+  width: 15px !important;
+  height: 15px !important;
+  flex-shrink: 0 !important;
+}
+
+/* 5. Stepper Timeline Card */
+.enterprise-detail-command .edc-timeline-card {
+  padding: 22px 26px !important;
+}
+.enterprise-detail-command .edc-active-step-tag {
+  font-size: 0.74rem !important;
+  font-weight: 800 !important;
+  color: #059669 !important;
+  background: #ecfdf5 !important;
+  padding: 3px 9px !important;
+  border-radius: 999px !important;
+  border: 1px solid rgba(16, 185, 129, 0.2) !important;
+}
+.enterprise-detail-command .edc-timeline-stepper {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  width: 100% !important;
+  margin-top: 14px !important;
+}
+.enterprise-detail-command .edc-step-item {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  text-align: center !important;
+  gap: 6px !important;
+  flex: 0 0 auto !important;
+  width: 110px !important;
+}
+.enterprise-detail-command .edc-step-badge {
+  width: 32px !important;
+  height: 32px !important;
+  border-radius: 50% !important;
+  background: #f1f5f9 !important;
+  border: 1.5px solid #cbd5e1 !important;
+  color: #64748b !important;
+  font-size: 0.78rem !important;
+  font-weight: 800 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  z-index: 2 !important;
+}
+.enterprise-detail-command .edc-step-item.is-complete .edc-step-badge {
+  background: #10b981 !important;
+  border-color: #10b981 !important;
+  color: #ffffff !important;
+}
+.enterprise-detail-command .edc-step-item.is-current .edc-step-badge {
+  background: #075092 !important;
+  border-color: #075092 !important;
+  color: #ffffff !important;
+  box-shadow: 0 0 0 4px rgba(7, 80, 146, 0.15) !important;
+}
+.enterprise-detail-command .edc-step-divider {
+  flex: 1 1 auto !important;
+  height: 2px !important;
+  background: #e2e8f0 !important;
+  margin: 0 -8px 24px !important;
+  z-index: 1 !important;
+}
+.enterprise-detail-command .edc-step-divider.is-complete {
+  background: #10b981 !important;
+}
+.enterprise-detail-command .edc-step-label {
+  font-size: 0.76rem !important;
+  font-weight: 750 !important;
+  color: #64748b !important;
+  line-height: 1.25 !important;
+}
+.enterprise-detail-command .edc-step-item.is-current .edc-step-label {
+  color: #075092 !important;
+  font-weight: 850 !important;
+}
+
+/* 6. Right Sticky Service Summary Panel */
+.enterprise-detail-command .edc-sticky-panel {
+  position: sticky !important;
+  top: 90px !important;
+  z-index: 10 !important;
+  padding: 22px 18px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 14px !important;
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 16px !important;
+  box-shadow: 0 4px 20px rgba(8, 31, 58, 0.05) !important;
+}
+.enterprise-detail-command .edc-sticky-top h3 {
+  font-size: 1.15rem !important;
+  font-weight: 850 !important;
+  color: #0b1f35 !important;
+  margin: 8px 0 2px !important;
+  line-height: 1.25 !important;
+}
+.enterprise-detail-command .edc-sticky-top p {
+  font-size: 0.8rem !important;
+  color: #64748b !important;
+  line-height: 1.4 !important;
+  margin: 0 !important;
+}
+.enterprise-detail-command .edc-sticky-summary-box {
+  background: #f8fafc !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 12px !important;
+  padding: 12px 14px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 8px !important;
+}
+.enterprise-detail-command .edc-ssb-row {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  font-size: 0.8rem !important;
+  color: #475569 !important;
+}
+.enterprise-detail-command .edc-ssb-row strong {
+  color: #0f172a !important;
+  font-weight: 750 !important;
+}
+.enterprise-detail-command .edc-ssb-row strong.gold-price-txt {
+  color: #075092 !important;
+  font-size: 1.05rem !important;
+  font-weight: 850 !important;
+}
+.enterprise-detail-command .edc-sticky-actions {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 8px !important;
+}
+.enterprise-detail-command .edc-sticky-apply {
+  width: 100% !important;
+  justify-content: center !important;
+  padding: 11px !important;
+  font-size: 0.95rem !important;
+  background: #075092 !important;
+  border-radius: 10px !important;
+}
+.enterprise-detail-command .edc-sticky-quick-actions {
+  display: grid !important;
+  grid-template-columns: 1.2fr 1fr 0.8fr !important;
+  gap: 6px !important;
+  width: 100% !important;
+}
+.enterprise-detail-command .edc-quick-action-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 4px !important;
+  font-size: 0.74rem !important;
+  font-weight: 750 !important;
+  padding: 7px 6px !important;
+  border-radius: 8px !important;
+  text-decoration: none !important;
+  border: 1px solid #e2e8f0 !important;
+  background: #f8fafc !important;
+  color: #334155 !important;
+  transition: all 0.2s ease !important;
+}
+.enterprise-detail-command .edc-quick-action-btn:hover {
+  background: #f1f5f9 !important;
+  border-color: #cbd5e1 !important;
+}
+.enterprise-detail-command .edc-quick-wa {
+  background: #f0fdf4 !important;
+  border-color: #bbf7d0 !important;
+  color: #166534 !important;
+}
+.enterprise-detail-command .edc-quick-wa:hover {
+  background: #dcfce7 !important;
+  border-color: #86efac !important;
+}
+.enterprise-detail-command .edc-quick-call {
+  background: #eff6ff !important;
+  border-color: #bfdbfe !important;
+  color: #1e40af !important;
+}
+.enterprise-detail-command .edc-quick-call:hover {
+  background: #dbeafe !important;
+  border-color: #93c5fd !important;
+}
+.enterprise-detail-command .edc-merged-support-strip {
+  padding: 10px 12px !important;
+  background: #f8fafc !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 10px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+}
+.enterprise-detail-command .edc-support-strip-left {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+}
+.enterprise-detail-command .edc-support-strip-left strong {
+  display: block !important;
+  font-size: 0.78rem !important;
+  color: #0f172a !important;
+}
+.enterprise-detail-command .edc-support-strip-left small {
+  font-size: 0.72rem !important;
+  color: #64748b !important;
+}
+.enterprise-detail-command .edc-desk-status-icon {
+  width: 28px !important;
+  height: 28px !important;
+  border-radius: 50% !important;
+  background: #eff6ff !important;
+  color: #075092 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex-shrink: 0 !important;
+}
+.enterprise-detail-command .edc-trust-strip-merged {
+  padding: 8px 10px !important;
+  background: #f0fdf4 !important;
+  border: 1px solid #dcfce7 !important;
+  border-radius: 8px !important;
+  font-size: 0.72rem !important;
+  font-weight: 750 !important;
+  color: #166534 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+}
+.enterprise-detail-command .edc-trust-strip-merged svg {
+  color: #16a34a !important;
+  width: 14px !important;
+  height: 14px !important;
+}
+
+/* Responsive Breakpoints */
+@media (max-width: 1024px) {
+  .enterprise-detail-command .edc-layout {
+    grid-template-columns: 1fr !important;
+  }
+  .enterprise-detail-command .edc-sticky-panel {
+    position: static !important;
+  }
+  .enterprise-detail-command .edc-two-col-grid {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+  .enterprise-detail-command .edc-price-row {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  .enterprise-detail-command .edc-trust-layer,
+  .enterprise-detail-command .edc-transparent-pricing-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+@media (max-width: 640px) {
+  .enterprise-detail-command .edc-price-row,
+  .enterprise-detail-command .edc-trust-layer,
+  .enterprise-detail-command .edc-transparent-pricing-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .enterprise-detail-command .edc-timeline-stepper {
+    flex-direction: column !important;
+    gap: 12px !important;
+  }
+  .enterprise-detail-command .edc-step-divider {
+    display: none !important;
+  }
+  .enterprise-detail-command .edc-step-item {
+    flex-direction: row !important;
+    width: 100% !important;
+    text-align: left !important;
+    gap: 12px !important;
+  }
+}
+
+/* --- Enterprise Trust Band Modern Refresh --- */
+.enterprise-trust-band {
+  display: grid !important;
+  grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+  gap: 14px !important;
+  width: min(1360px, calc(100% - 32px)) !important;
+  max-width: 1360px !important;
+  margin: -24px auto 36px auto !important;
+  position: relative !important;
+  z-index: 5 !important;
+  padding: 0 !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+@media (max-width: 1024px) {
+  .enterprise-trust-band {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 12px !important;
+    margin-top: 20px !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .enterprise-trust-band {
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+    margin-top: 16px !important;
+  }
+}
+
+.etb-item {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  background: #ffffff !important;
+  border: 1.5px solid rgba(13, 52, 92, 0.09) !important;
+  border-radius: 16px !important;
+  padding: 18px 16px !important;
+  box-shadow: 0 4px 18px rgba(8, 31, 58, 0.04) !important;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  min-height: auto !important;
+}
+
+.etb-item:hover {
+  transform: translateY(-3px) !important;
+  border-color: rgba(7, 80, 146, 0.25) !important;
+  box-shadow: 0 10px 28px rgba(8, 31, 58, 0.08) !important;
+}
+
+.etb-icon-chip {
+  width: 40px !important;
+  height: 40px !important;
+  border-radius: 12px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin-bottom: 12px !important;
+  flex-shrink: 0 !important;
+  transition: transform 0.2s ease !important;
+}
+
+.etb-item:hover .etb-icon-chip {
+  transform: scale(1.06) !important;
+}
+
+.etb-icon-chip svg,
+.etb-icon-chip i {
+  width: 20px !important;
+  height: 20px !important;
+  margin: 0 !important;
+  background: transparent !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+}
+
+.etb-chip-emerald {
+  background: #ecfdf5 !important;
+  color: #059669 !important;
+  border: 1px solid #a7f3d0 !important;
+}
+.etb-chip-blue {
+  background: #eff6ff !important;
+  color: #2563eb !important;
+  border: 1px solid #bfdbfe !important;
+}
+.etb-chip-purple {
+  background: #faf5ff !important;
+  color: #7c3aed !important;
+  border: 1px solid #e9d5ff !important;
+}
+.etb-chip-amber {
+  background: #fffbeb !important;
+  color: #d97706 !important;
+  border: 1px solid #fde68a !important;
+}
+.etb-chip-indigo {
+  background: #f0fdfa !important;
+  color: #0d9488 !important;
+  border: 1px solid #99f6e4 !important;
+}
+
+.etb-content {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 3px !important;
+  width: 100% !important;
+}
+
+.etb-item strong {
+  font-size: 0.95rem !important;
+  font-weight: 800 !important;
+  color: #0d345c !important;
+  line-height: 1.25 !important;
+  letter-spacing: -0.01em !important;
+  margin: 0 !important;
+}
+
+.etb-item span {
+  font-size: 0.78rem !important;
+  font-weight: 500 !important;
+  color: #64748b !important;
+  line-height: 1.4 !important;
+  margin: 0 !important;
+}
+
+/* Enhanced Timeline Steps Polish */
+.timeline-steps {
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  gap: 20px !important;
+  margin-top: 28px !important;
+}
+@media (max-width: 992px) {
+  .timeline-steps {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+@media (max-width: 580px) {
+  .timeline-steps {
+    grid-template-columns: 1fr !important;
+  }
+}
+.timeline-step {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  text-align: center !important;
+  justify-content: space-between !important;
+  background: #ffffff !important;
+  border: 1.5px solid rgba(13, 52, 92, 0.12) !important;
+  border-radius: 16px !important;
+  padding: 24px 20px !important;
+  box-shadow: 0 4px 16px rgba(8, 31, 58, 0.03) !important;
+  transition: all 0.25s ease !important;
+}
+.timeline-step:hover {
+  transform: translateY(-3px) !important;
+  border-color: rgba(7, 80, 146, 0.3) !important;
+  box-shadow: 0 8px 24px rgba(8, 31, 58, 0.07) !important;
+}
+.timeline-step .step-badge {
+  width: 32px !important;
+  height: 32px !important;
+  border-radius: 50% !important;
+  background: #075092 !important;
+  color: #ffffff !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-weight: 800 !important;
+  font-size: 0.92rem !important;
+  margin: 0 auto 14px !important;
+}
+.timeline-step h3 {
+  font-size: 1.05rem !important;
+  font-weight: 750 !important;
+  color: #0b1f35 !important;
+  margin: 0 0 8px !important;
+  text-align: center !important;
+}
+.timeline-step p {
+  font-size: 0.86rem !important;
+  line-height: 1.55 !important;
+  color: #64748b !important;
+  margin: 0 0 16px !important;
+  text-align: center !important;
+  flex-grow: 1 !important;
+}
+.timeline-step-status {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 6px !important;
+  font-size: 0.72rem !important;
+  font-weight: 750 !important;
+  text-transform: uppercase !important;
+  color: #059669 !important;
+  background: #ecfdf5 !important;
+  border: 1px solid #a7f3d0 !important;
+  padding: 4px 10px !important;
+  border-radius: 6px !important;
+  margin: auto auto 0 !important;
+  align-self: center !important;
+}
+.timeline-step-status svg,
+.timeline-step-status i {
+  width: 12px !important;
+  height: 12px !important;
+  stroke-width: 2.5 !important;
+}
+
+/* Enhanced Eligibility Grid Polish */
+.eligibility-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 20px !important;
+  margin-top: 28px !important;
+}
+@media (max-width: 768px) {
+  .eligibility-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+.eligibility-card {
+  display: flex !important;
+  flex-direction: column !important;
+  background: #ffffff !important;
+  border: 1.5px solid rgba(13, 52, 92, 0.12) !important;
+  border-radius: 16px !important;
+  padding: 24px 20px !important;
+  box-shadow: 0 4px 16px rgba(8, 31, 58, 0.03) !important;
+  transition: all 0.25s ease !important;
+}
+.eligibility-card:hover {
+  transform: translateY(-3px) !important;
+  border-color: rgba(7, 80, 146, 0.3) !important;
+  box-shadow: 0 8px 24px rgba(8, 31, 58, 0.07) !important;
+}
+.eligibility-card .eligibility-icon {
+  width: 42px !important;
+  height: 42px !important;
+  border-radius: 12px !important;
+  background: rgba(7, 80, 146, 0.08) !important;
+  border: 1px solid rgba(7, 80, 146, 0.18) !important;
+  color: #075092 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin-bottom: 14px !important;
+}
+.eligibility-card .eligibility-icon svg,
+.eligibility-card .eligibility-icon i {
+  width: 20px !important;
+  height: 20px !important;
+}
+.eligibility-card h3 {
+  font-size: 1.05rem !important;
+  font-weight: 750 !important;
+  color: #0b1f35 !important;
+  margin: 0 0 8px !important;
+}
+.eligibility-card p {
+  font-size: 0.86rem !important;
+  line-height: 1.55 !important;
+  color: #64748b !important;
+  margin: 0 !important;
+}
+
+/* ----------------------------------------------------------------------------
+   ONEMART PRODUCT CARD OVERRIDES (FULL-BLEED LUXURY PRODUCT CARD)
+   ---------------------------------------------------------------------------- */
+#homepage-body .product-card.om-product-card,
+#homepage-body .om-product-card,
+#homepage-body #featured-products .om-product-card,
+#homepage-body #featured-products .featured-product-card {
+  padding: 0 !important;
+  background: #ffffff !important;
+  border: 1.5px solid #e2e8f0 !important;
+  border-radius: 20px !important;
+  overflow: hidden !important;
+  box-shadow: 0 4px 18px rgba(8, 31, 58, 0.05), inset 0 1px 0 #ffffff !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  box-sizing: border-box !important;
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.28s ease, box-shadow 0.28s ease !important;
+  min-height: 400px !important;
+}
+
+#homepage-body .product-card.om-product-card:hover,
+#homepage-body .om-product-card:hover,
+#homepage-body #featured-products .om-product-card:hover {
+  transform: translateY(-6px) !important;
+  border-color: #075092 !important;
+  box-shadow: 0 14px 34px rgba(7, 80, 146, 0.14), inset 0 1px 0 #ffffff !important;
+}
+
+/* Full-bleed media container */
+#homepage-body .product-card.om-product-card .om-card-media,
+#homepage-body .om-product-card .om-card-media,
+#homepage-body #featured-products .om-card-media {
+  width: 100% !important;
+  height: 195px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  position: relative !important;
+  overflow: hidden !important;
+  border-radius: 18px 18px 0 0 !important;
+  background: #f1f5f9 !important;
+}
+
+#homepage-body .product-card.om-product-card .om-card-media-link,
+#homepage-body .om-product-card .om-card-media-link {
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border-radius: 18px 18px 0 0 !important;
+  overflow: hidden !important;
+}
+
+#homepage-body .product-card.om-product-card .om-card-media img,
+#homepage-body .product-card.om-product-card img,
+#homepage-body .om-product-card .om-card-media img,
+#homepage-body #featured-products .om-card-media img {
+  width: 100% !important;
+  height: 100% !important;
+  aspect-ratio: auto !important;
+  object-fit: cover !important;
+  object-position: center !important;
+  border-radius: 18px 18px 0 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: block !important;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+#homepage-body .product-card.om-product-card:hover .om-card-media img,
+#homepage-body .om-product-card:hover .om-card-media img {
+  transform: scale(1.08) !important;
+}
+
+/* Dynamic Badges matching Screenshot-1 */
+#homepage-body .om-card-badge {
+  position: absolute !important;
+  top: 12px !important;
+  left: 12px !important;
+  background: #0b1f35 !important;
+  color: #ffffff !important;
+  font-size: 11.5px !important;
+  font-weight: 850 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  padding: 4px 11px !important;
+  border-radius: 8px !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25) !important;
+  z-index: 2 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 4px !important;
+}
+
+#homepage-body .om-card-badge.gold {
+  background: #f59e0b !important;
+  color: #000000 !important;
+  font-weight: 900 !important;
+  box-shadow: 0 2px 8px rgba(245, 158, 11, 0.35) !important;
+}
+
+#homepage-body .om-card-badge.green {
+  background: #059669 !important;
+  color: #ffffff !important;
+  box-shadow: 0 2px 8px rgba(5, 150, 105, 0.3) !important;
+}
+
+#homepage-body .om-card-badge.blue {
+  background: #075092 !important;
+  color: #ffffff !important;
+}
+
+/* Floating Rating Pill */
+#homepage-body .om-card-rating {
+  position: absolute !important;
+  bottom: 12px !important;
+  right: 12px !important;
+  background: rgba(255, 255, 255, 0.96) !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.8) !important;
+  padding: 3px 10px !important;
+  border-radius: 999px !important;
+  font-size: 12.5px !important;
+  font-weight: 850 !important;
+  color: #0b1f35 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 3px !important;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15) !important;
+  z-index: 2 !important;
+}
+
+#homepage-body .om-card-rating span {
+  color: #f59e0b !important;
+  font-size: 12.5px !important;
+}
+
+/* Card Body */
+#homepage-body .om-card-body {
+  padding: 16px 18px 12px 18px !important;
+  flex: 1 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 6px !important;
+  box-sizing: border-box !important;
+}
+
+#homepage-body .om-card-body h3 {
+  font-size: 1.08rem !important;
+  font-weight: 850 !important;
+  color: #0b1f35 !important;
+  margin: 0 !important;
+  line-height: 1.3 !important;
+}
+
+#homepage-body .om-card-body h3 a {
+  color: #0b1f35 !important;
+  text-decoration: none !important;
+  transition: color 0.2s ease !important;
+}
+
+#homepage-body .om-card-body h3 a:hover {
+  color: #075092 !important;
+}
+
+#homepage-body .om-card-desc {
+  font-size: 12.5px !important;
+  color: #526071 !important;
+  line-height: 1.5 !important;
+  margin: 0 0 6px 0 !important;
+  min-height: 38px !important;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2 !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+}
+
+/* Turnaround Time Pill */
+#homepage-body .om-card-turnaround {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 5px !important;
+  font-size: 11.5px !important;
+  font-weight: 750 !important;
+  color: #059669 !important;
+  background: #ecfdf5 !important;
+  border: 1px solid #a7f3d0 !important;
+  padding: 4px 11px !important;
+  border-radius: 999px !important;
+  align-self: flex-start !important;
+  margin-top: auto !important;
+}
+
+#homepage-body .om-card-turnaround.blue-pill {
+  color: #075092 !important;
+  background: #eff6ff !important;
+  border-color: #bfdbfe !important;
+}
+
+#homepage-body .om-card-turnaround i,
+#homepage-body .om-card-turnaround svg {
+  width: 13px !important;
+  height: 13px !important;
+  stroke-width: 2.2 !important;
+}
+
+/* Card Footer & Action Group */
+#homepage-body .om-card-footer {
+  padding: 12px 16px 16px 16px !important;
+  border-top: 1px solid #f1f5f9 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 8px !important;
+  background: #ffffff !important;
+  margin-top: auto !important;
+  border-bottom-left-radius: 18px !important;
+  border-bottom-right-radius: 18px !important;
+  box-sizing: border-box !important;
+}
+
+#homepage-body .om-card-price-block {
+  display: flex !important;
+  flex-direction: column !important;
+  flex-shrink: 0 !important;
+  min-width: 0 !important;
+}
+
+#homepage-body .om-price-from {
+  font-size: 9.5px !important;
+  font-weight: 800 !important;
+  text-transform: uppercase !important;
+  color: #64748b !important;
+  letter-spacing: 0.05em !important;
+  line-height: 1.15 !important;
+  white-space: nowrap !important;
+}
+
+#homepage-body .om-price-val {
+  font-size: 1.4rem !important;
+  font-weight: 900 !important;
+  color: #075092 !important;
+  line-height: 1.1 !important;
+  letter-spacing: -0.01em !important;
+}
+
+#homepage-body .om-card-btn-group {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  flex-shrink: 0 !important;
+}
+
+#homepage-body .om-card-wa-btn {
+  width: 38px !important;
+  height: 38px !important;
+  min-width: 38px !important;
+  border-radius: 10px !important;
+  background: #25D366 !important;
+  color: #ffffff !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-decoration: none !important;
+  transition: all 0.2s ease !important;
+  flex-shrink: 0 !important;
+  box-shadow: 0 2px 6px rgba(37, 211, 102, 0.25) !important;
+}
+
+#homepage-body .om-card-wa-btn:hover {
+  background: #1eb954 !important;
+  transform: scale(1.08) !important;
+  box-shadow: 0 4px 10px rgba(37, 211, 102, 0.4) !important;
+}
+
+#homepage-body .om-card-wa-btn i,
+#homepage-body .om-card-wa-btn svg {
+  width: 18px !important;
+  height: 18px !important;
+}
+
+#homepage-body .om-card-cta {
+  padding: 0 16px !important;
+  height: 38px !important;
+  border-radius: 10px !important;
+  background: #075092 !important;
+  color: #ffffff !important;
+  font-size: 13px !important;
+  font-weight: 800 !important;
+  text-decoration: none !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 6px !important;
+  transition: all 0.2s ease !important;
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
+  box-shadow: 0 2px 8px rgba(7, 80, 146, 0.22) !important;
+}
+
+#homepage-body .om-card-cta:hover {
+  background: #0a5cb0 !important;
+  box-shadow: 0 4px 12px rgba(7, 80, 146, 0.35) !important;
+  transform: translateY(-1px) !important;
+}
+
+
+
+
+
+
+
+
+
+
+

@@ -3,6 +3,21 @@
 const db = require("./db");
 const notifications = require("./notifications");
 const { config } = require("./config");
+const workflowEngine = require("./workflow-engine");
+
+function objectPayload(sourceTable, sourcePk) {
+  return sourcePk === undefined || sourcePk === null ? null : db.getUniversalObjectPayload(sourceTable, sourcePk);
+}
+
+function withAssignmentObjects(row) {
+  if (!row) return row;
+  return {
+    ...row,
+    object: objectPayload("task_assignments", row.id),
+    orderObject: objectPayload("orders", row.order_db_id || row.order_id),
+    staffObject: objectPayload("staff", row.staff_id)
+  };
+}
 
 /**
  * Get current active task count for a staff member.
@@ -75,7 +90,7 @@ async function autoAssign(order, priority = "normal") {
     "SELECT * FROM task_assignments WHERE order_id = ? AND status NOT IN ('done','cancelled') LIMIT 1",
     [order.id]
   );
-  if (existing) return { assigned: true, existing: true, assignment: existing };
+  if (existing) return { assigned: true, existing: true, assignment: withAssignmentObjects(existing) };
 
   const staff = findBestStaff(order);
 
@@ -103,6 +118,12 @@ async function autoAssign(order, priority = "normal") {
   );
 
   const assignment = db.get("SELECT * FROM task_assignments WHERE id = ?", [Number(result.lastInsertRowid)]);
+  workflowEngine.syncAssignmentTask(order, assignment, {
+    actorType: "system",
+    actorId: "assignment-engine",
+    eventType: "workflow.assignment.auto_assigned",
+    title: "Order auto-assigned"
+  });
 
   // Notify the assigned staff
   notifyStaffAssigned(staff, order, assignment);
@@ -110,7 +131,11 @@ async function autoAssign(order, priority = "normal") {
   // Notify admin dashboard (as system notification)
   notifyAdminAssigned(staff, order, priority);
 
-  return { assigned: true, staff, assignment };
+  return {
+    assigned: true,
+    staff: { ...staff, object: objectPayload("staff", staff.id) },
+    assignment: withAssignmentObjects(assignment)
+  };
 }
 
 /**
@@ -141,9 +166,21 @@ function manualAssign(orderId, staffId, adminNotes = "", priority = "normal") {
   );
 
   const assignment = db.get("SELECT * FROM task_assignments WHERE id = ?", [Number(result.lastInsertRowid)]);
+  workflowEngine.syncAssignmentTask(order, assignment, {
+    actorType: "admin",
+    actorId: "manual-assignment",
+    eventType: "workflow.assignment.manual_assigned",
+    title: "Order manually assigned",
+    summary: adminNotes || "Admin assigned the order to a staff member."
+  });
   notifyStaffAssigned(staff, order, assignment);
 
-  return { assigned: true, staff, order, assignment };
+  return {
+    assigned: true,
+    staff: { ...staff, object: objectPayload("staff", staff.id) },
+    order: { ...order, object: objectPayload("orders", order.id) },
+    assignment: withAssignmentObjects(assignment)
+  };
 }
 
 /**
@@ -170,6 +207,14 @@ function updateAssignmentStatus(assignmentId, status, notes = "") {
 
   // If done, update order status
   if (status === "done") {
+    const updatedAssignment = db.get("SELECT * FROM task_assignments WHERE id = ?", [assignmentId]);
+    workflowEngine.syncAssignmentTask(assignment.order_id, updatedAssignment, {
+      actorType: "human",
+      actorId: String(assignment.staff_id),
+      eventType: "workflow.assignment.completed",
+      title: "Assignment completed",
+      summary: notes || "Assigned work marked as done."
+    });
     db.run(
       "UPDATE orders SET status = 'completed', bot_check_status = 'completed', updated_at = CURRENT_TIMESTAMP WHERE id = ?",
       [assignment.order_id]
@@ -186,8 +231,18 @@ function updateAssignmentStatus(assignmentId, status, notes = "") {
       }
     }
   }
+  if (status !== "done") {
+    const updatedAssignment = db.get("SELECT * FROM task_assignments WHERE id = ?", [assignmentId]);
+    workflowEngine.syncAssignmentTask(assignment.order_id, updatedAssignment, {
+      actorType: "human",
+      actorId: String(assignment.staff_id),
+      eventType: "workflow.assignment.status_updated",
+      title: "Assignment status updated",
+      summary: notes || `Assignment marked ${status}.`
+    });
+  }
 
-  return db.get("SELECT * FROM task_assignments WHERE id = ?", [assignmentId]);
+  return withAssignmentObjects(db.get("SELECT * FROM task_assignments WHERE id = ?", [assignmentId]));
 }
 
 /**
@@ -213,6 +268,7 @@ function getAssignments(filters = {}) {
   return db.all(
     `SELECT
        ta.*,
+       ta.order_id AS order_db_id,
        s.name    AS staff_name,
        s.phone   AS staff_phone,
        s.role    AS staff_role,
@@ -234,7 +290,7 @@ function getAssignments(filters = {}) {
        CASE ta.priority WHEN 'critical' THEN 0 WHEN 'high' THEN 1 WHEN 'normal' THEN 2 ELSE 3 END,
        ta.assigned_at DESC`,
     params
-  );
+  ).map(withAssignmentObjects);
 }
 
 /**
@@ -242,6 +298,28 @@ function getAssignments(filters = {}) {
  */
 function getStaffList() {
   const allStaff = db.all("SELECT * FROM staff ORDER BY is_active DESC, name ASC", []);
+  const governedRows = db.all(
+    `SELECT
+       wr.staff_id,
+       wr.workforce_uuid,
+       wr.workforce_type,
+       wr.branch_uuid,
+       wr.primary_department_uuid,
+       wr.lifecycle_status,
+       wr.experience_level,
+       wr.availability_status,
+       wr.capability_json,
+       wr.additional_departments_json,
+       d.department_name,
+       d.department_code,
+       b.branch_name,
+       b.branch_type
+     FROM workforce_registry wr
+     LEFT JOIN departments d ON d.department_uuid = wr.primary_department_uuid
+     LEFT JOIN branch_registry b ON b.branch_uuid = wr.branch_uuid`,
+    []
+  );
+  const governedByStaffId = new Map(governedRows.map((row) => [Number(row.staff_id), row]));
   return allStaff.map((s) => {
     const totalAssignedRow = db.get("SELECT COUNT(*) AS cnt FROM task_assignments WHERE staff_id = ?", [s.id]);
     const totalAssigned = totalAssignedRow ? Number(totalAssignedRow.cnt) : 0;
@@ -286,6 +364,9 @@ function getStaffList() {
       avgProcessingTime = s.name.includes("Kabir") ? "1.5 hrs" : "3.2 hrs";
     }
 
+    const governed = governedByStaffId.get(Number(s.id)) || null;
+    const capability = tryParseJson(governed?.capability_json, {});
+
     return {
       ...s,
       skills: tryParseJson(s.skills, []),
@@ -295,6 +376,22 @@ function getStaffList() {
       completionRate: `${completionRate}%`,
       avgProcessingTime: avgProcessingTime,
       available: s.is_active && pendingTasks < s.max_tasks,
+      workforceUuid: governed?.workforce_uuid || null,
+      workforceType: governed?.workforce_type || "Human",
+      primaryDepartmentUuid: governed?.primary_department_uuid || null,
+      primaryDepartmentName: governed?.department_name || "",
+      primaryDepartmentCode: governed?.department_code || "",
+      branchUuid: governed?.branch_uuid || null,
+      branchName: governed?.branch_name || "",
+      branchType: governed?.branch_type || null,
+      lifecycleStatus: governed?.lifecycle_status || (s.is_active ? "Active" : "Inactive"),
+      experienceLevel: governed?.experience_level || capability.experience_level || "Intermediate",
+      availabilityStatus: governed?.availability_status || capability.availability_status || "Available",
+      certifications: tryParseJson(capability.certifications, []),
+      supportedServices: tryParseJson(capability.supported_services, []),
+      languages: tryParseJson(capability.languages, []),
+      additionalDepartments: tryParseJson(governed?.additional_departments_json, []),
+      object: objectPayload("staff", s.id),
     };
   });
 }
@@ -313,7 +410,11 @@ function getUnassignedQueue() {
        CASE o.assignment_priority WHEN 'critical' THEN 0 WHEN 'high' THEN 1 WHEN 'normal' THEN 2 ELSE 3 END,
        o.created_at ASC`,
     []
-  );
+  ).map((order) => ({
+    ...order,
+    object: objectPayload("orders", order.id),
+    customerObject: objectPayload("users", order.user_id)
+  }));
 }
 
 // ─── Internal Notifications ───────────────────────────────────────────────────
@@ -341,6 +442,7 @@ function notifyAdminAssigned(staff, order, priority) {
       })
     ]
   );
+  db.registerUniversalObjectForSource("notifications", db.get("SELECT last_insert_rowid() AS id").id);
 }
 
 function notifyAdminNoStaff(order) {
@@ -356,6 +458,7 @@ function notifyAdminNoStaff(order) {
       })
     ]
   );
+  db.registerUniversalObjectForSource("notifications", db.get("SELECT last_insert_rowid() AS id").id);
 }
 
 function tryParseJson(str, fallback) {

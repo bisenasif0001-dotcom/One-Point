@@ -1,845 +1,2617 @@
 <!doctype html>
-
-
-
 <html lang="en">
-
-
-
   <head>
-
-
-
     <meta charset="utf-8">
-
-
-
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-
-
-    <meta name="description" content="Print and scan services in Lucknow: photocopy, color printing, document scanning, lamination and ID card printing support.">
-
-
-
-    <title>Print &amp; Scan Services | One Point Digital Services</title>
-
-
-
+    <meta name="description" content="Print and scan services in Lucknow: B/W photocopy, color printing, document scanning, lamination, passport photo printing, and spiral binding support.">
+    <title>Print &amp; Scan Services Lucknow | Photocopy, Color Print, Lamination &amp; Scanning</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-
-
-
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-
-
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-
-
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;850;900&display=swap" rel="stylesheet">
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-
-
-
-        <link rel="stylesheet" href="assets/onepoint.css?v=2">
-
-
-
-
-  
-
-
-
-<style id="spacing-collapse-rules">
-
-/* Match the home page section rhythm between carousel and next sections */
-
-html body.print-scan-page #service-options,
-
-#service-options {
-
-  width: 100vw !important;
-
-  max-width: none !important;
-
-  margin-left: calc(50% - 50vw) !important;
-
-  margin-right: calc(50% - 50vw) !important;
-
-  overflow: visible !important;
-
-  position: relative !important;
-
-  padding-bottom: clamp(64px, 8vw, 96px) !important;
-
-  margin-bottom: 0px !important;
-
-  opacity: 1 !important;
-
-  transform: none !important;
-
-}
-
-html body.print-scan-page #how-it-works,
-
-#how-it-works {
-
-  padding-top: clamp(64px, 8vw, 96px) !important;
-
-  margin-top: 0px !important;
-
-  opacity: 1 !important;
-
-  transform: none !important;
-
-}
-
-body.print-scan-page #how-it-works .section-head > div { max-width: none !important; }
-
-/* Collapse inner carousel bottom spacings to prevent pushing sections apart */
-
-html body.print-scan-page #service-options .services-carousel-container,
-
-html body.print-scan-page #service-options .services-carousel-viewport,
-
-html body.print-scan-page #service-options .services-carousel-track,
-
-#service-options .services-carousel-container,
-
-#service-options .services-carousel-viewport,
-
-#service-options .services-carousel-track {
-
-  margin-bottom: 0px !important;
-
-  padding-bottom: 0px !important;
-
-}
-
-html body.print-scan-page #service-options .service-option-card,
-
-#service-options .service-option-card {
-
-  margin-bottom: 0px !important;
-
-}
-
-#service-options .print-scan-section-inner {
-  max-width: calc(var(--max) + var(--gutter) * 2);
-  margin-inline: auto;
-  padding-inline: var(--gutter);
-  width: 100%;
-  box-sizing: border-box;
-}
-
-</style></head>
-
-
-
-  <body class="print-scan-page">
-
-
-
-    <div data-site-nav>
-
-
-
-      <header class="site-header fallback-site-header">
-
-
-
-        <nav class="nav-bar" aria-label="Primary fallback">
-
-
-
-          <a class="brand" href="index.html" aria-label="One Point Digital Services home">
-
-
-
-            <img class="brand-logo brand-logo-header" src="assets/logo-bisen-one-point-footer.svg" alt="Bisen One Point Suvidha Kendra">
-
-
-
-          </a>
-
-
-
-          <div class="fallback-nav-links">
-
-
-
-            <a class="nav-link" href="index.html">Home</a>
-
-
-
-            <a class="nav-link" href="services.html">Services</a>
-
-
-
-            <a class="nav-link" href="edupoint.html">EduPoint</a>
-
-
-
-            <a class="nav-link" href="contact.html">Contact</a>
-
-
-
-          </div>
-
-
-
-        </nav>
-
-
-
-      </header>
-
-
-
-    </div>
-
-
-
-
-
-
+    <script src="assets/opds-boot.js?v=anti-fouc-79"></script>
+    <link rel="stylesheet" href="assets/onepoint.css?v=customer-checkout-94">
+
+    <style id="ps-bespoke-styles">
+      :root {
+        --ps-primary: #075092;
+        --ps-primary-dark: #053b6d;
+        --ps-primary-light: #eff6ff;
+        --ps-primary-border: #bfdbfe;
+        --ps-gold: #f59e0b;
+        --ps-gold-dark: #d97706;
+        --ps-gold-light: #fef3c7;
+        --ps-bg-soft: #f8fafc;
+        --ps-bg-tint: #f1f5f9;
+        --ps-border: #e2e8f0;
+        --ps-border-hover: #94a3b8;
+        --ps-muted: #64748b;
+        --ps-text: #0b1f35;
+        --ps-shadow-sm: 0 2px 8px rgba(8, 37, 72, 0.05);
+        --ps-shadow-md: 0 8px 24px rgba(8, 37, 72, 0.08);
+        --ps-shadow-lg: 0 16px 36px rgba(8, 37, 72, 0.12);
+        --ps-r-md: 14px;
+        --ps-r-lg: 18px;
+        --ps-r-xl: 24px;
+      }
+
+      /* ── Container & Section Spacing Alignment ── */
+      .ps-section {
+        padding: 72px var(--gutter, clamp(16px, 4vw, 32px));
+        position: relative;
+        box-sizing: border-box;
+        width: 100%;
+      }
+      @media (max-width: 768px) {
+        .ps-section { padding: 48px var(--gutter, clamp(16px, 4vw, 32px)); }
+      }
+      .ps-container {
+        max-width: var(--max, 1200px);
+        margin-inline: auto;
+        padding: 0;
+        width: 100%;
+        box-sizing: border-box;
+      }
+      .ps-container-narrow {
+        max-width: 960px;
+        margin-inline: auto;
+        padding: 0;
+        width: 100%;
+        box-sizing: border-box;
+      }
+
+      .enterprise-comparison-section,
+      .enterprise-trust-band,
+      .enterprise-sticky-actions {
+        display: none !important;
+      }
+
+      /* ── Section Headings ── */
+      .ps-section-head {
+        text-align: center;
+        max-width: 760px;
+        margin: 0 auto 36px;
+      }
+      .ps-kicker {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 11.5px;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--ps-primary);
+        background: var(--ps-primary-light);
+        border: 1px solid var(--ps-primary-border);
+        padding: 5px 14px;
+        border-radius: 999px;
+        margin-bottom: 12px;
+      }
+      .ps-heading {
+        font-size: clamp(24px, 3.2vw, 34px);
+        font-weight: 850;
+        color: #0b1f35;
+        line-height: 1.25;
+        margin-bottom: 10px;
+      }
+      .ps-subtext {
+        font-size: 15px;
+        color: var(--ps-muted);
+        line-height: 1.55;
+        margin: 0 auto;
+      }
+
+      /* ── 1. Hero Trust Strip (5 Centered Cards) ── */
+      .ps-trust-strip-grid {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 14px;
+        margin-top: 0;
+        position: relative;
+        z-index: 10;
+      }
+      @media (max-width: 1024px) {
+        .ps-trust-strip-grid { grid-template-columns: repeat(3, 1fr); }
+      }
+      @media (max-width: 640px) {
+        .ps-trust-strip-grid { grid-template-columns: 1fr; gap: 10px; }
+      }
+      .ps-trust-card {
+        background: #ffffff;
+        border: 1.5px solid var(--ps-border);
+        border-radius: var(--ps-r-md);
+        padding: 20px 14px 18px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        justify-content: center;
+        box-shadow: var(--ps-shadow-sm);
+        transition: all 0.25s ease;
+      }
+      .ps-trust-card:hover {
+        transform: translateY(-3px);
+        border-color: var(--ps-primary-border);
+        box-shadow: var(--ps-shadow-md);
+      }
+      .ps-trust-icon-wrap {
+        width: 44px;
+        height: 44px;
+        border-radius: 12px;
+        background: var(--ps-primary-light);
+        border: 1px solid var(--ps-primary-border);
+        color: var(--ps-primary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        margin-bottom: 10px;
+        transition: all 0.2s ease;
+      }
+      .ps-trust-card:hover .ps-trust-icon-wrap {
+        background: var(--ps-primary);
+        color: #ffffff;
+        transform: scale(1.06);
+      }
+      .ps-trust-card-body strong {
+        display: block;
+        font-size: 13.5px;
+        font-weight: 850;
+        color: #0b1f35;
+        line-height: 1.25;
+        margin-bottom: 3px;
+      }
+      .ps-trust-card-body span {
+        display: block;
+        font-size: 11.5px;
+        color: var(--ps-muted);
+        line-height: 1.35;
+      }
+
+      /* ── 2. Quick Popular Action Chips Row ── */
+      .ps-chips-strip {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 24px;
+        flex-wrap: wrap;
+        padding: 12px 16px;
+        background: #ffffff;
+        border: 1.5px solid var(--ps-border);
+        border-radius: var(--ps-r-md);
+        box-shadow: var(--ps-shadow-sm);
+      }
+      .ps-chips-label {
+        font-size: 12px;
+        font-weight: 800;
+        color: #0b1f35;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin-right: 4px;
+      }
+      .ps-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 13px;
+        border-radius: 999px;
+        background: var(--ps-bg-soft);
+        border: 1px solid var(--ps-border);
+        font-size: 12.5px;
+        font-weight: 700;
+        color: #334155;
+        cursor: pointer;
+        transition: all 0.15s ease;
+        text-decoration: none;
+      }
+      .ps-chip:hover, .ps-chip.active {
+        background: var(--ps-primary-light);
+        border-color: var(--ps-primary-border);
+        color: var(--ps-primary);
+        transform: translateY(-1px);
+      }
+      .ps-chip span.price-tag {
+        font-weight: 850;
+        color: var(--ps-primary-dark);
+      }
+
+      /* ── 3. Modern Interactive Search & Dropdown Filter Toolbar ── */
+      .ps-toolbar-wrapper {
+        background: #ffffff;
+        border: 1.5px solid var(--ps-border);
+        border-radius: var(--ps-r-lg);
+        padding: 16px 20px;
+        box-shadow: var(--ps-shadow-sm);
+        margin-bottom: 28px;
+        position: relative;
+        z-index: 30;
+      }
+      .ps-toolbar-main {
+        display: grid;
+        grid-template-columns: 1.8fr 1fr 1fr 1fr;
+        gap: 12px;
+        align-items: center;
+      }
+      @media (max-width: 1024px) {
+        .ps-toolbar-main { grid-template-columns: 1fr 1fr; }
+      }
+      @media (max-width: 640px) {
+        .ps-toolbar-main { grid-template-columns: 1fr; }
+      }
+
+      .ps-search-box {
+        position: relative;
+        display: flex;
+        align-items: center;
+      }
+      .ps-search-box i, .ps-search-box svg {
+        position: absolute;
+        left: 14px;
+        color: var(--ps-muted);
+        pointer-events: none;
+        width: 17px;
+        height: 17px;
+      }
+      .ps-search-box input {
+        width: 100%;
+        padding: 11px 14px 11px 40px;
+        border-radius: 10px;
+        border: 1.5px solid var(--ps-border);
+        background: var(--ps-bg-soft);
+        font-size: 13.5px;
+        color: #0b1f35;
+        font-weight: 600;
+        outline: none;
+        transition: all 0.2s ease;
+      }
+      .ps-search-box input:focus {
+        border-color: var(--ps-primary);
+        background: #ffffff;
+        box-shadow: 0 0 0 3px rgba(7, 80, 146, 0.12);
+      }
+
+      /* Custom Luxury Dropdowns */
+      .ps-custom-select {
+        position: relative;
+        user-select: none;
+      }
+      .ps-select-trigger {
+        width: 100%;
+        padding: 11px 14px;
+        border-radius: 10px;
+        border: 1.5px solid var(--ps-border);
+        background: var(--ps-bg-soft);
+        font-size: 13px;
+        font-weight: 700;
+        color: #0b1f35;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        box-sizing: border-box;
+      }
+      .ps-select-trigger:hover {
+        border-color: var(--ps-border-hover);
+        background: #ffffff;
+      }
+      .ps-custom-select.open .ps-select-trigger {
+        border-color: var(--ps-primary);
+        background: #ffffff;
+        box-shadow: 0 0 0 3px rgba(7, 80, 146, 0.12);
+      }
+      .ps-select-trigger .ps-trigger-left {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      .ps-select-trigger i.chevron-icon {
+        color: var(--ps-muted);
+        transition: transform 0.2s ease;
+        flex-shrink: 0;
+      }
+      .ps-custom-select.open .ps-select-trigger i.chevron-icon {
+        transform: rotate(180deg);
+        color: var(--ps-primary);
+      }
+      .ps-select-options {
+        position: absolute;
+        top: calc(100% + 6px);
+        left: 0;
+        right: 0;
+        background: #ffffff;
+        border: 1.5px solid var(--ps-border);
+        border-radius: 12px;
+        box-shadow: var(--ps-shadow-lg);
+        padding: 6px;
+        display: none;
+        z-index: 999;
+        max-height: 240px;
+        overflow-y: auto;
+      }
+      .ps-custom-select.open .ps-select-options {
+        display: block;
+      }
+      .ps-option-item {
+        padding: 9px 12px;
+        border-radius: 8px;
+        font-size: 13px;
+        font-weight: 600;
+        color: #334155;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        transition: all 0.15s ease;
+      }
+      .ps-option-item:hover {
+        background: var(--ps-primary-light);
+        color: var(--ps-primary);
+      }
+      .ps-option-item.selected {
+        background: var(--ps-primary-light);
+        color: var(--ps-primary-dark);
+        font-weight: 800;
+      }
+
+      /* Quick Filter Pills Row */
+      .ps-quick-filters {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: 14px;
+        padding-top: 14px;
+        border-top: 1px solid var(--ps-border);
+        flex-wrap: wrap;
+      }
+      .ps-quick-filters-label {
+        font-size: 11.5px;
+        font-weight: 800;
+        color: var(--ps-muted);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin-right: 4px;
+      }
+      .ps-filter-pill {
+        padding: 5px 13px;
+        border-radius: 999px;
+        background: transparent;
+        border: 1.5px solid var(--ps-border);
+        font-size: 12.5px;
+        font-weight: 700;
+        color: #475569;
+        cursor: pointer;
+        transition: all 0.18s ease;
+      }
+      .ps-filter-pill:hover {
+        background: #f1f5f9;
+        color: #0b1f35;
+      }
+      .ps-filter-pill.active {
+        background: #0b1f35;
+        border-color: #0b1f35;
+        color: #ffffff;
+        font-weight: 800;
+      }
+
+      /* ── 4. Simplified, Product-Specific Service Cards Grid ── */
+      .ps-cards-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 22px;
+      }
+      @media (max-width: 1024px) {
+        .ps-cards-grid { grid-template-columns: repeat(2, 1fr); }
+      }
+      @media (max-width: 640px) {
+        .ps-cards-grid { grid-template-columns: 1fr; }
+      }
+
+      .ps-service-card {
+        background: #ffffff;
+        border: 1.5px solid var(--ps-border);
+        border-radius: var(--ps-r-lg);
+        padding: 24px 22px;
+        display: flex;
+        flex-direction: column;
+        box-shadow: var(--ps-shadow-sm);
+        transition: all 0.25s ease;
+        position: relative;
+      }
+      .ps-service-card:hover {
+        transform: translateY(-4px);
+        border-color: var(--ps-primary-border);
+        box-shadow: var(--ps-shadow-md);
+      }
+      .ps-card-top {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 16px;
+      }
+      .ps-card-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 14px;
+        background: var(--ps-primary-light);
+        border: 1px solid var(--ps-primary-border);
+        color: var(--ps-primary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+      .ps-card-badges {
+        display: flex;
+        gap: 6px;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+      }
+      .ps-badge {
+        font-size: 11px;
+        font-weight: 800;
+        padding: 3px 8px;
+        border-radius: 6px;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+      }
+      .ps-badge-popular { background: #fef3c7; color: #b45309; border: 1px solid #fde68a; }
+      .ps-badge-sameday { background: #dcfce7; color: #15803d; border: 1px solid #bbf7d0; }
+      .ps-badge-premium { background: #e0e7ff; color: #4338ca; border: 1px solid #c7d2fe; }
+
+      .ps-card-title {
+        font-size: 18px;
+        font-weight: 850;
+        color: #0b1f35;
+        line-height: 1.3;
+        margin-bottom: 8px;
+      }
+      .ps-card-desc {
+        font-size: 13.5px;
+        color: #475569;
+        line-height: 1.5;
+        margin-bottom: 16px;
+        flex-grow: 1;
+      }
+      
+      .ps-card-specs-list {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 18px 0;
+        display: flex;
+        flex-direction: column;
+        gap: 7px;
+        border-top: 1px dashed var(--ps-border);
+        padding-top: 14px;
+      }
+      .ps-card-specs-list li {
+        font-size: 12.5px;
+        color: #334155;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-weight: 600;
+      }
+      .ps-card-specs-list li i {
+        color: #10b981;
+        width: 14px;
+        height: 14px;
+        flex-shrink: 0;
+      }
+
+      .ps-card-meta-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: var(--ps-bg-soft);
+        border: 1px solid var(--ps-border);
+        border-radius: 10px;
+        padding: 10px 14px;
+        margin-bottom: 18px;
+      }
+      .ps-meta-price {
+        display: flex;
+        flex-direction: column;
+      }
+      .ps-meta-price small {
+        font-size: 10.5px;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: var(--ps-muted);
+      }
+      .ps-meta-price strong {
+        font-size: 17px;
+        font-weight: 900;
+        color: #075092;
+      }
+      .ps-meta-time {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        font-size: 12px;
+        font-weight: 750;
+        color: #475569;
+      }
+      .ps-meta-time i { width: 14px; height: 14px; color: var(--ps-muted); }
+
+      .ps-card-actions {
+        display: grid;
+        grid-template-columns: 1.4fr 1fr;
+        gap: 10px;
+      }
+      .ps-btn-primary {
+        background: var(--ps-primary);
+        color: #ffffff !important;
+        font-size: 13px;
+        font-weight: 800;
+        padding: 10px 14px;
+        border-radius: 10px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        text-decoration: none;
+        border: none;
+        cursor: pointer;
+        transition: all 0.18s ease;
+      }
+      .ps-btn-primary:hover {
+        background: var(--ps-primary-dark);
+        transform: translateY(-1px);
+      }
+      .ps-btn-secondary {
+        background: #ffffff;
+        color: #334155 !important;
+        font-size: 13px;
+        font-weight: 750;
+        padding: 10px 12px;
+        border-radius: 10px;
+        border: 1.5px solid var(--ps-border);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 4px;
+        text-decoration: none;
+        transition: all 0.18s ease;
+      }
+      .ps-btn-secondary:hover {
+        background: var(--ps-bg-soft);
+        border-color: var(--ps-border-hover);
+        color: #0b1f35 !important;
+      }
+
+      /* ── 5. "Send Your File" Instant Conversion CTA Banner ── */
+      .ps-send-file-banner {
+        background: linear-gradient(135deg, #075092 0%, #082548 100%) !important;
+        border: 1.5px solid rgba(255, 255, 255, 0.16) !important;
+        border-radius: var(--ps-r-xl);
+        padding: 36px 40px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 32px;
+        box-shadow: 0 16px 48px rgba(7, 80, 146, 0.28);
+        position: relative;
+        overflow: hidden;
+      }
+      .ps-send-file-banner::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        right: -10%;
+        width: 340px;
+        height: 340px;
+        background: radial-gradient(circle, rgba(210, 161, 42, 0.18) 0%, transparent 70%);
+        pointer-events: none;
+      }
+      @media (max-width: 900px) {
+        .ps-send-file-banner {
+          flex-direction: column;
+          align-items: flex-start;
+          padding: 28px 24px;
+        }
+      }
+      .ps-banner-left {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        max-width: 680px;
+        position: relative;
+        z-index: 2;
+      }
+      @media (max-width: 600px) {
+        .ps-banner-left { flex-direction: column; align-items: flex-start; gap: 14px; }
+      }
+      .ps-banner-icon {
+        width: 56px;
+        height: 56px;
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.12);
+        border: 1px solid rgba(255, 255, 255, 0.22);
+        color: #fde68a;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        box-shadow: 0 0 24px rgba(210, 161, 42, 0.25);
+        backdrop-filter: blur(8px);
+      }
+      .ps-banner-text h3 {
+        font-size: clamp(19px, 2.2vw, 24px);
+        font-weight: 850;
+        color: #ffffff !important;
+        line-height: 1.3;
+        margin: 0 0 8px 0;
+      }
+      .ps-banner-text p {
+        font-size: 14px;
+        color: #dbeafe !important;
+        line-height: 1.5;
+        margin: 0 0 12px 0;
+      }
+      .ps-banner-formats {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        flex-wrap: wrap;
+      }
+      .ps-banner-formats span.fmt-title {
+        font-size: 11.5px;
+        font-weight: 750;
+        color: rgba(255, 255, 255, 0.7);
+        text-transform: uppercase;
+      }
+      .ps-banner-formats span.fmt-tag {
+        font-size: 11px;
+        font-weight: 800;
+        background: rgba(255, 255, 255, 0.14);
+        color: #f8fafc;
+        padding: 2px 8px;
+        border-radius: 5px;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+      }
+
+      .ps-banner-actions {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        flex-shrink: 0;
+        width: 100%;
+        max-width: 260px;
+        position: relative;
+        z-index: 2;
+      }
+      .ps-btn-wa-gold {
+        background: linear-gradient(135deg, #d2a12a 0%, #f59e0b 100%) !important;
+        color: #061527 !important;
+        font-size: 14px;
+        font-weight: 850;
+        padding: 13px 20px;
+        border-radius: 12px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        text-decoration: none;
+        box-shadow: 0 4px 16px rgba(210, 161, 42, 0.35);
+        transition: all 0.18s ease;
+        border: none;
+      }
+      .ps-btn-wa-gold:hover {
+        background: linear-gradient(135deg, #dfab32 0%, #fbbf24 100%) !important;
+        color: #061527 !important;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(210, 161, 42, 0.45);
+      }
+      .ps-btn-white-ghost {
+        background: rgba(255, 255, 255, 0.12);
+        border: 1.5px solid rgba(255, 255, 255, 0.3);
+        color: #ffffff !important;
+        font-size: 13.5px;
+        font-weight: 750;
+        padding: 11px 18px;
+        border-radius: 12px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        text-decoration: none;
+        transition: all 0.18s ease;
+      }
+      .ps-btn-white-ghost:hover {
+        background: rgba(255, 255, 255, 0.22);
+        border-color: #ffffff;
+        color: #ffffff !important;
+      }
+
+      /* ── 6. Transparent Service Estimate & Pricing Benchmark ── */
+      .ps-estimate-grid {
+        display: grid;
+        grid-template-columns: 1.15fr 0.85fr;
+        gap: 24px;
+        align-items: stretch;
+      }
+      @media (max-width: 900px) {
+        .ps-estimate-grid { grid-template-columns: 1fr; }
+      }
+
+      .ps-benchmark-card {
+        background: #ffffff;
+        border: 1.5px solid var(--ps-border);
+        border-radius: var(--ps-r-lg);
+        padding: 28px 24px;
+        box-shadow: var(--ps-shadow-sm);
+        display: flex;
+        flex-direction: column;
+      }
+      .ps-benchmark-card h3 {
+        font-size: 17px;
+        font-weight: 850;
+        color: #0b1f35;
+        margin: 0 0 16px 0;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .ps-rates-table {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        margin-bottom: 20px;
+      }
+      @media (max-width: 600px) {
+        .ps-rates-table { grid-template-columns: 1fr; }
+      }
+      .ps-rate-item {
+        background: var(--ps-bg-soft);
+        border: 1px solid var(--ps-border);
+        border-radius: 10px;
+        padding: 12px 14px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+      }
+      .ps-rate-item-left strong {
+        display: block;
+        font-size: 13px;
+        font-weight: 800;
+        color: #0b1f35;
+      }
+      .ps-rate-item-left span {
+        font-size: 11px;
+        color: var(--ps-muted);
+      }
+      .ps-rate-price {
+        font-size: 15px;
+        font-weight: 900;
+        color: var(--ps-primary);
+        white-space: nowrap;
+      }
+
+      .ps-benchmark-note {
+        font-size: 12.5px;
+        color: var(--ps-muted);
+        line-height: 1.45;
+        background: #fffbeb;
+        border: 1px solid #fef3c7;
+        border-radius: 8px;
+        padding: 10px 14px;
+        margin-top: auto;
+      }
+
+      /* Live Quote Box */
+      .ps-quote-calculator {
+        background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+        border: 1.5px solid var(--ps-border);
+        border-radius: var(--ps-r-lg);
+        padding: 28px 24px;
+        box-shadow: var(--ps-shadow-sm);
+        display: flex;
+        flex-direction: column;
+      }
+      .ps-quote-calculator h3 {
+        font-size: 17px;
+        font-weight: 850;
+        color: #0b1f35;
+        margin: 0 0 18px 0;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .ps-quote-breakdown {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin-bottom: 20px;
+      }
+      .ps-quote-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 13.5px;
+        color: #475569;
+        font-weight: 600;
+        padding-bottom: 8px;
+        border-bottom: 1px dashed var(--ps-border);
+      }
+      .ps-quote-row strong {
+        color: #0b1f35;
+        font-weight: 800;
+      }
+      .ps-quote-total-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: var(--ps-primary-light);
+        border: 1.5px solid var(--ps-primary-border);
+        border-radius: 12px;
+        padding: 14px 16px;
+        margin-bottom: 18px;
+      }
+      .ps-quote-total-row span {
+        font-size: 14px;
+        font-weight: 800;
+        color: #075092;
+      }
+      .ps-quote-total-row strong {
+        font-size: 22px;
+        font-weight: 900;
+        color: #075092;
+      }
+
+      /* ── 7. Connected 4-Step Process Timeline ── */
+      .ps-process-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 18px;
+        position: relative;
+        margin-bottom: 28px;
+      }
+      @media (max-width: 1024px) {
+        .ps-process-grid { grid-template-columns: repeat(2, 1fr); }
+      }
+      @media (max-width: 600px) {
+        .ps-process-grid { grid-template-columns: 1fr; }
+      }
+      .ps-step-card {
+        background: #ffffff;
+        border: 1.5px solid var(--ps-border);
+        border-radius: var(--ps-r-lg);
+        padding: 24px 20px;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        box-shadow: var(--ps-shadow-sm);
+        transition: all 0.25s ease;
+      }
+      .ps-step-card:hover {
+        transform: translateY(-3px);
+        border-color: var(--ps-primary-border);
+        box-shadow: var(--ps-shadow-md);
+      }
+      .ps-step-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 16px;
+      }
+      .ps-step-badge {
+        font-size: 13px;
+        font-weight: 900;
+        color: var(--ps-primary);
+        background: var(--ps-primary-light);
+        border: 1px solid var(--ps-primary-border);
+        width: 32px;
+        height: 32px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .ps-time-cue {
+        font-size: 11px;
+        font-weight: 750;
+        color: #059669;
+        background: #ecfdf5;
+        border: 1px solid #a7f3d0;
+        padding: 3px 8px;
+        border-radius: 999px;
+      }
+      .ps-step-card h3 {
+        font-size: 16px;
+        font-weight: 850;
+        color: #0b1f35;
+        margin: 0 0 8px 0;
+      }
+      .ps-step-card p {
+        font-size: 13px;
+        color: var(--ps-muted);
+        line-height: 1.5;
+        margin: 0;
+      }
+
+      .ps-trust-pills-row {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 16px;
+        flex-wrap: wrap;
+      }
+      .ps-trust-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 12.5px;
+        font-weight: 750;
+        color: #334155;
+        background: #ffffff;
+        border: 1px solid var(--ps-border);
+        padding: 6px 14px;
+        border-radius: 999px;
+      }
+      .ps-trust-pill i { color: #10b981; width: 14px; height: 14px; }
+
+      /* ── 8. Privacy & Document Security Card ── */
+      .ps-security-card {
+        background: linear-gradient(135deg, #f8fafc 0%, #edf4fc 100%);
+        border: 1.5px solid #bfdbfe;
+        border-radius: var(--ps-r-xl);
+        padding: 32px 36px;
+        margin-bottom: 24px;
+      }
+      .ps-security-head {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 20px;
+      }
+      .ps-security-icon {
+        width: 44px;
+        height: 44px;
+        border-radius: 12px;
+        background: #ffffff;
+        border: 1.5px solid #bfdbfe;
+        color: var(--ps-primary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+      .ps-security-head h3 {
+        font-size: 18px;
+        font-weight: 850;
+        color: #0b1f35;
+        margin: 0 0 3px 0;
+      }
+      .ps-security-head p {
+        font-size: 13px;
+        color: var(--ps-muted);
+        margin: 0;
+      }
+      .ps-security-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+      }
+      @media (max-width: 900px) {
+        .ps-security-grid { grid-template-columns: repeat(2, 1fr); }
+      }
+      @media (max-width: 540px) {
+        .ps-security-grid { grid-template-columns: 1fr; }
+      }
+      .ps-sec-item {
+        background: #ffffff;
+        border: 1.5px solid var(--ps-border);
+        border-radius: var(--ps-r-md);
+        padding: 20px 18px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+        box-shadow: var(--ps-shadow-sm);
+        transition: all 0.22s ease;
+      }
+      .ps-sec-item:hover {
+        transform: translateY(-2px);
+        border-color: var(--ps-primary-border);
+        box-shadow: var(--ps-shadow-md);
+      }
+      .ps-sec-icon-wrap {
+        width: 38px;
+        height: 38px;
+        border-radius: 10px;
+        background: var(--ps-primary-light);
+        border: 1px solid var(--ps-primary-border);
+        color: var(--ps-primary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 6px;
+        transition: all 0.2s ease;
+        flex-shrink: 0;
+      }
+      .ps-sec-item:hover .ps-sec-icon-wrap {
+        background: var(--ps-primary);
+        color: #ffffff;
+        transform: scale(1.06);
+      }
+      .ps-sec-icon-wrap i,
+      .ps-sec-icon-wrap svg {
+        width: 18px;
+        height: 18px;
+      }
+      .ps-sec-item strong {
+        display: block;
+        font-size: 14px;
+        font-weight: 850;
+        color: #0b1f35;
+        line-height: 1.25;
+      }
+      .ps-sec-item span {
+        display: block;
+        font-size: 12px;
+        color: var(--ps-muted);
+        line-height: 1.45;
+      }
+
+      /* ── 9. "Better files, cleaner output" 2-Column Checklist ── */
+      .ps-checklist-wrap {
+        display: grid;
+        grid-template-columns: 0.85fr 1.15fr;
+        gap: 36px;
+        align-items: center;
+        background: #ffffff;
+        border: 1.5px solid var(--ps-border);
+        border-radius: var(--ps-r-xl);
+        padding: 36px 34px;
+        box-shadow: var(--ps-shadow-sm);
+      }
+      @media (max-width: 980px) {
+        .ps-checklist-wrap { grid-template-columns: 1fr; gap: 28px; padding: 28px 22px; }
+      }
+      .ps-checklist-left-info {
+        display: flex;
+        flex-direction: column;
+      }
+      .ps-checklist-actions {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+
+      .ps-check-cols {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
+      @media (max-width: 640px) {
+        .ps-check-cols { grid-template-columns: 1fr; }
+      }
+      .ps-check-col-box {
+        background: var(--ps-bg-soft);
+        border: 1.5px solid var(--ps-border);
+        border-radius: 16px;
+        padding: 22px 18px;
+        display: flex;
+        flex-direction: column;
+        transition: all 0.2s ease;
+      }
+      .ps-check-col-box:hover {
+        border-color: var(--ps-primary-border);
+        box-shadow: var(--ps-shadow-sm);
+      }
+      .ps-col-box-head {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 16px;
+        padding-bottom: 12px;
+        border-bottom: 1px solid var(--ps-border);
+      }
+      .ps-col-icon-bubble {
+        width: 32px;
+        height: 32px;
+        border-radius: 8px;
+        background: var(--ps-primary-light);
+        border: 1px solid var(--ps-primary-border);
+        color: var(--ps-primary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+      .ps-col-icon-bubble i,
+      .ps-col-icon-bubble svg {
+        width: 16px;
+        height: 16px;
+      }
+      .ps-col-box-head h4 {
+        font-size: 15px;
+        font-weight: 850;
+        color: #0b1f35;
+        margin: 0;
+      }
+
+      .ps-check-items {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
+      .ps-check-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+      }
+      .ps-check-tick {
+        width: 22px;
+        height: 22px;
+        min-width: 22px;
+        border-radius: 6px;
+        background: #ecfdf5;
+        border: 1px solid #a7f3d0;
+        color: #059669;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 1px;
+        flex-shrink: 0;
+      }
+      .ps-check-tick i,
+      .ps-check-tick svg {
+        width: 13px;
+        height: 13px;
+        stroke-width: 3;
+      }
+      .ps-check-content {
+        flex: 1;
+      }
+      .ps-check-content strong {
+        display: block;
+        font-size: 13px;
+        font-weight: 800;
+        color: #0b1f35;
+        line-height: 1.25;
+        margin-bottom: 2px;
+      }
+      .ps-check-content p {
+        font-size: 12px;
+        color: var(--ps-muted);
+        line-height: 1.45;
+        margin: 0;
+      }
+
+      /* ── 10. 2-Column Tabbed FAQ with Real-Time Search ── */
+      .ps-faq-search-wrap {
+        position: relative !important;
+        max-width: 100% !important;
+        margin-bottom: 24px !important;
+        display: block !important;
+      }
+      .ps-faq-search-wrap i,
+      .ps-faq-search-wrap svg {
+        position: absolute !important;
+        left: 18px !important;
+        top: 50% !important;
+        transform: translateY(-50%) !important;
+        width: 18px !important;
+        height: 18px !important;
+        color: #64748b !important;
+        pointer-events: none !important;
+        display: block !important;
+        margin: 0 !important;
+      }
+      .ps-faq-search-wrap input {
+        width: 100% !important;
+        height: 52px !important;
+        padding: 0 20px 0 48px !important;
+        border-radius: 14px !important;
+        border: 1.5px solid #cbd5e1 !important;
+        background: #ffffff !important;
+        font-size: 0.95rem !important;
+        color: #0f172a !important;
+        outline: none !important;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.03) !important;
+        transition: all 0.2s ease !important;
+        box-sizing: border-box !important;
+      }
+      .ps-faq-search-wrap input:focus {
+        border-color: #075092 !important;
+        box-shadow: 0 0 0 3px rgba(7, 80, 146, 0.12) !important;
+      }
+
+      .ps-cfaq-wrapper {
+        display: grid !important;
+        grid-template-columns: 260px 1fr !important;
+        gap: 0 !important;
+        background: #ffffff !important;
+        border: 1.5px solid #e2e8f0 !important;
+        border-radius: 18px !important;
+        box-shadow: 0 4px 24px rgba(8, 37, 72, 0.06) !important;
+        overflow: hidden !important;
+      }
+      @media (max-width: 860px) {
+        .ps-cfaq-wrapper { grid-template-columns: 1fr !important; }
+      }
+
+      .ps-cfaq-sidebar {
+        background: #f8fafc !important;
+        border-right: 1.5px solid #e2e8f0 !important;
+        padding: 16px 12px 20px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 6px !important;
+      }
+      .ps-cfaq-sidebar .cfaq-tab {
+        display: flex !important;
+        align-items: center !important;
+        gap: 10px !important;
+        padding: 12px 14px !important;
+        border-radius: 12px !important;
+        background: transparent !important;
+        color: #475569 !important;
+        font-size: 13.5px !important;
+        font-weight: 700 !important;
+        border: none !important;
+        cursor: pointer !important;
+        text-align: left !important;
+        transition: all 0.18s ease !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+      }
+      .ps-cfaq-sidebar .cfaq-tab:hover {
+        background: #f1f5f9 !important;
+        color: #075092 !important;
+      }
+      .ps-cfaq-sidebar .cfaq-tab.active {
+        background: #ffffff !important;
+        color: #075092 !important;
+        font-weight: 850 !important;
+        border: 1.5px solid #e2e8f0 !important;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05) !important;
+      }
+      .ps-cfaq-sidebar .cfaq-tab i,
+      .ps-cfaq-sidebar .cfaq-tab svg {
+        width: 16px !important;
+        height: 16px !important;
+        color: #075092 !important;
+        flex-shrink: 0 !important;
+      }
+      .ps-cfaq-sidebar::after,
+      .cfaq-sidebar::after {
+        display: none !important;
+        content: none !important;
+      }
+      .ps-cfaq-sidebar-bottom-link {
+        margin-top: auto;
+        padding-top: 14px;
+        border-top: 1px solid #e2e8f0;
+        text-align: center;
+      }
+      .ps-cfaq-sidebar-bottom-link a {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 12px;
+        font-weight: 700;
+        color: #64748b;
+        text-decoration: none;
+      }
+      .ps-cfaq-sidebar-bottom-link a:hover {
+        color: #075092;
+      }
+
+      .ps-cfaq-panels {
+        padding: 24px 32px !important;
+        background: #ffffff !important;
+        min-width: 0 !important;
+      }
+      @media (max-width: 640px) {
+        .ps-cfaq-panels { padding: 18px 16px !important; }
+      }
+      .ps-cfaq-panels .cfaq-panel { display: none; }
+      .ps-cfaq-panels .cfaq-panel.active { display: block; }
+      .ps-cfaq-panels .faq-item {
+        border-bottom: 1px solid #f1f5f9 !important;
+        padding: 16px 0 !important;
+      }
+      .ps-cfaq-panels .faq-item:first-child { padding-top: 4px !important; }
+      .ps-cfaq-panels .faq-item:last-child { border-bottom: none !important; }
+      .ps-cfaq-panels .faq-question {
+        width: 100% !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        gap: 16px !important;
+        background: transparent !important;
+        border: none !important;
+        cursor: pointer !important;
+        text-align: left !important;
+        padding: 0 !important;
+      }
+      .ps-cfaq-panels .faq-question .pfaq-q-text {
+        font-size: 15px !important;
+        font-weight: 800 !important;
+        color: #0b1f35 !important;
+        line-height: 1.35 !important;
+      }
+      .ps-cfaq-panels .faq-item.open .faq-question .pfaq-q-text {
+        color: #075092 !important;
+      }
+      .ps-cfaq-panels .faq-question i,
+      .ps-cfaq-panels .faq-question svg {
+        width: 22px !important;
+        height: 22px !important;
+        min-width: 22px !important;
+        border-radius: 50% !important;
+        background: #f1f5f9 !important;
+        color: #075092 !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        padding: 3px !important;
+        transition: transform 0.2s ease !important;
+      }
+      .ps-cfaq-panels .faq-item.open .faq-question i,
+      .ps-cfaq-panels .faq-item.open .faq-question svg {
+        transform: rotate(180deg) !important;
+        background: #eff6ff !important;
+      }
+      .ps-cfaq-panels .faq-answer {
+        display: none;
+        padding-top: 10px !important;
+      }
+      .ps-cfaq-panels .faq-item.open .faq-answer {
+        display: block !important;
+      }
+      .ps-cfaq-panels .faq-answer p {
+        font-size: 14px !important;
+        color: #475569 !important;
+        line-height: 1.55 !important;
+        margin: 0 !important;
+      }
+
+      /* ── 11. Mobile Sticky Bottom Action Bar ── */
+      .ps-sticky-mobile-bar {
+        position: fixed !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        background: #ffffff !important;
+        border-top: 1.5px solid #e2e8f0 !important;
+        padding: 12px 16px !important;
+        box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1) !important;
+        display: none;
+        z-index: 99999 !important;
+        gap: 12px !important;
+        box-sizing: border-box !important;
+      }
+      @media (max-width: 768px) {
+        .ps-sticky-mobile-bar {
+          display: flex !important;
+          flex-direction: row !important;
+          align-items: center !important;
+        }
+      }
+      .ps-sticky-mobile-bar a {
+        flex: 1 !important;
+        padding: 12px 16px !important;
+        border-radius: 12px !important;
+        font-size: 13.5px !important;
+        font-weight: 850 !important;
+        text-align: center !important;
+        text-decoration: none !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 8px !important;
+        transition: all 0.18s ease !important;
+        border: none !important;
+      }
+      .ps-sticky-mobile-bar a i,
+      .ps-sticky-mobile-bar a svg {
+        width: 17px !important;
+        height: 17px !important;
+        flex-shrink: 0 !important;
+        margin: 0 !important;
+      }
+      .ps-smb-send {
+        background: var(--ps-primary) !important;
+        color: #ffffff !important;
+        box-shadow: 0 4px 14px rgba(7, 80, 146, 0.3) !important;
+      }
+      .ps-smb-send:hover {
+        background: var(--ps-primary-dark) !important;
+      }
+      .ps-smb-wa {
+        background: linear-gradient(135deg, #d2a12a 0%, #f59e0b 100%) !important;
+        color: #061527 !important;
+        box-shadow: 0 4px 14px rgba(210, 161, 42, 0.35) !important;
+      }
+      .ps-smb-wa:hover {
+        background: linear-gradient(135deg, #dfab32 0%, #fbbf24 100%) !important;
+      }
+    </style>
+  </head>
+
+  <body class="print-scan-page page-service-detail proserve-detail-page">
+    <div data-site-nav></div>
 
     <main class="page-shell" data-default-service="Print &amp; Scan">
 
-
-
+      <!-- Hero Section -->
       <section class="page-hero page-hero-service premium-service-hero">
-
-
-
         <video class="hero-video-bg" autoplay loop muted playsinline>
-
-
-
           <source src="assets/Hero section home page.mp4" type="video/mp4">
-
-
-
         </video>
-
-
-
         <div class="hero-video-overlay"></div>
-
-
-
         <div class="page-hero-grid">
-
-
-
           <div class="page-hero-copy">
-
-
-
-            <p class="eyebrow">Print Desk</p>
-
-
-
+            <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+              <ol class="breadcrumbs">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li class="active">Print &amp; Scan Desk</li>
+              </ol>
+            </nav>
+            <div class="service-meta-row">
+              <span><i data-lucide="calendar"></i> Updated: August 2026</span>
+              <span>&middot;</span>
+              <span><i data-lucide="sparkles"></i> ProServe Print Desk</span>
+            </div>
+            <p class="eyebrow">ProServe Print &amp; Scan Desk</p>
             <h1 class="page-hero-title">Print, scan, copy and laminate documents quickly.</h1>
-
-
-
-            <p>B&amp;W photocopy, color print, certificate scan, PDF/JPEG conversion, lamination and ID card print support from the local desk.</p>
-
-
-
+            <p>B&amp;W photocopy, photo-quality color prints, certificate scan to PDF, heavy-duty lamination, spiral binding, and passport photo prints from the local Lucknow desk.</p>
             <div class="hero-actions">
-
-
-
               <a class="btn btn-primary" href="#service-options"><i data-lucide="printer"></i> Choose Service</a>
-
-
-
-              <a class="btn btn-ghost" href="#apply-now"><i data-lucide="send"></i> Request Print Job</a>
-
-
-
+              <a class="btn btn-ghost" href="#send-file-cta"><i data-lucide="send"></i> Send File for Estimate</a>
             </div>
-
-
-
             <div class="hero-trust-strip">
-
-
-
-              <span class="hero-trust-badge badge-upi"><i data-lucide="clock"></i> <strong>Fast</strong> same-visit jobs</span>
-
-
-
-              <span class="hero-trust-badge badge-speed"><i data-lucide="scan"></i> <strong>PDF/JPEG</strong> scanning</span>
-
-
-
-              <span class="hero-trust-badge badge-whatsapp"><i data-lucide="message-circle"></i> <strong>WhatsApp</strong> file support</span>
-
-
-
+              <span class="hero-trust-badge">
+                <i data-lucide="badge-check"></i> <strong>Verified Quality</strong>
+              </span>
+              <span class="hero-trust-badge">
+                <i data-lucide="clock"></i> <strong>Same Day Output</strong>
+              </span>
+              <span class="hero-trust-badge">
+                <i data-lucide="lock"></i> <strong>100% Document Privacy</strong>
+              </span>
             </div>
-
-
-
           </div>
-
-
 
           <div class="page-hero-console">
-
-
-
             <article class="hero-command-center dark-mockup">
-
-
-
               <div class="command-topbar"><span></span><span></span><span></span><strong>Print Desk OS</strong></div>
-
-
-
               <div class="command-grid">
-
-
-
                 <div class="command-main">
-
-
-
-                  <span class="tag tag-premium">Live queue</span>
-
-
-
+                  <span class="tag tag-premium">Live Queue</span>
                   <h3>PRINT-READY</h3>
-
-
-
-                  <p>Files checked, pages counted and quote ready for confirmation.</p>
-
-
-
-                  <div class="command-progress"><span></span></div>
-
-
-
+                  <p>Files verified, page count checked, and cost approved instantly.</p>
+                  <div class="command-progress"><span style="--progress:95%"></span></div>
                 </div>
-
-
-
-                <div class="command-tile"><i data-lucide="copy"></i><strong>Copies</strong><small>B&amp;W/color</small></div>
-
-
-
-                <div class="command-tile"><i data-lucide="file-scan"></i><strong>Scan</strong><small>PDF/JPEG</small></div>
-
-
-
+                <div class="command-tile" style="border: 1px solid var(--eds-border-1);"><i data-lucide="copy"></i><strong>Copies</strong><small>B&amp;W / Color</small></div>
+                <div class="command-tile" style="border: 1px solid var(--eds-border-1);"><i data-lucide="file-scan"></i><strong>Scan</strong><small>PDF / JPEG</small></div>
               </div>
-
-
-
               <div class="command-list">
+                <div><span><i data-lucide="image"></i></span><strong>Color print</strong><small class="status-complete">Photo &amp; Docs</small></div>
+                <div><span><i data-lucide="layers"></i></span><strong>Lamination</strong><small class="status-complete">Cards &amp; Docs</small></div>
+                <div><span><i data-lucide="badge-check"></i></span><strong>ID Card Print</strong><small class="status-pending">Ready</small></div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
 
+      <!-- 1. Contextual 5-Card Trust Strip -->
+      <section class="ps-section bg-soft" style="padding-top: 40px; padding-bottom: 40px;">
+        <div class="ps-container">
+          <div class="ps-trust-strip-grid">
+            
+            <div class="ps-trust-card">
+              <div class="ps-trust-icon-wrap"><i data-lucide="shield-check" style="width:22px;height:22px;"></i></div>
+              <div class="ps-trust-card-body">
+                <strong>Verified Quality</strong>
+                <span>High DPI sharp prints &amp; scans</span>
+              </div>
+            </div>
 
+            <div class="ps-trust-card">
+              <div class="ps-trust-icon-wrap"><i data-lucide="lock" style="width:22px;height:22px;"></i></div>
+              <div class="ps-trust-card-body">
+                <strong>Secure Handling</strong>
+                <span>100% private document policy</span>
+              </div>
+            </div>
 
-                <div><span><i data-lucide="image"></i></span><strong>Color print</strong><small>photo/docs</small></div>
+            <div class="ps-trust-card">
+              <div class="ps-trust-icon-wrap"><i data-lucide="message-circle" style="width:22px;height:22px;"></i></div>
+              <div class="ps-trust-card-body">
+                <strong>Live Support</strong>
+                <span>Real-time WhatsApp alerts</span>
+              </div>
+            </div>
 
+            <div class="ps-trust-card">
+              <div class="ps-trust-icon-wrap"><i data-lucide="star" style="width:22px;height:22px;"></i></div>
+              <div class="ps-trust-card-body">
+                <strong>4.9/5 Rating</strong>
+                <span>Trusted by Lucknow citizens</span>
+              </div>
+            </div>
 
+            <div class="ps-trust-card">
+              <div class="ps-trust-icon-wrap"><i data-lucide="printer" style="width:22px;height:22px;"></i></div>
+              <div class="ps-trust-card-body">
+                <strong>12,000+ Print Requests</strong>
+                <span>Delivered at LDA Colony desk</span>
+              </div>
+            </div>
 
-                <div><span><i data-lucide="layers"></i></span><strong>Lamination</strong><small>cards/docs</small></div>
+          </div>
+        </div>
+      </section>
 
+      <!-- 2. Choose Print Desk Service (Catalog & Toolbar) -->
+      <section class="ps-section bg-white" id="service-options">
+        <div class="ps-container">
+          
+          <div class="ps-section-head">
+            <span class="ps-kicker"><i data-lucide="printer" style="width:13px;height:13px;"></i> Print Desk Catalog</span>
+            <h2 class="ps-heading">Choose the exact print <span class="h2-gold">desk service.</span></h2>
+            <p class="ps-subtext">Select your document requirement below for high-speed printing, crystal-clear scanning, heavy-duty lamination, or professional binding.</p>
+          </div>
 
+          <!-- Quick Action Popular Chips Row -->
+          <div class="ps-chips-strip">
+            <span class="ps-chips-label"><i data-lucide="sparkles" style="width:14px;height:14px;display:inline-block;vertical-align:middle;color:var(--ps-gold);"></i> Quick Picks:</span>
+            <button class="ps-chip" type="button" data-chip-filter="photocopy"><i data-lucide="copy" style="width:13px;height:13px;"></i> A4 B&amp;W Print</button>
+            <button class="ps-chip" type="button" data-chip-filter="color"><i data-lucide="image" style="width:13px;height:13px;"></i> Color Print</button>
+            <button class="ps-chip" type="button" data-chip-filter="scan"><i data-lucide="file-scan" style="width:13px;height:13px;"></i> Certificate Scan (PDF)</button>
+            <button class="ps-chip" type="button" data-chip-filter="lamination"><i data-lucide="layers" style="width:13px;height:13px;"></i> A4 Lamination</button>
+            <button class="ps-chip" type="button" data-chip-filter="photo"><i data-lucide="camera" style="width:13px;height:13px;"></i> Passport Photos (8 Pcs)</button>
+            <button class="ps-chip" type="button" data-chip-filter="binding"><i data-lucide="book-open" style="width:13px;height:13px;"></i> Spiral Binding</button>
+          </div>
 
-                <div><span><i data-lucide="badge-check"></i></span><strong>ID card print</strong><small>ready</small></div>
-
-
-
+          <!-- Modern Sticky / Elevated Filter Toolbar -->
+          <div class="ps-toolbar-wrapper">
+            <div class="ps-toolbar-main">
+              
+              <!-- Search Box -->
+              <div class="ps-search-box">
+                <i data-lucide="search"></i>
+                <input type="text" id="ps-service-search" placeholder="Search printing, scanning, photocopy, lamination..." aria-label="Search print services">
               </div>
 
+              <!-- Category Dropdown -->
+              <div class="ps-custom-select" id="ps-category-select" data-filter-type="category">
+                <div class="ps-select-trigger" tabindex="0">
+                  <span class="ps-trigger-left"><i data-lucide="layers" style="width:15px;height:15px;"></i> <span class="trigger-label">All Categories</span></span>
+                  <i data-lucide="chevron-down" class="chevron-icon" style="width:15px;height:15px;"></i>
+                </div>
+                <div class="ps-select-options">
+                  <div class="ps-option-item selected" data-value="all">All Categories</div>
+                  <div class="ps-option-item" data-value="print">Printing &amp; Xerox</div>
+                  <div class="ps-option-item" data-value="scan">Document Scanning</div>
+                  <div class="ps-option-item" data-value="protect">Lamination &amp; Protection</div>
+                  <div class="ps-option-item" data-value="photo">Photo &amp; ID Cards</div>
+                  <div class="ps-option-item" data-value="binding">Spiral Binding</div>
+                </div>
+              </div>
 
+              <!-- Output Format Dropdown -->
+              <div class="ps-custom-select" id="ps-format-select" data-filter-type="format">
+                <div class="ps-select-trigger" tabindex="0">
+                  <span class="ps-trigger-left"><i data-lucide="file-text" style="width:15px;height:15px;"></i> <span class="trigger-label">All Sizes &amp; Types</span></span>
+                  <i data-lucide="chevron-down" class="chevron-icon" style="width:15px;height:15px;"></i>
+                </div>
+                <div class="ps-select-options">
+                  <div class="ps-option-item selected" data-value="all">All Sizes &amp; Types</div>
+                  <div class="ps-option-item" data-value="a4">A4 Standard Document</div>
+                  <div class="ps-option-item" data-value="a3">A3 Large Format</div>
+                  <div class="ps-option-item" data-value="glossy">Glossy Photo Sheet</div>
+                  <div class="ps-option-item" data-value="pvc">PVC / Plastic Card</div>
+                </div>
+              </div>
 
+              <!-- Sort Dropdown -->
+              <div class="ps-custom-select" id="ps-sort-select" data-filter-type="sort">
+                <div class="ps-select-trigger" tabindex="0">
+                  <span class="ps-trigger-left"><i data-lucide="arrow-up-down" style="width:15px;height:15px;"></i> <span class="trigger-label">Most Popular</span></span>
+                  <i data-lucide="chevron-down" class="chevron-icon" style="width:15px;height:15px;"></i>
+                </div>
+                <div class="ps-select-options">
+                  <div class="ps-option-item selected" data-value="popular">Most Popular</div>
+                  <div class="ps-option-item" data-value="fastest">Fastest Turnaround</div>
+                  <div class="ps-option-item" data-value="price-low">Price: Low to High</div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Quick Filter Pills -->
+            <div class="ps-quick-filters">
+              <span class="ps-quick-filters-label">Filters:</span>
+              <button class="ps-filter-pill active" type="button" data-filter="all">All Services</button>
+              <button class="ps-filter-pill" type="button" data-filter="popular">Popular</button>
+              <button class="ps-filter-pill" type="button" data-filter="sameday">Same Day Print</button>
+              <button class="ps-filter-pill" type="button" data-filter="scan">High-Res Scan</button>
+              <button class="ps-filter-pill" type="button" data-filter="protect">Lamination &amp; ID</button>
+              <button class="ps-filter-pill" type="button" data-filter="binding">Binding &amp; Reports</button>
+            </div>
+          </div>
+
+          <!-- 6 Simplified, Product-Specific Service Cards -->
+          <div class="ps-cards-grid" id="ps-cards-container">
+            
+            <!-- Card 1: Photocopy & B/W Print -->
+            <article class="ps-service-card" data-category="print" data-tags="popular sameday a4" data-price="2" data-speed="5">
+              <div class="ps-card-top">
+                <div class="ps-card-icon"><i data-lucide="copy" style="width:24px;height:24px;"></i></div>
+                <div class="ps-card-badges">
+                  <span class="ps-badge ps-badge-popular">POPULAR</span>
+                  <span class="ps-badge ps-badge-sameday">SAME DAY</span>
+                </div>
+              </div>
+              <h3 class="ps-card-title">Photocopy &amp; B/W Print</h3>
+              <p class="ps-card-desc">High-speed black &amp; white laser printing and photocopy for documents, college notes, forms, and legal papers.</p>
+              <ul class="ps-card-specs-list">
+                <li><i data-lucide="check-circle-2"></i> B&amp;W &amp; Color &middot; A4 / A3 &middot; Single/Double Side</li>
+                <li><i data-lucide="check-circle-2"></i> Print from WhatsApp, Email, Pen Drive or Phone</li>
+                <li><i data-lucide="check-circle-2"></i> Premium 75 GSM bright white paper</li>
+              </ul>
+              <div class="ps-card-meta-row">
+                <div class="ps-meta-price">
+                  <small>Starting from</small>
+                  <strong>₹2 / page</strong>
+                </div>
+                <div class="ps-meta-time">
+                  <i data-lucide="clock"></i> <span>5–10 Mins</span>
+                </div>
+              </div>
+              <div class="ps-card-actions">
+                <a class="ps-btn-primary" href="checkout.html?service=print-and-scan&amp;service_name=Photocopy+%26+Print"><i data-lucide="printer" style="width:14px;height:14px;"></i> Start Print</a>
+                <a class="ps-btn-secondary" href="service-photocopy-printing.html">View Details <i data-lucide="arrow-right" style="width:13px;height:13px;"></i></a>
+              </div>
             </article>
 
+            <!-- Card 2: Photo-Quality Color Printing -->
+            <article class="ps-service-card" data-category="print" data-tags="popular sameday a4 a3 glossy" data-price="10" data-speed="10">
+              <div class="ps-card-top">
+                <div class="ps-card-icon"><i data-lucide="image" style="width:24px;height:24px;"></i></div>
+                <div class="ps-card-badges">
+                  <span class="ps-badge ps-badge-premium">PREMIUM</span>
+                  <span class="ps-badge ps-badge-sameday">FAST</span>
+                </div>
+              </div>
+              <h3 class="ps-card-title">Color Document Printing</h3>
+              <p class="ps-card-desc">Vibrant photo-quality color prints for school/college projects, official certificates, brochures, and resume copies.</p>
+              <ul class="ps-card-specs-list">
+                <li><i data-lucide="check-circle-2"></i> Rich color laser &amp; photo-grade inkjet options</li>
+                <li><i data-lucide="check-circle-2"></i> Standard 100 GSM or Heavy 180 GSM sheets</li>
+                <li><i data-lucide="check-circle-2"></i> True RGB &amp; CMYK color reproduction</li>
+              </ul>
+              <div class="ps-card-meta-row">
+                <div class="ps-meta-price">
+                  <small>Starting from</small>
+                  <strong>₹10 / page</strong>
+                </div>
+                <div class="ps-meta-time">
+                  <i data-lucide="clock"></i> <span>10–15 Mins</span>
+                </div>
+              </div>
+              <div class="ps-card-actions">
+                <a class="ps-btn-primary" href="checkout.html?service=print-and-scan&amp;service_name=Color+Printing"><i data-lucide="printer" style="width:14px;height:14px;"></i> Start Print</a>
+                <a class="ps-btn-secondary" href="service-color-printing.html">View Details <i data-lucide="arrow-right" style="width:13px;height:13px;"></i></a>
+              </div>
+            </article>
 
+            <!-- Card 3: High-Res Document Scanning -->
+            <article class="ps-service-card" data-category="scan" data-tags="popular scan sameday a4" data-price="10" data-speed="5">
+              <div class="ps-card-top">
+                <div class="ps-card-icon"><i data-lucide="file-scan" style="width:24px;height:24px;"></i></div>
+                <div class="ps-card-badges">
+                  <span class="ps-badge ps-badge-popular">300+ DPI</span>
+                  <span class="ps-badge ps-badge-sameday">INSTANT</span>
+                </div>
+              </div>
+              <h3 class="ps-card-title">Document Scanning to PDF</h3>
+              <p class="ps-card-desc">Convert physical marksheets, identity cards, registry deeds, and receipts into clear, multi-page PDF or JPEG files.</p>
+              <ul class="ps-card-specs-list">
+                <li><i data-lucide="check-circle-2"></i> Multi-page combined PDF or high-res JPEGs</li>
+                <li><i data-lucide="check-circle-2"></i> Auto deskew, crop &amp; contrast enhancement</li>
+                <li><i data-lucide="check-circle-2"></i> Instant dispatch to WhatsApp or Email</li>
+              </ul>
+              <div class="ps-card-meta-row">
+                <div class="ps-meta-price">
+                  <small>Starting from</small>
+                  <strong>₹10 / doc</strong>
+                </div>
+                <div class="ps-meta-time">
+                  <i data-lucide="clock"></i> <span>5 Mins</span>
+                </div>
+              </div>
+              <div class="ps-card-actions">
+                <a class="ps-btn-primary" href="checkout.html?service=print-and-scan&amp;service_name=Document+Scanning"><i data-lucide="file-scan" style="width:14px;height:14px;"></i> Start Scan</a>
+                <a class="ps-btn-secondary" href="service-document-scanning.html">View Details <i data-lucide="arrow-right" style="width:13px;height:13px;"></i></a>
+              </div>
+            </article>
+
+            <!-- Card 4: Lamination Support -->
+            <article class="ps-service-card" data-category="protect" data-tags="protect sameday a4 pvc" data-price="20" data-speed="5">
+              <div class="ps-card-top">
+                <div class="ps-card-icon"><i data-lucide="layers" style="width:24px;height:24px;"></i></div>
+                <div class="ps-card-badges">
+                  <span class="ps-badge ps-badge-popular">HEAVY DUTY</span>
+                  <span class="ps-badge ps-badge-sameday">WATERPROOF</span>
+                </div>
+              </div>
+              <h3 class="ps-card-title">Pouch Lamination Support</h3>
+              <p class="ps-card-desc">Protect your valuable certificates, admit cards, marksheets, and identity proofs against water, tearing, and dust.</p>
+              <ul class="ps-card-specs-list">
+                <li><i data-lucide="check-circle-2"></i> 125 to 250 Micron crystal-clear thermal pouch</li>
+                <li><i data-lucide="check-circle-2"></i> A4, A5, and ID Card size lamination</li>
+                <li><i data-lucide="check-circle-2"></i> Bubble-free airtight hermetic heat seal</li>
+              </ul>
+              <div class="ps-card-meta-row">
+                <div class="ps-meta-price">
+                  <small>Starting from</small>
+                  <strong>₹20 / doc</strong>
+                </div>
+                <div class="ps-meta-time">
+                  <i data-lucide="clock"></i> <span>5 Mins</span>
+                </div>
+              </div>
+              <div class="ps-card-actions">
+                <a class="ps-btn-primary" href="checkout.html?service=print-and-scan&amp;service_name=Lamination+Support"><i data-lucide="shield" style="width:14px;height:14px;"></i> Get Lamination</a>
+                <a class="ps-btn-secondary" href="service-lamination.html">View Details <i data-lucide="arrow-right" style="width:13px;height:13px;"></i></a>
+              </div>
+            </article>
+
+            <!-- Card 5: Passport Photo Prints -->
+            <article class="ps-service-card" data-category="photo" data-tags="photo popular sameday glossy" data-price="40" data-speed="10">
+              <div class="ps-card-top">
+                <div class="ps-card-icon"><i data-lucide="camera" style="width:24px;height:24px;"></i></div>
+                <div class="ps-card-badges">
+                  <span class="ps-badge ps-badge-premium">STUDIO GRADE</span>
+                  <span class="ps-badge ps-badge-sameday">EXPRESS</span>
+                </div>
+              </div>
+              <h3 class="ps-card-title">Passport Photo Printing</h3>
+              <p class="ps-card-desc">Studio-grade passport, visa, and stamp-size photo sheets printed on ultra-glossy 250 GSM waterproof photographic paper.</p>
+              <ul class="ps-card-specs-list">
+                <li><i data-lucide="check-circle-2"></i> 8, 16, or 32 Photos sheet pack options</li>
+                <li><i data-lucide="check-circle-2"></i> White, blue, or light background editing</li>
+                <li><i data-lucide="check-circle-2"></i> Exact government &amp; exam dimension compliance</li>
+              </ul>
+              <div class="ps-card-meta-row">
+                <div class="ps-meta-price">
+                  <small>Starting from</small>
+                  <strong>₹40 / sheet</strong>
+                </div>
+                <div class="ps-meta-time">
+                  <i data-lucide="clock"></i> <span>10 Mins</span>
+                </div>
+              </div>
+              <div class="ps-card-actions">
+                <a class="ps-btn-primary" href="https://wa.me/919473946181?text=Hi%20One%20Point%2C%20I%20need%20Passport%20Photo%20Prints." target="_blank" rel="noopener"><i data-lucide="camera" style="width:14px;height:14px;"></i> Order Photos</a>
+                <a class="ps-btn-secondary" href="https://wa.me/919473946181?text=Hi%20One%20Point%2C%20I%20have%20a%20query%20regarding%20Passport%20Photos." target="_blank" rel="noopener">WhatsApp <i data-lucide="message-circle" style="width:13px;height:13px;"></i></a>
+              </div>
+            </article>
+
+            <!-- Card 6: Spiral Binding & Project Reports -->
+            <article class="ps-service-card" data-category="binding" data-tags="binding a4" data-price="30" data-speed="20">
+              <div class="ps-card-top">
+                <div class="ps-card-icon"><i data-lucide="book-open" style="width:24px;height:24px;"></i></div>
+                <div class="ps-card-badges">
+                  <span class="ps-badge ps-badge-popular">CLEAN FINISH</span>
+                  <span class="ps-badge ps-badge-sameday">PROJECT READY</span>
+                </div>
+              </div>
+              <h3 class="ps-card-title">Spiral Binding &amp; Reports</h3>
+              <p class="ps-card-desc">Professional spiral coil binding with clear transparent protective front sheet and heavy matte black card backing.</p>
+              <ul class="ps-card-specs-list">
+                <li><i data-lucide="check-circle-2"></i> Supports 10 to 350 pages per booklet</li>
+                <li><i data-lucide="check-circle-2"></i> College project reports, manuals &amp; legal briefs</li>
+                <li><i data-lucide="check-circle-2"></i> Durable plastic spiral coil with safety locks</li>
+              </ul>
+              <div class="ps-card-meta-row">
+                <div class="ps-meta-price">
+                  <small>Starting from</small>
+                  <strong>₹30 / book</strong>
+                </div>
+                <div class="ps-meta-time">
+                  <i data-lucide="clock"></i> <span>15–20 Mins</span>
+                </div>
+              </div>
+              <div class="ps-card-actions">
+                <a class="ps-btn-primary" href="https://wa.me/919473946181?text=Hi%20One%20Point%2C%20I%20need%20Spiral%20Binding%20for%20my%20documents." target="_blank" rel="noopener"><i data-lucide="book" style="width:14px;height:14px;"></i> Get Binding</a>
+                <a class="ps-btn-secondary" href="https://wa.me/919473946181?text=Hi%20One%20Point%2C%20what%20are%20the%20charges%20for%20Spiral%20Binding%3F" target="_blank" rel="noopener">WhatsApp <i data-lucide="message-circle" style="width:13px;height:13px;"></i></a>
+              </div>
+            </article>
 
           </div>
 
-
-
         </div>
-
-
-
       </section>
 
-
-
-
-
-
-
-      <section class="section edupoint-trending-services print-scan-trending" id="service-options" data-edupoint-service-carousel>
-        <div class="print-scan-section-inner">
-          <div class="section-head edupoint-trending-head">
-
-
-
-          <div>
-
-
-
-            <p class="section-kicker">Print Desk</p>
-
-
-
-            <h2>Choose the exact print <span class="h2-gold">desk service.</span></h2>
-
-
-
-          </div>
-
-
-
-          <button class="btn btn-soft edupoint-view-all-btn" type="button" data-edupoint-view-all aria-expanded="false">
-
-
-
-            <span>View All</span> <i data-lucide="arrow-right"></i>
-
-
-
-          </button>
-
-
-
-        </div>
-
-
-
-
-
-
-
-        <div class="category-filters edupoint-category-filters" data-edupoint-service-filters>
-
-
-
-          <button class="btn btn-soft active" type="button" data-edupoint-filter="all">All Services</button>
-
-
-
-          <button class="btn btn-ghost" type="button" data-edupoint-filter="print">Printing</button>
-
-
-
-          <button class="btn btn-ghost" type="button" data-edupoint-filter="scan">Scanning</button>
-
-
-
-          <button class="btn btn-ghost" type="button" data-edupoint-filter="protect">Protection</button>
-
-
-
-        </div>
-
-
-
-
-
-
-
-        <div class="services-carousel-container edupoint-carousel-shell">
-
-
-
-          <button type="button" class="carousel-arrow prev edupoint-carousel-arrow" data-edupoint-carousel-prev aria-label="Previous service">
-
-
-
-            <i data-lucide="chevron-left"></i>
-
-
-
-          </button>
-
-
-
-          <div class="services-carousel-viewport edupoint-carousel-viewport">
-
-
-
-            <div class="services-carousel-track edupoint-service-track" data-edupoint-service-track>
-
-
-
-              <a class="service-option-card service-card" id="photocopy-printing" href="service-photocopy-printing.html" data-edupoint-service-card data-edupoint-categories="print popular">
-
-
-
-                <div class="service-top service-card-top">
-
-
-
-                  <div class="service-icon"><i data-lucide="copy"></i></div>
-
-
-
-                  <div class="service-card-badges"><span class="tag">B&amp;W / Color</span><span class="tag price-tag">&#8377;2 - &#8377;10</span></div>
-
-
-
+      <!-- 3. "Send Your File" Instant Conversion CTA Banner -->
+      <section class="ps-section bg-soft" id="send-file-cta" style="padding-top: 10px; padding-bottom: 54px;">
+        <div class="ps-container">
+          <div class="ps-send-file-banner">
+            
+            <div class="ps-banner-left">
+              <div class="ps-banner-icon">
+                <i data-lucide="upload-cloud" style="width:28px;height:28px;"></i>
+              </div>
+              <div class="ps-banner-text">
+                <h3>Have a file ready? Send it now for a print estimate.</h3>
+                <p>Send your document on WhatsApp or request online for immediate page count, color check, and transparent price confirmation.</p>
+                <div class="ps-banner-formats">
+                  <span class="fmt-title">Supported Formats:</span>
+                  <span class="fmt-tag">PDF</span>
+                  <span class="fmt-tag">JPG</span>
+                  <span class="fmt-tag">PNG</span>
+                  <span class="fmt-tag">DOCX</span>
+                  <span class="fmt-tag">PPTX</span>
+                  <span class="fmt-tag">ZIP</span>
                 </div>
-
-
-
-                <h3>Photocopy &amp; Print</h3>
-
-
-
-                <p>B&amp;W and color page printing from mobile, email, WhatsApp or pen drive.</p>
-
-
-
-                <span class="btn btn-primary btn-service-select" data-service="Photocopy &amp; Print">Open Service</span>
-
-
-
-              </a>
-
-
-
-              <a class="service-option-card service-card" id="color-printing" href="service-color-printing.html" data-edupoint-service-card data-edupoint-categories="print popular">
-
-
-
-                <div class="service-top service-card-top">
-
-
-
-                  <div class="service-icon"><i data-lucide="image"></i></div>
-
-
-
-                  <div class="service-card-badges"><span class="tag">Premium</span><span class="tag price-tag">&#8377;5+</span></div>
-
-
-
-                </div>
-
-
-
-                <h3>Color Printing</h3>
-
-
-
-                <p>Premium photo prints, certificates, school work, forms and color document copies.</p>
-
-
-
-                <span class="btn btn-primary btn-service-select" data-service="Color Printing">Open Service</span>
-
-
-
-              </a>
-
-
-
-              <a class="service-option-card service-card" id="document-scanning" href="service-document-scanning.html" data-edupoint-service-card data-edupoint-categories="scan popular">
-
-
-
-                <div class="service-top service-card-top">
-
-
-
-                  <div class="service-icon"><i data-lucide="file-scan"></i></div>
-
-
-
-                  <div class="service-card-badges"><span class="tag">PDF/JPEG</span><span class="tag price-tag">&#8377;10+</span></div>
-
-
-
-                </div>
-
-
-
-                <h3>Document Scanning</h3>
-
-
-
-                <p>Scan certificates, forms and ID proofs into clean PDF or JPEG files.</p>
-
-
-
-                <span class="btn btn-primary btn-service-select" data-service="Document Scanning">Open Service</span>
-
-
-
-              </a>
-
-
-
-              <a class="service-option-card service-card" id="lamination" href="service-lamination.html" data-edupoint-service-card data-edupoint-categories="protect popular">
-
-
-
-                <div class="service-top service-card-top">
-
-
-
-                  <div class="service-icon"><i data-lucide="layers"></i></div>
-
-
-
-                  <div class="service-card-badges"><span class="tag">Pouch</span><span class="tag price-tag">&#8377;10+</span></div>
-
-
-
-                </div>
-
-
-
-                <h3>Lamination Support</h3>
-
-
-
-                <p>Protect certificates, ID cards, admit cards and important documents.</p>
-
-
-
-                <span class="btn btn-primary btn-service-select" data-service="Lamination Support">Open Service</span>
-
-
-
-              </a>
-
-
-
+              </div>
             </div>
 
-
+            <div class="ps-banner-actions">
+              <a class="ps-btn-wa-gold" href="https://wa.me/919473946181?text=Hi%20One%20Point%2C%20I%20have%20a%20file%20ready%20for%20print/scan%20estimate." target="_blank" rel="noopener">
+                <i data-lucide="message-circle" style="width:18px;height:18px;"></i> Send on WhatsApp
+              </a>
+              <a class="ps-btn-white-ghost" href="checkout.html?service=print-and-scan&amp;service_name=Print+%26+Scan">
+                <i data-lucide="send" style="width:15px;height:15px;"></i> Request Print Job
+              </a>
+            </div>
 
           </div>
-
-
-
-          <button type="button" class="carousel-arrow next edupoint-carousel-arrow" data-edupoint-carousel-next aria-label="Next service">
-
-
-
-            <i data-lucide="chevron-right"></i>
-
-
-
-          </button>
-
-
-
         </div>
-      </div>
       </section>
 
-
-
-
-
-
-
-      <div class="page-pan-card dark-how-it-works">
-        <section class="section reveal" id="how-it-works">
-          <div class="section-head">
-            <div>
-              <p class="section-kicker">How It Works</p>
-              <h2>Print &amp; scan in four <span class="h2-gold">easy steps.</span></h2>
-              <p class="how-it-works-subtitle">Share your file, approve details, and collect clean output at the desk.</p>
-            </div>
+      <!-- 4. Transparent Service Estimate & Pricing Benchmark -->
+      <section class="ps-section bg-white" id="pricing-estimate">
+        <div class="ps-container">
+          
+          <div class="ps-section-head">
+            <span class="ps-kicker"><i data-lucide="calculator" style="width:13px;height:13px;"></i> Transparent Pricing</span>
+            <h2 class="ps-heading">Transparent service <span class="h2-gold">estimate.</span></h2>
+            <p class="ps-subtext">Clear, upfront rates for printing, scanning, lamination, and binding with zero hidden charges.</p>
           </div>
-          <div class="how-it-works-grid">
-            <div class="step-card">
-              <span class="hiw-step-num">01</span>
-              <div class="hiw-step-top"><div class="hiw-step-icon"><i data-lucide="send"></i></div></div>
-              <h3>Share Your File</h3>
-              <p>Send PDF, photo, Drive link, email file, or bring it directly on your device.</p>
+
+          <div class="ps-estimate-grid">
+            
+            <!-- Left: Benchmark Rates Grid -->
+            <div class="ps-benchmark-card">
+              <h3><i data-lucide="receipt" style="width:18px;height:18px;color:var(--ps-primary);"></i> Standard Desk Rate Benchmarks</h3>
+              
+              <div class="ps-rates-table">
+                <div class="ps-rate-item">
+                  <div class="ps-rate-item-left">
+                    <strong>A4 B&amp;W Print / Xerox</strong>
+                    <span>75 GSM Single / Double Side</span>
+                  </div>
+                  <div class="ps-rate-price">from ₹2 / page</div>
+                </div>
+
+                <div class="ps-rate-item">
+                  <div class="ps-rate-item-left">
+                    <strong>A4 Color Document</strong>
+                    <span>Laser / Inkjet Rich Color</span>
+                  </div>
+                  <div class="ps-rate-price">from ₹10 / page</div>
+                </div>
+
+                <div class="ps-rate-item">
+                  <div class="ps-rate-item-left">
+                    <strong>Document Scan (PDF)</strong>
+                    <span>300+ DPI Auto-Cropped</span>
+                  </div>
+                  <div class="ps-rate-price">from ₹10 / page</div>
+                </div>
+
+                <div class="ps-rate-item">
+                  <div class="ps-rate-item-left">
+                    <strong>A4 Pouch Lamination</strong>
+                    <span>125 Micron Waterproof Seal</span>
+                  </div>
+                  <div class="ps-rate-price">from ₹20 / doc</div>
+                </div>
+
+                <div class="ps-rate-item">
+                  <div class="ps-rate-item-left">
+                    <strong>Passport Photo Sheet</strong>
+                    <span>8 / 16 Photos on Glossy</span>
+                  </div>
+                  <div class="ps-rate-price">from ₹40 / sheet</div>
+                </div>
+
+                <div class="ps-rate-item">
+                  <div class="ps-rate-item-left">
+                    <strong>Spiral Coil Binding</strong>
+                    <span>Includes Cover &amp; Backing</span>
+                  </div>
+                  <div class="ps-rate-price">from ₹30 / book</div>
+                </div>
+              </div>
+
+              <div class="ps-benchmark-note">
+                <i data-lucide="info" style="width:14px;height:14px;display:inline-block;vertical-align:middle;color:#d97706;margin-right:4px;"></i>
+                <strong>Note:</strong> Final exact cost depends on total page count, paper thickness (75/100/180 GSM), color coverage ratio, and volume discounts for bulk copies.
+              </div>
             </div>
-            <div class="step-card">
-              <span class="hiw-step-num">02</span>
-              <div class="hiw-step-top"><div class="hiw-step-icon"><i data-lucide="sliders-horizontal"></i></div></div>
-              <h3>Check Print Details</h3>
-              <p>We confirm page count, paper size, color mode, copies, scan format, and finishing.</p>
+
+            <!-- Right: Interactive Live Quote Structure -->
+            <div class="ps-quote-calculator">
+              <h3><i data-lucide="file-check" style="width:18px;height:18px;color:var(--ps-primary);"></i> Instant Quote Structure</h3>
+              
+              <div class="ps-quote-breakdown">
+                <div class="ps-quote-row">
+                  <span>Base Operator Service Charge</span>
+                  <strong style="color:#059669;">₹0 (Free / Included)</strong>
+                </div>
+                <div class="ps-quote-row">
+                  <span>Printing &amp; Scanning Cost</span>
+                  <strong>Starting from ₹2</strong>
+                </div>
+                <div class="ps-quote-row">
+                  <span>Optional Finishing (Lamination/Binding)</span>
+                  <strong>₹20 – ₹30</strong>
+                </div>
+                <div class="ps-quote-row">
+                  <span>Desk Pickup / WhatsApp Dispatch</span>
+                  <strong style="color:#059669;">Free</strong>
+                </div>
+              </div>
+
+              <div class="ps-quote-total-row">
+                <div>
+                  <span>Estimated Total</span>
+                  <div style="font-size:11px;color:var(--ps-muted);font-weight:600;">Transparent quote before job starts</div>
+                </div>
+                <strong>from ₹2</strong>
+              </div>
+
+              <a class="ps-btn-primary" href="https://wa.me/919473946181?text=Hi%20One%20Point%2C%20I%20want%20to%20get%20a%20quick%20quote%20for%20my%20printing%20job." target="_blank" rel="noopener" style="width:100%;text-align:center;padding:12px;font-size:14px;">
+                <i data-lucide="message-circle" style="width:16px;height:16px;"></i> Get Instant Quote on WhatsApp
+              </a>
             </div>
-            <div class="step-card">
-              <span class="hiw-step-num">03</span>
-              <div class="hiw-step-top"><div class="hiw-step-icon"><i data-lucide="badge-indian-rupee"></i></div></div>
+
+          </div>
+
+        </div>
+      </section>
+
+      <!-- 5. Connected 4-Step Process Timeline -->
+      <section class="ps-section bg-soft" id="how-it-works">
+        <div class="ps-container">
+          
+          <div class="ps-section-head">
+            <span class="ps-kicker"><i data-lucide="workflow" style="width:13px;height:13px;"></i> How It Works</span>
+            <h2 class="ps-heading">Print &amp; scan in four <span class="h2-gold">easy steps.</span></h2>
+            <p class="ps-subtext">Share your file, approve specifications, and collect fresh output at our LDA Colony desk.</p>
+          </div>
+
+          <div class="ps-process-grid">
+            
+            <div class="ps-step-card">
+              <div class="ps-step-header">
+                <span class="ps-step-badge">01</span>
+                <span class="ps-time-cue">⏱ 1–2 Mins</span>
+              </div>
+              <h3>Send File</h3>
+              <p>Share your PDF, photo, Drive link, email file, or bring your pen drive / mobile to the desk.</p>
+            </div>
+
+            <div class="ps-step-card">
+              <div class="ps-step-header">
+                <span class="ps-step-badge">02</span>
+                <span class="ps-time-cue">⏱ Before printing</span>
+              </div>
+              <h3>Confirm Specs</h3>
+              <p>We check page count, paper size (A4/A3), color mode (B&amp;W/Color), and finishing choices.</p>
+            </div>
+
+            <div class="ps-step-card">
+              <div class="ps-step-header">
+                <span class="ps-step-badge">03</span>
+                <span class="ps-time-cue">⏱ Zero surprises</span>
+              </div>
               <h3>Approve Cost</h3>
-              <p>Final price and timing are confirmed before printing, scanning, or lamination starts.</p>
+              <p>Exact price and timing are confirmed with you before any printing or scanning starts.</p>
             </div>
-            <div class="step-card">
-              <span class="hiw-step-num">04</span>
-              <div class="hiw-step-top"><div class="hiw-step-icon"><i data-lucide="package-check"></i></div></div>
-              <h3>Collect Output</h3>
-              <p>Pick up fresh copies, laminated pages, ID prints, or receive digital PDF/JPEG files.</p>
-            </div>
-          </div>
-          <div class="how-it-works-trust">
-            <span class="trust-pill"><i data-lucide="check"></i> Same-day output</span>
-            <span class="trust-pill"><i data-lucide="check"></i> Quality checked</span>
-            <span class="trust-pill"><i data-lucide="check"></i> WhatsApp confirmed</span>
-            <span class="trust-pill"><i data-lucide="check"></i> No hidden cost</span>
-          </div>
-        </section>
-      </div>
 
-      <section class="reveal print-scan-checklist" id="file-checklist">
-        <div class="ps-checklist-split">
-          <div class="ps-checklist-left">
-            <p class="section-kicker">File Checklist</p>
-            <h2>Better files, cleaner <span class="h2-gold">output.</span></h2>
-            <p>Before sending your document, check these small details so prints stay sharp and scans look professional.</p>
-            <a class="ps-cta-btn" href="#apply-now">Start Request <i data-lucide="arrow-right"></i></a>
+            <div class="ps-step-card">
+              <div class="ps-step-header">
+                <span class="ps-step-badge">04</span>
+                <span class="ps-time-cue">⏱ Same day / Instant</span>
+              </div>
+              <h3>Collect Output</h3>
+              <p>Pick up fresh prints, laminated documents, or receive digital PDF/JPEG files on WhatsApp.</p>
+            </div>
+
           </div>
-          <div class="ps-checklist-right">
-            <div class="ps-check-row">
-              <div class="ps-check-num">01</div>
-              <div class="ps-check-icon"><i data-lucide="file-check-2"></i></div>
-              <div class="ps-check-text">
-                <h3>Use PDF for printing</h3>
-                <p>PDF keeps page size, fonts, and layout more stable than screenshots.</p>
+
+          <div class="ps-trust-pills-row">
+            <span class="ps-trust-pill"><i data-lucide="check"></i> Same-day output</span>
+            <span class="ps-trust-pill"><i data-lucide="check"></i> Quality inspected</span>
+            <span class="ps-trust-pill"><i data-lucide="check"></i> WhatsApp confirmed</span>
+            <span class="ps-trust-pill"><i data-lucide="check"></i> No hidden cost</span>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- 6. Print-Specific Privacy & Document Security Trust Card -->
+      <section class="ps-section bg-white" id="document-security" style="padding-top: 10px; padding-bottom: 54px;">
+        <div class="ps-container">
+          <div class="ps-security-card">
+            
+            <div class="ps-security-head">
+              <div class="ps-security-icon">
+                <i data-lucide="shield-check" style="width:24px;height:24px;"></i>
+              </div>
+              <div>
+                <h3>Your documents are handled with 100% privacy &amp; security</h3>
+                <p>We follow strict data handling standards for citizen certificates, identity cards, and academic documents.</p>
               </div>
             </div>
-            <div class="ps-check-row">
-              <div class="ps-check-num">02</div>
-              <div class="ps-check-icon"><i data-lucide="scan-line"></i></div>
-              <div class="ps-check-text">
-                <h3>Keep edges visible</h3>
-                <p>For certificates and IDs, keep all corners visible and avoid cropped photos.</p>
+
+            <div class="ps-security-grid">
+              <div class="ps-sec-item">
+                <div class="ps-sec-icon-wrap">
+                  <i data-lucide="lock" style="width:18px;height:18px;"></i>
+                </div>
+                <strong>Dedicated Job Purpose</strong>
+                <span>Your files are accessed strictly for the requested print, scan, or copy service.</span>
+              </div>
+
+              <div class="ps-sec-item">
+                <div class="ps-sec-icon-wrap">
+                  <i data-lucide="shield-check" style="width:18px;height:18px;"></i>
+                </div>
+                <strong>Zero Public Sharing</strong>
+                <span>Sensitive identity proofs (Aadhaar, PAN, marksheets) are never shared or made public.</span>
+              </div>
+
+              <div class="ps-sec-item">
+                <div class="ps-sec-icon-wrap">
+                  <i data-lucide="trash-2" style="width:18px;height:18px;"></i>
+                </div>
+                <strong>Auto Data Purge</strong>
+                <span>Temporary digital print queue files are removed from our local terminals post-completion.</span>
+              </div>
+
+              <div class="ps-sec-item">
+                <div class="ps-sec-icon-wrap">
+                  <i data-lucide="user-check" style="width:18px;height:18px;"></i>
+                </div>
+                <strong>Desk Confidentiality</strong>
+                <span>Operator confidentiality guaranteed at our registered Lucknow LDA Colony service desk.</span>
               </div>
             </div>
-            <div class="ps-check-row">
-              <div class="ps-check-num">03</div>
-              <div class="ps-check-icon"><i data-lucide="palette"></i></div>
-              <div class="ps-check-text">
-                <h3>Mention color choice</h3>
-                <p>Tell us B&amp;W or color, single or double side, page size, and number of copies.</p>
-              </div>
-            </div>
-            <div class="ps-check-row">
-              <div class="ps-check-num">04</div>
-              <div class="ps-check-icon"><i data-lucide="file-type-2"></i></div>
-              <div class="ps-check-text">
-                <h3>Name files clearly</h3>
-                <p>Use simple file names like Aadhaar-print, passport-photo, or certificate-scan.</p>
-              </div>
-            </div>
+
           </div>
         </div>
       </section>
 
+      <!-- 7. "Better files, cleaner output" 2-Column Checklist -->
+      <section class="ps-section bg-soft" id="file-checklist">
+        <div class="ps-container">
+          
+          <div class="ps-checklist-wrap">
+            
+            <!-- Left Info Column -->
+            <div class="ps-checklist-left-info">
+              <span class="ps-kicker"><i data-lucide="clipboard-check" style="width:13px;height:13px;"></i> File Quality Guide</span>
+              <h2 class="ps-heading">Better files, cleaner <span class="h2-gold">output.</span></h2>
+              <p class="ps-subtext" style="margin-bottom: 24px;">Before sending your document, follow these small guidelines so your prints stay sharp, scans remain legible, and copies look professional.</p>
+              
+              <div class="ps-checklist-actions">
+                <a class="ps-btn-primary" href="checkout.html?service=print-and-scan&amp;service_name=Print+%26+Scan">
+                  <i data-lucide="send" style="width:14px;height:14px;"></i> Start Print Request
+                </a>
+                <a class="ps-btn-secondary" href="https://wa.me/919473946181?text=Hi%20One%20Point%2C%20can%20you%20check%20if%20my%20file%20is%20ready%20for%20printing%3F" target="_blank" rel="noopener">
+                  <i data-lucide="message-circle" style="width:14px;height:14px;"></i> Check My File
+                </a>
+              </div>
+            </div>
 
+            <!-- Right 2 Columns -->
+            <div class="ps-check-cols">
+              
+              <!-- Column 1: Best for Printing -->
+              <div class="ps-check-col-box">
+                <div class="ps-col-box-head">
+                  <div class="ps-col-icon-bubble"><i data-lucide="printer"></i></div>
+                  <h4>Best for Printing</h4>
+                </div>
+                
+                <div class="ps-check-items">
+                  <div class="ps-check-item">
+                    <div class="ps-check-tick"><i data-lucide="check"></i></div>
+                    <div class="ps-check-content">
+                      <strong>Use PDF Format</strong>
+                      <p>Keeps fonts, margins, and page layouts perfectly stable across devices.</p>
+                    </div>
+                  </div>
 
+                  <div class="ps-check-item">
+                    <div class="ps-check-tick"><i data-lucide="check"></i></div>
+                    <div class="ps-check-content">
+                      <strong>300+ DPI Resolution</strong>
+                      <p>Ensures text, stamps, and photos print sharp with zero pixelation.</p>
+                    </div>
+                  </div>
 
+                  <div class="ps-check-item">
+                    <div class="ps-check-tick"><i data-lucide="check"></i></div>
+                    <div class="ps-check-content">
+                      <strong>Correct 5mm Margins</strong>
+                      <p>Keep at least 5mm margin on all sides to avoid cut-off edges.</p>
+                    </div>
+                  </div>
 
+                  <div class="ps-check-item">
+                    <div class="ps-check-tick"><i data-lucide="check"></i></div>
+                    <div class="ps-check-content">
+                      <strong>Avoid Screenshots</strong>
+                      <p>Low-res mobile screenshots often appear blurry or compressed in print.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
+              <!-- Column 2: Before Sending -->
+              <div class="ps-check-col-box">
+                <div class="ps-col-box-head">
+                  <div class="ps-col-icon-bubble"><i data-lucide="sliders-horizontal"></i></div>
+                  <h4>Before Sending</h4>
+                </div>
 
-      <div data-unified-apply-slot></div>
+                <div class="ps-check-items">
+                  <div class="ps-check-item">
+                    <div class="ps-check-tick"><i data-lucide="check"></i></div>
+                    <div class="ps-check-content">
+                      <strong>Specify Color Mode</strong>
+                      <p>Clearly mention if you need Black &amp; White or vibrant Color prints.</p>
+                    </div>
+                  </div>
 
+                  <div class="ps-check-item">
+                    <div class="ps-check-tick"><i data-lucide="check"></i></div>
+                    <div class="ps-check-content">
+                      <strong>Check Page Sequence</strong>
+                      <p>Confirm multi-page documents follow correct chronological order.</p>
+                    </div>
+                  </div>
 
+                  <div class="ps-check-item">
+                    <div class="ps-check-tick"><i data-lucide="check"></i></div>
+                    <div class="ps-check-content">
+                      <strong>State Copy Quantity</strong>
+                      <p>Mention the exact number of copies needed for each document.</p>
+                    </div>
+                  </div>
+
+                  <div class="ps-check-item">
+                    <div class="ps-check-tick"><i data-lucide="check"></i></div>
+                    <div class="ps-check-content">
+                      <strong>Mention Finishing Needs</strong>
+                      <p>Specify if you require stapling, lamination, or spiral binding.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+      <!-- 8. Print-Specific 2-Column Tabbed FAQ Section with Real-Time Search -->
+      <section class="ps-section bg-white" id="faq-section">
+        <div class="ps-container">
+          
+          <div class="ps-section-head">
+            <span class="ps-kicker"><i data-lucide="help-circle" style="width:13px;height:13px;"></i> FAQs</span>
+            <h2 class="ps-heading">Common Print &amp; Scan <span class="h2-gold">Questions</span></h2>
+            <p class="ps-subtext">Quick answers regarding document formats, same-day delivery, mobile printing, and pricing.</p>
+          </div>
+
+          <!-- FAQ Search Bar -->
+          <div class="ps-faq-search-wrap">
+            <i data-lucide="search"></i>
+            <input type="text" id="ps-faq-search-input" placeholder="Search print FAQs, file formats, rates, timings..." aria-label="Search FAQs">
+          </div>
+
+          <!-- 2-Column Tabbed FAQ Container -->
+          <div class="cfaq-wrap ps-cfaq-wrapper">
+            
+            <!-- Left: Category Tabs Sidebar -->
+            <div class="cfaq-sidebar ps-cfaq-sidebar">
+              <button class="cfaq-tab active" data-tab="general" type="button">
+                <i data-lucide="file-text"></i> <span>General &amp; File Formats</span>
+              </button>
+              <button class="cfaq-tab" data-tab="printing" type="button">
+                <i data-lucide="printer"></i> <span>Printing &amp; Photocopy</span>
+              </button>
+              <button class="cfaq-tab" data-tab="scanning" type="button">
+                <i data-lucide="file-scan"></i> <span>Scanning to PDF</span>
+              </button>
+              <button class="cfaq-tab" data-tab="lamination" type="button">
+                <i data-lucide="layers"></i> <span>Lamination &amp; Binding</span>
+              </button>
+              <button class="cfaq-tab" data-tab="pricing" type="button">
+                <i data-lucide="indian-rupee"></i> <span>Pricing &amp; Delivery</span>
+              </button>
+              <div class="ps-cfaq-sidebar-bottom-link">
+                <a href="https://wa.me/919473946181?text=Hi%20One%20Point%2C%20I%20have%20a%20question%20regarding%20Print%20and%20Scan%20services." target="_blank" rel="noopener">
+                  <i data-lucide="message-circle" style="width:13px;height:13px;"></i> Need help? Chat with us
+                </a>
+              </div>
+            </div>
+
+            <!-- Right: Content Panels -->
+            <div class="cfaq-panels ps-cfaq-panels">
+
+              <!-- Panel 1: General & File Formats -->
+              <div class="cfaq-panel active" data-panel="general">
+                <div class="faq">
+                  <div class="faq-item open">
+                    <button class="faq-question" type="button">
+                      <span class="pfaq-q-text">Can I send files directly on WhatsApp for printing?</span>
+                      <i data-lucide="chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                      <p>Yes! You can directly send your PDF, DOCX, JPG, or PNG files to our official WhatsApp desk number. Our operator verifies the page count, color specifications, and sends you an instant cost approval before printing.</p>
+                    </div>
+                  </div>
+                  <div class="faq-item">
+                    <button class="faq-question" type="button">
+                      <span class="pfaq-q-text">Do you print documents directly from mobile phones or email?</span>
+                      <i data-lucide="chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                      <p>Yes, you can email your files to our desk, share a Google Drive link, send via WhatsApp, or plug in a standard USB pen drive / memory card directly at our Lucknow shop counter.</p>
+                    </div>
+                  </div>
+                  <div class="faq-item">
+                    <button class="faq-question" type="button">
+                      <span class="pfaq-q-text">Which file format is best for printing documents?</span>
+                      <i data-lucide="chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                      <p>PDF (Portable Document Format) is the best format because it preserves exact page margins, font styles, and vector clarity without shifting layouts between different devices.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Panel 2: Printing & Photocopy -->
+              <div class="cfaq-panel" data-panel="printing">
+                <div class="faq">
+                  <div class="faq-item open">
+                    <button class="faq-question" type="button">
+                      <span class="pfaq-q-text">Can you print Aadhaar, PAN, Admit Cards and Marksheets?</span>
+                      <i data-lucide="chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                      <p>Yes, we specialize in high-resolution official document printing, e-Aadhaar card prints, exam admit cards, university marksheets, and revenue registry deeds on premium 75 GSM to 180 GSM paper.</p>
+                    </div>
+                  </div>
+                  <div class="faq-item">
+                    <button class="faq-question" type="button">
+                      <span class="pfaq-q-text">Is same-day and urgent printing available?</span>
+                      <i data-lucide="chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                      <p>Yes! Most standard photocopy and print jobs (under 100 pages) are completed within 5 to 15 minutes. Large project reports and bulk xerox are delivered on the same day.</p>
+                    </div>
+                  </div>
+                  <div class="faq-item">
+                    <button class="faq-question" type="button">
+                      <span class="pfaq-q-text">Do you support both Single-Sided and Double-Sided (Duplex) printing?</span>
+                      <i data-lucide="chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                      <p>Yes, our high-speed laser printers support automatic duplex (back-to-back) printing, which reduces paper thickness and saves cost on large study materials and books.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Panel 3: Scanning to PDF -->
+              <div class="cfaq-panel" data-panel="scanning">
+                <div class="faq">
+                  <div class="faq-item open">
+                    <button class="faq-question" type="button">
+                      <span class="pfaq-q-text">Can you scan multi-page physical documents into a single PDF?</span>
+                      <i data-lucide="chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                      <p>Yes! We can scan book chapters, legal deeds, marksheets, and bills into a single searchable PDF file with chronological page ordering and auto-deskew correction.</p>
+                    </div>
+                  </div>
+                  <div class="faq-item">
+                    <button class="faq-question" type="button">
+                      <span class="pfaq-q-text">What scan resolution (DPI) do you provide?</span>
+                      <i data-lucide="chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                      <p>We scan documents at 300 DPI (standard for official portal uploads) up to 600 DPI (high-resolution photo &amp; certificate archival), ensuring small fonts and stamps remain perfectly legible.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Panel 4: Lamination & Binding -->
+              <div class="cfaq-panel" data-panel="lamination">
+                <div class="faq">
+                  <div class="faq-item open">
+                    <button class="faq-question" type="button">
+                      <span class="pfaq-q-text">Do you provide lamination and spiral binding?</span>
+                      <i data-lucide="chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                      <p>Yes! We provide heavy-duty 125–250 micron thermal pouch lamination for certificates and ID cards, as well as plastic spiral coil binding with clear protective front covers for college project reports and manuals.</p>
+                    </div>
+                  </div>
+                  <div class="faq-item">
+                    <button class="faq-question" type="button">
+                      <span class="pfaq-q-text">How long does lamination or spiral binding take?</span>
+                      <i data-lucide="chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                      <p>Lamination is completed within 3–5 minutes at our counter. Spiral binding for reports up to 200 pages is completed within 15–20 minutes.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Panel 5: Pricing & Delivery -->
+              <div class="cfaq-panel" data-panel="pricing">
+                <div class="faq">
+                  <div class="faq-item open">
+                    <button class="faq-question" type="button">
+                      <span class="pfaq-q-text">How do I pay for my print and scan jobs?</span>
+                      <i data-lucide="chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                      <p>You can pay via UPI (Google Pay, PhonePe, Paytm), cash at our LDA Colony counter, debit/credit cards, or net banking with an instant GST receipt generated upon request.</p>
+                    </div>
+                  </div>
+                  <div class="faq-item">
+                    <button class="faq-question" type="button">
+                      <span class="pfaq-q-text">Are there volume discounts for bulk photocopy or booklet printing?</span>
+                      <i data-lucide="chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                      <p>Yes! For bulk printing, coaching study material, and book photocopy exceeding 100 pages, we offer special wholesale volume discount rates.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Mobile Sticky Bottom Action Bar -->
+      <div class="ps-sticky-mobile-bar" aria-label="Mobile quick actions">
+        <a class="ps-smb-send" href="checkout.html?service=print-and-scan&amp;service_name=Print+%26+Scan">
+          <i data-lucide="printer" style="width:16px;height:16px;"></i> Send File / Order
+        </a>
+        <a class="ps-smb-wa" href="https://wa.me/919473946181?text=Hi%20One%20Point%2C%20I%20want%20to%20send%20a%20file%20for%20printing." target="_blank" rel="noopener">
+          <i data-lucide="message-circle" style="width:16px;height:16px;"></i> WhatsApp Desk
+        </a>
+      </div>
 
     </main>
 
-
-
     <div data-site-footer></div>
 
-
-
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+    <script src="assets/app.js?v=customer-checkout-94" defer></script>
 
-
-
-    <script src="assets/app.js?v=clean_js_v11" defer></script>
-
-
-
-  
-
-
-
-<script id="line-alignment-script">
-
-
-
-  document.addEventListener("DOMContentLoaded", function() {
-
-
-
-    setTimeout(() => {
-
-
-
-      document.querySelectorAll(".section-head h2").forEach(h2 => {
-
-
-
-        let align = window.getComputedStyle(h2).textAlign;
-
-
-
-        let parent = h2.closest('.section-head');
-
-
-
-        if (parent) {
-
-
-
-          if (align === "center") {
-
-
-
-            parent.classList.add("center-line");
-
-
-
-          } else {
-
-
-
-            parent.classList.add("left-line");
-
-
-
-          }
-
-
-
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Initialize Lucide Icons
+        if (window.lucide) {
+          window.lucide.createIcons();
         }
 
+        // ── 1. Custom Dropdown Logic ──
+        const customSelects = document.querySelectorAll(".ps-custom-select");
+        customSelects.forEach(select => {
+          const trigger = select.querySelector(".ps-select-trigger");
+          const options = select.querySelectorAll(".ps-option-item");
+          const label = select.querySelector(".trigger-label");
 
+          trigger.addEventListener("click", function (e) {
+            e.stopPropagation();
+            customSelects.forEach(s => {
+              if (s !== select) s.classList.remove("open");
+            });
+            select.classList.toggle("open");
+          });
 
+          options.forEach(opt => {
+            opt.addEventListener("click", function (e) {
+              e.stopPropagation();
+              options.forEach(o => o.classList.remove("selected"));
+              this.classList.add("selected");
+              label.textContent = this.textContent;
+              select.classList.remove("open");
+              runServiceFilter();
+            });
+          });
+        });
+
+        // Close dropdowns on outside click
+        document.addEventListener("click", function () {
+          customSelects.forEach(s => s.classList.remove("open"));
+        });
+
+        // ── 2. Search & Filter Cards Controller ──
+        const searchInput = document.getElementById("ps-service-search");
+        const filterPills = document.querySelectorAll(".ps-filter-pill");
+        const serviceCards = document.querySelectorAll(".ps-service-card");
+        const quickChips = document.querySelectorAll(".ps-chip[data-chip-filter]");
+
+        let currentCategory = "all";
+        let currentPill = "all";
+        let currentSearch = "";
+
+        if (searchInput) {
+          searchInput.addEventListener("input", function () {
+            currentSearch = this.value.toLowerCase().trim();
+            runServiceFilter();
+          });
+        }
+
+        filterPills.forEach(pill => {
+          pill.addEventListener("click", function () {
+            filterPills.forEach(p => p.classList.remove("active"));
+            this.classList.add("active");
+            currentPill = this.getAttribute("data-filter");
+            runServiceFilter();
+          });
+        });
+
+        quickChips.forEach(chip => {
+          chip.addEventListener("click", function () {
+            const filterKey = this.getAttribute("data-chip-filter");
+            if (searchInput) {
+              searchInput.value = this.textContent.trim().replace(/\(.*\)/, "").trim();
+              currentSearch = searchInput.value.toLowerCase();
+              runServiceFilter();
+            }
+          });
+        });
+
+        function runServiceFilter() {
+          const catSelect = document.getElementById("ps-category-select");
+          const selectedCatOpt = catSelect?.querySelector(".ps-option-item.selected");
+          currentCategory = selectedCatOpt?.getAttribute("data-value") || "all";
+
+          serviceCards.forEach(card => {
+            const cardCat = card.getAttribute("data-category") || "";
+            const cardTags = card.getAttribute("data-tags") || "";
+            const cardTitle = card.querySelector(".ps-card-title")?.textContent.toLowerCase() || "";
+            const cardDesc = card.querySelector(".ps-card-desc")?.textContent.toLowerCase() || "";
+
+            // Category match
+            const matchesCat = (currentCategory === "all" || cardCat === currentCategory);
+
+            // Pill filter match
+            let matchesPill = true;
+            if (currentPill !== "all") {
+              matchesPill = cardTags.includes(currentPill) || cardCat === currentPill;
+            }
+
+            // Search query match
+            let matchesQuery = true;
+            if (currentSearch) {
+              matchesQuery = cardTitle.includes(currentSearch) || cardDesc.includes(currentSearch) || cardCat.includes(currentSearch) || cardTags.includes(currentSearch);
+            }
+
+            if (matchesCat && matchesPill && matchesQuery) {
+              card.style.display = "flex";
+            } else {
+              card.style.display = "none";
+            }
+          });
+        }
+
+        // ── 3. FAQ Sidebar Tabs, Real-Time Search & Accordion Controller ──
+        const faqTabs = document.querySelectorAll(".ps-cfaq-sidebar .cfaq-tab");
+        const faqPanels = document.querySelectorAll(".ps-cfaq-panels .cfaq-panel");
+        const faqSearchInput = document.getElementById("ps-faq-search-input");
+
+        faqTabs.forEach(tab => {
+          tab.addEventListener("click", function () {
+            faqTabs.forEach(t => t.classList.remove("active"));
+            faqPanels.forEach(p => p.classList.remove("active"));
+
+            this.classList.add("active");
+            const targetTab = this.getAttribute("data-tab");
+            const targetPanel = document.querySelector('.ps-cfaq-panels .cfaq-panel[data-panel="' + targetTab + '"]');
+            if (targetPanel) {
+              targetPanel.classList.add("active");
+            }
+          });
+        });
+
+        const faqQuestions = document.querySelectorAll(".ps-cfaq-panels .faq-question");
+        faqQuestions.forEach(btn => {
+          btn.addEventListener("click", function () {
+            const item = this.closest(".faq-item");
+            if (!item) return;
+            const isOpen = item.classList.contains("open");
+
+            const currentPanel = item.closest(".cfaq-panel");
+            if (currentPanel) {
+              currentPanel.querySelectorAll(".faq-item.open").forEach(i => {
+                if (i !== item) i.classList.remove("open");
+              });
+            }
+
+            item.classList.toggle("open", !isOpen);
+          });
+        });
+
+        if (faqSearchInput) {
+          faqSearchInput.addEventListener("input", function () {
+            const query = this.value.toLowerCase().trim();
+            const allFaqItems = document.querySelectorAll(".ps-cfaq-panels .faq-item");
+
+            if (!query) {
+              faqPanels.forEach(p => p.style.display = "");
+              allFaqItems.forEach(item => {
+                item.style.display = "";
+              });
+              const activeTab = document.querySelector(".ps-cfaq-sidebar .cfaq-tab.active")?.getAttribute("data-tab");
+              faqPanels.forEach(p => {
+                if (p.getAttribute("data-panel") === activeTab) {
+                  p.classList.add("active");
+                } else {
+                  p.classList.remove("active");
+                }
+              });
+              return;
+            }
+
+            faqPanels.forEach(p => {
+              p.classList.add("active");
+              p.style.display = "block";
+            });
+
+            allFaqItems.forEach(item => {
+              const qText = item.querySelector(".pfaq-q-text")?.textContent.toLowerCase() || "";
+              const aText = item.querySelector(".faq-answer")?.textContent.toLowerCase() || "";
+              if (qText.includes(query) || aText.includes(query)) {
+                item.style.display = "block";
+                item.classList.add("open");
+              } else {
+                item.style.display = "none";
+                item.classList.remove("open");
+              }
+            });
+          });
+        }
       });
-
-
-
-    }, 100); // small delay to ensure CSS is applied
-
-
-
-  });
-
-
-
-</script>
-
-
-
-</body>
-
-
-
+    </script>
+  </body>
 </html>
-
-

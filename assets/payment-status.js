@@ -17,15 +17,36 @@
     return `dashboard/index.html?${target.toString()}`;
   }
 
+  function profileUrl(params) {
+    const target = new URLSearchParams({ payment: "success" });
+    const orderId = params.get("order_id");
+    if (orderId) target.set("order", orderId);
+    return `customer-profile.html?${target.toString()}`;
+  }
+
+  function accountOrderUrl(params) {
+    const orderId = params.get("order_id");
+    const target = new URLSearchParams({ checkout: "success" });
+    if (orderId) target.set("id", orderId);
+    return `customer-account-order-detail.html?${target.toString()}`;
+  }
+
   function setupDashboardRedirect(params) {
-    if (!isSuccessPage() || params.get("redirect") !== "dashboard") return;
+    const redirectTarget = params.get("redirect");
+    const validTargets = ["dashboard", "profile", "account-order"];
+    if (!isSuccessPage() || !validTargets.includes(redirectTarget)) return;
     const note = document.querySelector("[data-dashboard-redirect-note]");
-    const targetUrl = dashboardUrl(params);
+    const targetUrl = redirectTarget === "profile" ? profileUrl(params)
+      : redirectTarget === "account-order" ? accountOrderUrl(params)
+      : dashboardUrl(params);
+    const destinationLabel = redirectTarget === "profile" ? "profile"
+      : redirectTarget === "account-order" ? "order details"
+      : "customer dashboard";
     let remaining = 4;
 
     const updateNote = () => {
       if (!note) return;
-      note.innerHTML = `Opening your customer dashboard in <strong>${remaining}</strong> seconds... <a href="${targetUrl}">Open now</a>`;
+      note.innerHTML = `Opening your ${destinationLabel} in <strong>${remaining}</strong> seconds... <a href="${targetUrl}">Open now</a>`;
     };
 
     updateNote();
@@ -101,6 +122,25 @@
     else window.location.href = `checkout.html`;
   }
 
-  document.addEventListener("DOMContentLoaded", loadStatus);
+  // Render retry options from the OPDSPay gateway registry (no hardcoded providers)
+  function renderRetryRail() {
+    const rail = document.querySelector("[data-retry-rail]");
+    if (!rail || !window.OPDSPay) return;
+    const params = new URLSearchParams(window.location.search);
+    const failedGateway = params.get("gateway") || "";
+    const options = window.OPDSPay.getRetryGateways(failedGateway);
+    if (!options.length) return;
+    rail.innerHTML = options.map((gw) => `
+      <button class="btn btn-soft" type="button" data-retry-payment="${gw.id}">
+        <i data-lucide="refresh-cw"></i> Retry via ${gw.label}
+      </button>
+    `).join("");
+    if (window.lucide) window.lucide.createIcons();
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    loadStatus();
+    renderRetryRail();
+  });
   document.addEventListener("click", retryPayment);
 })();

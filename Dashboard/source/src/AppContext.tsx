@@ -1,4 +1,4 @@
-﻿import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
+import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
 import {
   CUSTOMERS as INIT_CUSTOMERS,
   TASKS as INIT_TASKS,
@@ -7,6 +7,7 @@ import {
   NOTIFS as INIT_NOTIFS,
   LIVE_PAYMENTS as INIT_PAYMENTS,
 } from './data';
+import { adminTokenHeader, clearStoredAdminToken, getCsrfToken, getStoredAdminToken } from './security/adminSession';
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 export type Customer = {
@@ -15,6 +16,19 @@ export type Customer = {
   totalSpent: number;
   orders: Order[];
   documents?: any[];
+  object?: any;
+  customerUuid?: string;
+  customerNumber?: string;
+  lifecycleStage?: string;
+  segment?: string;
+  trustScore?: number | null;
+  riskLevel?: string;
+  preferredLanguage?: string;
+  preferredChannel?: string;
+  consentStatus?: string;
+  serviceDna?: any[];
+  customerTimeline?: any[];
+  genome?: any;
 };
 
 export type Order = {
@@ -22,6 +36,8 @@ export type Order = {
   status: string; payStatus: string; gateway: string; date: string;
   invoiceNo?: string; notes?: string; attachments?: any;
   customer?: any;
+  object?: any; paymentObject?: any; invoiceObject?: any;
+  workflow?: any;
 };
 
 export type Task = {
@@ -109,6 +125,22 @@ interface AppContextType {
 
   // Actions — Automation Engine
   triggerEvent: (event: string, payload: Record<string, any>) => void;
+
+  // Preferences & Accessibility
+  theme: 'light' | 'dark' | 'high-contrast' | 'auto' | 'print';
+  fontScale: '100%' | '110%' | '120%' | '130%' | '140%' | '150%';
+  density: 'compact' | 'comfort' | 'high';
+  animation: 'on' | 'reduced' | 'off';
+  direction: 'ltr' | 'rtl';
+  setTheme: (theme: 'light' | 'dark' | 'high-contrast' | 'auto' | 'print') => void;
+  setFontScale: (scale: '100%' | '110%' | '120%' | '130%' | '140%' | '150%') => void;
+  setDensity: (density: 'compact' | 'comfort' | 'high') => void;
+  setAnimation: (animation: 'on' | 'reduced' | 'off') => void;
+  setDirection: (dir: 'ltr' | 'rtl') => void;
+
+  // Right insights panel collapse
+  rightPanelCollapsed: boolean;
+  toggleRightPanel: () => void;
 }
 
 const AppContext = createContext<AppContextType | null>(null);
@@ -136,7 +168,7 @@ const TRACKABLE_DEMO_ORDER = {
   id: 'OPDS-20260604-000002',
   service: 'Ayushman',
   category: 'E-Services',
-  amount: 199,
+  amount: 0,
   status: 'Completed',
   payStatus: 'Paid',
   gateway: 'Razorpay',
@@ -168,7 +200,7 @@ function getInitialPanel(savedPanel?: string) {
   const params = getUrlParams();
   const panel = params.get('panel');
   const portal = params.get('portal');
-  if (portal === 'customer' && !panel) return 'crm';
+  if (portal === 'employee' && !panel) return 'employee-portal';
   return panel || savedPanel || 'home';
 }
 
@@ -176,10 +208,10 @@ function getInitialRole(savedRole?: AppRole): AppRole {
   const params = getUrlParams();
   const role = params.get('role') as AppRole | null;
   const portal = params.get('portal');
-  if (role && ['admin', 'operator', 'franchise', 'support', 'customer'].includes(role)) return role;
-  if (portal === 'customer') return 'customer';
+  if (role && ['admin', 'operator', 'franchise', 'support'].includes(role)) return role;
+  if (portal === 'employee') return 'operator';
   if (portal === 'admin') return 'admin';
-  return savedRole || 'admin';
+  return savedRole && ['admin', 'operator', 'franchise', 'support'].includes(savedRole) ? savedRole : 'admin';
 }
 
 function titleCaseStatus(status: any, fallback = 'Pending') {
@@ -187,12 +219,21 @@ function titleCaseStatus(status: any, fallback = 'Pending') {
   const map: Record<string, string> = {
     created: 'Pending',
     pending: 'Pending',
+    documents_pending: 'Documents Pending',
+    verification: 'Verification',
+    payment: 'Payment',
     paid: 'Completed',
+    ready: 'Ready',
     captured: 'Completed',
     verified: 'Verified',
     processing: 'Processing',
+    government_submission: 'Government Submission',
+    waiting: 'Waiting',
     out_for_delivery: 'Processing',
     completed: 'Completed',
+    delivered: 'Delivered',
+    feedback: 'Feedback',
+    archived: 'Archived',
     cancelled: 'Cancelled',
     failed: 'Pending',
   };
@@ -250,22 +291,43 @@ function itemNames(order: any) {
 
 function mapApiOrder(order: any, index = 0): Order {
   const payment = order.payment || {};
+  const workflow = order.workflow || null;
   return {
     id: String(order.orderId || order.id || `WEB-${index + 1}`),
     service: itemNames(order),
     category: order.orderType === 'service' ? 'E-Services' : 'OneMart Store',
     amount: Number(order.total ?? order.amount ?? 0),
-    status: titleCaseStatus(order.status),
+    status: String(workflow?.statusLabel || titleCaseStatus(order.status)),
     payStatus: paymentStatus(payment.status || order.paymentStatus),
     gateway: String(payment.gateway || order.gateway || 'razorpay'),
     date: formatDate(order.createdAt),
     invoiceNo: order.invoiceNo,
     notes: order.notes || '',
     attachments: order.attachments || {},
+    object: order.object || null,
+    paymentObject: order.paymentObject || payment.object || null,
+    invoiceObject: order.invoiceObject || null,
+    workflow,
   };
 }
 
 function orderDocuments(order: any) {
+  const registered = Array.isArray(order.documents) ? order.documents.map((doc: any, index: number) => ({
+    id: doc.id,
+    title: doc.file_name || `Document ${index + 1}`,
+    type: doc.doc_type || 'Document',
+    format: String(doc.file_name || '').split('.').pop()?.toUpperCase() || 'FILE',
+    size: doc.file_size_bytes ? `${Math.max(1, Math.round(Number(doc.file_size_bytes) / 1024))} KB` : 'Metadata registered',
+    uploadedAt: formatDate(doc.created_at || order.createdAt),
+    extractedText: `Lifecycle: ${doc.lifecycle_status || 'Pending Verification'}\nOperational status: ${doc.operational_status || 'Active'}\nVerification: ${doc.verification_status || 'Pending Human Verification'}`,
+    documentUuid: doc.document_uuid || null,
+    versionNumber: doc.version_number || 1,
+    lifecycleStatus: doc.lifecycle_status || 'Pending Verification',
+    operationalStatus: doc.operational_status || 'Active',
+    verificationStatus: doc.verification_status || 'Pending Human Verification',
+    verified: Boolean(doc.verified),
+    fileUrl: doc.file_url || null,
+  })) : [];
   const attachments = order.attachments || {};
   const files = Array.isArray(attachments.files) ? attachments.files : [];
   const docs = files.map((file: any, index: number) => ({
@@ -290,7 +352,7 @@ function orderDocuments(order: any) {
     });
   }
 
-  return docs;
+  return [...registered, ...docs];
 }
 
 function mapWebsiteOrdersToCustomers(orders: any[]): Customer[] {
@@ -318,6 +380,7 @@ function mapWebsiteOrdersToCustomers(orders: any[]): Customer[] {
         totalSpent: 0,
         orders: [],
         documents: [],
+        object: rawCustomer.object || null,
       });
     }
 
@@ -337,34 +400,94 @@ function mapWebsiteOrdersToCustomers(orders: any[]): Customer[] {
   }));
 }
 
-function mapCustomerDashboardToCustomers(data: any): Customer[] {
-  const rawCustomer = data?.customer || {};
-  const orders = Array.isArray(data?.orders) ? data.orders : [];
-  const name = String(rawCustomer.name || 'Customer');
-  const phone = String(rawCustomer.phone || getUrlParams().get('phone') || 'N/A');
-  const email = String(rawCustomer.email || '');
+function applyGenomeFields(customer: Customer, genome: any): Customer {
+  if (!genome) return customer;
+  const identity = genome.identity || {};
+  const lifecycle = genome.lifecycle || {};
+  const trust = genome.trust || {};
+  const financial = genome.financial || {};
+  const preferences = genome.preferences || {};
+  const consent = genome.consent || {};
+  const trustIsPlaceholder = trust.assessmentStatus === 'placeholder'
+    || String(genome.riskLevel || trust.riskLevel || '').toLowerCase() === 'not_assessed';
+  const trustScore = trustIsPlaceholder
+    ? Number.NaN
+    : Number(genome.trustScore ?? trust.score ?? customer.trustScore ?? NaN);
+  const lifetimeValue = Number(genome.lifetimeValue ?? financial.lifetimeValue ?? customer.totalSpent ?? 0);
+  const lifecycleStage = String(genome.lifecycleStage || lifecycle.stage || customer.lifecycleStage || '').toLowerCase();
+  const tier = lifecycleStage === 'premium'
+    ? 'Premium'
+    : lifecycleStage === 'regular' || lifecycleStage === 'active'
+      ? 'Standard'
+      : customer.tier;
+
+  return {
+    ...customer,
+    name: identity.name || customer.name,
+    phone: identity.mobile || customer.phone,
+    email: identity.email || customer.email,
+    city: identity.city || identity.address || customer.city,
+    verified: customer.verified || identity.identityStatus === 'verified' || lifecycleStage === 'verified',
+    tier,
+    totalSpent: Number.isFinite(lifetimeValue) ? lifetimeValue : customer.totalSpent,
+    customerUuid: genome.customerUuid || customer.customerUuid,
+    customerNumber: genome.customerNumber || customer.customerNumber,
+    lifecycleStage: genome.lifecycleStage || lifecycle.stage || customer.lifecycleStage,
+    segment: genome.segment || lifecycle.segment || customer.segment,
+    trustScore: trustIsPlaceholder ? null : Number.isFinite(trustScore) ? trustScore : customer.trustScore ?? null,
+    riskLevel: genome.riskLevel || trust.riskLevel || customer.riskLevel,
+    preferredLanguage: genome.preferredLanguage || preferences.preferredLanguage || customer.preferredLanguage,
+    preferredChannel: genome.preferredChannel || preferences.preferredChannel || customer.preferredChannel,
+    consentStatus: genome.consentStatus || consent.status || customer.consentStatus,
+    serviceDna: genome.serviceDna || customer.serviceDna || [],
+    customerTimeline: genome.timeline || customer.customerTimeline || [],
+    object: genome.object || customer.object,
+    genome,
+  };
+}
+
+function mapCustomer360ToCustomer(genome: any, index = 0): Customer {
+  const identity = genome?.identity || {};
+  const name = String(identity.name || 'Customer');
+  const phone = String(identity.mobile || 'N/A');
+  const email = String(identity.email || '');
   const customer: Customer = {
-    id: stableId(phone !== 'N/A' ? phone : email || name),
+    id: stableId(genome?.customerUuid || phone || email || name),
     name,
     phone,
     initials: initials(name),
-    color: LIVE_COLORS[0],
+    color: LIVE_COLORS[index % LIVE_COLORS.length],
     email: email || 'not-provided@bisenonepoint.com',
-    city: rawCustomer.address || 'Address not provided',
-    joined: orders[orders.length - 1]?.createdAt ? formatDate(orders[orders.length - 1].createdAt) : formatDate(new Date()),
-    verified: false,
+    city: identity.city || identity.address || 'Address not provided',
+    joined: genome?.timeline?.slice(-1)?.[0]?.occurredAt ? formatDate(genome.timeline.slice(-1)[0].occurredAt) : formatDate(new Date()),
+    verified: identity.identityStatus === 'verified',
     tier: 'New',
     totalSpent: 0,
     orders: [],
     documents: [],
   };
+  return applyGenomeFields(customer, genome);
+}
 
-  customer.orders = orders.map(mapApiOrder);
-  customer.totalSpent = customer.orders.reduce((sum, order) => sum + order.amount, 0);
-  customer.verified = customer.orders.some(order => order.payStatus === 'Paid');
-  customer.tier = customer.totalSpent >= 2000 ? 'Premium' : customer.orders.length > 1 ? 'Standard' : 'New';
-  customer.documents = orders.flatMap(orderDocuments);
-  return [customer];
+function mergeCustomersWithGenomes(orderCustomers: Customer[], genomes: any[]): Customer[] {
+  const byPhone = new Map(orderCustomers.map(customer => [String(customer.phone || '').replace(/\D/g, ''), customer]));
+  const byUuid = new Map(orderCustomers.filter(customer => customer.customerUuid).map(customer => [customer.customerUuid, customer]));
+  const merged = [...orderCustomers];
+
+  genomes.forEach((genome, index) => {
+    const phone = String(genome?.identity?.mobile || '').replace(/\D/g, '');
+    const uuid = genome?.customerUuid;
+    const match = (uuid && byUuid.get(uuid)) || (phone && byPhone.get(phone));
+    if (match) {
+      const updated = applyGenomeFields(match, genome);
+      const existingIndex = merged.findIndex(customer => customer.id === match.id);
+      if (existingIndex >= 0) merged[existingIndex] = updated;
+      return;
+    }
+    merged.push(mapCustomer360ToCustomer(genome, merged.length + index));
+  });
+
+  return merged;
 }
 
 function mapWebsiteOrdersToActivities(orders: any[]): Activity[] {
@@ -396,9 +519,7 @@ function nextOrderId() {
 
 // ─── Provider ────────────────────────────────────────────────────────────────
 export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  console.log("AppProvider: rendering start");
   const saved = loadState();
-  console.log("AppProvider: saved state loaded =", saved);
 
   const [customers, setCustomers] = useState<Customer[]>(
     saved?.customers ?? INIT_CUSTOMERS
@@ -428,61 +549,90 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     message: 'Login as admin to sync live website orders.',
   });
 
-  const refreshBackend = useCallback(async () => {
-    const params = getUrlParams();
-    const customerPhone = params.get('phone') || localStorage.getItem('opds_customer_phone') || localStorage.getItem('opds_testing_user') || '';
-
-    if (role === 'customer') {
-      if (!customerPhone) {
-        setBackendSync({
-          status: 'demo',
-          source: 'Customer portal',
-          message: 'Customer phone missing. Login or open dashboard from payment success.',
-        });
-        return;
-      }
-
-      setBackendSync(prev => ({ ...prev, status: 'syncing', message: 'Loading your live orders...' }));
-
-      try {
-        const sessionToken = localStorage.getItem('opds_customer_session') || '';
-        const response = await fetch(`/api/customer/dashboard?phone=${encodeURIComponent(customerPhone)}`, {
-          headers: sessionToken ? { 'Authorization': `Bearer ${sessionToken}` } : {},
-        });
-        const data = await response.json().catch(() => ({}));
-        if (!response.ok) throw new Error(data.message || 'Customer dashboard sync failed.');
-        const liveCustomers = mapCustomerDashboardToCustomers(data);
-        setCustomers(liveCustomers);
-        setActivities(liveCustomers[0].orders.map(order => ({
-          text: `Customer order ${order.id} - ${order.service}`,
-          time: 'live sync',
-          color: 'var(--blue)',
-          bg: 'var(--blue-dim)',
-          icon: 'package',
-        })).slice(0, 20));
-        setLivePayments(liveCustomers[0].orders.map(order => ({
-          text: `Rs. ${order.amount.toLocaleString('en-IN')} - ${order.service} - ${liveCustomers[0].name}`,
-          time: 'live',
-          color: order.payStatus === 'Paid' ? 'var(--emerald)' : order.payStatus === 'Failed' ? 'var(--rose)' : 'var(--amber)',
-        })).slice(0, 6));
-        localStorage.setItem('opds_customer_phone', customerPhone);
-        setBackendSync({
-          status: 'live',
-          source: 'Customer dashboard API',
-          message: `${liveCustomers[0].orders.length} live orders loaded.`,
-          lastSyncedAt: new Date().toISOString(),
-        });
-      } catch (error) {
-        setBackendSync({
-          status: 'offline',
-          source: 'Customer dashboard API',
-          message: error instanceof Error ? error.message : 'Customer sync failed.',
-        });
-      }
-      return;
+  const [theme, setThemeState] = useState<'light' | 'dark' | 'high-contrast' | 'auto' | 'print'>(
+    () => {
+      // 'print' is no longer a selectable screen theme — it hides the sidebar/right panel
+      // (and the theme switcher itself), trapping the user. Self-heal any stuck session.
+      const stored = localStorage.getItem('opds_theme');
+      return (stored && stored !== 'print' ? stored : 'auto') as any;
     }
+  );
+  const [fontScale, setFontScaleState] = useState<'100%' | '110%' | '120%' | '130%' | '140%' | '150%'>(
+    () => (localStorage.getItem('opds_font_scale') as any) || '100%'
+  );
+  const [density, setDensityState] = useState<'compact' | 'comfort' | 'high'>(
+    () => (localStorage.getItem('opds_density') as any) || 'comfort'
+  );
+  const [animation, setAnimationState] = useState<'on' | 'reduced' | 'off'>(
+    () => (localStorage.getItem('opds_animation') as any) || 'on'
+  );
+  const [direction, setDirectionState] = useState<'ltr' | 'rtl'>(
+    () => (localStorage.getItem('opds_direction') as any) || 'ltr'
+  );
+  const [rightPanelCollapsed, setRightPanelCollapsed] = useState<boolean>(
+    () => localStorage.getItem('opds_right_collapsed') !== '0'
+  );
 
-    const token = localStorage.getItem('opds_admin_token') || '';
+  useEffect(() => {
+    const applyTheme = (t: typeof theme) => {
+      let resolvedTheme = t;
+      if (t === 'auto') {
+        const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        resolvedTheme = isDark ? 'dark' : 'light';
+      }
+      document.documentElement.setAttribute('data-theme', resolvedTheme);
+      localStorage.setItem('opds_theme', t);
+    };
+
+    applyTheme(theme);
+
+    if (theme === 'auto') {
+      const media = window.matchMedia('(prefers-color-scheme: dark)');
+      const listener = (e: MediaQueryListEvent) => {
+        document.documentElement.setAttribute('data-theme', e.matches ? 'dark' : 'light');
+      };
+      media.addEventListener('change', listener);
+      return () => media.removeEventListener('change', listener);
+    }
+  }, [theme]);
+
+  useEffect(() => {
+    const scaleMap = { '100%': '16px', '110%': '17.6px', '120%': '19.2px', '130%': '20.8px', '140%': '22.4px', '150%': '24px' };
+    document.documentElement.style.fontSize = scaleMap[fontScale];
+    localStorage.setItem('opds_font_scale', fontScale);
+  }, [fontScale]);
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-density', density);
+    localStorage.setItem('opds_density', density);
+  }, [density]);
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-animation', animation);
+    localStorage.setItem('opds_animation', animation);
+  }, [animation]);
+
+  useEffect(() => {
+    document.documentElement.setAttribute('dir', direction);
+    localStorage.setItem('opds_direction', direction);
+  }, [direction]);
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-rightpanel', rightPanelCollapsed ? 'collapsed' : 'open');
+    localStorage.setItem('opds_right_collapsed', rightPanelCollapsed ? '1' : '0');
+  }, [rightPanelCollapsed]);
+
+  const toggleRightPanel = useCallback(() => setRightPanelCollapsed(v => !v), []);
+
+  const setTheme = useCallback((t: typeof theme) => setThemeState(t), []);
+  const setFontScale = useCallback((s: typeof fontScale) => setFontScaleState(s), []);
+  const setDensity = useCallback((d: typeof density) => setDensityState(d), []);
+  const setAnimation = useCallback((a: typeof animation) => setAnimationState(a), []);
+  const setDirection = useCallback((dir: typeof direction) => setDirectionState(dir), []);
+
+
+  const refreshBackend = useCallback(async () => {
+    const token = getStoredAdminToken();
     if (!token) {
       setBackendSync({
         status: 'demo',
@@ -496,13 +646,30 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
 
     try {
       const response = await fetch('/api/admin/orders', {
-        headers: { 'X-Admin-Token': token },
+        headers: adminTokenHeader(),
       });
       const data = await response.json().catch(() => ({}));
+      if (response.status === 401 || response.status === 403) {
+        clearStoredAdminToken();
+        setBackendSync({ status: 'offline', source: 'Admin portal', message: 'SESSION_EXPIRED: Admin session expired. Please login again.' });
+        return;
+      }
       if (!response.ok) throw new Error(data.message || 'Website backend sync failed.');
 
       const liveOrders = Array.isArray(data.orders) ? data.orders : [];
-      const liveCustomers = mapWebsiteOrdersToCustomers(liveOrders);
+      let liveCustomers = mapWebsiteOrdersToCustomers(liveOrders);
+
+      try {
+        const customerResponse = await fetch('/api/admin/customers', {
+          headers: adminTokenHeader(),
+        });
+        const customerData = await customerResponse.json().catch(() => ({}));
+        if (customerResponse.ok && Array.isArray(customerData.customers)) {
+          liveCustomers = mergeCustomersWithGenomes(liveCustomers, customerData.customers);
+        }
+      } catch {
+        // Keep order-backed customer data when the Customer 360 endpoint is unavailable.
+      }
 
       if (liveCustomers.length > 0) {
         setCustomers(liveCustomers);
@@ -570,25 +737,29 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const updateOrderStatus = useCallback(async (orderId: string, status: string, nextPaymentStatus?: string) => {
     const uiStatus = titleCaseStatus(status, status);
     const uiPaymentStatus = nextPaymentStatus ? paymentStatus(nextPaymentStatus) : '';
+    let previousOrderSnapshot: Order | null = null;
 
     setCustomers(prev => prev.map(c => ({
       ...c,
-      orders: c.orders.map(o => o.id === orderId ? {
-        ...o,
-        status: uiStatus,
-        ...(uiPaymentStatus ? { payStatus: uiPaymentStatus } : {}),
-      } : o)
+      orders: c.orders.map(o => {
+        if (o.id !== orderId) return o;
+        previousOrderSnapshot = { ...o };
+        return {
+          ...o,
+          status: uiStatus,
+          ...(uiPaymentStatus ? { payStatus: uiPaymentStatus } : {}),
+        };
+      })
     })));
     addActivity({ text: `Order ${orderId} status updated to ${uiStatus}`, color: 'var(--blue)', bg: 'var(--blue-dim)', icon: 'refresh-cw' });
 
-    const token = localStorage.getItem('opds_admin_token') || '';
     try {
-      const csrf = await fetch('/api/csrf').then(res => res.json()).then(data => data.csrfToken || '');
+      const csrf = await getCsrfToken();
       const response = await fetch('/api/admin/orders/status', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'X-Admin-Token': token,
+          ...adminTokenHeader(),
           ...(csrf ? { 'X-CSRF-Token': csrf } : {}),
         },
         body: JSON.stringify({
@@ -599,8 +770,24 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       });
       const data = await response.json().catch(() => ({}));
       if (!response.ok) throw new Error(data.message || 'Backend status update failed.');
+      const acceptedStatus = String(data.workflow?.statusLabel || uiStatus);
+      setCustomers(prev => prev.map(c => ({
+        ...c,
+        orders: c.orders.map(o => o.id === orderId ? {
+          ...o,
+          status: acceptedStatus,
+          ...(uiPaymentStatus ? { payStatus: uiPaymentStatus } : {}),
+          ...(data.workflow ? { workflow: data.workflow } : {}),
+        } : o)
+      })));
       addNotification({ title: `Order Updated: ${orderId}`, sub: `${uiStatus}${uiPaymentStatus ? ` / ${uiPaymentStatus}` : ''}`, time: 'just now', color: 'var(--blue)', icon: 'refresh-cw', panelTarget: 'orders' });
     } catch (error) {
+      if (previousOrderSnapshot) {
+        setCustomers(prev => prev.map(c => ({
+          ...c,
+          orders: c.orders.map(o => o.id === orderId ? previousOrderSnapshot as Order : o)
+        })));
+      }
       addNotification({
         title: `Local update only: ${orderId}`,
         sub: error instanceof Error ? error.message : 'Backend status sync failed.',
@@ -714,9 +901,12 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     addNotification, markAllRead,
     setActivePanel, setRole, refreshBackend,
     triggerEvent,
+    theme, fontScale, density, animation, direction,
+    setTheme, setFontScale, setDensity, setAnimation, setDirection,
+    rightPanelCollapsed, toggleRightPanel,
   };
 
-  console.log("AppProvider: returning AppContext.Provider");
+
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 };
 

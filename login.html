@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -9,8 +9,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-        <link rel="stylesheet" href="assets/onepoint.css?v=2">
-    <link rel="stylesheet" href="assets/auth-visual-refresh.css?v=auth_refresh_v2">
+        <script src="assets/opds-boot.js?v=anti-fouc-79"></script>
+        <link rel="stylesheet" href="assets/onepoint.css?v=customer-checkout-94">
+    <link rel="stylesheet" href="assets/auth-visual-refresh.css?v=auth_refresh_v12">
 </head>
   <body class="elite-auth-body">
     <!-- Fluid background glow meshes -->
@@ -18,7 +19,7 @@
     <div class="ambient-orb orb-gold"></div>
 
     <main class="elite-auth-shell">
-      <div class="elite-auth-card glass-panel">
+      <div class="auth-shell-card">
         
         <!-- Left Brand Sidebar -->
         <div class="brand-sidebar">
@@ -79,18 +80,18 @@
             
             <!-- Main Login Mode switcher -->
             <div class="elite-segmented-control main-auth-tabs" id="main-tab-switcher" role="group" aria-label="Login Method" data-active="otp">
-              <label class="segment-item" data-tab="password">
+              <button class="segment-item" type="button" data-tab="password">
                 <i data-lucide="lock"></i>
                 <span>Password</span>
-              </label>
-              <label class="segment-item active" data-tab="otp">
+              </button>
+              <button class="segment-item active" type="button" data-tab="otp">
                 <i data-lucide="smartphone"></i>
                 <span>Mobile OTP</span>
-              </label>
-              <label class="segment-item" data-tab="gmail">
+              </button>
+              <button class="segment-item" type="button" data-tab="gmail">
                 <i data-lucide="mail"></i>
-                <span>Gmail Link</span>
-              </label>
+                <span>Social Login</span>
+              </button>
               <div class="segment-highlight" id="main-tab-highlight"></div>
             </div>
 
@@ -154,7 +155,13 @@
             <form class="elite-auth-card" id="otp-login-card" data-auth-otp data-otp-purpose="login">
               <div class="auth-card-header">
                 <h2>OTP <span class="h2-gold">Authentication</span></h2>
-                <p>Secure login using your registered mobile number.</p>
+                <p>Enter your mobile number first. We will show the verification step after sending the code.</p>
+              </div>
+
+              <div class="auth-stepper" aria-label="Mobile OTP login progress">
+                <span class="auth-step active" data-step="phone"><b>1</b><small>Mobile</small></span>
+                <span class="auth-step-line" aria-hidden="true"></span>
+                <span class="auth-step" data-step="code"><b>2</b><small>Verify OTP</small></span>
               </div>
 
               <div class="form-grid elite-form-grid">
@@ -181,8 +188,12 @@
                 </button>
 
                 <!-- Button 2: Verify OTP -->
-                <button class="btn btn-success full" type="button" data-verify-otp>
-                  <i data-lucide="check-circle-2"></i> Verify & Login
+                <button class="btn btn-success full" type="button" data-verify-otp hidden>
+                  <span data-auth-verify-text><i data-lucide="check-circle-2"></i> Verify & Login</span>
+                </button>
+
+                <button class="auth-resend-link full" type="button" data-resend-otp hidden>
+                  <i data-lucide="refresh-cw"></i> Didn&rsquo;t receive it? Resend OTP
                 </button>
 
                 <div class="login-status full" data-auth-status></div>
@@ -198,52 +209,46 @@
               </div>
             </form>
 
-            <!-- CARD 3: Gmail Quick Login Card -->
-            <form class="elite-auth-card gmail-auth-card auth-card-hidden" id="gmail-login-card" data-auth-gmail>
-              <div class="gmail-auth-head">
-                <span><i data-lucide="mail-check"></i></span>
-                <div>
-                  <strong>Continue with Gmail</strong>
-                  <small>Gmail email verify hoga, phir mobile OTP se orders attach honge.</small>
-                </div>
+            <!-- CARD 3: Google / Microsoft OpenID Connect Login -->
+            <form class="elite-auth-card google-auth-card auth-card-hidden" id="gmail-login-card" data-auth-google>
+              <div class="auth-card-header google-auth-title">
+                <span class="auth-eyebrow"><i data-lucide="sparkles"></i> One-click secure access</span>
+                <h2>Continue with <span class="h2-gold">Google or Microsoft</span></h2>
+                <p>No form filling. Choose your trusted account provider to sign in.</p>
               </div>
-              <div class="form-grid elite-form-grid compact">
-                <div class="form-field full">
-                  <label for="gmail-name">Name</label>
-                  <div class="elite-input-wrapper">
-                    <i data-lucide="user"></i>
-                    <input class="input" id="gmail-name" name="gmail_name" placeholder="Optional display name" autocomplete="name">
-                  </div>
-                </div>
-                <div class="form-field full">
-                  <label for="gmail-email">Gmail Address <span aria-hidden="true">*</span></label>
-                  <div class="elite-input-wrapper">
-                    <i data-lucide="mail"></i>
-                    <input class="input" id="gmail-email" name="gmail_email" type="email" placeholder="name@gmail.com" required autocomplete="email">
-                  </div>
-                </div>
-                <div class="form-field full">
-                  <label for="gmail-phone">Mobile Number <span aria-hidden="true">*</span></label>
-                  <div class="elite-input-wrapper">
-                    <i data-lucide="phone"></i>
-                    <input class="input" id="gmail-phone" name="gmail_phone" inputmode="numeric" placeholder="10-digit mobile number" required autocomplete="tel">
-                  </div>
-                </div>
-                <div class="form-field full" data-gmail-otp-panel hidden>
-                  <label for="gmail-otp">Mobile OTP <span aria-hidden="true">*</span></label>
-                  <div class="elite-input-wrapper">
-                    <i data-lucide="shield-check"></i>
-                    <input class="input" id="gmail-otp" name="gmail_otp" inputmode="numeric" maxlength="6" placeholder="6-digit OTP" autocomplete="one-time-code">
-                  </div>
-                </div>
-                <button class="btn btn-soft full" type="button" data-gmail-start>
-                  <span data-auth-submit-text><i data-lucide="send"></i> Send Mobile OTP</span>
+
+              <div class="social-login-actions">
+                <button class="google-signin-card" type="button" data-login-provider="google">
+                  <span class="google-provider-mark" aria-hidden="true">G</span>
+                  <span class="google-provider-copy" data-auth-submit-text>
+                    <strong>Continue with Google</strong>
+                    <small>Choose your Google account to sign in</small>
+                  </span>
+                  <i class="google-card-arrow" data-lucide="arrow-right"></i>
                 </button>
-                <button class="btn btn-primary full" type="button" data-gmail-verify>
-                  <i data-lucide="check-circle-2"></i> Verify & Open Dashboard
+
+                <button class="google-signin-card" type="button" data-login-provider="microsoft">
+                  <span class="google-provider-mark microsoft-provider-mark" aria-hidden="true">
+                    <span></span><span></span><span></span><span></span>
+                  </span>
+                  <span class="google-provider-copy" data-auth-submit-text>
+                    <strong>Continue with Microsoft</strong>
+                    <small>Use Outlook, Hotmail, work or school account</small>
+                  </span>
+                  <i class="google-card-arrow" data-lucide="arrow-right"></i>
                 </button>
-                <div class="login-status full" data-auth-status></div>
               </div>
+
+              <div class="google-assurance-grid" aria-label="Social login benefits">
+                <span><i data-lucide="badge-check"></i> Verified email</span>
+                <span><i data-lucide="shield-check"></i> Secure OAuth</span>
+                <span><i data-lucide="key-round"></i> No password shared</span>
+              </div>
+
+              <p class="google-privacy-note">
+                Your provider shares your name and verified email only. You can add a mobile number later to match phone-based orders.
+              </p>
+              <div class="login-status" data-auth-status></div>
             </form>
 
             <!-- CARD 4: Dedicated Onboarding OTP Verification Card -->
@@ -297,8 +302,8 @@
     </main>
 
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
-    <script src="assets/app.js?v=clean_js_v11" defer></script>
-    <script src="assets/auth.js?v=auth_v2" defer></script>
+    <script src="assets/app.js?v=customer-checkout-94" defer></script>
+    <script src="assets/auth.js?v=auth_v5" defer></script>
     
     <script>
       document.addEventListener("DOMContentLoaded", () => {
@@ -414,7 +419,8 @@
             try {
               setLoginBusy(true);
               const data = await window.OPDSAuth.loginCustomer({ identifier: user, password: pass });
-              window.location.href = window.OPDSAuth.dashboardUrl(data.user, { panel: "orders" });
+              const returnUrl = window.OPDSAuth.getReturnUrl();
+              window.location.href = returnUrl || window.OPDSAuth.accountOverviewUrl();
             } catch (error) {
               errorDiv.textContent = error.message || "Customer login failed. Use mobile/email and password, or login with OTP.";
               errorDiv.style.display = "block";
@@ -431,9 +437,8 @@
         const trackingId = urlParams.get('tracking_id');
 
         if (flow === 'onboarding') {
-          // 1. Hide Standard Switcher and Testing Kicker
+          // 1. Hide the standard login/OTP/Google tab switcher
           if (mainTabSwitcher) mainTabSwitcher.style.display = 'none';
-          if (quickFillBtn) quickFillBtn.style.display = 'none';
 
           // 2. Hide all normal login forms
           passwordCard.classList.add("auth-card-hidden");
@@ -485,23 +490,5 @@
         }
       });
     </script>
-  
-<script id="line-alignment-script">
-  document.addEventListener("DOMContentLoaded", function() {
-    setTimeout(() => {
-      document.querySelectorAll(".section-head h2").forEach(h2 => {
-        let align = window.getComputedStyle(h2).textAlign;
-        let parent = h2.closest('.section-head');
-        if (parent) {
-          if (align === "center") {
-            parent.classList.add("center-line");
-          } else {
-            parent.classList.add("left-line");
-          }
-        }
-      });
-    }, 100); // small delay to ensure CSS is applied
-  });
-</script>
 </body>
 </html>

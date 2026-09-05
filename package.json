@@ -2,14 +2,24 @@
   "name": "one-point-digital-services-premium-multipage",
   "version": "1.0.0",
   "private": true,
+  "main": "server.js",
   "description": "Premium multipage website for One Point Digital Services with native Razorpay and PhonePe payment APIs.",
   "scripts": {
     "start": "node server.js",
-    "check": "node --check server.js && node --check backend/auth-service.js && node --check backend/catalog-service.js && node --check assets/app.js && node --check assets/auth.js && node --check assets/checkout.js && node --check assets/payment-status.js && node --check assets/admin-payments.js && node --check assets/customer-dashboard.js",
+    "check": "node --check server.js && node --check backend/auth-service.js && node --check backend/catalog-service.js && node --check backend/consent-service.js && node --check assets/app.js && node --check assets/auth.js && node --check assets/checkout.js && node --check assets/voter-consent.js && node --check assets/payment-methods.js && node --check assets/payment-status.js && node --check assets/admin-payments.js && node --check assets/customer-dashboard.js",
+    "test": "node backend/tests/config.test.js && node backend/tests/workflow.test.js && node backend/tests/security.test.js && node backend/tests/observability.test.js && node backend/tests/production.test.js && node backend/tests/ai.test.js && node backend/tests/multi-agent.test.js && node backend/tests/ai-memory.test.js && node backend/tests/ai-planner.test.js && node backend/tests/ai-collaboration.test.js && node backend/tests/approval-runtime.test.js && node backend/tests/ai-learning.test.js && node backend/tests/executive-decision-center.test.js && node backend/tests/enterprise-digital-twin.test.js && node backend/tests/predictive-intelligence.test.js && node backend/tests/optimization-engine.test.js && node backend/tests/simulation-engine.test.js && node backend/tests/recommendation-engine.test.js && node backend/tests/autonomous-scheduler.test.js && node backend/tests/enterprise-orchestrator.test.js && node backend/tests/self-healing-engine.test.js && node backend/tests/capacity-manager.test.js && node backend/tests/intelligent-load-balancer.test.js && node backend/tests/incident-manager.test.js && node backend/tests/runtime-health-coordinator.test.js && node backend/tests/resilience-manager.test.js && node backend/tests/plugin-runtime.test.js && node backend/tests/extension-registry.test.js && node backend/tests/marketplace-runtime.test.js && node backend/tests/sdk-runtime.test.js && node backend/tests/public-api-gateway.test.js && node backend/tests/integration-hub.test.js && node backend/tests/marketplace-governance.test.js && node backend/tests/multi-tenant-runtime.test.js && node backend/tests/cloud-control-plane.test.js && node backend/tests/distributed-event-mesh.test.js && node backend/tests/multi-region-manager.test.js && node backend/tests/billing-platform.test.js && node backend/tests/partner-platform.test.js && node backend/tests/compliance-engine.test.js && node backend/tests/ai-governance.test.js && node backend/tests/cost-optimizer.test.js && node backend/tests/control-center-v2.test.js && node backend/tests/v2-integration.test.js && node backend/tests/v2-phase2-integration.test.js && node backend/tests/v2-phase3-integration.test.js",
     "dashboard:build": "npm --prefix Dashboard/source run build",
-    "dashboard:lint": "npm --prefix Dashboard/source run lint"
+    "dashboard:lint": "npm --prefix Dashboard/source run lint",
+    "catalog:export": "node scripts/export-catalog.js && node scripts/export-static-pricing.js",
+    "catalog:pricing": "node scripts/export-static-pricing.js",
+    "deploy:build": "node scripts/build-static-deploy.js"
   },
   "devDependencies": {
     "puppeteer": "^25.1.0"
+  },
+  "dependencies": {
+    "nodemailer": "^9.0.1",
+    "pg": "^8.22.0",
+    "redis": "^6.1.0"
   }
 }

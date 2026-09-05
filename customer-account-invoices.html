@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="One Point Invoices &amp; Receipts Archive — download GST tax invoices, government department challans, and payment receipts.">
+    <meta name="robots" content="noindex,nofollow">
+    <title>Invoices &amp; Receipts | One Point Digital Services</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;850;900&display=swap" rel="stylesheet">
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+    <script src="assets/opds-boot.js?v=anti-fouc-79"></script>
+    <link rel="stylesheet" href="assets/onepoint.css?v=customer-checkout-94">
+    <link rel="stylesheet" href="assets/onepoint-customer-profile.css?v=20">
+    <link rel="stylesheet" href="assets/onepoint-customer-account.css?v=21">
+  </head>
+  <body class="elite-console-body enterprise-checkout-body" data-account-page="invoices">
+    <div data-account-shell></div>
+
+    <div class="acc-page" data-account-content hidden>
+      
+      <!-- Top Page Heading -->
+      <section class="acc-greeting">
+        <div>
+          <span class="acc-eyebrow"><i data-lucide="receipt"></i> INVOICES &amp; RECEIPTS</span>
+          <h1>Invoices &amp; Receipts</h1>
+          <p>Download permanent GST tax invoices, official government portal challans, and receipt proofs for your service requests.</p>
+        </div>
+        <div style="display:flex; gap:10px; flex-wrap:wrap;">
+          <button type="button" class="eds-btn eds-btn-primary" id="acc-download-fy-bundle-btn">
+            <i data-lucide="folder-archive"></i> Download FY 2026&ndash;27 Bundle
+          </button>
+          <a class="eds-btn eds-btn-secondary" href="customer-account-payments.html"><i data-lucide="credit-card"></i> Payments Ledger</a>
+        </div>
+      </section>
+
+      <!-- Financial Year / Invoices Metrics Summary Grid -->
+      <div class="acc-summary-grid acc-summary-grid-4" id="acc-invoices-summary-grid">
+        <div class="acc-summary-card">
+          <span class="acc-summary-icon acc-summary-icon-total"><i data-lucide="receipt"></i></span>
+          <div class="acc-sum-card-bottom">
+            <strong class="acc-sum-number" id="inv-count-total">3</strong>
+            <span class="acc-sum-label">Total Tax Invoices</span>
+            <small class="acc-sum-subtext">GST compliant documents</small>
+          </div>
+        </div>
+
+        <div class="acc-summary-card">
+          <span class="acc-summary-icon acc-summary-icon-completed"><i data-lucide="file-check"></i></span>
+          <div class="acc-sum-card-bottom">
+            <strong class="acc-sum-number" id="inv-count-challans">2</strong>
+            <span class="acc-sum-label">Government Challans</span>
+            <small class="acc-sum-subtext">Department fee receipts</small>
+          </div>
+        </div>
+
+        <div class="acc-summary-card">
+          <span class="acc-summary-icon acc-summary-icon-pending"><i data-lucide="landmark"></i></span>
+          <div class="acc-sum-card-bottom">
+            <strong class="acc-sum-number" style="color:var(--shub-primary);" id="inv-total-billed">₹799</strong>
+            <span class="acc-sum-label">Total Billed (All Time)</span>
+            <small class="acc-sum-subtext">Facilitation &amp; portal fees</small>
+          </div>
+        </div>
+
+        <div class="acc-summary-card">
+          <span class="acc-summary-icon acc-summary-icon-action"><i data-lucide="calendar"></i></span>
+          <div class="acc-sum-card-bottom">
+            <strong class="acc-sum-number" style="color:#166534;" id="inv-fy-billed">₹799</strong>
+            <span class="acc-sum-label">This Financial Year</span>
+            <small class="acc-sum-subtext">FY 2026&ndash;27 Total</small>
+          </div>
+        </div>
+      </div>
+
+      <!-- Search & Category Filters -->
+      <section class="cpf-card acc-search-filter-card">
+        <div class="acc-search-row">
+          <div class="acc-search-input-wrap">
+            <i data-lucide="search" class="acc-search-icon"></i>
+            <input class="acc-search-input eds-input" id="acc-invoice-search" placeholder="Search by Invoice No, Request ID, Service, or Date (e.g. INV-..., OPDS-...)...">
+          </div>
+          <div class="acc-search-select-wrap">
+            <select class="eds-input" id="acc-invoice-fy-select" aria-label="Select Financial Year">
+              <option value="all">All Financial Years</option>
+              <option value="26-27" selected>FY 2026–27 (Current)</option>
+              <option value="25-26">FY 2025–26</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Document Type Filter Chips -->
+        <div class="acc-filter-row" id="acc-invoice-type-filters"></div>
+      </section>
+
+      <!-- Bulk Action Bar (Visible when rows are selected) -->
+      <div id="acc-bulk-action-bar" class="acc-bulk-action-bar" hidden>
+        <span id="acc-selected-count-text"><strong>0</strong> documents selected</span>
+        <div style="display:flex; gap:8px;">
+          <button type="button" class="eds-btn eds-btn-primary" id="acc-download-selected-btn" style="font-size:.8rem; padding:4px 12px; min-height:34px;">
+            <i data-lucide="download"></i> Download Selected (Zip)
+          </button>
+          <button type="button" class="eds-btn eds-btn-ghost" id="acc-clear-selection-btn" style="font-size:.8rem; min-height:34px;">
+            Deselect All
+          </button>
+        </div>
+      </div>
+
+      <!-- Invoices Archive Output -->
+      <section class="cpf-card">
+        <div class="cpf-card-title-row">
+          <div style="display:flex; align-items:center; gap:10px;">
+            <input type="checkbox" id="acc-select-all-invoices" title="Select all invoices on this page" style="cursor:pointer; width:16px; height:16px;">
+            <label for="acc-select-all-invoices" style="cursor:pointer; font-weight:700; font-size:.92rem; color:#071426; margin:0;">
+              Billing &amp; Tax Documents
+            </label>
+          </div>
+          <span class="acc-desk-live-pill"><span class="acc-pulse-dot-green"></span> Immutable Accounting Records</span>
+        </div>
+
+        <!-- Desktop Table -->
+        <div class="acc-table-wrap hide-mobile-sm">
+          <table class="acc-table">
+            <thead>
+              <tr>
+                <th style="width:40px;"></th>
+                <th>Invoice / Document #</th>
+                <th>Request / Service</th>
+                <th>Issued Date</th>
+                <th>Document Type</th>
+                <th style="text-align:right;">Amount</th>
+                <th style="text-align:right;">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="acc-invoices-body"></tbody>
+          </table>
+        </div>
+
+        <!-- Mobile Cards List -->
+        <div class="acc-mobile-txns-list hide-desktop" id="acc-mobile-invoices-container"></div>
+      </section>
+
+      <!-- Legal Record Immutability Note -->
+      <p class="cpf-retention-note" style="margin-top: 14px;">
+        <i data-lucide="info"></i>
+        Issued tax invoices are permanent statutory accounting records and cannot be directly edited. If your billing address or GSTIN needs correction, please use the <a href="support.html?context=InvoiceCorrection" style="color:#075aa8; font-weight:700;">Report Billing Issue</a> desk to request a credit note / revised invoice.
+      </p>
+
+    </div>
+
+    <!-- Modal Backdrop for PDF Invoice Preview -->
+    <div id="cpf-modal-backdrop" class="cpf-modal-backdrop" hidden>
+      <div class="cpf-modal" id="cpf-modal" role="dialog" aria-modal="true" style="width:min(680px, 100%);"></div>
+    </div>
+
+    <div data-account-footer></div>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+    <script src="assets/app.js?v=customer-checkout-94" defer></script>
+    <script src="assets/auth.js?v=cpf-1" defer></script>
+    <script src="assets/customer-account.js?v=20" defer></script>
+    <script src="assets/customer-account-invoices.js?v=20" defer></script>
+  </body>
+</html>

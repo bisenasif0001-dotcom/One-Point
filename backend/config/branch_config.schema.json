@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "BranchConfig",
+  "type": "object",
+  "properties": {
+    "branchMetadata": {
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "status": { "type": "string" },
+        "name": { "type": "string" },
+        "city": { "type": "string" },
+        "locality": { "type": "string" },
+        "cscId": { "type": "string" },
+        "state": { "type": "string" },
+        "country": { "type": "string" }
+      },
+      "required": ["id", "city", "locality", "cscId"]
+    },
+    "contact": {
+      "type": "object",
+      "properties": {
+        "address": { "type": "string" },
+        "phone": { "type": "string" },
+        "whatsapp": { "type": "string" },
+        "email": { "type": "string" },
+        "supportHours": { "type": "string" }
+      },
+      "required": ["address", "phone"]
+    },
+    "featureFlags": {
+      "type": "object"
+    }
+  },
+  "required": ["branchMetadata", "contact"]
+}

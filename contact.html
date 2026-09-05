@@ -1,47 +1,537 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Contact One Point Digital Services for government services, student services, business registrations, printing and products.">
-    <title>Contact Us | One Point Digital Services</title>
+    <meta name="description" content="Contact One Point Digital Services in Lucknow. Get instant help on WhatsApp, call our helpline, or visit our Suvidha Kendra in LDA Colony for assisted citizen services, PAN cards, GST, and printing.">
+    <title>Contact Us &amp; Visit Center | One Point Digital Services</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-        <link rel="stylesheet" href="assets/onepoint.css?v=2">
-
+    <script src="assets/opds-boot.js?v=anti-fouc-79"></script>
+    <link rel="stylesheet" href="assets/onepoint.css?v=customer-checkout-94">
+    <link rel="stylesheet" href="assets/enterprise-design-system.css?v=eds-2">
+    <link rel="stylesheet" href="assets/enterprise-visual-polish.css?v=polish-3">
     <style>
+      /* ══════════════════════════════════════════════════════════════════════════
+         CONTACT & VISIT CENTER — REFINED ENTERPRISE STYLING
+         ══════════════════════════════════════════════════════════════════════════ */
+      :root {
+        --brand-navy: #125696;
+        --brand-navy-dark: #082f61;
+        --brand-gold: #f5c842;
+        --brand-gold-text: #c58a10;
+        --brand-border: #e2e8f0;
+        --brand-surface: #ffffff;
+        --brand-bg: #f8fafc;
+      }
+
+      body.contact-page-body {
+        background-color: #f8fafc;
+        color: #0f172a;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      }
+
+      /* ── Signature Top Hero ── */
       .compact-hero.contact-hero-bg {
-        background: 
-          linear-gradient(90deg, rgba(18, 86, 150, 0.98) 0%, rgba(18, 86, 150, 0.88) 45%, rgba(210, 161, 42, 0.3) 100%),
-          url('assets/contact_hero_bg.png') no-repeat center / cover !important;
+        background:
+          linear-gradient(100deg, rgba(11, 40, 88, 0.97) 0%, rgba(18, 86, 150, 0.92) 55%, rgba(12, 46, 98, 0.93) 100%),
+          linear-gradient(to bottom, rgba(8, 24, 60, 0.65) 0%, transparent 42%),
+          url('assets/contact_hero_bg.png') no-repeat center/cover !important;
+        text-align: left !important;
+        padding-top: clamp(48px, 6vw, 76px) !important;
+        padding-bottom: clamp(48px, 6vw, 76px) !important;
       }
-      .compact-hero::before,
-      .compact-hero::after,
-      .contact-hero-bg::before,
-      .contact-hero-bg::after {
-        display: none !important;
-      }
-      #visit-us {
-        background: linear-gradient(180deg, #f0f6ff 0%, #f7faff 100%) !important;
-        width: 100vw !important;
-        max-width: none !important;
-        margin-left: calc(50% - 50vw) !important;
-        margin-right: calc(50% - 50vw) !important;
-        box-sizing: border-box !important;
-        position: relative !important;
-      }
-      #visit-us .site-container {
-        padding-left: 24px !important;
-        padding-right: 24px !important;
-        max-width: 1200px !important;
+      .compact-hero.contact-hero-bg::before,
+      .compact-hero.contact-hero-bg::after { display: none !important; }
+      .compact-hero.contact-hero-bg .site-container {
         width: 100% !important;
+        max-width: var(--max, 1200px) !important;
+        margin-inline: auto !important;
+        padding-inline: var(--gutter, clamp(16px, 4vw, 32px)) !important;
         box-sizing: border-box !important;
-        margin: 0 auto !important;
+        text-align: left !important;
       }
-    </style></head>
-  <body>
+      .compact-hero.contact-hero-bg h1 {
+        text-align: left !important;
+        margin-left: 0 !important;
+        font-size: clamp(2rem, 3.5vw, 2.75rem) !important;
+        font-weight: 800 !important;
+        letter-spacing: -0.025em !important;
+        color: #ffffff !important;
+      }
+      .compact-hero.contact-hero-bg p:not(.eyebrow) {
+        text-align: left !important;
+        margin-left: 0 !important;
+        max-width: 680px !important;
+        font-size: 1rem !important;
+        line-height: 1.6 !important;
+        color: rgba(235, 245, 255, 0.88) !important;
+      }
+      .compact-hero.contact-hero-bg .eyebrow {
+        margin-left: 0 !important;
+        margin-right: auto !important;
+        background: rgba(245, 200, 66, 0.15) !important;
+        border: 1px solid rgba(245, 200, 66, 0.35) !important;
+        color: #f5c842 !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        gap: 6px !important;
+        padding: 4px 12px !important;
+        border-radius: 999px !important;
+        font-size: 0.76rem !important;
+        font-weight: 700 !important;
+        letter-spacing: 0.06em !important;
+        text-transform: uppercase !important;
+        margin-bottom: 14px !important;
+      }
+      .compact-hero.contact-hero-bg .hero-actions {
+        justify-content: flex-start !important;
+        margin-top: 24px !important;
+        display: flex !important;
+        gap: 12px !important;
+        flex-wrap: wrap !important;
+      }
+
+      /* ── Page Shell ── */
+      .contact-page-shell {
+        width: 100%;
+        max-width: var(--max, 1200px);
+        margin-inline: auto;
+        padding-top: clamp(24px, 3.5vw, 36px);
+        padding-bottom: 72px;
+        padding-inline: var(--gutter, clamp(16px, 4vw, 32px));
+        box-sizing: border-box;
+      }
+
+      /* ── Breadcrumb ── */
+      .contact-breadcrumb {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 0.82rem;
+        color: #64748b;
+        margin-bottom: 24px;
+      }
+      .contact-breadcrumb a { color: #475569; text-decoration: none; transition: color 0.15s; }
+      .contact-breadcrumb a:hover { color: #0a5aa8; }
+      .contact-breadcrumb i, .contact-breadcrumb svg { width: 14px; height: 14px; color: #94a3b8; }
+      .contact-breadcrumb span { color: #0f172a; font-weight: 600; }
+
+      /* ── 4 Quick Contact Channels Grid ── */
+      .contact-channels-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+        margin-bottom: 32px;
+      }
+      @media (max-width: 960px) {
+        .contact-channels-grid { grid-template-columns: repeat(2, 1fr); }
+      }
+      @media (max-width: 540px) {
+        .contact-channels-grid { grid-template-columns: 1fr; }
+      }
+
+      .contact-channel-card {
+        background: #ffffff;
+        border: 1px solid var(--brand-border);
+        border-radius: 14px;
+        padding: 20px 18px;
+        box-shadow: 0 1px 3px rgba(15, 23, 42, 0.02);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+      }
+      .contact-channel-card:hover {
+        transform: translateY(-2px);
+        border-color: rgba(18, 86, 150, 0.28);
+        box-shadow: 0 8px 20px rgba(8, 47, 97, 0.06);
+      }
+      .channel-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 12px;
+      }
+      .channel-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .channel-icon.wa { background: rgba(34, 197, 94, 0.10); color: #16a34a; border: 1px solid rgba(34, 197, 94, 0.2); }
+      .channel-icon.phone { background: rgba(18, 86, 150, 0.08); color: #125696; border: 1px solid rgba(18, 86, 150, 0.15); }
+      .channel-icon.mail { background: rgba(234, 88, 12, 0.08); color: #ea580c; border: 1px solid rgba(234, 88, 12, 0.2); }
+      .channel-icon.clock { background: rgba(200, 152, 46, 0.10); color: #c58a10; border: 1px solid rgba(200, 152, 46, 0.22); }
+      
+      .channel-badge {
+        font-size: 0.68rem;
+        font-weight: 700;
+        padding: 2px 7px;
+        border-radius: 4px;
+      }
+      .badge-green { background: #f0fdf4; color: #15803d; border: 1px solid #bbf7d0; }
+      .badge-blue { background: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; }
+      .badge-orange { background: #fff7ed; color: #c2410c; border: 1px solid #fed7aa; }
+
+      .channel-title {
+        font-size: 0.95rem;
+        font-weight: 750;
+        color: #082f61;
+        margin: 0 0 4px 0;
+      }
+      .channel-value {
+        font-size: 0.88rem;
+        font-weight: 600;
+        color: #1e293b;
+        margin: 0 0 12px 0;
+        word-break: break-all;
+      }
+      .channel-btn {
+        font-size: 0.78rem;
+        font-weight: 700;
+        padding: 6px 12px;
+        border-radius: 6px;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+        transition: all 0.15s ease;
+      }
+      .btn-wa-fill { background: #22c55e; color: #ffffff; }
+      .btn-wa-fill:hover { background: #16a34a; }
+      .btn-blue-outline { background: #f0f7ff; color: #125696; border: 1px solid rgba(18, 86, 150, 0.2); }
+      .btn-blue-outline:hover { background: #125696; color: #ffffff; }
+      .btn-ghost-sm { background: #f8fafc; color: #475569; border: 1px solid #e2e8f0; }
+      .btn-ghost-sm:hover { background: #e2e8f0; color: #0f172a; }
+
+      /* ── Main 2-Column Interactive Hub ── */
+      .contact-main-grid {
+        display: grid;
+        grid-template-columns: 1.15fr 1fr;
+        gap: 24px;
+        align-items: stretch;
+      }
+      @media (max-width: 920px) {
+        .contact-main-grid { grid-template-columns: 1fr; }
+      }
+
+      /* Left Card: Send Inquiry / Callback Form */
+      .inquiry-card {
+        background: #ffffff;
+        border: 1px solid var(--brand-border);
+        border-radius: 16px;
+        padding: clamp(24px, 4vw, 36px);
+        box-shadow: 0 1px 3px rgba(15, 23, 42, 0.03);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+      .inquiry-head {
+        margin-bottom: 20px;
+      }
+      .inquiry-kicker {
+        font-size: 0.74rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: #0a5aa8;
+        background: rgba(10, 90, 168, 0.08);
+        border: 1px solid rgba(10, 90, 168, 0.18);
+        padding: 3px 10px;
+        border-radius: 999px;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        margin-bottom: 8px;
+      }
+      .inquiry-title {
+        font-size: 1.35rem;
+        font-weight: 800;
+        color: #082f61;
+        margin: 0 0 6px 0;
+      }
+      .inquiry-sub {
+        font-size: 0.86rem;
+        color: #64748b;
+        line-height: 1.5;
+        margin: 0;
+      }
+
+      .contact-form {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
+      .form-row-2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+      @media (max-width: 580px) {
+        .form-row-2 { grid-template-columns: 1fr; }
+      }
+
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+      }
+      .form-label {
+        font-size: 0.78rem;
+        font-weight: 700;
+        color: #334155;
+      }
+      .form-input, .form-select, .form-textarea {
+        width: 100%;
+        padding: 10px 12px;
+        border-radius: 8px;
+        border: 1px solid #cbd5e1;
+        background: #ffffff;
+        color: #0f172a;
+        font-size: 0.88rem;
+        font-family: inherit;
+        outline: none;
+        box-sizing: border-box;
+        transition: border-color 0.15s, box-shadow 0.15s;
+      }
+      .form-input:focus, .form-select:focus, .form-textarea:focus {
+        border-color: #125696;
+        box-shadow: 0 0 0 3px rgba(18, 86, 150, 0.12);
+      }
+      .form-textarea {
+        resize: vertical;
+        min-height: 80px;
+      }
+
+      .form-submit-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin-top: 6px;
+        flex-wrap: wrap;
+      }
+      .btn-submit-inquiry {
+        background: #125696;
+        color: #ffffff;
+        font-size: 0.88rem;
+        font-weight: 700;
+        padding: 11px 22px;
+        border-radius: 8px;
+        border: none;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        transition: background 0.15s, transform 0.15s;
+      }
+      .btn-submit-inquiry:hover { background: #0b3f72; transform: translateY(-1px); }
+      .form-privacy-note {
+        font-size: 0.72rem;
+        color: #64748b;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+
+      /* Right Card: Visit Suvidha Kendra & Map */
+      .location-hub-card {
+        background: #ffffff;
+        border: 1px solid var(--brand-border);
+        border-radius: 16px;
+        padding: clamp(24px, 4vw, 36px);
+        box-shadow: 0 1px 3px rgba(15, 23, 42, 0.03);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+      .location-header {
+        margin-bottom: 16px;
+      }
+      .visit-open-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: rgba(22, 163, 74, 0.08);
+        color: #15803d;
+        border: 1px solid rgba(22, 163, 74, 0.22);
+        padding: 3px 10px;
+        border-radius: 999px;
+        font-size: 0.72rem;
+        font-weight: 700;
+        margin-bottom: 8px;
+      }
+      .pulse-dot-green {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: #16a34a;
+        box-shadow: 0 0 0 0 rgba(22, 163, 74, 0.7);
+        animation: track-pulse 2s infinite;
+      }
+      .location-main-title {
+        font-size: 1.35rem;
+        font-weight: 800;
+        color: #082f61;
+        margin: 0 0 4px 0;
+      }
+      .location-address-line {
+        font-size: 0.85rem;
+        color: #475569;
+        display: flex;
+        align-items: flex-start;
+        gap: 8px;
+        line-height: 1.45;
+        margin: 0 0 16px 0;
+      }
+      .location-address-line i {
+        color: #125696;
+        width: 16px;
+        height: 16px;
+        flex-shrink: 0;
+        margin-top: 2px;
+      }
+
+      /* Map Embed */
+      .location-map-wrapper {
+        border: 1px solid var(--brand-border);
+        border-radius: 12px;
+        overflow: hidden;
+        min-height: 180px;
+        height: 200px;
+        margin-bottom: 18px;
+      }
+      .location-map-wrapper iframe {
+        width: 100%;
+        height: 100%;
+        border: 0;
+        display: block;
+      }
+
+      /* Practical Walk-in Benefits */
+      .walkin-benefits-list {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin-bottom: 20px;
+      }
+      .benefit-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 0.82rem;
+        color: #334155;
+      }
+      .benefit-item i, .benefit-item svg {
+        color: #16a34a;
+        width: 15px;
+        height: 15px;
+        flex-shrink: 0;
+      }
+
+      .location-action-row {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        padding-top: 14px;
+        border-top: 1px solid #f1f5f9;
+      }
+      .btn-directions-lg {
+        background: #125696;
+        color: #ffffff;
+        font-size: 0.84rem;
+        font-weight: 700;
+        padding: 9px 16px;
+        border-radius: 8px;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        transition: background 0.15s;
+      }
+      .btn-directions-lg:hover { background: #0b3f72; color: #ffffff; }
+
+      .btn-wa-previsit {
+        background: rgba(34, 197, 94, 0.10);
+        color: #15803d;
+        border: 1px solid rgba(34, 197, 94, 0.3);
+        font-size: 0.84rem;
+        font-weight: 700;
+        padding: 9px 14px;
+        border-radius: 8px;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        transition: all 0.15s;
+      }
+      .btn-wa-previsit:hover { background: #22c55e; color: #ffffff; }
+
+      /* ── Bottom Trust Strip ── */
+      .contact-trust-strip {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+        margin-top: 32px;
+      }
+      @media (max-width: 768px) {
+        .contact-trust-strip { grid-template-columns: 1fr; }
+      }
+      .contact-trust-card {
+        background: #ffffff;
+        border: 1px solid var(--brand-border);
+        border-radius: 12px;
+        padding: 16px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .contact-trust-icon {
+        width: 38px;
+        height: 38px;
+        border-radius: 8px;
+        background: rgba(18, 86, 150, 0.08);
+        color: #125696;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+      .contact-trust-title {
+        font-size: 0.84rem;
+        font-weight: 700;
+        color: #0f172a;
+      }
+      .contact-trust-sub {
+        font-size: 0.74rem;
+        color: #64748b;
+        display: block;
+      }
+
+      /* Form success modal / alert */
+      .inquiry-alert-success {
+        display: none;
+        padding: 12px 16px;
+        border-radius: 8px;
+        background: #f0fdf4;
+        border: 1px solid #bbf7d0;
+        color: #15803d;
+        font-size: 0.84rem;
+        font-weight: 600;
+        margin-bottom: 14px;
+        align-items: center;
+        gap: 8px;
+      }
+    </style>
+  </head>
+
+  <body class="contact-page-body">
     <div data-site-nav>
       <header class="site-header fallback-site-header">
         <nav class="nav-bar" aria-label="Primary fallback">
@@ -53,62 +543,306 @@
             <a class="nav-link" href="services.html">Services</a>
             <a class="nav-link" href="products.html">Store</a>
             <a class="nav-link" href="track-application.html">Track</a>
-            <a class="nav-link" href="contact.html">Contact</a>
+            <a class="nav-link active" href="contact.html">Contact</a>
           </div>
         </nav>
       </header>
     </div>
-    <main class="page-shell">
+
+    <main>
+      <!-- Signature Top Hero Section -->
       <section class="compact-hero contact-hero-bg">
         <div class="site-container">
-          <p class="eyebrow">Connect With Us</p>
+          <p class="eyebrow"><i data-lucide="phone-call" style="width: 14px; height: 14px;"></i> Connect With Us</p>
           <h1>Your gateway to seamless digital services.</h1>
-          <p class="font-medium">Have a service request, custom print query, or business registration need? Contact the One Point team for fast, transparent, and expert assistance.</p>
-        </div>
-      </section>
-
-      <div data-unified-apply-slot></div>
-
-      <section class="section reveal" id="visit-us">
-        <div class="site-container">
-          <div class="panel visit-center-panel">
-            <p class="section-kicker">Visit Center</p>
-            <h2>Local support with online <span class="h2-gold">convenience.</span></h2>
-            <div class="visit-contact-grid">
-              <span><i data-lucide="message-circle"></i><strong>WhatsApp</strong>+91 9473946181</span>
-              <span><i data-lucide="phone"></i><strong>Phone</strong>+91 9473946181</span>
-              <span><i data-lucide="mail"></i><strong>Email</strong>support@bisenonepoint.com</span>
-              <span><i data-lucide="clock"></i><strong>Hours</strong>9:00 AM to 8:00 PM</span>
-            </div>
-            <p class="visit-address"><i data-lucide="map-pin"></i> One Point Suvidha Kendra, Lucknow, Uttar Pradesh &mdash; 226001</p>
-            <div class="card-actions">
-              <a class="btn btn-primary" href="https://wa.me/919473946181">Open WhatsApp</a>
-              <a class="btn btn-soft" href="https://www.google.com/maps/search/?api=1&query=One%20Point%20Digital%20Services" target="_blank">Open Map</a>
-            </div>
+          <p>Have a service request, custom print query, or business registration need? Contact our Lucknow team for fast, transparent, and expert assistance.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="https://wa.me/919473946181" target="_blank" rel="noopener"><i data-lucide="message-circle"></i> Chat on WhatsApp</a>
+            <a class="btn btn-ghost" href="#inquiry-section"><i data-lucide="send"></i> Send Inquiry</a>
           </div>
         </div>
       </section>
+
+      <!-- Main Contact Page Shell -->
+      <div class="contact-page-shell">
+        
+        <!-- Breadcrumb -->
+        <nav class="contact-breadcrumb" aria-label="Breadcrumb">
+          <a href="index.html">Home</a>
+          <i data-lucide="chevron-right"></i>
+          <span>Contact &amp; Visit Center</span>
+        </nav>
+
+        <!-- 4 Quick Contact Channels Grid -->
+        <section class="contact-channels-grid">
+          
+          <!-- Channel 1: WhatsApp -->
+          <article class="contact-channel-card">
+            <div>
+              <div class="channel-top">
+                <div class="channel-icon wa"><i data-lucide="message-circle"></i></div>
+                <span class="channel-badge badge-green">Instant Help</span>
+              </div>
+              <h3 class="channel-title">WhatsApp Desk</h3>
+              <p class="channel-value">+91 9473946181</p>
+            </div>
+            <a href="https://wa.me/919473946181?text=Hello%20One%20Point%2C%20I%20have%20an%20inquiry%20regarding%20services." target="_blank" rel="noopener" class="channel-btn btn-wa-fill">
+              <i data-lucide="message-circle" style="width: 13px; height: 13px;"></i>
+              <span>Open WhatsApp</span>
+            </a>
+          </article>
+
+          <!-- Channel 2: Phone Helpline -->
+          <article class="contact-channel-card">
+            <div>
+              <div class="channel-top">
+                <div class="channel-icon phone"><i data-lucide="phone"></i></div>
+                <span class="channel-badge badge-blue">Direct Call</span>
+              </div>
+              <h3 class="channel-title">Direct Helpline</h3>
+              <p class="channel-value">+91 9473946181</p>
+            </div>
+            <a href="tel:+919473946181" class="channel-btn btn-blue-outline">
+              <i data-lucide="phone" style="width: 13px; height: 13px;"></i>
+              <span>Call Now</span>
+            </a>
+          </article>
+
+          <!-- Channel 3: Email Support -->
+          <article class="contact-channel-card">
+            <div>
+              <div class="channel-top">
+                <div class="channel-icon mail"><i data-lucide="mail"></i></div>
+                <span class="channel-badge badge-orange">Official Mail</span>
+              </div>
+              <h3 class="channel-title">Support Email</h3>
+              <p class="channel-value">support@bisenonepoint.com</p>
+            </div>
+            <a href="mailto:support@bisenonepoint.com" class="channel-btn btn-ghost-sm">
+              <i data-lucide="mail" style="width: 13px; height: 13px;"></i>
+              <span>Send Email</span>
+            </a>
+          </article>
+
+          <!-- Channel 4: Center Working Hours -->
+          <article class="contact-channel-card">
+            <div>
+              <div class="channel-top">
+                <div class="channel-icon clock"><i data-lucide="clock"></i></div>
+                <span class="channel-badge badge-green">Mon &ndash; Sat</span>
+              </div>
+              <h3 class="channel-title">Center Hours</h3>
+              <p class="channel-value">9:00 AM &ndash; 8:00 PM</p>
+            </div>
+            <span class="channel-btn btn-ghost-sm" style="cursor: default; pointer-events: none; background: #f8fafc;">
+              <span class="pulse-dot-green"></span>
+              <span>Open Today</span>
+            </span>
+          </article>
+
+        </section>
+
+        <!-- Main 2-Column Contact & Suvidha Kendra Hub -->
+        <section class="contact-main-grid" id="inquiry-section">
+          
+          <!-- Left: Send Inquiry / Callback Form -->
+          <div class="inquiry-card">
+            <div>
+              <div class="inquiry-head">
+                <span class="inquiry-kicker">
+                  <i data-lucide="send" style="width: 12px; height: 12px;"></i>
+                  Quick Request
+                </span>
+                <h2 class="inquiry-title">Send us a direct inquiry.</h2>
+                <p class="inquiry-sub">Fill in your requirements below. Our operator will review and reply within 15 minutes on WhatsApp or phone.</p>
+              </div>
+
+              <!-- Alert Success -->
+              <div class="inquiry-alert-success" id="inquiry-success-msg">
+                <i data-lucide="check-circle-2" style="width: 18px; height: 18px;"></i>
+                <span>Thank you! Your inquiry has been routed to our Lucknow desk. We will contact you shortly.</span>
+              </div>
+
+              <form class="contact-form" id="contact-inquiry-form">
+                <div class="form-row-2">
+                  <div class="form-group">
+                    <label class="form-label" for="contact-name">Your Full Name *</label>
+                    <input type="text" id="contact-name" class="form-input" placeholder="e.g. Rahul Sharma" required>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="contact-phone">WhatsApp / Phone Number *</label>
+                    <input type="tel" id="contact-phone" class="form-input" placeholder="e.g. +91 9876543210" required>
+                  </div>
+                </div>
+
+                <div class="form-row-2">
+                  <div class="form-group">
+                    <label class="form-label" for="contact-service">Service Category *</label>
+                    <select id="contact-service" class="form-select" required>
+                      <option value="">Select Service Area...</option>
+                      <option value="PAN Card Application / Correction">PAN Card (New / Correction)</option>
+                      <option value="Government Certificates & Citizen IDs">Government Certificates &amp; Citizen IDs</option>
+                      <option value="Student Forms & Admit Cards">Student Forms &amp; Admit Cards</option>
+                      <option value="GST Registration & ITR Filing">GST Registration &amp; ITR Filing</option>
+                      <option value="Photo Printing, Lamination & Design">Photo Printing, Lamination &amp; Design</option>
+                      <option value="Travel Booking (Tatkal / Flight)">Travel Booking (Tatkal / Flight)</option>
+                      <option value="Other Service Inquiry">Other Inquiry / Assistance</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="contact-tracking">Existing Tracking ID (Optional)</label>
+                    <input type="text" id="contact-tracking" class="form-input" placeholder="e.g. OPDS-20260722-000001">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="contact-message">Message / Specific Requirement</label>
+                  <textarea id="contact-message" class="form-textarea" placeholder="Tell us how we can help you with your application or order..."></textarea>
+                </div>
+
+                <div class="form-submit-row">
+                  <button type="submit" class="btn-submit-inquiry">
+                    <i data-lucide="send" style="width: 15px; height: 15px;"></i>
+                    <span>Submit Inquiry</span>
+                  </button>
+                  <span class="form-privacy-note">
+                    <i data-lucide="shield-check" style="width: 13px; height: 13px; color: #16a34a;"></i>
+                    <span>Your contact details are strictly confidential.</span>
+                  </span>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <!-- Right: Visit Suvidha Kendra & Map Embed -->
+          <div class="location-hub-card">
+            <div>
+              <div class="location-header">
+                <span class="visit-open-pill">
+                  <span class="pulse-dot-green"></span>
+                  Open Today: 9:00 AM &ndash; 8:00 PM
+                </span>
+                <h2 class="location-main-title">One Point Suvidha Kendra</h2>
+                <div class="location-address-line">
+                  <i data-lucide="map-pin"></i>
+                  <span>Milan Tower, Kursi Rd, Adil Nagar, LDA Colony, Lucknow, UP &ndash; 226022</span>
+                </div>
+              </div>
+
+              <!-- Map Embed -->
+              <div class="location-map-wrapper">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3557.6794410432926!2d80.96067699999999!3d26.9136668!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399957b67a13d94f%3A0xd16b0b38c7f7f320!2sOne%20Point%20Suvidha%20Kendra!5e0!3m2!1sen!2sin!4v1778773792841!5m2!1sen!2sin"
+                  loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="One Point Suvidha Kendra location in Lucknow">
+                </iframe>
+              </div>
+
+              <!-- Walk-in benefits -->
+              <div class="walkin-benefits-list">
+                <div class="benefit-item">
+                  <i data-lucide="check-circle-2"></i>
+                  <span>Counter document pickup &amp; direct operator review</span>
+                </div>
+                <div class="benefit-item">
+                  <i data-lucide="check-circle-2"></i>
+                  <span>Color laser admit card &amp; photo print collection</span>
+                </div>
+                <div class="benefit-item">
+                  <i data-lucide="check-circle-2"></i>
+                  <span>Cash &amp; UPI payments with printed tax invoice receipt</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="location-action-row">
+              <a href="https://maps.google.com/?q=One+Point+Suvidha+Kendra+Lucknow" target="_blank" rel="noopener" class="btn-directions-lg">
+                <i data-lucide="navigation" style="width: 14px; height: 14px;"></i>
+                <span>Get Directions</span>
+              </a>
+              <a href="https://wa.me/919473946181?text=Hello%20One%20Point%2C%20I%20am%20planning%20to%20visit%20your%20center.%20Please%20share%20the%20document%20checklist." target="_blank" rel="noopener" class="btn-wa-previsit">
+                <i data-lucide="message-circle" style="width: 14px; height: 14px;"></i>
+                <span>Pre-Visit Checklist</span>
+              </a>
+            </div>
+          </div>
+
+        </section>
+
+        <!-- Bottom Trust Assurances Strip -->
+        <section class="contact-trust-strip">
+          <div class="contact-trust-card">
+            <div class="contact-trust-icon"><i data-lucide="clock"></i></div>
+            <div>
+              <div class="contact-trust-title">15-Min Response Guarantee</div>
+              <span class="contact-trust-sub">Active operator support during desk hours</span>
+            </div>
+          </div>
+
+          <div class="contact-trust-card">
+            <div class="contact-trust-icon"><i data-lucide="shield-check"></i></div>
+            <div>
+              <div class="contact-trust-title">256-Bit Encrypted Data Vault</div>
+              <span class="contact-trust-sub">Protected under IT Act 2000 privacy guidelines</span>
+            </div>
+          </div>
+
+          <div class="contact-trust-card">
+            <div class="contact-trust-icon"><i data-lucide="receipt"></i></div>
+            <div>
+              <div class="contact-trust-title">100% Upfront Pricing &amp; GST Invoices</div>
+              <span class="contact-trust-sub">No surprise middleman markups or hidden fees</span>
+            </div>
+          </div>
+        </section>
+
+      </div>
     </main>
+
     <div data-site-footer></div>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
-    <script src="assets/app.js?v=clean_js_v11" defer></script>
-  
-<script id="line-alignment-script">
-  document.addEventListener("DOMContentLoaded", function() {
-    setTimeout(() => {
-      document.querySelectorAll(".section-head h2").forEach(h2 => {
-        let align = window.getComputedStyle(h2).textAlign;
-        let parent = h2.closest('.section-head');
-        if (parent) {
-          if (align === "center") {
-            parent.classList.add("center-line");
-          } else {
-            parent.classList.add("left-line");
-          }
+    <script src="assets/app.js?v=customer-checkout-94" defer></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const form = document.getElementById('contact-inquiry-form');
+        const successMsg = document.getElementById('inquiry-success-msg');
+
+        if (form) {
+          form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('contact-name').value.trim();
+            const phone = document.getElementById('contact-phone').value.trim();
+            const service = document.getElementById('contact-service').value;
+            const tracking = document.getElementById('contact-tracking').value.trim();
+            const message = document.getElementById('contact-message').value.trim();
+
+            if (!name || !phone || !service) {
+              alert('Please complete all required fields (*).');
+              return;
+            }
+
+            // Construct WhatsApp message URL for direct routing
+            let waText = `*New Service Inquiry via One Point Website*\n\n` +
+              `*Name:* ${name}\n` +
+              `*Phone:* ${phone}\n` +
+              `*Service Area:* ${service}\n`;
+            if (tracking) waText += `*Tracking ID:* ${tracking}\n`;
+            if (message) waText += `*Details:* ${message}\n`;
+
+            // Display success message
+            if (successMsg) {
+              successMsg.style.display = 'flex';
+              form.reset();
+              successMsg.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+
+            // Optionally open WhatsApp in a new tab if user wants direct live assistance
+            const waUrl = `https://wa.me/919473946181?text=${encodeURIComponent(waText)}`;
+            setTimeout(() => {
+              window.open(waUrl, '_blank');
+            }, 600);
+          });
         }
       });
-    }, 100); // small delay to ensure CSS is applied
-  });
-</script>
-</body>
+    </script>
+  </body>
 </html>

@@ -1,6 +1,6 @@
-﻿import React, { useState, useEffect } from 'react';
-import { PanelHeader, Card, Badge, Icon } from '../Shared';
-import { useApp } from '../AppContext';
+import { useState, useEffect} from 'react';
+import { PanelHeader, Card, Icon} from '../Shared';
+import { adminTokenHeader} from '../security/adminSession';
 
 const money = (v: any) => `₹${Number(v / 100 || 0).toLocaleString('en-IN')}`;
 
@@ -197,9 +197,6 @@ const StaffLoadBar = ({ staff }: any) => (
 );
 
 export const AssignmentPanel = () => {
-  const { adminToken } = useApp() as any;
-  const token = adminToken || localStorage.getItem('opds_admin_token') || '';
-
   const [assignments, setAssignments] = useState<any[]>([]);
   const [queue, setQueue] = useState<any[]>([]);
   const [staff, setStaff] = useState<any[]>([]);
@@ -207,7 +204,7 @@ export const AssignmentPanel = () => {
   const [loading, setLoading] = useState(true);
   const [autoAssigning, setAutoAssigning] = useState(false);
 
-  const headers = { 'X-Admin-Token': token, 'Content-Type': 'application/json' };
+  const headers = { ...adminTokenHeader(), 'Content-Type': 'application/json' };
 
   async function load() {
     setLoading(true);
@@ -288,7 +285,7 @@ export const AssignmentPanel = () => {
         </button>
       </PanelHeader>
 
-      <div className="panel-body" style={{ display: 'grid', gridTemplateColumns: '1fr 300px', gap: 24, alignItems: 'start' }}>
+      <div className="panel-body" style={{ display: 'grid', gridTemplateColumns: '1fr 300px', gap: 24, alignItems: 'start', padding: '14px 20px 100px 20px', overflowY: 'auto' }}>
 
         {/* Left: Main content */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
@@ -395,6 +392,8 @@ export const AssignmentPanel = () => {
           </Card>
         </div>
       </div>
+      {/* Bottom spacer for clean scrolling */}
+      <div style={{ height: 60, flexShrink: 0 }} />
     </div>
   );
 };

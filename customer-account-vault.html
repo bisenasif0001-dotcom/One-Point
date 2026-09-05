@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="One Point Secure Document Vault — 256-bit encrypted digital repository for identity proofs, educational marksheet scans, and government service certificates.">
+    <meta name="robots" content="noindex,nofollow">
+    <title>My Documents | One Point Digital Services</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;850;900&display=swap" rel="stylesheet">
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+    <script src="assets/opds-boot.js?v=anti-fouc-79"></script>
+    <link rel="stylesheet" href="assets/onepoint.css?v=customer-checkout-94">
+    <link rel="stylesheet" href="assets/onepoint-customer-profile.css?v=20">
+    <link rel="stylesheet" href="assets/onepoint-customer-account.css?v=21">
+  </head>
+  <body class="elite-console-body enterprise-checkout-body" data-account-page="vault">
+    <div data-account-shell></div>
+
+    <div class="acc-page" data-account-content hidden>
+      
+      <!-- Top Page Heading -->
+      <section class="acc-greeting">
+        <div>
+          <span class="acc-eyebrow"><i data-lucide="shield-check"></i> DOCUMENT VAULT</span>
+          <h1>My Documents</h1>
+          <p>Securely view, upload, replace, and manage identity files linked to your One Point citizen requests.</p>
+        </div>
+        <button type="button" class="eds-btn eds-btn-primary" id="acc-vault-upload-btn">
+          <i data-lucide="upload-cloud"></i> Upload Document
+        </button>
+      </section>
+
+      <!-- Top 4 Document Summary Metric Cards -->
+      <div class="acc-summary-grid acc-summary-grid-4" id="acc-vault-summary-grid">
+        <div class="acc-summary-card">
+          <span class="acc-summary-icon acc-summary-icon-total"><i data-lucide="folder-lock"></i></span>
+          <div class="acc-sum-card-bottom">
+            <strong class="acc-sum-number" id="vault-count-total">6</strong>
+            <span class="acc-sum-label">Total Documents</span>
+            <small class="acc-sum-subtext">Encrypted &middot; 256-bit AES</small>
+          </div>
+        </div>
+
+        <div class="acc-summary-card acc-summary-card-clickable acc-summary-highlight-pending acc-sum-action" id="vault-stat-attention-card" role="button" tabindex="0" title="Filter to documents needing attention">
+          <span class="acc-summary-icon acc-summary-icon-pending"><i data-lucide="alert-triangle"></i></span>
+          <div class="acc-sum-card-bottom">
+            <strong class="acc-sum-number" id="vault-count-attention">1</strong>
+            <span class="acc-sum-label">Needs Attention</span>
+            <small class="acc-sum-subtext">Click to view replacement</small>
+          </div>
+          <span class="acc-summary-pulse-dot"></span>
+        </div>
+
+        <div class="acc-summary-card">
+          <span class="acc-summary-icon acc-summary-icon-completed"><i data-lucide="check-circle-2"></i></span>
+          <div class="acc-sum-card-bottom">
+            <strong class="acc-sum-number" id="vault-count-verified">4</strong>
+            <span class="acc-sum-label">Verified &amp; Accepted</span>
+            <small class="acc-sum-subtext">Kendra verified proofs</small>
+          </div>
+        </div>
+
+        <div class="acc-summary-card">
+          <span class="acc-summary-icon acc-summary-icon-action"><i data-lucide="trash-2"></i></span>
+          <div class="acc-sum-card-bottom">
+            <strong class="acc-sum-number" id="vault-count-removals">1</strong>
+            <span class="acc-sum-label">Removal Requests</span>
+            <small class="acc-sum-subtext">Under privacy review</small>
+          </div>
+        </div>
+      </div>
+
+      <!-- Search & Category Filters -->
+      <section class="cpf-card acc-search-filter-card">
+        <div class="acc-search-row">
+          <div class="acc-search-input-wrap">
+            <i data-lucide="search" class="acc-search-icon"></i>
+            <input class="acc-search-input eds-input" id="acc-vault-search" placeholder="Search documents by name, category, request ID (e.g. Aadhaar, OPDS-..., Marksheet)...">
+          </div>
+          <div class="acc-search-select-wrap">
+            <select class="eds-input" id="acc-vault-group-select" aria-label="Group Documents">
+              <option value="all">View All Files</option>
+              <option value="group_request">Group by Request</option>
+              <option value="group_category">Group by Category</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Category Filter Chips -->
+        <div class="acc-filter-row" id="acc-vault-category-filters"></div>
+      </section>
+
+      <!-- Document Vault Cards Grid / Grouped Container -->
+      <section class="cpf-card">
+        <div class="cpf-card-title-row">
+          <div>
+            <h3 style="font-size:1.05rem;"><i data-lucide="shield-check"></i> Encrypted Document Vault</h3>
+            <p class="cpf-muted" style="font-size:.82rem; margin:0;">Files are strictly restricted to authorized Kendra operators and citizen applications.</p>
+          </div>
+          <span class="acc-desk-live-pill"><span class="acc-pulse-dot-green"></span> Zero Third-Party Sharing</span>
+        </div>
+
+        <!-- Container rendered dynamically -->
+        <div id="acc-vault-container"></div>
+      </section>
+
+      <!-- Digital Locker Privacy & Security Reassurance Banner -->
+      <section class="acc-privacy-banner">
+        <div class="acc-privacy-icon-box">
+          <i data-lucide="shield-check"></i>
+        </div>
+        <div class="acc-privacy-copy">
+          <h4>256-Bit Encrypted Digital Locker &amp; Privacy Charter</h4>
+          <p>One Point digital locker stores identity proofs exclusively for facilitating government portal submissions and applicant record verification. We practice strict zero third-party data sharing. You may request complete document removal at any time.</p>
+        </div>
+        <div class="acc-privacy-action">
+          <a href="customer-profile.html#tab-privacy" class="eds-btn eds-btn-secondary" style="font-size:12.5px; padding:6px 14px; min-height:36px; white-space:nowrap;">
+            <i data-lucide="lock"></i> Privacy Controls
+          </a>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- Modal Backdrop for Document Preview & Upload -->
+    <div id="cpf-modal-backdrop" class="cpf-modal-backdrop" hidden>
+      <div class="cpf-modal" id="cpf-modal" role="dialog" aria-modal="true" style="width:min(640px, 100%);"></div>
+    </div>
+
+    <div data-account-footer></div>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+    <script src="assets/app.js?v=customer-checkout-94" defer></script>
+    <script src="assets/auth.js?v=cpf-1" defer></script>
+    <script src="assets/customer-account.js?v=20" defer></script>
+    <script src="assets/customer-account-vault.js?v=20" defer></script>
+  </body>
+</html>

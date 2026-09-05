@@ -1,0 +1,70 @@
+{
+  "branchMetadata": {
+    "id": "BR-0104",
+    "status": "active",
+    "name": "Lucknow LDA Colony Center",
+    "city": "Lucknow",
+    "locality": "LDA Colony",
+    "cscId": "417409",
+    "state": "UP",
+    "country": "IN"
+  },
+  "contact": {
+    "address": "One Point Suvidha Kendra, LDA Colony, Lucknow",
+    "phone": "+91 9473946181",
+    "whatsapp": "https://wa.me/919473946181",
+    "email": "support@bisenonepoint.com",
+    "supportHours": "9:00 AM - 8:00 PM"
+  },
+  "theme": {
+    "primaryColor": "#125696",
+    "secondaryColor": "#1f7fd4"
+  },
+  "seo": {
+    "title": "Certified CSC Lucknow Digital Center",
+    "description": "Instant PAN Cards, Government Certificates, and High-Speed Printing at LDA Colony."
+  },
+  "featureFlags": {
+    "enableOnlinePayments": true,
+    "enableWhatsAppSupport": true,
+    "enableAISuggestions": true,
+    "enableCustomerAgent": true,
+    "enableDocumentAgent": true,
+    "enableWorkflowAgent": true,
+    "enableExecutiveAgent": true,
+    "enableKnowledgeAgent": true,
+    "enableAIMemory": true,
+    "enableAIPlanning": true,
+    "enableAICollaboration": true,
+    "enableApprovalGateway": true,
+    "enableAILearning": false,
+    "enableExecutiveDecisionCenter": true,
+    "enableDigitalTwin": true,
+    "enablePredictiveEngine": true,
+    "enableOptimizationEngine": true,
+    "enableSimulationEngine": true,
+    "enableRecommendationEngine": true,
+    "enableAutonomousScheduler": true,
+    "enableEnterpriseOrchestrator": true,
+    "enableSelfHealing": true,
+    "enableCapacityManager": true,
+    "enableIntelligentLoadBalancer": true,
+    "enableIncidentManager": true,
+    "enableRuntimeHealthCoordinator": true,
+    "enableResilienceManager": true,
+    "enablePluginRuntime": true,
+    "enableMarketplace": true,
+    "enablePublicAPI": true,
+    "enableSDK": true,
+    "enableIntegrationHub": true,
+    "enableMarketplaceGovernance": true,
+    "enableMultiTenant": true,
+    "enableCloudControlPlane": true,
+    "enableDistributedEventMesh": true,
+    "enablePartnerPlatform": true,
+    "enableBillingPlatform": true,
+    "enableComplianceEngine": true,
+    "enableAIGovernance": true,
+    "enableControlCenterV2": true
+  }
+}

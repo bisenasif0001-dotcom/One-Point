@@ -1,20 +1,20 @@
 import React, { useState } from 'react';
-import { 
-  DndContext, 
-  closestCorners, 
-  KeyboardSensor, 
-  PointerSensor, 
-  useSensor, 
-  useSensors, 
+import {
+  DndContext,
+  closestCorners,
+  KeyboardSensor,
+  PointerSensor,
+  useSensor,
+  useSensors,
   DragOverlay,
   defaultDropAnimationSideEffects
 } from '@dnd-kit/core';
-import { 
-  arrayMove, 
-  SortableContext, 
-  sortableKeyboardCoordinates, 
-  verticalListSortingStrategy, 
-  useSortable 
+import {
+  arrayMove,
+  SortableContext,
+  sortableKeyboardCoordinates,
+  verticalListSortingStrategy,
+  useSortable
 } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { PanelHeader, Icon, Badge } from '../Shared';
@@ -33,7 +33,7 @@ const getDueDateInfo = (dueDate: string) => {
   const due = new Date(dueDate);
   due.setHours(0, 0, 0, 0);
   const diffDays = Math.ceil((due.getTime() - today.getTime()) / (1000 * 3600 * 24));
-  
+
   if (diffDays < 0) return { text: `Overdue by ${Math.abs(diffDays)} days`, color: 'var(--rose)' };
   if (diffDays === 0) return { text: 'Due Today', color: 'var(--amber)' };
   if (diffDays === 1) return { text: 'Due Tomorrow', color: 'var(--amber)' };
@@ -43,9 +43,9 @@ const getDueDateInfo = (dueDate: string) => {
 
 const SortableTaskCard = ({ task, onClick }: any) => {
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id: task.id });
-  const style = { 
-    transform: CSS.Transform.toString(transform), 
-    transition, 
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
     opacity: isDragging ? 0.4 : 1,
     cursor: isDragging ? 'grabbing' : 'grab'
   };
@@ -67,6 +67,9 @@ const SortableTaskCard = ({ task, onClick }: any) => {
   );
 };
 
+const AVATAR_COLORS = ['var(--blue)', 'var(--emerald)', 'var(--amber)', 'var(--violet)', 'var(--rose)'];
+const getAvatarColor = (name: string) => AVATAR_COLORS[Math.abs((name || 'A').charCodeAt(0)) % AVATAR_COLORS.length];
+
 export const TasksPanel = ({ onNewTask }: { onNewTask?: () => void }) => {
   const { tasks: ctxTasks, updateTask } = useApp();
   const [tasks, setTasks] = useState(ctxTasks);
@@ -76,6 +79,8 @@ export const TasksPanel = ({ onNewTask }: { onNewTask?: () => void }) => {
   const [activeTask, setActiveTask] = useState<any>(null);
   const [selectedTask, setSelectedTask] = useState<any>(null);
   const [commentInput, setCommentInput] = useState('');
+  const [descDraft, setDescDraft] = useState<string>('');
+  const [isDirty, setIsDirty] = useState(false);
 
   const applyTaskUpdate = (id: string, updates: any) => {
     setTasks(prev => prev.map(t => t.id === id ? { ...t, ...updates } : t));
@@ -83,9 +88,29 @@ export const TasksPanel = ({ onNewTask }: { onNewTask?: () => void }) => {
     updateTask(id, updates);
   };
 
+  const toggleSubtask = (taskId: string, subtaskIdx: number) => {
+    const task = tasks.find(t => t.id === taskId);
+    if (!task) return;
+    const subtasks = (task.subtasks || []).map((s: any, i: number) =>
+      i === subtaskIdx ? { ...s, done: !s.done } : s
+    );
+    applyTaskUpdate(taskId, { subtasks });
+  };
+
+  const handleDescChange = (value: string) => {
+    setDescDraft(value);
+    setIsDirty(value !== (selectedTask?.description ?? selectedTask?.sub ?? ''));
+  };
+
+  const handleSaveDescription = () => {
+    if (!selectedTask) return;
+    applyTaskUpdate(selectedTask.id, { description: descDraft, sub: descDraft });
+    setIsDirty(false);
+  };
+
   const handleAddComment = () => {
     if (!commentInput.trim() || !selectedTask) return;
-    
+
     const newComment = {
       id: Date.now().toString(),
       author: 'Asif Bisen',
@@ -104,6 +129,15 @@ export const TasksPanel = ({ onNewTask }: { onNewTask?: () => void }) => {
     applyTaskUpdate(selectedTask.id, { comments: updatedTask.comments });
     setCommentInput('');
   };
+
+  // Sync descDraft when a different task is opened
+  React.useEffect(() => {
+    if (selectedTask) {
+      const desc = selectedTask.description ?? selectedTask.sub ?? '';
+      setDescDraft(desc);
+      setIsDirty(false);
+    }
+  }, [selectedTask?.id]);
 
   const getCommentsToRender = () => {
     if (!selectedTask) return [];
@@ -136,7 +170,7 @@ export const TasksPanel = ({ onNewTask }: { onNewTask?: () => void }) => {
     setTasks(prev => {
       const activeIndex = prev.findIndex(t => t.id === activeId);
       const overIndex = prev.findIndex(t => t.id === overId);
-      
+
       const activeColumn = prev[activeIndex]?.status;
       const overColumn = prev[overIndex]?.status || overId; // If over an empty column
 
@@ -144,7 +178,7 @@ export const TasksPanel = ({ onNewTask }: { onNewTask?: () => void }) => {
         let newItems = [...prev];
         const taskToMove = newItems[activeIndex];
         newItems.splice(activeIndex, 1);
-        
+
         if (overIndex >= 0) {
           newItems.splice(overIndex, 0, { ...taskToMove, status: overColumn });
         } else {
@@ -188,28 +222,28 @@ export const TasksPanel = ({ onNewTask }: { onNewTask?: () => void }) => {
   };
 
   return (
-    <div className="panel active" style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
-      <PanelHeader 
-        title="Task Board" 
-        sub="Kanban-style workflow management" 
+    <div className="panel active" style={{ display: 'flex', flexDirection: 'column' }}>
+      <PanelHeader
+        title="Task Board"
+        sub="Kanban-style workflow management"
         actions={
           <button className="btn btn-primary btn-sm" onClick={onNewTask}>
             <Icon name="plus" /> New Task
           </button>
-        } 
+        }
       />
-      <div className="panels" style={{ flex: 1, paddingBottom: 0, overflow: 'hidden' }}>
-        <div style={{ display: 'flex', gap: 16, height: '100%', overflowX: 'auto', paddingBottom: 16 }}>
-          <DndContext 
-            sensors={sensors} 
-            collisionDetection={closestCorners} 
+      <div className="panels" style={{ flex: 1, minHeight: 0, paddingBottom: 12, overflow: 'hidden' }}>
+        <div style={{ display: 'flex', gap: 16, flex: 1, minHeight: 0, overflowX: 'auto' }}>
+          <DndContext
+            sensors={sensors}
+            collisionDetection={closestCorners}
             onDragStart={handleDragStart}
             onDragOver={handleDragOver}
             onDragEnd={handleDragEnd}
           >
             {COLUMNS.map(col => {
               const colTasks = tasks.filter(t => t.status === col.id);
-              
+
               return (
                 <div key={col.id} className="kanban-col" style={{ width: 320, backgroundColor: 'var(--bg-2)', borderRadius: 'var(--radius-lg)', border: '1px solid var(--border-1)', display: 'flex', flexDirection: 'column' }}>
                   <div style={{ padding: '14px 16px', borderBottom: '1px solid var(--border-1)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -221,15 +255,15 @@ export const TasksPanel = ({ onNewTask }: { onNewTask?: () => void }) => {
                       {colTasks.length}
                     </span>
                   </div>
-                  
+
                   <div className="kanban-col-body" style={{ padding: 12, flex: 1, overflowY: 'auto' }}>
                     <SortableContext id={col.id} items={colTasks.map(t => t.id)} strategy={verticalListSortingStrategy}>
                       <div style={{ display: 'flex', flexDirection: 'column', gap: 10, minHeight: 100 }}>
                         {colTasks.map(task => (
-                          <SortableTaskCard 
-                            key={task.id} 
-                            task={task} 
-                            onClick={() => setSelectedTask(task)} 
+                          <SortableTaskCard
+                            key={task.id}
+                            task={task}
+                            onClick={() => setSelectedTask(task)}
                           />
                         ))}
                       </div>
@@ -269,8 +303,8 @@ export const TasksPanel = ({ onNewTask }: { onNewTask?: () => void }) => {
                 <div style={{ fontSize: 'var(--fs-base)', fontWeight: 'var(--fw-semibold)', lineHeight: 1.3, marginBottom: 4 }}>{selectedTask.title}</div>
                 <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-3)' }}>{selectedTask.id} · {COLUMNS.find(c => c.id === selectedTask.status)?.title}</div>
               </div>
-              <button 
-                className="btn-icon-sm" 
+              <button
+                className="btn-icon-sm"
                 onClick={() => setSelectedTask(null)}
                 style={{ padding: 6, background: 'var(--bg-3)', borderRadius: 'var(--radius-sm)' }}
               >
@@ -279,21 +313,28 @@ export const TasksPanel = ({ onNewTask }: { onNewTask?: () => void }) => {
             </div>
             <div className="side-panel-body">
               <div className="form-group" style={{ marginBottom: 16 }}>
-                <label className="form-label">Description</label>
-                <textarea 
-                  className="form-input" 
-                  rows={3} 
-                  value={selectedTask.sub}
-                  onChange={(e) => applyTaskUpdate(selectedTask.id, { sub: e.target.value })}
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 4 }}>
+                  <label className="form-label" style={{ marginBottom: 0 }}>Description</label>
+                  {isDirty && (
+                    <span style={{ fontSize: 'var(--fs-xs)', fontWeight: 'var(--fw-semibold)', color: 'var(--amber)', background: 'var(--amber-dim)', padding: '2px 8px', borderRadius: 12 }}>
+                      Unsaved changes
+                    </span>
+                  )}
+                </div>
+                <textarea
+                  className="form-input"
+                  rows={3}
+                  value={descDraft}
+                  onChange={(e) => handleDescChange(e.target.value)}
                   style={{ resize: 'vertical' }}
                 />
               </div>
               <div className="form-grid" style={{ marginBottom: 16 }}>
                  <div className="form-group">
                    <label className="form-label">Status</label>
-                   <select 
-                     className="form-input" 
-                     value={selectedTask.status} 
+                   <select
+                     className="form-input"
+                     value={selectedTask.status}
                      onChange={(e) => {
                        const newStatus = e.target.value;
                        applyTaskUpdate(selectedTask.id, { status: newStatus });
@@ -304,8 +345,8 @@ export const TasksPanel = ({ onNewTask }: { onNewTask?: () => void }) => {
                  </div>
                  <div className="form-group">
                    <label className="form-label">Priority</label>
-                   <select 
-                     className="form-input" 
+                   <select
+                     className="form-input"
                      value={selectedTask.priority}
                      onChange={(e) => applyTaskUpdate(selectedTask.id, { priority: e.target.value })}
                    >
@@ -318,9 +359,9 @@ export const TasksPanel = ({ onNewTask }: { onNewTask?: () => void }) => {
               <div className="form-grid" style={{ marginBottom: 16 }}>
                 <div className="form-group">
                    <label className="form-label">Due Date</label>
-                   <input 
-                     type="date" 
-                     className="form-input" 
+                   <input
+                     type="date"
+                     className="form-input"
                      value={selectedTask.dueDate || ''}
                      onChange={(e) => {
                      const newStatus = e.target.value;
@@ -341,23 +382,42 @@ export const TasksPanel = ({ onNewTask }: { onNewTask?: () => void }) => {
                    </select>
                 </div>
               </div>
-              
+
               <div className="divider" style={{ margin: '20px 0' }}></div>
-              
+
               <div className="form-group" style={{ marginBottom: 16 }}>
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 8 }}>
                   <label className="form-label" style={{ marginBottom: 0 }}>Subtasks</label>
-                  <button className="btn btn-ghost btn-xs"><Icon name="plus" size={12} /> Add</button>
+                  <button className="btn btn-ghost btn-xs" onClick={() => {
+                    const current = selectedTask.subtasks || [
+                      { text: 'Review document scans', done: true },
+                      { text: 'Approve via portal', done: false },
+                    ];
+                    applyTaskUpdate(selectedTask.id, { subtasks: [...current, { text: 'New subtask', done: false }] });
+                  }}><Icon name="plus" size={12} /> Add</button>
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 8, padding: 8, background: 'var(--bg-3)', borderRadius: 'var(--radius-sm)', border: '1px solid var(--border-1)' }}>
-                    <input type="checkbox" style={{ width: 14, height: 14 }} defaultChecked />
-                    <span style={{ fontSize: 'var(--fs-xs)', textDecoration: 'line-through', color: 'var(--text-3)' }}>Review document scans</span>
-                  </div>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 8, padding: 8, background: 'var(--bg-3)', borderRadius: 'var(--radius-sm)', border: '1px solid var(--border-1)' }}>
-                    <input type="checkbox" style={{ width: 14, height: 14 }} />
-                    <span style={{ fontSize: 'var(--fs-xs)' }}>Approve via portal</span>
-                  </div>
+                  {(selectedTask.subtasks || [
+                    { text: 'Review document scans', done: true },
+                    { text: 'Approve via portal', done: false },
+                  ]).map((st: any, idx: number) => (
+                    <div key={idx} style={{ display: 'flex', alignItems: 'center', gap: 8, padding: 8, background: 'var(--bg-3)', borderRadius: 'var(--radius-sm)', border: '1px solid var(--border-1)' }}>
+                      <input
+                        type="checkbox"
+                        style={{ width: 14, height: 14, cursor: 'pointer' }}
+                        checked={!!st.done}
+                        onChange={() => {
+                          const base = selectedTask.subtasks || [
+                            { text: 'Review document scans', done: true },
+                            { text: 'Approve via portal', done: false },
+                          ];
+                          const updated = base.map((s: any, i: number) => i === idx ? { ...s, done: !s.done } : s);
+                          applyTaskUpdate(selectedTask.id, { subtasks: updated });
+                        }}
+                      />
+                      <span style={{ fontSize: 'var(--fs-xs)', textDecoration: st.done ? 'line-through' : 'none', color: st.done ? 'var(--text-3)' : 'var(--text-1)' }}>{st.text}</span>
+                    </div>
+                  ))}
                 </div>
               </div>
 
@@ -368,7 +428,7 @@ export const TasksPanel = ({ onNewTask }: { onNewTask?: () => void }) => {
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 12, marginBottom: 16 }}>
                   {getCommentsToRender().length > 0 ? getCommentsToRender().map((comment: any) => (
                     <div key={comment.id} style={{ display: 'flex', gap: 10 }}>
-                      <div className="cust-avatar" style={{ background: 'var(--blue)', width: 28, height: 28, fontSize: 'var(--fs-xs)', flexShrink: 0 }}>
+                      <div className="cust-avatar" style={{ background: getAvatarColor(comment.author || comment.initials || 'A'), width: 28, height: 28, fontSize: 'var(--fs-xs)', flexShrink: 0 }}>
                         {comment.initials}
                       </div>
                       <div style={{ flex: 1, background: 'var(--bg-3)', padding: '10px 12px', borderTopRightRadius: 8, borderBottomRightRadius: 8, borderBottomLeftRadius: 8, border: '1px solid var(--border-1)' }}>
@@ -385,16 +445,16 @@ export const TasksPanel = ({ onNewTask }: { onNewTask?: () => void }) => {
                   )}
                 </div>
                 <div style={{ display: 'flex', gap: 8 }}>
-                  <input 
-                    className="form-input" 
-                    placeholder="Type your comment..." 
-                    style={{ flex: 1 }} 
+                  <input
+                    className="form-input"
+                    placeholder="Type your comment..."
+                    style={{ flex: 1 }}
                     value={commentInput}
                     onChange={e => setCommentInput(e.target.value)}
                     onKeyDown={e => { if (e.key === 'Enter') handleAddComment(); }}
                   />
-                  <button 
-                    className="btn btn-primary btn-sm" 
+                  <button
+                    className="btn btn-primary btn-sm"
                     style={{ padding: '0 16px' }}
                     onClick={handleAddComment}
                   >
@@ -405,7 +465,7 @@ export const TasksPanel = ({ onNewTask }: { onNewTask?: () => void }) => {
             </div>
             <div style={{ padding: '16px 24px', borderTop: '1px solid var(--border-1)', display: 'flex', justifyContent: 'flex-end', gap: 8, background: 'var(--bg-2)' }}>
                <button className="btn btn-ghost" onClick={() => setSelectedTask(null)}>Close</button>
-               <button className="btn btn-primary" onClick={() => setSelectedTask(null)}>Save Changes</button>
+               <button className="btn btn-primary" onClick={() => { handleSaveDescription(); setSelectedTask(null); }}>Save Changes</button>
             </div>
           </div>
         </div>

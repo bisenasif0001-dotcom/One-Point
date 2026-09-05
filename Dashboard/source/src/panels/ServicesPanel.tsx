@@ -1,5 +1,6 @@
-﻿import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { PanelHeader, Badge, Icon } from '../Shared';
+import { getCsrfToken, getStoredAdminToken, setStoredAdminToken } from '../security/adminSession';
 
 type CatalogType = 'service' | 'product';
 
@@ -9,6 +10,22 @@ type CatalogItem = {
   name: string;
   category: string;
   price: number;
+  displayPrice?: string;
+  pricingModel?: string;
+  pricing?: {
+    displayPrice?: string;
+    model?: string;
+    governmentFee?: number;
+    operatorFee?: number;
+    convenienceFee?: number;
+    gstRate?: number;
+    offerPrice?: number | null;
+  };
+  governmentFee?: number;
+  operatorFee?: number;
+  convenienceFee?: number;
+  gstRate?: number;
+  offerPrice?: number | null;
   taxRate: number;
   active: boolean;
   duration?: string;
@@ -17,6 +34,19 @@ type CatalogItem = {
   requiredDocs?: string[];
   automationCount?: number;
   imageUrl?: string;
+  serviceDna?: {
+    lifecycleStatus?: string;
+    active?: boolean;
+    version?: number;
+    layers?: string[];
+    documentLayer?: {
+      required?: string[];
+      optional?: string[];
+      conditional?: string[];
+      evidenceRequired?: string[];
+      evidenceRequiredScope?: string;
+    };
+  } | null;
 };
 
 type Draft = {
@@ -25,7 +55,10 @@ type Draft = {
   name: string;
   category: string;
   price: string;
+  governmentFee: string;
+  displayPrice: string;
   taxRate: string;
+  pricingModel: string;
   active: boolean;
   duration: string;
   icon: string;
@@ -52,8 +85,11 @@ const defaultDraft: Draft = {
   slug: '',
   name: '',
   category: 'E-Services',
-  price: '199',
+  price: '',
+  governmentFee: '0',
+  displayPrice: '',
   taxRate: '0',
+  pricingModel: 'all_inclusive',
   active: true,
   duration: '1-3 Days',
   icon: 'layers',
@@ -65,8 +101,16 @@ const defaultDraft: Draft = {
 
 const money = (amount: any) => `Rs. ${Number(amount || 0).toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 
+function displayPriceForItem(item: CatalogItem) {
+  return item.displayPrice || item.pricing?.displayPrice || money(item.price);
+}
+
 function docsText(item?: CatalogItem) {
   return (item?.requiredDocs || []).join(', ');
+}
+
+function dnaDocumentCount(item: CatalogItem, key: 'required' | 'optional' | 'conditional' | 'evidenceRequired') {
+  return item.serviceDna?.documentLayer?.[key]?.length || 0;
 }
 
 function toDraft(item: CatalogItem): Draft {
@@ -75,8 +119,11 @@ function toDraft(item: CatalogItem): Draft {
     slug: item.slug,
     name: item.name,
     category: item.category,
-    price: String(item.price || 0),
-    taxRate: String(item.taxRate || 0),
+    price: String(item.operatorFee ?? item.pricing?.operatorFee ?? ''),
+    governmentFee: String(item.governmentFee ?? item.pricing?.governmentFee ?? 0),
+    displayPrice: item.displayPrice || item.pricing?.displayPrice || '',
+    taxRate: String(item.gstRate ?? item.pricing?.gstRate ?? item.taxRate ?? 0),
+    pricingModel: item.pricingModel || item.pricing?.model || 'all_inclusive',
     active: item.active,
     duration: item.duration || '',
     icon: item.icon || (item.type === 'product' ? 'shopping-bag' : 'layers'),
@@ -96,15 +143,9 @@ function copyDraftForDuplicate(item: CatalogItem): Draft {
   };
 }
 
-async function getCsrfToken() {
-  const response = await fetch('/api/csrf');
-  const data = await response.json().catch(() => ({}));
-  return data.csrfToken || '';
-}
-
 async function adminCatalogFetch(path: string, options: RequestInit = {}) {
   const headers: Record<string, string> = {
-    'X-Admin-Token': localStorage.getItem('opds_admin_token') || '',
+    'X-Admin-Token': getStoredAdminToken(),
     ...(options.headers as Record<string, string> || {}),
   };
 
@@ -144,6 +185,7 @@ export const ServicesPanel = () => {
   const [draft, setDraft] = useState<Draft>(defaultDraft);
   const [showTokenInput, setShowTokenInput] = useState(false);
   const [tokenInput, setTokenInput] = useState('');
+  const [isDuplicate, setIsDuplicate] = useState(false);
 
   const loadCatalog = async () => {
     setLoading(true);
@@ -176,7 +218,7 @@ export const ServicesPanel = () => {
   const saveAdminToken = () => {
     const t = tokenInput.trim();
     if (!t) return;
-    localStorage.setItem('opds_admin_token', t);
+    setStoredAdminToken(t);
     setTokenInput('');
     loadCatalog();
   };
@@ -203,6 +245,7 @@ export const ServicesPanel = () => {
   const activeCount = items.filter(item => item.active).length;
   const totalCount = items.length;
   const categoryCount = useMemo(() => new Set(items.map(i => i.category).filter(Boolean)).size, [items]);
+  const dnaReadyCount = items.filter(item => item.serviceDna?.lifecycleStatus === 'Published').length;
 
   const openCreate = () => {
     setEditing(null);
@@ -219,12 +262,14 @@ export const ServicesPanel = () => {
   const openDuplicate = (item: CatalogItem) => {
     setEditing(null);
     setEditorOpen(true);
+    setIsDuplicate(true);
     setDraft(copyDraftForDuplicate(item));
   };
 
   const closeEditor = () => {
     setEditorOpen(false);
     setEditing(null);
+    setIsDuplicate(false);
     setDraft(defaultDraft);
   };
 
@@ -239,6 +284,13 @@ export const ServicesPanel = () => {
           requiredDocs: draft.requiredDocs.split(',').map(doc => doc.trim()).filter(Boolean),
           price: Number(draft.price || 0),
           taxRate: Number(draft.taxRate || 0),
+          pricingModel: draft.pricingModel || 'all_inclusive',
+          governmentFee: Number(draft.governmentFee || 0),
+          operatorFee: Number(draft.price || 0),
+          convenienceFee: editing?.convenienceFee ?? editing?.pricing?.convenienceFee ?? 0,
+          gstRate: Number(draft.taxRate || 0),
+          offerPrice: editing?.offerPrice ?? editing?.pricing?.offerPrice ?? null,
+          displayPrice: draft.displayPrice || undefined,
           automationCount: Number(draft.automationCount || 0),
         }),
       });
@@ -271,67 +323,111 @@ export const ServicesPanel = () => {
   };
 
   return (
-    <div className="panel active" style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
-      <PanelHeader
-        title="Service Templates"
-        sub="Website catalog, pricing, required docs, and automation controls"
-        actions={
-          <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
-            <button className="btn btn-ghost btn-sm" onClick={loadCatalog} disabled={loading}>
-              <Icon name="refresh-cw" size={14} /> Sync Website
-            </button>
-            <button className="btn btn-primary btn-sm" onClick={openCreate}>
-              <Icon name="plus" size={14} /> Add Service
-            </button>
+    <div className="panel active" style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: '20px 24px', overflowY: 'auto' }}>
+      {/* Header bar */}
+      <div style={{
+        display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 14,
+        background: '#ffffff', padding: '16px 20px', borderRadius: 16, border: '1px solid rgba(8, 47, 97, 0.08)',
+        boxShadow: '0 2px 8px rgba(15, 23, 42, 0.04)'
+      }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+            <span style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em', color: 'var(--blue)', background: 'var(--blue-dim)', padding: '2px 8px', borderRadius: 6 }}>
+              Services Catalog & Pricing Matrix
+            </span>
           </div>
-        }
-      />
-
-      <div className="panels" style={{ flex: 1, paddingBottom: 0, display: 'flex', flexDirection: 'column', gap: 16 }}>
-        <div className="grid-3">
-          <div className="insight-card info" style={{ padding: 16 }}>
-            <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-3)' }}>Active Services</div>
-            <div style={{ fontSize: 'var(--fs-2xl)', fontWeight: 'var(--fw-semibold)', color: 'var(--text-1)', marginTop: 4 }}>{activeCount}</div>
-          </div>
-          <div className="insight-card positive" style={{ padding: 16 }}>
-            <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-3)' }}>Total Services</div>
-            <div style={{ fontSize: 'var(--fs-2xl)', fontWeight: 'var(--fw-semibold)', color: 'var(--emerald)', marginTop: 4 }}>{totalCount}</div>
-          </div>
-          <div className="insight-card" style={{ padding: 16 }}>
-            <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-3)' }}>Categories</div>
-            <div style={{ fontSize: 'var(--fs-2xl)', fontWeight: 'var(--fw-semibold)', color: 'var(--blue)', marginTop: 4 }}>{categoryCount}</div>
-          </div>
+          <h1 style={{ fontSize: 20, fontWeight: 800, color: 'var(--text-1)', letterSpacing: '-0.02em', margin: 0 }}>
+            Citizen Services & Price Catalog
+          </h1>
+          <p style={{ fontSize: 12.5, color: 'var(--text-3)', margin: 0 }}>
+            {activeCount} Published Live on Portal · {categoryCount} Core Service Categories · One-Click Pricing & SLA Controls
+          </p>
         </div>
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-          <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-            {categories.map(c => (
-              <button
-                key={c}
-                className={`btn btn-sm ${activeCat === c ? 'btn-primary' : 'btn-ghost'}`}
-                style={{ whiteSpace: 'nowrap', ...(activeCat !== c ? { border: '1px solid var(--border-1)', color: 'var(--text-2)' } : {}) }}
-                onClick={() => setActiveCat(c)}
-              >
-                {c}
-              </button>
-            ))}
-          </div>
-          <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-            <div style={{ position: 'relative', width: 260 }}>
-              <div style={{ position: 'absolute', left: 10, top: '50%', transform: 'translateY(-50%)', color: 'var(--text-3)' }}>
-                <Icon name="search" size={14} />
-              </div>
-              <input
-                type="text"
-                className="form-input"
-                placeholder="Search services..."
-                style={{ paddingLeft: 32, fontSize: 'var(--fs-sm)', height: 34 }}
-                value={search}
-                onChange={e => setSearch(e.target.value)}
-              />
-            </div>
-          </div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+          <button
+            type="button"
+            className="btn btn-ghost btn-sm"
+            onClick={loadCatalog}
+            disabled={loading}
+            style={{ borderRadius: 10, fontWeight: 600 }}
+          >
+            <Icon name={loading ? 'loader-2' : 'refresh-cw'} size={14} className={loading ? 'spin' : ''} /> Sync Website
+          </button>
+
+          <button
+            type="button"
+            className="btn btn-primary btn-sm"
+            style={{ background: 'var(--blue)', borderColor: 'var(--blue)', borderRadius: 10, fontWeight: 600 }}
+            onClick={openCreate}
+          >
+            <Icon name="plus" size={14} /> Add Service / SKU
+          </button>
         </div>
+      </div>
+
+      {/* KPI Stats Strip */}
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 14 }}>
+        <div style={{ background: '#ffffff', padding: '16px 20px', borderRadius: 14, border: '1px solid rgba(8, 47, 97, 0.08)', boxShadow: '0 1px 4px rgba(15, 23, 42, 0.04)' }}>
+          <div style={{ fontSize: 11.5, fontWeight: 700, color: 'var(--emerald)', textTransform: 'uppercase' }}>Live On Portal</div>
+          <div style={{ fontSize: 24, fontWeight: 800, color: 'var(--emerald)', marginTop: 4 }}>{activeCount}</div>
+          <div style={{ fontSize: 11.5, color: 'var(--text-4)', marginTop: 4 }}>Active citizen booking items</div>
+        </div>
+
+        <div style={{ background: '#ffffff', padding: '16px 20px', borderRadius: 14, border: '1px solid rgba(8, 47, 97, 0.08)', boxShadow: '0 1px 4px rgba(15, 23, 42, 0.04)' }}>
+          <div style={{ fontSize: 11.5, fontWeight: 700, color: 'var(--blue)', textTransform: 'uppercase' }}>Total Services</div>
+          <div style={{ fontSize: 24, fontWeight: 800, color: 'var(--text-1)', marginTop: 4 }}>{totalCount}</div>
+          <div style={{ fontSize: 11.5, color: 'var(--text-4)', marginTop: 4 }}>Complete Master Catalog</div>
+        </div>
+
+        <div style={{ background: '#ffffff', padding: '16px 20px', borderRadius: 14, border: '1px solid rgba(8, 47, 97, 0.08)', boxShadow: '0 1px 4px rgba(15, 23, 42, 0.04)' }}>
+          <div style={{ fontSize: 11.5, fontWeight: 700, color: 'var(--amber)', textTransform: 'uppercase' }}>Categories</div>
+          <div style={{ fontSize: 24, fontWeight: 800, color: 'var(--text-1)', marginTop: 4 }}>{categoryCount}</div>
+          <div style={{ fontSize: 11.5, color: 'var(--text-4)', marginTop: 4 }}>G2C, B2C, Travel & Edu</div>
+        </div>
+
+        <div style={{ background: '#ffffff', padding: '16px 20px', borderRadius: 14, border: '1px solid rgba(8, 47, 97, 0.08)', boxShadow: '0 1px 4px rgba(15, 23, 42, 0.04)' }}>
+          <div style={{ fontSize: 11.5, fontWeight: 700, color: 'var(--violet)', textTransform: 'uppercase' }}>Service DNA Ready</div>
+          <div style={{ fontSize: 24, fontWeight: 800, color: 'var(--violet)', marginTop: 4 }}>{dnaReadyCount}</div>
+          <div style={{ fontSize: 11.5, color: 'var(--text-4)', marginTop: 4 }}>Govt SLA & verification flows</div>
+        </div>
+      </div>
+
+      {/* Filter Chips and Search */}
+      <div style={{
+        display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12,
+        background: '#ffffff', padding: '12px 18px', borderRadius: 14, border: '1px solid rgba(8, 47, 97, 0.08)'
+      }}>
+        <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+          {categories.map(c => (
+            <button
+              key={c}
+              className={`btn btn-sm ${activeCat === c ? 'btn-primary' : 'btn-ghost'}`}
+              style={{
+                borderRadius: 20, fontSize: 12, fontWeight: activeCat === c ? 700 : 500,
+                ...(activeCat === c ? { background: 'var(--blue)', color: '#fff' } : { color: 'var(--text-2)', border: '1px solid var(--border-1)' })
+              }}
+              onClick={() => setActiveCat(c)}
+            >
+              {c}
+            </button>
+          ))}
+        </div>
+
+        <div style={{ position: 'relative', width: 260 }}>
+          <div style={{ position: 'absolute', left: 12, top: '50%', transform: 'translateY(-50%)', color: 'var(--text-3)', display: 'flex', alignItems: 'center' }}>
+            <Icon name="search" size={14} />
+          </div>
+          <input
+            type="text"
+            className="form-input"
+            placeholder="Search catalog by name, slug..."
+            style={{ paddingLeft: 34, fontSize: 12.5, height: 36, borderRadius: 10, width: '100%' }}
+            value={search}
+            onChange={e => setSearch(e.target.value)}
+          />
+        </div>
+      </div>
 
         {notice && (
           <div style={{ border: '1px solid var(--blue-border)', background: 'var(--blue-dim)', color: 'var(--text-1)', borderRadius: 8, padding: '10px 12px', fontSize: 'var(--fs-sm)', display: 'flex', alignItems: 'center', gap: 8 }}>
@@ -346,7 +442,8 @@ export const ServicesPanel = () => {
             <div style={{ flex: 1 }}>
               <div style={{ fontWeight: 'var(--fw-semibold)', marginBottom: 4, color: 'var(--text-1)' }}>Admin Token Required</div>
               <div style={{ fontSize: 'var(--fs-sm)', color: 'var(--text-2)', marginBottom: 10 }}>
-                Enter your admin API token to sync the live website catalog. You can find this in your server config or <code>.env</code> file as <code>ADMIN_API_TOKEN</code>.
+                Dashboard mein login karein services manage karne ke liye. Admin token aapke server config ya <code>.env</code> file mein <code>ADMIN_API_TOKEN</code> ke naam se milega.{' '}
+                <a href="/admin.html" style={{ color: 'var(--blue)' }}>Admin login karein →</a>
               </div>
               <div style={{ display: 'flex', gap: 8 }}>
                 <input
@@ -367,7 +464,7 @@ export const ServicesPanel = () => {
           </div>
         )}
 
-        <div className="grid-3" style={{ overflowY: 'auto', paddingBottom: 24 }}>
+        <div className="grid-3" style={{ paddingBottom: 24 }}>
           {loading ? (
             <div style={{ gridColumn: '1 / -1', padding: 40, textAlign: 'center', color: 'var(--text-3)' }}>
               <Icon name="loader" size={28} className="spin" style={{ marginBottom: 8 }} />
@@ -392,8 +489,8 @@ export const ServicesPanel = () => {
 
                 <div style={{ display: 'grid', gap: 10, margin: '12px 0 16px', flex: 1, borderTop: '1px solid var(--border-1)', paddingTop: 14 }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 'var(--fs-sm)', alignItems: 'center' }}>
-                    <span style={{ color: 'var(--text-3)', display: 'flex', alignItems: 'center', gap: 6 }}><Icon name="tag" size={14} /> Website Price</span>
-                    <strong>{money(item.price)}</strong>
+                    <span style={{ color: 'var(--text-3)', display: 'flex', alignItems: 'center', gap: 6 }}><Icon name="tag" size={14} /> Display Price</span>
+                    <strong>{displayPriceForItem(item)}</strong>
                   </div>
                   <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 'var(--fs-sm)', alignItems: 'center' }}>
                     <span style={{ color: 'var(--text-3)', display: 'flex', alignItems: 'center', gap: 6 }}><Icon name="clock" size={14} /> Est. Duration</span>
@@ -407,12 +504,38 @@ export const ServicesPanel = () => {
                     <span style={{ color: 'var(--text-3)', display: 'flex', alignItems: 'center', gap: 6 }}><Icon name="bot" size={14} /> Auto Tasks</span>
                     <Badge type={item.automationCount ? 'info' : 'neutral'}>{item.automationCount || 0} configured</Badge>
                   </div>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 'var(--fs-sm)', alignItems: 'center' }}>
+                    <span style={{ color: 'var(--text-3)', display: 'flex', alignItems: 'center', gap: 6 }}><Icon name="layers" size={14} /> Service DNA</span>
+                    <Badge type={item.serviceDna?.lifecycleStatus === 'Published' ? 'success' : 'neutral'}>
+                      v{item.serviceDna?.version || 0} {item.serviceDna?.lifecycleStatus || 'Not ready'}
+                    </Badge>
+                  </div>
                   <div>
                     <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-3)', marginBottom: 6, fontWeight: 'var(--fw-semibold)', textTransform: 'uppercase' }}>Required documents</div>
+                    {(item.requiredDocs || []).length ? (() => {
+                      const docs = item.requiredDocs!;
+                      const maxVisible = 3;
+                      const visible = docs.slice(0, maxVisible);
+                      const extra = docs.length - maxVisible;
+                      return (
+                        <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', maxHeight: 60, overflow: 'hidden' }}>
+                          {visible.map(doc => (
+                            <span key={doc} style={{ background: 'var(--bg-3)', border: '1px solid var(--border-1)', color: 'var(--text-2)', padding: '3px 8px', borderRadius: 4, fontSize: 'var(--fs-xs)' }}>{doc}</span>
+                          ))}
+                          {extra > 0 && (
+                            <span style={{ background: 'var(--bg-3)', border: '1px solid var(--border-1)', color: 'var(--blue)', padding: '3px 8px', borderRadius: 4, fontSize: 'var(--fs-xs)' }}>+{extra} more</span>
+                          )}
+                        </div>
+                      );
+                    })() : <span style={{ color: 'var(--text-3)', fontSize: 'var(--fs-xs)' }}>No checklist set</span>}
+                  </div>
+                  <div>
+                    <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-3)', marginBottom: 6, fontWeight: 'var(--fw-semibold)', textTransform: 'uppercase' }}>Document rule layer</div>
                     <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-                      {(item.requiredDocs || []).length ? item.requiredDocs!.map(doc => (
-                        <span key={doc} style={{ background: 'var(--bg-3)', border: '1px solid var(--border-1)', color: 'var(--text-2)', padding: '3px 8px', borderRadius: 4, fontSize: 'var(--fs-xs)' }}>{doc}</span>
-                      )) : <span style={{ color: 'var(--text-3)', fontSize: 'var(--fs-xs)' }}>No checklist set</span>}
+                      <Badge type="info">Required {dnaDocumentCount(item, 'required')}</Badge>
+                      <Badge type="neutral">Optional {dnaDocumentCount(item, 'optional')}</Badge>
+                      <Badge type="neutral">Conditional {dnaDocumentCount(item, 'conditional')}</Badge>
+                      <Badge type="neutral">Evidence {dnaDocumentCount(item, 'evidenceRequired')}</Badge>
                     </div>
                   </div>
                 </div>
@@ -425,7 +548,7 @@ export const ServicesPanel = () => {
                   <div style={{ display: 'flex', gap: 4 }}>
                     <button className="btn-icon-sm" title="Edit Template" onClick={() => openEdit(item)}><Icon name="edit-2" size={14} /></button>
                     <button className="btn-icon-sm" title="Duplicate" onClick={() => openDuplicate(item)}><Icon name="copy" size={14} /></button>
-                    <button className="btn-icon-sm" title="Remove from website" onClick={() => setDeleteTarget(item)}><Icon name="trash-2" size={14} /></button>
+                    <button className="btn-icon-sm" title="Remove from website" onClick={() => { if (window.confirm(`Kya aap "${item.name}" ko deactivate karna chahte hain?`)) setDeleteTarget(item); }}><Icon name="trash-2" size={14} /></button>
                   </div>
                 </div>
               </div>
@@ -439,11 +562,10 @@ export const ServicesPanel = () => {
             </div>
           )}
         </div>
-      </div>
 
       {editorOpen && (
         <div className="modal-overlay" onClick={closeEditor}>
-          <form className="modal-content" onClick={e => e.stopPropagation()} onSubmit={saveItem} style={{ width: 760, maxHeight: 'calc(100vh - 60px)', overflowY: 'auto' }}>
+          <form className="modal-content" onClick={e => e.stopPropagation()} onSubmit={saveItem} style={{ width: '95vw', maxWidth: 760, maxHeight: '90vh', overflowY: 'auto' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 18 }}>
               <div>
                 <div style={{ fontSize: 'var(--fs-xl)', fontWeight: 'var(--fw-semibold)' }}>{editing ? 'Edit Service' : 'Add Service'}</div>
@@ -452,10 +574,19 @@ export const ServicesPanel = () => {
               <button type="button" className="icon-btn" onClick={closeEditor}><Icon name="x" size={16} /></button>
             </div>
 
+            {isDuplicate && (
+              <div style={{ border: '1px solid var(--amber)', background: 'rgba(201,146,26,0.08)', borderRadius: 8, padding: '10px 12px', fontSize: 'var(--fs-sm)', color: 'var(--text-1)', display: 'flex', alignItems: 'center', gap: 8, marginBottom: 14 }}>
+                <Icon name="copy" size={14} style={{ color: 'var(--amber)', flexShrink: 0 }} />
+                Service duplicate ho gayi — please naam aur slug update karein.
+              </div>
+            )}
+
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }}>
               <label className="form-group">
                 <span className="form-label">Category</span>
-                <input className="form-input" list="catalog-categories" value={draft.category} onChange={e => setDraft(prev => ({ ...prev, category: e.target.value }))} required />
+                <select className="form-input" value={draft.category} onChange={e => setDraft(prev => ({ ...prev, category: e.target.value }))} required>
+                  {DEFAULT_CATEGORIES.map(cat => <option key={cat} value={cat}>{cat}</option>)}
+                </select>
               </label>
               <label className="form-group">
                 <span className="form-label">Name</span>
@@ -466,12 +597,35 @@ export const ServicesPanel = () => {
                 <input className="form-input" value={draft.slug} placeholder="Auto from name if empty" onChange={e => setDraft(prev => ({ ...prev, slug: e.target.value }))} />
               </label>
               <label className="form-group">
-                <span className="form-label">Base Price</span>
+                <span className="form-label">Operator Fee (₹)</span>
                 <input type="number" min="0" className="form-input" value={draft.price} onChange={e => setDraft(prev => ({ ...prev, price: e.target.value }))} required />
+              </label>
+              <label className="form-group">
+                <span className="form-label">Govt / Portal Fee (₹)</span>
+                <input type="number" min="0" className="form-input" value={draft.governmentFee} placeholder="0" onChange={e => setDraft(prev => ({ ...prev, governmentFee: e.target.value }))} />
+              </label>
+              <label className="form-group" style={{ gridColumn: '1 / -1' }}>
+                <span className="form-label">Display Price (website pe dikhega — blank chhodo auto ke liye)</span>
+                <input className="form-input" value={draft.displayPrice} placeholder="e.g. Rs. 220 or Starting from Rs. 499 + Govt Fee" onChange={e => setDraft(prev => ({ ...prev, displayPrice: e.target.value }))} />
               </label>
               <label className="form-group">
                 <span className="form-label">Tax Rate (%)</span>
                 <input type="number" min="0" className="form-input" value={draft.taxRate} onChange={e => setDraft(prev => ({ ...prev, taxRate: e.target.value }))} />
+              </label>
+              <label className="form-group">
+                <span className="form-label">Pricing Model</span>
+                <select className="form-input" value={draft.pricingModel} onChange={e => setDraft(prev => ({ ...prev, pricingModel: e.target.value }))}>
+                  <option value="all_inclusive">all_inclusive</option>
+                  <option value="service_charge_plus_actual">service_charge_plus_actual</option>
+                  <option value="starting_from">starting_from</option>
+                </select>
+                <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-3)', marginTop: 4 }}>
+                  {draft.pricingModel === 'all_inclusive'
+                    ? 'Ek flat fee — govt fee included'
+                    : draft.pricingModel === 'service_charge_plus_actual'
+                      ? 'Service charge plus actual portal / bill / fare amount'
+                      : 'Starting price — final quote depends on selected scope'}
+                </div>
               </label>
               <label className="form-group">
                 <span className="form-label">Duration</span>
@@ -480,6 +634,12 @@ export const ServicesPanel = () => {
               <label className="form-group">
                 <span className="form-label">Icon</span>
                 <input className="form-input" value={draft.icon} onChange={e => setDraft(prev => ({ ...prev, icon: e.target.value }))} />
+                <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-3)', marginTop: 4 }}>
+                  Lucide icon name daalo (e.g.: file-text, credit-card, shield-check)
+                  <a href="https://lucide.dev/icons/" target="_blank" rel="noopener" style={{ marginLeft: 6, color: 'var(--blue)' }}>
+                    Icons dekhein →
+                  </a>
+                </div>
               </label>
               <label className="form-group">
                 <span className="form-label">Target SLA</span>

@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -8,228 +8,485 @@
     <title>Secure Unified Checkout | One Point Digital Services</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@700;800;900&display=swap" rel="stylesheet">
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-        <link rel="stylesheet" href="assets/onepoint.css?v=2">
-</head>
-  <body class="elite-console-body">
-    <header class="elite-console-topbar">
-      <div class="topbar-left">
-        <a class="brand" href="index.html" aria-label="One Point Digital Services home">
-          <img class="console-logo" src="assets/logo-bisen-one-point-footer.svg" alt="Bisen One Point Suvidha Kendra">
-        </a>
-        <span class="console-title-tag badge-checkout">Secure Checkout</span>
-      </div>
-      
-      <div class="topbar-center">
-        <div class="region-badge badge-ssl">
-          <i data-lucide="lock"></i>
-          <span>256-Bit SSL Encrypted Checkout &bull; Verified by OneMart</span>
+    <script src="assets/opds-boot.js?v=anti-fouc-79"></script>
+    <link rel="stylesheet" href="assets/onepoint.css?v=customer-checkout-94">
+  </head>
+  <body class="elite-console-body enterprise-checkout-body">
+    <header class="elite-console-topbar enterprise-checkout-topbar">
+      <div class="checkout-topbar-inner">
+        <div class="topbar-left">
+          <a class="brand" href="index.html" aria-label="One Point Digital Services home">
+            <img class="console-logo" src="assets/logo-bisen-one-point.svg" alt="Bisen One Point Suvidha Kendra">
+          </a>
+          <span class="console-title-tag badge-checkout">Secure Checkout</span>
         </div>
-      </div>
 
-      <div class="topbar-right">
-        <a class="btn btn-soft btn-xs console-exit-btn" href="https://wa.me/919473946181" target="_blank">
-          <i data-lucide="help-circle"></i> Live Help (9473946181)
-        </a>
+        <div class="topbar-center hide-mobile-sm">
+          <div class="region-badge badge-ssl">
+            <i data-lucide="lock"></i>
+            <span>256-bit encrypted checkout</span>
+          </div>
+        </div>
+
+        <div class="topbar-right">
+          <a class="btn btn-soft btn-xs console-exit-btn" href="https://wa.me/919473946181" target="_blank" rel="noopener">
+            <i data-lucide="message-circle"></i> Live Support
+          </a>
+        </div>
       </div>
     </header>
 
-    <main class="elite-console-main">
-      <h1 class="sr-only">Secure Checkout</h1>
-      <div class="elite-checkout-layout simple-checkout-layout">
-        <form class="elite-checkout-form simple-checkout-card glass-panel" data-checkout-form id="checkout-form">
-          <div class="simple-checkout-hero">
-            <div class="checkout-form-header">
-              <span class="checkout-kicker">Secure checkout</span>
-              <h2>Confirm and <span class="h2-gold">pay.</span></h2>
-              <p>Only check your name, mobile number, and payment method. Receipt and tracking will be shared after payment.</p>
-            </div>
-
-            <div class="summary-payable-band">
-              <span>Payable now</span>
-              <strong id="summary-payable-total">Rs. 0.00</strong>
-              <small>Verified One Point service fee.</small>
-            </div>
+    <main class="checkout-grid-container enterprise-checkout-page" aria-labelledby="checkout-title">
+      <section class="checkout-wizard-card enterprise-checkout-panel">
+        <div class="checkout-panel-hero">
+          <div>
+            <span class="checkout-kicker"><i data-lucide="shield-check"></i> One Point Secure Checkout</span>
+            <h1 id="checkout-title"><span>Complete your request.</span><span class="checkout-title-accent">Secure at every step.</span></h1>
+            <p>Review the service, add applicant details, upload documents, and complete payment through one guided flow.</p>
           </div>
-
-          <div class="simple-review-box">
-            <div class="simple-review-head">
-              <span><i data-lucide="shopping-bag"></i></span>
-              <div>
-                <small>Selected service</small>
-                <strong>Review before payment</strong>
-              </div>
+          <div class="checkout-session-chip">
+            <div class="session-chip-head">
+              <span class="pulse-dot-green"></span>
+              <span>Secure Session</span>
             </div>
-            <div id="checkout-items-container" class="checkout-items-list">
-              <div class="empty-console-state">
-                <i data-lucide="loader-2" class="spin"></i>
-                <p>Calculating service fee...</p>
-              </div>
-            </div>
-            <div class="premium-totals simple-totals">
-              <div class="totals-row">
-                <span>Service fee</span>
-                <strong id="summary-subtotal">Rs. 0.00</strong>
-              </div>
-              <div class="totals-row">
-                <span>Platform security fee</span>
-                <strong>FREE</strong>
-              </div>
-              <div class="totals-row totals-row-final">
-                <span>Total payable</span>
-                <strong id="summary-total">Rs. 0.00</strong>
-              </div>
-            </div>
+            <strong id="slot-timer">15:00</strong>
           </div>
+        </div>
 
-          <div class="checkout-section-badge">
-            <span class="step-num">1</span>
-            <div>
-              <h3>Contact details</h3>
-              <p class="checkout-section-helper">Bas naam aur mobile number confirm kar dijiye.</p>
-            </div>
-          </div>
+        <nav class="wizard-progress-bar enterprise-journey modern-journey-3" aria-label="Checkout progress">
+          <div class="progress-line-fill" id="progress-fill" style="width: 0%;"></div>
+          <button type="button" class="progress-node active" id="node-1" onclick="navigateToStep(1)" aria-label="Step 1: Details" aria-current="step">
+            <span class="journey-icon"><i data-lucide="user-check"></i></span>
+            <span class="journey-copy"><strong>1. Details</strong><small>Service & Applicant</small></span>
+          </button>
+          <button type="button" class="progress-node" id="node-2" onclick="navigateToStep(2)" aria-label="Step 2: Documents">
+            <span class="journey-icon"><i data-lucide="file-up"></i></span>
+            <span class="journey-copy"><strong>2. Documents</strong><small>Upload / Attach</small></span>
+          </button>
+          <button type="button" class="progress-node" id="node-3" onclick="navigateToStep(3)" aria-label="Step 3: Payment">
+            <span class="journey-icon"><i data-lucide="shield-check"></i></span>
+            <span class="journey-copy"><strong>3. Payment</strong><small>Review & Pay</small></span>
+          </button>
+          <button type="button" class="progress-node hide-node" id="node-4" onclick="navigateToStep(4)" aria-label="Step 4: Complete" style="display: none;" disabled>
+            <span class="journey-icon"><i data-lucide="badge-check"></i></span>
+            <span class="journey-copy"><strong>Complete</strong><small>Tracking</small></span>
+          </button>
+        </nav>
 
-          <div class="form-grid elite-form-grid simple-essential-grid">
-            <div class="form-field">
-              <label for="checkout-name">Full Name <span aria-hidden="true">*</span></label>
-              <div class="elite-input-wrapper">
-                <i data-lucide="user"></i>
-                <input class="input" id="checkout-name" name="name" autocomplete="name" placeholder="Enter your full name" required>
-              </div>
-            </div>
-            <div class="form-field">
-              <label for="checkout-mobile">Mobile Number <span aria-hidden="true">*</span></label>
-              <div class="elite-input-wrapper">
-                <i data-lucide="phone"></i>
-                <input class="input" id="checkout-mobile" name="mobile" type="tel" inputmode="numeric" autocomplete="tel" pattern="[0-9]{10}" maxlength="10" placeholder="10-digit mobile number" required>
-              </div>
-            </div>
-          </div>
-
-          <input id="checkout-email" name="email" type="hidden">
-          <input id="checkout-address" name="address" type="hidden">
+        <form id="checkout-form" class="enterprise-checkout-form" novalidate>
           <input id="checkout-notes" name="notes" type="hidden">
           <input id="checkout-attachments" name="attachments" type="hidden">
           <input type="hidden" name="gateway" value="razorpay">
+          <div id="checkout-step-status" class="checkout-step-status" role="status" aria-live="polite" hidden></div>
 
-          <div class="checkout-section-badge mt-32">
-            <span class="step-num">2</span>
-            <div>
-              <h3>Payment method</h3>
-              <p class="checkout-section-helper">UPI selected hai. Zarurat ho to method change kar sakte hain.</p>
+          <!-- STEP 1: SERVICE SNAPSHOT & APPLICANT DETAILS -->
+          <div class="wizard-step active" id="step-1">
+            <div class="step-head">
+              <span>01</span>
+              <div>
+                <h2>Service & Applicant Details</h2>
+                <p>Review the selected service and enter applicant details as per official government ID.</p>
+              </div>
+            </div>
+
+            <!-- Service Snapshot Hero Card -->
+            <div id="step-1-details-container" class="selected-service-card">
+              <div class="summary-loading">
+                <i data-lucide="loader-2" class="spin"></i>
+                <p>Fetching service pricing...</p>
+              </div>
+            </div>
+
+            <!-- Saved Customer Quick Fill -->
+            <div class="checkout-saved-customer" id="checkout-saved-customer" hidden></div>
+
+            <!-- Applicant Form Editor -->
+            <div id="checkout-customer-editor">
+              <div class="profile-choice-row" role="radiogroup" aria-label="Filing profile type">
+                <label class="profile-choice-card active">
+                  <i data-lucide="user-round"></i>
+                  <span><strong>Personal applicant</strong><small>Individual citizen filing & certificates</small></span>
+                  <span class="choice-dot"></span>
+                  <input type="radio" name="profileType" value="personal" checked onclick="toggleProfileType('personal')">
+                </label>
+                <label class="profile-choice-card">
+                  <i data-lucide="building-2"></i>
+                  <span><strong>Business entity</strong><small>GSTIN & corporate filings</small></span>
+                  <span class="choice-dot"></span>
+                  <input type="radio" name="profileType" value="business" onclick="toggleProfileType('business')">
+                </label>
+              </div>
+
+              <div class="form-grid elite-form-grid enterprise-form-grid">
+                <div class="form-field enterprise-field span-2">
+                  <input class="eds-input" id="checkout-name" name="name" autocomplete="name" required placeholder=" " oninput="validateLiveInput(this)">
+                  <label for="checkout-name">Applicant Full Name *</label>
+                  <small>Enter the legal name from Aadhaar, PAN, or official identity card.</small>
+                </div>
+                <div class="form-field enterprise-field">
+                  <input class="eds-input" id="checkout-mobile" name="mobile" type="tel" inputmode="numeric" autocomplete="tel" required placeholder=" " pattern="[0-9]{10}" maxlength="10" oninput="validateLiveInput(this)">
+                  <label for="checkout-mobile">Mobile Number *</label>
+                  <small>Real-time WhatsApp & SMS application updates are sent here.</small>
+                </div>
+                <div class="form-field enterprise-field">
+                  <input class="eds-input" id="checkout-email" name="email" type="email" autocomplete="email" required placeholder=" " oninput="validateLiveInput(this)">
+                  <label for="checkout-email">Email Address *</label>
+                  <small>Official receipt and tracking link will be sent to this email.</small>
+                </div>
+                <div class="form-field enterprise-field span-2">
+                  <input class="eds-input" id="checkout-address" name="address" autocomplete="street-address" required placeholder=" " oninput="validateLiveInput(this)">
+                  <label for="checkout-address">Complete Postal Address *</label>
+                  <small>Your mailing / communication address for certificate delivery.</small>
+                </div>
+                <div class="form-field enterprise-field span-2" id="gst-field-container" style="display: none;">
+                  <input class="eds-input" id="checkout-gst" name="gstin" placeholder=" " oninput="validateGstinInput(this)">
+                  <label for="checkout-gst">GSTIN Number *</label>
+                  <small id="gstin-help">Example: 07AAAAA1111A1Z1</small>
+                </div>
+              </div>
+            </div>
+
+            <div class="checkout-trust-grid" aria-label="Checkout trust layer">
+              <div class="trust-tile">
+                <div class="trust-icon trust-ssl"><i data-lucide="lock"></i></div>
+                <div class="trust-info">
+                  <strong>SSL Protected</strong>
+                  <small>256-bit encrypted</small>
+                </div>
+              </div>
+              <div class="trust-tile">
+                <div class="trust-icon trust-gov"><i data-lucide="landmark"></i></div>
+                <div class="trust-info">
+                  <strong>Gov Portal Ready</strong>
+                  <small>Compliant filing</small>
+                </div>
+              </div>
+              <div class="trust-tile">
+                <div class="trust-icon trust-ai"><i data-lucide="badge-check"></i></div>
+                <div class="trust-info">
+                  <strong>Authorized Center</strong>
+                  <small>CSC VLE operator</small>
+                </div>
+              </div>
+            </div>
+
+            <div class="checkout-actions end">
+              <button type="button" class="eds-btn eds-btn-primary" id="service-continue-btn" onclick="continueFromStep1()">Continue to Documents <i data-lucide="arrow-right"></i></button>
             </div>
           </div>
 
-          <div class="premium-choice-grid">
-            <label class="premium-radio-tile active" id="tile-upi">
-              <input type="radio" name="paymentMethod" value="upi" checked hidden>
-              <div class="tile-content">
-                <i data-lucide="qr-code"></i>
-                <span>UPI / QR Code <small>GooglePay, PhonePe, Paytm</small></span>
+          <!-- STEP 2: DOCUMENTS UPLOAD & VERIFICATION -->
+          <div class="wizard-step" id="step-2">
+            <div class="step-head">
+              <span>02</span>
+              <div>
+                <h2>Supporting Documents</h2>
+                <p>Upload clear photos/PDFs or choose to send via WhatsApp later for operator review.</p>
               </div>
-            </label>
-            <label class="premium-radio-tile" id="tile-card">
-              <input type="radio" name="paymentMethod" value="card" hidden>
-              <div class="tile-content">
-                <i data-lucide="credit-card"></i>
-                <span>Debit / Credit Cards <small>Visa, Mastercard, RuPay</small></span>
+            </div>
+
+            <div class="checkout-applicant-summary" id="checkout-applicant-summary" hidden></div>
+
+            <div class="document-command-grid">
+              <aside class="document-checklist-card">
+                <span class="mini-eyebrow"><i data-lucide="list-checks"></i> Recommended Checklist</span>
+                <h3>Keep these ready</h3>
+                <ul>
+                  <li><i data-lucide="check"></i> Identity proof (Aadhaar / Voter ID)</li>
+                  <li><i data-lucide="check"></i> Address proof / Certificate copy</li>
+                  <li><i data-lucide="check"></i> Passport-size photograph</li>
+                  <li><i data-lucide="check"></i> Signature / Marksheet (if needed)</li>
+                </ul>
+                <p>Your documents stay 100% encrypted and are used strictly for portal filing.</p>
+              </aside>
+
+              <div>
+                <div class="drag-drop-area" id="drag-drop-zone" onclick="triggerFileInput()" role="button" tabindex="0" aria-label="Upload documents">
+                  <span class="upload-orb"><i data-lucide="upload-cloud"></i></span>
+                  <h3>Drop documents here or browse</h3>
+                  <p>PDF, JPG, PNG supported. Up to 10MB per file.</p>
+                  <div class="upload-action-row">
+                    <button type="button" class="eds-btn eds-btn-primary" onclick="event.stopPropagation(); triggerFileInput();"><i data-lucide="folder-open"></i> Browse Files</button>
+                    <button type="button" class="eds-btn eds-btn-secondary" onclick="event.stopPropagation(); triggerCamera();"><i data-lucide="camera"></i> Camera</button>
+                  </div>
+                  <input type="file" id="file-input" style="display: none;" multiple accept=".pdf,.jpg,.jpeg,.png" onchange="handleFileSelect(event)">
+                </div>
+
+                <div class="file-upload-progress" id="upload-progress-container" aria-hidden="true">
+                  <div class="file-upload-progress-fill" id="upload-progress-fill"></div>
+                </div>
+
+                <div id="uploaded-files-list" class="uploaded-files-list" aria-live="polite"></div>
+
+                <!-- High-conversion WhatsApp submission fallback -->
+                <div class="checkout-whatsapp-doc-card">
+                  <label class="whatsapp-doc-toggle">
+                    <input type="checkbox" id="whatsapp-doc-later" onchange="toggleWhatsAppDocLater(this)">
+                    <span class="whatsapp-toggle-custom"></span>
+                    <span class="whatsapp-toggle-content">
+                      <span class="whatsapp-toggle-title"><i data-lucide="message-circle"></i> Don't have documents handy right now?</span>
+                      <span class="whatsapp-toggle-desc">Check this to continue with payment immediately. You can share your documents directly on WhatsApp with our operator (<strong>9473946181</strong>) after placing the order.</span>
+                    </span>
+                  </label>
+                </div>
               </div>
-            </label>
-            <label class="premium-radio-tile" id="tile-net">
-              <input type="radio" name="paymentMethod" value="netbanking" hidden>
-              <div class="tile-content">
-                <i data-lucide="building-2"></i>
-                <span>Net Banking <small>All Major Indian Banks</small></span>
-              </div>
-            </label>
+            </div>
+
+            <div class="checkout-actions split">
+              <button type="button" class="eds-btn eds-btn-secondary" onclick="prevStep(1)"><i data-lucide="arrow-left"></i> Back to Details</button>
+              <button type="button" class="eds-btn eds-btn-primary" onclick="nextStep(3)">Continue to Payment <i data-lucide="arrow-right"></i></button>
+            </div>
           </div>
 
-          <div class="summary-safe-note">
-            <i data-lucide="info"></i>
-            <span>Payment ke baad receipt aur tracking details WhatsApp par share honge.</span>
+          <!-- STEP 3: CONSOLIDATED REVIEW & SECURE PAYMENT -->
+          <div class="wizard-step" id="step-3">
+            <div class="step-head">
+              <span>03</span>
+              <div>
+                <h2>Review & Secure Payment</h2>
+                <p>Verify your details, apply available discount coupons, and complete payment safely.</p>
+              </div>
+            </div>
+
+            <!-- Compact Quick Review Cards -->
+            <div class="review-grid modern-review-grid">
+              <section class="review-card">
+                <div class="review-head"><i data-lucide="user-round"></i><strong>Applicant details</strong><button type="button" onclick="navigateToStep(1)">Edit</button></div>
+                <div id="review-customer-summary" class="review-summary-list"></div>
+              </section>
+              <section class="review-card">
+                <div class="review-head"><i data-lucide="files"></i><strong>Documents status</strong><button type="button" onclick="navigateToStep(2)">Edit</button></div>
+                <div id="review-docs-summary" class="review-summary-list"></div>
+              </section>
+            </div>
+
+            <!-- 1-Click Coupon Section -->
+            <div class="checkout-coupon-card">
+              <div class="coupon-command-row">
+                <div class="enterprise-field coupon-field">
+                  <input class="eds-input" id="coupon-code" placeholder=" " autocomplete="off">
+                  <label for="coupon-code">Have a Coupon Code?</label>
+                  <small>Enter promo code or tap the special offer below.</small>
+                </div>
+                <button type="button" class="eds-btn eds-btn-primary" onclick="applyPromoCoupon()">Apply Code</button>
+              </div>
+              <div class="coupon-quick-row">
+                <span class="coupon-quick-label">Special Offer:</span>
+                <button type="button" class="coupon-pill-btn" onclick="applyQuickCoupon('ONEPOINT10')">
+                  <i data-lucide="sparkles"></i> Use <strong>ONEPOINT10</strong> for 10% Instant OFF
+                </button>
+              </div>
+              <div id="coupon-feedback" class="coupon-feedback" style="display: none;"></div>
+            </div>
+
+            <input type="hidden" name="payment_method" id="payment-method-input" value="">
+            <input type="hidden" name="payment_plan" id="payment-plan-input" value="full">
+
+            <!-- Payment Methods UI -->
+            <div class="pay-section-block">
+              <h3 class="pay-section-title"><i data-lucide="credit-card"></i> Choose Payment Method</h3>
+              <div class="pay-cat-tabs" id="payment-category-tabs" role="tablist" aria-label="Payment method categories"></div>
+              <div class="pay-method-grid" id="payment-methods-grid" role="radiogroup" aria-label="Payment methods"></div>
+              <div class="pay-routing-note" id="payment-routing-note" aria-live="polite"></div>
+            </div>
+
+            <!-- Live Invoice / Fee Breakdown -->
+            <div class="enterprise-fee-card">
+              <div class="fee-card-head">
+                <span class="mini-eyebrow"><i data-lucide="calculator"></i> Live invoice</span>
+                <strong>Final Payment Breakdown</strong>
+              </div>
+              <table class="enterprise-fee-table" aria-label="Checkout fee breakdown">
+                <tr>
+                  <td>Government Department Fee</td>
+                  <td id="breakdown-gov">Rs. 0.00</td>
+                </tr>
+                <tr>
+                  <td>One Point Service Charge</td>
+                  <td id="breakdown-platform">Rs. 0.00</td>
+                </tr>
+                <tr>
+                  <td>GST on Service Charge (18%)</td>
+                  <td id="breakdown-gst">Rs. 0.00</td>
+                </tr>
+                <tr id="discount-row" class="discount-row" style="display: none;">
+                  <td>Coupon Discount</td>
+                  <td id="breakdown-discount">-Rs. 0.00</td>
+                </tr>
+                <tr class="total-row">
+                  <td>Grand Total Payable</td>
+                  <td id="breakdown-total">Rs. 0.00</td>
+                </tr>
+              </table>
+            </div>
+
+            <div id="checkout-error" class="login-status error checkout-error" style="display: none;"></div>
+
+            <button type="submit" class="eds-btn eds-btn-primary checkout-submit-btn">
+              <span id="submit-btn-text"><i data-lucide="lock"></i> Secure SSL Checkout</span>
+            </button>
+
+            <div class="payment-trust-strip">
+              <span><i data-lucide="shield-check"></i> 100% Safe Checkout</span>
+              <span><i data-lucide="database-zap"></i> Data Privacy Assured</span>
+              <span><i data-lucide="refresh-ccw"></i> Refund Protection</span>
+            </div>
+
+            <div class="checkout-actions start">
+              <button type="button" class="eds-btn eds-btn-secondary" onclick="prevStep(2)"><i data-lucide="arrow-left"></i> Back to Documents</button>
+            </div>
           </div>
 
-          <div id="checkout-error" class="login-status error"></div>
+          <!-- STEP 4: ORDER SUCCESS & TIMELINE -->
+          <div class="wizard-step" id="step-4">
+            <div class="completion-hero">
+              <div class="success-check-circle">
+                <i data-lucide="check"></i>
+              </div>
+              <span class="mini-eyebrow"><i data-lucide="badge-check"></i> Application Placed</span>
+              <h2>Order placed successfully.</h2>
+              <p id="success-message">Your e-service application is registered and locked in the One Point processing queue.</p>
+            </div>
 
-          <button class="btn btn-primary full elite-shimmer-btn" type="submit">
-            <span class="btn-text" id="submit-btn-text"><i data-lucide="lock"></i> Complete Secure Payment</span>
-            <span class="shimmer-wave"></span>
-          </button>
+            <div class="completion-grid">
+              <section class="completion-card primary">
+                <span>Application number</span>
+                <strong id="tracking-order-id">OPDS2026-TBD</strong>
+                <small>Keep this ID for tracking and support.</small>
+              </section>
+              <section class="completion-card">
+                <span>Payment status</span>
+                <strong id="completion-payment-status">Recorded</strong>
+                <small>Receipt generated after gateway or counter confirmation.</small>
+              </section>
+              <section class="completion-card">
+                <span>Estimated completion</span>
+                <strong id="tracking-estimated">Calculating...</strong>
+                <small>Subject to government portal approval.</small>
+              </section>
+            </div>
 
-          <p class="checkout-urgency">
-            <i data-lucide="zap"></i>
-            <span>Same-day available. Active operator slot locked for your application.</span>
-          </p>
+            <h3 class="timeline-heading">Application timeline</h3>
+            <div class="order-tracking-timeline">
+              <div class="timeline-track-step done" id="track-step-1">
+                <div>
+                  <strong>Received &amp; Verified</strong>
+                  <span>Form metadata checks complete.</span>
+                </div>
+              </div>
+              <div class="timeline-track-step active" id="track-step-2">
+                <div>
+                  <strong>Document Verification</strong>
+                  <span>Operator checks uploaded files and details.</span>
+                </div>
+              </div>
+              <div class="timeline-track-step" id="track-step-3">
+                <div>
+                  <strong>Operator Dispatch</strong>
+                  <span>Submitting to official government channels.</span>
+                </div>
+              </div>
+              <div class="timeline-track-step" id="track-step-4">
+                <div>
+                  <strong>Government Approval</strong>
+                  <span>Official verification and certificate/order completion.</span>
+                </div>
+              </div>
+            </div>
 
-          <div class="simple-trust-strip">
-            <span><i data-lucide="shield-check"></i> Secure transaction</span>
-            <span><i data-lucide="receipt"></i> Receipt shared</span>
-            <span><i data-lucide="message-circle"></i> WhatsApp support</span>
+            <div id="success-payment-note" class="pay-routing-note success-note" style="display: none;"></div>
+
+            <div class="completion-actions">
+              <button type="button" class="eds-btn eds-btn-secondary" id="download-receipt-btn" onclick="window.print()"><i data-lucide="download"></i> Download Receipt</button>
+              <a href="track-application.html" id="success-track-link" class="eds-btn eds-btn-primary"><i data-lucide="radar"></i> Track Application</a>
+              <a href="customer-account-orders.html" class="eds-btn eds-btn-secondary"><i data-lucide="package"></i> View My Orders</a>
+              <a href="services.html" class="eds-btn eds-btn-secondary"><i data-lucide="grid-3x3"></i> Continue Browsing</a>
+            </div>
           </div>
         </form>
+      </section>
+
+      <aside class="sticky-summary-card enterprise-order-summary" id="summary-sidebar" aria-label="Order summary">
+        <div class="summary-head">
+          <span class="mini-eyebrow"><i data-lucide="receipt-text"></i> Order summary</span>
+          <strong id="summary-current-step">Service</strong>
+        </div>
+
+        <div id="checkout-items-container" class="summary-items">
+          <div class="summary-loading">
+            <i data-lucide="loader-2" class="spin"></i>
+            <p>Fetching application details...</p>
+          </div>
+        </div>
+
+        <div class="summary-money-stack">
+          <div>
+            <span>Service subtotal</span>
+            <strong id="summary-subtotal">Rs. 0.00</strong>
+          </div>
+          <div>
+            <span>Government fee</span>
+            <strong id="summary-gov">Rs. 0.00</strong>
+          </div>
+          <div>
+            <span>Service charge</span>
+            <strong id="summary-platform">Rs. 0.00</strong>
+          </div>
+          <div>
+            <span>GST</span>
+            <strong id="summary-taxes">Rs. 0.00</strong>
+          </div>
+          <div class="summary-discount-line">
+            <span>Coupon savings</span>
+            <strong id="summary-discount">-Rs. 0.00</strong>
+          </div>
+          <div class="summary-total-line">
+            <span>Total payable</span>
+            <strong id="summary-total">Rs. 0.00</strong>
+          </div>
+        </div>
+
+        <div class="summary-intel-grid">
+          <span><small>Savings</small><strong id="summary-savings">Rs. 0.00</strong></span>
+          <span><small>Estimated delivery</small><strong id="summary-delivery">2-3 days</strong></span>
+          <span><small>Payment method</small><strong id="summary-payment-method">UPI ready</strong></span>
+          <span><small>Mode</small><strong id="summary-service-type">Assisted</strong></span>
+        </div>
+
+        <div class="summary-support-card">
+          <i data-lucide="headphones"></i>
+          <div>
+            <strong>Need help during checkout?</strong>
+            <span>Live operator support: 9473946181</span>
+          </div>
+          <a href="https://wa.me/919473946181" target="_blank" rel="noopener" aria-label="Open WhatsApp support"><i data-lucide="message-circle"></i></a>
+        </div>
+
+        <div class="summary-trust-badges" aria-label="Trust badges">
+          <span><i data-lucide="lock"></i> SSL Protected</span>
+          <span><i data-lucide="shield-check"></i> Secure Payment</span>
+          <span><i data-lucide="scan-search"></i> AI Verification</span>
+          <span><i data-lucide="headphones"></i> 24x7 Support</span>
+          <span><i data-lucide="refresh-ccw"></i> Refund Policy</span>
+        </div>
+      </aside>
+
+      <div class="checkout-mobile-cta" aria-label="Mobile checkout action">
+        <div>
+          <span>Total payable</span>
+          <strong id="summary-payable-total">Rs. 0.00</strong>
+        </div>
+        <button type="button" class="eds-btn eds-btn-primary" id="mobile-checkout-cta">Continue</button>
       </div>
     </main>
 
     <div data-site-footer></div>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
-    <script src="assets/app.js?v=clean_js_v11" defer></script>
-    <script src="assets/checkout.js?v=elite-system-v10" defer></script>
-    <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        function setupTileGroup(name, prefix) {
-          const radios = document.querySelectorAll(`input[name="${name}"]`);
-          radios.forEach(radio => {
-            radio.addEventListener("change", (e) => {
-              document.querySelectorAll(`input[name="${name}"]`).forEach(r => {
-                const tile = document.getElementById(`${prefix}-${r.value}`);
-                if (tile) {
-                  if (r.checked) tile.classList.add("active");
-                  else tile.classList.remove("active");
-                }
-              });
-            });
-          });
-        }
-        setupTileGroup("gateway", "tile");
-        setupTileGroup("paymentMethod", "tile");
-      });
-    </script>
-  
-<script id="line-alignment-script">
-  document.addEventListener("DOMContentLoaded", function() {
-    setTimeout(() => {
-      document.querySelectorAll(".section-head h2").forEach(h2 => {
-        let align = window.getComputedStyle(h2).textAlign;
-        let parent = h2.closest('.section-head');
-        if (parent) {
-          if (align === "center") {
-            parent.classList.add("center-line");
-          } else {
-            parent.classList.add("left-line");
-          }
-        }
-      });
-    }, 100); // small delay to ensure CSS is applied
-  });
-</script>
-</body>
+    <script src="assets/catalog-pricing.js?v=checkout-pricing-83"></script>
+    <script src="assets/app.js?v=customer-checkout-94" defer></script>
+    <script src="assets/payment-methods.js?v=checkout-polish-81" defer></script>
+    <script src="assets/checkout.js?v=saved-customer-94" defer></script>
+  </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

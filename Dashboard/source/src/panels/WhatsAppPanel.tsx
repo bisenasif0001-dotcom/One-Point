@@ -1,6 +1,7 @@
-﻿import React, { useState, useRef, useEffect, useMemo } from 'react';
+﻿import { useState, useRef, useEffect, useMemo } from 'react';
 import { PanelHeader, Card, Icon, Badge } from '../Shared';
 import { useApp } from '../AppContext';
+import { adminTokenHeader } from '../security/adminSession';
 
 const WA_TEMPLATES = [
   { id: 'wa_pan_update',    name: 'PAN Application Status Update', category: 'Utility',   content: 'Hello {{name}}, your PAN Card application ({{order_id}}) is now under verification. Expect completion in 1-2 days. Track here: {{link}}' },
@@ -10,7 +11,6 @@ const WA_TEMPLATES = [
   { id: 'wa_payment',       name: 'Payment Confirmation',            category: 'Utility',   content: 'Payment confirmed! ₹{{amount}} received for order {{order_id}}. Our team will now process your application. Track: {{link}}' },
 ];
 
-const TOKEN = localStorage.getItem('opds_admin_token') || '';
 
 function getCsrf() {
   return document.cookie.split(';').find(c => c.trim().startsWith('opds_csrf='))?.split('=')[1] || '';
@@ -26,7 +26,7 @@ function aiReply(text: string, customerName = 'Customer', orderId = '') {
   if (t.includes('document') || t.includes('upload') || t.includes('paper') || t.includes('dastavez'))
     return `${customerName} ji, required documents for most services:\n1. Aadhaar Card (Front & Back)\n2. Recent Passport Photo\n3. Mobile number linked to Aadhaar\n\nPlease upload at: ${window.location.origin}/track-application.html${orderId ? '?id=' + orderId : ''}`;
   if (t.includes('price') || t.includes('kitna') || t.includes('cost') || t.includes('fees') || t.includes('charge'))
-    return `Our service charges:\n• PAN Card: ₹499\n• GST Registration: ₹1,200\n• Passport Assistance: ₹2,000\n• Income Certificate: ₹150\n• Voter ID: ₹200\n\nAll prices include processing fees. Visit: ${window.location.origin}/services.html`;
+    return `Our current service charges are shown live from Master Pricing on each service card and checkout page.\n\nPlease visit: ${window.location.origin}/services.html`;
   if (t.includes('track') || t.includes('where') || t.includes('kahan') || t.includes('progress'))
     return `${customerName} ji, track your application live here:\n${window.location.origin}/track-application.html${orderId ? '?id=' + orderId : ''}\n\nYou can also visit our center with your application number.`;
   if (t.includes('hello') || t.includes('hi') || t.includes('namaste') || t.includes('help'))
@@ -55,9 +55,42 @@ export const WhatsAppPanel = () => {
   const [selectedAudience, setSelectedAudience] = useState('all');
   const [broadcastStatus, setBroadcastStatus] = useState<'idle' | 'sending' | 'success'>('idle');
   const [broadcastLogs, setBroadcastLogs]     = useState<any[]>([]);
+  const [governedConversations, setGovernedConversations] = useState<any[]>([]);
 
   // Build chat list from real customers
   const chatList = useMemo(() => {
+    const governed = governedConversations.map((conversation: any) => {
+      const customer = conversation.participants?.find((participant: any) => participant.participantType === 'Customer');
+      // Prefer a WhatsApp channel row that actually carries a phone reference — message inserts
+      // also register a null-reference WhatsApp channel row, which must not win here or dedup breaks.
+      const channel = conversation.channels?.find((item: any) => item.channelType === 'WhatsApp' && item.channelReference)
+        || conversation.channels?.find((item: any) => item.channelType === 'WhatsApp');
+      // A governed conversation carries copies of the same notification across Email/SMS/WhatsApp.
+      // Only WhatsApp-channel messages belong in the WhatsApp view; otherwise each note shows 3x.
+      const whatsappMessages = (conversation.messages || []).filter(
+        (message: any) => !message.channelType || message.channelType === 'WhatsApp'
+      );
+      const latestMessage = whatsappMessages[whatsappMessages.length - 1];
+      const name = customer?.displayName || 'Customer';
+      return {
+        id: conversation.conversationUuid,
+        conversationUuid: conversation.conversationUuid,
+        name,
+        phone: channel?.channelReference || '',
+        lastMsg: latestMessage?.content || conversation.subject || 'Governed conversation',
+        time: latestMessage?.occurredAt || conversation.updatedAt || 'Recent',
+        unread: whatsappMessages.filter((message: any) => message.lifecycleStatus !== 'Read' && message.direction === 'Inbound').length || 0,
+        color: 'var(--emerald)',
+        initials: name.slice(0, 2).toUpperCase(),
+        latestOrder: conversation.linkedObjectType === 'Order' ? conversation.linkedObjectUuid : '',
+        governedMessages: whatsappMessages.map((message: any) => ({
+          id: message.messageUuid,
+          sender: message.direction === 'Inbound' ? 'customer' : 'agent',
+          text: message.content || message.messageType,
+          time: message.occurredAt ? new Date(message.occurredAt).toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' }) : 'Recent',
+        })),
+      };
+    });
     const base = customers.map((c, i) => ({
       id: c.id,
       name: c.name,
@@ -69,6 +102,9 @@ export const WhatsAppPanel = () => {
       initials: c.initials || c.name.slice(0, 2).toUpperCase(),
       latestOrder: c.orders[0]?.id || '',
     }));
+    const governedPhones = new Set(governed.map((conversation: any) => conversation.phone.replace(/\D/g, '')).filter(Boolean));
+    const uniqueCustomerChats = base.filter((conversation: any) => !governedPhones.has(conversation.phone.replace(/\D/g, '')));
+    if (governed.length || uniqueCustomerChats.length) return [...governed, ...uniqueCustomerChats];
     if (base.length === 0) {
       return [
         { id: 'demo1', name: 'Nida Begum',    phone: '+91 98765 43210', lastMsg: 'Mera PAN kab tak banega?', time: '09:42 AM', unread: 1, color: 'var(--blue)',   initials: 'NB', latestOrder: '' },
@@ -77,7 +113,7 @@ export const WhatsAppPanel = () => {
       ];
     }
     return base;
-  }, [customers]);
+  }, [customers, governedConversations]);
 
   const filteredChats = useMemo(() =>
     searchQuery.trim()
@@ -92,6 +128,7 @@ export const WhatsAppPanel = () => {
   const messages = useMemo(() => {
     if (!selectedChat) return [];
     if (chatHistories[selectedChat.id]) return chatHistories[selectedChat.id];
+    if (selectedChat.governedMessages?.length) return selectedChat.governedMessages;
     return [
       { id: 1, sender: 'customer', text: selectedChat.lastMsg || 'Hello', time: selectedChat.time || '09:00 AM' },
       { id: 2, sender: 'bot', text: aiReply(selectedChat.lastMsg || 'hello', selectedChat.name, selectedChat.latestOrder), time: selectedChat.time || '09:00 AM' },
@@ -102,22 +139,34 @@ export const WhatsAppPanel = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages, selectedChatIdx]);
 
-  // Load broadcast logs
-  useEffect(() => {
-    fetch('/api/admin/notifications?channel=whatsapp&limit=20', { headers: { 'X-Admin-Token': TOKEN } })
+  const loadGovernedConversations = () => {
+    if (isCustomer) return Promise.resolve();
+    return fetch('/api/admin/conversations?channel=WhatsApp&limit=50', { headers: adminTokenHeader() })
       .then(r => r.json())
       .then(d => {
-        if (d.logs?.length) {
-          setBroadcastLogs(d.logs.map((l: any) => ({
-            name: l.event, template: l.event, audience: l.recipient,
-            sent: 1, delivered: l.status === 'sent' ? 1 : 0,
-            time: new Date(l.created_at).toLocaleString('en-IN', { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' }),
-            status: l.status === 'sent' ? 'Delivered' : 'Logged',
-          })));
-        }
+        const conversations = d.conversations || [];
+        setGovernedConversations(conversations);
+        const logs = conversations.flatMap((conversation: any) =>
+          (conversation.messages || [])
+            .filter((message: any) => message.channelType === 'WhatsApp' && message.direction !== 'Inbound')
+            .map((message: any) => ({
+              name: conversation.subject || message.messageType,
+              template: message.messageType,
+              audience: conversation.channels?.find((channel: any) => channel.channelType === 'WhatsApp')?.channelReference || 'Customer',
+              sent: 1,
+              delivered: ['Delivered', 'Read'].includes(message.lifecycleStatus) ? 1 : 0,
+              time: new Date(message.occurredAt).toLocaleString('en-IN', { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' }),
+              status: message.lifecycleStatus,
+            }))
+        );
+        setBroadcastLogs(logs);
       }).catch(() => {});
-  }, []);
+  };
 
+  // Load governed WhatsApp conversations and their notification history.
+  useEffect(() => {
+    loadGovernedConversations();
+  }, [isCustomer]);
   const pushMsg = (chatId: string, msg: any) => {
     setChatHistories(prev => {
       const existing = prev[chatId] || messages;
@@ -125,25 +174,67 @@ export const WhatsAppPanel = () => {
     });
   };
 
-  const handleSend = (fromCustomer = false) => {
-    if (!inputValue.trim() || !selectedChat) return;
-    const now = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-    const newMsg = { id: Date.now(), sender: fromCustomer ? 'customer' : 'agent', text: inputValue, time: now };
-    pushMsg(selectedChat.id, newMsg);
-    const query = inputValue;
-    setInputValue('');
-
-    if (fromCustomer && !takeover) {
-      setTimeout(() => {
-        pushMsg(selectedChat.id, {
-          id: Date.now() + 1, sender: 'bot',
-          text: aiReply(query, selectedChat.name, selectedChat.latestOrder),
-          time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-        });
-      }, 700);
+  const saveGovernedWhatsAppMessage = async (chat: any, content: string, direction: 'Inbound' | 'Outbound' = 'Outbound') => {
+    const body = {
+      content,
+      messageType: 'Text',
+      lifecycleStatus: 'Sent',
+      direction,
+      channelType: 'WhatsApp',
+    };
+    const headers = { ...adminTokenHeader(), 'Content-Type': 'application/json', 'X-CSRF-Token': getCsrf() };
+    if (chat.conversationUuid) {
+      const response = await fetch(`/api/admin/conversations/${encodeURIComponent(chat.conversationUuid)}/messages`, {
+        method: 'POST',
+        headers,
+        body: JSON.stringify(body),
+      });
+      if (!response.ok) throw new Error('Message was not saved.');
+      return response.json();
     }
+    const response = await fetch('/api/admin/conversations', {
+      method: 'POST',
+      headers,
+      body: JSON.stringify({
+        ...body,
+        name: chat.name || 'Customer',
+        phone: chat.phone || '',
+        subject: `WhatsApp conversation with ${chat.name || 'Customer'}`,
+        channelReference: chat.phone || '',
+        linkedObjectType: chat.latestOrder ? 'Order' : null,
+        linkedObjectUuid: chat.latestOrder || null,
+      }),
+    });
+    if (!response.ok) throw new Error('Conversation was not saved.');
+    return response.json();
   };
 
+  const handleSend = async (fromCustomer = false) => {
+    if (!inputValue.trim() || !selectedChat) return;
+    const now = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    const query = inputValue;
+    try {
+      const saved = await saveGovernedWhatsAppMessage(selectedChat, query, fromCustomer ? 'Inbound' : 'Outbound');
+      const chatId = saved.conversationUuid || selectedChat.id;
+      pushMsg(chatId, { id: saved.message?.messageUuid || Date.now(), sender: fromCustomer ? 'customer' : 'agent', text: query, time: now });
+      setInputValue('');
+
+      if (fromCustomer && !takeover) {
+        const reply = aiReply(query, selectedChat.name, selectedChat.latestOrder);
+        const governedChat = { ...selectedChat, conversationUuid: saved.conversationUuid || selectedChat.conversationUuid };
+        const replySaved = await saveGovernedWhatsAppMessage(governedChat, reply, 'Outbound');
+        pushMsg(chatId, {
+          id: replySaved.message?.messageUuid || Date.now() + 1,
+          sender: 'bot',
+          text: reply,
+          time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+        });
+      }
+      loadGovernedConversations();
+    } catch {
+      addNotification({ title: 'WhatsApp message not saved', sub: 'Governed conversation record is required before showing this message.', time: 'just now', color: 'var(--danger)', icon: 'alert-triangle', panelTarget: 'whatsapp' });
+    }
+  };
   const sendQuickTemplate = (templateId: string) => {
     if (!selectedChat) return;
     const t = WA_TEMPLATES.find(x => x.id === templateId);
@@ -154,9 +245,17 @@ export const WhatsAppPanel = () => {
       .replace('{{link}}', `${window.location.origin}/track-application.html${selectedChat.latestOrder ? '?id=' + selectedChat.latestOrder : ''}`)
       .replace('{{amount}}', '499');
     const now = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-    pushMsg(selectedChat.id, { id: Date.now(), sender: 'agent', text: `[Template: ${t.name}]\n\n${msg}`, time: now });
-    addActivity({ text: `WhatsApp template "${t.name}" sent to ${selectedChat.name}`, color: 'var(--emerald)', bg: 'var(--emerald-dim)', icon: 'message-circle' });
-    addNotification({ title: `WhatsApp Sent`, sub: `Template "${t.name}" sent to ${selectedChat.name}`, time: 'just now', color: 'var(--emerald)', icon: 'message-circle', panelTarget: 'whatsapp' });
+    const text = `[Template: ${t.name}]\n\n${msg}`;
+    saveGovernedWhatsAppMessage(selectedChat, text, 'Outbound')
+      .then((saved) => {
+        pushMsg(saved.conversationUuid || selectedChat.id, { id: saved.message?.messageUuid || Date.now(), sender: 'agent', text, time: now });
+        addActivity({ text: `WhatsApp template "${t.name}" sent to ${selectedChat.name}`, color: 'var(--emerald)', bg: 'var(--emerald-dim)', icon: 'message-circle' });
+        addNotification({ title: `WhatsApp Sent`, sub: `Template "${t.name}" sent to ${selectedChat.name}`, time: 'just now', color: 'var(--emerald)', icon: 'message-circle', panelTarget: 'whatsapp' });
+        loadGovernedConversations();
+      })
+      .catch(() => {
+        addNotification({ title: 'WhatsApp template not saved', sub: 'Governed conversation record is required before showing this message.', time: 'just now', color: 'var(--danger)', icon: 'alert-triangle', panelTarget: 'whatsapp' });
+      });
   };
 
   const handleSendBroadcast = async () => {
@@ -168,7 +267,7 @@ export const WhatsAppPanel = () => {
       const csrf = getCsrf();
       const res  = await fetch('/api/admin/notifications/send', {
         method: 'POST',
-        headers: { 'X-Admin-Token': TOKEN, 'Content-Type': 'application/json', 'X-CSRF-Token': csrf },
+        headers: { ...adminTokenHeader(), 'Content-Type': 'application/json', 'X-CSRF-Token': csrf },
         body: JSON.stringify({ event: `wa_broadcast_${selectedTemplate}`, message: msg, audience: selectedAudience }),
       });
       const data = await res.json();
@@ -188,8 +287,8 @@ export const WhatsAppPanel = () => {
     return (
       <div className="panel active" style={{ display: 'flex', flexDirection: 'column' }}>
         <PanelHeader title="WhatsApp Support" sub="Official One Point Digital Services Support · End-to-End Encrypted" actions={<Badge type="success"><Icon name="check-circle" size={12} /> Official Business Account</Badge>} />
-        <div className="panels" style={{ flex: 1, paddingBottom: 0 }}>
-          <Card bodyClass="card-body-flush" style={{ maxWidth: 860, margin: '0 auto', display: 'flex', flexDirection: 'column' }}>
+        <div className="panels" style={{ flex: 1, paddingBottom: 0, display: 'flex', flexDirection: 'column' }}>
+          <Card bodyClass="card-body-flush" style={{ maxWidth: 860, width: '100%', margin: '0 auto', display: 'flex', flexDirection: 'column', flex: 1, minHeight: 0, overflow: 'hidden' }} bodyStyle={{ display: 'flex', flexDirection: 'column', flex: 1, minHeight: 0, overflow: 'hidden' }}>
             <div style={{ padding: '14px 20px', borderBottom: '1px solid var(--border-1)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'var(--bg-2)' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
                 <div className="cust-avatar" style={{ background: 'var(--emerald)', color: '#fff', width: 40, height: 40 }}><Icon name="message-circle" size={22} /></div>
@@ -204,10 +303,10 @@ export const WhatsAppPanel = () => {
               <div style={{ alignSelf: 'center', fontSize: 'var(--fs-xs)', color: 'var(--text-3)', background: 'var(--bg-2)', padding: '3px 14px', borderRadius: 16, border: '1px solid var(--border-1)' }}>Today · 256-bit Encrypted</div>
               {messages.map(m => (
                 <div key={m.id} style={{ alignSelf: m.sender === 'customer' ? 'flex-end' : 'flex-start', maxWidth: '75%', display: 'flex', flexDirection: 'column', gap: 3, alignItems: m.sender === 'customer' ? 'flex-end' : 'flex-start' }}>
-                  {m.sender === 'bot' && <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--violet)', fontWeight: 'var(--fw-semibold)', textTransform: 'uppercase', display: 'flex', alignItems: 'center', gap: 4, marginBottom: 2 }}><Icon name="sparkles" size={11} /> One Point AI Assistant</div>}
+                  {m.sender === 'bot' && <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--violet)', fontWeight: 'var(--fw-semibold)', textTransform: 'uppercase', display: 'flex', alignItems: 'center', gap: 4, marginBottom: 2 }}><Icon name="sparkles" size={11} /> One Point FAQ Assistant</div>}
                   {m.sender === 'agent' && <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--blue)', fontWeight: 'var(--fw-semibold)', textTransform: 'uppercase', marginBottom: 2 }}>Asif Bisen (CSC Expert)</div>}
                   <div style={{ background: m.sender === 'customer' ? 'var(--blue)' : 'var(--bg-2)', color: m.sender === 'customer' ? '#fff' : 'var(--text-1)', padding: '10px 14px', borderRadius: 14, borderTopLeftRadius: m.sender === 'customer' ? 14 : 4, borderTopRightRadius: m.sender === 'customer' ? 4 : 14, border: m.sender !== 'customer' ? '1px solid var(--border-1)' : 'none', fontSize: 'var(--fs-sm)', whiteSpace: 'pre-wrap', lineHeight: 1.5 }}>{m.text}</div>
-                  <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-4)' }}>{m.time}{m.sender === 'bot' ? ' · AI Reply' : ''}</div>
+                  <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-4)' }}>{m.time}{m.sender === 'bot' ? ' · Automated FAQ Reply' : ''}</div>
                 </div>
               ))}
               <div ref={messagesEndRef} />
@@ -224,8 +323,8 @@ export const WhatsAppPanel = () => {
 
   // ─── Admin view ───────────────────────────────────────────────────────────
   return (
-    <div className="panel active" style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
-      <PanelHeader title="WhatsApp Control Center" sub="1-on-1 conversations, AI chatbot, bulk broadcast campaigns" actions={
+    <div className="panel active" style={{ display: 'flex', flexDirection: 'column' }}>
+      <PanelHeader title="WhatsApp Control Center" sub="1-on-1 conversations, keyword-based FAQ replies, bulk broadcast campaigns" actions={
         <div style={{ display: 'flex', gap: 4, background: 'var(--bg-3)', border: '1px solid var(--border-1)', borderRadius: 8, padding: 3 }}>
           {(['chats', 'broadcast'] as const).map(tab => (
             <button key={tab} onClick={() => setActiveTab(tab)} style={{ padding: '4px 14px', borderRadius: 6, border: 'none', fontSize: 'var(--fs-xs)', fontWeight: 'var(--fw-semibold)', cursor: 'pointer', background: activeTab === tab ? 'var(--bg-1)' : 'transparent', color: activeTab === tab ? 'var(--text-1)' : 'var(--text-3)', transition: 'all 0.15s' }}>
@@ -236,12 +335,12 @@ export const WhatsAppPanel = () => {
         </div>
       } />
 
-      <div className="panels" style={{ flex: 1, paddingBottom: 0, overflow: 'hidden' }}>
+      <div className="panels" style={{ flex: 1, minHeight: 0, paddingBottom: 0, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
         {activeTab === 'chats' ? (
-          <div style={{ display: 'grid', gridTemplateColumns: '300px 1fr', gap: 16, height: '100%' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '300px 1fr', gap: 16, flex: 1, minHeight: 0 }}>
 
             {/* Chat List */}
-            <Card bodyClass="card-body-flush" style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+            <Card bodyClass="card-body-flush" style={{ display: 'flex', flexDirection: 'column', minHeight: 0 }} bodyStyle={{ display: 'flex', flexDirection: 'column', flex: 1, minHeight: 0, overflow: 'hidden' }}>
               <div style={{ padding: '10px 14px', borderBottom: '1px solid var(--border-1)' }}>
                 <input type="text" className="form-input" placeholder="Search chats..." style={{ width: '100%' }} value={searchQuery} onChange={e => setSearchQuery(e.target.value)} />
               </div>
@@ -266,7 +365,7 @@ export const WhatsAppPanel = () => {
 
             {/* Chat Window */}
             {selectedChat ? (
-              <Card bodyClass="card-body-flush" style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+              <Card bodyClass="card-body-flush" style={{ display: 'flex', flexDirection: 'column', minHeight: 0 }} bodyStyle={{ display: 'flex', flexDirection: 'column', flex: 1, minHeight: 0, overflow: 'hidden' }}>
                 {/* Header */}
                 <div style={{ padding: '14px 16px', borderBottom: '1px solid var(--border-1)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'var(--bg-2)' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
@@ -278,13 +377,20 @@ export const WhatsAppPanel = () => {
                   </div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                     {/* Quick template buttons */}
-                    <select className="form-input" style={{ fontSize: 'var(--fs-xs)', height: 30, padding: '0 8px' }} onChange={e => { if (e.target.value) { sendQuickTemplate(e.target.value); e.target.value = ''; } }}>
+                    <select className="form-input" style={{ fontSize: 'var(--fs-xs)', height: 30, padding: '0 8px' }} onChange={e => {
+                      if (e.target.value) {
+                        const tpl = WA_TEMPLATES.find(x => x.id === e.target.value);
+                        if (tpl) setInputValue(tpl.content);
+                        sendQuickTemplate(e.target.value);
+                        e.target.value = '';
+                      }
+                    }}>
                       <option value="">Quick Template...</option>
                       {WA_TEMPLATES.map(t => <option key={t.id} value={t.id}>{t.name}</option>)}
                     </select>
-                    {takeover ? <Badge type="info">Human Agent Active</Badge> : <Badge type="success">AI Bot Active</Badge>}
+                    {takeover ? <Badge type="info">Human Agent Active</Badge> : <Badge type="success">FAQ Automation Active</Badge>}
                     <button className={`btn btn-sm ${takeover ? 'btn-ghost' : 'btn-primary'}`} onClick={() => setTakeover(!takeover)}>
-                      <Icon name={takeover ? 'bot' : 'user'} size={13} /> {takeover ? 'Hand to AI' : 'Take Over'}
+                      <Icon name={takeover ? 'bot' : 'user'} size={13} /> {takeover ? 'Hand to FAQ Automation' : 'Take Over'}
                     </button>
                   </div>
                 </div>
@@ -294,7 +400,7 @@ export const WhatsAppPanel = () => {
                   <div style={{ alignSelf: 'center', fontSize: 'var(--fs-xs)', color: 'var(--text-3)', background: 'var(--bg-2)', padding: '2px 12px', borderRadius: 12 }}>Today</div>
                   {messages.map(m => (
                     <div key={m.id} style={{ alignSelf: m.sender === 'customer' ? 'flex-start' : 'flex-end', maxWidth: '70%', display: 'flex', flexDirection: 'column', gap: 3, alignItems: m.sender === 'customer' ? 'flex-start' : 'flex-end' }}>
-                      {m.sender === 'bot'   && <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--violet)', fontWeight: 'var(--fw-semibold)', textTransform: 'uppercase', display: 'flex', gap: 4, alignItems: 'center' }}><Icon name="sparkles" size={10} />AI Smart Reply</div>}
+                      {m.sender === 'bot'   && <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--violet)', fontWeight: 'var(--fw-semibold)', textTransform: 'uppercase', display: 'flex', gap: 4, alignItems: 'center' }}><Icon name="sparkles" size={10} />Keyword FAQ Reply</div>}
                       {m.sender === 'agent' && <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--blue)', fontWeight: 'var(--fw-semibold)', textTransform: 'uppercase' }}>Agent Reply</div>}
                       <div style={{ background: m.sender === 'customer' ? 'var(--bg-2)' : 'var(--blue)', color: m.sender === 'customer' ? 'var(--text-1)' : '#fff', padding: '9px 13px', borderRadius: 11, borderTopLeftRadius: m.sender === 'customer' ? 3 : 11, borderTopRightRadius: m.sender === 'customer' ? 11 : 3, border: m.sender === 'customer' ? '1px solid var(--border-1)' : 'none', fontSize: 'var(--fs-sm)', whiteSpace: 'pre-wrap', lineHeight: 1.5 }}>{m.text}</div>
                       <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-4)' }}>{m.time}{m.sender === 'bot' ? ' · FAQ Engine' : ''}</div>
@@ -318,7 +424,7 @@ export const WhatsAppPanel = () => {
                   )}
                   {takeover && (
                     <div style={{ display: 'flex', gap: 8 }}>
-                      <input type="text" className="form-input" placeholder={`Type a message to ${selectedChat.name}...`} style={{ flex: 1 }} value={inputValue} onChange={e => setInputValue(e.target.value)} onKeyDown={e => e.key === 'Enter' && handleSend(false)} />
+                      <input type="text" className="form-input" placeholder={`Type a message to ${selectedChat.name}... (Shift+Enter for newline)`} style={{ flex: 1 }} value={inputValue} onChange={e => setInputValue(e.target.value)} onKeyDown={e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleSend(false); } }} />
                       <button className="btn btn-primary btn-sm" style={{ padding: '0 16px' }} onClick={() => handleSend(false)}><Icon name="send" size={14} /></button>
                     </div>
                   )}
@@ -347,8 +453,13 @@ export const WhatsAppPanel = () => {
                   <select className="form-input" value={selectedAudience} onChange={e => setSelectedAudience(e.target.value)}>
                     <option value="all">All Registered Customers ({customers.length} contacts)</option>
                     <option value="premium">Premium Tier ({customers.filter(c => c.tier === 'Premium').length} contacts)</option>
-                    <option value="pending_payment">Pending Payment Queue</option>
+                    <option value="pending_payment">Pending Payment Queue ({customers.filter(c => c.orders?.some((o: any) => o.payStatus !== 'Paid')).length} contacts)</option>
                   </select>
+                  <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-3)', marginTop: 6 }}>
+                    {selectedAudience === 'all' && <>{customers.length} recipients</>}
+                    {selectedAudience === 'premium' && <>{customers.filter(c => c.tier === 'Premium').length} recipients</>}
+                    {selectedAudience === 'pending_payment' && <>{customers.filter(c => c.orders?.some((o: any) => o.payStatus !== 'Paid')).length} recipients</>}
+                  </div>
                 </div>
                 <div>
                   <label style={{ fontSize: 'var(--fs-xs)', fontWeight: 'var(--fw-semibold)', display: 'block', marginBottom: 6 }}>Message Template</label>

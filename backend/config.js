@@ -2,6 +2,7 @@
 
 const fs = require("node:fs");
 const path = require("node:path");
+const { DEFAULT_ADMIN_API_TOKEN } = require("./security/security-policy");
 
 const rootDir = path.join(__dirname, "..");
 
@@ -30,12 +31,26 @@ const config = {
   siteUrl,
   databaseUrl: process.env.DATABASE_URL || path.join(rootDir, "backend", "data", "opds-payments.sqlite"),
   jwtSecret: process.env.JWT_SECRET || "",
-  adminApiToken: process.env.ADMIN_API_TOKEN || "bisenasif0001_Graphix@123",
+  adminApiToken: process.env.ADMIN_API_TOKEN || DEFAULT_ADMIN_API_TOKEN,
+  security: {
+    allowLegacyAdminToken: process.env.OPDS_ALLOW_LEGACY_ADMIN_TOKEN !== "false"
+  },
   razorpay: {
     keyId: process.env.RAZORPAY_KEY_ID || "",
     keySecret: process.env.RAZORPAY_KEY_SECRET || "",
     webhookSecret: process.env.RAZORPAY_WEBHOOK_SECRET || process.env.RAZORPAY_KEY_SECRET || "",
     baseUrl: process.env.RAZORPAY_BASE_URL || "https://api.razorpay.com/v1"
+  },
+  google: {
+    clientId: process.env.GOOGLE_CLIENT_ID || "",
+    clientSecret: process.env.GOOGLE_CLIENT_SECRET || "",
+    redirectUri: process.env.GOOGLE_REDIRECT_URI || `${siteUrl}/api/auth/google/callback`
+  },
+  microsoft: {
+    clientId: process.env.MICROSOFT_CLIENT_ID || "",
+    clientSecret: process.env.MICROSOFT_CLIENT_SECRET || "",
+    tenant: process.env.MICROSOFT_TENANT_ID || "common",
+    redirectUri: process.env.MICROSOFT_REDIRECT_URI || `${siteUrl}/api/auth/microsoft/callback`
   },
   phonepe: {
     merchantId: process.env.PHONEPE_MERCHANT_ID || "",

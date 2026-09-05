@@ -1,58 +1,1137 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="One Point OneMart for sticker printing, UV DTF printing, T-shirt printing, personalized gifts and business branding.">
-    <title>Products Store | One Point Digital Services</title>
+    <meta name="description" content="OneMart Print Studio by One Point — premium custom sticker printing, photo frames, wall art, personalized gifts, custom t-shirts, business branding, and office printing in Lucknow. Order online or on WhatsApp.">
+    <title>OneMart Print Studio &amp; Custom Gifts | One Point Digital Services</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-        <link rel="stylesheet" href="assets/onepoint.css?v=2">
-</head>
-  <body>
-    <div data-site-nav>
-      <header class="site-header fallback-site-header">
-        <nav class="nav-bar" aria-label="Primary fallback">
-          <a class="brand" href="index.html" aria-label="One Point Digital Services home">
-            <img class="brand-logo brand-logo-header" src="assets/logo-bisen-one-point-footer.svg" alt="Bisen One Point Suvidha Kendra">
-          </a>
-          <div class="fallback-nav-links">
-            <a class="nav-link" href="index.html">Home</a>
-            <a class="nav-link" href="services.html">Services</a>
-            <a class="nav-link" href="products.html">Store</a>
-            <a class="nav-link" href="track-application.html">Track</a>
-            <a class="nav-link" href="contact.html">Contact</a>
-          </div>
-        </nav>
-      </header>
-    </div>
+    <script src="assets/opds-boot.js?v=anti-fouc-79"></script>
+    <link rel="stylesheet" href="assets/onepoint.css?v=customer-checkout-94">
+    
+    <style>
+      /* --- Global Typography & Layout Resets --- */
+      html, body {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+        color: #0f172a;
+        background: #ffffff;
+        scroll-behavior: smooth;
+      }
+
+      /* Unified Gold Gradient Text */
+      .h2-gold {
+        color: #d2a12a !important;
+        background: linear-gradient(135deg, #e5b338 0%, #d2a12a 55%, #b6851b 100%) !important;
+        -webkit-background-clip: text !important;
+        background-clip: text !important;
+        -webkit-text-fill-color: transparent !important;
+        display: inline-block;
+      }
+
+      /* Section Head Styling */
+      .section-head.center-line {
+        text-align: center !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        margin-bottom: clamp(28px, 4vw, 40px) !important;
+      }
+      .section-head.center-line .section-kicker {
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        margin: 0 auto 12px !important;
+        padding: 6px 18px !important;
+        font-size: 0.78rem !important;
+        font-weight: 800 !important;
+        letter-spacing: 0.08em !important;
+        text-transform: uppercase !important;
+        border-radius: 999px !important;
+        background: rgba(7, 80, 146, 0.07) !important;
+        color: #075092 !important;
+        border: 1px solid rgba(7, 80, 146, 0.2) !important;
+      }
+      .section-head.center-line h2 {
+        font-size: clamp(1.75rem, 3.2vw, 2.35rem) !important;
+        font-weight: 850 !important;
+        color: #0b1f35 !important;
+        line-height: 1.25 !important;
+        margin: 0 auto !important;
+        text-align: center !important;
+        letter-spacing: -0.02em !important;
+      }
+      .section-head.center-line h2::after {
+        content: "" !important;
+        display: block !important;
+        width: 52px !important;
+        height: 3.5px !important;
+        margin: 12px auto 0 !important;
+        background: linear-gradient(90deg, #e5b338, #d2a12a, #b6851b) !important;
+        border-radius: 999px !important;
+      }
+      .section-head.center-line p {
+        font-size: clamp(0.92rem, 1.4vw, 1.02rem) !important;
+        color: #475569 !important;
+        line-height: 1.6 !important;
+        margin: 14px auto 0 !important;
+        max-width: 680px !important;
+        text-align: center !important;
+      }
+
+      /* --- 1. Shop by Category 3x3 Visual Discovery Grid --- */
+      .om-cat-grid-section {
+        padding: clamp(36px, 5vw, 60px) 0;
+        background: #f8fafc;
+        border-bottom: 1px solid #e2e8f0;
+      }
+      .om-cat-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+      @media (max-width: 960px) {
+        .om-cat-grid { grid-template-columns: repeat(2, 1fr); }
+      }
+      @media (max-width: 600px) {
+        .om-cat-grid { grid-template-columns: 1fr; gap: 14px; }
+      }
+      .om-cat-card {
+        background: #ffffff;
+        border: 1.5px solid #e2e8f0;
+        border-radius: 16px;
+        padding: 20px 22px;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        text-decoration: none;
+        box-shadow: 0 2px 10px rgba(8, 31, 58, 0.03);
+        transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        position: relative;
+      }
+      .om-cat-card:hover {
+        transform: translateY(-3px);
+        border-color: #075092;
+        box-shadow: 0 10px 24px rgba(7, 80, 146, 0.1);
+      }
+      .om-cat-icon {
+        width: 52px;
+        height: 52px;
+        border-radius: 14px;
+        background: #eff6ff;
+        border: 1.5px solid #bfdbfe;
+        color: #075092;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        transition: all 0.2s ease;
+      }
+      .om-cat-card:hover .om-cat-icon {
+        background: #075092;
+        color: #ffffff;
+        border-color: #075092;
+      }
+      .om-cat-icon i, .om-cat-icon svg { width: 26px; height: 26px; }
+      .om-cat-info { flex: 1; min-width: 0; }
+      .om-cat-info h3 {
+        font-size: 1.05rem;
+        font-weight: 800;
+        color: #0b1f35;
+        margin: 0 0 4px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .om-cat-info p {
+        font-size: 0.82rem;
+        color: #64748b;
+        margin: 0;
+        line-height: 1.45;
+      }
+      .om-cat-count {
+        font-size: 0.72rem;
+        font-weight: 800;
+        background: #f1f5f9;
+        color: #075092;
+        border: 1px solid #e2e8f0;
+        padding: 3px 9px;
+        border-radius: 999px;
+      }
+
+      /* --- 2. Best Sellers / Featured Section --- */
+      .om-featured-section {
+        padding: clamp(40px, 5vw, 64px) 0;
+        background: #ffffff;
+      }
+      .om-featured-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+        box-sizing: border-box;
+      }
+      @media (max-width: 1140px) {
+        .om-featured-grid { grid-template-columns: repeat(3, 1fr); gap: 16px; }
+      }
+      @media (max-width: 820px) {
+        .om-featured-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+      }
+      @media (max-width: 520px) {
+        .om-featured-grid { grid-template-columns: 1fr; gap: 14px; }
+      }
+
+      /* --- 3. Sticky Category Navigation & Search Bar --- */
+      .om-sticky-nav-wrapper {
+        position: sticky;
+        top: 68px;
+        z-index: 85;
+        background: rgba(255, 255, 255, 0.97);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        border-top: 1px solid #e2e8f0;
+        border-bottom: 2px solid #cbd5e1;
+        box-shadow: 0 6px 24px rgba(8, 31, 58, 0.08);
+        padding: 12px 0;
+        transition: all 0.2s ease;
+      }
+      .om-sticky-nav-inner {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 0 20px;
+      }
+      .om-pills-scroll {
+        display: flex;
+        gap: 8px;
+        overflow-x: auto;
+        scrollbar-width: none;
+        flex: 1;
+        min-width: 0;
+        padding: 2px 0;
+      }
+      .om-pills-scroll::-webkit-scrollbar { display: none; }
+      .om-nav-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 8px 16px;
+        border-radius: 999px;
+        font-size: 0.84rem;
+        font-weight: 750;
+        color: #475569;
+        background: #f8fafc;
+        border: 1.5px solid #e2e8f0;
+        text-decoration: none;
+        white-space: nowrap;
+        transition: all 0.2s ease;
+        flex-shrink: 0;
+      }
+      .om-nav-pill:hover {
+        background: #eff6ff;
+        border-color: #93c5fd;
+        color: #075092;
+      }
+      .om-nav-pill.active {
+        background: #075092;
+        border-color: #075092;
+        color: #ffffff;
+        box-shadow: 0 3px 10px rgba(7, 80, 146, 0.3);
+      }
+      .om-nav-pill.active::before {
+        content: "●";
+        font-size: 0.7rem;
+        color: #e5b338;
+        margin-right: 2px;
+      }
+
+      /* Search & Filter Component */
+      .om-search-bar-wrap {
+        max-width: 1200px;
+        margin: 24px auto 0;
+        padding: 0 20px;
+      }
+      .om-search-box {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        background: #ffffff;
+        border: 2px solid #cbd5e1;
+        border-radius: 14px;
+        padding: 8px 16px;
+        box-shadow: 0 3px 12px rgba(8, 31, 58, 0.05);
+        transition: all 0.2s ease;
+      }
+      .om-search-box:focus-within {
+        border-color: #075092;
+        box-shadow: 0 0 0 4px rgba(7, 80, 146, 0.14);
+      }
+      .om-search-box i, .om-search-box svg {
+        color: #075092;
+        width: 20px;
+        height: 20px;
+        flex-shrink: 0;
+      }
+      .om-search-input {
+        flex: 1;
+        border: none;
+        outline: none;
+        font-size: 0.94rem;
+        color: #0f172a;
+        padding: 6px 0;
+        background: transparent;
+        font-weight: 500;
+      }
+      .om-search-clear {
+        background: none;
+        border: none;
+        cursor: pointer;
+        color: #94a3b8;
+        font-size: 1.2rem;
+        display: none;
+        line-height: 1;
+        padding: 4px;
+      }
+      .om-search-clear:hover { color: #0f172a; }
+      .om-quick-chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 14px;
+        align-items: center;
+      }
+      .om-chip-label {
+        font-size: 0.78rem;
+        font-weight: 800;
+        color: #475569;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+      .om-chip {
+        padding: 5px 14px;
+        border-radius: 999px;
+        font-size: 0.8rem;
+        font-weight: 700;
+        background: #f1f5f9;
+        border: 1px solid #cbd5e1;
+        color: #334155;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+      .om-chip:hover {
+        background: #eff6ff;
+        border-color: #93c5fd;
+        color: #075092;
+      }
+      .om-chip.active {
+        background: #075092;
+        border-color: #075092;
+        color: #ffffff;
+      }
+
+      /* --- 4. Product Category Sections --- */
+      .om-category-section {
+        padding: clamp(48px, 6vw, 72px) 0;
+        scroll-margin-top: 140px;
+        position: relative;
+      }
+      .om-cat-alt-bg {
+        background: #f8fbfe;
+        border-top: 1px solid #e2e8f0;
+        border-bottom: 1px solid #e2e8f0;
+      }
+      .om-cat-warm-bg {
+        background: #fdfbf7;
+        border-top: 1px solid #f2ede4;
+        border-bottom: 1px solid #f2ede4;
+      }
+      .om-cat-emerald-bg {
+        background: #f4fdf8;
+        border-top: 1px solid #dcf2e5;
+        border-bottom: 1px solid #dcf2e5;
+      }
+
+      .om-cat-header-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 1200px;
+        margin: 0 auto 32px;
+        padding: 0 20px;
+        flex-wrap: wrap;
+        gap: 16px;
+      }
+      .om-cat-title-block {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+      .om-cat-header-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 14px;
+        background: #eff6ff;
+        border: 1.5px solid #93c5fd;
+        color: #075092;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+      .om-cat-header-icon i, .om-cat-header-icon svg { width: 24px; height: 24px; }
+      .om-cat-title-text h2 {
+        font-size: clamp(1.4rem, 2.4vw, 1.8rem);
+        font-weight: 850;
+        color: #0b1f35;
+        margin: 0 0 4px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+      .om-cat-title-text p {
+        font-size: 0.88rem;
+        color: #64748b;
+        margin: 0;
+        max-width: 620px;
+        line-height: 1.45;
+      }
+      .om-view-all-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 9px 20px;
+        border-radius: 11px;
+        background: #eff6ff;
+        color: #075092;
+        font-size: 0.86rem;
+        font-weight: 800;
+        text-decoration: none;
+        border: 1.5px solid #bfdbfe;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        white-space: nowrap;
+      }
+      .om-view-all-btn:hover {
+        background: #075092;
+        color: #ffffff;
+        border-color: #075092;
+        box-shadow: 0 3px 12px rgba(7, 80, 146, 0.25);
+      }
+
+      /* --- Perfect Vertical Alignment Product Card Grid --- */
+      .om-products-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+        box-sizing: border-box;
+      }
+      @media (max-width: 1140px) {
+        .om-products-grid { grid-template-columns: repeat(3, 1fr); gap: 16px; padding: 0 16px; }
+      }
+      @media (max-width: 820px) {
+        .om-products-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; padding: 0 12px; }
+      }
+      @media (max-width: 520px) {
+        .om-products-grid { grid-template-columns: 1fr; gap: 14px; padding: 0 10px; }
+      }
+
+      /* --- Luxury Redesigned Product Card System --- */
+      .om-product-card {
+        background: #ffffff;
+        border: 1.5px solid #e2e8f0;
+        border-radius: 18px !important;
+        overflow: hidden !important;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        box-shadow: 0 4px 16px rgba(8, 31, 58, 0.05);
+        transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+        position: relative;
+        height: 100%;
+        box-sizing: border-box;
+      }
+      .om-product-card:hover {
+        transform: translateY(-4px);
+        border-color: #075092;
+        box-shadow: 0 14px 32px rgba(7, 80, 146, 0.12);
+      }
+
+      /* Media & Image Container */
+      .om-card-media {
+        width: 100%;
+        height: 200px;
+        background: #f1f5f9;
+        position: relative;
+        overflow: hidden !important;
+      }
+      .om-card-media::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(180deg, rgba(0,0,0,0.14) 0%, transparent 40%, rgba(0,0,0,0.2) 100%);
+        pointer-events: none;
+        transition: opacity 0.25s ease;
+      }
+      .om-card-media img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        display: block;
+      }
+      .om-product-card:hover .om-card-media img {
+        transform: scale(1.06);
+      }
+
+      /* Dynamic Badges with Frosted Glass / Rich Gradients */
+      .om-card-badge {
+        position: absolute;
+        top: 12px;
+        left: 12px;
+        background: #0b1f35;
+        color: #ffffff;
+        font-size: 11px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        padding: 4px 10px;
+        border-radius: 999px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+        z-index: 2;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+      }
+      .om-card-badge.gold {
+        background: linear-gradient(135deg, #d2a12a 0%, #f59e0b 100%);
+        color: #061527;
+        font-weight: 850;
+        box-shadow: 0 2px 10px rgba(210, 161, 42, 0.35);
+      }
+      .om-card-badge.green {
+        background: #059669;
+        color: #ffffff;
+        box-shadow: 0 2px 8px rgba(5, 150, 105, 0.3);
+      }
+      .om-card-badge.blue {
+        background: #075092;
+        color: #ffffff;
+      }
+
+      /* Floating Rating Pill */
+      .om-card-rating {
+        position: absolute;
+        bottom: 12px;
+        right: 12px;
+        background: rgba(255, 255, 255, 0.94);
+        backdrop-filter: blur(8px);
+        border: 1px solid rgba(255, 255, 255, 0.7);
+        padding: 3px 9px;
+        border-radius: 999px;
+        font-size: 12px;
+        font-weight: 850;
+        color: #0b1f35;
+        display: inline-flex;
+        align-items: center;
+        gap: 3px;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
+        z-index: 2;
+      }
+      .om-card-rating span {
+        color: #f59e0b;
+        font-size: 12.5px;
+      }
+
+      /* Card Body */
+      .om-card-body {
+        padding: 16px 18px 12px;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        box-sizing: border-box;
+      }
+      .om-card-body h3 {
+        font-size: 1.02rem;
+        font-weight: 850;
+        color: #0b1f35;
+        margin: 0;
+        line-height: 1.35;
+        min-height: 2.7em;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+      .om-card-desc {
+        font-size: 12.5px;
+        color: #475569;
+        line-height: 1.5;
+        margin: 0 0 8px;
+        min-height: 3em;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+
+      /* Turnaround Time Pill */
+      .om-card-turnaround {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        font-size: 11px;
+        font-weight: 750;
+        color: #059669;
+        background: #ecfdf5;
+        border: 1px solid #a7f3d0;
+        padding: 3px 9px;
+        border-radius: 999px;
+        align-self: flex-start;
+        margin-top: auto;
+      }
+      .om-card-turnaround.blue-pill {
+        color: #075092;
+        background: #eff6ff;
+        border-color: #bfdbfe;
+      }
+      .om-card-turnaround i,
+      .om-card-turnaround svg {
+        width: 12px;
+        height: 12px;
+        stroke-width: 2.2;
+      }
+
+      /* Card Footer & Action Group */
+      .om-card-footer {
+        padding: 12px 14px 14px;
+        border-top: 1px solid #f1f5f9;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        background: #fafcff;
+        margin-top: auto;
+        border-bottom-left-radius: 18px !important;
+        border-bottom-right-radius: 18px !important;
+        box-sizing: border-box;
+      }
+      .om-card-price-block {
+        display: flex;
+        flex-direction: column;
+        flex-shrink: 0;
+        min-width: 0;
+      }
+      .om-price-from {
+        font-size: 9.5px;
+        font-weight: 800;
+        text-transform: uppercase;
+        color: #64748b;
+        letter-spacing: 0.04em;
+        line-height: 1.15;
+        white-space: nowrap;
+      }
+      .om-price-val {
+        font-size: 1.25rem;
+        font-weight: 900;
+        color: #075092;
+        line-height: 1.1;
+        letter-spacing: -0.01em;
+      }
+      .om-card-btn-group {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        flex-shrink: 0;
+      }
+      .om-card-wa-btn {
+        width: 34px;
+        height: 34px;
+        min-width: 34px;
+        border-radius: 9px;
+        background: #25D366;
+        color: #ffffff !important;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        transition: all 0.2s ease;
+        flex-shrink: 0;
+        box-shadow: 0 2px 6px rgba(37, 211, 102, 0.25);
+      }
+      .om-card-wa-btn:hover {
+        background: #1eb954;
+        transform: scale(1.08);
+        box-shadow: 0 4px 10px rgba(37, 211, 102, 0.4);
+      }
+      .om-card-wa-btn i,
+      .om-card-wa-btn svg {
+        width: 16px;
+        height: 16px;
+      }
+      .om-card-cta {
+        padding: 8px 12px;
+        border-radius: 9px;
+        background: #075092;
+        color: #ffffff !important;
+        font-size: 12px;
+        font-weight: 800;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 4px;
+        transition: all 0.2s ease;
+        white-space: nowrap;
+        flex-shrink: 0;
+        box-shadow: 0 2px 8px rgba(7, 80, 146, 0.22);
+        box-sizing: border-box;
+      }
+      .om-card-cta:hover {
+        background: #053b6c;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(7, 80, 146, 0.35);
+      }
+      .om-card-cta:hover i,
+      .om-card-cta:hover svg {
+        transform: translateX(2px);
+      }
+      .om-card-cta i,
+      .om-card-cta svg {
+        width: 12px;
+        height: 12px;
+        transition: transform 0.2s ease;
+      }
+
+      /* Hidden overflow products in a category */
+      .om-extra-product {
+        display: none;
+      }
+      .om-extra-product.show {
+        display: flex;
+        animation: fadeInProduct 0.3s ease forwards;
+      }
+      @keyframes fadeInProduct {
+        from { opacity: 0; transform: translateY(8px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+
+      /* --- 5. High-Contrast Promotional Banner --- */
+      .om-promo-banner {
+        max-width: 1200px;
+        margin: clamp(36px, 5vw, 52px) auto;
+        padding: 0 20px;
+      }
+      .om-promo-card {
+        background: linear-gradient(135deg, #075092 0%, #0b2545 60%, #06162a 100%);
+        border-radius: 24px;
+        padding: clamp(32px, 5vw, 44px);
+        color: #ffffff;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 32px;
+        box-shadow: 0 12px 36px rgba(7, 80, 146, 0.25);
+        position: relative;
+        overflow: hidden;
+      }
+      @media (max-width: 860px) {
+        .om-promo-card { flex-direction: column; text-align: center; }
+      }
+      .om-promo-content h3 {
+        font-size: clamp(1.5rem, 2.6vw, 2rem);
+        font-weight: 850;
+        margin: 0 0 10px;
+        line-height: 1.25;
+        color: #ffffff !important;
+      }
+      .om-promo-content p {
+        font-size: 0.96rem;
+        color: #e2e8f0 !important;
+        margin: 0;
+        max-width: 640px;
+        line-height: 1.6;
+      }
+      .om-promo-actions {
+        display: flex;
+        gap: 14px;
+        flex-wrap: wrap;
+        flex-shrink: 0;
+      }
+      .btn-promo-primary {
+        background: linear-gradient(135deg, #e5b338 0%, #d2a12a 55%, #b6851b 100%);
+        color: #0b1f35 !important;
+        font-weight: 850;
+        padding: 13px 24px;
+        border-radius: 12px;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 0.92rem;
+        box-shadow: 0 4px 16px rgba(229, 179, 56, 0.4);
+        transition: all 0.2s ease;
+      }
+      .btn-promo-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 24px rgba(229, 179, 56, 0.55);
+      }
+      .btn-promo-secondary {
+        background: rgba(255, 255, 255, 0.14);
+        color: #ffffff !important;
+        font-weight: 750;
+        padding: 13px 22px;
+        border-radius: 12px;
+        text-decoration: none;
+        border: 1.5px solid rgba(255, 255, 255, 0.35);
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 0.92rem;
+        transition: all 0.2s ease;
+      }
+      .btn-promo-secondary:hover {
+        background: rgba(255, 255, 255, 0.25);
+      }
+
+      /* --- 6. "Need Design Help?" USP Section --- */
+      .om-design-usp-section {
+        background: #f8fafc;
+        border-top: 1px solid #e2e8f0;
+        border-bottom: 1px solid #e2e8f0;
+        padding: clamp(40px, 5vw, 60px) 0;
+        margin: clamp(36px, 5vw, 52px) 0;
+      }
+      .om-design-usp-inner {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+        display: grid;
+        grid-template-columns: 1.15fr 0.85fr;
+        gap: 36px;
+        align-items: center;
+      }
+      @media (max-width: 860px) {
+        .om-design-usp-inner { grid-template-columns: 1fr; }
+      }
+      .om-usp-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 0.76rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        background: #eff6ff;
+        color: #075092;
+        border: 1px solid #bfdbfe;
+        padding: 4px 12px;
+        border-radius: 999px;
+        margin-bottom: 12px;
+      }
+      .om-design-usp-left h2 {
+        font-size: clamp(1.5rem, 2.6vw, 2.1rem);
+        font-weight: 850;
+        color: #0b1f35;
+        margin: 0 0 12px;
+        line-height: 1.25;
+      }
+      .om-design-usp-left p {
+        font-size: 0.92rem;
+        color: #475569;
+        line-height: 1.6;
+        margin: 0 0 24px;
+      }
+      .om-usp-checks {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 14px;
+      }
+      @media (max-width: 500px) {
+        .om-usp-checks { grid-template-columns: 1fr; }
+      }
+      .om-check-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 0.88rem;
+        font-weight: 750;
+        color: #1e293b;
+      }
+      .om-check-item i, .om-check-item svg {
+        color: #059669;
+        width: 18px;
+        height: 18px;
+        flex-shrink: 0;
+      }
+      .om-design-usp-right {
+        background: #ffffff;
+        border: 1.5px solid #e2e8f0;
+        border-radius: 20px;
+        padding: 30px;
+        box-shadow: 0 6px 24px rgba(8, 31, 58, 0.05);
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+      .om-design-usp-right h4 {
+        font-size: 1.2rem;
+        font-weight: 850;
+        color: #0b1f35;
+        margin: 0;
+      }
+      .om-design-usp-right p {
+        font-size: 0.88rem;
+        color: #64748b;
+        margin: 0;
+        line-height: 1.5;
+      }
+
+      /* --- 7. Revamped Clickable "Shop by Use Case" Section --- */
+      .om-use-case-section {
+        padding: clamp(52px, 6vw, 76px) 0;
+        background: #f8fafc;
+        border-top: 1px solid #e2e8f0;
+      }
+      .om-use-case-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 22px;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+      @media (max-width: 960px) {
+        .om-use-case-grid { grid-template-columns: repeat(2, 1fr); }
+      }
+      @media (max-width: 600px) {
+        .om-use-case-grid { grid-template-columns: 1fr; gap: 16px; }
+      }
+      .om-use-card {
+        background: #ffffff;
+        border: 1.5px solid #e2e8f0;
+        border-radius: 20px;
+        padding: 26px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 18px;
+        text-decoration: none;
+        box-shadow: 0 2px 10px rgba(8, 31, 58, 0.03);
+        transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        cursor: pointer;
+      }
+      .om-use-card:hover {
+        transform: translateY(-4px);
+        border-color: #075092;
+        box-shadow: 0 10px 28px rgba(7, 80, 146, 0.11);
+      }
+      .om-use-card-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .om-use-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 14px;
+        background: #eff6ff;
+        border: 1.5px solid #bfdbfe;
+        color: #075092;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .om-use-icon i, .om-use-icon svg { width: 24px; height: 24px; }
+      .om-use-arrow {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background: #f1f5f9;
+        color: #075092;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s ease;
+      }
+      .om-use-card:hover .om-use-arrow {
+        background: #075092;
+        color: #ffffff;
+        transform: translateX(4px);
+      }
+      .om-use-arrow i, .om-use-arrow svg { width: 15px; height: 15px; }
+      .om-use-title {
+        font-size: 1.1rem;
+        font-weight: 850;
+        color: #0b1f35;
+        margin: 0 0 6px;
+      }
+      .om-use-desc {
+        font-size: 0.84rem;
+        color: #64748b;
+        margin: 0 0 14px;
+        line-height: 1.45;
+      }
+      .om-use-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+      }
+      .om-use-tag {
+        font-size: 0.74rem;
+        font-weight: 750;
+        color: #075092;
+        background: #eff6ff;
+        border: 1px solid #bfdbfe;
+        padding: 4px 10px;
+        border-radius: 999px;
+        text-decoration: none;
+        transition: all 0.15s ease;
+      }
+      .om-use-tag:hover {
+        background: #075092;
+        color: #ffffff;
+      }
+
+      /* --- 8. Strong 5-Point Trust Strip --- */
+      .om-trust-strip-outer {
+        background: #ffffff;
+        border-top: 1.5px solid #e2e8f0;
+        padding: clamp(36px, 5vw, 56px) 0;
+      }
+      .om-trust-grid {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+      @media (max-width: 960px) {
+        .om-trust-grid { grid-template-columns: repeat(3, 1fr); }
+      }
+      @media (max-width: 600px) {
+        .om-trust-grid { grid-template-columns: 1fr; gap: 14px; }
+      }
+      .om-trust-item {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding: 10px;
+        border-radius: 12px;
+        background: #f8fafc;
+        border: 1px solid #e2e8f0;
+      }
+      .om-trust-icon {
+        width: 42px;
+        height: 42px;
+        border-radius: 12px;
+        background: #eff6ff;
+        border: 1.5px solid #bfdbfe;
+        color: #075092;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+      .om-trust-icon i, .om-trust-icon svg { width: 20px; height: 20px; }
+      .om-trust-text { display: flex; flex-direction: column; gap: 2px; }
+      .om-trust-text strong {
+        font-size: 0.86rem;
+        font-weight: 850;
+        color: #0b1f35;
+      }
+      .om-trust-text span {
+        font-size: 0.74rem;
+        color: #64748b;
+        font-weight: 500;
+      }
+
+      /* Floating Back to Categories Button (Stacked Cleanly Above WhatsApp) */
+      .om-back-to-top {
+        position: fixed !important;
+        bottom: 92px !important;
+        right: 28px !important;
+        z-index: 90 !important;
+        background: linear-gradient(135deg, #075092 0%, #082548 100%) !important;
+        color: #ffffff !important;
+        border: 1px solid rgba(255, 255, 255, 0.25) !important;
+        border-radius: 999px !important;
+        padding: 9px 18px !important;
+        font-size: 0.80rem !important;
+        font-weight: 850 !important;
+        display: flex !important;
+        align-items: center !important;
+        gap: 6px !important;
+        cursor: pointer !important;
+        box-shadow: 0 6px 20px rgba(7, 80, 146, 0.35) !important;
+        opacity: 0;
+        pointer-events: none;
+        transition: all 0.25s ease !important;
+      }
+      .om-back-to-top.visible {
+        opacity: 1 !important;
+        pointer-events: auto !important;
+      }
+      .om-back-to-top:hover {
+        background: linear-gradient(135deg, #0961b1 0%, #0b3260 100%) !important;
+        transform: translateY(-2px) !important;
+        box-shadow: 0 8px 24px rgba(7, 80, 146, 0.45) !important;
+      }
+      @media (max-width: 768px) {
+        .om-back-to-top {
+          bottom: 86px !important;
+          right: 18px !important;
+          padding: 8px 14px !important;
+          font-size: 0.74rem !important;
+        }
+      }
+    </style>
+  </head>
+  <body class="page-onemart-store">
+    <div data-site-nav></div>
+
     <main class="page-shell">
+
+      <!-- ── 1. Hero Section ──────────────────────────────────────── -->
       <section class="page-hero page-hero-service premium-service-hero">
-        <!-- Background Video -->
         <video class="hero-video-bg" autoplay loop muted playsinline>
           <source src="assets/Hero section home page.mp4" type="video/mp4">
         </video>
         <div class="hero-video-overlay"></div>
         <div class="page-hero-grid">
           <div class="page-hero-copy">
-            <p class="eyebrow">OneMart</p>
-            <h1 class="page-hero-title"><span class="service-title-static">High-demand print products,</span><span class="service-animated-word" data-animated-word data-words="made order-ready.|stickers &amp; UV DTF branding.|custom tees &amp; gifts.|WhatsApp-first ordering.">made order-ready.</span></h1>
-            <p  class="hero-desc" class="font-regular leading-normal">Sticker printing, UV DTF branding, custom T-shirts, personalized gifts and small business packaging with WhatsApp-first ordering.</p>
+            <p class="eyebrow">OneMart Print Studio &bull; Bisen One Point</p>
+            <h1 class="page-hero-title">
+              <span class="service-title-static">Premium printing,</span>
+              <span class="service-animated-word" data-animated-word data-words="delivered to your door.|for artists &amp; businesses.|custom frames &amp; wall art.|WhatsApp-first ordering.">delivered to your door.</span>
+            </h1>
+            <p class="hero-desc">Custom vinyl stickers, fine art prints, wooden frames, personalized photo mugs, corporate branding, and apparel — crafted with museum-grade precision.</p>
             <div class="hero-actions">
-              <a class="btn btn-primary" href="#onemart-catalog">Shop Best Sellers</a>
-              <a class="btn btn-ghost" href="products.html?service=Custom+Print+Order#apply-now">Get Quote</a>
+              <a class="btn btn-primary font-bold" href="#best-sellers"><i data-lucide="sparkles"></i> Shop Best Sellers</a>
+              <a class="btn btn-ghost font-bold" href="checkout.html?service=custom-print-order&amp;service_name=Custom+Print+Order"><i data-lucide="upload-cloud"></i> Upload Artwork / Get Quote</a>
             </div>
-                        <div class="hero-trust-strip">
-              <span class="hero-trust-badge badge-upi">
-                <i data-lucide="shopping-bag"></i> <strong>5</strong> priority categories
+            <div class="hero-trust-strip">
+              <span class="hero-trust-badge">
+                <i data-lucide="badge-check"></i> <strong>Museum Quality</strong>
               </span>
-              <span class="hero-trust-badge badge-speed">
-                <i data-lucide="truck"></i> <strong>Fast</strong> repeat orders
+              <span class="hero-trust-badge">
+                <i data-lucide="clock"></i> <strong>Fast Dispatch</strong>
               </span>
-              <span class="hero-trust-badge badge-whatsapp">
-                <i data-lucide="clock"></i> <strong>Print</strong> ready proofing
+              <span class="hero-trust-badge">
+                <i data-lucide="lock"></i> <strong>100% Satisfaction</strong>
               </span>
             </div>
           </div>
@@ -60,181 +1139,1758 @@
             <article class="hero-command-center dark-mockup">
               <div class="command-topbar">
                 <span></span><span></span><span></span>
-                <strong>OneMart OS</strong>
+                <strong>OneMart Studio Console</strong>
               </div>
               <div class="command-grid">
                 <div class="command-main">
-                  <span class="tag">Print queue</span>
-                  <h3>Best sellers active</h3>
-                  <p>Sticker, mug, T-shirt and branding jobs move through proofing.</p>
+                  <span class="tag">Active Print Queue</span>
+                  <h3>Studio Live Orders</h3>
+                  <p>Custom stickers, framed prints and merchandise proofing in real time.</p>
                   <div class="command-progress"><span></span></div>
                 </div>
-                <div class="command-tile">
-                  <i data-lucide="shopping-bag"></i>
-                  <strong>Sticker</strong>
-                  <small>labels ready</small>
-                </div>
-                <div class="command-tile">
-                  <i data-lucide="message-circle"></i>
-                  <strong>Proof</strong>
-                  <small>artwork check</small>
-                </div>
+                <div class="command-tile"><i data-lucide="image"></i><strong>Photo</strong><small>Print ready</small></div>
+                <div class="command-tile"><i data-lucide="frame"></i><strong>Frames</strong><small>Dispatching</small></div>
               </div>
               <div class="command-list">
-                <div><span><i data-lucide="sticker"></i></span><strong>Waterproof Stickers</strong><small>best seller</small></div>
-                <div><span><i data-lucide="shirt"></i></span><strong>Custom T-Shirts</strong><small>high demand</small></div>
-                <div><span><i data-lucide="sparkles"></i></span><strong>UV DTF Branding</strong><small>premium finish</small></div>
+                <div><span><i data-lucide="tag"></i></span><strong>Die-Cut Vinyl Stickers</strong><small class="status-complete">300+ DPI</small></div>
+                <div><span><i data-lucide="star"></i></span><strong>Islamic Calligraphy Art</strong><small class="status-complete">Gold Foil</small></div>
+                <div><span><i data-lucide="palette"></i></span><strong>Fine Art Canvas</strong><small class="status-complete">Archival</small></div>
               </div>
             </article>
             <article class="hero-mini-card hero-mini-card-one dark-mockup">
-              <span>Order mode</span>
-              <strong>WhatsApp + local pickup</strong>
+              <span>Order Mode</span>
+              <strong>WhatsApp + Lucknow pickup</strong>
             </article>
             <article class="hero-mini-card hero-mini-card-two dark-mockup">
-              <span>Store trust</span>
-              <strong>Stock + price clarity</strong>
+              <span>Quality Assurance</span>
+              <strong>Proof check before print</strong>
             </article>
           </div>
         </div>
       </section>
 
-      <section class="section onemart-catalog-section" id="onemart-catalog" data-onemart-catalog>
-        <div class="section-head">
-          <div>
-            <p class="section-kicker">Full OneMart Catalog</p>
-            <h2>All products, cleanly grouped <span class="h2-gold">by category.</span></h2>
+      <!-- ── 2. Shop by Category (3x3 Visual Discovery Grid) ──────── -->
+      <section class="om-cat-grid-section" id="shop-categories">
+        <div class="site-container">
+          <div class="section-head center-line">
+            <div>
+              <p class="section-kicker">Visual Discovery</p>
+              <h2>Shop by <span class="h2-gold">Category</span></h2>
+              <p>Explore our curated print catalog from custom stickers to fine art framing.</p>
+            </div>
           </div>
-          <a class="btn btn-soft" href="products.html?service=OneMart+Bulk+Order#apply-now">Bulk Quote <i data-lucide="arrow-right"></i></a>
-        </div>
-        <div class="store-category-stack" data-static-onemart-catalog>
-          <span class="sr-only" id="personalized-gifts"></span>
-          <span class="sr-only" id="sticker-printing"></span>
-          <span class="sr-only" id="uv-dtf-printing"></span>
-          <span class="sr-only" id="t-shirt-printing"></span>
-          <span class="sr-only" id="business-branding"></span>
-          <span class="sr-only" id="islamic-products"></span>
-          <span class="sr-only" id="stationery"></span>
-          <span class="sr-only" id="printer-ink"></span>
-          <span class="sr-only" id="accessories"></span>
-          <p class="field-help">Loading OneMart products...</p>
+
+          <div class="om-cat-grid">
+            <a href="#sticker-printing" class="om-cat-card">
+              <div class="om-cat-icon"><i data-lucide="tag"></i></div>
+              <div class="om-cat-info">
+                <h3>Sticker Printing <span class="om-cat-count">8 Items</span></h3>
+                <p>Custom die-cut, waterproof vinyl &amp; packaging labels.</p>
+              </div>
+            </a>
+
+            <a href="#photo-fine-art" class="om-cat-card">
+              <div class="om-cat-icon"><i data-lucide="image"></i></div>
+              <div class="om-cat-info">
+                <h3>Wall Art &amp; Prints <span class="om-cat-count">11 Items</span></h3>
+                <p>Fine art giclée, photo prints &amp; stretched canvas.</p>
+              </div>
+            </a>
+
+            <a href="#photo-frames" class="om-cat-card">
+              <div class="om-cat-icon"><i data-lucide="frame"></i></div>
+              <div class="om-cat-info">
+                <h3>Photo Frames <span class="om-cat-count">7 Items</span></h3>
+                <p>A4/A3 wooden, sleek black &amp; custom size frames.</p>
+              </div>
+            </a>
+
+            <a href="#personalized-gifts" class="om-cat-card">
+              <div class="om-cat-icon"><i data-lucide="gift"></i></div>
+              <div class="om-cat-info">
+                <h3>Personalized Gifts <span class="om-cat-count">5 Items</span></h3>
+                <p>Custom photo mugs, magic mugs &amp; keychains.</p>
+              </div>
+            </a>
+
+            <a href="#t-shirt-printing" class="om-cat-card">
+              <div class="om-cat-icon"><i data-lucide="shirt"></i></div>
+              <div class="om-cat-info">
+                <h3>Custom Apparel <span class="om-cat-count">4 Items</span></h3>
+                <p>DTF graphic t-shirts, polo &amp; corporate wear.</p>
+              </div>
+            </a>
+
+            <a href="#business-branding" class="om-cat-card">
+              <div class="om-cat-icon"><i data-lucide="briefcase"></i></div>
+              <div class="om-cat-info">
+                <h3>Business Branding <span class="om-cat-count">8 Items</span></h3>
+                <p>Visiting cards, flyers, brochures &amp; QR standees.</p>
+              </div>
+            </a>
+
+            <a href="#office-printing" class="om-cat-card">
+              <div class="om-cat-icon"><i data-lucide="printer"></i></div>
+              <div class="om-cat-info">
+                <h3>Office &amp; Documents <span class="om-cat-count">8 Items</span></h3>
+                <p>Color Xerox, lamination, spiral binding &amp; ID cards.</p>
+              </div>
+            </a>
+
+            <a href="#islamic-wall-art" class="om-cat-card">
+              <div class="om-cat-icon"><i data-lucide="moon"></i></div>
+              <div class="om-cat-info">
+                <h3>Islamic Wall Art <span class="om-cat-count">6 Items</span></h3>
+                <p>Ayatul Kursi, Surah Rahman &amp; gold foil calligraphy.</p>
+              </div>
+            </a>
+
+            <a href="#artists-corner" class="om-cat-card">
+              <div class="om-cat-icon"><i data-lucide="palette"></i></div>
+              <div class="om-cat-info">
+                <h3>Artists Corner <span class="om-cat-count">7 Items</span></h3>
+                <p>Artwork reproduction, sketch prints &amp; exhibitions.</p>
+              </div>
+            </a>
+          </div>
         </div>
       </section>
-    </main>
-    <div data-site-footer></div>
-    <script>
-      (function renderStaticOneMartCatalog() {
-        const root = document.querySelector("[data-static-onemart-catalog]");
-        if (!root) return;
 
-        const images = {
-          "Personalized Gifts": "assets/happy_customer.png?v=product-local-1",
-          "Sticker Printing": "assets/pan-card-showcase.png?v=product-local-1",
-          "UV DTF Printing": "assets/contact_hero_bg.png?v=product-local-1",
-          "T-Shirt Printing": "assets/indian_student_study.png?v=product-local-1",
-          "Business Branding": "assets/csc_hero_bg.png?v=product-local-1",
-          "Wedding & Events": "assets/happy_indian_customer.png?v=product-local-1",
-          "Home Decor": "assets/security-shield.png?v=product-local-1",
-          "Trending Products": "assets/voter_review_bg.png?v=product-local-1",
-          "Islamic Products": "assets/disclaimer_seal.png?v=product-local-1",
-          "Stationery": "assets/indian_student_study_bg.png?v=product-local-1",
-          "Printer Ink & Refills": "assets/pan_card_mockup.png?v=product-local-1",
-          "Computer Accessories": "assets/csc_hero_bg.png?v=product-local-1"
-        };
+      <!-- ── 3. Featured / Best Sellers (4 Top Cards) ──────────────── -->
+      <section class="om-featured-section" id="best-sellers">
+        <div class="site-container">
+          <div class="section-head center-line">
+            <div>
+              <p class="section-kicker">Customer Favorites</p>
+              <h2>Most Popular <span class="h2-gold">Right Now</span></h2>
+              <p>Top-rated custom prints and personalized products loved by our customers.</p>
+            </div>
+          </div>
 
-        const catalog = [
-          ["Personalized Gifts", "gift", [["Photo Frames",199],["LED Frames",499],["Magic Mugs",249],["Custom Mugs",149],["Mobile Covers",249],["Spotify Plaques",299],["Keychains",69],["Cushion Printing",299]]],
-          ["Sticker Printing", "sticker", [["Logo Stickers",99],["Waterproof Stickers",149],["Vinyl Stickers",149],["Holographic Stickers",199],["Laptop Stickers",99],["QR Code Stickers",79],["Product Labels",129],["Packaging Stickers",149]]],
-          ["UV DTF Printing", "sparkles", [["Cup Branding",199],["Bottle Branding",199],["Glass Stickers",179],["Acrylic Name Plates",349],["Business Logo Transfers",199],["Product Branding",249]]],
-          ["T-Shirt Printing", "shirt", [["Custom T-Shirts",299],["Couple T-Shirts",599],["Polo T-Shirts",399],["Hoodies",799],["DTF Transfers",99]]],
-          ["Business Branding", "briefcase-business", [["Visiting Cards",299],["PVC Cards",60],["Flyers",399],["Menu Cards",499],["Barcode Labels",149],["Thank You Cards",199]]],
-          ["Wedding & Events", "party-popper", [["Wedding Cards",499],["Welcome Boards",699],["Return Gift Tags",99],["Photo Booth Props",299]]],
-          ["Home Decor", "image", [["Wall Posters",149],["Canvas Prints",499],["Photo Tiles",199],["Refrigerator Magnets",79]]],
-          ["Trending Products", "flame", [["Anime Stickers",99],["Aesthetic Stickers",99],["Creator Merchandise",349],["Mini Photo Prints",99],["Instagram Branding Kits",499],["Small Business Packaging Kits",599]]],
-          ["Islamic Products", "star", [["Attar Perfume",149],["Prayer Cap",99],["Tasbih Counter",79],["Dates Pack",199],["Islamic Books",149],["Gift Sets",349]]],
-          ["Stationery", "pencil", [["Notebooks",49],["Pens",10],["Files & Folders",35],["School Kits",199],["Office Registers",89],["Exam Pads",79]]],
-          ["Printer Ink & Refills", "droplet", [["Epson Ink",199],["Canon Ink",199],["HP Ink",249],["Toner Refill",399],["Cartridge Support",299],["Photo Paper",149]]],
-          ["Computer Accessories", "monitor", [["Keyboard",399],["Mouse",199],["USB Drive",299],["Memory Card",249],["HDMI Cable",149],["Laptop Stand",499]]]
-        ];
-
-        const slug = (value) => value.toLowerCase().replace(/&/g, "and").replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
-        const categoryAnchors = {
-          "Printer Ink & Refills": "printer-ink",
-          "Computer Accessories": "accessories"
-        };
-        const card = (category, product) => {
-          const productSlug = slug(product[0]);
-          return `
-            <article class="store-product-card">
-              <a class="store-product-link" href="product-detail.html?product=${productSlug}">
-                <div class="store-product-media">
-                  <img src="${images[category]}" alt="${product[0]}" loading="lazy" decoding="async">
-                  <span class="store-product-badge">OneMart</span>
+          <div class="om-featured-grid">
+            
+            <!-- Best Seller 1 -->
+            <article class="om-product-card">
+              <div class="om-card-media">
+                <img src="https://images.unsplash.com/photo-1572375992501-4b0892d50c69?auto=format&fit=crop&w=800&q=80" alt="Custom Die-Cut Vinyl Stickers" loading="lazy">
+                <span class="om-card-badge gold">BEST SELLER</span>
+                <span class="om-card-rating"><span>★</span> 4.9</span>
+              </div>
+              <div class="om-card-body">
+                <h3>Custom Die-Cut Vinyl Stickers</h3>
+                <p class="om-card-desc">Waterproof, scratch-resistant vinyl stickers customized to your exact logo and artwork shape.</p>
+                <div class="om-card-turnaround"><i data-lucide="zap"></i> Same-Day Available</div>
+              </div>
+              <div class="om-card-footer">
+                <div class="om-card-price-block">
+                  <span class="om-price-from">Starting From</span>
+                  <span class="om-price-val">&#8377;99</span>
                 </div>
-                <div class="store-product-body">
-                  <span class="rating">4.8</span>
-                  <h3>${product[0]}</h3>
-                  <p>${product[0]} with clean print finishing, order-ready proofing and local support.</p>
+                <div class="om-card-btn-group">
+                  <a href="https://wa.me/919473946181?text=Hi%20One%20Point,%20I%20want%20to%20order%20Custom%20Die-Cut%20Stickers" class="om-card-wa-btn" target="_blank" rel="noopener" title="Order on WhatsApp"><i data-lucide="message-circle"></i></a>
+                  <a href="product-detail.html?product=die-cut-stickers" class="om-card-cta">Customize <i data-lucide="arrow-right" style="width:13px;height:13px"></i></a>
                 </div>
-              </a>
-              <div class="store-product-actions">
-                <strong>Rs. ${product[1]}</strong>
-                <a class="btn btn-soft" href="product-detail.html?product=${productSlug}">Add</a>
-                <a class="btn btn-primary" href="product-detail.html?product=${productSlug}">Buy</a>
               </div>
             </article>
-          `;
-        };
 
-        root.innerHTML = catalog.map(([category, icon, products]) => `
-          <section class="store-category-section" id="${categoryAnchors[category] || slug(category)}">
-            <div class="store-category-head">
-              <span><i data-lucide="${icon}"></i></span>
-              <div>
-                <p class="section-kicker">OneMart</p>
-                <h2><span class="h2-gold">${category}</span></h2>
-                <p>${products.length} high-demand products in this category.</p>
+            <!-- Best Seller 2 -->
+            <article class="om-product-card">
+              <div class="om-card-media">
+                <img src="https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?auto=format&fit=crop&w=800&q=80" alt="A4/A3 Premium Wooden Photo Frame" loading="lazy">
+                <span class="om-card-badge blue">POPULAR</span>
+                <span class="om-card-rating"><span>★</span> 4.9</span>
+              </div>
+              <div class="om-card-body">
+                <h3>A4/A3 Premium Wooden Photo Frame</h3>
+                <p class="om-card-desc">High-finish wooden frame with acrylic shatterproof glass and premium photo print included.</p>
+                <div class="om-card-turnaround blue-pill"><i data-lucide="clock"></i> Ready in 1–2 Days</div>
+              </div>
+              <div class="om-card-footer">
+                <div class="om-card-price-block">
+                  <span class="om-price-from">Starting From</span>
+                  <span class="om-price-val">&#8377;149</span>
+                </div>
+                <div class="om-card-btn-group">
+                  <a href="https://wa.me/919473946181?text=Hi%20One%20Point,%20I%20want%20to%20order%20Photo%20Frames" class="om-card-wa-btn" target="_blank" rel="noopener" title="Order on WhatsApp"><i data-lucide="message-circle"></i></a>
+                  <a href="product-detail.html?product=a4-frame" class="om-card-cta">Customize <i data-lucide="arrow-right" style="width:13px;height:13px"></i></a>
+                </div>
+              </div>
+            </article>
+
+            <!-- Best Seller 3 -->
+            <article class="om-product-card">
+              <div class="om-card-media">
+                <img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=800&q=80" alt="Personalized Ceramic Photo Mug" loading="lazy">
+                <span class="om-card-badge green">FAST MOVING</span>
+                <span class="om-card-rating"><span>★</span> 4.8</span>
+              </div>
+              <div class="om-card-body">
+                <h3>Personalized Ceramic Photo Mug</h3>
+                <p class="om-card-desc">Glossy ceramic mug printed with your cherished photos, quotes, and custom anniversary designs.</p>
+                <div class="om-card-turnaround"><i data-lucide="zap"></i> Same-Day Available</div>
+              </div>
+              <div class="om-card-footer">
+                <div class="om-card-price-block">
+                  <span class="om-price-from">Starting From</span>
+                  <span class="om-price-val">&#8377;149</span>
+                </div>
+                <div class="om-card-btn-group">
+                  <a href="https://wa.me/919473946181?text=Hi%20One%20Point,%20I%20want%20to%20order%20Personalized%20Photo%20Mug" class="om-card-wa-btn" target="_blank" rel="noopener" title="Order on WhatsApp"><i data-lucide="message-circle"></i></a>
+                  <a href="product-detail.html?product=photo-mug" class="om-card-cta">Customize <i data-lucide="arrow-right" style="width:13px;height:13px"></i></a>
+                </div>
+              </div>
+            </article>
+
+            <!-- Best Seller 4 -->
+            <article class="om-product-card">
+              <div class="om-card-media">
+                <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=800&q=80" alt="Custom DTF Streetwear T-Shirt" loading="lazy">
+                <span class="om-card-badge gold">TRENDING</span>
+                <span class="om-card-rating"><span>★</span> 4.9</span>
+              </div>
+              <div class="om-card-body">
+                <h3>Custom DTF Streetwear T-Shirt</h3>
+                <p class="om-card-desc">100% biowash cotton t-shirt with ultra-vibrant, wash-proof direct-to-film (DTF) color print.</p>
+                <div class="om-card-turnaround blue-pill"><i data-lucide="clock"></i> Ready in 2–3 Days</div>
+              </div>
+              <div class="om-card-footer">
+                <div class="om-card-price-block">
+                  <span class="om-price-from">Starting From</span>
+                  <span class="om-price-val">&#8377;299</span>
+                </div>
+                <div class="om-card-btn-group">
+                  <a href="https://wa.me/919473946181?text=Hi%20One%20Point,%20I%20want%20to%20order%20Custom%20T-Shirt" class="om-card-wa-btn" target="_blank" rel="noopener" title="Order on WhatsApp"><i data-lucide="message-circle"></i></a>
+                  <a href="product-detail.html?product=custom-t-shirt" class="om-card-cta">Customize <i data-lucide="arrow-right" style="width:13px;height:13px"></i></a>
+                </div>
+              </div>
+            </article>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- ── Prominent Search & Filter Section ─────────────────────── -->
+      <div class="om-search-bar-wrap">
+        <div class="om-search-box">
+          <i data-lucide="search"></i>
+          <input type="text" id="om-product-search" class="om-search-input" placeholder="Search products, stickers, frames, gifts, apparel or documents..." aria-label="Search all products">
+          <button type="button" id="om-search-clear" class="om-search-clear">&times;</button>
+        </div>
+
+        <div class="om-quick-chips">
+          <span class="om-chip-label">Quick Filters:</span>
+          <button class="om-chip active" data-filter="all">All Products (64)</button>
+          <button class="om-chip" data-filter="sameday">⚡ Same-Day Available</button>
+          <button class="om-chip" data-filter="under199">🏷️ Under &#8377;199</button>
+          <button class="om-chip" data-filter="bestseller">🔥 Best Sellers</button>
+          <button class="om-chip" data-filter="custom">✨ Customizable</button>
+        </div>
+      </div>
+
+      <!-- ── 5. Category 1: Sticker Printing (4 Items + Expandable) ── -->
+      <section class="om-category-section" id="sticker-printing">
+        <div class="om-cat-header-row">
+          <div class="om-cat-title-block">
+            <div class="om-cat-header-icon"><i data-lucide="tag"></i></div>
+            <div class="om-cat-title-text">
+              <h2>Sticker Printing <span class="om-cat-count">8 Products</span></h2>
+              <p>Durable custom vinyl, die-cut, and packaging stickers for brands &amp; personal use.</p>
+            </div>
+          </div>
+          <button class="om-view-all-btn" data-toggle-cat="sticker-printing">
+            View All Stickers (8) <i data-lucide="chevron-down" style="width:14px;height:14px"></i>
+          </button>
+        </div>
+
+        <div class="om-products-grid">
+          <!-- Card 1 -->
+          <article class="om-product-card" data-tags="custom sticker logo under199 bests">
+            <div class="om-card-media">
+              <img src="https://images.unsplash.com/photo-1572375992501-4b0892d50c69?auto=format&fit=crop&w=800&q=80" alt="Logo Stickers" loading="lazy">
+              <span class="om-card-badge gold">BEST SELLER</span>
+              <span class="om-card-rating"><span>★</span> 4.9</span>
+            </div>
+            <div class="om-card-body">
+              <h3>Logo Stickers</h3>
+              <p class="om-card-desc">Precision contour-cut brand logo stickers on glossy or matte vinyl sheets.</p>
+              <div class="om-card-turnaround"><i data-lucide="zap"></i> Same-Day Available</div>
+            </div>
+            <div class="om-card-footer">
+              <div class="om-card-price-block">
+                <span class="om-price-from">Starting From</span>
+                <span class="om-price-val">&#8377;99</span>
+              </div>
+              <div class="om-card-btn-group">
+                <a href="https://wa.me/919473946181?text=Order%20Logo%20Stickers" class="om-card-wa-btn" target="_blank" rel="noopener"><i data-lucide="message-circle"></i></a>
+                <a href="product-detail.html?product=logo-stickers" class="om-card-cta">Customize <i data-lucide="arrow-right" style="width:13px;height:13px"></i></a>
               </div>
             </div>
-            <div class="store-product-rail">${products.map((product) => card(category, product)).join("")}</div>
-          </section>
-        `).join("");
-      })();
-    </script>
+          </article>
+
+          <!-- Card 2 -->
+          <article class="om-product-card" data-tags="custom sticker waterproof under199">
+            <div class="om-card-media">
+              <img src="https://images.unsplash.com/photo-1589384267710-7a25bf6443c2?auto=format&fit=crop&w=800&q=80" alt="Waterproof Stickers" loading="lazy">
+              <span class="om-card-badge green">OUTDOOR GRADE</span>
+              <span class="om-card-rating"><span>★</span> 4.8</span>
+            </div>
+            <div class="om-card-body">
+              <h3>Waterproof Vinyl Stickers</h3>
+              <p class="om-card-desc">100% waterproof UV-laminated vinyl for bottles, laptops, bikes &amp; helmets.</p>
+              <div class="om-card-turnaround"><i data-lucide="zap"></i> Same-Day Available</div>
+            </div>
+            <div class="om-card-footer">
+              <div class="om-card-price-block">
+                <span class="om-price-from">Starting From</span>
+                <span class="om-price-val">&#8377;149</span>
+              </div>
+              <div class="om-card-btn-group">
+                <a href="https://wa.me/919473946181?text=Order%20Waterproof%20Stickers" class="om-card-wa-btn" target="_blank" rel="noopener"><i data-lucide="message-circle"></i></a>
+                <a href="product-detail.html?product=waterproof-stickers" class="om-card-cta">Customize <i data-lucide="arrow-right" style="width:13px;height:13px"></i></a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 3 -->
+          <article class="om-product-card" data-tags="custom sticker holographic under199">
+            <div class="om-card-media">
+              <img src="https://images.unsplash.com/photo-1550684848-fac1c5b4e853?auto=format&fit=crop&w=800&q=80" alt="Holographic Stickers" loading="lazy">
+              <span class="om-card-badge gold">PREMIUM SHINE</span>
+              <span class="om-card-rating"><span>★</span> 4.9</span>
+            </div>
+            <div class="om-card-body">
+              <h3>Holographic Stickers</h3>
+              <p class="om-card-desc">Iridescent rainbow effect metallic stickers that shine and shift under light.</p>
+              <div class="om-card-turnaround"><i data-lucide="clock"></i> Ready in 1–2 Days</div>
+            </div>
+            <div class="om-card-footer">
+              <div class="om-card-price-block">
+                <span class="om-price-from">Starting From</span>
+                <span class="om-price-val">&#8377;199</span>
+              </div>
+              <div class="om-card-btn-group">
+                <a href="https://wa.me/919473946181?text=Order%20Holographic%20Stickers" class="om-card-wa-btn" target="_blank" rel="noopener"><i data-lucide="message-circle"></i></a>
+                <a href="product-detail.html?product=holographic-stickers" class="om-card-cta">Customize <i data-lucide="arrow-right" style="width:13px;height:13px"></i></a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 4 -->
+          <article class="om-product-card" data-tags="custom sticker packaging under199">
+            <div class="om-card-media">
+              <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=800&q=80" alt="Product Labels" loading="lazy">
+              <span class="om-card-badge">PACKAGING</span>
+              <span class="om-card-rating"><span>★</span> 4.8</span>
+            </div>
+            <div class="om-card-body">
+              <h3>Product &amp; Jar Labels</h3>
+              <p class="om-card-desc">Roll and sheet labels for jars, cosmetic boxes, bakery items and pouches.</p>
+              <div class="om-card-turnaround"><i data-lucide="zap"></i> Same-Day Available</div>
+            </div>
+            <div class="om-card-footer">
+              <div class="om-card-price-block">
+                <span class="om-price-from">Starting From</span>
+                <span class="om-price-val">&#8377;129</span>
+              </div>
+              <div class="om-card-btn-group">
+                <a href="https://wa.me/919473946181?text=Order%20Product%20Labels" class="om-card-wa-btn" target="_blank" rel="noopener"><i data-lucide="message-circle"></i></a>
+                <a href="product-detail.html?product=product-labels" class="om-card-cta">Customize <i data-lucide="arrow-right" style="width:13px;height:13px"></i></a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Extra 4 Products (Revealed on View All) -->
+          <article class="om-product-card om-extra-product" data-tags="custom sticker transparent under199">
+            <div class="om-card-media">
+              <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80" alt="Transparent Stickers" loading="lazy">
+              <span class="om-card-badge">CLEAR VINYL</span>
+              <span class="om-card-rating"><span>★</span> 4.7</span>
+            </div>
+            <div class="om-card-body">
+              <h3>Transparent Stickers</h3>
+              <p class="om-card-desc">Ultra-clear see-through vinyl stickers with crisp white ink backing.</p>
+              <div class="om-card-turnaround"><i data-lucide="zap"></i> Same-Day Available</div>
+            </div>
+            <div class="om-card-footer">
+              <div class="om-card-price-block">
+                <span class="om-price-from">Starting From</span>
+                <span class="om-price-val">&#8377;129</span>
+              </div>
+              <div class="om-card-btn-group">
+                <a href="https://wa.me/919473946181?text=Order%20Transparent%20Stickers" class="om-card-wa-btn" target="_blank" rel="noopener"><i data-lucide="message-circle"></i></a>
+                <a href="product-detail.html?product=transparent-stickers" class="om-card-cta">Customize <i data-lucide="arrow-right" style="width:13px;height:13px"></i></a>
+              </div>
+            </div>
+          </article>
+
+          <article class="om-product-card om-extra-product" data-tags="custom sticker diecut under199">
+            <div class="om-card-media">
+              <img src="https://images.unsplash.com/photo-1607083206869-4c7672e72a8a?auto=format&fit=crop&w=800&q=80" alt="Die Cut Stickers" loading="lazy">
+              <span class="om-card-badge">CUSTOM SHAPE</span>
+              <span class="om-card-rating"><span>★</span> 4.8</span>
+            </div>
+            <div class="om-card-body">
+              <h3>Die Cut Custom Stickers</h3>
+              <p class="om-card-desc">Individually cut sticker singles perfect for giveaways and brand merch.</p>
+              <div class="om-card-turnaround"><i data-lucide="zap"></i> Same-Day Available</div>
+            </div>
+            <div class="om-card-footer">
+              <div class="om-card-price-block">
+                <span class="om-price-from">Starting From</span>
+                <span class="om-price-val">&#8377;179</span>
+              </div>
+              <div class="om-card-btn-group">
+                <a href="https://wa.me/919473946181?text=Order%20Die%20Cut%20Stickers" class="om-card-wa-btn" target="_blank" rel="noopener"><i data-lucide="message-circle"></i></a>
+                <a href="product-detail.html?product=die-cut-stickers" class="om-card-cta">Customize <i data-lucide="arrow-right" style="width:13px;height:13px"></i></a>
+              </div>
+            </div>
+          </article>
+
+          <article class="om-product-card om-extra-product" data-tags="custom sticker qr under199">
+            <div class="om-card-media">
+              <img src="https://images.unsplash.com/photo-1595079672139-54708050d03a?auto=format&fit=crop&w=800&q=80" alt="QR Code Stickers" loading="lazy">
+              <span class="om-card-badge green">SCANNABLE</span>
+              <span class="om-card-rating"><span>★</span> 4.9</span>
+            </div>
+            <div class="om-card-body">
+              <h3>UPI &amp; Menu QR Stickers</h3>
+              <p class="om-card-desc">Durable laminated QR code stickers for payment counters and digital restaurant menus.</p>
+              <div class="om-card-turnaround"><i data-lucide="zap"></i> Same-Day Available</div>
+            </div>
+            <div class="om-card-footer">
+              <div class="om-card-price-block">
+                <span class="om-price-from">Starting From</span>
+                <span class="om-price-val">&#8377;79</span>
+              </div>
+              <div class="om-card-btn-group">
+                <a href="https://wa.me/919473946181?text=Order%20QR%20Stickers" class="om-card-wa-btn" target="_blank" rel="noopener"><i data-lucide="message-circle"></i></a>
+                <a href="product-detail.html?product=qr-code-stickers" class="om-card-cta">Customize <i data-lucide="arrow-right" style="width:13px;height:13px"></i></a>
+              </div>
+            </div>
+          </article>
+
+          <article class="om-product-card om-extra-product" data-tags="custom sticker packaging under199">
+            <div class="om-card-media">
+              <img src="https://images.unsplash.com/photo-1530587191325-3db32d826c18?auto=format&fit=crop&w=800&q=80" alt="Packaging Box Stickers" loading="lazy">
+              <span class="om-card-badge">SEAL TAPE</span>
+              <span class="om-card-rating"><span>★</span> 4.8</span>
+            </div>
+            <div class="om-card-body">
+              <h3>Box Packaging Seal Stickers</h3>
+              <p class="om-card-desc">Tamper-evident thank-you and brand seal stickers for e-commerce courier boxes.</p>
+              <div class="om-card-turnaround"><i data-lucide="zap"></i> Same-Day Available</div>
+            </div>
+            <div class="om-card-footer">
+              <div class="om-card-price-block">
+                <span class="om-price-from">Starting From</span>
+                <span class="om-price-val">&#8377;149</span>
+              </div>
+              <div class="om-card-btn-group">
+                <a href="https://wa.me/919473946181?text=Order%20Packaging%20Stickers" class="om-card-wa-btn" target="_blank" rel="noopener"><i data-lucide="message-circle"></i></a>
+                <a href="product-detail.html?product=packaging-stickers" class="om-card-cta">Customize <i data-lucide="arrow-right" style="width:13px;height:13px"></i></a>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- ── 6. Category 2: Wall Art & Photo Prints (Subtle Alt BG) ── -->
+      <section class="om-category-section om-cat-alt-bg" id="photo-fine-art">
+        <div class="om-cat-header-row">
+          <div class="om-cat-title-block">
+            <div class="om-cat-header-icon"><i data-lucide="image"></i></div>
+            <div class="om-cat-title-text">
+              <h2>Wall Art &amp; Photo Prints <span class="om-cat-count">11 Products</span></h2>
+              <p>Museum-quality photo printing, fine art giclée and textured canvas look prints.</p>
+            </div>
+          </div>
+          <button class="om-view-all-btn" data-toggle-cat="photo-fine-art">
+            View All Wall Art (11) <i data-lucide="chevron-down" style="width:14px;height:14px"></i>
+          </button>
+        </div>
+
+        <div class="om-products-grid">
+          <!-- Card 1 -->
+          <article class="om-product-card" data-tags="fine art giclee print canvas">
+            <div class="om-card-media">
+              <img src="https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=800&q=80" alt="Fine Art Gallery Print" loading="lazy">
+              <span class="om-card-badge gold">MUSEUM GRADE</span>
+              <span class="om-card-rating"><span>★</span> 4.9</span>
+            </div>
+            <div class="om-card-body">
+              <h3>Fine Art Gallery Print</h3>
+              <p class="om-card-desc">Archival 310 GSM Hahnemühle cotton paper print with 100+ years fade resistance.</p>
+              <div class="om-card-turnaround"><i data-lucide="clock"></i> Ready in 1–2 Days</div>
+            </div>
+            <div class="om-card-footer">
+              <div class="om-card-price-block">
+                <span class="om-price-from">Starting From</span>
+                <span class="om-price-val">&#8377;299</span>
+              </div>
+              <div class="om-card-btn-group">
+                <a href="https://wa.me/919473946181?text=Order%20Fine%20Art%20Print" class="om-card-wa-btn" target="_blank" rel="noopener"><i data-lucide="message-circle"></i></a>
+                <a href="product-detail.html?product=fine-art-print" class="om-card-cta">Customize <i data-lucide="arrow-right" style="width:13px;height:13px"></i></a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 2 -->
+          <article class="om-product-card" data-tags="canvas print wallart">
+            <div class="om-card-media">
+              <img src="https://images.unsplash.com/photo-1582561424760-0321d75e81fa?auto=format&fit=crop&w=800&q=80" alt="Canvas Look Print" loading="lazy">
+              <span class="om-card-badge">TEXTURED</span>
+              <span class="om-card-rating"><span>★</span> 4.8</span>
+            </div>
+            <div class="om-card-body">
+              <h3>Canvas Look Textured Print</h3>
+              <p class="om-card-desc">Rich textured canvas finish for modern home and office gallery walls.</p>
+              <div class="om-card-turnaround"><i data-lucide="clock"></i> Ready in 2–3 Days</div>
+            </div>
+            <div class="om-card-footer">
+              <div class="om-card-price-block">
+                <span class="om-price-from">Starting From</span>
+                <span class="om-price-val">&#8377;399</span>
+              </div>
+              <div class="om-card-btn-group">
+                <a href="https://wa.me/919473946181?text=Order%20Canvas%20Print" class="om-card-wa-btn" target="_blank" rel="noopener"><i data-lucide="message-circle"></i></a>
+                <a href="product-detail.html?product=canvas-look-print" class="om-card-cta">Customize <i data-lucide="arrow-right" style="width:13px;height:13px"></i></a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 3 -->
+          <article class="om-product-card" data-tags="photo print a4 glossy under199">
+            <div class="om-card-media">
+              <img src="https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=800&q=80" alt="A4 HD Photo Print" loading="lazy">
+              <span class="om-card-badge green">POPULAR</span>
+              <span class="om-card-rating"><span>★</span> 4.9</span>
+            </div>
+            <div class="om-card-body">
+              <h3>A4 HD Photo Print</h3>
+              <p class="om-card-desc">Ultra-vibrant 260 GSM glossy or satin photographic paper printing.</p>
+              <div class="om-card-turnaround"><i data-lucide="zap"></i> Same-Day Available</div>
+            </div>
+            <div class="om-card-footer">
+              <div class="om-card-price-block">
+                <span class="om-price-from">Starting From</span>
+                <span class="om-price-val">&#8377;49</span>
+              </div>
+              <div class="om-card-btn-group">
+                <a href="https://wa.me/919473946181?text=Order%20A4%20Photo%20Print" class="om-card-wa-btn" target="_blank" rel="noopener"><i data-lucide="message-circle"></i></a>
+                <a href="product-detail.html?product=a4-photo-print" class="om-card-cta">Customize <i data-lucide="arrow-right" style="width:13px;height:13px"></i></a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 4 -->
+          <article class="om-product-card" data-tags="landscape wallart under199">
+            <div class="om-card-media">
+              <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80" alt="Landscape Wall Art Print" loading="lazy">
+              <span class="om-card-badge">WIDE FORMAT</span>
+              <span class="om-card-rating"><span>★</span> 4.8</span>
+            </div>
+            <div class="om-card-body">
+              <h3>Landscape &amp; Panoramic Print</h3>
+              <p class="om-card-desc">Panoramic scenic prints with depth-rich color saturation and vivid detail.</p>
+              <div class="om-card-turnaround"><i data-lucide="clock"></i> Ready in 1–2 Days</div>
+            </div>
+            <div class="om-card-footer">
+              <div class="om-card-price-block">
+                <span class="om-price-from">Starting From</span>
+                <span class="om-price-val">&#8377;199</span>
+              </div>
+              <div class="om-card-btn-group">
+                <a href="https://wa.me/919473946181?text=Order%20Landscape%20Print" class="om-card-wa-btn" target="_blank" rel="noopener"><i data-lucide="message-circle"></i></a>
+                <a href="product-detail.html?product=landscape-print" class="om-card-cta">Customize <i data-lucide="arrow-right" style="width:13px;height:13px"></i></a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Extra Products -->
+          <article class="om-product-card om-extra-product" data-tags="photo print a3 under199">
+            <div class="om-card-media">
+              <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=800&q=80" alt="A3 Photo Print" loading="lazy">
+              <span class="om-card-badge">A3 LARGE</span>
+              <span class="om-card-rating"><span>★</span> 4.8</span>
+            </div>
+            <div class="om-card-body">
+              <h3>A3 Photo Print (12&times;18 in)</h3>
+              <p class="om-card-desc">High-impact large format photo print on 280 GSM luster paper.</p>
+              <div class="om-card-turnaround"><i data-lucide="zap"></i> Same-Day Available</div>
+            </div>
+            <div class="om-card-footer">
+              <div class="om-card-price-block">
+                <span class="om-price-from">Starting From</span>
+                <span class="om-price-val">&#8377;99</span>
+              </div>
+              <div class="om-card-btn-group">
+                <a href="https://wa.me/919473946181?text=Order%20A3%20Photo%20Print" class="om-card-wa-btn" target="_blank" rel="noopener"><i data-lucide="message-circle"></i></a>
+                <a href="product-detail.html?product=a3-photo-print" class="om-card-cta">Customize <i data-lucide="arrow-right" style="width:13px;height:13px"></i></a>
+              </div>
+            </div>
+          </article>
+
+          <article class="om-product-card om-extra-product" data-tags="portrait photo print under199">
+            <div class="om-card-media">
+              <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80" alt="Portrait Studio Print" loading="lazy">
+              <span class="om-card-badge">STUDIO GRADE</span>
+              <span class="om-card-rating"><span>★</span> 4.9</span>
+            </div>
+            <div class="om-card-body">
+              <h3>Studio Portrait Print</h3>
+              <p class="om-card-desc">True-to-life skin tones and natural shadow reproduction for family portraits.</p>
+              <div class="om-card-turnaround"><i data-lucide="zap"></i> Same-Day Available</div>
+            </div>
+            <div class="om-card-footer">
+              <div class="om-card-price-block">
+                <span class="om-price-from">Starting From</span>
+                <span class="om-price-val">&#8377;199</span>
+              </div>
+              <div class="om-card-btn-group">
+                <a href="https://wa.me/919473946181?text=Order%20Portrait%20Print" class="om-card-wa-btn" target="_blank" rel="noopener"><i data-lucide="message-circle"></i></a>
+                <a href="product-detail.html?product=portrait-print" class="om-card-cta">Customize <i data-lucide="arrow-right" style="width:13px;height:13px"></i></a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- ── 7. Category 3: Photo Frames ───────────────────────────── -->
+      <section class="om-category-section" id="photo-frames">
+        <div class="om-cat-header-row">
+          <div class="om-cat-title-block">
+            <div class="om-cat-header-icon"><i data-lucide="frame"></i></div>
+            <div class="om-cat-title-text">
+              <h2>Photo Frames <span class="om-cat-count">7 Products</span></h2>
+              <p>Ready-to-hang wooden, sleek modern black, white, and custom sized wall frames.</p>
+            </div>
+          </div>
+          <button class="om-view-all-btn" data-toggle-cat="photo-frames">
+            View All Frames (7) <i data-lucide="chevron-down" style="width:14px;height:14px"></i>
+          </button>
+        </div>
+
+        <div class="om-products-grid">
+          <!-- Card 1 -->
+          <article class="om-product-card" data-tags="photo frame a4 wood under199 bests">
+            <div class="om-card-media">
+              <img src="https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?auto=format&fit=crop&w=800&q=80" alt="A4 Classic Frame" loading="lazy">
+              <span class="om-card-badge gold">BEST SELLER</span>
+              <span class="om-card-rating"><span>★</span> 4.9</span>
+            </div>
+            <div class="om-card-body">
+              <h3>A4 Classic Photo Frame</h3>
+              <p class="om-card-desc">Sleek matte finish frame with anti-glare acrylic front and tabletop stand.</p>
+              <div class="om-card-turnaround"><i data-lucide="zap"></i> Same-Day Available</div>
+            </div>
+            <div class="om-card-footer">
+              <div class="om-card-price-block">
+                <span class="om-price-from">Starting From</span>
+                <span class="om-price-val">&#8377;149</span>
+              </div>
+              <div class="om-card-btn-group">
+                <a href="https://wa.me/919473946181?text=Order%20A4%20Frame" class="om-card-wa-btn" target="_blank" rel="noopener"><i data-lucide="message-circle"></i></a>
+                <a href="product-detail.html?product=a4-frame" class="om-card-cta">Customize <i data-lucide="arrow-right" style="width:13px;height:13px"></i></a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 2 -->
+          <article class="om-product-card" data-tags="photo frame a3 wood">
+            <div class="om-card-media">
+              <img src="https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=800&q=80" alt="A3 Large Wall Frame" loading="lazy">
+              <span class="om-card-badge">GALLERY WALL</span>
+              <span class="om-card-rating"><span>★</span> 4.8</span>
+            </div>
+            <div class="om-card-body">
+              <h3>A3 Wall Gallery Frame</h3>
+              <p class="om-card-desc">Large format wooden wall frame perfect for certificates, memories &amp; artwork.</p>
+              <div class="om-card-turnaround"><i data-lucide="clock"></i> Ready in 1–2 Days</div>
+            </div>
+            <div class="om-card-footer">
+              <div class="om-card-price-block">
+                <span class="om-price-from">Starting From</span>
+                <span class="om-price-val">&#8377;249</span>
+              </div>
+              <div class="om-card-btn-group">
+                <a href="https://wa.me/919473946181?text=Order%20A3%20Frame" class="om-card-wa-btn" target="_blank" rel="noopener"><i data-lucide="message-circle"></i></a>
+                <a href="product-detail.html?product=a3-frame" class="om-card-cta">Customize <i data-lucide="arrow-right" style="width:13px;height:13px"></i></a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 3 -->
+          <article class="om-product-card" data-tags="photo frame wooden natural">
+            <div class="om-card-media">
+              <img src="https://images.unsplash.com/photo-1534349762230-e0cadf78f5da?auto=format&fit=crop&w=800&q=80" alt="Natural Teak Wood Frame" loading="lazy">
+              <span class="om-card-badge green">PREMIUM WOOD</span>
+              <span class="om-card-rating"><span>★</span> 4.9</span>
+            </div>
+            <div class="om-card-body">
+              <h3>Natural Teak Wooden Frame</h3>
+              <p class="om-card-desc">Solid wood handcrafted frame with natural grain finish for luxury interiors.</p>
+              <div class="om-card-turnaround"><i data-lucide="clock"></i> Ready in 1–2 Days</div>
+            </div>
+            <div class="om-card-footer">
+              <div class="om-card-price-block">
+                <span class="om-price-from">Starting From</span>
+                <span class="om-price-val">&#8377;299</span>
+              </div>
+              <div class="om-card-btn-group">
+                <a href="https://wa.me/919473946181?text=Order%20Wooden%20Frame" class="om-card-wa-btn" target="_blank" rel="noopener"><i data-lucide="message-circle"></i></a>
+                <a href="product-detail.html?product=wooden-frame" class="om-card-cta">Customize <i data-lucide="arrow-right" style="width:13px;height:13px"></i></a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 4 -->
+          <article class="om-product-card" data-tags="photo frame custom size">
+            <div class="om-card-media">
+              <img src="https://images.unsplash.com/photo-1516455207990-7a41ce80f7ee?auto=format&fit=crop&w=800&q=80" alt="Custom Size Floating Frame" loading="lazy">
+              <span class="om-card-badge">CUSTOM SIZE</span>
+              <span class="om-card-rating"><span>★</span> 4.8</span>
+            </div>
+            <div class="om-card-body">
+              <h3>Custom Size Photo Frame</h3>
+              <p class="om-card-desc">Tailor-made framing to your exact canvas or poster inch measurements.</p>
+              <div class="om-card-turnaround"><i data-lucide="clock"></i> Ready in 2–3 Days</div>
+            </div>
+            <div class="om-card-footer">
+              <div class="om-card-price-block">
+                <span class="om-price-from">Starting From</span>
+                <span class="om-price-val">&#8377;349</span>
+              </div>
+              <div class="om-card-btn-group">
+                <a href="https://wa.me/919473946181?text=Order%20Custom%20Frame" class="om-card-wa-btn" target="_blank" rel="noopener"><i data-lucide="message-circle"></i></a>
+                <a href="product-detail.html?product=custom-size-frame" class="om-card-cta">Customize <i data-lucide="arrow-right" style="width:13px;height:13px"></i></a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- ── High-Contrast Mid-Page Promotional Banner ──────────────── -->
+      <div class="om-promo-banner">
+        <div class="om-promo-card">
+          <div class="om-promo-content">
+            <span class="om-usp-pill"><i data-lucide="sparkles"></i> Custom Print On Demand</span>
+            <h3>Have Your Own Design or Artwork Ready?</h3>
+            <p>Upload your high-res design, PDF, or photos. Our print specialists inspect file resolution, adjust bleed margins, and deliver showroom-grade prints directly to you.</p>
+          </div>
+          <div class="om-promo-actions">
+            <a href="checkout.html?service=custom-print-order&amp;service_name=Custom+Print+Order" class="btn-promo-primary">
+              <i data-lucide="upload-cloud"></i> Upload Design &amp; Order
+            </a>
+            <a href="https://wa.me/919473946181?text=Hi%20One%20Point,%20I%20have%20a%20custom%20design%20to%20print" class="btn-promo-secondary" target="_blank" rel="noopener">
+              <i data-lucide="message-circle"></i> Get Free Quote
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── 8. Category 4: Personalized Gifts (Warm Off-White BG) ── -->
+      <section class="om-category-section om-cat-warm-bg" id="personalized-gifts">
+        <div class="om-cat-header-row">
+          <div class="om-cat-title-block">
+            <div class="om-cat-header-icon"><i data-lucide="gift"></i></div>
+            <div class="om-cat-title-text">
+              <h2>Personalized Gifts <span class="om-cat-count">5 Products</span></h2>
+              <p>Custom photo mugs, heat-reactive magic mugs, engraved keychains and gift items.</p>
+            </div>
+          </div>
+          <button class="om-view-all-btn" data-toggle-cat="personalized-gifts">
+            View All Gifts (5) <i data-lucide="chevron-down" style="width:14px;height:14px"></i>
+          </button>
+        </div>
+
+        <div class="om-products-grid">
+          <!-- Card 1 -->
+          <article class="om-product-card" data-tags="personalized gift mug under199 bests">
+            <div class="om-card-media">
+              <img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=800&q=80" alt="Custom Photo Mug" loading="lazy">
+              <span class="om-card-badge gold">BEST SELLER</span>
+              <span class="om-card-rating"><span>★</span> 4.9</span>
+            </div>
+            <div class="om-card-body">
+              <h3>Custom Ceramic Photo Mug</h3>
+              <p class="om-card-desc">11 oz ceramic coffee mug with dishwasher-safe 360-degree sublimated photo print.</p>
+              <div class="om-card-turnaround"><i data-lucide="zap"></i> Same-Day Available</div>
+            </div>
+            <div class="om-card-footer">
+              <div class="om-card-price-block">
+                <span class="om-price-from">Starting From</span>
+                <span class="om-price-val">&#8377;149</span>
+              </div>
+              <div class="om-card-btn-group">
+                <a href="https://wa.me/919473946181?text=Order%20Photo%20Mug" class="om-card-wa-btn" target="_blank" rel="noopener"><i data-lucide="message-circle"></i></a>
+                <a href="product-detail.html?product=photo-mug" class="om-card-cta">Customize <i data-lucide="arrow-right" style="width:13px;height:13px"></i></a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 2 -->
+          <article class="om-product-card" data-tags="personalized gift magic mug">
+            <div class="om-card-media">
+              <img src="https://images.unsplash.com/photo-1577937927133-66ef06acdf18?auto=format&fit=crop&w=800&q=80" alt="Magic Color Changing Mug" loading="lazy">
+              <span class="om-card-badge">COLOR SHIFT</span>
+              <span class="om-card-rating"><span>★</span> 4.8</span>
+            </div>
+            <div class="om-card-body">
+              <h3>Magic Heat Changing Mug</h3>
+              <p class="om-card-desc">Hidden photo reveals magically when hot beverage is poured into the mug.</p>
+              <div class="om-card-turnaround"><i data-lucide="zap"></i> Same-Day Available</div>
+            </div>
+            <div class="om-card-footer">
+              <div class="om-card-price-block">
+                <span class="om-price-from">Starting From</span>
+                <span class="om-price-val">&#8377;249</span>
+              </div>
+              <div class="om-card-btn-group">
+                <a href="https://wa.me/919473946181?text=Order%20Magic%20Mug" class="om-card-wa-btn" target="_blank" rel="noopener"><i data-lucide="message-circle"></i></a>
+                <a href="product-detail.html?product=magic-mug" class="om-card-cta">Customize <i data-lucide="arrow-right" style="width:13px;height:13px"></i></a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 3 -->
+          <article class="om-product-card" data-tags="personalized gift keychain under199">
+            <div class="om-card-media">
+              <img src="https://images.unsplash.com/photo-1614036417651-efe5912149d8?auto=format&fit=crop&w=800&q=80" alt="Personalized Acrylic Keychain" loading="lazy">
+              <span class="om-card-badge green">QUICK GIFT</span>
+              <span class="om-card-rating"><span>★</span> 4.8</span>
+            </div>
+            <div class="om-card-body">
+              <h3>Personalized Photo Keychain</h3>
+              <p class="om-card-desc">Laser-cut metal and acrylic keychains printed with dual-sided photos and names.</p>
+              <div class="om-card-turnaround"><i data-lucide="zap"></i> Same-Day Available</div>
+            </div>
+            <div class="om-card-footer">
+              <div class="om-card-price-block">
+                <span class="om-price-from">Starting From</span>
+                <span class="om-price-val">&#8377;69</span>
+              </div>
+              <div class="om-card-btn-group">
+                <a href="https://wa.me/919473946181?text=Order%20Keychain" class="om-card-wa-btn" target="_blank" rel="noopener"><i data-lucide="message-circle"></i></a>
+                <a href="product-detail.html?product=keychain" class="om-card-cta">Customize <i data-lucide="arrow-right" style="width:13px;height:13px"></i></a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 4 -->
+          <article class="om-product-card" data-tags="personalized gift mobile cover">
+            <div class="om-card-media">
+              <img src="https://images.unsplash.com/photo-1586953208448-b95a79798f07?auto=format&fit=crop&w=800&q=80" alt="Custom Phone Case" loading="lazy">
+              <span class="om-card-badge">PROTECTIVE</span>
+              <span class="om-card-rating"><span>★</span> 4.7</span>
+            </div>
+            <div class="om-card-body">
+              <h3>Custom Printed Phone Case</h3>
+              <p class="om-card-desc">Hard polycarbonate or soft TPU bumper case with 3D wrap edge-to-edge printing.</p>
+              <div class="om-card-turnaround"><i data-lucide="clock"></i> Ready in 2–3 Days</div>
+            </div>
+            <div class="om-card-footer">
+              <div class="om-card-price-block">
+                <span class="om-price-from">Starting From</span>
+                <span class="om-price-val">&#8377;249</span>
+              </div>
+              <div class="om-card-btn-group">
+                <a href="https://wa.me/919473946181?text=Order%20Phone%20Case" class="om-card-wa-btn" target="_blank" rel="noopener"><i data-lucide="message-circle"></i></a>
+                <a href="product-detail.html?product=mobile-cover" class="om-card-cta">Customize <i data-lucide="arrow-right" style="width:13px;height:13px"></i></a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- ── 9. Category 5: Custom Apparel & T-Shirts ──────────────── -->
+      <section class="om-category-section" id="t-shirt-printing">
+        <div class="om-cat-header-row">
+          <div class="om-cat-title-block">
+            <div class="om-cat-header-icon"><i data-lucide="shirt"></i></div>
+            <div class="om-cat-title-text">
+              <h2>Custom Apparel &amp; T-Shirts <span class="om-cat-count">4 Products</span></h2>
+              <p>Direct-to-Film (DTF), screen &amp; vinyl printed t-shirts for creators, teams &amp; events.</p>
+            </div>
+          </div>
+          <button class="om-view-all-btn" data-toggle-cat="t-shirt-printing">
+            View All Apparel (4) <i data-lucide="chevron-down" style="width:14px;height:14px"></i>
+          </button>
+        </div>
+
+        <div class="om-products-grid">
+          <!-- Card 1 -->
+          <article class="om-product-card" data-tags="tshirt apparel custom dtf bests">
+            <div class="om-card-media">
+              <img src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=800&q=80" alt="Custom Round Neck T-Shirt" loading="lazy">
+              <span class="om-card-badge gold">BEST SELLER</span>
+              <span class="om-card-rating"><span>★</span> 4.9</span>
+            </div>
+            <div class="om-card-body">
+              <h3>Custom Round Neck T-Shirt</h3>
+              <p class="om-card-desc">180 GSM combed cotton t-shirt with vivid color digital DTF chest or back print.</p>
+              <div class="om-card-turnaround"><i data-lucide="clock"></i> Ready in 2–3 Days</div>
+            </div>
+            <div class="om-card-footer">
+              <div class="om-card-price-block">
+                <span class="om-price-from">Starting From</span>
+                <span class="om-price-val">&#8377;299</span>
+              </div>
+              <div class="om-card-btn-group">
+                <a href="https://wa.me/919473946181?text=Order%20Custom%20T-Shirt" class="om-card-wa-btn" target="_blank" rel="noopener"><i data-lucide="message-circle"></i></a>
+                <a href="product-detail.html?product=custom-t-shirt" class="om-card-cta">Customize <i data-lucide="arrow-right" style="width:13px;height:13px"></i></a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 2 -->
+          <article class="om-product-card" data-tags="tshirt apparel polo corporate">
+            <div class="om-card-media">
+              <img src="https://images.unsplash.com/photo-1581655353564-df123a1eb820?auto=format&fit=crop&w=800&q=80" alt="Corporate Polo T-Shirt" loading="lazy">
+              <span class="om-card-badge">CORPORATE</span>
+              <span class="om-card-rating"><span>★</span> 4.8</span>
+            </div>
+            <div class="om-card-body">
+              <h3>Corporate Collared Polo T-Shirt</h3>
+              <p class="om-card-desc">220 GSM pique polo t-shirt with embroidered or rubberized chest logo.</p>
+              <div class="om-card-turnaround"><i data-lucide="clock"></i> Ready in 3–4 Days</div>
+            </div>
+            <div class="om-card-footer">
+              <div class="om-card-price-block">
+                <span class="om-price-from">Starting From</span>
+                <span class="om-price-val">&#8377;399</span>
+              </div>
+              <div class="om-card-btn-group">
+                <a href="https://wa.me/919473946181?text=Order%20Polo%20T-Shirt" class="om-card-wa-btn" target="_blank" rel="noopener"><i data-lucide="message-circle"></i></a>
+                <a href="product-detail.html?product=polo-t-shirt" class="om-card-cta">Customize <i data-lucide="arrow-right" style="width:13px;height:13px"></i></a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 3 -->
+          <article class="om-product-card" data-tags="tshirt apparel dtf streetwear">
+            <div class="om-card-media">
+              <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=800&q=80" alt="High-Density DTF Graphic Tee" loading="lazy">
+              <span class="om-card-badge green">VIBRANT PRINT</span>
+              <span class="om-card-rating"><span>★</span> 4.9</span>
+            </div>
+            <div class="om-card-body">
+              <h3>High-Density DTF Graphic Tee</h3>
+              <p class="om-card-desc">No cracking or color fading. High stretchability and breathable feel.</p>
+              <div class="om-card-turnaround"><i data-lucide="clock"></i> Ready in 2–3 Days</div>
+            </div>
+            <div class="om-card-footer">
+              <div class="om-card-price-block">
+                <span class="om-price-from">Starting From</span>
+                <span class="om-price-val">&#8377;349</span>
+              </div>
+              <div class="om-card-btn-group">
+                <a href="https://wa.me/919473946181?text=Order%20DTF%20T-Shirt" class="om-card-wa-btn" target="_blank" rel="noopener"><i data-lucide="message-circle"></i></a>
+                <a href="product-detail.html?product=dtf-t-shirt" class="om-card-cta">Customize <i data-lucide="arrow-right" style="width:13px;height:13px"></i></a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 4 -->
+          <article class="om-product-card" data-tags="tshirt apparel couple gift">
+            <div class="om-card-media">
+              <img src="https://images.unsplash.com/photo-1562157873-818bc0726f68?auto=format&fit=crop&w=800&q=80" alt="Couple Matching T-Shirts" loading="lazy">
+              <span class="om-card-badge">SET OF 2</span>
+              <span class="om-card-rating"><span>★</span> 4.9</span>
+            </div>
+            <div class="om-card-body">
+              <h3>Matching Couple T-Shirt Set</h3>
+              <p class="om-card-desc">Pair of 2 customized matching t-shirts for anniversaries, birthdays and trips.</p>
+              <div class="om-card-turnaround"><i data-lucide="clock"></i> Ready in 2–3 Days</div>
+            </div>
+            <div class="om-card-footer">
+              <div class="om-card-price-block">
+                <span class="om-price-from">Starting From</span>
+                <span class="om-price-val">&#8377;599</span>
+              </div>
+              <div class="om-card-btn-group">
+                <a href="https://wa.me/919473946181?text=Order%20Couple%20T-Shirts" class="om-card-wa-btn" target="_blank" rel="noopener"><i data-lucide="message-circle"></i></a>
+                <a href="product-detail.html?product=couple-t-shirt" class="om-card-cta">Customize <i data-lucide="arrow-right" style="width:13px;height:13px"></i></a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- ── 10. Category 6: Business Branding (Subtle Alt BG) ─────── -->
+      <section class="om-category-section om-cat-alt-bg" id="business-branding">
+        <div class="om-cat-header-row">
+          <div class="om-cat-title-block">
+            <div class="om-cat-header-icon"><i data-lucide="briefcase"></i></div>
+            <div class="om-cat-title-text">
+              <h2>Business Branding <span class="om-cat-count">8 Products</span></h2>
+              <p>Corporate visiting cards, PVC smart cards, marketing flyers, menus &amp; QR standees.</p>
+            </div>
+          </div>
+          <button class="om-view-all-btn" data-toggle-cat="business-branding">
+            View All Branding (8) <i data-lucide="chevron-down" style="width:14px;height:14px"></i>
+          </button>
+        </div>
+
+        <div class="om-products-grid">
+          <!-- Card 1 -->
+          <article class="om-product-card" data-tags="visiting cards business card branding bests">
+            <div class="om-card-media">
+              <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=800&q=80" alt="Premium Visiting Cards" loading="lazy">
+              <span class="om-card-badge gold">BEST SELLER</span>
+              <span class="om-card-rating"><span>★</span> 4.9</span>
+            </div>
+            <div class="om-card-body">
+              <h3>Premium Visiting Cards (350 GSM)</h3>
+              <p class="om-card-desc">Velvet matte or gloss laminated visiting cards with crisp typography &amp; corner options.</p>
+              <div class="om-card-turnaround"><i data-lucide="zap"></i> Same-Day Available</div>
+            </div>
+            <div class="om-card-footer">
+              <div class="om-card-price-block">
+                <span class="om-price-from">Pack of 100 From</span>
+                <span class="om-price-val">&#8377;299</span>
+              </div>
+              <div class="om-card-btn-group">
+                <a href="https://wa.me/919473946181?text=Order%20Visiting%20Cards" class="om-card-wa-btn" target="_blank" rel="noopener"><i data-lucide="message-circle"></i></a>
+                <a href="product-detail.html?product=visiting-cards" class="om-card-cta">Customize <i data-lucide="arrow-right" style="width:13px;height:13px"></i></a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 2 -->
+          <article class="om-product-card" data-tags="pvc smart card id under199">
+            <div class="om-card-media">
+              <img src="https://images.unsplash.com/photo-1559526324-4b87b5e36e44?auto=format&fit=crop&w=800&q=80" alt="PVC Smart Cards" loading="lazy">
+              <span class="om-card-badge green">DURABLE PLASTIC</span>
+              <span class="om-card-rating"><span>★</span> 4.8</span>
+            </div>
+            <div class="om-card-body">
+              <h3>PVC Smart ID &amp; Membership Cards</h3>
+              <p class="om-card-desc">Waterproof durable plastic PVC cards for employee IDs, access keys &amp; memberships.</p>
+              <div class="om-card-turnaround"><i data-lucide="zap"></i> Same-Day Available</div>
+            </div>
+            <div class="om-card-footer">
+              <div class="om-card-price-block">
+                <span class="om-price-from">Starting From</span>
+                <span class="om-price-val">&#8377;60</span>
+              </div>
+              <div class="om-card-btn-group">
+                <a href="https://wa.me/919473946181?text=Order%20PVC%20Cards" class="om-card-wa-btn" target="_blank" rel="noopener"><i data-lucide="message-circle"></i></a>
+                <a href="product-detail.html?product=pvc-cards" class="om-card-cta">Customize <i data-lucide="arrow-right" style="width:13px;height:13px"></i></a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 3 -->
+          <article class="om-product-card" data-tags="flyers marketing brochure">
+            <div class="om-card-media">
+              <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=800&q=80" alt="Marketing Flyers" loading="lazy">
+              <span class="om-card-badge">PROMOTIONAL</span>
+              <span class="om-card-rating"><span>★</span> 4.8</span>
+            </div>
+            <div class="om-card-body">
+              <h3>Marketing Flyers &amp; Pamphlets</h3>
+              <p class="om-card-desc">130/170 GSM glossy promotional leaflets for newspaper drops and store launches.</p>
+              <div class="om-card-turnaround"><i data-lucide="clock"></i> Ready in 1–2 Days</div>
+            </div>
+            <div class="om-card-footer">
+              <div class="om-card-price-block">
+                <span class="om-price-from">Pack of 500 From</span>
+                <span class="om-price-val">&#8377;399</span>
+              </div>
+              <div class="om-card-btn-group">
+                <a href="https://wa.me/919473946181?text=Order%20Flyers" class="om-card-wa-btn" target="_blank" rel="noopener"><i data-lucide="message-circle"></i></a>
+                <a href="product-detail.html?product=flyers" class="om-card-cta">Customize <i data-lucide="arrow-right" style="width:13px;height:13px"></i></a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 4 -->
+          <article class="om-product-card" data-tags="qr standee acrylic display">
+            <div class="om-card-media">
+              <img src="https://images.unsplash.com/photo-1556742049-0a67c5574f73?auto=format&fit=crop&w=800&q=80" alt="Acrylic QR Code Standee" loading="lazy">
+              <span class="om-card-badge gold">TABLETOP</span>
+              <span class="om-card-rating"><span>★</span> 4.9</span>
+            </div>
+            <div class="om-card-body">
+              <h3>Acrylic UPI Payment QR Standee</h3>
+              <p class="om-card-desc">Premium laser-cut acrylic display stand for shop counters, GooglePay &amp; menus.</p>
+              <div class="om-card-turnaround"><i data-lucide="clock"></i> Ready in 1–2 Days</div>
+            </div>
+            <div class="om-card-footer">
+              <div class="om-card-price-block">
+                <span class="om-price-from">Starting From</span>
+                <span class="om-price-val">&#8377;699</span>
+              </div>
+              <div class="om-card-btn-group">
+                <a href="https://wa.me/919473946181?text=Order%20QR%20Standee" class="om-card-wa-btn" target="_blank" rel="noopener"><i data-lucide="message-circle"></i></a>
+                <a href="product-detail.html?product=qr-standee" class="om-card-cta">Customize <i data-lucide="arrow-right" style="width:13px;height:13px"></i></a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- ── Mid-Page Break 2: "Need Design Help?" USP Desk ───────── -->
+      <section class="om-design-usp-section">
+        <div class="om-design-usp-inner">
+          <div class="om-design-usp-left">
+            <span class="om-usp-pill"><i data-lucide="pen-tool"></i> Full Design Support</span>
+            <h2>No Print-Ready Artwork? We Help You Prepare It.</h2>
+            <p>Don't let file errors or blurry graphics ruin your print. Our in-house design studio cleans up your logos, checks bleed margins, and sets up production-grade CMYK vectors.</p>
+            
+            <div class="om-usp-checks">
+              <div class="om-check-item"><i data-lucide="check-circle-2"></i> Free Resolution &amp; DPI Audit</div>
+              <div class="om-check-item"><i data-lucide="check-circle-2"></i> Size &amp; Bleed Adjustment</div>
+              <div class="om-check-item"><i data-lucide="check-circle-2"></i> Print-Ready CMYK Setup</div>
+              <div class="om-check-item"><i data-lucide="check-circle-2"></i> WhatsApp Proofing &amp; Approval</div>
+            </div>
+          </div>
+
+          <div class="om-design-usp-right">
+            <h4>Request Quick Design Assistance</h4>
+            <p>Share your rough idea, logo sketch or low-res image. Our designers will redraw or format it into an ultra-sharp vector file.</p>
+            <a href="https://wa.me/919473946181?text=Hi%20One%20Point,%20I%20need%20help%20with%20Artwork%20Design%20Setup" class="btn btn-primary font-bold" target="_blank" rel="noopener" style="justify-content:center; gap:8px;">
+              <i data-lucide="message-circle"></i> Chat With Design Desk
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── 11. Category 7: Office & Document Printing ────────────── -->
+      <section class="om-category-section" id="office-printing">
+        <div class="om-cat-header-row">
+          <div class="om-cat-title-block">
+            <div class="om-cat-header-icon"><i data-lucide="printer"></i></div>
+            <div class="om-cat-title-text">
+              <h2>Office &amp; Document Printing <span class="om-cat-count">8 Products</span></h2>
+              <p>High-speed laser printing, thermal lamination, project spiral binding, and certificates.</p>
+            </div>
+          </div>
+          <button class="om-view-all-btn" data-toggle-cat="office-printing">
+            View All Office (8) <i data-lucide="chevron-down" style="width:14px;height:14px"></i>
+          </button>
+        </div>
+
+        <div class="om-products-grid">
+          <!-- Card 1 -->
+          <article class="om-product-card" data-tags="color print xerox document under199">
+            <div class="om-card-media">
+              <img src="https://images.unsplash.com/photo-1588508065123-287b28e013da?auto=format&fit=crop&w=800&q=80" alt="Color & BW Printing" loading="lazy">
+              <span class="om-card-badge green">DAILY NEED</span>
+              <span class="om-card-rating"><span>★</span> 4.9</span>
+            </div>
+            <div class="om-card-body">
+              <h3>High-Speed Laser Color Prints</h3>
+              <p class="om-card-desc">Crisp text and high-res chart printing on 75–100 GSM premium JK Copier paper.</p>
+              <div class="om-card-turnaround"><i data-lucide="zap"></i> Same-Day Available</div>
+            </div>
+            <div class="om-card-footer">
+              <div class="om-card-price-block">
+                <span class="om-price-from">Per Page From</span>
+                <span class="om-price-val">&#8377;10</span>
+              </div>
+              <div class="om-card-btn-group">
+                <a href="https://wa.me/919473946181?text=Order%20Color%20Prints" class="om-card-wa-btn" target="_blank" rel="noopener"><i data-lucide="message-circle"></i></a>
+                <a href="product-detail.html?product=color-print" class="om-card-cta">Order Now <i data-lucide="arrow-right" style="width:13px;height:13px"></i></a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 2 -->
+          <article class="om-product-card" data-tags="lamination pouch under199">
+            <div class="om-card-media">
+              <img src="https://images.unsplash.com/photo-1568667256549-094345857637?auto=format&fit=crop&w=800&q=80" alt="Thermal Lamination" loading="lazy">
+              <span class="om-card-badge">PROTECTIVE</span>
+              <span class="om-card-rating"><span>★</span> 4.8</span>
+            </div>
+            <div class="om-card-body">
+              <h3>A4/A3 Thermal Lamination</h3>
+              <p class="om-card-desc">Waterproof, dust-proof 250 micron heavy duty heat-sealed lamination pouches.</p>
+              <div class="om-card-turnaround"><i data-lucide="zap"></i> Same-Day Available</div>
+            </div>
+            <div class="om-card-footer">
+              <div class="om-card-price-block">
+                <span class="om-price-from">Starting From</span>
+                <span class="om-price-val">&#8377;20</span>
+              </div>
+              <div class="om-card-btn-group">
+                <a href="https://wa.me/919473946181?text=Order%20Lamination" class="om-card-wa-btn" target="_blank" rel="noopener"><i data-lucide="message-circle"></i></a>
+                <a href="product-detail.html?product=lamination" class="om-card-cta">Order Now <i data-lucide="arrow-right" style="width:13px;height:13px"></i></a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 3 -->
+          <article class="om-product-card" data-tags="spiral binding project thesis under199">
+            <div class="om-card-media">
+              <img src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=800&q=80" alt="Spiral & Hard Binding" loading="lazy">
+              <span class="om-card-badge">PROJECTS</span>
+              <span class="om-card-rating"><span>★</span> 4.9</span>
+            </div>
+            <div class="om-card-body">
+              <h3>Spiral &amp; Thesis Hard Binding</h3>
+              <p class="om-card-desc">Plastic coil spiral binding with protective transparent cover and card back.</p>
+              <div class="om-card-turnaround"><i data-lucide="zap"></i> Same-Day Available</div>
+            </div>
+            <div class="om-card-footer">
+              <div class="om-card-price-block">
+                <span class="om-price-from">Starting From</span>
+                <span class="om-price-val">&#8377;49</span>
+              </div>
+              <div class="om-card-btn-group">
+                <a href="https://wa.me/919473946181?text=Order%20Spiral%20Binding" class="om-card-wa-btn" target="_blank" rel="noopener"><i data-lucide="message-circle"></i></a>
+                <a href="product-detail.html?product=spiral-binding" class="om-card-cta">Order Now <i data-lucide="arrow-right" style="width:13px;height:13px"></i></a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 4 -->
+          <article class="om-product-card" data-tags="certificate printing embossed under199">
+            <div class="om-card-media">
+              <img src="https://images.unsplash.com/photo-1606326608606-aa0b62935f2b?auto=format&fit=crop&w=800&q=80" alt="Certificate Printing" loading="lazy">
+              <span class="om-card-badge gold">GOLD FOIL</span>
+              <span class="om-card-rating"><span>★</span> 4.9</span>
+            </div>
+            <div class="om-card-body">
+              <h3>Award Certificate Printing</h3>
+              <p class="om-card-desc">300 GSM textured paper certificates with metallic border and high-definition crest.</p>
+              <div class="om-card-turnaround"><i data-lucide="zap"></i> Same-Day Available</div>
+            </div>
+            <div class="om-card-footer">
+              <div class="om-card-price-block">
+                <span class="om-price-from">Starting From</span>
+                <span class="om-price-val">&#8377;49</span>
+              </div>
+              <div class="om-card-btn-group">
+                <a href="https://wa.me/919473946181?text=Order%20Certificates" class="om-card-wa-btn" target="_blank" rel="noopener"><i data-lucide="message-circle"></i></a>
+                <a href="product-detail.html?product=certificate-printing" class="om-card-cta">Customize <i data-lucide="arrow-right" style="width:13px;height:13px"></i></a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- ── 12. Category 8: Islamic Wall Art (Emerald Tint BG) ─────── -->
+      <section class="om-category-section om-cat-emerald-bg" id="islamic-wall-art">
+        <div class="om-cat-header-row">
+          <div class="om-cat-title-block">
+            <div class="om-cat-header-icon"><i data-lucide="moon"></i></div>
+            <div class="om-cat-title-text">
+              <h2>Islamic Wall Art <span class="om-cat-count">6 Products</span></h2>
+              <p>Sacred Arabic calligraphy, Quranic verse frames, and luxury gold foil wall art.</p>
+            </div>
+          </div>
+          <button class="om-view-all-btn" data-toggle-cat="islamic-wall-art">
+            View All Islamic Art (6) <i data-lucide="chevron-down" style="width:14px;height:14px"></i>
+          </button>
+        </div>
+
+        <div class="om-products-grid">
+          <!-- Card 1 -->
+          <article class="om-product-card" data-tags="islamic wallart ayatul kursi frame bests">
+            <div class="om-card-media">
+              <img src="https://images.unsplash.com/photo-1564769625905-50e93615e769?auto=format&fit=crop&w=800&q=80" alt="Ayatul Kursi Gold Calligraphy Frame" loading="lazy">
+              <span class="om-card-badge gold">BEST SELLER</span>
+              <span class="om-card-rating"><span>★</span> 4.9</span>
+            </div>
+            <div class="om-card-body">
+              <h3>Ayatul Kursi Gold Calligraphy Frame</h3>
+              <p class="om-card-desc">Elegant black and gold foil calligraphy with luxury wooden gallery frame.</p>
+              <div class="om-card-turnaround"><i data-lucide="clock"></i> Ready in 1–2 Days</div>
+            </div>
+            <div class="om-card-footer">
+              <div class="om-card-price-block">
+                <span class="om-price-from">Starting From</span>
+                <span class="om-price-val">&#8377;499</span>
+              </div>
+              <div class="om-card-btn-group">
+                <a href="https://wa.me/919473946181?text=Order%20Ayatul%20Kursi%20Frame" class="om-card-wa-btn" target="_blank" rel="noopener"><i data-lucide="message-circle"></i></a>
+                <a href="product-detail.html?product=ayatul-kursi-frame" class="om-card-cta">Customize <i data-lucide="arrow-right" style="width:13px;height:13px"></i></a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 2 -->
+          <article class="om-product-card" data-tags="islamic wallart surah rahman">
+            <div class="om-card-media">
+              <img src="https://images.unsplash.com/photo-1584286595398-a59f21d313f5?auto=format&fit=crop&w=800&q=80" alt="Surah Rahman Arabic Art" loading="lazy">
+              <span class="om-card-badge">CURATED</span>
+              <span class="om-card-rating"><span>★</span> 4.8</span>
+            </div>
+            <div class="om-card-body">
+              <h3>Surah Ar-Rahman Verse Art</h3>
+              <p class="om-card-desc">Fabiayyi ala-i Rabbikuma tukaththiban artistic print with museum framing.</p>
+              <div class="om-card-turnaround"><i data-lucide="clock"></i> Ready in 1–2 Days</div>
+            </div>
+            <div class="om-card-footer">
+              <div class="om-card-price-block">
+                <span class="om-price-from">Starting From</span>
+                <span class="om-price-val">&#8377;499</span>
+              </div>
+              <div class="om-card-btn-group">
+                <a href="https://wa.me/919473946181?text=Order%20Surah%20Rahman%20Frame" class="om-card-wa-btn" target="_blank" rel="noopener"><i data-lucide="message-circle"></i></a>
+                <a href="product-detail.html?product=surah-rahman-frame" class="om-card-cta">Customize <i data-lucide="arrow-right" style="width:13px;height:13px"></i></a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 3 -->
+          <article class="om-product-card" data-tags="islamic wallart kalima frame">
+            <div class="om-card-media">
+              <img src="https://images.unsplash.com/photo-1590076215667-875d4ef2d7ee?auto=format&fit=crop&w=800&q=80" alt="First Kalima Tayyibah Frame" loading="lazy">
+              <span class="om-card-badge green">MODERN ISLAMIC</span>
+              <span class="om-card-rating"><span>★</span> 4.9</span>
+            </div>
+            <div class="om-card-body">
+              <h3>First Kalima Tayyibah Art Frame</h3>
+              <p class="om-card-desc">Minimalist contemporary Arabic typography print with sleek black border frame.</p>
+              <div class="om-card-turnaround"><i data-lucide="clock"></i> Ready in 1–2 Days</div>
+            </div>
+            <div class="om-card-footer">
+              <div class="om-card-price-block">
+                <span class="om-price-from">Starting From</span>
+                <span class="om-price-val">&#8377;399</span>
+              </div>
+              <div class="om-card-btn-group">
+                <a href="https://wa.me/919473946181?text=Order%20Kalima%20Frame" class="om-card-wa-btn" target="_blank" rel="noopener"><i data-lucide="message-circle"></i></a>
+                <a href="product-detail.html?product=kalima-frame" class="om-card-cta">Customize <i data-lucide="arrow-right" style="width:13px;height:13px"></i></a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 4 -->
+          <article class="om-product-card" data-tags="islamic wallart allah muhammad name">
+            <div class="om-card-media">
+              <img src="https://images.unsplash.com/photo-1574634534894-89d7576c8259?auto=format&fit=crop&w=800&q=80" alt="Allah & Muhammad Frame Set" loading="lazy">
+              <span class="om-card-badge gold">SET OF 2</span>
+              <span class="om-card-rating"><span>★</span> 4.9</span>
+            </div>
+            <div class="om-card-body">
+              <h3>Allah &amp; Muhammad (PBUH) Diptych</h3>
+              <p class="om-card-desc">Matching twin set of sacred name calligraphy framed prints for living room walls.</p>
+              <div class="om-card-turnaround"><i data-lucide="clock"></i> Ready in 1–2 Days</div>
+            </div>
+            <div class="om-card-footer">
+              <div class="om-card-price-block">
+                <span class="om-price-from">Starting From</span>
+                <span class="om-price-val">&#8377;449</span>
+              </div>
+              <div class="om-card-btn-group">
+                <a href="https://wa.me/919473946181?text=Order%20Allah%20Muhammad%20Frames" class="om-card-wa-btn" target="_blank" rel="noopener"><i data-lucide="message-circle"></i></a>
+                <a href="product-detail.html?product=allah-name-frame" class="om-card-cta">Customize <i data-lucide="arrow-right" style="width:13px;height:13px"></i></a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- ── 13. Category 9: Artists Corner ────────────────────────── -->
+      <section class="om-category-section" id="artists-corner">
+        <div class="om-cat-header-row">
+          <div class="om-cat-title-block">
+            <div class="om-cat-header-icon"><i data-lucide="palette"></i></div>
+            <div class="om-cat-title-text">
+              <h2>Artists Corner <span class="om-cat-count">7 Products</span></h2>
+              <p>Professional giclée printing, digital painting, sketch scans &amp; exhibition gallery proofs.</p>
+            </div>
+          </div>
+          <button class="om-view-all-btn" data-toggle-cat="artists-corner">
+            View All Artists (7) <i data-lucide="chevron-down" style="width:14px;height:14px"></i>
+          </button>
+        </div>
+
+        <div class="om-products-grid">
+          <!-- Card 1 -->
+          <article class="om-product-card" data-tags="artists artwork giclee reproduction">
+            <div class="om-card-media">
+              <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=800&q=80" alt="Customer Artwork Reproduction" loading="lazy">
+              <span class="om-card-badge gold">FINE ART GICLÉE</span>
+              <span class="om-card-rating"><span>★</span> 4.9</span>
+            </div>
+            <div class="om-card-body">
+              <h3>Customer Artwork Giclée Reproduction</h3>
+              <p class="om-card-desc">High-gamut color calibrated printing for original paintings and digital illustrations.</p>
+              <div class="om-card-turnaround"><i data-lucide="clock"></i> Ready in 1–2 Days</div>
+            </div>
+            <div class="om-card-footer">
+              <div class="om-card-price-block">
+                <span class="om-price-from">Starting From</span>
+                <span class="om-price-val">&#8377;199</span>
+              </div>
+              <div class="om-card-btn-group">
+                <a href="https://wa.me/919473946181?text=Order%20Artwork%20Reproduction" class="om-card-wa-btn" target="_blank" rel="noopener"><i data-lucide="message-circle"></i></a>
+                <a href="product-detail.html?product=customer-artwork-printing" class="om-card-cta">Customize <i data-lucide="arrow-right" style="width:13px;height:13px"></i></a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 2 -->
+          <article class="om-product-card" data-tags="artists canvas painting print">
+            <div class="om-card-media">
+              <img src="https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=800&q=80" alt="Stretched Canvas Artwork" loading="lazy">
+              <span class="om-card-badge">COTTON CANVAS</span>
+              <span class="om-card-rating"><span>★</span> 4.9</span>
+            </div>
+            <div class="om-card-body">
+              <h3>Gallery Stretched Canvas Print</h3>
+              <p class="om-card-desc">Wrapped around 1-inch pinewood stretcher bars with mirror edge finishing.</p>
+              <div class="om-card-turnaround"><i data-lucide="clock"></i> Ready in 2–3 Days</div>
+            </div>
+            <div class="om-card-footer">
+              <div class="om-card-price-block">
+                <span class="om-price-from">Starting From</span>
+                <span class="om-price-val">&#8377;499</span>
+              </div>
+              <div class="om-card-btn-group">
+                <a href="https://wa.me/919473946181?text=Order%20Stretched%20Canvas" class="om-card-wa-btn" target="_blank" rel="noopener"><i data-lucide="message-circle"></i></a>
+                <a href="product-detail.html?product=canvas-style-print" class="om-card-cta">Customize <i data-lucide="arrow-right" style="width:13px;height:13px"></i></a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 3 -->
+          <article class="om-product-card" data-tags="artists sketch charcoal print under199">
+            <div class="om-card-media">
+              <img src="https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=800&q=80" alt="Fine Pencil Sketch Print" loading="lazy">
+              <span class="om-card-badge green">MONOCHROME</span>
+              <span class="om-card-rating"><span>★</span> 4.8</span>
+            </div>
+            <div class="om-card-body">
+              <h3>Charcoal &amp; Pencil Sketch Print</h3>
+              <p class="om-card-desc">High-contrast fine art matte paper that preserves raw pencil texture and graphite tone.</p>
+              <div class="om-card-turnaround"><i data-lucide="zap"></i> Same-Day Available</div>
+            </div>
+            <div class="om-card-footer">
+              <div class="om-card-price-block">
+                <span class="om-price-from">Starting From</span>
+                <span class="om-price-val">&#8377;149</span>
+              </div>
+              <div class="om-card-btn-group">
+                <a href="https://wa.me/919473946181?text=Order%20Sketch%20Print" class="om-card-wa-btn" target="_blank" rel="noopener"><i data-lucide="message-circle"></i></a>
+                <a href="product-detail.html?product=sketch-printing" class="om-card-cta">Customize <i data-lucide="arrow-right" style="width:13px;height:13px"></i></a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 4 -->
+          <article class="om-product-card" data-tags="artists photography gallery exhibition">
+            <div class="om-card-media">
+              <img src="https://images.unsplash.com/photo-1452587925148-ce544e77e70d?auto=format&fit=crop&w=800&q=80" alt="Photography Exhibition Print" loading="lazy">
+              <span class="om-card-badge gold">EXHIBITION PROOF</span>
+              <span class="om-card-rating"><span>★</span> 4.9</span>
+            </div>
+            <div class="om-card-body">
+              <h3>Photography Exhibition Proof</h3>
+              <p class="om-card-desc">Full spectrum Dmax black density print for photographer portfolios &amp; art shows.</p>
+              <div class="om-card-turnaround"><i data-lucide="clock"></i> Ready in 1–2 Days</div>
+            </div>
+            <div class="om-card-footer">
+              <div class="om-card-price-block">
+                <span class="om-price-from">Starting From</span>
+                <span class="om-price-val">&#8377;249</span>
+              </div>
+              <div class="om-card-btn-group">
+                <a href="https://wa.me/919473946181?text=Order%20Exhibition%20Print" class="om-card-wa-btn" target="_blank" rel="noopener"><i data-lucide="message-circle"></i></a>
+                <a href="product-detail.html?product=photography-print" class="om-card-cta">Customize <i data-lucide="arrow-right" style="width:13px;height:13px"></i></a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- ── 14. Revamped Clickable "Shop by Use Case / Need" ─────── -->
+      <section class="om-use-case-section" id="shop-by-use-case">
+        <div class="site-container">
+          <div class="section-head center-line">
+            <div>
+              <p class="section-kicker">Tailored Solutions</p>
+              <h2>Shop by <span class="h2-gold">Use Case &amp; Need</span></h2>
+              <p>Find the perfect curated printing package based on your exact requirement.</p>
+            </div>
+          </div>
+
+          <div class="om-use-case-grid">
+            
+            <!-- Card 1: For Business -->
+            <div class="om-use-card" onclick="window.location.href='#business-branding'">
+              <div>
+                <div class="om-use-card-top">
+                  <div class="om-use-icon"><i data-lucide="briefcase"></i></div>
+                  <div class="om-use-arrow"><i data-lucide="arrow-right"></i></div>
+                </div>
+                <div class="om-use-title">For Business &amp; Startups</div>
+                <p class="om-use-desc">Complete commercial printing solutions to establish brand authority.</p>
+              </div>
+              <div class="om-use-tags">
+                <a href="#business-branding" class="om-use-tag" onclick="event.stopPropagation()">Visiting Cards</a>
+                <a href="#sticker-printing" class="om-use-tag" onclick="event.stopPropagation()">Stickers</a>
+                <a href="#business-branding" class="om-use-tag" onclick="event.stopPropagation()">Signage</a>
+                <a href="#business-branding" class="om-use-tag" onclick="event.stopPropagation()">Flyers</a>
+                <a href="#sticker-printing" class="om-use-tag" onclick="event.stopPropagation()">Packaging</a>
+              </div>
+            </div>
+
+            <!-- Card 2: For Home -->
+            <div class="om-use-card" onclick="window.location.href='#photo-fine-art'">
+              <div>
+                <div class="om-use-card-top">
+                  <div class="om-use-icon"><i data-lucide="home"></i></div>
+                  <div class="om-use-arrow"><i data-lucide="arrow-right"></i></div>
+                </div>
+                <div class="om-use-title">For Home Décor</div>
+                <p class="om-use-desc">Transform your living space with custom frames, canvas and wall art.</p>
+              </div>
+              <div class="om-use-tags">
+                <a href="#photo-frames" class="om-use-tag" onclick="event.stopPropagation()">Wooden Frames</a>
+                <a href="#photo-fine-art" class="om-use-tag" onclick="event.stopPropagation()">Wall Art</a>
+                <a href="#photo-fine-art" class="om-use-tag" onclick="event.stopPropagation()">Canvas Prints</a>
+                <a href="#islamic-wall-art" class="om-use-tag" onclick="event.stopPropagation()">Islamic Art</a>
+              </div>
+            </div>
+
+            <!-- Card 3: For Gifting -->
+            <div class="om-use-card" onclick="window.location.href='#personalized-gifts'">
+              <div>
+                <div class="om-use-card-top">
+                  <div class="om-use-icon"><i data-lucide="gift"></i></div>
+                  <div class="om-use-arrow"><i data-lucide="arrow-right"></i></div>
+                </div>
+                <div class="om-use-title">For Personalized Gifting</div>
+                <p class="om-use-desc">Memorable gifts customized with personal photos, names and dates.</p>
+              </div>
+              <div class="om-use-tags">
+                <a href="#personalized-gifts" class="om-use-tag" onclick="event.stopPropagation()">Photo Mugs</a>
+                <a href="#personalized-gifts" class="om-use-tag" onclick="event.stopPropagation()">Magic Mugs</a>
+                <a href="#personalized-gifts" class="om-use-tag" onclick="event.stopPropagation()">Keychains</a>
+                <a href="#photo-frames" class="om-use-tag" onclick="event.stopPropagation()">Gift Frames</a>
+              </div>
+            </div>
+
+            <!-- Card 4: For Events -->
+            <div class="om-use-card" onclick="window.location.href='#t-shirt-printing'">
+              <div>
+                <div class="om-use-card-top">
+                  <div class="om-use-icon"><i data-lucide="party-popper"></i></div>
+                  <div class="om-use-arrow"><i data-lucide="arrow-right"></i></div>
+                </div>
+                <div class="om-use-title">For Events &amp; Celebrations</div>
+                <p class="om-use-desc">Custom merchandise, standees, invitations, and matching event tees.</p>
+              </div>
+              <div class="om-use-tags">
+                <a href="#t-shirt-printing" class="om-use-tag" onclick="event.stopPropagation()">Custom T-Shirts</a>
+                <a href="#office-printing" class="om-use-tag" onclick="event.stopPropagation()">Invitations</a>
+                <a href="#business-branding" class="om-use-tag" onclick="event.stopPropagation()">QR Standees</a>
+                <a href="#office-printing" class="om-use-tag" onclick="event.stopPropagation()">Certificates</a>
+              </div>
+            </div>
+
+            <!-- Card 5: For Students -->
+            <div class="om-use-card" onclick="window.location.href='#office-printing'">
+              <div>
+                <div class="om-use-card-top">
+                  <div class="om-use-icon"><i data-lucide="graduation-cap"></i></div>
+                  <div class="om-use-arrow"><i data-lucide="arrow-right"></i></div>
+                </div>
+                <div class="om-use-title">For Students &amp; Academics</div>
+                <p class="om-use-desc">Fast thesis binding, color project prints, lamination and reports.</p>
+              </div>
+              <div class="om-use-tags">
+                <a href="#office-printing" class="om-use-tag" onclick="event.stopPropagation()">Project Prints</a>
+                <a href="#office-printing" class="om-use-tag" onclick="event.stopPropagation()">Spiral Binding</a>
+                <a href="#office-printing" class="om-use-tag" onclick="event.stopPropagation()">Lamination</a>
+                <a href="#office-printing" class="om-use-tag" onclick="event.stopPropagation()">Color Xerox</a>
+              </div>
+            </div>
+
+            <!-- Card 6: For Artists -->
+            <div class="om-use-card" onclick="window.location.href='#artists-corner'">
+              <div>
+                <div class="om-use-card-top">
+                  <div class="om-use-icon"><i data-lucide="palette"></i></div>
+                  <div class="om-use-arrow"><i data-lucide="arrow-right"></i></div>
+                </div>
+                <div class="om-use-title">For Artists &amp; Creators</div>
+                <p class="om-use-desc">Exhibition gallery proofs, archival canvas, and artwork reproduction.</p>
+              </div>
+              <div class="om-use-tags">
+                <a href="#artists-corner" class="om-use-tag" onclick="event.stopPropagation()">Fine Art Giclée</a>
+                <a href="#artists-corner" class="om-use-tag" onclick="event.stopPropagation()">Canvas Wraps</a>
+                <a href="#artists-corner" class="om-use-tag" onclick="event.stopPropagation()">Sketch Prints</a>
+                <a href="#artists-corner" class="om-use-tag" onclick="event.stopPropagation()">Portfolios</a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- ── 15. Strong 5-Point Trust Strip ────────────────────────── -->
+      <section class="om-trust-strip-outer">
+        <div class="om-trust-grid">
+          <div class="om-trust-item">
+            <div class="om-trust-icon"><i data-lucide="sparkles"></i></div>
+            <div class="om-trust-text">
+              <strong>Quality Printing</strong>
+              <span>300+ DPI Archival Inks</span>
+            </div>
+          </div>
+          <div class="om-trust-item">
+            <div class="om-trust-icon"><i data-lucide="shield-check"></i></div>
+            <div class="om-trust-text">
+              <strong>Artwork Checked</strong>
+              <span>WhatsApp File Approval</span>
+            </div>
+          </div>
+          <div class="om-trust-item">
+            <div class="om-trust-icon"><i data-lucide="truck"></i></div>
+            <div class="om-trust-text">
+              <strong>Fast Turnaround</strong>
+              <span>Same-Day &amp; 24h Options</span>
+            </div>
+          </div>
+          <div class="om-trust-item">
+            <div class="om-trust-icon"><i data-lucide="lock"></i></div>
+            <div class="om-trust-text">
+              <strong>Secure Payments</strong>
+              <span>100% Buyer Protection</span>
+            </div>
+          </div>
+          <div class="om-trust-item">
+            <div class="om-trust-icon"><i data-lucide="headphones"></i></div>
+            <div class="om-trust-text">
+              <strong>Local Support</strong>
+              <span>Lucknow Store Helpdesk</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Floating Quick Jump to Categories Button -->
+    <button class="om-back-to-top" id="om-back-to-top" aria-label="Jump to Categories">
+      <i data-lucide="arrow-up" style="width:15px;height:15px"></i> Back to Categories
+    </button>
+
+    <div data-site-footer></div>
+
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
-    <script src="assets/app.js?v=clean_js_v11" defer></script>
-  
-<script id="line-alignment-script">
-  document.addEventListener("DOMContentLoaded", function() {
-    setTimeout(() => {
-      document.querySelectorAll(".section-head h2").forEach(h2 => {
-        let align = window.getComputedStyle(h2).textAlign;
-        let parent = h2.closest('.section-head');
-        if (parent) {
-          if (align === "center") {
-            parent.classList.add("center-line");
-          } else {
-            parent.classList.add("left-line");
+    <script src="assets/app.js?v=customer-checkout-94" defer></script>
+
+    <!-- Client-Side Modern Interactivity Script -->
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        function refreshIcons() {
+          if (window.lucide && typeof window.lucide.createIcons === 'function') {
+            window.lucide.createIcons();
           }
         }
+        refreshIcons();
+
+        // 1. Expand / Collapse "View All Products" in each category
+        const toggleButtons = document.querySelectorAll('[data-toggle-cat]');
+        toggleButtons.forEach(btn => {
+          btn.addEventListener('click', function() {
+            const catId = this.getAttribute('data-toggle-cat');
+            const section = document.getElementById(catId);
+            if (!section) return;
+
+            const extraProducts = section.querySelectorAll('.om-extra-product');
+            const isExpanded = extraProducts[0] && extraProducts[0].classList.contains('show');
+
+            if (isExpanded) {
+              extraProducts.forEach(p => p.classList.remove('show'));
+              this.innerHTML = this.innerHTML.replace('Show Less', 'View All').replace('chevron-up', 'chevron-down');
+            } else {
+              extraProducts.forEach(p => p.classList.add('show'));
+              this.innerHTML = this.innerHTML.replace('View All', 'Show Less').replace('chevron-down', 'chevron-up');
+            }
+            refreshIcons();
+          });
+        });
+
+        // 2. Real-Time Product Search Bar
+        const searchInput = document.getElementById('om-product-search');
+        const clearBtn = document.getElementById('om-search-clear');
+        const allCards = document.querySelectorAll('.om-product-card');
+
+        function filterProducts() {
+          const query = searchInput ? searchInput.value.toLowerCase().trim() : '';
+          if (clearBtn) clearBtn.style.display = query ? 'block' : 'none';
+
+          allCards.forEach(card => {
+            const text = card.textContent.toLowerCase();
+            const tags = (card.getAttribute('data-tags') || '').toLowerCase();
+            if (!query || text.includes(query) || tags.includes(query)) {
+              card.style.display = 'flex';
+            } else {
+              card.style.display = 'none';
+            }
+          });
+          refreshIcons();
+        }
+
+        if (searchInput) searchInput.addEventListener('input', filterProducts);
+        if (clearBtn) {
+          clearBtn.addEventListener('click', function() {
+            searchInput.value = '';
+            filterProducts();
+            searchInput.focus();
+          });
+        }
+
+        // 3. Quick Filter Chips
+        const chips = document.querySelectorAll('.om-chip');
+        chips.forEach(chip => {
+          chip.addEventListener('click', function() {
+            chips.forEach(c => c.classList.remove('active'));
+            this.classList.add('active');
+            const filter = this.getAttribute('data-filter');
+
+            allCards.forEach(card => {
+              const tags = (card.getAttribute('data-tags') || '').toLowerCase();
+              const turnaround = card.querySelector('.om-card-turnaround')?.textContent.toLowerCase() || '';
+              const priceText = card.querySelector('.om-price-val')?.textContent.replace(/[^0-9]/g, '') || '0';
+              const price = parseInt(priceText, 10);
+
+              let match = true;
+              if (filter === 'sameday') {
+                match = turnaround.includes('same-day');
+              } else if (filter === 'under199') {
+                match = price < 200;
+              } else if (filter === 'bestseller') {
+                match = card.querySelector('.om-card-badge')?.textContent.includes('BEST') || tags.includes('bests');
+              } else if (filter === 'custom') {
+                match = true;
+              }
+
+              card.style.display = match ? 'flex' : 'none';
+            });
+            refreshIcons();
+          });
+        });
+
+        // 4. Floating Back to Categories Button
+        const backToTopBtn = document.getElementById('om-back-to-top');
+        window.addEventListener('scroll', function() {
+          if (!backToTopBtn) return;
+          if (window.scrollY > 800) {
+            backToTopBtn.classList.add('visible');
+          } else {
+            backToTopBtn.classList.remove('visible');
+          }
+        }, { passive: true });
+
+        if (backToTopBtn) {
+          backToTopBtn.addEventListener('click', function() {
+            const nav = document.getElementById('shop-categories') || document.getElementById('best-sellers');
+            if (nav) nav.scrollIntoView({ behavior: 'smooth' });
+          });
+        }
+
+        setTimeout(refreshIcons, 150);
       });
-    }, 100); // small delay to ensure CSS is applied
-  });
-</script>
-</body>
+    </script>
+  </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

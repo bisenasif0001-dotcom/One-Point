@@ -1,48 +1,67 @@
 import React, { useState } from 'react';
 import { Icon } from './Shared';
 import { useApp } from './AppContext';
+import {
+  CUSTOMER_COMMS_PANEL_LINKS,
+  FINANCE_PANEL_LINKS,
+  OPERATIONS_PANEL_LINKS,
+  SYSTEM_PANEL_LINKS,
+  type PanelLinkDefinition,
+} from './features/navigation/nav-config';
+import { getRegistryNavigationLinks, type DashboardRegistryRole } from './features/dashboard/enterprise-dashboard-registry';
+import { clearStoredAdminToken } from './security/adminSession';
+
+const LogoBrand = () => {
+  const [imgFailed, setImgFailed] = useState(false);
+  if (imgFailed) {
+    return (
+      <div style={{
+        width: 32, height: 32, borderRadius: 8, flexShrink: 0,
+        background: 'linear-gradient(135deg, #125696 0%, #1e7fd4 100%)',
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        fontSize: 13, fontWeight: 700, color: '#fff', letterSpacing: '-0.02em',
+      }}>OP</div>
+    );
+  }
+  return (
+    <img
+      src="../assets/logo-bisen-one-point.svg"
+      alt="One Point"
+      style={{ height: 30, width: 'auto', flexShrink: 0 }}
+      onError={() => setImgFailed(true)}
+    />
+  );
+};
 
 // ─── Top Bar ──────────────────────────────────────────────────────────────────
 export const TopBar = ({ onSearchOpen }: { onSearchOpen: () => void }) => {
-  const { role, setRole, activePanel, unreadCount, notifications, markAllRead, setActivePanel, backendSync, refreshBackend, customers } = useApp();
-  const [notifOpen, setNotifOpen] = useState(false);
+  const { role, setRole, activePanel, unreadCount, notifications, markAllRead, setActivePanel, backendSync, refreshBackend, customers, rightPanelCollapsed, toggleRightPanel } = useApp();
   const isCustomer = role === 'customer';
   const currentCustomer = customers[0];
-
+  const [notifOpen, setNotifOpen] = useState(false);
   const handleRoleChange = (nextRole: any) => {
     setRole(nextRole);
-    if (nextRole === 'customer') {
-      setActivePanel('customer-home');
-      return;
-    }
-    if (role === 'customer' || ['crm', 'orders', 'documents', 'support', 'whatsapp', 'customer-home', 'customer-apps', 'customer-docs', 'customer-payments', 'customer-support', 'customer-profile'].includes(activePanel)) {
-      setActivePanel(nextRole === 'franchise' ? 'orders' : 'home');
-    }
+    setActivePanel(nextRole === 'franchise' ? 'orders' : 'home');
   };
 
   const syncLabel = backendSync.status === 'live'
-    ? 'Website backend live'
+    ? 'Live'
     : backendSync.status === 'syncing'
-      ? 'Syncing website'
+      ? 'Syncing...'
       : backendSync.status === 'offline'
-        ? 'Backend offline'
-        : 'Demo data mode';
+        ? 'Offline'
+        : 'Demo Mode';
   const syncTitle = backendSync.lastSyncedAt
     ? `${backendSync.message} Last sync: ${new Date(backendSync.lastSyncedAt).toLocaleTimeString('en-IN')}`
     : backendSync.message;
 
   return (
     <div className="command-bar" style={{ position: 'relative' }}>
-      <div className="brand" style={{ cursor: 'pointer' }} onClick={() => setActivePanel(isCustomer ? 'customer-home' : 'home')}>
-        <img src="../assets/logo-bisen-one-point.svg" alt="One Point" style={{ height: 28, width: 'auto', flexShrink: 0 }}
-          onError={e => { (e.target as HTMLImageElement).style.display = 'none'; }} />
-        {isCustomer ? (
-          <div className="brand-name">One Point <span>Customer Portal</span></div>
-        ) : (
-          <div className="brand-name">One Point <span>Service OS</span></div>
-        )}
+      <div className="brand" style={{ cursor: 'pointer' }} onClick={() => setActivePanel('home')}>
+        <LogoBrand />
+        <div className="brand-name">One Point <span>Service OS</span></div>
       </div>
-      <a className="icon-btn" href="../" title="Back to website">
+      <a className="icon-btn" href="/" title="Back to website">
         <Icon name="home" size={15} />
       </a>
       <div className="cmd-divider" />
@@ -51,68 +70,68 @@ export const TopBar = ({ onSearchOpen }: { onSearchOpen: () => void }) => {
       <div className="global-search" onClick={onSearchOpen} style={{ cursor: 'pointer' }}>
         <Icon name="search" size={14} className="text-gray-400" />
         <span style={{ color: 'var(--text-3)', flex: 1, fontSize: '12.5px' }}>
-          {isCustomer ? 'Search my applications, documents, support...' : 'Search customers, orders, panels...'}
+          Search customers, orders, panels...
         </span>
         <span className="search-hint">Ctrl+K</span>
       </div>
 
-      {!isCustomer && (
-        <div className={`sys-status sys-status-${backendSync.status}`} title={syncTitle}>
-          <div className="sys-dot" />
-          {syncLabel}
-        </div>
-      )}
+      <div className={`sys-status sys-status-${backendSync.status}`} title={backendSync.status === 'demo' ? `${syncTitle} — Login karein live data ke liye` : syncTitle}>
+        <div className="sys-dot" />
+        {syncLabel}
+      </div>
 
       <div className="cmd-right">
-        {!isCustomer && (
-          <button className="icon-btn" title="Sync website backend" onClick={refreshBackend}>
-            <Icon name={backendSync.status === 'syncing' ? 'loader-2' : 'refresh-cw'} size={15} className={backendSync.status === 'syncing' ? 'spin' : ''} />
-          </button>
-        )}
+        <button
+          className="icon-btn"
+          title={rightPanelCollapsed ? 'Show insights panel' : 'Hide insights panel'}
+          aria-pressed={!rightPanelCollapsed}
+          onClick={toggleRightPanel}
+        >
+          <Icon name={rightPanelCollapsed ? 'panel-right-open' : 'panel-right-close'} size={16} />
+        </button>
 
-        {isCustomer ? (
-          <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8 }}>
-            <span className="role-switcher" title="Customer portal" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, pointerEvents: 'none' }}>
-              <Icon name="user-check" size={13} /> Customer Portal
-            </span>
-            <button
-              className="btn btn-ghost btn-sm"
-              title="Logout from customer portal"
-              style={{ display: 'inline-flex', alignItems: 'center', gap: 5, color: 'var(--rose)', border: '1px solid var(--rose)', borderRadius: 6, padding: '4px 10px', fontSize: 'var(--fs-xs)' }}
-              onClick={() => {
-                localStorage.removeItem('opds_customer_session');
-                handleRoleChange('operator');
-              }}
-            >
-              <Icon name="log-out" size={13} /> Logout
-            </button>
-          </div>
-        ) : (
-          <select
-            className="role-switcher"
-            value={role}
-            onChange={e => handleRoleChange(e.target.value)}
-            title="Switch role"
-          >
-            <option value="admin">Global Admin</option>
-            <option value="operator">Operator Viewer</option>
-            <option value="franchise">Franchise Partner</option>
-            <option value="support">Support Agent</option>
-            <option value="customer">Customer Portal</option>
-          </select>
-        )}
+        <button className="icon-btn" title="Sync website backend" onClick={refreshBackend}>
+          <Icon name={backendSync.status === 'syncing' ? 'loader-2' : 'refresh-cw'} size={15} className={backendSync.status === 'syncing' ? 'spin' : ''} />
+        </button>
 
-        {!isCustomer && (
-          <button className="icon-btn" title="AI Assistant" onClick={() => setActivePanel('ai-agents')}>
-            <Icon name="sparkles" size={16} />
-          </button>
-        )}
+        <a
+          href="/customer-account-overview.html"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="btn btn-ghost btn-xs"
+          title="Open Customer Account Portal in new tab"
+          style={{ display: 'inline-flex', alignItems: 'center', gap: 5, color: 'var(--blue)', border: '1px solid var(--border-1)', borderRadius: 6, padding: '4px 8px', fontSize: 'var(--fs-xs)', textDecoration: 'none' }}
+        >
+          <Icon name="external-link" size={13} /> Customer Portal
 
-        {isCustomer && (
-          <span style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-3)', fontWeight: 'var(--fw-medium)', padding: '3px 8px', background: 'var(--bg-3)', border: '1px solid var(--border-1)', borderRadius: 6 }}>
-            {currentCustomer?.tier || 'Standard'} Tier
-          </span>
-        )}
+        </a>
+
+        <select
+          className="role-switcher"
+          value={role}
+          onChange={e => handleRoleChange(e.target.value)}
+          title="Switch role"
+        >
+          <option value="admin">Global Admin</option>
+          <option value="operator">Operator</option>
+          <option value="franchise">Franchise Partner</option>
+          <option value="support">Support Staff</option>
+        </select>
+
+        <button className="icon-btn" title="AI Assistant" onClick={() => setActivePanel('ai-agents')}>
+          <Icon name="sparkles" size={16} />
+        </button>
+        <button
+          className="icon-btn"
+          title="Logout admin"
+          style={{ color: 'var(--rose)' }}
+          onClick={() => {
+            clearStoredAdminToken();
+            window.location.reload();
+          }}
+        >
+          <Icon name="log-out" size={15} />
+        </button>
 
         {/* Notification Bell */}
         <div style={{ position: 'relative' }}>
@@ -124,9 +143,14 @@ export const TopBar = ({ onSearchOpen }: { onSearchOpen: () => void }) => {
             <Icon name="bell" size={16} />
             {unreadCount > 0 && (
               <span style={{
-                position: 'absolute', top: 4, right: 4, width: 8, height: 8,
-                background: 'var(--rose)', borderRadius: '50%', border: '1.5px solid var(--bg-1)',
-              }} />
+                position: 'absolute', top: 2, right: 2,
+                minWidth: 18, height: 18,
+                background: 'var(--rose)', borderRadius: 999,
+                border: '1.5px solid var(--bg-1)',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                fontSize: 11, fontWeight: 600, color: '#fff',
+                padding: '0 4px', lineHeight: 1, pointerEvents: 'none',
+              }}>{unreadCount > 99 ? '99+' : unreadCount}</span>
             )}
           </button>
 
@@ -174,18 +198,16 @@ export const TopBar = ({ onSearchOpen }: { onSearchOpen: () => void }) => {
         </div>
 
         {/* New Order Button */}
-        {!isCustomer && (
-          <button className="quick-create-btn" onClick={() => setActivePanel('orders')}>
-            <Icon name="plus" size={14} /> New Order
-          </button>
-        )}
+        <button className="quick-create-btn" onClick={() => setActivePanel('orders')}>
+          <Icon name="plus" size={14} /> New Order
+        </button>
 
         {/* User Avatar */}
-        <button className="user-btn" onClick={() => setActivePanel(isCustomer ? 'customer-profile' : 'settings')} title={isCustomer ? 'Open my profile' : 'Open platform settings'}>
-          <div className="user-avatar" style={{ background: isCustomer ? 'var(--blue)' : undefined }}>
-            {isCustomer ? (currentCustomer?.initials || 'OP') : 'AS'}
+        <button className="user-btn" onClick={() => setActivePanel('settings')} title="Open platform settings">
+          <div className="user-avatar">
+            AS
           </div>
-          <span className="user-name">{isCustomer ? (currentCustomer?.name || 'Customer') : 'Asif Bisen'}</span>
+          <span className="user-name">Asif Bisen</span>
         </button>
       </div>
 
@@ -197,117 +219,182 @@ export const TopBar = ({ onSearchOpen }: { onSearchOpen: () => void }) => {
   );
 };
 
+// ─── Accordion nav group ──────────────────────────────────────────────────────
+const NavGroup = ({
+  icon, label, color = '#125696', children, defaultOpen = false, hasActive = false,
+}: {
+  icon: string; label: string; color?: string; children: React.ReactNode;
+  defaultOpen?: boolean; hasActive?: boolean;
+}) => {
+  const [open, setOpen] = useState(defaultOpen || hasActive);
+  const [hover, setHover] = useState(false);
+
+  return (
+    <div style={{ marginBottom: 4 }}>
+      <button
+        type="button"
+        onClick={() => setOpen(o => !o)}
+        onMouseEnter={() => setHover(true)}
+        onMouseLeave={() => setHover(false)}
+        style={{
+          display: 'flex', alignItems: 'center', gap: 9, width: '100%',
+          padding: '7px 10px', borderRadius: 10, border: 'none', cursor: 'pointer',
+          background: open ? 'rgba(18, 86, 150, 0.05)' : hover ? 'rgba(8, 47, 97, 0.035)' : 'transparent',
+          transition: 'all 160ms ease',
+        }}
+      >
+        <div style={{
+          width: 26, height: 26, borderRadius: 8, flexShrink: 0,
+          background: open ? 'var(--blue)' : 'rgba(8, 47, 97, 0.06)',
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          boxShadow: open ? '0 2px 6px rgba(18, 86, 150, 0.25)' : 'none',
+          transition: 'all 180ms ease',
+        }}>
+          <Icon name={icon} size={13} style={{ color: open ? '#ffffff' : 'var(--blue)', transition: 'color 180ms' }} />
+        </div>
+        <span style={{
+          fontSize: 12.5, fontWeight: 600, letterSpacing: '-0.01em',
+          color: open ? 'var(--text-1)' : 'var(--text-2)',
+          flex: 1, textAlign: 'left', transition: 'color 160ms',
+        }}>{label}</span>
+        <Icon
+          name="chevron-right"
+          size={12}
+          style={{
+            color: open ? 'var(--blue)' : 'var(--text-4)', flexShrink: 0,
+            transform: open ? 'rotate(90deg)' : 'none',
+            transition: 'transform 200ms ease, color 160ms',
+          }}
+        />
+      </button>
+
+      <div style={{
+        display: 'grid',
+        gridTemplateRows: open ? '1fr' : '0fr',
+        transition: 'grid-template-rows 200ms ease',
+      }}>
+        <div style={{ overflow: 'hidden' }}>
+          <div style={{
+            display: 'flex', flexDirection: 'column', gap: 2,
+            paddingLeft: 6, paddingTop: 4, paddingBottom: 4,
+            borderLeft: '1.5px solid rgba(8, 47, 97, 0.1)',
+            marginLeft: 18, marginTop: 2,
+          }}>
+            {children}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 // ─── Sidebar ──────────────────────────────────────────────────────────────────
 export const Sidebar = ({ activePanel, setActivePanel }: any) => {
-  const { role, customers } = useApp();
+  const { role, customers, allOrders } = useApp();
 
   const link = (id: string, icon: string, text: string, badge?: any) => (
-    <button className={`nav-link ${activePanel === id ? 'active' : ''}`} onClick={() => setActivePanel(id)}>
-      <Icon name={icon} className="ni" /> {text}
+    <button
+      key={id}
+      type="button"
+      className={`nav-link ${activePanel === id ? 'active' : ''}`}
+      onClick={() => setActivePanel(id)}
+    >
+      <Icon name={icon} className="ni" size={15} />
+      <span style={{ flex: 1, textAlign: 'left', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{text}</span>
       {badge && <span className={`nav-badge ${badge.cls || ''}`}>{badge.num}</span>}
     </button>
   );
 
-  // Role-based visibility
-  const isAdmin = role === 'admin';
-  const isOperator = role === 'admin' || role === 'operator';
-  const isSupport = role === 'admin' || role === 'support';
-  const isFranchise = role === 'franchise';
-  const isCustomer = role === 'customer';
+  const renderPanelLinks = (
+    items: PanelLinkDefinition[],
+    options?: {
+      filter?: (item: PanelLinkDefinition) => boolean;
+      badge?: (item: PanelLinkDefinition) => any;
+    },
+  ) => items
+    .filter(item => (options?.filter ? options.filter(item) : true))
+    .map(item => link(item.panel, item.icon, item.label, options?.badge?.(item)));
 
-  if (isCustomer) {
-    return (
-      <aside className="sidebar" id="sidebar">
-        <div className="nav-section">
-          <div className="nav-section-label">My Account</div>
-          {link('customer-home', 'home', 'Dashboard Home')}
-          {link('customer-apps', 'package', 'My Applications', { num: customers[0]?.orders?.length || 0, cls: 'emerald' })}
-          {link('customer-docs', 'folder', 'Documents Locker')}
-          {link('customer-payments', 'credit-card', 'Payments & Receipts')}
-        </div>
-        <div className="nav-section">
-          <div className="nav-section-label">Help & Support</div>
-          {link('customer-support', 'life-buoy', 'Support Tickets')}
-          {link('customer-profile', 'user', 'Profile & Settings')}
-        </div>
-        <div style={{ marginTop: 'auto', paddingTop: 12, borderTop: '1px solid var(--border-1)', display: 'flex', alignItems: 'center', gap: 8, padding: '12px 10px 0' }}>
-          <img src="../assets/logo-bisen-one-point.svg" alt="One Point" style={{ height: 20, opacity: 0.5 }}
-            onError={e => { (e.target as HTMLImageElement).style.display = 'none'; }} />
-          <span style={{ fontSize: 10, color: 'var(--text-4)', lineHeight: 1.3 }}>Bisen One Point<br/>Suvidha Kendra</span>
-        </div>
-      </aside>
-    );
-  }
+  const hasActivePanel = (
+    items: PanelLinkDefinition[],
+    filter?: (item: PanelLinkDefinition) => boolean,
+  ) => items.some(item => (!filter || filter(item)) && item.panel === activePanel);
+
+  const isAdmin     = role === 'admin';
+  const isOperator  = role === 'admin' || role === 'operator';
+  const isSupport   = role === 'admin' || role === 'support';
+  const isFranchise = role === 'franchise';
+
+  const pendingCount = allOrders.filter(o => ['Pending','Processing','Verified'].includes(o.status)).length;
+
+  const SidebarLogo = () => (
+    <div style={{ marginTop: 'auto', borderTop: '1px solid rgba(8, 47, 97, 0.08)', display: 'flex', alignItems: 'center', gap: 10, padding: '12px 10px 4px' }}>
+      <img
+        src="../assets/logo-bisen-one-point.svg"
+        alt="One Point"
+        style={{ height: 22, opacity: 0.7, maxWidth: 90 }}
+        onError={e => { (e.target as HTMLImageElement).style.display = 'none'; }}
+      />
+      <span style={{ fontSize: 10.5, fontWeight: 600, color: 'var(--text-3)', lineHeight: 1.3 }}>Bisen One Point<br/>Suvidha Kendra</span>
+    </div>
+  );
 
   return (
-    <aside className="sidebar" id="sidebar">
+    <aside className="sidebar" id="sidebar" style={{ display: 'flex', flexDirection: 'column', gap: 4, padding: '14px 10px', overflowY: 'auto' }}>
+      {/* 1. Overview */}
       <div className="nav-section">
-        {link('home', 'layout-dashboard', 'Dashboard')}
+        <div className="nav-section-label">Overview</div>
+        {link('home', 'layout-dashboard', 'Dashboard Home')}
       </div>
 
-      {isOperator && (
-        <div className="nav-section">
-          <div className="nav-section-label">Operations Control</div>
-          {link('kanban',      'git-commit',    'Order Pipeline', { num: 28, cls: 'amber' })}
-          {link('assignments', 'user-check',    'Assignments', { num: 0, cls: 'rose' })}
-          {link('documents',   'file-check-2',  'Verify Queue')}
-          {link('orders',      'list-ordered',  'All Applications')}
-          {link('tasks',       'check-square',  'Tasks & Follow-ups')}
-        </div>
-      )}
-
+      {/* 2. Operations */}
       <div className="nav-section">
-        <div className="nav-section-label">Customer & Comms</div>
-        {link('crm',         'users',          'CRM Profiles')}
-        {link('customer-db', 'database',       'Customer Database')}
-        {link('whatsapp', 'message-circle', 'WhatsApp Center', { num: 4, cls: 'emerald' })}
-        {link('sms', 'smartphone', 'SMS Notifications')}
-        {isSupport && link('support', 'life-buoy', 'Support Tickets')}
+        <div className="nav-section-label">Operations</div>
+        <NavGroup icon="git-commit" label="Workflow & Pipeline" defaultOpen hasActive={hasActivePanel(OPERATIONS_PANEL_LINKS)}>
+          {renderPanelLinks(OPERATIONS_PANEL_LINKS, {
+            badge: item => item.panel === 'kanban' && pendingCount > 0 ? { num: pendingCount, cls: 'amber' } : undefined,
+          })}
+        </NavGroup>
       </div>
 
-      {isAdmin && (
-        <div className="nav-section">
-          <div className="nav-section-label">Business & Finance</div>
-          {link('finance', 'indian-rupee', 'Payment Ledger')}
-          {link('refunds', 'rotate-ccw', 'Refunds')}
-          {link('franchise', 'store', 'Franchise Network')}
-          {link('analytics', 'pie-chart', 'Data Analytics')}
-          {link('digipay', 'wallet', 'DigiPay / AEPS')}
-        </div>
-      )}
-
-      {isFranchise && (
-        <div className="nav-section">
-          <div className="nav-section-label">Franchise View</div>
-          {link('orders', 'list-ordered', 'My Orders')}
-          {link('finance', 'indian-rupee', 'My Wallet')}
-        </div>
-      )}
-
-      {isAdmin && (
-        <div className="nav-section">
-          <div className="nav-section-label">System</div>
-          {link('staff', 'user-cog', 'Staff Management')}
-          {link('automation', 'zap', 'Rule Builder')}
-          {link('ai-agents', 'bot', 'AI Employees / Agents')}
-          {link('services', 'grid-3x3', 'Service Templates')}
-          {link('onemart', 'shopping-cart', 'OneMart Store')}
-          {link('settings', 'settings', 'Platform Settings')}
-        </div>
-      )}
-
-      <div style={{ marginTop: 'auto', paddingTop: 12, borderTop: '1px solid var(--border-1)', display: 'flex', alignItems: 'center', gap: 8, padding: '12px 10px 0' }}>
-        <img src="../assets/logo-bisen-one-point.svg" alt="One Point" style={{ height: 20, opacity: 0.5 }}
-          onError={e => { (e.target as HTMLImageElement).style.display = 'none'; }} />
-        <span style={{ fontSize: 10, color: 'var(--text-4)', lineHeight: 1.3 }}>Bisen One Point<br/>Suvidha Kendra</span>
+      {/* 3. Customers & Comms */}
+      <div className="nav-section">
+        <div className="nav-section-label">Customers & Comms</div>
+        <NavGroup
+          icon="users"
+          label="CRM & Communication"
+          defaultOpen
+          hasActive={hasActivePanel(CUSTOMER_COMMS_PANEL_LINKS, item => item.panel !== 'support' || isSupport)}
+        >
+          {renderPanelLinks(CUSTOMER_COMMS_PANEL_LINKS, {
+            filter: item => item.panel !== 'support' || isSupport,
+          })}
+        </NavGroup>
       </div>
+
+      {/* 4. Business & System */}
+      <div className="nav-section">
+        <div className="nav-section-label">Management & System</div>
+        {isAdmin && (
+          <NavGroup icon="settings" label="Finance & Settings" defaultOpen hasActive={hasActivePanel(FINANCE_PANEL_LINKS)}>
+            {renderPanelLinks(FINANCE_PANEL_LINKS)}
+            {link('orders',  'list-ordered', 'My Orders')}
+            {link('finance', 'indian-rupee', 'My Wallet')}
+          </NavGroup>
+        )}
+      </div>
+
+      <SidebarLogo />
     </aside>
   );
 };
 
 // ─── Right Panel — Working AI Assistant & Customer Widgets ───────────────────
 export const RightPanel = () => {
-  const { role, livePayments, setActivePanel, addTask, addActivity, customers, allOrders } = useApp();
+  const {
+    role, livePayments, setActivePanel, addTask, addActivity, customers, allOrders,
+    theme, setTheme, fontScale, setFontScale, density, setDensity, animation, setAnimation, direction, setDirection
+  } = useApp();
   const [aiInput, setAiInput] = useState('');
   const [aiResponses, setAiResponses] = useState<{ q: string; a: string }[]>([]);
   const isCustomer = role === 'customer';
@@ -613,32 +700,115 @@ export const RightPanel = () => {
   }
 
   return (
-    <aside className="right-panel">
-      {/* Live Payments */}
-      <div className="rp-section">
-        <div className="rp-label">Live Payments</div>
-        <div className="live-feed">
-          {livePayments.slice(0, 4).map((p, i) => (
-            <div className="live-item" key={i}>
-              <div className="live-dot" style={{ background: p.color }} />
-              <div className="live-text">{p.text}</div>
+    <aside className="right-panel" style={{ background: '#ffffff', borderLeft: '1px solid rgba(8, 47, 97, 0.08)', display: 'flex', flexDirection: 'column', height: '100%', overflowY: 'auto' }}>
+      
+      {/* ─── 1. LIVE KENDRA TELEMETRY ───────────────────────────────────── */}
+      <div className="rp-section" style={{ padding: '16px 16px 12px 16px', borderBottom: '1px solid rgba(8, 47, 97, 0.06)' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10 }}>
+          <div className="rp-label" style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em', color: 'var(--blue)' }}>
+            <span style={{ width: 7, height: 7, borderRadius: '50%', background: 'var(--emerald)', display: 'inline-block', boxShadow: '0 0 6px var(--emerald)' }} />
+            Kendra Telemetry
+          </div>
+          <span style={{ fontSize: 10.5, color: 'var(--text-4)', fontWeight: 600 }}>Today</span>
+        </div>
+
+        {/* 2x2 Telemetry Grid */}
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
+          <div style={{ background: 'var(--bg-3)', padding: '10px 12px', borderRadius: 10, border: '1px solid var(--border-1)' }}>
+            <div style={{ fontSize: 10.5, color: 'var(--text-3)', fontWeight: 600 }}>Total Revenue</div>
+            <div style={{ fontSize: 14, fontWeight: 800, color: 'var(--emerald)', marginTop: 2 }}>{money(totalRevenue)}</div>
+          </div>
+          <div style={{ background: 'var(--bg-3)', padding: '10px 12px', borderRadius: 10, border: '1px solid var(--border-1)', cursor: 'pointer' }} onClick={() => setActivePanel('orders')}>
+            <div style={{ fontSize: 10.5, color: 'var(--text-3)', fontWeight: 600 }}>Active Orders</div>
+            <div style={{ fontSize: 14, fontWeight: 800, color: 'var(--text-1)', marginTop: 2 }}>{allOrders.length} Applications</div>
+          </div>
+          <div style={{ background: 'var(--bg-3)', padding: '10px 12px', borderRadius: 10, border: '1px solid var(--border-1)', cursor: 'pointer' }} onClick={() => setActivePanel('documents')}>
+            <div style={{ fontSize: 10.5, color: 'var(--amber)', fontWeight: 600 }}>Pending Review</div>
+            <div style={{ fontSize: 14, fontWeight: 800, color: 'var(--amber)', marginTop: 2 }}>{pendingOrders.length} In Queue</div>
+          </div>
+          <div style={{ background: 'var(--bg-3)', padding: '10px 12px', borderRadius: 10, border: '1px solid var(--border-1)', cursor: 'pointer' }} onClick={() => setActivePanel('assignments')}>
+            <div style={{ fontSize: 10.5, color: 'var(--blue)', fontWeight: 600 }}>Active Staff</div>
+            <div style={{ fontSize: 14, fontWeight: 800, color: 'var(--blue)', marginTop: 2 }}>2 Operators</div>
+          </div>
+        </div>
+      </div>
+
+      {/* ─── 2. QUICK ACTION SHORTCUTS ──────────────────────────────────── */}
+      <div className="rp-section" style={{ padding: '14px 16px', borderBottom: '1px solid rgba(8, 47, 97, 0.06)' }}>
+        <div className="rp-label" style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em', color: 'var(--text-2)', marginBottom: 8 }}>
+          Quick Desk Actions
+        </div>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 6 }}>
+          <button
+            type="button"
+            className="btn btn-ghost btn-xs"
+            style={{ justifyContent: 'center', padding: '8px 6px', fontSize: 11, background: 'var(--bg-2)', borderRadius: 8, border: '1px solid var(--border-1)', fontWeight: 600 }}
+            onClick={() => setActivePanel('orders')}
+          >
+            <Icon name="plus-circle" size={13} style={{ color: 'var(--blue)' }} /> New Order
+          </button>
+          <button
+            type="button"
+            className="btn btn-ghost btn-xs"
+            style={{ justifyContent: 'center', padding: '8px 6px', fontSize: 11, background: 'var(--bg-2)', borderRadius: 8, border: '1px solid var(--border-1)', fontWeight: 600 }}
+            onClick={() => setActivePanel('whatsapp')}
+          >
+            <Icon name="message-circle" size={13} style={{ color: '#25D366' }} /> WhatsApp
+          </button>
+          <button
+            type="button"
+            className="btn btn-ghost btn-xs"
+            style={{ justifyContent: 'center', padding: '8px 6px', fontSize: 11, background: 'var(--bg-2)', borderRadius: 8, border: '1px solid var(--border-1)', fontWeight: 600 }}
+            onClick={() => setActivePanel('documents')}
+          >
+            <Icon name="file-check" size={13} style={{ color: 'var(--amber)' }} /> Verify Docs
+          </button>
+          <button
+            type="button"
+            className="btn btn-ghost btn-xs"
+            style={{ justifyContent: 'center', padding: '8px 6px', fontSize: 11, background: 'var(--bg-2)', borderRadius: 8, border: '1px solid var(--border-1)', fontWeight: 600 }}
+            onClick={() => setActivePanel('finance')}
+          >
+            <Icon name="credit-card" size={13} style={{ color: 'var(--emerald)' }} /> Ledger
+          </button>
+        </div>
+      </div>
+
+      {/* ─── 3. LIVE ACTIVITY & PAYMENT STREAM ──────────────────────────── */}
+      <div className="rp-section" style={{ padding: '14px 16px', borderBottom: '1px solid rgba(8, 47, 97, 0.06)' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
+          <div className="rp-label" style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em', color: 'var(--text-2)' }}>
+            Live Operations Stream
+          </div>
+          <span style={{ fontSize: 10, color: 'var(--emerald)', fontWeight: 700 }}>LIVE</span>
+        </div>
+        <div className="live-feed" style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+          {livePayments.slice(0, 3).map((p, i) => (
+            <div className="live-item" key={i} style={{ padding: '6px 8px', borderRadius: 6, background: 'var(--bg-2)', fontSize: 11.5 }}>
+              <div className="live-dot" style={{ background: p.color, width: 6, height: 6 }} />
+              <div className="live-text" style={{ fontSize: 11.5, lineHeight: 1.3 }}>{p.text}</div>
             </div>
           ))}
         </div>
       </div>
 
-      {/* AI Assistant */}
-      <div className="rp-section" style={{ flex: 1 }}>
-        <div className="rp-label">AI Assistant</div>
-        <div style={{ fontSize: '11.5px', color: 'var(--text-3)', marginBottom: 8 }}>Ask anything about your business</div>
+      {/* ─── 4. KABIR AI COPILOT ─────────────────────────────────────────── */}
+      <div className="rp-section" style={{ flex: 1, padding: '14px 16px 16px 16px', display: 'flex', flexDirection: 'column' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 4 }}>
+          <Icon name="sparkles" size={14} style={{ color: 'var(--blue)' }} />
+          <div className="rp-label" style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em', color: 'var(--text-1)' }}>
+            Kabir AI Copilot
+          </div>
+        </div>
+        <div style={{ fontSize: 11, color: 'var(--text-4)', marginBottom: 8 }}>Ask anything about orders, revenue, or staff</div>
 
-        {/* Quick Buttons */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 5, marginBottom: 12 }}>
-          {['Revenue kitna hai?', 'Pending verifications', 'Failed payments'].map(q => (
+        {/* Quick Question Chips */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 4, marginBottom: 10 }}>
+          {['Revenue summary dikhao', 'Pending verifications', 'Failed payments'].map(q => (
             <button
               key={q}
               className="btn btn-ghost btn-xs text-left"
-              style={{ justifyContent: 'flex-start', fontSize: 'var(--fs-xs)' }}
+              style={{ justifyContent: 'flex-start', fontSize: 11, padding: '5px 8px', background: 'var(--bg-3)', border: '1px solid var(--border-1)', borderRadius: 6 }}
               onClick={() => processAIQuery(q)}
             >
               <Icon name="zap" size={11} style={{ color: 'var(--amber)', flexShrink: 0 }} /> {q}
@@ -646,35 +816,38 @@ export const RightPanel = () => {
           ))}
         </div>
 
-        {/* Responses */}
+        {/* AI Responses Display */}
         {aiResponses.length > 0 && (
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 8, maxHeight: 200, overflowY: 'auto', marginBottom: 8 }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 6, maxHeight: 160, overflowY: 'auto', marginBottom: 8 }}>
             {aiResponses.map((r, i) => (
-              <div key={i} style={{ background: 'var(--bg-3)', border: '1px solid var(--border-1)', borderRadius: 8, padding: 10, fontSize: 'var(--fs-xs)' }}>
-                <div style={{ color: 'var(--text-3)', marginBottom: 4, fontStyle: 'italic' }}>"{r.q}"</div>
-                <div style={{ color: 'var(--text-1)', whiteSpace: 'pre-line', lineHeight: 1.5 }}>{r.a}</div>
+              <div key={i} style={{ background: 'var(--bg-3)', border: '1px solid var(--border-1)', borderRadius: 8, padding: 8, fontSize: 11.5 }}>
+                <div style={{ color: 'var(--text-3)', marginBottom: 2, fontStyle: 'italic' }}>"{r.q}"</div>
+                <div style={{ color: 'var(--text-1)', whiteSpace: 'pre-line', lineHeight: 1.4 }}>{r.a}</div>
               </div>
             ))}
           </div>
         )}
-      </div>
 
-      {/* AI Input */}
-      <div className="ai-prompt-bar">
-        <input
-          className="ai-input"
-          placeholder="Ask AI assistant…"
-          value={aiInput}
-          onChange={e => setAiInput(e.target.value)}
-          onKeyDown={e => e.key === 'Enter' && aiInput.trim() && processAIQuery(aiInput)}
-        />
-        <button
-          className="ai-send"
-          onClick={() => aiInput.trim() && processAIQuery(aiInput)}
-          disabled={!aiInput.trim()}
-        >
-          <Icon name="send" size={14} />
-        </button>
+        {/* AI Prompt Input Bar */}
+        <div className="ai-prompt-bar" style={{ marginTop: 'auto', display: 'flex', alignItems: 'center', gap: 6, background: 'var(--bg-2)', border: '1px solid var(--border-2)', borderRadius: 8, padding: '4px 8px' }}>
+          <input
+            className="ai-input"
+            placeholder="Ask Kabir AI..."
+            value={aiInput}
+            onChange={e => setAiInput(e.target.value)}
+            onKeyDown={e => e.key === 'Enter' && aiInput.trim() && processAIQuery(aiInput)}
+            style={{ width: '100%', border: 'none', background: 'transparent', outline: 'none', fontSize: 12, color: 'var(--text-1)' }}
+          />
+          <button
+            type="button"
+            className="ai-send icon-btn"
+            onClick={() => aiInput.trim() && processAIQuery(aiInput)}
+            disabled={!aiInput.trim()}
+            style={{ border: 'none', background: 'transparent', cursor: 'pointer', color: 'var(--blue)', padding: 0 }}
+          >
+            <Icon name="send" size={14} />
+          </button>
+        </div>
       </div>
     </aside>
   );

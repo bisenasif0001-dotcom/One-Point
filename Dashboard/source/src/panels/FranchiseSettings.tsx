@@ -1,279 +1,344 @@
-﻿import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { PanelHeader, Card, Badge, Icon } from '../Shared';
 import { useApp } from '../AppContext';
+import { getCsrfToken, getStoredAdminToken, setStoredAdminToken } from '../security/adminSession';
 
-// ─── Franchise Data ───────────────────────────────────────────────────────────
-const INIT_DATA = [
-  { id: 'FC_UP_LKO_01', name: 'Sharma Suvidha Kendra', owner: 'Rajesh Sharma', location: 'Alambagh, Lucknow',   phone: '9876543210', balance: 14200, tier: 'Gold',   commission: 12, orders: 89, joined: 'Jan 2026', active: true  },
-  { id: 'FC_UP_KNP_02', name: 'Kanpur e-Point',         owner: 'Priya Singh',    location: 'Civil Lines, Kanpur', phone: '9512312312', balance: 450,   tier: 'Silver', commission: 8,  orders: 34, joined: 'Mar 2026', active: true  },
-  { id: 'FC_UP_VNS_03', name: 'Varanasi DigiPoint',     owner: 'Suresh Gupta',   location: 'Lanka, Varanasi',    phone: '9988776655', balance: 8900,  tier: 'Gold',   commission: 10, orders: 62, joined: 'Feb 2026', active: true  },
-  { id: 'FC_UP_AGR_04', name: 'Agra Smart Center',      owner: 'Meera Patel',    location: 'Sanjay Place, Agra', phone: '9812345678', balance: 200,   tier: 'Bronze', commission: 5,  orders: 12, joined: 'May 2026', active: false },
-];
-
-const TIER_COLORS: Record<string, string> = { Gold: 'var(--amber)', Silver: 'var(--text-2)', Bronze: '#cd7f32' };
+const TIER_COLORS: Record<string, string> = { Gold: 'var(--amber)', Silver: 'var(--text-2)', Bronze: '#cd7f32', Platinum: 'var(--violet)' };
 const TIERS = ['Bronze', 'Silver', 'Gold', 'Platinum'];
+const STATUS_OPTIONS = ['Active', 'Inactive', 'Archived'];
+const adminHeaders = () => ({ 'X-Admin-Token': getStoredAdminToken(), 'Content-Type': 'application/json' });
+const adminWriteHeaders = async () => ({ ...adminHeaders(), 'X-CSRF-Token': await getCsrfToken() });
 
-const EMPTY_FORM = { name: '', owner: '', location: '', phone: '', tier: 'Silver', commission: 8, balance: 0, orders: 0, joined: '', active: true };
-
-const FRANCHISE_STORAGE_KEY = 'opds_franchise_data';
-
-function loadFranchises() {
-  try {
-    const raw = localStorage.getItem(FRANCHISE_STORAGE_KEY);
-    if (raw) return JSON.parse(raw);
-  } catch {}
-  return INIT_DATA;
-}
+const EMPTY_FORM = {
+  branchName: '',
+  ownerName: '',
+  contactPhone: '',
+  contactEmail: '',
+  locationText: '',
+  tier: 'Silver',
+  commissionRate: 8,
+  operationalStatus: 'Active',
+  parentBranchUuid: '',
+};
 
 export const FranchisePanel: React.FC = () => {
   const { addNotification, setActivePanel } = useApp() as any;
-  const [franchises, setFranchises] = useState(loadFranchises);
-
-  useEffect(() => {
-    try { localStorage.setItem(FRANCHISE_STORAGE_KEY, JSON.stringify(franchises)); } catch {}
-  }, [franchises]);
-  const [selected, setSelected]     = useState<string | null>(null);
-  const [search, setSearch]         = useState('');
-  const [showForm, setShowForm]     = useState(false);
+  const [franchises, setFranchises] = useState<any[]>([]);
+  const [allBranches, setAllBranches] = useState<any[]>([]);
+  const [selected, setSelected] = useState<string | null>(null);
+  const [search, setSearch] = useState('');
+  const [showForm, setShowForm] = useState(false);
   const [editTarget, setEditTarget] = useState<any>(null);
-  const [form, setForm]             = useState<any>(EMPTY_FORM);
-  const [topupModal, setTopupModal] = useState<any>(null);
-  const [topupAmt, setTopupAmt]     = useState('5000');
+  const [form, setForm] = useState<any>(EMPTY_FORM);
+  const [loading, setLoading] = useState(true);
 
-  const filtered = franchises.filter(f =>
-    f.name.toLowerCase().includes(search.toLowerCase()) ||
-    f.location.toLowerCase().includes(search.toLowerCase()) ||
-    f.owner.toLowerCase().includes(search.toLowerCase())
-  );
-  const sel = franchises.find(f => f.id === selected);
-
-  const openAdd = () => { setForm({ ...EMPTY_FORM }); setEditTarget(null); setShowForm(true); };
-  const openEdit = (f: any) => { setForm({ ...f }); setEditTarget(f.id); setShowForm(true); };
-
-  const saveForm = () => {
-    if (!form.name || !form.owner || !form.phone) return;
-    if (editTarget) {
-      setFranchises(prev => prev.map(f => f.id === editTarget ? { ...f, ...form } : f));
-      addNotification({ title: 'Franchise updated', sub: form.name, time: 'just now', color: 'var(--blue)', icon: 'store', panelTarget: 'franchise' });
-    } else {
-      const newId = `FC_NEW_${Date.now()}`;
-      setFranchises(prev => [...prev, { ...form, id: newId, balance: Number(form.balance) || 0, orders: 0, joined: new Date().toLocaleDateString('en-IN', { month: 'short', year: 'numeric' }) }]);
-      addNotification({ title: 'Franchise added', sub: form.name, time: 'just now', color: 'var(--emerald)', icon: 'store', panelTarget: 'franchise' });
+  const load = async () => {
+    setLoading(true);
+    try {
+      const headers = adminHeaders();
+      const [franchiseRes, branchRes] = await Promise.all([
+        fetch('/api/admin/branches?branchType=Franchise', { headers }),
+        fetch('/api/admin/branches', { headers }),
+      ]);
+      if (franchiseRes.ok) setFranchises((await franchiseRes.json()).branches || []);
+      if (branchRes.ok) setAllBranches((await branchRes.json()).branches || []);
+    } catch {
+      // Keep current state on transient fetch issues.
     }
+    setLoading(false);
+  };
+
+  useEffect(() => { load(); }, []);
+
+  const filtered = franchises.filter((item) =>
+    item.branchName.toLowerCase().includes(search.toLowerCase()) ||
+    item.locationText.toLowerCase().includes(search.toLowerCase()) ||
+    item.ownerName.toLowerCase().includes(search.toLowerCase())
+  );
+  const selectedFranchise = franchises.find((item) => item.branchUuid === selected);
+  const parentOptions = allBranches.filter((item) => item.branchUuid !== editTarget?.branchUuid);
+  const parentByUuid = new Map(allBranches.map((item) => [item.branchUuid, item.branchName]));
+
+  const openAdd = () => {
+    setForm({ ...EMPTY_FORM });
+    setEditTarget(null);
+    setShowForm(true);
+  };
+
+  const openEdit = (record: any) => {
+    setEditTarget(record);
+    setForm({
+      branchName: record.branchName || '',
+      ownerName: record.ownerName || '',
+      contactPhone: record.contactPhone || '',
+      contactEmail: record.contactEmail || '',
+      locationText: record.locationText || '',
+      tier: record.tier || 'Silver',
+      commissionRate: Number(record.commissionRate || 0),
+      operationalStatus: record.operationalStatus || 'Active',
+      parentBranchUuid: record.parentBranchUuid || '',
+    });
+    setShowForm(true);
+  };
+
+  const saveForm = async () => {
+    if (!form.branchName || !form.ownerName || !form.contactPhone) return;
+    const method = editTarget ? 'PATCH' : 'POST';
+    const endpoint = editTarget ? `/api/admin/branches/${editTarget.branchUuid}` : '/api/admin/branches';
+    const payload = {
+      branchType: 'Franchise',
+      ...form,
+      parentBranchUuid: form.parentBranchUuid || null,
+    };
+    const response = await fetch(endpoint, {
+      method,
+      headers: await adminWriteHeaders(),
+      body: JSON.stringify(payload),
+    });
+    if (!response.ok) return;
+    await load();
+    addNotification({
+      title: editTarget ? 'Franchise updated' : 'Franchise added',
+      sub: form.branchName,
+      time: 'just now',
+      color: editTarget ? 'var(--blue)' : 'var(--emerald)',
+      icon: 'store',
+      panelTarget: 'franchise',
+    });
     setShowForm(false);
   };
 
-  const toggleActive = (id: string) => {
-    setFranchises(prev => prev.map(f => f.id === id ? { ...f, active: !f.active } : f));
-    const f = franchises.find(x => x.id === id);
-    addNotification({ title: f?.active ? 'Franchise deactivated' : 'Franchise activated', sub: f?.name || '', time: 'just now', color: f?.active ? 'var(--rose)' : 'var(--emerald)', icon: 'store', panelTarget: 'franchise' });
+  const toggleActive = async (record: any) => {
+    const nextStatus = record.active ? 'Inactive' : 'Active';
+    const response = await fetch(`/api/admin/branches/${record.branchUuid}`, {
+      method: 'PATCH',
+      headers: await adminWriteHeaders(),
+      body: JSON.stringify({ branchType: 'Franchise', operationalStatus: nextStatus }),
+    });
+    if (!response.ok) return;
+    await load();
+    addNotification({
+      title: record.active ? 'Franchise deactivated' : 'Franchise activated',
+      sub: record.branchName,
+      time: 'just now',
+      color: record.active ? 'var(--rose)' : 'var(--emerald)',
+      icon: 'store',
+      panelTarget: 'franchise',
+    });
   };
 
   const sendWhatsApp = (phone: string, name: string) => {
     const num = phone.replace(/\D/g, '');
     const msg = encodeURIComponent(`Namaste ${name} ji, One Point Digital Services Franchise support se bol raha hoon. Koi madad chahiye?`);
-    window.open(`https://wa.me/${num.length === 10 ? '91' + num : num}?text=${msg}`, '_blank');
+    window.open(`https://wa.me/${num.length === 10 ? `91${num}` : num}?text=${msg}`, '_blank');
   };
 
-  const processTopup = () => {
-    const amt = Number(topupAmt) || 0;
-    if (!amt || !topupModal) return;
-    setFranchises(prev => prev.map(f => f.id === topupModal.id ? { ...f, balance: f.balance + amt } : f));
-    addNotification({ title: `Wallet Topup: ${topupModal.name}`, sub: `₹${amt.toLocaleString()} added successfully`, time: 'just now', color: 'var(--emerald)', icon: 'indian-rupee', panelTarget: 'franchise' });
-    setTopupModal(null);
-  };
-
-  const totalBalance = franchises.reduce((s, f) => s + f.balance, 0);
-  const lowBalanceCount = franchises.filter(f => f.balance < 1000).length;
+  const activeCount = franchises.filter((item) => item.active).length;
+  const linkedCount = franchises.filter((item) => item.parentBranchUuid).length;
+  const archivedCount = franchises.filter((item) => item.operationalStatus === 'Archived').length;
 
   return (
     <div className="panel active">
-      <PanelHeader title="Franchise Network" sub="Manage partner centers · Wallet & commissions" actions={
-        <button className="btn btn-primary btn-sm" onClick={openAdd}>
-          <Icon name="plus" size={13} /> Add Franchise
-        </button>
-      } />
+      <PanelHeader
+        title="Franchise Network"
+        sub="Governed partner registry · Metadata only · No wallet automation"
+        actions={(
+          <button className="btn btn-primary btn-sm" onClick={openAdd}>
+            <Icon name="plus" size={13} /> Add Franchise
+          </button>
+        )}
+      />
 
       <div className="panels">
-        {/* Demo notice */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '12px 16px', background: 'var(--amber-dim)', border: '1px solid var(--amber-border)', borderRadius: 10 }}>
-          <Icon name="database" size={16} style={{ color: 'var(--amber)', flexShrink: 0 }} />
+        <div style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '12px 16px', background: 'var(--blue-dim)', border: '1px solid var(--border-1)', borderRadius: 10 }}>
+          <Icon name="shield-check" size={16} style={{ color: 'var(--blue)', flexShrink: 0 }} />
           <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-2)' }}>
-            <strong>Local Data Mode</strong> — Franchise records are saved in your browser (localStorage). A backend API for franchise management is not yet connected. Data added/edited here persists across page reloads on this device only.
+            <strong>Governed Registry Mode</strong> — franchise centers now come from the backend branch registry. Commission, hierarchy, and status are governed metadata only in this milestone.
           </div>
         </div>
 
-        {/* KPI */}
         <div className="grid-4">
           {[
-            { l: 'Total Partners',    v: String(franchises.length),                          icon: 'store',           color: 'var(--blue)',    cls: 'info' },
-            { l: 'Active Centers',    v: String(franchises.filter(f => f.active).length),    icon: 'check-circle',    color: 'var(--emerald)', cls: 'positive' },
-            { l: 'Network Wallet',    v: `₹${totalBalance.toLocaleString('en-IN')}`,         icon: 'indian-rupee',    color: 'var(--amber)',   cls: 'warning' },
-            { l: 'Low Balance Alert', v: String(lowBalanceCount),                             icon: 'alert-triangle',  color: 'var(--rose)',    cls: lowBalanceCount > 0 ? 'alert' : 'positive' },
-          ].map((k, i) => (
-            <div key={i} className={`insight-card ${k.cls}`} style={{ padding: 16 }}>
+            { l: 'Total Partners', v: String(franchises.length), icon: 'store', color: 'var(--blue)', cls: 'info' },
+            { l: 'Active Centers', v: String(activeCount), icon: 'check-circle', color: 'var(--emerald)', cls: 'positive' },
+            { l: 'Linked To Parent', v: String(linkedCount), icon: 'git-branch', color: 'var(--violet)', cls: 'info' },
+            { l: 'Archived', v: String(archivedCount), icon: 'archive', color: 'var(--amber)', cls: archivedCount ? 'warning' : 'positive' },
+          ].map((card, index) => (
+            <div key={index} className={`insight-card ${card.cls}`} style={{ padding: 16 }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 8 }}>
-                <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-3)' }}>{k.l}</div>
-                <Icon name={k.icon} size={14} style={{ color: k.color }} />
+                <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-3)' }}>{card.l}</div>
+                <Icon name={card.icon} size={14} style={{ color: card.color }} />
               </div>
-              <div style={{ fontSize: 'var(--fs-xl)', fontWeight: 'var(--fw-semibold)' }}>{k.v}</div>
+              <div style={{ fontSize: 'var(--fs-xl)', fontWeight: 'var(--fw-semibold)' }}>{card.v}</div>
             </div>
           ))}
         </div>
 
-        {/* Table */}
-        <Card title="Partner Centers" sub={`${filtered.length} franchise partners`}>
+        <Card title="Partner Centers" sub={`${filtered.length} governed franchise records`}>
           <div style={{ padding: '10px 14px', borderBottom: '1px solid var(--border-1)' }}>
-            <input className="form-input" placeholder="Search by name, location, owner..." value={search} onChange={e => setSearch(e.target.value)} />
+            <input className="form-input" placeholder="Search by name, location, owner..." value={search} onChange={(e) => setSearch(e.target.value)} />
           </div>
-          <table className="data-table">
-            <thead><tr><th>Partner Center</th><th>Owner</th><th>Tier</th><th>Wallet</th><th>Orders</th><th>Status</th><th>Actions</th></tr></thead>
-            <tbody>
-              {filtered.map(f => (
-                <tr key={f.id} onClick={() => setSelected(f.id === selected ? null : f.id)} style={{ cursor: 'pointer', background: selected === f.id ? 'var(--blue-dim)' : 'transparent' }}>
-                  <td><div style={{ fontWeight: 'var(--fw-semibold)', fontSize: 'var(--fs-sm)' }}>{f.name}</div><div style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-3)' }}>{f.location}</div></td>
-                  <td style={{ fontSize: 'var(--fs-xs)' }}>{f.owner}</td>
-                  <td>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                      <span style={{ width: 7, height: 7, borderRadius: '50%', background: TIER_COLORS[f.tier] || '#888' }} />
-                      <span style={{ fontSize: 'var(--fs-xs)', fontWeight: 'var(--fw-semibold)', color: TIER_COLORS[f.tier] }}>{f.tier}</span>
-                      <span style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-3)' }}>({f.commission}%)</span>
-                    </div>
-                  </td>
-                  <td>
-                    <span style={{ fontWeight: 'var(--fw-semibold)', color: f.balance < 1000 ? 'var(--rose)' : f.balance < 5000 ? 'var(--amber)' : 'var(--emerald)', fontSize: 'var(--fs-sm)' }}>₹{f.balance.toLocaleString('en-IN')}</span>
-                    {f.balance < 1000 && <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--rose)' }}>⚠ Low Balance</div>}
-                  </td>
-                  <td style={{ fontWeight: 'var(--fw-semibold)' }}>{f.orders}</td>
-                  <td><Badge type={f.active ? 'success' : 'neutral'}>{f.active ? 'Active' : 'Inactive'}</Badge></td>
-                  <td>
-                    <div style={{ display: 'flex', gap: 4 }} onClick={e => e.stopPropagation()}>
-                      <button className="btn btn-ghost btn-xs" title="Topup Wallet" onClick={() => { setTopupModal(f); setTopupAmt('5000'); }}>
-                        <Icon name="plus-circle" size={11} /> Topup
-                      </button>
-                      <button className="btn btn-ghost btn-xs" title={`WhatsApp ${f.owner}`} style={{ color: 'var(--emerald)' }} onClick={() => sendWhatsApp(f.phone, f.owner)}>
-                        <Icon name="message-circle" size={11} /> WA
-                      </button>
-                    </div>
-                  </td>
+          {loading ? (
+            <div style={{ padding: 48, textAlign: 'center', color: 'var(--text-3)' }}>
+              <Icon name="loader-2" size={24} className="spin" style={{ marginBottom: 10 }} />
+              <div>Loading governed franchise records...</div>
+            </div>
+          ) : filtered.length === 0 ? (
+            <div style={{ padding: 48, textAlign: 'center', color: 'var(--text-3)' }}>
+              <div style={{ fontSize: 'var(--fs-md)', fontWeight: 600, marginBottom: 8 }}>No franchise records yet</div>
+              <div style={{ fontSize: 'var(--fs-sm)' }}>Create the first governed franchise center.</div>
+            </div>
+          ) : (
+            <table className="data-table">
+              <thead>
+                <tr>
+                  <th>Partner Center</th>
+                  <th>Owner</th>
+                  <th>Tier</th>
+                  <th>Parent Branch</th>
+                  <th>Status</th>
+                  <th>Actions</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {filtered.map((item) => (
+                  <tr
+                    key={item.branchUuid}
+                    onClick={() => setSelected(item.branchUuid === selected ? null : item.branchUuid)}
+                    style={{ cursor: 'pointer', background: selected === item.branchUuid ? 'var(--blue-dim)' : 'transparent' }}
+                  >
+                    <td>
+                      <div style={{ fontWeight: 'var(--fw-semibold)', fontSize: 'var(--fs-sm)' }}>{item.branchName}</div>
+                      <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-3)' }}>{item.locationText || 'Location not set'}</div>
+                    </td>
+                    <td style={{ fontSize: 'var(--fs-xs)' }}>
+                      <div>{item.ownerName || 'Not set'}</div>
+                      <div style={{ color: 'var(--text-3)' }}>{item.contactPhone || 'No phone'}</div>
+                    </td>
+                    <td>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                        <span style={{ width: 7, height: 7, borderRadius: '50%', background: TIER_COLORS[item.tier] || '#888' }} />
+                        <span style={{ fontSize: 'var(--fs-xs)', fontWeight: 'var(--fw-semibold)', color: TIER_COLORS[item.tier] || 'var(--text-2)' }}>{item.tier || 'Unspecified'}</span>
+                        <span style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-3)' }}>({Number(item.commissionRate || 0)}%)</span>
+                      </div>
+                    </td>
+                    <td style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-2)' }}>{parentByUuid.get(item.parentBranchUuid) || 'Standalone'}</td>
+                    <td><Badge type={item.active ? 'success' : item.operationalStatus === 'Archived' ? 'warning' : 'neutral'}>{item.operationalStatus}</Badge></td>
+                    <td>
+                      <div style={{ display: 'flex', gap: 4 }} onClick={(e) => e.stopPropagation()}>
+                        <button className="btn btn-ghost btn-xs" title="Edit" onClick={() => openEdit(item)}>
+                          <Icon name="edit-2" size={11} /> Edit
+                        </button>
+                        <button className="btn btn-ghost btn-xs" title={`WhatsApp ${item.ownerName || item.branchName}`} style={{ color: 'var(--emerald)' }} onClick={() => sendWhatsApp(item.contactPhone || '', item.ownerName || item.branchName)}>
+                          <Icon name="message-circle" size={11} /> WA
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          )}
         </Card>
 
-        {/* Detail Panel */}
-        {sel && (
-          <Card title={sel.name} sub={`${sel.id} · Partner Details`}>
+        {selectedFranchise ? (
+          <Card title={selectedFranchise.branchName} sub={`${selectedFranchise.branchUuid} · Governed franchise metadata`}>
             <div style={{ padding: 20, display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16 }}>
               {[
-                { l: 'Owner',      v: sel.owner },
-                { l: 'Phone',      v: sel.phone },
-                { l: 'Location',   v: sel.location },
-                { l: 'Tier',       v: `${sel.tier} (${sel.commission}% commission)` },
-                { l: 'Orders',     v: String(sel.orders) },
-                { l: 'Joined',     v: sel.joined },
-              ].map((d, i) => (
-                <div key={i}>
-                  <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-3)', fontWeight: 'var(--fw-semibold)', textTransform: 'uppercase', marginBottom: 3 }}>{d.l}</div>
-                  <div style={{ fontSize: 'var(--fs-sm)', fontWeight: 'var(--fw-semibold)' }}>{d.v}</div>
+                { l: 'Owner', v: selectedFranchise.ownerName || 'Not set' },
+                { l: 'Phone', v: selectedFranchise.contactPhone || 'Not set' },
+                { l: 'Email', v: selectedFranchise.contactEmail || 'Not set' },
+                { l: 'Location', v: selectedFranchise.locationText || 'Not set' },
+                { l: 'Tier', v: `${selectedFranchise.tier || 'Unspecified'} (${Number(selectedFranchise.commissionRate || 0)}% metadata)` },
+                { l: 'Parent Branch', v: parentByUuid.get(selectedFranchise.parentBranchUuid) || 'Standalone' },
+                { l: 'Status', v: selectedFranchise.operationalStatus },
+                { l: 'Type', v: selectedFranchise.branchType },
+                { l: 'Joined', v: selectedFranchise.joinedAt ? new Date(selectedFranchise.joinedAt).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }) : 'N/A' },
+              ].map((detail, index) => (
+                <div key={index}>
+                  <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-3)', fontWeight: 'var(--fw-semibold)', textTransform: 'uppercase', marginBottom: 3 }}>{detail.l}</div>
+                  <div style={{ fontSize: 'var(--fs-sm)', fontWeight: 'var(--fw-semibold)' }}>{detail.v}</div>
                 </div>
               ))}
             </div>
             <div style={{ padding: '0 20px 20px', display: 'flex', gap: 8, flexWrap: 'wrap' }}>
-              <button className="btn btn-primary btn-sm" onClick={() => { setTopupModal(sel); setTopupAmt('5000'); }}>
-                <Icon name="plus-circle" size={13} /> Topup Wallet
-              </button>
-              <button className="btn btn-ghost btn-sm" style={{ color: 'var(--emerald)' }} onClick={() => sendWhatsApp(sel.phone, sel.owner)}>
+              <button className="btn btn-ghost btn-sm" style={{ color: 'var(--emerald)' }} onClick={() => sendWhatsApp(selectedFranchise.contactPhone || '', selectedFranchise.ownerName || selectedFranchise.branchName)}>
                 <Icon name="message-circle" size={13} /> WhatsApp
               </button>
-              <button className="btn btn-ghost btn-sm" onClick={() => openEdit(sel)}>
+              <button className="btn btn-ghost btn-sm" onClick={() => openEdit(selectedFranchise)}>
                 <Icon name="edit-2" size={13} /> Edit Details
               </button>
               <button className="btn btn-ghost btn-sm" onClick={() => (setActivePanel as any)('analytics')}>
                 <Icon name="bar-chart-2" size={13} /> View Reports
               </button>
               <button
-                className={`btn btn-sm ${sel.active ? 'btn-danger' : 'btn-primary'}`}
-                style={{ marginLeft: 'auto', background: sel.active ? 'var(--rose)' : 'var(--emerald)', borderColor: sel.active ? 'var(--rose)' : 'var(--emerald)', color: '#fff' }}
-                onClick={() => toggleActive(sel.id)}
+                className="btn btn-sm"
+                style={{ marginLeft: 'auto', background: selectedFranchise.active ? 'var(--rose)' : 'var(--emerald)', borderColor: selectedFranchise.active ? 'var(--rose)' : 'var(--emerald)', color: '#fff' }}
+                onClick={() => toggleActive(selectedFranchise)}
               >
-                <Icon name={sel.active ? 'pause-circle' : 'play-circle'} size={13} />
-                {sel.active ? 'Deactivate' : 'Activate'}
+                <Icon name={selectedFranchise.active ? 'pause-circle' : 'play-circle'} size={13} />
+                {selectedFranchise.active ? 'Deactivate' : 'Activate'}
               </button>
             </div>
           </Card>
-        )}
+        ) : null}
       </div>
 
-      {/* Add/Edit Franchise Modal */}
-      {showForm && (
+      {showForm ? (
         <div className="modal-overlay" onClick={() => setShowForm(false)}>
-          <div className="modal-content" onClick={(e: any) => e.stopPropagation()} style={{ width: 520 }}>
+          <div className="modal-content" onClick={(e: any) => e.stopPropagation()} style={{ width: 560 }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
               <div><div style={{ fontSize: 'var(--fs-lg)', fontWeight: 'var(--fw-semibold)' }}>{editTarget ? 'Edit Franchise' : 'Add New Franchise'}</div></div>
               <button className="icon-btn" onClick={() => setShowForm(false)}><Icon name="x" size={16} /></button>
             </div>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
               {[
-                { l: 'Center Name *', k: 'name',     ph: 'Sharma Suvidha Kendra' },
-                { l: 'Owner Name *',  k: 'owner',    ph: 'Rajesh Sharma' },
-                { l: 'Phone *',       k: 'phone',    ph: '9876543210' },
-                { l: 'Location',      k: 'location', ph: 'City, District' },
-              ].map(f => (
-                <div key={f.k}>
-                  <label style={{ fontSize: 'var(--fs-xs)', fontWeight: 'var(--fw-semibold)', display: 'block', marginBottom: 5 }}>{f.l}</label>
-                  <input className="form-input" placeholder={f.ph} value={form[f.k] || ''} onChange={e => setForm((p: any) => ({ ...p, [f.k]: e.target.value }))} />
+                { l: 'Center Name *', k: 'branchName', ph: 'Sharma Suvidha Kendra' },
+                { l: 'Owner Name *', k: 'ownerName', ph: 'Rajesh Sharma' },
+                { l: 'Phone *', k: 'contactPhone', ph: '9876543210' },
+                { l: 'Email', k: 'contactEmail', ph: 'franchise@example.com' },
+                { l: 'Location', k: 'locationText', ph: 'City, District' },
+              ].map((field) => (
+                <div key={field.k}>
+                  <label style={{ fontSize: 'var(--fs-xs)', fontWeight: 'var(--fw-semibold)', display: 'block', marginBottom: 5 }}>{field.l}</label>
+                  <input className="form-input" placeholder={field.ph} value={form[field.k] || ''} onChange={(e) => setForm((p: any) => ({ ...p, [field.k]: e.target.value }))} />
                 </div>
               ))}
               <div>
                 <label style={{ fontSize: 'var(--fs-xs)', fontWeight: 'var(--fw-semibold)', display: 'block', marginBottom: 5 }}>Tier</label>
-                <select className="form-input" value={form.tier || 'Silver'} onChange={e => setForm((p: any) => ({ ...p, tier: e.target.value }))}>
-                  {TIERS.map(t => <option key={t}>{t}</option>)}
+                <select className="form-input" value={form.tier || 'Silver'} onChange={(e) => setForm((p: any) => ({ ...p, tier: e.target.value }))}>
+                  {TIERS.map((tier) => <option key={tier}>{tier}</option>)}
                 </select>
               </div>
               <div>
-                <label style={{ fontSize: 'var(--fs-xs)', fontWeight: 'var(--fw-semibold)', display: 'block', marginBottom: 5 }}>Commission (%)</label>
-                <input type="number" className="form-input" min={0} max={30} value={form.commission || 8} onChange={e => setForm((p: any) => ({ ...p, commission: Number(e.target.value) }))} />
+                <label style={{ fontSize: 'var(--fs-xs)', fontWeight: 'var(--fw-semibold)', display: 'block', marginBottom: 5 }}>Commission Metadata (%)</label>
+                <input type="number" className="form-input" min={0} max={30} value={form.commissionRate || 0} onChange={(e) => setForm((p: any) => ({ ...p, commissionRate: Number(e.target.value) }))} />
+              </div>
+              <div>
+                <label style={{ fontSize: 'var(--fs-xs)', fontWeight: 'var(--fw-semibold)', display: 'block', marginBottom: 5 }}>Operational Status</label>
+                <select className="form-input" value={form.operationalStatus || 'Active'} onChange={(e) => setForm((p: any) => ({ ...p, operationalStatus: e.target.value }))}>
+                  {STATUS_OPTIONS.map((status) => <option key={status}>{status}</option>)}
+                </select>
+              </div>
+              <div>
+                <label style={{ fontSize: 'var(--fs-xs)', fontWeight: 'var(--fw-semibold)', display: 'block', marginBottom: 5 }}>Parent Branch (Optional)</label>
+                <select className="form-input" value={form.parentBranchUuid || ''} onChange={(e) => setForm((p: any) => ({ ...p, parentBranchUuid: e.target.value }))}>
+                  <option value="">Standalone</option>
+                  {parentOptions.map((branch) => (
+                    <option key={branch.branchUuid} value={branch.branchUuid}>{branch.branchName} ({branch.branchType})</option>
+                  ))}
+                </select>
               </div>
             </div>
             <div style={{ display: 'flex', gap: 8, justifyContent: 'flex-end', marginTop: 16 }}>
               <button className="btn btn-ghost" onClick={() => setShowForm(false)}>Cancel</button>
-              <button className="btn btn-primary" disabled={!form.name || !form.owner || !form.phone} onClick={saveForm}>
+              <button className="btn btn-primary" disabled={!form.branchName || !form.ownerName || !form.contactPhone} onClick={saveForm}>
                 <Icon name="save" size={13} /> {editTarget ? 'Save Changes' : 'Add Franchise'}
               </button>
             </div>
           </div>
         </div>
-      )}
-
-      {/* Topup Modal */}
-      {topupModal && (
-        <div className="modal-overlay" onClick={() => setTopupModal(null)}>
-          <div className="modal-content" onClick={(e: any) => e.stopPropagation()} style={{ width: 380 }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
-              <div><div style={{ fontSize: 'var(--fs-lg)', fontWeight: 'var(--fw-semibold)' }}>Topup Wallet</div><div style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-3)' }}>{topupModal.name}</div></div>
-              <button className="icon-btn" onClick={() => setTopupModal(null)}><Icon name="x" size={16} /></button>
-            </div>
-            <div style={{ marginBottom: 12 }}>
-              <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-3)', marginBottom: 8 }}>Current Balance: <strong style={{ color: topupModal.balance < 1000 ? 'var(--rose)' : 'var(--emerald)' }}>₹{topupModal.balance.toLocaleString('en-IN')}</strong></div>
-              <label style={{ fontSize: 'var(--fs-xs)', fontWeight: 'var(--fw-semibold)', display: 'block', marginBottom: 6 }}>Amount to Add (₹)</label>
-              <input type="number" className="form-input" value={topupAmt} onChange={e => setTopupAmt(e.target.value)} min={100} step={500} />
-              <div style={{ display: 'flex', gap: 6, marginTop: 8, flexWrap: 'wrap' }}>
-                {['1000','2000','5000','10000'].map(v => (
-                  <button key={v} className="btn btn-ghost btn-xs" style={{ background: topupAmt === v ? 'var(--blue-dim)' : undefined }} onClick={() => setTopupAmt(v)}>₹{Number(v).toLocaleString()}</button>
-                ))}
-              </div>
-            </div>
-            <div style={{ display: 'flex', gap: 8, justifyContent: 'flex-end' }}>
-              <button className="btn btn-ghost" onClick={() => setTopupModal(null)}>Cancel</button>
-              <button className="btn btn-primary" onClick={processTopup} style={{ background: 'var(--emerald)', borderColor: 'var(--emerald)' }}>
-                <Icon name="plus-circle" size={13} /> Add ₹{Number(topupAmt || 0).toLocaleString('en-IN')}
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+      ) : null}
     </div>
   );
 };
@@ -298,7 +363,7 @@ export const SettingsPanel: React.FC = () => {
     razorpaySecret: '',
     whatsappToken:  '',
     smsWebhook:     '',
-    adminToken:     localStorage.getItem('opds_admin_token') || '',
+    adminToken:     getStoredAdminToken(),
     twoFA:          true,
     sessionTimeout: '30',
     emailAlerts:    true,
@@ -312,10 +377,10 @@ export const SettingsPanel: React.FC = () => {
     let active = true;
     const fetchSettings = async () => {
       setLoading(true);
-      const TOKEN = localStorage.getItem('opds_admin_token') || '';
+      const TOKEN = getStoredAdminToken();
       try {
         const res = await fetch('/api/admin/settings', {
-          headers: { 'X-Admin-Token': token },
+          headers: { 'X-Admin-Token': TOKEN },
         });
         if (!res.ok) throw new Error('Failed to load settings');
         const data = await res.json();
@@ -345,17 +410,15 @@ export const SettingsPanel: React.FC = () => {
 
   const handleSave = async () => {
     setLoading(true);
-    const TOKEN = localStorage.getItem('opds_admin_token') || '';
+    const TOKEN = getStoredAdminToken();
     try {
-      const csrfRes = await fetch('/api/csrf');
-      const csrfData = await csrfRes.json();
-      const csrfToken = csrfData.csrfToken || '';
+      const csrfToken = await getCsrfToken();
 
       const res = await fetch('/api/admin/settings', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'X-Admin-Token': token,
+          'X-Admin-Token': TOKEN,
           'X-CSRF-Token': csrfToken,
         },
         body: JSON.stringify(settings),
@@ -369,10 +432,9 @@ export const SettingsPanel: React.FC = () => {
       const data = await res.json();
       setSettings(data.settings);
 
-      // Keep localStorage in sync
       localStorage.setItem(SETTINGS_KEY, JSON.stringify(data.settings));
       if (data.settings.adminToken) {
-        localStorage.setItem('opds_admin_token', data.settings.adminToken);
+        setStoredAdminToken(data.settings.adminToken);
       }
 
       setSaved(true);
@@ -404,7 +466,7 @@ export const SettingsPanel: React.FC = () => {
     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '12px 0', borderBottom: '1px solid var(--border-1)' }}>
       <div>
         <div style={{ fontSize: 'var(--fs-sm)', fontWeight: 'var(--fw-semibold)' }}>{label}</div>
-        {sub && <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-3)', marginTop: 2 }}>{sub}</div>}
+        {sub ? <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-3)', marginTop: 2 }}>{sub}</div> : null}
       </div>
       <label style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}>
         <input type="checkbox" checked={Boolean((settings as any)[field])} onChange={() => toggle(field)} style={{ display: 'none' }} />
@@ -416,121 +478,221 @@ export const SettingsPanel: React.FC = () => {
   );
 
   return (
-    <div className="panel active" style={{ opacity: loading ? 0.75 : 1, transition: 'opacity 0.15s' }}>
-      <PanelHeader title="Platform Settings" sub="Configure integrations, notifications, and security"
-        actions={
-          <button className="btn btn-primary btn-sm" onClick={handleSave} disabled={loading} style={{ background: saved ? 'var(--emerald)' : undefined }}>
-            <Icon name={saved ? 'check' : 'save'} size={14} /> {saved ? 'Saved!' : loading ? 'Saving...' : 'Save Changes'}
+    <div className="panel active" style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: '20px 24px', overflowY: 'auto', opacity: loading ? 0.75 : 1, transition: 'opacity 0.15s' }}>
+      
+      {/* Header bar */}
+      <div style={{
+        display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 14,
+        background: '#ffffff', padding: '16px 20px', borderRadius: 16, border: '1px solid rgba(8, 47, 97, 0.08)',
+        boxShadow: '0 2px 8px rgba(15, 23, 42, 0.04)'
+      }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+            <span style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em', color: 'var(--blue)', background: 'var(--blue-dim)', padding: '2px 8px', borderRadius: 6 }}>
+              Platform & Center Operations
+            </span>
+          </div>
+          <h1 style={{ fontSize: 20, fontWeight: 800, color: 'var(--text-1)', letterSpacing: '-0.02em', margin: 0 }}>
+            Center Settings & API Configuration
+          </h1>
+          <p style={{ fontSize: 12.5, color: 'var(--text-3)', margin: 0 }}>
+            Configure Payment Gateways, WhatsApp Webhooks, Center Profile & Automatic Verification Rules
+          </p>
+        </div>
+
+        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+          <button
+            type="button"
+            className="btn btn-primary btn-sm"
+            onClick={handleSave}
+            disabled={loading}
+            style={{
+              background: saved ? 'var(--emerald)' : 'var(--blue)',
+              borderColor: saved ? 'var(--emerald)' : 'var(--blue)',
+              borderRadius: 10,
+              fontWeight: 600
+            }}
+          >
+            <Icon name={saved ? 'check' : 'save'} size={14} /> {saved ? '✓ Changes Saved!' : loading ? 'Saving…' : 'Save Settings'}
           </button>
-        }
-      />
-      <div className="panels">
-        <div style={{ display: 'grid', gridTemplateColumns: '220px 1fr', gap: 20 }}>
-          <div className="card" style={{ padding: 8, height: 'fit-content' }}>
-            {SECTIONS.map(s => (
-              <button key={s.id} onClick={() => setSection(s.id)} className={`nav-link ${section === s.id ? 'active' : ''}`} style={{ width: '100%', marginBottom: 2 }}>
-                <Icon name={s.icon} size={15} className="ni" /> {s.label}
+        </div>
+      </div>
+
+      {/* Main Settings Grid */}
+      <div style={{ display: 'grid', gridTemplateColumns: '240px 1fr', gap: 18, alignItems: 'flex-start' }}>
+        {/* Settings Navigation */}
+        <div style={{
+          background: '#ffffff', padding: 8, borderRadius: 14, border: '1px solid rgba(8, 47, 97, 0.08)',
+          boxShadow: '0 1px 4px rgba(15, 23, 42, 0.04)', display: 'flex', flexDirection: 'column', gap: 4
+        }}>
+          {SECTIONS.map((sectionItem) => {
+            const isActive = section === sectionItem.id;
+            return (
+              <button
+                key={sectionItem.id}
+                type="button"
+                onClick={() => setSection(sectionItem.id)}
+                style={{
+                  display: 'flex', alignItems: 'center', gap: 10, padding: '10px 14px', borderRadius: 10,
+                  fontSize: 13, fontWeight: isActive ? 700 : 500, width: '100%', textAlign: 'left',
+                  border: 'none', cursor: 'pointer', transition: 'all 0.15s ease',
+                  background: isActive ? 'var(--blue-dim)' : 'transparent',
+                  color: isActive ? 'var(--blue)' : 'var(--text-2)'
+                }}
+              >
+                <Icon name={sectionItem.icon} size={16} style={{ color: isActive ? 'var(--blue)' : 'var(--text-3)' }} />
+                <span>{sectionItem.label}</span>
               </button>
-            ))}
-          </div>
-          <div>
-            {section === 'general' && (
-              <Card title="Business Information" sub="Your CSC center details — used in invoices and communications">
-                <div style={{ padding: 20, display: 'flex', flexDirection: 'column', gap: 14 }}>
-                  {[
-                    { l: 'Business Name',  k: 'businessName', ph: 'Your center name' },
-                    { l: 'GSTIN',          k: 'gstin',        ph: '15-digit GSTIN' },
-                    { l: 'Address',        k: 'address',      ph: 'Full registered address' },
-                    { l: 'Contact Phone',  k: 'phone',        ph: '10-digit number' },
-                    { l: 'Email',          k: 'email',        ph: 'business@email.com' },
-                  ].map(f => (
-                    <div key={f.k}>
-                      <label style={{ fontSize: 'var(--fs-xs)', fontWeight: 'var(--fw-semibold)', display: 'block', marginBottom: 5, color: 'var(--text-2)' }}>{f.l}</label>
-                      <input className="form-input" value={(settings as any)[f.k] || ''} onChange={e => set(f.k, e.target.value)} placeholder={f.ph} disabled={loading} />
-                    </div>
-                  ))}
-                </div>
-              </Card>
-            )}
-            {section === 'integrations' && (
-              <Card title="API Integrations" sub="Payment gateway & communication APIs — synced with server database">
-                <div style={{ padding: 20, display: 'flex', flexDirection: 'column', gap: 16 }}>
-                  {[
-                    { l: 'Razorpay API Key',         k: 'razorpay',       icon: 'credit-card',    color: 'var(--blue)',    desc: 'rzp_live_... — from dashboard.razorpay.com' },
-                    { l: 'Razorpay API Key Secret',  k: 'razorpaySecret', icon: 'key',            color: 'var(--blue)',    desc: 'rzp_live_secret_... — keep this secret' },
-                    { l: 'WhatsApp Webhook URL',      k: 'whatsappToken',  icon: 'message-circle', color: 'var(--emerald)', desc: 'WHATSAPP_NOTIFICATION_WEBHOOK_URL (Wati/360Dialog)' },
-                    { l: 'SMS Webhook URL',           k: 'smsWebhook',     icon: 'smartphone',     color: 'var(--amber)',   desc: 'SMS_NOTIFICATION_WEBHOOK_URL (MSG91/Fast2SMS)' },
-                    { l: 'Admin API Token',           k: 'adminToken',     icon: 'shield',         color: 'var(--violet)',  desc: 'ADMIN_API_TOKEN — keep this secret' },
-                  ].map(f => {
-                    const isSecret = f.k === 'adminToken' || f.k === 'razorpaySecret';
-                    return (
-                      <div key={f.k} style={{ display: 'flex', gap: 14, alignItems: 'flex-start', padding: 14, background: 'var(--bg-3)', borderRadius: 10, border: '1px solid var(--border-1)' }}>
-                        <div style={{ width: 36, height: 36, borderRadius: 8, background: `${f.color}15`, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                          <Icon name={f.icon} size={18} style={{ color: f.color }} />
-                        </div>
-                        <div style={{ flex: 1 }}>
-                          <div style={{ fontWeight: 'var(--fw-semibold)', fontSize: 'var(--fs-sm)', marginBottom: 2 }}>{f.l}</div>
-                          <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-3)', marginBottom: 8 }}>{f.desc}</div>
-                          <div style={{ display: 'flex', gap: 8 }}>
-                            <input
-                              className="form-input"
-                              value={(settings as any)[f.k] || ''}
-                              onChange={e => set(f.k, e.target.value)}
-                              placeholder={`Enter ${f.l.toLowerCase()}...`}
-                              type={isSecret && !showSecrets[f.k] ? 'password' : 'text'}
-                              style={{ flex: 1 }}
-                              disabled={loading}
-                            />
-                            {isSecret && (
-                              <button
-                                type="button"
-                                className="btn btn-ghost"
-                                style={{ padding: '0 10px', height: 38, display: 'flex', alignItems: 'center', background: 'var(--bg-4)' }}
-                                onClick={() => setShowSecrets(p => ({ ...p, [f.k]: !p[f.k] }))}
-                              >
-                                <Icon name={showSecrets[f.k] ? 'eye-off' : 'eye'} size={15} />
-                              </button>
-                            )}
-                          </div>
-                        </div>
-                        <Badge type={(settings as any)[f.k] ? 'success' : 'warning'}>{(settings as any)[f.k] ? 'Configured' : 'Not Set'}</Badge>
-                      </div>
-                    );
-                  })}
-                </div>
-              </Card>
-            )}
-            {section === 'notifications' && (
-              <Card title="Alert Preferences">
-                <div style={{ padding: '4px 20px' }}>
-                  <Toggle field="emailAlerts"    label="Email Alerts"    sub="Daily summary & critical alerts via email" />
-                  <Toggle field="whatsappAlerts" label="WhatsApp Alerts" sub="Payment & order updates on WhatsApp" />
-                  <Toggle field="smsAlerts"      label="SMS Alerts"      sub="SMS for failed payments and urgent actions" />
-                </div>
-              </Card>
-            )}
-            {section === 'security' && (
-              <Card title="Security Settings">
-                <div style={{ padding: '4px 20px' }}>
-                  <Toggle field="twoFA" label="Two-Factor Authentication (2FA)" sub="Require TOTP on every login" />
-                  <div style={{ padding: '12px 0', borderBottom: '1px solid var(--border-1)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <div><div style={{ fontSize: 'var(--fs-sm)', fontWeight: 'var(--fw-semibold)' }}>Session Timeout</div><div style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-3)' }}>Auto-logout after inactivity</div></div>
-                    <select className="form-input" style={{ width: 120 }} value={(settings as any).sessionTimeout || '30'} onChange={e => set('sessionTimeout', e.target.value)}>
-                      {['15','30','60','120','480'].map(v => <option key={v} value={v}>{v} min</option>)}
-                    </select>
+            );
+          })}
+        </div>
+
+        {/* Section Content */}
+        <div style={{
+          background: '#ffffff', padding: '20px 24px', borderRadius: 16, border: '1px solid rgba(8, 47, 97, 0.08)',
+          boxShadow: '0 1px 4px rgba(15, 23, 42, 0.04)'
+        }}>
+          {section === 'general' && (
+            <div>
+              <div style={{ marginBottom: 18 }}>
+                <h3 style={{ fontSize: 16, fontWeight: 700, color: 'var(--text-1)', margin: 0 }}>Business & Center Profile</h3>
+                <p style={{ fontSize: 12.5, color: 'var(--text-3)', margin: '4px 0 0' }}>Your CSC center details — printed on citizen receipts, invoices, and verification certificates.</p>
+              </div>
+
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+                {[
+                  { l: 'Business / Center Name', k: 'businessName', ph: 'e.g. One Point Digital Services' },
+                  { l: 'GSTIN / Registration Number', k: 'gstin', ph: '15-digit GSTIN or Registration No.' },
+                  { l: 'Registered Physical Address', k: 'address', ph: 'Complete center address' },
+                  { l: 'Primary Helpline Phone', k: 'phone', ph: '10-digit customer helpline number' },
+                  { l: 'Official Support Email', k: 'email', ph: 'support@yourdomain.com' },
+                ].map((field) => (
+                  <div key={field.k}>
+                    <label style={{ fontSize: 12, fontWeight: 600, display: 'block', marginBottom: 5, color: 'var(--text-2)' }}>{field.l}</label>
+                    <input
+                      className="form-input"
+                      value={(settings as any)[field.k] || ''}
+                      onChange={(e) => set(field.k, e.target.value)}
+                      placeholder={field.ph}
+                      disabled={loading}
+                      style={{ height: 38, borderRadius: 10, fontSize: 13 }}
+                    />
                   </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {section === 'integrations' && (
+            <div>
+              <div style={{ marginBottom: 18 }}>
+                <h3 style={{ fontSize: 16, fontWeight: 700, color: 'var(--text-1)', margin: 0 }}>Payment & Communication APIs</h3>
+                <p style={{ fontSize: 12.5, color: 'var(--text-3)', margin: '4px 0 0' }}>Synced in real-time with your server database for instant payment collection and customer WhatsApp alerts.</p>
+              </div>
+
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+                {[
+                  { l: 'Razorpay API Key', k: 'razorpay', icon: 'credit-card', color: 'var(--blue)', desc: 'rzp_live_... — from dashboard.razorpay.com' },
+                  { l: 'Razorpay API Key Secret', k: 'razorpaySecret', icon: 'key', color: 'var(--blue)', desc: 'rzp_live_secret_... — keep this secret' },
+                  { l: 'WhatsApp Webhook URL', k: 'whatsappToken', icon: 'message-circle', color: 'var(--emerald)', desc: 'WHATSAPP_NOTIFICATION_WEBHOOK_URL (Wati / 360Dialog / Gupshup)' },
+                  { l: 'SMS Webhook URL', k: 'smsWebhook', icon: 'smartphone', color: 'var(--amber)', desc: 'SMS_NOTIFICATION_WEBHOOK_URL (MSG91 / Fast2SMS)' },
+                  { l: 'Admin API Token', k: 'adminToken', icon: 'shield', color: 'var(--violet)', desc: 'ADMIN_API_TOKEN — server authorization key' },
+                ].map((field) => {
+                  const isSecret = field.k === 'adminToken' || field.k === 'razorpaySecret';
+                  return (
+                    <div key={field.k} style={{ display: 'flex', gap: 14, alignItems: 'flex-start', padding: 14, background: '#f8fafc', borderRadius: 12, border: '1px solid rgba(8, 47, 97, 0.06)' }}>
+                      <div style={{ width: 38, height: 38, borderRadius: 10, background: `${field.color}15`, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                        <Icon name={field.icon} size={18} style={{ color: field.color }} />
+                      </div>
+                      <div style={{ flex: 1 }}>
+                        <div style={{ fontWeight: 600, fontSize: 13, marginBottom: 2 }}>{field.l}</div>
+                        <div style={{ fontSize: 11.5, color: 'var(--text-3)', marginBottom: 8 }}>{field.desc}</div>
+                        <div style={{ display: 'flex', gap: 8 }}>
+                          <input
+                            className="form-input"
+                            value={(settings as any)[field.k] || ''}
+                            onChange={(e) => set(field.k, e.target.value)}
+                            placeholder={`Enter ${field.l.toLowerCase()}...`}
+                            type={isSecret && !showSecrets[field.k] ? 'password' : 'text'}
+                            style={{ flex: 1, height: 36, borderRadius: 8, fontSize: 12.5 }}
+                            disabled={loading}
+                          />
+                          {isSecret && (
+                            <button
+                              type="button"
+                              className="btn btn-ghost"
+                              style={{ padding: '0 10px', height: 36, display: 'flex', alignItems: 'center', borderRadius: 8 }}
+                              onClick={() => setShowSecrets((prev) => ({ ...prev, [field.k]: !prev[field.k] }))}
+                            >
+                              <Icon name={showSecrets[field.k] ? 'eye-off' : 'eye'} size={15} />
+                            </button>
+                          )}
+                        </div>
+                      </div>
+                      <Badge type={(settings as any)[field.k] ? 'success' : 'warning'}>
+                        {(settings as any)[field.k] ? 'Configured' : 'Not Set'}
+                      </Badge>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+
+          {section === 'notifications' && (
+            <div>
+              <div style={{ marginBottom: 18 }}>
+                <h3 style={{ fontSize: 16, fontWeight: 700, color: 'var(--text-1)', margin: 0 }}>Notification & Broadcast Preferences</h3>
+                <p style={{ fontSize: 12.5, color: 'var(--text-3)', margin: '4px 0 0' }}>Control automatic notifications sent to operators and customers across channels.</p>
+              </div>
+              <div style={{ padding: '0 4px' }}>
+                <Toggle field="emailAlerts" label="Email Alerts" sub="Daily financial ledger summary & critical verification alerts via email" />
+                <Toggle field="whatsappAlerts" label="WhatsApp Customer Alerts" sub="Instant payment receipt & order status transitions delivered on WhatsApp" />
+                <Toggle field="smsAlerts" label="SMS Alerts Fallback" sub="Send fallback SMS for failed payments and OTP verifications" />
+              </div>
+            </div>
+          )}
+
+          {section === 'security' && (
+            <div>
+              <div style={{ marginBottom: 18 }}>
+                <h3 style={{ fontSize: 16, fontWeight: 700, color: 'var(--text-1)', margin: 0 }}>Security & Access Protection</h3>
+                <p style={{ fontSize: 12.5, color: 'var(--text-3)', margin: '4px 0 0' }}>Manage two-factor authentication requirements and administrative session lifespan.</p>
+              </div>
+              <div style={{ padding: '0 4px' }}>
+                <Toggle field="twoFA" label="Two-Factor Authentication (2FA)" sub="Require authenticator TOTP token on every admin and operator sign-in" />
+                <div style={{ padding: '14px 0', borderBottom: '1px solid rgba(8, 47, 97, 0.08)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <div>
+                    <div style={{ fontSize: 13, fontWeight: 600 }}>Session Inactivity Timeout</div>
+                    <div style={{ fontSize: 12, color: 'var(--text-3)', marginTop: 2 }}>Auto-logout admin & desk staff after inactivity</div>
+                  </div>
+                  <select
+                    className="form-input"
+                    style={{ width: 130, height: 36, borderRadius: 8, fontSize: 12.5 }}
+                    value={(settings as any).sessionTimeout || '30'}
+                    onChange={(e) => set('sessionTimeout', e.target.value)}
+                  >
+                    {['15', '30', '60', '120', '480'].map((value) => (
+                      <option key={value} value={value}>{value} Minutes</option>
+                    ))}
+                  </select>
                 </div>
-              </Card>
-            )}
-            {section === 'automation' && (
-              <Card title="Automation Defaults">
-                <div style={{ padding: '4px 20px' }}>
-                  <Toggle field="autoVerify"    label="Auto-Verify Documents"    sub="Bot checks docs automatically after upload" />
-                  <Toggle field="autoWhatsApp"  label="Auto WhatsApp on Order"   sub="Send instant confirmation to customers" />
-                </div>
-              </Card>
-            )}
-          </div>
+              </div>
+            </div>
+          )}
+
+          {section === 'automation' && (
+            <div>
+              <div style={{ marginBottom: 18 }}>
+                <h3 style={{ fontSize: 16, fontWeight: 700, color: 'var(--text-1)', margin: 0 }}>Workflow Automation Engine</h3>
+                <p style={{ fontSize: 12.5, color: 'var(--text-3)', margin: '4px 0 0' }}>Configure automated bots for OCR document verification and instant order assignment.</p>
+              </div>
+              <div style={{ padding: '0 4px' }}>
+                <Toggle field="autoVerify" label="AI Document Auto-Check" sub="Verify Aadhaar, PAN, and Photo readability immediately upon citizen upload" />
+                <Toggle field="autoWhatsApp" label="Instant Order WhatsApp Broadcast" sub="Trigger WhatsApp message with Order ID and Tracking Link immediately after payment" />
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>

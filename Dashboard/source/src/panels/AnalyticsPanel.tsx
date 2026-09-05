@@ -1,18 +1,13 @@
-import React, { useState, useMemo } from 'react';
-import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, Tooltip, BarChart, Bar, PieChart, Pie, Cell, Legend, AreaChart, Area } from 'recharts';
-import { PanelHeader, Card, Badge, Icon } from '../Shared';
-import { useApp } from '../AppContext';
+import React, { useEffect, useMemo, useState } from 'react';
+import { ResponsiveContainer, XAxis, YAxis, Tooltip, BarChart, Bar, PieChart, Pie, Cell, Legend, AreaChart, Area} from 'recharts';
+import { PanelHeader, Card, Badge, Icon} from '../Shared';
+import { useApp} from '../AppContext';
+import { usePersistentState} from '../hooks/usePersistentState';
+import { adminTokenHeader} from '../security/adminSession';
 
 const CHART_COLORS = ['#125696', '#16a34a', '#C9921A', '#f59e0b', '#dc2626', '#0284c7'];
 
-const SLA_DATA = [
-  { service: 'PAN Card', avgHours: 1.5, target: 4, met: 95 },
-  { service: 'GST Reg.', avgHours: 52.8, target: 72, met: 78 },
-  { service: 'Passport', avgHours: 240, target: 360, met: 82 },
-  { service: 'DSC', avgHours: 4.1, target: 4, met: 60 },
-  { service: 'Voter ID', avgHours: 6.2, target: 12, met: 88 },
-  { service: 'Income Cert', avgHours: 3.8, target: 6, met: 91 },
-];
+const SLA_DATA: any[] = [];
 
 // Custom Tooltip
 const CustomTooltip = ({ active, payload, label }: any) => {
@@ -31,7 +26,28 @@ const CustomTooltip = ({ active, payload, label }: any) => {
 
 export const AnalyticsPanel: React.FC = () => {
   const { customers, allOrders } = useApp();
-  const [period, setPeriod] = useState<'7d' | '30d' | 'all'>('30d');
+  const [period, setPeriod] = usePersistentState<'7d' | '30d' | 'all'>('analytics_period', '30d');
+  const [executiveSummary, setExecutiveSummary] = useState<any>(null);
+
+  const setPeriodAndSave = (p: '7d' | '30d' | 'all') => setPeriod(p);
+
+  useEffect(() => {
+    let active = true;
+    const loadExecutiveSummary = async () => {
+      try {
+        const response = await fetch('/api/admin/executive/summary', {
+          headers: adminTokenHeader(),
+        });
+        if (!response.ok) return;
+        const payload = await response.json();
+        if (active) setExecutiveSummary(payload.summary || null);
+      } catch {
+        if (active) setExecutiveSummary(null);
+      }
+    };
+    loadExecutiveSummary();
+    return () => { active = false; };
+  }, []);
 
   // Filter orders by period
   const filteredOrders = useMemo(() => {
@@ -103,11 +119,12 @@ export const AnalyticsPanel: React.FC = () => {
             {(['7d', '30d', 'all'] as const).map(p => (
               <button
                 key={p}
-                onClick={() => setPeriod(p)}
+                onClick={() => setPeriodAndSave(p)}
                 style={{
-                  padding: '4px 12px', borderRadius: 6, border: 'none', fontSize: 'var(--fs-xs)', fontWeight: 'var(--fw-semibold)', cursor: 'pointer',
-                  background: period === p ? 'var(--bg-1)' : 'transparent',
-                  color: period === p ? 'var(--text-1)' : 'var(--text-3)',
+                  padding: '4px 12px', borderRadius: 6, border: 'none', fontSize: 'var(--fs-xs)', cursor: 'pointer',
+                  background: period === p ? 'var(--blue)' : 'var(--bg-2)',
+                  color: period === p ? '#fff' : 'var(--text-2)',
+                  fontWeight: period === p ? 'var(--fw-semibold)' : undefined,
                   transition: 'all 0.15s',
                 }}
               >
@@ -122,7 +139,7 @@ export const AnalyticsPanel: React.FC = () => {
         {/* KPI Row */}
         <div className="grid-4">
           {[
-            { l: 'Total Revenue', v: `₹${totalRevenue.toLocaleString()}`, sub: '+18% vs last month', color: 'var(--emerald)', icon: 'indian-rupee', cls: 'positive' },
+            { l: 'Total Revenue', v: `₹${totalRevenue.toLocaleString()}`, sub: 'vs previous period', color: 'var(--emerald)', icon: 'indian-rupee', cls: 'positive' },
             { l: 'Total Orders', v: String(totalOrders), sub: `${completedOrders} completed`, color: 'var(--blue)', icon: 'package', cls: 'info' },
             { l: 'Avg Order Value', v: `₹${avgOrderValue}`, sub: 'Per transaction', color: 'var(--violet)', icon: 'trending-up', cls: 'info' },
             { l: 'Completion Rate', v: `${conversionRate}%`, sub: 'SLA compliance', color: 'var(--amber)', icon: 'check-circle', cls: conversionRate > 80 ? 'positive' : 'warning' },
@@ -140,6 +157,62 @@ export const AnalyticsPanel: React.FC = () => {
           ))}
         </div>
 
+        {executiveSummary ? (
+          <Card
+            title="Executive Command Read Model"
+            sub={`Snapshot boundary: ${executiveSummary.latestSnapshot ? `v${executiveSummary.latestSnapshot.snapshotVersion}` : 'No snapshot captured yet'} · Read-only governance projection`}
+            style={{ flexShrink: 0 }}
+          >
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, minmax(0, 1fr))', gap: 12 }}>
+              <div className="insight-card info" style={{ padding: 14 }}>
+                <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-3)' }}>Governed Workforce</div>
+                <div style={{ fontSize: 'var(--fs-xl)', fontWeight: 'var(--fw-semibold)' }}>{executiveSummary.workforce?.active || 0}</div>
+                <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-3)' }}>{executiveSummary.workforce?.total || 0} total</div>
+              </div>
+              <div className="insight-card positive" style={{ padding: 14 }}>
+                <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-3)' }}>Branches / Franchises</div>
+                <div style={{ fontSize: 'var(--fs-xl)', fontWeight: 'var(--fw-semibold)' }}>{executiveSummary.network?.total || 0}</div>
+                <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-3)' }}>{executiveSummary.network?.franchises || 0} franchise nodes</div>
+              </div>
+              <div className="insight-card warning" style={{ padding: 14 }}>
+                <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-3)' }}>Documents</div>
+                <div style={{ fontSize: 'var(--fs-xl)', fontWeight: 'var(--fw-semibold)' }}>{executiveSummary.operations?.totalDocuments || 0}</div>
+                <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-3)' }}>Registry-backed</div>
+              </div>
+              <div className="insight-card info" style={{ padding: 14 }}>
+                <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-3)' }}>Conversations</div>
+                <div style={{ fontSize: 'var(--fs-xl)', fontWeight: 'var(--fw-semibold)' }}>{executiveSummary.operations?.totalConversations || 0}</div>
+                <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-3)' }}>Omnichannel memory</div>
+              </div>
+            </div>
+
+            <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: 16, marginTop: 16 }}>
+              <div style={{ border: '1px solid var(--border-1)', borderRadius: 10, overflow: 'hidden' }}>
+                <div style={{ padding: '12px 14px', borderBottom: '1px solid var(--border-1)', fontSize: 'var(--fs-xs)', color: 'var(--text-3)', fontWeight: 'var(--fw-semibold)' }}>
+                  Department Ownership
+                </div>
+                {(executiveSummary.workforce?.byDepartment || []).map((department: any, index: number, rows: any[]) => (
+                  <div key={department.departmentUuid} style={{ padding: '10px 14px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: index < rows.length - 1 ? '1px solid var(--border-1)' : 'none' }}>
+                    <div>
+                      <div style={{ fontSize: 'var(--fs-xs)', fontWeight: 'var(--fw-semibold)' }}>{department.departmentName}</div>
+                      <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-3)' }}>{department.activeWorkforce} active workforce</div>
+                    </div>
+                    <Badge type={department.workforceCount > 0 ? 'success' : 'neutral'}>{department.workforceCount}</Badge>
+                  </div>
+                ))}
+              </div>
+
+              <div style={{ border: '1px solid var(--border-1)', borderRadius: 10, padding: 14, display: 'flex', flexDirection: 'column', gap: 10 }}>
+                <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-3)', fontWeight: 'var(--fw-semibold)' }}>Read Boundary</div>
+                <div style={{ fontSize: 'var(--fs-sm)' }}>Executive dashboards read governed projections only.</div>
+                <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-3)' }}>Predictive analytics: {executiveSummary.boundaries?.predictiveAnalytics || 'not_implemented'}</div>
+                <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-3)' }}>Scoring engine: {executiveSummary.boundaries?.scoringEngine || 'not_implemented'}</div>
+                <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-3)' }}>AI runtime: {executiveSummary.boundaries?.aiRuntime || 'not_implemented'}</div>
+              </div>
+            </div>
+          </Card>
+        ) : null}
+
         {/* Revenue Trend + Service Pie */}
         <div className="grid-65">
           <Card title="Revenue Trend" sub="Daily revenue & order volume">
@@ -153,7 +226,7 @@ export const AnalyticsPanel: React.FC = () => {
                     </linearGradient>
                   </defs>
                   <XAxis dataKey="date" tick={{ fontSize: 'var(--fs-xs)', fill: 'var(--text-3)' }} axisLine={false} tickLine={false} />
-                  <YAxis tick={{ fontSize: 'var(--fs-xs)', fill: 'var(--text-3)' }} axisLine={false} tickLine={false} tickFormatter={v => `₹${(v/1000).toFixed(0)}k`} />
+                  <YAxis tick={{ fontSize: 11, fill: 'var(--text-3)' }} axisLine={false} tickLine={false} tickFormatter={(v) => `₹${v >= 1000 ? (v / 1000).toFixed(0) + 'k' : v}`} />
                   <Tooltip content={<CustomTooltip />} />
                   <Area type="monotone" dataKey="revenue" stroke="#125696" fill="url(#revGrad)" strokeWidth={2} dot={false} />
                 </AreaChart>
@@ -166,10 +239,11 @@ export const AnalyticsPanel: React.FC = () => {
               {serviceBreakdown.length > 0 ? (
                 <ResponsiveContainer width="100%" height={220}>
                   <PieChart>
-                    <Pie data={serviceBreakdown} dataKey="count" nameKey="name" cx="50%" cy="50%" outerRadius={80} label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`} labelLine={false} fontSize={10}>
+                    <Pie data={serviceBreakdown} dataKey="count" nameKey="name" cx="50%" cy="50%" outerRadius={70} label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`} labelLine={false} fontSize={10}>
                       {serviceBreakdown.map((_, i) => <Cell key={i} fill={CHART_COLORS[i % CHART_COLORS.length]} />)}
                     </Pie>
                     <Tooltip formatter={(v: any) => [`${v} orders`, 'Count']} />
+                    <Legend iconSize={10} wrapperStyle={{ fontSize: 'var(--fs-xs)' }} />
                   </PieChart>
                 </ResponsiveContainer>
               ) : (
@@ -180,9 +254,13 @@ export const AnalyticsPanel: React.FC = () => {
         </div>
 
         {/* SLA Compliance */}
-        <Card title="SLA Compliance by Service" sub="Average processing time vs target">
+        <Card title="SLA Compliance by Service" sub="Average processing time vs target" style={{ flexShrink: 0 }}>
           <div style={{ padding: '8px 0' }}>
-            {SLA_DATA.map((s, i) => (
+            {SLA_DATA.length === 0 ? (
+              <div style={{ padding: '24px', textAlign: 'center', color: 'var(--text-3)', fontSize: 'var(--fs-sm)' }}>
+                SLA data orders aane ke baad yahan dikhega
+              </div>
+            ) : SLA_DATA.map((s, i) => (
               <div key={i} style={{ padding: '10px 18px', borderBottom: i < SLA_DATA.length - 1 ? '1px solid var(--border-1)' : 'none' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 6 }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
@@ -211,6 +289,7 @@ export const AnalyticsPanel: React.FC = () => {
               </div>
             ))}
           </div>
+
         </Card>
 
         {/* Top Customers */}

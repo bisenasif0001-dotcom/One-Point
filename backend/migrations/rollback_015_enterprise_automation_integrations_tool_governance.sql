@@ -1,0 +1,108 @@
+PRAGMA foreign_keys = OFF;
+
+-- Drop Triggers
+DROP TRIGGER IF EXISTS trg_enterprise_tool_registry_uuid_immutable;
+DROP TRIGGER IF EXISTS trg_enterprise_tool_versions_uuid_immutable;
+DROP TRIGGER IF EXISTS trg_enterprise_tool_contracts_uuid_immutable;
+DROP TRIGGER IF EXISTS trg_enterprise_tool_dependencies_uuid_immutable;
+DROP TRIGGER IF EXISTS trg_enterprise_tool_classifications_uuid_immutable;
+DROP TRIGGER IF EXISTS trg_enterprise_tool_sandboxes_uuid_immutable;
+DROP TRIGGER IF EXISTS trg_enterprise_tool_output_governance_uuid_immutable;
+DROP TRIGGER IF EXISTS trg_enterprise_tool_observability_uuid_immutable;
+DROP TRIGGER IF EXISTS trg_enterprise_tool_execution_ownership_uuid_immutable;
+DROP TRIGGER IF EXISTS trg_enterprise_tool_executions_uuid_immutable;
+DROP TRIGGER IF EXISTS trg_enterprise_tool_executions_append_only_update;
+DROP TRIGGER IF EXISTS trg_enterprise_tool_executions_append_only_delete;
+DROP TRIGGER IF EXISTS trg_enterprise_tool_execution_priorities_uuid_immutable;
+DROP TRIGGER IF EXISTS trg_enterprise_tool_execution_idempotency_uuid_immutable;
+DROP TRIGGER IF EXISTS trg_enterprise_tool_bulk_execution_uuid_immutable;
+DROP TRIGGER IF EXISTS trg_enterprise_tool_resource_governance_uuid_immutable;
+DROP TRIGGER IF EXISTS trg_enterprise_provider_capabilities_uuid_immutable;
+DROP TRIGGER IF EXISTS trg_enterprise_provider_trust_uuid_immutable;
+DROP TRIGGER IF EXISTS trg_enterprise_provider_health_uuid_immutable;
+DROP TRIGGER IF EXISTS trg_enterprise_integration_registry_uuid_immutable;
+DROP TRIGGER IF EXISTS trg_enterprise_integration_contracts_uuid_immutable;
+DROP TRIGGER IF EXISTS trg_enterprise_integration_lifecycle_uuid_immutable;
+DROP TRIGGER IF EXISTS trg_enterprise_webhook_governance_uuid_immutable;
+DROP TRIGGER IF EXISTS trg_enterprise_callback_governance_uuid_immutable;
+DROP TRIGGER IF EXISTS trg_enterprise_credential_rotation_uuid_immutable;
+DROP TRIGGER IF EXISTS trg_enterprise_secret_usage_uuid_immutable;
+DROP TRIGGER IF EXISTS trg_enterprise_secret_usage_append_only_update;
+DROP TRIGGER IF EXISTS trg_enterprise_secret_usage_append_only_delete;
+DROP TRIGGER IF EXISTS trg_enterprise_rate_limit_policies_uuid_immutable;
+DROP TRIGGER IF EXISTS trg_enterprise_circuit_breaker_policies_uuid_immutable;
+DROP TRIGGER IF EXISTS trg_enterprise_human_approval_policies_uuid_immutable;
+DROP TRIGGER IF EXISTS trg_enterprise_policy_hierarchy_uuid_immutable;
+DROP TRIGGER IF EXISTS trg_enterprise_governance_change_control_uuid_immutable;
+DROP TRIGGER IF EXISTS trg_enterprise_metadata_classifications_uuid_immutable;
+DROP TRIGGER IF EXISTS trg_enterprise_multi_tenant_governance_uuid_immutable;
+DROP TRIGGER IF EXISTS trg_enterprise_cost_governance_uuid_immutable;
+DROP TRIGGER IF EXISTS trg_enterprise_compliance_governance_uuid_immutable;
+DROP TRIGGER IF EXISTS trg_enterprise_disaster_recovery_governance_uuid_immutable;
+DROP TRIGGER IF EXISTS trg_enterprise_automation_registry_uuid_immutable;
+DROP TRIGGER IF EXISTS trg_enterprise_automation_lifecycle_uuid_immutable;
+DROP TRIGGER IF EXISTS trg_enterprise_automation_scheduling_uuid_immutable;
+DROP TRIGGER IF EXISTS trg_enterprise_automation_policies_uuid_immutable;
+DROP TRIGGER IF EXISTS trg_enterprise_automation_executions_uuid_immutable;
+DROP TRIGGER IF EXISTS trg_enterprise_automation_executions_append_only_update;
+DROP TRIGGER IF EXISTS trg_enterprise_automation_executions_append_only_delete;
+
+-- Drop Indexes
+DROP INDEX IF EXISTS idx_enterprise_tool_versions_key;
+DROP INDEX IF EXISTS idx_enterprise_tool_contracts_key;
+DROP INDEX IF EXISTS idx_enterprise_tool_dependencies_parent;
+DROP INDEX IF EXISTS idx_enterprise_tool_dependencies_dep;
+DROP INDEX IF EXISTS idx_enterprise_tool_executions_key;
+DROP INDEX IF EXISTS idx_enterprise_tool_executions_created;
+DROP INDEX IF EXISTS idx_enterprise_automation_executions_key;
+DROP INDEX IF EXISTS idx_enterprise_automation_executions_created;
+DROP INDEX IF EXISTS idx_enterprise_integration_contracts_key;
+DROP INDEX IF EXISTS idx_enterprise_webhook_governance_key;
+DROP INDEX IF EXISTS idx_enterprise_callback_governance_key;
+
+-- Drop Tables
+DROP TABLE IF EXISTS enterprise_automation_executions;
+DROP TABLE IF EXISTS enterprise_automation_policies;
+DROP TABLE IF EXISTS enterprise_automation_scheduling;
+DROP TABLE IF EXISTS enterprise_automation_lifecycle;
+DROP TABLE IF EXISTS enterprise_automation_registry;
+DROP TABLE IF EXISTS enterprise_disaster_recovery_governance;
+DROP TABLE IF EXISTS enterprise_compliance_governance;
+DROP TABLE IF EXISTS enterprise_cost_governance;
+DROP TABLE IF EXISTS enterprise_multi_tenant_governance;
+DROP TABLE IF EXISTS enterprise_metadata_classifications;
+DROP TABLE IF EXISTS enterprise_governance_change_control;
+DROP TABLE IF EXISTS enterprise_policy_hierarchy;
+DROP TABLE IF EXISTS enterprise_human_approval_policies;
+DROP TABLE IF EXISTS enterprise_circuit_breaker_policies;
+DROP TABLE IF EXISTS enterprise_rate_limit_policies;
+DROP TABLE IF EXISTS enterprise_secret_usage;
+DROP TABLE IF EXISTS enterprise_credential_rotation;
+DROP TABLE IF EXISTS enterprise_callback_governance;
+DROP TABLE IF EXISTS enterprise_webhook_governance;
+DROP TABLE IF EXISTS enterprise_integration_lifecycle;
+DROP TABLE IF EXISTS enterprise_integration_contracts;
+DROP TABLE IF EXISTS enterprise_integration_registry;
+DROP TABLE IF EXISTS enterprise_provider_health;
+DROP TABLE IF EXISTS enterprise_provider_trust;
+DROP TABLE IF EXISTS enterprise_provider_capabilities;
+DROP TABLE IF EXISTS enterprise_tool_resource_governance;
+DROP TABLE IF EXISTS enterprise_tool_bulk_execution;
+DROP TABLE IF EXISTS enterprise_tool_execution_idempotency;
+DROP TABLE IF EXISTS enterprise_tool_execution_priorities;
+DROP TABLE IF EXISTS enterprise_tool_executions;
+DROP TABLE IF EXISTS enterprise_tool_execution_ownership;
+DROP TABLE IF EXISTS enterprise_tool_observability;
+DROP TABLE IF EXISTS enterprise_tool_output_governance;
+DROP TABLE IF EXISTS enterprise_tool_sandboxes;
+DROP TABLE IF EXISTS enterprise_tool_classifications;
+DROP TABLE IF EXISTS enterprise_tool_dependencies;
+DROP TABLE IF EXISTS enterprise_tool_contracts;
+DROP TABLE IF EXISTS enterprise_tool_versions;
+DROP TABLE IF EXISTS enterprise_tool_registry;
+
+-- Revert migration registry status if required
+DELETE FROM enterprise_migration_dependencies WHERE migration_key = 'phase-3-milestone-3.7-enterprise-automation-integrations-tool-governance';
+DELETE FROM enterprise_migration_registry WHERE migration_key = 'phase-3-milestone-3.7-enterprise-automation-integrations-tool-governance';
+
+PRAGMA foreign_keys = ON;

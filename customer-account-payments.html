@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="One Point Payments &amp; Billing Center — settle pending dues, review transaction history, download official payment receipts, and track refunds.">
+    <meta name="robots" content="noindex,nofollow">
+    <title>Payments &amp; Billing | One Point Digital Services</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;850;900&display=swap" rel="stylesheet">
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+    <script src="assets/opds-boot.js?v=anti-fouc-79"></script>
+    <link rel="stylesheet" href="assets/onepoint.css?v=customer-checkout-94">
+    <link rel="stylesheet" href="assets/onepoint-customer-profile.css?v=20">
+    <link rel="stylesheet" href="assets/onepoint-customer-account.css?v=21">
+  </head>
+  <body class="elite-console-body enterprise-checkout-body" data-account-page="payments">
+    <div data-account-shell></div>
+
+    <div class="acc-page" data-account-content hidden>
+      
+      <!-- Top Page Heading -->
+      <section class="acc-greeting">
+        <div>
+          <span class="acc-eyebrow"><i data-lucide="credit-card"></i> PAYMENTS &amp; BILLING</span>
+          <h1>Payments &amp; Billing</h1>
+          <p>Transparent ledger of all facilitation fees, government department portal challans, receipts, and refund requests.</p>
+        </div>
+        <a class="eds-btn eds-btn-secondary" href="customer-account-invoices.html"><i data-lucide="receipt"></i> Invoices &amp; Receipts Archive</a>
+      </section>
+
+      <!-- Financial Snapshot Summary Grid (Amount Due, Paid, Refunds, Transactions) -->
+      <div class="acc-summary-grid" id="acc-payments-summary-grid">
+        <!-- Rendered via JS -->
+      </div>
+
+      <!-- Payments Navigation Tabs (Transactions vs. Refund Center) -->
+      <nav class="cpf-tab-nav" role="tablist" aria-label="Billing Sections" style="margin-top: 4px;">
+        <button type="button" class="cpf-tab-btn active" data-bill-tab="transactions" role="tab" aria-selected="true" id="bill-tab-btn-txns">
+          <i data-lucide="list-ordered"></i> Transactions Ledger
+        </button>
+        <button type="button" class="cpf-tab-btn" data-bill-tab="refunds" role="tab" aria-selected="false" id="bill-tab-btn-refunds">
+          <i data-lucide="refresh-cw"></i> Refund Center <span class="cpf-tab-count-badge" id="cpf-refunds-count-badge" style="background:#475569;">1</span>
+        </button>
+      </nav>
+
+      <!-- ==================== TAB 1: TRANSACTIONS LEDGER ==================== -->
+      <div class="cpf-tab-panel active" id="bill-panel-transactions" role="tabpanel" aria-labelledby="bill-tab-btn-txns">
+        
+        <!-- Search & Filter Controls -->
+        <section class="cpf-card acc-search-filter-card">
+          <div class="acc-search-row">
+            <div class="acc-search-input-wrap">
+              <i data-lucide="search" class="acc-search-icon"></i>
+              <input class="acc-search-input eds-input" id="acc-payment-search" placeholder="Search transaction, request ID, service or amount (e.g. TXN-..., OPDS-..., ₹399)...">
+            </div>
+            <button type="button" class="eds-btn eds-btn-secondary" id="acc-pay-filter-toggle-btn" aria-expanded="false" aria-controls="acc-pay-secondary-filter-panel">
+              <i data-lucide="sliders-horizontal"></i> Filters <span id="acc-pay-filter-count" class="acc-filter-count-badge" hidden>1</span>
+            </button>
+          </div>
+
+          <!-- Primary Payment Status Filter Chips -->
+          <div class="acc-filter-row" id="acc-payment-primary-filters"></div>
+
+          <!-- Expandable Advanced Filter Drawer -->
+          <div class="acc-secondary-filters" id="acc-pay-secondary-filter-panel" hidden>
+            <div class="acc-sec-filter-grid">
+              <div class="acc-sec-filter-col">
+                <label for="filter-pay-method"><small>Payment Method</small></label>
+                <select id="filter-pay-method" class="eds-input">
+                  <option value="all">All Methods</option>
+                  <option value="upi">UPI (GPay / PhonePe / Paytm / QR)</option>
+                  <option value="card">Credit / Debit Card</option>
+                  <option value="netbanking">Net Banking</option>
+                  <option value="cash">Cash at Lucknow Desk</option>
+                </select>
+              </div>
+              <div class="acc-sec-filter-col">
+                <label for="filter-pay-date"><small>Time Period</small></label>
+                <select id="filter-pay-date" class="eds-input">
+                  <option value="all">All Time</option>
+                  <option value="30d">Last 30 Days</option>
+                  <option value="90d">Last 3 Months</option>
+                  <option value="1y">This Financial Year</option>
+                </select>
+              </div>
+              <div class="acc-sec-filter-col">
+                <label for="filter-pay-sort"><small>Sort By</small></label>
+                <select id="filter-pay-sort" class="eds-input">
+                  <option value="newest">Newest First</option>
+                  <option value="oldest">Oldest First</option>
+                  <option value="amount-high">Highest Amount</option>
+                  <option value="amount-low">Lowest Amount</option>
+                </select>
+              </div>
+            </div>
+            <div class="acc-sec-filter-actions">
+              <button type="button" class="eds-btn eds-btn-ghost" id="acc-pay-clear-all-btn">Reset Filters</button>
+              <button type="button" class="eds-btn eds-btn-primary" id="acc-pay-apply-filters-btn">Apply</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Desktop Transactions Table / Mobile Cards Output -->
+        <section class="cpf-card">
+          <div class="cpf-card-title-row">
+            <h3 style="font-size:1.05rem;"><i data-lucide="receipt-text"></i> Payment History</h3>
+            <span class="acc-desk-live-pill"><span class="acc-pulse-dot-green"></span> 256-Bit Encrypted Payments</span>
+          </div>
+
+          <!-- Desktop Table (Hidden on small screens) -->
+          <div class="acc-table-wrap hide-mobile-sm">
+            <table class="acc-table">
+              <thead>
+                <tr>
+                  <th>Transaction ID</th>
+                  <th>Service / Request</th>
+                  <th>Date &amp; Time</th>
+                  <th>Payment Mode</th>
+                  <th style="text-align:right;">Amount</th>
+                  <th>Status</th>
+                  <th style="text-align:right;">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="acc-payments-body"></tbody>
+            </table>
+          </div>
+
+          <!-- Mobile Cards Container (Visible on mobile screens) -->
+          <div class="acc-mobile-txns-list hide-desktop" id="acc-mobile-txns-container"></div>
+        </section>
+      </div>
+
+      <!-- ==================== TAB 2: REFUND CENTER ==================== -->
+      <div class="cpf-tab-panel" id="bill-panel-refunds" role="tabpanel" aria-labelledby="bill-tab-btn-refunds" hidden>
+        <section class="cpf-card">
+          <div class="cpf-card-title-row">
+            <div>
+              <h3 style="font-size:1.05rem;"><i data-lucide="refresh-cw"></i> Refund Center &amp; Reversals</h3>
+              <p class="cpf-muted" style="font-size:.82rem; margin:0;">Track status of refunds for cancelled requests or excess statutory fees.</p>
+            </div>
+          </div>
+
+          <div class="acc-refunds-list" id="acc-refunds-list">
+            <!-- Rendered via JS -->
+          </div>
+
+          <p class="cpf-retention-note" style="margin-top: 14px;">
+            <i data-lucide="info"></i>
+            Approved refunds are credited back to the original payment source (UPI account or Card) within 2&ndash;5 business days depending on your banking network.
+          </p>
+        </section>
+      </div>
+
+    </div>
+
+    <!-- Modal Backdrop for Payment Details / Receipt Preview -->
+    <div id="cpf-modal-backdrop" class="cpf-modal-backdrop" hidden>
+      <div class="cpf-modal" id="cpf-modal" role="dialog" aria-modal="true"></div>
+    </div>
+
+    <div data-account-footer></div>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+    <script src="assets/app.js?v=customer-checkout-94" defer></script>
+    <script src="assets/auth.js?v=cpf-1" defer></script>
+    <script src="assets/customer-account.js?v=20" defer></script>
+    <script src="assets/customer-account-payments.js?v=20" defer></script>
+  </body>
+</html>

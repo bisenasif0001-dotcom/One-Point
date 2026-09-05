@@ -9,7 +9,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-        <link rel="stylesheet" href="assets/onepoint.css?v=2">
+        <script src="assets/opds-boot.js?v=anti-fouc-79"></script>
+        <link rel="stylesheet" href="assets/onepoint.css?v=customer-checkout-94">
+    <link rel="stylesheet" href="assets/tbs-style.css">
 </head>
   <body class="online-services-page">
     <div data-site-nav>
@@ -32,7 +34,7 @@
       <section class="page-hero page-hero-service premium-service-hero online-services-hero">
         <!-- Background Video -->
         <video class="hero-video-bg" autoplay loop muted playsinline>
-          <source src="assets/Hero section home page.mp4" type="video/mp4">
+          <source src="assets/Create_a_second_ultra_realis.mp4" type="video/mp4">
         </video>
         <div class="hero-video-overlay"></div>
         <div class="page-hero-grid">
@@ -47,14 +49,16 @@
               <a class="btn btn-primary" href="#bus-ticket"><i data-lucide="ticket"></i> Book Ticket</a>
               <a class="btn btn-ghost" href="contact.html"><i data-lucide="message-circle"></i> Ask Support</a>
             </div>
-                        <div class="hero-trust-strip">
-              <span class="hero-trust-badge badge-upi">
-                <i data-lucide="plane"></i> <strong>Train</strong> Booking support
+            <div class="hero-trust-strip">
+              <span class="hero-trust-badge">
+                <i data-lucide="badge-check"></i> <strong>Verified Booking</strong>
               </span>
-              <span class="hero-trust-badge badge-speed">
-                <i data-lucide="shield-check"></i> <strong>Flight</strong> Fare guidance
+              <span class="hero-trust-badge">
+                <i data-lucide="clock"></i> <strong>Instant Ticket</strong>
               </span>
-
+              <span class="hero-trust-badge">
+                <i data-lucide="lock"></i> <strong>100% Secure</strong>
+              </span>
             </div>
           </div>
           <div class="page-hero-console">
@@ -99,272 +103,385 @@
         </div>
       </section>
 
-      <section class="section travel-booking-section reveal">
-        <div class="section-head">
-          <div><p class="section-kicker">Travel Booking</p><h2>Travel booking with local <span class="h2-gold">support.</span></h2></div>
-          <div class="travel-live-chips" aria-label="Live travel categories"><span>Train</span><span>Flight</span><span>Visa</span></div>
-        </div>
-        <div class="travel-booking-grid">
-          <div class="travel-photo-panel">
-            <div class="travel-panel-route">
-              <span class="travel-panel-city">LKO</span>
-              <span class="travel-panel-route-line"><i data-lucide="plane"></i></span>
-              <span class="travel-panel-city">DEL</span>
-            </div>
-            <div>
-              <span class="tag">Human-assisted booking support</span>
-              <h3>Routes, fares and confirmations handled with care.</h3>
-              <p>Share route, date, passengers and timing. We help compare options and confirm booking details before payment.</p>
-            </div>
-            <div class="travel-panel-pills">
-              <span class="travel-panel-pill"><i data-lucide="shield-check"></i> Fare verified</span>
-              <span class="travel-panel-pill"><i data-lucide="message-circle"></i> WhatsApp delivery</span>
-            </div>
-          </div>
-          <div class="travel-booking-cards">
-            <article class="travel-card" id="bus-ticket">
-              <span class="travel-icon"><i data-lucide="bus"></i></span>
-              <div><h3>Bus Ticket</h3><p>Timing: same-day support</p><small>Status: fare check + seat help</small></div>
-              <a class="btn btn-primary" href="travel-services.html?service=Bus+Ticket#apply-now">Book Now</a>
-            </article>
-            <article class="travel-card" id="train-ticket">
-              <span class="travel-icon"><i data-lucide="train"></i></span>
-              <div><h3>Train Ticket</h3><p>Timing: availability guidance</p><small>Status: passenger detail review</small></div>
-              <a class="btn btn-primary" href="travel-services.html?service=Train+Ticket#apply-now">Book Now</a>
-            </article>
-            <article class="travel-card" id="flight-ticket">
-              <span class="travel-icon"><i data-lucide="plane"></i></span>
-              <div><h3>Flight Ticket</h3><p>Timing: quote and fare support</p><small>Status: ID and fare confirmation</small></div>
-              <a class="btn btn-primary" href="travel-services.html?service=Flight+Ticket#apply-now">Book Now</a>
-            </article>
+      <section class="section tbs-section reveal">
 
+        <!-- ── Section Header ── -->
+        <div class="tbs-header">
+          <div class="tbs-header-left">
+            <p class="section-kicker">Travel Booking</p>
+            <h2>Book your journey with <span class="h2-gold">local support.</span></h2>
+            <p class="tbs-subtitle">Bus, train and flight bookings — fare verified, WhatsApp delivered, human assisted.</p>
+          </div>
+          <div class="tbs-trust-row">
+            <span class="tbs-trust-badge"><i data-lucide="shield-check"></i> Fare Verified</span>
+            <span class="tbs-trust-badge"><i data-lucide="message-circle"></i> WhatsApp Delivery</span>
+            <span class="tbs-trust-badge"><i data-lucide="user-check"></i> Human Assisted</span>
           </div>
         </div>
+
+        <!-- ── Main Grid ── -->
+        <div class="tbs-grid">
+
+          <!-- Left: Dark Hero Panel -->
+          <div class="tbs-hero-panel">
+            <div class="tbs-hero-bg-orb tbs-orb-1"></div>
+            <div class="tbs-hero-bg-orb tbs-orb-2"></div>
+
+            <div class="tbs-hero-route">
+              <div class="tbs-route-city">
+                <span class="tbs-city-code">LKO</span>
+                <span class="tbs-city-name">Lucknow</span>
+              </div>
+              <div class="tbs-route-connector">
+                <span class="tbs-route-dot"></span>
+                <span class="tbs-route-line-dash"></span>
+                <i data-lucide="plane" class="tbs-route-icon"></i>
+                <span class="tbs-route-line-dash"></span>
+                <span class="tbs-route-dot"></span>
+              </div>
+              <div class="tbs-route-city tbs-route-city-right">
+                <span class="tbs-city-code">DEL</span>
+                <span class="tbs-city-name">New Delhi</span>
+              </div>
+            </div>
+
+            <div class="tbs-hero-body">
+              <span class="tbs-hero-tag">Human-assisted booking support</span>
+              <h3 class="tbs-hero-title">Routes, fares &amp; confirmations — handled with care.</h3>
+              <p class="tbs-hero-desc">Share your route, date and passenger details. We compare options and confirm live fares before any payment.</p>
+            </div>
+
+            <div class="tbs-hero-stats">
+              <div class="tbs-stat">
+                <strong>Same Day</strong>
+                <span>Bus booking</span>
+              </div>
+              <div class="tbs-stat-divider"></div>
+              <div class="tbs-stat">
+                <strong>Tatkal</strong>
+                <span>Train support</span>
+              </div>
+              <div class="tbs-stat-divider"></div>
+              <div class="tbs-stat">
+                <strong>Live Fare</strong>
+                <span>Before payment</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Two-panel selector -->
+          <div class="tbs-selector" data-tbs-shell>
+
+            <!-- Left: compact preview tabs -->
+            <div class="tbs-sel-tabs">
+              <button class="tbs-sel-tab active" data-tbs-tab="bus">
+                <div class="tbs-sel-tab-icon"><i data-lucide="bus"></i></div>
+                <div class="tbs-sel-tab-text">
+                  <strong>Bus Ticket</strong>
+                  <span>Same day</span>
+                </div>
+              </button>
+              <button class="tbs-sel-tab" data-tbs-tab="train">
+                <div class="tbs-sel-tab-icon"><i data-lucide="train"></i></div>
+                <div class="tbs-sel-tab-text">
+                  <strong>Train Ticket</strong>
+                  <span>Tatkal support</span>
+                </div>
+              </button>
+              <button class="tbs-sel-tab" data-tbs-tab="flight">
+                <div class="tbs-sel-tab-icon"><i data-lucide="plane"></i></div>
+                <div class="tbs-sel-tab-text">
+                  <strong>Flight Ticket</strong>
+                  <span>Live fare</span>
+                </div>
+              </button>
+            </div>
+
+            <!-- Right: detail panels -->
+            <div class="tbs-sel-detail">
+
+              <!-- BUS -->
+              <div class="tbs-sel-panel active" data-tbs-panel="bus">
+                <div class="tbs-sel-panel-head">
+                  <div class="tbs-sel-panel-icon tbs-pi-bus"><i data-lucide="bus"></i></div>
+                  <div>
+                    <h3>Bus Ticket</h3>
+                    <p>Same-day seat confirmation with fare check and multiple operator options across all major routes.</p>
+                  </div>
+                </div>
+                <ul class="tbs-sel-features">
+                  <li><i data-lucide="check-circle-2"></i> Same-day seat confirmation</li>
+                  <li><i data-lucide="check-circle-2"></i> Live fare check &amp; seat selection</li>
+                  <li><i data-lucide="check-circle-2"></i> Multiple operator options</li>
+                  <li><i data-lucide="check-circle-2"></i> Ticket delivered on WhatsApp</li>
+                </ul>
+                <div class="tbs-sel-tags">
+                  <span><i data-lucide="clock"></i> Same day</span>
+                  <span><i data-lucide="message-circle"></i> WhatsApp delivery</span>
+                  <span><i data-lucide="shield-check"></i> Fare verified</span>
+                </div>
+                <div class="tbs-sel-foot">
+                  <a class="tbs-book-btn" href="checkout.html?service=bus-ticket&amp;service_name=Bus+Ticket">
+                    Book Now <i data-lucide="arrow-right"></i>
+                  </a>
+                </div>
+              </div>
+
+              <!-- TRAIN -->
+              <div class="tbs-sel-panel" data-tbs-panel="train">
+                <div class="tbs-sel-panel-head">
+                  <div class="tbs-sel-panel-icon tbs-pi-train"><i data-lucide="train"></i></div>
+                  <div>
+                    <h3>Train Ticket</h3>
+                    <p>Tatkal &amp; Premium Tatkal booking with PNR support and IRCTC availability guidance.</p>
+                  </div>
+                </div>
+                <ul class="tbs-sel-features">
+                  <li><i data-lucide="check-circle-2"></i> Tatkal &amp; Premium Tatkal</li>
+                  <li><i data-lucide="check-circle-2"></i> PNR support &amp; passenger review</li>
+                  <li><i data-lucide="check-circle-2"></i> IRCTC availability guidance</li>
+                  <li><i data-lucide="check-circle-2"></i> Berth preference assistance</li>
+                </ul>
+                <div class="tbs-sel-tags">
+                  <span><i data-lucide="clock"></i> Availability check</span>
+                  <span><i data-lucide="message-circle"></i> WhatsApp delivery</span>
+                  <span><i data-lucide="shield-check"></i> PNR confirmed</span>
+                </div>
+                <div class="tbs-sel-foot">
+                  <a class="tbs-book-btn" href="checkout.html?service=train-ticket&amp;service_name=Train+Ticket">
+                    Book Now <i data-lucide="arrow-right"></i>
+                  </a>
+                </div>
+              </div>
+
+              <!-- FLIGHT -->
+              <div class="tbs-sel-panel" data-tbs-panel="flight">
+                <div class="tbs-sel-panel-head">
+                  <div class="tbs-sel-panel-icon tbs-pi-flight"><i data-lucide="plane"></i></div>
+                  <div>
+                    <h3>Flight Ticket</h3>
+                    <p>Domestic &amp; international routes with live fare quotes, fare lock, and boarding pass support.</p>
+                  </div>
+                </div>
+                <ul class="tbs-sel-features">
+                  <li><i data-lucide="check-circle-2"></i> Domestic &amp; international routes</li>
+                  <li><i data-lucide="check-circle-2"></i> Live fare quote &amp; fare lock</li>
+                  <li><i data-lucide="check-circle-2"></i> ID &amp; boarding pass support</li>
+                  <li><i data-lucide="check-circle-2"></i> Web check-in assistance</li>
+                </ul>
+                <div class="tbs-sel-tags">
+                  <span><i data-lucide="clock"></i> Quote &amp; fare</span>
+                  <span><i data-lucide="message-circle"></i> WhatsApp delivery</span>
+                  <span><i data-lucide="globe"></i> International</span>
+                </div>
+                <div class="tbs-sel-foot">
+                  <a class="tbs-book-btn" href="checkout.html?service=flight-ticket&amp;service_name=Flight+Ticket">
+                    Book Now <i data-lucide="arrow-right"></i>
+                  </a>
+                </div>
+              </div>
+
+            </div><!-- /.tbs-sel-detail -->
+          </div><!-- /.tbs-selector -->
+        </div><!-- /.tbs-grid -->
+
       </section>
 
-      <!-- ============ POPULAR ROUTES ============ -->
-      <section class="section travel-routes-section reveal">
-        <div class="section-head">
-          <div><p class="section-kicker">Popular Routes</p><h2>Most booked routes from <span class="h2-gold">Lucknow.</span></h2></div>
-          <a class="btn btn-soft" href="#apply-now"><i data-lucide="ticket"></i> Book a Route</a>
-        </div>
-        <div class="travel-routes-grid">
-          <article class="route-card">
-            <div class="route-card-head">
-              <div class="route-endpoints">
-                <span class="route-city"><strong>LKO</strong><small>Lucknow</small></span>
-                <span class="route-line"><i data-lucide="arrow-right"></i></span>
-                <span class="route-city"><strong>DEL</strong><small>Delhi</small></span>
-              </div>
-              <span class="route-modes"><i data-lucide="train"></i><i data-lucide="plane"></i><i data-lucide="bus"></i></span>
-            </div>
-            <div class="route-card-foot">
-              <span class="route-fare">From <strong>₹450</strong></span>
-              <a class="route-book" href="travel-services.html?service=Train+Ticket#apply-now">Book <i data-lucide="arrow-right"></i></a>
-            </div>
-          </article>
-          <article class="route-card">
-            <div class="route-card-head">
-              <div class="route-endpoints">
-                <span class="route-city"><strong>LKO</strong><small>Lucknow</small></span>
-                <span class="route-line"><i data-lucide="arrow-right"></i></span>
-                <span class="route-city"><strong>BOM</strong><small>Mumbai</small></span>
-              </div>
-              <span class="route-modes"><i data-lucide="train"></i><i data-lucide="plane"></i></span>
-            </div>
-            <div class="route-card-foot">
-              <span class="route-fare">From <strong>₹1,200</strong></span>
-              <a class="route-book" href="travel-services.html?service=Flight+Ticket#apply-now">Book <i data-lucide="arrow-right"></i></a>
-            </div>
-          </article>
-          <article class="route-card">
-            <div class="route-card-head">
-              <div class="route-endpoints">
-                <span class="route-city"><strong>LKO</strong><small>Lucknow</small></span>
-                <span class="route-line"><i data-lucide="arrow-right"></i></span>
-                <span class="route-city"><strong>BLR</strong><small>Bangalore</small></span>
-              </div>
-              <span class="route-modes"><i data-lucide="plane"></i><i data-lucide="train"></i></span>
-            </div>
-            <div class="route-card-foot">
-              <span class="route-fare">From <strong>₹2,800</strong></span>
-              <a class="route-book" href="travel-services.html?service=Flight+Ticket#apply-now">Book <i data-lucide="arrow-right"></i></a>
-            </div>
-          </article>
-          <article class="route-card">
-            <div class="route-card-head">
-              <div class="route-endpoints">
-                <span class="route-city"><strong>LKO</strong><small>Lucknow</small></span>
-                <span class="route-line"><i data-lucide="arrow-right"></i></span>
-                <span class="route-city"><strong>CCU</strong><small>Kolkata</small></span>
-              </div>
-              <span class="route-modes"><i data-lucide="train"></i><i data-lucide="plane"></i></span>
-            </div>
-            <div class="route-card-foot">
-              <span class="route-fare">From <strong>₹900</strong></span>
-              <a class="route-book" href="travel-services.html?service=Train+Ticket#apply-now">Book <i data-lucide="arrow-right"></i></a>
-            </div>
-          </article>
-          <article class="route-card">
-            <div class="route-card-head">
-              <div class="route-endpoints">
-                <span class="route-city"><strong>LKO</strong><small>Lucknow</small></span>
-                <span class="route-line"><i data-lucide="arrow-right"></i></span>
-                <span class="route-city"><strong>GOI</strong><small>Goa</small></span>
-              </div>
-              <span class="route-modes"><i data-lucide="plane"></i></span>
-            </div>
-            <div class="route-card-foot">
-              <span class="route-fare">From <strong>₹3,500</strong></span>
-              <a class="route-book" href="travel-services.html?service=Flight+Ticket#apply-now">Book <i data-lucide="arrow-right"></i></a>
-            </div>
-          </article>
-          <article class="route-card">
-            <div class="route-card-head">
-              <div class="route-endpoints">
-                <span class="route-city"><strong>LKO</strong><small>Lucknow</small></span>
-                <span class="route-line"><i data-lucide="arrow-right"></i></span>
-                <span class="route-city"><strong>VNS</strong><small>Varanasi</small></span>
-              </div>
-              <span class="route-modes"><i data-lucide="bus"></i><i data-lucide="train"></i></span>
-            </div>
-            <div class="route-card-foot">
-              <span class="route-fare">From <strong>₹250</strong></span>
-              <a class="route-book" href="travel-services.html?service=Bus+Ticket#apply-now">Book <i data-lucide="arrow-right"></i></a>
-            </div>
-          </article>
-        </div>
-        <p class="travel-routes-note"><i data-lucide="info"></i> Fares are indicative starting points and vary with date, class and availability. We confirm the live fare before any payment.</p>
-      </section>
-
-      <!-- ============ TOUR PACKAGES ============ -->
-      <section class="section travel-packages-section reveal" id="tour-package">
-        <div class="section-head">
-          <div><p class="section-kicker">Tour Packages</p><h2>Curated yatra &amp; holiday <span class="h2-gold">packages.</span></h2></div>
-          <div class="travel-live-chips" aria-label="Package categories"><span>Pilgrimage</span><span>Hills</span><span>Beach</span></div>
-        </div>
-        <div class="travel-packages-grid">
-          <article class="package-card">
-            <div class="package-media package-media-pilgrim">
-              <span class="package-badge">10 Days</span>
-              <span class="package-tagline"><i data-lucide="landmark"></i> Pilgrimage</span>
-            </div>
-            <div class="package-body">
-              <h3>Char Dham Yatra</h3>
-              <p>Yamunotri, Gangotri, Kedarnath &amp; Badrinath with stay, transport and darshan assistance.</p>
-              <div class="package-foot">
-                <span class="package-price">From <strong>₹18,999</strong></span>
-                <a class="btn btn-primary" href="travel-services.html?service=Tour+Package#apply-now">Enquire</a>
-              </div>
-            </div>
-          </article>
-          <article class="package-card">
-            <div class="package-media package-media-pilgrim">
-              <span class="package-badge">3 Days</span>
-              <span class="package-tagline"><i data-lucide="landmark"></i> Pilgrimage</span>
-            </div>
-            <div class="package-body">
-              <h3>Vaishno Devi</h3>
-              <p>Katra stay, helicopter or trek guidance and Mata Vaishno Devi darshan support.</p>
-              <div class="package-foot">
-                <span class="package-price">From <strong>₹6,499</strong></span>
-                <a class="btn btn-primary" href="travel-services.html?service=Tour+Package#apply-now">Enquire</a>
-              </div>
-            </div>
-          </article>
-          <article class="package-card">
-            <div class="package-media package-media-beach">
-              <span class="package-badge">4 Days</span>
-              <span class="package-tagline"><i data-lucide="palm-tree"></i> Beach</span>
-            </div>
-            <div class="package-body">
-              <h3>Goa Beach Holiday</h3>
-              <p>North &amp; South Goa stay, sightseeing and water-sport booking assistance.</p>
-              <div class="package-foot">
-                <span class="package-price">From <strong>₹12,999</strong></span>
-                <a class="btn btn-primary" href="travel-services.html?service=Tour+Package#apply-now">Enquire</a>
-              </div>
-            </div>
-          </article>
-          <article class="package-card">
-            <div class="package-media package-media-hills">
-              <span class="package-badge">6 Days</span>
-              <span class="package-tagline"><i data-lucide="mountain"></i> Hills</span>
-            </div>
-            <div class="package-body">
-              <h3>Shimla &amp; Manali</h3>
-              <p>Himachal hill stations with stay, local sightseeing and transport support.</p>
-              <div class="package-foot">
-                <span class="package-price">From <strong>₹14,499</strong></span>
-                <a class="btn btn-primary" href="travel-services.html?service=Tour+Package#apply-now">Enquire</a>
-              </div>
-            </div>
-          </article>
-          <article class="package-card">
-            <div class="package-media package-media-pilgrim">
-              <span class="package-badge">3 Days</span>
-              <span class="package-tagline"><i data-lucide="landmark"></i> Pilgrimage</span>
-            </div>
-            <div class="package-body">
-              <h3>Ayodhya &amp; Kashi Darshan</h3>
-              <p>Ram Mandir Ayodhya and Kashi Vishwanath Varanasi with stay and travel help.</p>
-              <div class="package-foot">
-                <span class="package-price">From <strong>₹5,999</strong></span>
-                <a class="btn btn-primary" href="travel-services.html?service=Tour+Package#apply-now">Enquire</a>
-              </div>
-            </div>
-          </article>
-          <article class="package-card">
-            <div class="package-media package-media-hills">
-              <span class="package-badge">5 Days</span>
-              <span class="package-tagline"><i data-lucide="mountain"></i> Hills</span>
-            </div>
-            <div class="package-body">
-              <h3>Kashmir Valley</h3>
-              <p>Srinagar, Gulmarg &amp; Pahalgam with houseboat stay and sightseeing assistance.</p>
-              <div class="package-foot">
-                <span class="package-price">From <strong>₹16,999</strong></span>
-                <a class="btn btn-primary" href="travel-services.html?service=Tour+Package#apply-now">Enquire</a>
-              </div>
-            </div>
-          </article>
-        </div>
-      </section>
 
       <!-- ============ PASSPORT ASSISTANCE ============ -->
-      <section class="section travel-passport-section reveal" id="passport-assistance">
-        <div class="travel-passport-grid">
-          <div class="travel-passport-info">
+
+      <!-- ============ PASSPORT ASSISTANCE ============ -->
+      <section class="section ppa-section reveal" id="passport-assistance">
+
+        <!-- Section header — outside card, left-aligned like other sections -->
+        <div class="ppa-section-head">
+          <div class="ppa-section-head-left">
             <p class="section-kicker">Passport Assistance</p>
             <h2>Passport filing made <span class="h2-gold">simple.</span></h2>
-            <p class="travel-passport-lead">Fresh passport, renewal and Tatkal support — online form filling, appointment booking and document checklist handled by our operator from start to finish.</p>
-            <div class="travel-passport-points">
-              <div><span><i data-lucide="file-text"></i></span> Online form filling &amp; error check</div>
-              <div><span><i data-lucide="calendar-check"></i></span> PSK appointment booking support</div>
-              <div><span><i data-lucide="list-checks"></i></span> Document checklist verification</div>
-              <div><span><i data-lucide="message-circle"></i></span> WhatsApp status updates</div>
-            </div>
-            <a class="btn btn-primary" href="travel-services.html?service=Passport+Assistance#apply-now"><i data-lucide="plane"></i> Start Passport Application</a>
-          </div>
-          <div class="travel-passport-cards">
-            <article class="passport-type-card">
-              <span class="passport-type-icon"><i data-lucide="book-open"></i></span>
-              <div class="passport-type-body"><h3>Fresh Passport</h3><p>First-time applicants</p></div>
-              <span class="passport-type-fee">₹299</span>
-            </article>
-            <article class="passport-type-card">
-              <span class="passport-type-icon"><i data-lucide="refresh-cw"></i></span>
-              <div class="passport-type-body"><h3>Renewal / Re-issue</h3><p>Expiry or page exhaustion</p></div>
-              <span class="passport-type-fee">₹249</span>
-            </article>
-            <article class="passport-type-card">
-              <span class="passport-type-icon"><i data-lucide="zap"></i></span>
-              <div class="passport-type-body"><h3>Tatkal Passport</h3><p>Urgent processing support</p></div>
-              <span class="passport-type-fee">₹499</span>
-            </article>
+            <p class="ppa-lead">Fresh passport, renewal and Tatkal support — online form filling, appointment booking and document checklist handled by our operator from start to finish.</p>
           </div>
         </div>
+
+        <!-- Two-column card: dark left features + white right interactive -->
+        <div class="ppa-unified">
+
+          <!-- Left dark panel: feature tiles + CTAs -->
+          <div class="ppa-info-left">
+            <div class="ppa-features">
+              <div class="ppa-feat">
+                <div class="ppa-feat-icon"><i data-lucide="file-text"></i></div>
+                <span>Online form filling &amp; error check</span>
+              </div>
+              <div class="ppa-feat">
+                <div class="ppa-feat-icon"><i data-lucide="calendar-check"></i></div>
+                <span>PSK appointment booking support</span>
+              </div>
+              <div class="ppa-feat">
+                <div class="ppa-feat-icon"><i data-lucide="list-checks"></i></div>
+                <span>Document checklist verification</span>
+              </div>
+              <div class="ppa-feat">
+                <div class="ppa-feat-icon"><i data-lucide="message-circle"></i></div>
+                <span>WhatsApp status updates</span>
+              </div>
+            </div>
+            <div class="ppa-cta-row">
+              <a class="ppa-primary-btn" href="checkout.html?service=passport-assistance&amp;service_name=Passport+Assistance">
+                <i data-lucide="send"></i> Start Passport Application
+              </a>
+              <a class="ppa-wa-btn" href="https://wa.me/919473946181" target="_blank" rel="noopener">
+                <i data-lucide="message-circle"></i> Ask on WhatsApp
+              </a>
+            </div>
+          </div>
+
+          <!-- Right white panel: interactive tabs -->
+          <div class="ppa-bigcard">
+
+            <!-- Selector buttons -->
+            <div class="ppa-tabs" role="tablist">
+              <button class="ppa-tab active" data-ppa-tab="fresh" role="tab" aria-selected="true">
+                <div class="ppa-tab-icon"><i data-lucide="book-open"></i></div>
+                <div class="ppa-tab-text"><strong>Fresh Passport</strong><span>New Application</span></div>
+              </button>
+              <button class="ppa-tab" data-ppa-tab="renewal" role="tab" aria-selected="false">
+                <div class="ppa-tab-icon"><i data-lucide="refresh-cw"></i></div>
+                <div class="ppa-tab-text"><strong>Renewal</strong><span>Re-issue</span></div>
+              </button>
+              <button class="ppa-tab" data-ppa-tab="tatkal" role="tab" aria-selected="false">
+                <div class="ppa-tab-icon"><i data-lucide="zap"></i></div>
+                <div class="ppa-tab-text"><strong>Tatkal</strong><span>Urgent</span></div>
+              </button>
+            </div>
+
+            <!-- Detail panels -->
+            <div class="ppa-panels">
+
+              <!-- Fresh Passport -->
+              <div class="ppa-panel active" data-ppa-panel="fresh">
+                <div class="ppa-panel-hero ppa-hero-fresh">
+                  <div class="ppa-panel-hero-left">
+                    <div class="ppa-panel-icon"><i data-lucide="book-open"></i></div>
+                    <div class="ppa-panel-title-group">
+                      <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                        <h3 class="ppa-panel-title">Fresh Passport</h3>
+                        <span class="ppa-badge ppa-badge-new">New Application</span>
+                      </div>
+                      <p class="ppa-panel-sub">For first-time applicants applying for an Indian passport</p>
+                    </div>
+                  </div>
+                  <div class="ppa-panel-fee-block">
+                    <span class="ppa-panel-fee-label">Service Fee</span>
+                    <span class="ppa-panel-fee" data-pricing-slot data-service="Fresh Passport">Price loading</span>
+                    <span class="ppa-panel-fee-note">+ Govt fee extra</span>
+                  </div>
+                </div>
+                <ul class="ppa-panel-features">
+                  <li><i data-lucide="check-circle"></i> Online Passport Seva portal form filling</li>
+                  <li><i data-lucide="check-circle"></i> Document checklist guidance &amp; review</li>
+                  <li><i data-lucide="check-circle"></i> PSK / POPSK appointment booking support</li>
+                  <li><i data-lucide="check-circle"></i> Aadhaar, address proof &amp; photo verification</li>
+                  <li><i data-lucide="check-circle"></i> WhatsApp updates at every step</li>
+                </ul>
+                <div class="ppa-panel-foot">
+                  <div class="ppa-panel-timing">
+                    <i data-lucide="clock"></i>
+                    <span>Processing: <strong>2–4 weeks</strong> after PSK appointment</span>
+                  </div>
+                  <a class="ppa-panel-btn" href="checkout.html?service=fresh-passport&amp;service_name=Fresh+Passport">
+                    Start Application <i data-lucide="arrow-right"></i>
+                  </a>
+                </div>
+              </div>
+
+              <!-- Renewal -->
+              <div class="ppa-panel" data-ppa-panel="renewal">
+                <div class="ppa-panel-hero ppa-hero-renewal">
+                  <div class="ppa-panel-hero-left">
+                    <div class="ppa-panel-icon"><i data-lucide="refresh-cw"></i></div>
+                    <div class="ppa-panel-title-group">
+                      <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                        <h3 class="ppa-panel-title">Renewal / Re-issue</h3>
+                        <span class="ppa-badge ppa-badge-renew">Renewal</span>
+                      </div>
+                      <p class="ppa-panel-sub">For expired passports or passports with exhausted pages</p>
+                    </div>
+                  </div>
+                  <div class="ppa-panel-fee-block">
+                    <span class="ppa-panel-fee-label">Service Fee</span>
+                    <span class="ppa-panel-fee" data-pricing-slot data-service="Passport Renewal">Price loading</span>
+                    <span class="ppa-panel-fee-note">+ Govt fee extra</span>
+                  </div>
+                </div>
+                <ul class="ppa-panel-features">
+                  <li><i data-lucide="check-circle"></i> Old passport copy review &amp; data transfer</li>
+                  <li><i data-lucide="check-circle"></i> Re-issue form filling &amp; error check</li>
+                  <li><i data-lucide="check-circle"></i> Appointment booking at nearest PSK</li>
+                  <li><i data-lucide="check-circle"></i> Address or name correction support</li>
+                  <li><i data-lucide="check-circle"></i> Status tracking via WhatsApp</li>
+                </ul>
+                <div class="ppa-panel-foot">
+                  <div class="ppa-panel-timing">
+                    <i data-lucide="clock"></i>
+                    <span>Processing: <strong>2–3 weeks</strong> after PSK appointment</span>
+                  </div>
+                  <a class="ppa-panel-btn ppa-btn-renewal" href="checkout.html?service=passport-renewal&amp;service_name=Passport+Renewal">
+                    Start Renewal <i data-lucide="arrow-right"></i>
+                  </a>
+                </div>
+              </div>
+
+              <!-- Tatkal -->
+              <div class="ppa-panel" data-ppa-panel="tatkal">
+                <div class="ppa-panel-hero ppa-hero-tatkal">
+                  <div class="ppa-panel-hero-left">
+                    <div class="ppa-panel-icon"><i data-lucide="zap"></i></div>
+                    <div class="ppa-panel-title-group">
+                      <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                        <h3 class="ppa-panel-title">Tatkal Passport</h3>
+                        <span class="ppa-badge ppa-badge-urgent">Urgent</span>
+                      </div>
+                      <p class="ppa-panel-sub">Expedited processing for urgent travel requirements</p>
+                    </div>
+                  </div>
+                  <div class="ppa-panel-fee-block">
+                    <span class="ppa-panel-fee-label">Service Fee</span>
+                    <span class="ppa-panel-fee" data-pricing-slot data-service="Tatkal Passport">Price loading</span>
+                    <span class="ppa-panel-fee-note">+ Govt fee extra</span>
+                  </div>
+                </div>
+                <ul class="ppa-panel-features">
+                  <li><i data-lucide="check-circle"></i> Tatkal slot search &amp; booking support</li>
+                  <li><i data-lucide="check-circle"></i> Priority form filling &amp; document review</li>
+                  <li><i data-lucide="check-circle"></i> Additional document checklist (Tatkal-specific)</li>
+                  <li><i data-lucide="check-circle"></i> Police verification guidance if needed</li>
+                  <li><i data-lucide="check-circle"></i> Urgent status tracking every 24 hrs</li>
+                </ul>
+                <div class="ppa-panel-foot">
+                  <div class="ppa-panel-timing">
+                    <i data-lucide="clock"></i>
+                    <span>Processing: <strong>1–3 working days</strong> after PSK verification</span>
+                  </div>
+                  <a class="ppa-panel-btn ppa-btn-tatkal" href="checkout.html?service=tatkal-passport&amp;service_name=Tatkal+Passport">
+                    Apply Tatkal <i data-lucide="arrow-right"></i>
+                  </a>
+                </div>
+              </div>
+
+            </div><!-- /.ppa-panels -->
+
+            <!-- Note -->
+            <div class="ppa-note">
+              <i data-lucide="info"></i>
+              <span>Service fee only. Government passport fee is paid separately at PSK appointment.</span>
+            </div>
+
+          </div><!-- /.ppa-bigcard -->
+
+        </div><!-- /.ppa-unified -->
+
       </section>
+
 
       <!-- ============ WHY BOOK THROUGH US ============ -->
       <section class="section travel-why-section reveal">
@@ -467,7 +584,7 @@
                 <div class="large-card-icon"><i data-lucide="headphones"></i></div>
                 <h3 class="large-card-title">Travel Desk Help</h3>
                 <p class="large-card-desc">Not sure what's needed? Share your trip and our operator confirms the exact checklist for you.</p>
-                <a class="large-card-cta" href="#apply-now">Start Booking <i data-lucide="arrow-right"></i></a>
+                <a class="large-card-cta" href="checkout.html?service=bus-ticket&amp;service_name=Bus+Ticket">Start Booking <i data-lucide="arrow-right"></i></a>
               </article>
             </div>
           </div>
@@ -486,201 +603,189 @@
         </div>
       </section>
 
-      <div data-unified-apply-slot></div>
-
       <!-- ============ IMPORTANT INFORMATION ============ -->
-      <section id="ci-section">
+      <section class="section reveal" id="ci-section">
+        <div class="ci-header">
+          <div class="ci-pill"><i data-lucide="shield-alert"></i> Compliance &amp; Terms</div>
+          <h2 class="ci-heading">Important <span class="h2-gold">Information</span></h2>
+          <p class="ci-subtext">Review these guidelines before submitting your application. Our process is fully aligned<br>with official department requirements.</p>
+        </div>
+
         <div class="ci-dark-panel">
-          <div class="ci-header">
-            <div class="ci-pill"><i data-lucide="shield-alert"></i> Compliance &amp; Terms</div>
-            <h2 class="ci-heading">Important <span class="h2-gold">Information</span></h2>
-            <p class="ci-subtext">Please review these travel booking guidelines carefully before you confirm. Our desk operates in line with official operator and portal rules.</p>
-          </div>
 
-          <div class="ci-tablist" role="tablist" aria-label="Compliance information">
-            <button class="ci-tab active" role="tab" aria-selected="true" id="ci-tab-1" aria-controls="ci-panel-1" tabindex="0">
-              <span class="ci-tab-icon"><i data-lucide="building-2"></i></span>
-              <span class="ci-tab-meta"><span class="ci-tab-num">01</span><span class="ci-tab-label">Independent Desk</span></span>
-            </button>
-            <button class="ci-tab" role="tab" aria-selected="false" id="ci-tab-2" aria-controls="ci-panel-2" tabindex="-1">
-              <span class="ci-tab-icon"><i data-lucide="ticket-check"></i></span>
-              <span class="ci-tab-meta"><span class="ci-tab-num">02</span><span class="ci-tab-label">Booking Confirmation</span></span>
-            </button>
-            <button class="ci-tab" role="tab" aria-selected="false" id="ci-tab-3" aria-controls="ci-panel-3" tabindex="-1">
-              <span class="ci-tab-icon"><i data-lucide="indian-rupee"></i></span>
-              <span class="ci-tab-meta"><span class="ci-tab-num">03</span><span class="ci-tab-label">Assistance Fee</span></span>
-            </button>
-            <button class="ci-tab" role="tab" aria-selected="false" id="ci-tab-4" aria-controls="ci-panel-4" tabindex="-1">
-              <span class="ci-tab-icon"><i data-lucide="file-check-2"></i></span>
-              <span class="ci-tab-meta"><span class="ci-tab-num">04</span><span class="ci-tab-label">Passenger Details</span></span>
-            </button>
-            <button class="ci-tab" role="tab" aria-selected="false" id="ci-tab-5" aria-controls="ci-panel-5" tabindex="-1">
-              <span class="ci-tab-icon"><i data-lucide="bell-ring"></i></span>
-              <span class="ci-tab-meta"><span class="ci-tab-num">05</span><span class="ci-tab-label">Tickets &amp; Updates</span></span>
-            </button>
-          </div>
+        <!-- Tabbed FAQ: left categories + right accordion -->
+          <div class="cfaq-wrap">
 
-          <div class="ci-panels">
-            <div class="ci-panel active" role="tabpanel" id="ci-panel-1" aria-labelledby="ci-tab-1">
-              <div class="ci-panel-icon"><i data-lucide="building-2"></i></div>
-              <div class="ci-panel-body">
-                <h3 class="ci-panel-title">Independent Desk</h3>
-                <p class="ci-panel-text">One Point provides assisted travel booking support. We are a private travel desk — not IRCTC, any airline, bus operator or government body.</p>
+            <!-- Left: category tabs -->
+            <div class="cfaq-sidebar">
+              <button class="cfaq-tab active" data-tab="booking">
+                <i data-lucide="ticket"></i> Booking &amp; Tickets
+              </button>
+              <button class="cfaq-tab" data-tab="fares">
+                <i data-lucide="indian-rupee"></i> Fares &amp; Payment
+              </button>
+              <button class="cfaq-tab" data-tab="train">
+                <i data-lucide="train"></i> Train &amp; Tatkal
+              </button>
+              <button class="cfaq-tab" data-tab="flight">
+                <i data-lucide="plane"></i> Flight &amp; International
+              </button>
+              <button class="cfaq-tab" data-tab="passport">
+                <i data-lucide="book-open"></i> Passport Assistance
+              </button>
+            </div>
+
+            <!-- Right: FAQ panels -->
+            <div class="cfaq-panels">
+
+              <div class="cfaq-panel active" data-panel="booking">
+                <div class="faq">
+                  <div class="faq-item open">
+                    <button class="faq-question" data-faq-question>
+                      <span class="pfaq-q-text">How do I receive my ticket after booking?</span>
+                      <i data-lucide="chevron-down"></i>
+                    </button>
+                    <div class="faq-answer"><p>Once payment is confirmed, your ticket, PNR and booking confirmation are sent to your WhatsApp and Email. You can also ask our operator for a copy anytime.</p></div>
+                  </div>
+                  <div class="faq-item">
+                    <button class="faq-question" data-faq-question>
+                      <span class="pfaq-q-text">What happens if a booking cannot be completed?</span>
+                      <i data-lucide="chevron-down"></i>
+                    </button>
+                    <div class="faq-answer"><p>If we are unable to complete your booking during operator processing, the service fee is fully refunded. Actual fares are only collected once a booking is confirmed.</p></div>
+                  </div>
+                  <div class="faq-item">
+                    <button class="faq-question" data-faq-question>
+                      <span class="pfaq-q-text">Do you help with cancellations and refunds?</span>
+                      <i data-lucide="chevron-down"></i>
+                    </button>
+                    <div class="faq-answer"><p>Yes. We assist with cancellation and refund requests, but the refund amount and timeline are decided by the railway, airline or operator policy — not by us.</p></div>
+                  </div>
+                  <div class="faq-item">
+                    <button class="faq-question" data-faq-question>
+                      <span class="pfaq-q-text">How will I receive my confirmed ticket?</span>
+                      <i data-lucide="chevron-down"></i>
+                    </button>
+                    <div class="faq-answer"><p>Tickets, PNR and booking confirmations are shared on WhatsApp and Email after successful payment and operator processing. You can request a re-send anytime.</p></div>
+                  </div>
+                </div>
               </div>
-              <span class="ci-panel-watermark" aria-hidden="true">01</span>
-            </div>
-            <div class="ci-panel" role="tabpanel" id="ci-panel-2" aria-labelledby="ci-tab-2" hidden>
-              <div class="ci-panel-icon"><i data-lucide="ticket-check"></i></div>
-              <div class="ci-panel-body">
-                <h3 class="ci-panel-title">Booking Confirmation</h3>
-                <p class="ci-panel-text">Final ticket confirmation, seat or berth availability and fares depend entirely on the official IRCTC, airline and operator systems at the time of booking.</p>
+
+              <div class="cfaq-panel" data-panel="fares">
+                <div class="faq">
+                  <div class="faq-item open">
+                    <button class="faq-question" data-faq-question>
+                      <span class="pfaq-q-text">Are the fares shown on this page final?</span>
+                      <i data-lucide="chevron-down"></i>
+                    </button>
+                    <div class="faq-answer"><p>No — fares are indicative starting points. Live fares change with date, class and availability. We always confirm the exact fare with you before taking any payment.</p></div>
+                  </div>
+                  <div class="faq-item">
+                    <button class="faq-question" data-faq-question>
+                      <span class="pfaq-q-text">How are tour package payments handled?</span>
+                      <i data-lucide="chevron-down"></i>
+                    </button>
+                    <div class="faq-answer"><p>A token advance confirms your stay and transport, and the balance is paid as per the itinerary. Every payment is shared with a clear confirmation for your records.</p></div>
+                  </div>
+                  <div class="faq-item">
+                    <button class="faq-question" data-faq-question>
+                      <span class="pfaq-q-text">What payment methods are accepted?</span>
+                      <i data-lucide="chevron-down"></i>
+                    </button>
+                    <div class="faq-answer"><p>We accept UPI (GPay, PhonePe, Paytm), debit/credit cards, and NetBanking. Cash payment is also accepted at our walk-in centre in Lucknow.</p></div>
+                  </div>
+                  <div class="faq-item">
+                    <button class="faq-question" data-faq-question>
+                      <span class="pfaq-q-text">Is the service fee refundable?</span>
+                      <i data-lucide="chevron-down"></i>
+                    </button>
+                    <div class="faq-answer"><p>Yes — 100% refund if we cannot process your request during operator check. Actual ticket fares are refunded as per the railway/airline/operator's cancellation policy.</p></div>
+                  </div>
+                </div>
               </div>
-              <span class="ci-panel-watermark" aria-hidden="true">02</span>
-            </div>
-            <div class="ci-panel" role="tabpanel" id="ci-panel-3" aria-labelledby="ci-tab-3" hidden>
-              <div class="ci-panel-icon"><i data-lucide="indian-rupee"></i></div>
-              <div class="ci-panel-body">
-                <h3 class="ci-panel-title">Assistance Fee</h3>
-                <p class="ci-panel-text">The service fee covers operator booking assistance only. Actual ticket and package fares are charged separately as per live rates at booking time.</p>
+
+              <div class="cfaq-panel" data-panel="train">
+                <div class="faq">
+                  <div class="faq-item open">
+                    <button class="faq-question" data-faq-question>
+                      <span class="pfaq-q-text">Can you book Tatkal train tickets?</span>
+                      <i data-lucide="chevron-down"></i>
+                    </button>
+                    <div class="faq-answer"><p>Yes, we provide Tatkal and Premium Tatkal booking support. Tatkal opens one day in advance and confirmation depends entirely on live IRCTC availability.</p></div>
+                  </div>
+                  <div class="faq-item">
+                    <button class="faq-question" data-faq-question>
+                      <span class="pfaq-q-text">What details are needed for train ticket booking?</span>
+                      <i data-lucide="chevron-down"></i>
+                    </button>
+                    <div class="faq-answer"><p>Share the route, travel date, preferred timing, passenger names, ages and Aadhaar/government ID details. We review and confirm before booking.</p></div>
+                  </div>
+                  <div class="faq-item">
+                    <button class="faq-question" data-faq-question>
+                      <span class="pfaq-q-text">Is seat confirmation guaranteed on train bookings?</span>
+                      <i data-lucide="chevron-down"></i>
+                    </button>
+                    <div class="faq-answer"><p>Seat and berth availability depends entirely on IRCTC at the time of booking. We help you pick the best available option and notify you immediately once confirmed.</p></div>
+                  </div>
+                </div>
               </div>
-              <span class="ci-panel-watermark" aria-hidden="true">03</span>
-            </div>
-            <div class="ci-panel" role="tabpanel" id="ci-panel-4" aria-labelledby="ci-tab-4" hidden>
-              <div class="ci-panel-icon"><i data-lucide="file-check-2"></i></div>
-              <div class="ci-panel-body">
-                <h3 class="ci-panel-title">Passenger Details</h3>
-                <p class="ci-panel-text">Customer must provide correct passenger names, ID, age and travel dates. Incorrect details can cause boarding denial and remain the traveller's responsibility.</p>
+
+              <div class="cfaq-panel" data-panel="flight">
+                <div class="faq">
+                  <div class="faq-item open">
+                    <button class="faq-question" data-faq-question>
+                      <span class="pfaq-q-text">Do you book international flights too?</span>
+                      <i data-lucide="chevron-down"></i>
+                    </button>
+                    <div class="faq-answer"><p>Yes, we assist with international flight bookings. You will need a valid passport and visa, and we help you check fare and document requirements before booking.</p></div>
+                  </div>
+                  <div class="faq-item">
+                    <button class="faq-question" data-faq-question>
+                      <span class="pfaq-q-text">What documents are needed for a flight booking?</span>
+                      <i data-lucide="chevron-down"></i>
+                    </button>
+                    <div class="faq-answer"><p>For domestic flights: Aadhaar, PAN or Driving Licence. For international flights: a valid passport and visa. Share contact details for e-ticket and boarding pass delivery.</p></div>
+                  </div>
+                  <div class="faq-item">
+                    <button class="faq-question" data-faq-question>
+                      <span class="pfaq-q-text">How will I get my e-ticket and boarding pass?</span>
+                      <i data-lucide="chevron-down"></i>
+                    </button>
+                    <div class="faq-answer"><p>Your e-ticket and boarding pass are sent directly to your WhatsApp and email once the airline confirms the booking. You can download and use them at the airport.</p></div>
+                  </div>
+                </div>
               </div>
-              <span class="ci-panel-watermark" aria-hidden="true">04</span>
-            </div>
-            <div class="ci-panel" role="tabpanel" id="ci-panel-5" aria-labelledby="ci-tab-5" hidden>
-              <div class="ci-panel-icon"><i data-lucide="bell-ring"></i></div>
-              <div class="ci-panel-body">
-                <h3 class="ci-panel-title">Tickets &amp; Updates</h3>
-                <p class="ci-panel-text">Tickets, PNR and booking confirmations are shared on WhatsApp and Email after successful payment confirmation and operator processing.</p>
+
+              <div class="cfaq-panel" data-panel="passport">
+                <div class="faq">
+                  <div class="faq-item open">
+                    <button class="faq-question" data-faq-question>
+                      <span class="pfaq-q-text">Is passport assistance available here?</span>
+                      <i data-lucide="chevron-down"></i>
+                    </button>
+                    <div class="faq-answer"><p>Yes — we support fresh passport, renewal and Tatkal applications, including online form filling, appointment booking and document checklist verification.</p></div>
+                  </div>
+                  <div class="faq-item">
+                    <button class="faq-question" data-faq-question>
+                      <span class="pfaq-q-text">What documents are needed for passport assistance?</span>
+                      <i data-lucide="chevron-down"></i>
+                    </button>
+                    <div class="faq-answer"><p>You need your Aadhaar card, a recent passport-size photograph, address proof and (for renewal) your old passport copy. Our operator verifies the complete checklist before submission.</p></div>
+                  </div>
+                  <div class="faq-item">
+                    <button class="faq-question" data-faq-question>
+                      <span class="pfaq-q-text">How long does passport processing take?</span>
+                      <i data-lucide="chevron-down"></i>
+                    </button>
+                    <div class="faq-answer"><p>Normal applications take 2–4 weeks after PSK appointment. Tatkal applications are typically processed within 1–3 working days after document verification by Passport Seva Kendra.</p></div>
+                  </div>
+                </div>
               </div>
-              <span class="ci-panel-watermark" aria-hidden="true">05</span>
-            </div>
-          </div>
 
-        </div><!-- /.ci-dark-panel -->
+            </div><!-- /.cfaq-panels -->
+          </div><!-- /.cfaq-wrap -->
 
-        <script>
-        (function () {
-          var section  = document.getElementById('ci-section');
-          var tabs     = Array.from(section.querySelectorAll('.ci-tab'));
-          var panels   = Array.from(section.querySelectorAll('.ci-panel'));
-          var tablist  = section.querySelector('.ci-tablist');
-          function activate(idx) {
-            tabs.forEach(function (t, i) {
-              var on = i === idx;
-              t.classList.toggle('active', on);
-              t.setAttribute('aria-selected', on ? 'true' : 'false');
-              t.tabIndex = on ? 0 : -1;
-            });
-            panels.forEach(function (p, i) {
-              if (i === idx) {
-                p.removeAttribute('hidden');
-                p.classList.remove('active');
-                void p.offsetWidth;
-                p.classList.add('active');
-              } else {
-                p.classList.remove('active');
-                p.setAttribute('hidden', '');
-              }
-            });
-            tabs[idx].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-          }
-          tabs.forEach(function (tab, i) {
-            tab.addEventListener('click', function () { activate(i); });
-          });
-          tablist.addEventListener('keydown', function (e) {
-            var cur = tabs.findIndex(function (t) { return t.classList.contains('active'); });
-            var next = -1;
-            if (e.key === 'ArrowRight') { next = (cur + 1) % tabs.length; }
-            if (e.key === 'ArrowLeft')  { next = (cur - 1 + tabs.length) % tabs.length; }
-            if (next !== -1) { e.preventDefault(); activate(next); tabs[next].focus(); }
-          });
-        })();
-        </script>
-      </section>
-
-      <!-- ============ FAQ ============ -->
-      <section class="section reveal" id="faq-section">
-        <div class="pfaq-wrap">
-          <div class="pfaq-header">
-            <div class="pfaq-pill"><i data-lucide="help-circle"></i> FAQs</div>
-            <h2 class="pfaq-heading">Common Travel <span class="h2-gold">Questions.</span></h2>
-            <p class="pfaq-sub">Everything you need to know about our travel booking assistance — answered clearly and honestly.</p>
-          </div>
-
-          <div class="faq pfaq-grid">
-            <div class="faq-item open">
-              <button class="faq-question" data-faq-question>
-                <span class="pfaq-num">01</span>
-                <span class="pfaq-q-text">How do I receive my ticket after booking?</span>
-                <i data-lucide="chevron-down"></i>
-              </button>
-              <div class="faq-answer"><p>Once payment is confirmed, your ticket, PNR and booking confirmation are sent to your WhatsApp and Email. You can also ask our operator for a copy anytime.</p></div>
-            </div>
-            <div class="faq-item">
-              <button class="faq-question" data-faq-question>
-                <span class="pfaq-num">02</span>
-                <span class="pfaq-q-text">Are the fares shown on this page final?</span>
-                <i data-lucide="chevron-down"></i>
-              </button>
-              <div class="faq-answer"><p>No — fares are indicative starting points. Live fares change with date, class and availability. We always confirm the exact fare with you before taking any payment.</p></div>
-            </div>
-            <div class="faq-item">
-              <button class="faq-question" data-faq-question>
-                <span class="pfaq-num">03</span>
-                <span class="pfaq-q-text">Can you book Tatkal train tickets?</span>
-                <i data-lucide="chevron-down"></i>
-              </button>
-              <div class="faq-answer"><p>Yes, we provide Tatkal and Premium Tatkal booking support. Tatkal opens one day in advance and confirmation depends entirely on live IRCTC availability.</p></div>
-            </div>
-            <div class="faq-item">
-              <button class="faq-question" data-faq-question>
-                <span class="pfaq-num">04</span>
-                <span class="pfaq-q-text">Do you help with cancellations and refunds?</span>
-                <i data-lucide="chevron-down"></i>
-              </button>
-              <div class="faq-answer"><p>Yes. We assist with cancellation and refund requests, but the refund amount and timeline are decided by the railway, airline or operator policy — not by us.</p></div>
-            </div>
-            <div class="faq-item">
-              <button class="faq-question" data-faq-question>
-                <span class="pfaq-num">05</span>
-                <span class="pfaq-q-text">Is passport assistance available here?</span>
-                <i data-lucide="chevron-down"></i>
-              </button>
-              <div class="faq-answer"><p>Yes — we support fresh passport, renewal and Tatkal applications, including online form filling, appointment booking and document checklist verification.</p></div>
-            </div>
-            <div class="faq-item">
-              <button class="faq-question" data-faq-question>
-                <span class="pfaq-num">06</span>
-                <span class="pfaq-q-text">What happens if a booking cannot be completed?</span>
-                <i data-lucide="chevron-down"></i>
-              </button>
-              <div class="faq-answer"><p>If we are unable to complete your booking during operator processing, the service fee is fully refunded. Actual fares are only collected once a booking is confirmed.</p></div>
-            </div>
-            <div class="faq-item">
-              <button class="faq-question" data-faq-question>
-                <span class="pfaq-num">07</span>
-                <span class="pfaq-q-text">Do you book international flights too?</span>
-                <i data-lucide="chevron-down"></i>
-              </button>
-              <div class="faq-answer"><p>Yes, we assist with international flight bookings. You will need a valid passport and visa, and we help you check fare and document requirements before booking.</p></div>
-            </div>
-            <div class="faq-item">
-              <button class="faq-question" data-faq-question>
-                <span class="pfaq-num">08</span>
-                <span class="pfaq-q-text">How are tour package payments handled?</span>
-                <i data-lucide="chevron-down"></i>
-              </button>
-              <div class="faq-answer"><p>A token advance confirms your stay and transport, and the balance is paid as per the itinerary. Every payment is shared with a clear confirmation for your records.</p></div>
-            </div>
-          </div>
-
+          <!-- WhatsApp CTA -->
           <div class="pfaq-cta">
             <div class="pfaq-cta-left">
               <div class="pfaq-cta-icon"><i data-lucide="message-circle"></i></div>
@@ -693,8 +798,10 @@
               <i data-lucide="message-circle"></i> Chat on WhatsApp
             </a>
           </div>
-        </div>
+
+        </div><!-- /.pfaq-wrap -->
       </section>
+
 
       <!-- ============ RELATED SERVICES ============ -->
       <section class="section reveal related-services-section" id="related-services">
@@ -709,7 +816,7 @@
               <a class="service-option-card service-card" href="service-passport-assistance.html">
                 <div class="service-top service-card-top">
                   <div class="service-icon"><i data-lucide="plane"></i></div>
-                  <div class="service-card-badges"><span class="tag">2-4 weeks</span><span class="tag price-tag">&#8377;200+</span></div>
+                  <div class="service-card-badges"><span class="tag">2-4 weeks</span><span class="tag price-tag" data-pricing-slot>Price loading</span></div>
                 </div>
                 <h3>Passport Assistance</h3>
                 <p>Form filling, appointment booking and document checklist.</p>
@@ -719,7 +826,7 @@
               <a class="service-option-card service-card" href="online-services.html">
                 <div class="service-top service-card-top">
                   <div class="service-icon"><i data-lucide="globe"></i></div>
-                  <div class="service-card-badges"><span class="tag">Same day</span><span class="tag price-tag">&#8377;30+</span></div>
+                  <div class="service-card-badges"><span class="tag">Same day</span><span class="tag price-tag" data-pricing-slot>Price loading</span></div>
                 </div>
                 <h3>Online Services</h3>
                 <p>PAN, Ayushman, Voter ID and certificate filing support.</p>
@@ -729,17 +836,17 @@
               <a class="service-option-card service-card" href="service-pan-card.html">
                 <div class="service-top service-card-top">
                   <div class="service-icon"><i data-lucide="id-card"></i></div>
-                  <div class="service-card-badges"><span class="tag">2-3 days</span><span class="tag price-tag">&#8377;107+</span></div>
+                  <div class="service-card-badges"><span class="tag">2-3 days</span><span class="tag price-tag" data-pricing-slot>Price loading</span></div>
                 </div>
                 <h3>PAN Card</h3>
                 <p>New PAN, correction and E-PAN download assistance.</p>
                 <span class="btn btn-primary">Apply</span>
               </a>
 
-              <a class="service-option-card service-card" href="service-ayushman-card.html">
+              <a class="service-option-card service-card" href="service-citizen-security-cybercrime-police-help.html">
                 <div class="service-top service-card-top">
                   <div class="service-icon"><i data-lucide="heart-pulse"></i></div>
-                  <div class="service-card-badges"><span class="tag">Same day</span><span class="tag price-tag">&#8377;30 - &#8377;50</span></div>
+                  <div class="service-card-badges"><span class="tag">Same day</span><span class="tag price-tag" data-pricing-slot>Price loading</span></div>
                 </div>
                 <h3>Ayushman Card</h3>
                 <p>PMJAY eligibility check, e-card download and print support.</p>
@@ -749,7 +856,7 @@
               <a class="service-option-card service-card" href="service-voter-id.html">
                 <div class="service-top service-card-top">
                   <div class="service-icon"><i data-lucide="badge"></i></div>
-                  <div class="service-card-badges"><span class="tag">15-30 days</span><span class="tag price-tag">&#8377;50+</span></div>
+                  <div class="service-card-badges"><span class="tag">15-30 days</span><span class="tag price-tag" data-pricing-slot>Price loading</span></div>
                 </div>
                 <h3>Voter ID</h3>
                 <p>New voter registration, correction and e-EPIC support.</p>
@@ -759,7 +866,7 @@
               <a class="service-option-card service-card" href="business-solutions.html">
                 <div class="service-top service-card-top">
                   <div class="service-icon"><i data-lucide="briefcase"></i></div>
-                  <div class="service-card-badges"><span class="tag">1-7 days</span><span class="tag price-tag">&#8377;199+</span></div>
+                  <div class="service-card-badges"><span class="tag">1-7 days</span><span class="tag price-tag" data-pricing-slot>Price loading</span></div>
                 </div>
                 <h3>Business Solutions</h3>
                 <p>GST, MSME, FSSAI and licence registration support.</p>
@@ -839,50 +946,62 @@
     </main>
     <div data-site-footer></div>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
-    <script src="assets/app.js?v=clean_js_v11" defer></script>
-  
-<script id="line-alignment-script">
-  document.addEventListener("DOMContentLoaded", function() {
-    setTimeout(() => {
-      document.querySelectorAll(".section-head h2").forEach(h2 => {
-        let align = window.getComputedStyle(h2).textAlign;
-        let parent = h2.closest('.section-head');
-        if (parent) {
-          if (align === "center") {
-            parent.classList.add("center-line");
-          } else {
-            parent.classList.add("left-line");
-          }
-        }
-      });
-    }, 100); // small delay to ensure CSS is applied
+    <script src="assets/app.js?v=customer-checkout-94" defer></script>
+<script defer>
+document.addEventListener('DOMContentLoaded', function() {
+  document.addEventListener('click', function(e) {
+    var tab = e.target.closest('[data-tbs-tab]');
+    if (!tab) return;
+    var shell = tab.closest('[data-tbs-shell]');
+    if (!shell) return;
+    e.preventDefault();
+    e.stopPropagation();
+    var key = tab.getAttribute('data-tbs-tab');
+    shell.querySelectorAll('[data-tbs-tab]').forEach(function(t) { t.classList.remove('active'); });
+    tab.classList.add('active');
+    shell.querySelectorAll('[data-tbs-panel]').forEach(function(p) { p.classList.remove('active'); });
+    var panel = shell.querySelector('[data-tbs-panel="' + key + '"]');
+    if (panel) panel.classList.add('active');
+    if (window.lucide) window.lucide.createIcons();
   });
+});
 </script>
-    <div class="sticky-bottom-cta">
+<div class="sticky-bottom-cta">
       <div class="sticky-cta-content">
         <h4 class="sticky-cta-title">Book Travel</h4>
-        <span class="sticky-cta-price">Rs. 200+ <small>Service Fee</small></span>
+        <span class="sticky-cta-price" data-pricing-slot>Price loading</span>
       </div>
-      <a class="btn btn-primary" href="#apply-now">Book Now</a>
+      <a class="btn btn-primary" href="checkout.html?service=bus-ticket&amp;service_name=Bus+Ticket">Book Now</a>
     </div>
+
+  <!-- Passport bigcard tab switcher -->
+  <script>
+    (function () {
+      document.querySelectorAll('.ppa-tabs').forEach(function (tabRow) {
+        var bigcard = tabRow.closest('.ppa-bigcard');
+        if (!bigcard) return;
+        tabRow.querySelectorAll('.ppa-tab').forEach(function (tab) {
+          tab.addEventListener('click', function () {
+            var target = tab.dataset.ppaTab;
+            // Update tabs
+            tabRow.querySelectorAll('.ppa-tab').forEach(function (t) {
+              t.classList.remove('active');
+              t.setAttribute('aria-selected', 'false');
+            });
+            tab.classList.add('active');
+            tab.setAttribute('aria-selected', 'true');
+            // Update panels
+            bigcard.querySelectorAll('.ppa-panel').forEach(function (p) {
+              p.classList.remove('active');
+            });
+            var panel = bigcard.querySelector('.ppa-panel[data-ppa-panel="' + target + '"]');
+            if (panel) panel.classList.add('active');
+          });
+        });
+      });
+    })();
+  </script>
+
 </body>
+
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

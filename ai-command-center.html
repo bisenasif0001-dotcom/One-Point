@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="One Point Service OS AI Command Center.">
+    <meta http-equiv="refresh" content="0; url=/dashboard/?portal=admin&amp;panel=ai-agents">
+    <title>Opening AI Command Center | One Point Service OS</title>
+    <script>
+      (function () {
+        var target = "dashboard/?portal=admin&panel=ai-agents";
+        if (window.location.protocol === "file:") {
+          window.location.replace("http://localhost:4173/" + target);
+        } else {
+          window.location.replace(new URL(target, window.location.href).toString());
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <h1>Opening One Point AI Command Center</h1>
+  </body>
+</html>

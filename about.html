@@ -3,15 +3,809 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="About One Point Digital Services &mdash; A trusted local digital service center in Lucknow offering PAN Card, GST, student services, travel booking, design and more. 9 AM to 8 PM daily.">
+    <meta name="description" content="About One Point Digital Services &mdash; A trusted hybrid digital service center in Lucknow offering PAN Card, citizen services, student forms, GST, travel booking, custom design, and printing.">
     <title>About Us | One Point Digital Services &mdash; Lucknow</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;650;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-        <link rel="stylesheet" href="assets/onepoint.css?v=2">
-</head>
-  <body>
+    <script src="assets/opds-boot.js?v=anti-fouc-79"></script>
+    <link rel="stylesheet" href="assets/onepoint.css?v=customer-checkout-94">
+    <link rel="stylesheet" href="assets/enterprise-design-system.css?v=eds-2">
+    <link rel="stylesheet" href="assets/enterprise-visual-polish.css?v=polish-3">
+    <style>
+      /* ══════════════════════════════════════════════════════════════════════════
+         ABOUT US — REFINED EDITORIAL & BRAND TRUST ARCHITECTURE
+         ══════════════════════════════════════════════════════════════════════════ */
+      :root {
+        --brand-navy: #082f61;
+        --brand-navy-dark: #051d3d;
+        --brand-blue: #0a5aa8;
+        --brand-gold: #c58a10;
+        --brand-gold-light: #f8cf67;
+        --brand-border: #e2e8f0;
+        --brand-border-subtle: rgba(18, 86, 150, 0.10);
+        --brand-surface: #ffffff;
+        --brand-bg-tint: #f8fbff;
+        --brand-bg-soft: #f4f8fc;
+      }
+
+      body.about-page {
+        background-color: #ffffff;
+        color: #0f172a;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      }
+
+      /* ── Typography & Section Heads ── */
+      .about-page .section-kicker {
+        font-size: 0.74rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: #0a5aa8;
+        background: rgba(10, 90, 168, 0.08);
+        border: 1px solid rgba(10, 90, 168, 0.18);
+        padding: 4px 12px;
+        border-radius: 999px;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        margin-bottom: 12px;
+      }
+
+      .about-page .section-head h2 {
+        font-size: clamp(1.75rem, 3vw, 2.35rem);
+        font-weight: 800;
+        color: #082f61;
+        line-height: 1.22;
+        letter-spacing: -0.025em;
+        margin: 0 0 10px 0;
+      }
+
+      .about-page .section-head p {
+        font-size: 0.95rem;
+        color: #475569;
+        line-height: 1.55;
+        max-width: 640px;
+        margin: 0 auto;
+      }
+
+      .about-page .h2-gold {
+        color: var(--brand-gold);
+      }
+
+      /* ── Hero Section ── */
+      body.about-page .about-hero {
+        background:
+          radial-gradient(circle at 90% 18%, rgba(197, 138, 16, 0.12), transparent 22rem),
+          radial-gradient(circle at 10% 85%, rgba(10, 90, 168, 0.08), transparent 24rem),
+          linear-gradient(180deg, #f8fbff 0%, #edf5fc 100%);
+        border-bottom: 1px solid rgba(18, 86, 150, 0.08);
+        padding: clamp(40px, 6vw, 68px) 0 clamp(36px, 5vw, 60px);
+      }
+
+      /* ── Section Dividers & Rhythm ── */
+      .section-pillars-wrap {
+        background: #ffffff;
+        padding: clamp(48px, 6vw, 76px) 0;
+      }
+
+      .section-story-wrap {
+        background: var(--brand-bg-tint);
+        border-top: 1px solid var(--brand-border-subtle);
+        border-bottom: 1px solid var(--brand-border-subtle);
+        padding: clamp(52px, 6vw, 84px) 0;
+      }
+
+      .section-location-wrap {
+        background: #ffffff;
+        padding: clamp(52px, 6vw, 84px) 0;
+      }
+
+      .section-trust-wrap {
+        background: var(--brand-bg-soft);
+        border-top: 1px solid var(--brand-border-subtle);
+        padding: clamp(52px, 6vw, 84px) 0;
+      }
+
+      .section-prefooter-wrap {
+        background: #ffffff;
+        border-top: 1px solid var(--brand-border-subtle);
+        padding: clamp(40px, 5vw, 60px) 0;
+      }
+
+      /* ── 1. Core Pillars Grid ── */
+      .pillars-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+        margin-top: 36px;
+      }
+      @media (max-width: 992px) {
+        .pillars-grid { grid-template-columns: repeat(2, 1fr); }
+      }
+      @media (max-width: 580px) {
+        .pillars-grid { grid-template-columns: 1fr; }
+      }
+
+      .pillar-card {
+        background: #ffffff;
+        border: 1px solid var(--brand-border);
+        border-radius: 14px;
+        padding: 24px 20px;
+        box-shadow: 0 1px 3px rgba(15, 23, 42, 0.03);
+        transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .pillar-card:hover {
+        transform: translateY(-2px);
+        border-color: rgba(10, 90, 168, 0.28);
+        box-shadow: 0 8px 20px rgba(8, 47, 97, 0.06);
+      }
+      .pillar-icon {
+        width: 44px;
+        height: 44px;
+        border-radius: 10px;
+        background: rgba(10, 90, 168, 0.08);
+        color: #0a5aa8;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 16px;
+        border: 1px solid rgba(10, 90, 168, 0.14);
+      }
+      .pillar-title {
+        font-size: 1.05rem;
+        font-weight: 750;
+        color: #082f61;
+        margin: 0 0 8px 0;
+      }
+      .pillar-desc {
+        font-size: 0.86rem;
+        color: #475569;
+        line-height: 1.5;
+        margin: 0;
+      }
+
+      /* ── 2. Editorial Story & Grouped Offerings Pane ── */
+      .story-editorial-container {
+        background: #ffffff;
+        border: 1px solid var(--brand-border);
+        border-radius: 20px;
+        box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04), 0 16px 36px rgba(8, 47, 97, 0.04);
+        display: grid;
+        grid-template-columns: 1.35fr 1fr;
+        overflow: hidden;
+      }
+      @media (max-width: 920px) {
+        .story-editorial-container { grid-template-columns: 1fr; }
+      }
+
+      .story-left-pane {
+        padding: clamp(32px, 4vw, 48px);
+      }
+      .story-quote-banner {
+        background: linear-gradient(135deg, #f0f7ff 0%, #fefcf3 100%);
+        border: 1px solid rgba(10, 90, 168, 0.14);
+        border-left: 4px solid #0a5aa8;
+        border-radius: 8px;
+        padding: 12px 16px;
+        margin: 20px 0 24px;
+        font-size: 0.95rem;
+        font-weight: 700;
+        color: #082f61;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .story-body-text {
+        font-size: 0.9rem;
+        color: #334155;
+        line-height: 1.6;
+        margin-bottom: 24px;
+      }
+
+      /* Milestone Timeline */
+      .milestone-timeline {
+        border-top: 1px solid #f1f5f9;
+        padding-top: 20px;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+      }
+      @media (max-width: 580px) {
+        .milestone-timeline { grid-template-columns: 1fr; }
+      }
+      .milestone-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+      }
+      .milestone-num {
+        font-size: 0.72rem;
+        font-weight: 800;
+        color: #0a5aa8;
+        background: rgba(10, 90, 168, 0.08);
+        border: 1px solid rgba(10, 90, 168, 0.18);
+        padding: 2px 7px;
+        border-radius: 6px;
+        flex-shrink: 0;
+        margin-top: 1px;
+      }
+      .milestone-title {
+        font-size: 0.84rem;
+        font-weight: 700;
+        color: #0f172a;
+        margin-bottom: 2px;
+      }
+      .milestone-desc {
+        font-size: 0.76rem;
+        color: #64748b;
+        line-height: 1.4;
+        margin: 0;
+      }
+
+      /* Right Offers Pane */
+      .story-right-pane {
+        background: linear-gradient(160deg, #f8fbff 0%, #f1f7fd 100%);
+        border-left: 1px solid var(--brand-border);
+        padding: clamp(32px, 4vw, 48px);
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+      @media (max-width: 920px) {
+        .story-right-pane { border-left: none; border-top: 1px solid var(--brand-border); }
+      }
+
+      .offer-group {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .offer-group-label {
+        font-size: 0.74rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: #0a5aa8;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .offer-pills-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+      }
+      .service-offer-chip {
+        background: #ffffff;
+        border: 1px solid #cbd5e1;
+        color: #1e293b;
+        border-radius: 8px;
+        padding: 5px 11px;
+        font-size: 0.78rem;
+        font-weight: 600;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        transition: all 0.15s ease;
+        box-shadow: 0 1px 2px rgba(15, 23, 42, 0.02);
+      }
+      .service-offer-chip:hover {
+        border-color: #0a5aa8;
+        color: #0a5aa8;
+        background: #f0f7ff;
+        transform: translateY(-1px);
+      }
+      .service-offer-chip i, .service-offer-chip svg {
+        color: #0a5aa8;
+        width: 14px;
+        height: 14px;
+      }
+
+      /* ── 3. Signature Process Section (EXACT FOOTER THEME MATCH) ── */
+      .process-navy-section {
+        background:
+          radial-gradient(circle at 14% 12%, rgba(210, 161, 42, 0.18), transparent 28%),
+          radial-gradient(circle at 86% 18%, rgba(179, 218, 248, 0.16), transparent 32%),
+          linear-gradient(180deg, #125696 0%, #0f4f8b 56%, #0b3f72 100%) !important;
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        box-shadow: 0 20px 48px rgba(11, 63, 114, 0.22);
+        border-radius: 24px;
+        padding: clamp(48px, 5vw, 68px) clamp(24px, 4vw, 48px);
+        margin: 0 auto;
+        color: #ffffff;
+        position: relative;
+        overflow: hidden;
+      }
+      .process-navy-section .section-kicker {
+        color: #f5c842 !important;
+        background: rgba(255, 255, 255, 0.10) !important;
+        border-color: rgba(245, 200, 66, 0.35) !important;
+      }
+      .process-navy-section h2 {
+        color: #ffffff !important;
+      }
+      .process-navy-section h2 .h2-gold {
+        color: #f5c842 !important;
+      }
+      .process-navy-section .section-head p {
+        color: rgba(235, 245, 255, 0.85) !important;
+      }
+
+      .process-cards-grid {
+        position: relative;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+        margin-top: 36px;
+      }
+      @media (max-width: 960px) {
+        .process-cards-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+      }
+      @media (max-width: 580px) {
+        .process-cards-grid { grid-template-columns: 1fr; }
+      }
+
+      /* Subtle Horizontal Connector Bar (Desktop) */
+      .process-connector-line {
+        position: absolute;
+        top: 40px;
+        left: 12%;
+        right: 12%;
+        height: 2px;
+        background: linear-gradient(90deg, rgba(245, 200, 66, 0.2) 0%, rgba(245, 200, 66, 0.6) 50%, rgba(245, 200, 66, 0.2) 100%);
+        z-index: 0;
+      }
+      @media (max-width: 960px) {
+        .process-connector-line { display: none; }
+      }
+
+      .proc-step-card {
+        position: relative;
+        z-index: 1;
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12), 0 10px 24px rgba(6, 35, 66, 0.16);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        border-radius: 14px;
+        padding: 22px 18px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+      }
+      .proc-step-card:hover {
+        transform: translateY(-2px);
+        background: rgba(255, 255, 255, 0.13);
+        border-color: rgba(245, 200, 66, 0.45);
+      }
+      .proc-step-header {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 14px;
+      }
+      .proc-step-num {
+        font-size: 0.72rem;
+        font-weight: 800;
+        color: #f5c842;
+        background: rgba(245, 200, 66, 0.14);
+        border: 1px solid rgba(245, 200, 66, 0.32);
+        padding: 2px 8px;
+        border-radius: 999px;
+      }
+      .proc-step-icon {
+        width: 36px;
+        height: 36px;
+        border-radius: 8px;
+        background: linear-gradient(135deg, #f5c842 0%, #d49a16 100%);
+        color: #0b3f72;
+        border: 1px solid rgba(255, 243, 198, 0.4);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      }
+      .proc-step-icon i, .proc-step-icon svg {
+        color: #0b3f72;
+        width: 18px;
+        height: 18px;
+      }
+      .proc-step-title {
+        font-size: 0.98rem;
+        font-weight: 750;
+        color: #ffffff;
+        margin: 0 0 6px 0;
+      }
+      .proc-step-desc {
+        font-size: 0.82rem;
+        color: rgba(235, 245, 255, 0.85);
+        line-height: 1.45;
+        margin: 0;
+      }
+
+      .process-cta-wrap {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        margin-top: 32px;
+        padding-top: 24px;
+        border-top: 1px solid rgba(255, 255, 255, 0.12);
+        flex-wrap: wrap;
+      }
+      .process-cta-text {
+        font-size: 0.88rem;
+        color: rgba(235, 245, 255, 0.9);
+        font-weight: 500;
+      }
+      .process-cta-btn {
+        background: #f5c842;
+        color: #082f61;
+        font-weight: 700;
+        font-size: 0.85rem;
+        padding: 8px 18px;
+        border-radius: 8px;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        transition: all 0.15s ease;
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+      }
+      .process-cta-btn:hover {
+        background: #ffffff;
+        color: #082f61;
+        transform: translateX(2px);
+      }
+
+      /* ── 4. Location & Local Presence Block ── */
+      .location-equal-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+        align-items: stretch;
+      }
+      @media (max-width: 860px) {
+        .location-equal-grid { grid-template-columns: 1fr; }
+      }
+
+      .location-map-frame {
+        border: 1px solid var(--brand-border);
+        border-radius: 16px;
+        overflow: hidden;
+        min-height: 380px;
+        box-shadow: 0 1px 3px rgba(15, 23, 42, 0.03);
+      }
+      .location-map-frame iframe {
+        width: 100%;
+        height: 100%;
+        min-height: 380px;
+        border: 0;
+        display: block;
+      }
+
+      .location-info-card {
+        background: #ffffff;
+        border: 1px solid var(--brand-border);
+        border-radius: 16px;
+        padding: clamp(24px, 3.5vw, 36px);
+        box-shadow: 0 1px 3px rgba(15, 23, 42, 0.03);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+      .visit-open-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: rgba(22, 163, 74, 0.08);
+        color: #15803d;
+        border: 1px solid rgba(22, 163, 74, 0.22);
+        padding: 3px 10px;
+        border-radius: 999px;
+        font-size: 0.72rem;
+        font-weight: 700;
+        margin-bottom: 8px;
+      }
+      .pulse-dot-green {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: #16a34a;
+        box-shadow: 0 0 0 0 rgba(22, 163, 74, 0.7);
+        animation: track-pulse 2s infinite;
+      }
+      .location-title {
+        font-size: 1.35rem;
+        font-weight: 800;
+        color: #082f61;
+        margin: 0 0 14px 0;
+      }
+      .location-details-list {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin: 0 0 20px 0;
+        padding: 0;
+        list-style: none;
+      }
+      .location-details-list li {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        font-size: 0.85rem;
+        color: #334155;
+        line-height: 1.45;
+      }
+      .location-details-list li i, .location-details-list li svg {
+        color: #0a5aa8;
+        width: 16px;
+        height: 16px;
+        flex-shrink: 0;
+        margin-top: 2px;
+      }
+
+      /* Clean Button Hierarchy */
+      .location-btn-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        padding-top: 14px;
+        border-top: 1px solid #f1f5f9;
+      }
+      .btn-directions-primary {
+        background: #0a5aa8;
+        color: #ffffff;
+        padding: 8px 16px;
+        border-radius: 8px;
+        font-size: 0.84rem;
+        font-weight: 600;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        transition: background 0.15s;
+      }
+      .btn-directions-primary:hover { background: #084c8d; color: #ffffff; }
+
+      .btn-wa-secondary {
+        background: rgba(34, 197, 94, 0.10);
+        color: #15803d;
+        border: 1px solid rgba(34, 197, 94, 0.3);
+        padding: 8px 14px;
+        border-radius: 8px;
+        font-size: 0.84rem;
+        font-weight: 600;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        transition: all 0.15s;
+      }
+      .btn-wa-secondary:hover { background: #22c55e; color: #ffffff; }
+
+      .btn-contact-ghost {
+        background: #f8fafc;
+        color: #475569;
+        border: 1px solid #cbd5e1;
+        padding: 8px 14px;
+        border-radius: 8px;
+        font-size: 0.84rem;
+        font-weight: 600;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        transition: all 0.15s;
+      }
+      .btn-contact-ghost:hover { background: #e2e8f0; color: #0f172a; }
+
+      /* ── 5. Customer Protections (Why Customers Trust Us) ── */
+      .protections-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+        margin-top: 36px;
+      }
+      @media (max-width: 992px) {
+        .protections-grid { grid-template-columns: repeat(2, 1fr); }
+      }
+      @media (max-width: 580px) {
+        .protections-grid { grid-template-columns: 1fr; }
+      }
+
+      .protection-card {
+        background: #ffffff;
+        border: 1px solid var(--brand-border);
+        border-radius: 14px;
+        padding: 22px 18px;
+        box-shadow: 0 1px 3px rgba(15, 23, 42, 0.02);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        transition: transform 0.2s ease, border-color 0.2s ease;
+      }
+      .protection-card:hover {
+        transform: translateY(-2px);
+        border-color: rgba(10, 90, 168, 0.28);
+      }
+      .protection-top-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 12px;
+      }
+      .protection-icon {
+        width: 36px;
+        height: 36px;
+        border-radius: 8px;
+        background: rgba(10, 90, 168, 0.08);
+        color: #0a5aa8;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .protection-tag {
+        font-size: 0.68rem;
+        font-weight: 600;
+        color: #64748b;
+        background: #f1f5f9;
+        border: 1px solid #e2e8f0;
+        padding: 2px 7px;
+        border-radius: 4px;
+        letter-spacing: 0.02em;
+      }
+      .protection-title {
+        font-size: 0.98rem;
+        font-weight: 750;
+        color: #082f61;
+        margin: 0 0 6px 0;
+      }
+      .protection-desc {
+        font-size: 0.82rem;
+        color: #475569;
+        line-height: 1.48;
+        margin: 0 0 12px 0;
+      }
+      .protection-proof {
+        font-size: 0.74rem;
+        font-weight: 600;
+        color: #15803d;
+        background: #f0fdf4;
+        border: 1px solid #dcfce7;
+        padding: 4px 8px;
+        border-radius: 6px;
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+      }
+
+      /* ── 6. Pre-Footer Conversion Callout (MATCHED FOOTER GRADIENT) ── */
+      .prefooter-banner {
+        background:
+          radial-gradient(circle at 14% 12%, rgba(210, 161, 42, 0.16), transparent 26rem),
+          radial-gradient(circle at 86% 80%, rgba(179, 218, 248, 0.16), transparent 28rem),
+          linear-gradient(180deg, #125696 0%, #0f4f8b 56%, #0b3f72 100%) !important;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        box-shadow: 0 16px 40px rgba(11, 63, 114, 0.18);
+        border-radius: 16px;
+        padding: clamp(28px, 4vw, 40px) clamp(20px, 3.5vw, 36px);
+        color: #ffffff;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 20px;
+      }
+      .prefooter-copy h3 {
+        font-size: clamp(1.25rem, 2.5vw, 1.6rem);
+        font-weight: 800;
+        color: #ffffff;
+        margin: 0 0 4px 0;
+      }
+      .prefooter-copy p {
+        font-size: 0.88rem;
+        color: rgba(235, 245, 255, 0.82);
+        margin: 0;
+      }
+      .prefooter-actions {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+      .btn-prefooter-gold {
+        background: #f5c842;
+        color: #082f61;
+        font-weight: 700;
+        font-size: 0.85rem;
+        padding: 10px 18px;
+        border-radius: 8px;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        transition: transform 0.15s;
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+      }
+      .btn-prefooter-gold:hover { transform: translateY(-1px); background: #ffffff; }
+
+      .btn-prefooter-outline {
+        background: rgba(255, 255, 255, 0.10);
+        color: #ffffff;
+        border: 1px solid rgba(255, 255, 255, 0.22);
+        font-weight: 600;
+        font-size: 0.85rem;
+        padding: 10px 18px;
+        border-radius: 8px;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        transition: background 0.15s;
+      }
+      .btn-prefooter-outline:hover { background: rgba(255, 255, 255, 0.20); color: #ffffff; }
+
+      /* Footer styling specific to about page */
+      body.about-page .footer {
+        background:
+          radial-gradient(circle at 14% 12%, rgba(210, 161, 42, .18), transparent 28%),
+          radial-gradient(circle at 86% 18%, rgba(179, 218, 248, .16), transparent 32%),
+          linear-gradient(180deg, #125696 0%, #0f4f8b 56%, #0b3f72 100%) !important;
+        color: rgba(235, 245, 255, .78) !important;
+      }
+      body.about-page .footer-brand-block p,
+      body.about-page .footer-contact-row span,
+      body.about-page .footer-map-card span,
+      body.about-page .footer-bottom,
+      body.about-page .footer-bottom a {
+        color: rgba(235, 245, 255, .76) !important;
+      }
+      body.about-page .footer-contact-row svg,
+      body.about-page .footer-contact-row i,
+      body.about-page .trust-badge-item svg,
+      body.about-page .trust-badge-item i {
+        color: #f5c842 !important;
+      }
+      body.about-page .footer-top,
+      body.about-page .footer-trust-badges,
+      body.about-page .footer-bottom {
+        border-color: rgba(255, 255, 255, .12) !important;
+      }
+      body.about-page .footer h4,
+      body.about-page .footer-map-card strong {
+        color: #ffffff !important;
+      }
+      body.about-page .footer-links a {
+        color: rgba(235, 245, 255, .72) !important;
+      }
+      body.about-page .footer-links a:hover,
+      body.about-page .footer-bottom a:hover {
+        color: #f5c842 !important;
+      }
+      body.about-page .footer-pill {
+        background: rgba(255, 255, 255, .08) !important;
+        border: 1px solid rgba(255, 255, 255, .16) !important;
+        color: #ffffff !important;
+      }
+      body.about-page .footer-pill:hover {
+        background: rgba(255, 255, 255, .13) !important;
+        border-color: rgba(245, 200, 66, .35) !important;
+      }
+      body.about-page .footer-map-card {
+        background: rgba(255, 255, 255, .07) !important;
+        border: 1px solid rgba(255, 255, 255, .14) !important;
+      }
+    </style>
+  </head>
+  <body class="about-page">
     <div data-site-nav>
       <header class="site-header fallback-site-header">
         <nav class="nav-bar" aria-label="Primary fallback">
@@ -28,328 +822,451 @@
         </nav>
       </header>
     </div>
+
     <main class="page-shell">
 
+      <!-- Hero Section -->
       <section class="page-hero page-hero-service premium-service-hero about-hero">
-        <!-- Background Video -->
-        <video class="hero-video-bg" autoplay loop muted playsinline>
-          <source src="assets/Hero section home page.mp4" type="video/mp4">
-        </video>
-        <div class="hero-video-overlay"></div>
-        <div class="page-hero-grid">
-          <div class="page-hero-copy">
-            <p class="eyebrow">About Us</p>
-            <h1 class="page-hero-title">
-              <span class="service-title-static">One trusted place for </span>
-              <span class="animated-word service-animated-word" data-animated-word data-words="digital services.|government services.|student support.|business filing.|travel bookings.">digital services.</span>
-            </h1>
-            <p>One Point Digital Services is a local-first, hybrid digital service center &mdash; trusted by students, families, and businesses for fast, transparent, and human-assisted services in Lucknow.</p>
-            <div class="hero-actions">
-              <a class="btn btn-primary" href="services.html"><i data-lucide="sparkles"></i> Our Services</a>
-              <a class="btn btn-ghost" href="contact.html"><i data-lucide="phone"></i> Contact Us</a>
+        <div class="site-container">
+          <div class="page-hero-grid">
+            <div class="page-hero-copy">
+              <p class="section-kicker"><i data-lucide="shield-check" style="width: 14px; height: 14px;"></i> About Us</p>
+              <h1 class="page-hero-title" data-two-line-title="true">
+                <span class="public-hero-title-line">One trusted place for</span>
+                <span class="public-hero-title-line public-hero-title-line-accent">digital services.</span>
+              </h1>
+              <p style="font-size: 0.95rem; color: #334155; line-height: 1.6; max-width: 580px; margin-top: 10px;">
+                One Point Digital Services is a local-first, hybrid service center &mdash; trusted by students, families, and businesses for fast, transparent, and human-assisted citizen services in Lucknow.
+              </p>
+              <div class="hero-actions" style="margin-top: 24px;">
+                <a class="btn btn-primary" href="services.html"><i data-lucide="sparkles"></i> Our Services</a>
+                <a class="btn btn-ghost" href="contact.html"><i data-lucide="phone"></i> Contact Us</a>
+              </div>
             </div>
-            <div class="hero-trust-strip">
-              <span class="hero-trust-badge badge-upi">
-                <i data-lucide="layers"></i> <strong>45+</strong> Categories
-              </span>
-              <span class="hero-trust-badge badge-speed">
-                <i data-lucide="users"></i> <strong>500+</strong> Customers
-              </span>
-              <span class="hero-trust-badge badge-whatsapp">
-                <i data-lucide="clock"></i> <strong>9AM&mdash;8PM</strong> Daily
-              </span>
-            </div>
-          </div>
-          <div class="page-hero-console">
-            <article class="hero-command-center dark-mockup">
-              <div class="command-topbar">
-                <span></span><span></span><span></span>
-                <strong>Trust OS</strong>
-              </div>
-              <div class="command-grid">
-                <div class="command-main">
-                  <span class="tag tag-premium">Suvidha Kendra</span>
-                  <h3>One Point Lucknow</h3>
-                  <p>Providing transparent pricing, secure handling, and verification tracking.</p>
-                  <div class="command-progress"><span></span></div>
-                </div>
-                <div class="command-tile">
-                  <i data-lucide="shield-check"></i>
-                  <strong>Secured</strong>
-                  <small>AES-256</small>
-                </div>
-                <div class="command-tile">
-                  <i data-lucide="badge-check"></i>
-                  <strong>Verified</strong>
-                  <small>12K+ Done</small>
-                </div>
-              </div>
-              <div class="command-list">
-                <div><span><i data-lucide="award"></i></span><strong>Transparency</strong><small class="status-complete">100% Upfront</small></div>
-                <div><span><i data-lucide="users"></i></span><strong>Human Guided</strong><small class="status-complete">Expert team</small></div>
-                <div><span><i data-lucide="message-circle"></i></span><strong>WhatsApp Support</strong><small class="status-complete">Active</small></div>
-              </div>
-            </article>
-            <article class="hero-mini-card hero-mini-card-one dark-mockup">
-              <span class="secure-flow-kicker">Local Support</span>
-              <strong> Lucknow, UP</strong>
-            </article>
-            <article class="hero-mini-card hero-mini-card-two dark-mockup">
-              <span class="helpdesk-kicker">Operating Hours</span>
-              <strong>9:00 AM &mdash; 8:00 PM</strong>
-            </article>
-          </div>
-        </div>
-      </section>
 
-      <section class="section reveal">
-        <div class="section-head center">
-          <div>
-            <p class="section-kicker">Our Core Pillars</p>
-            <h2>Built on trust, speed, <span class="h2-gold">and support.</span></h2>
-            <p>We combine modern digital workflows with local human assistance to make services simple.</p>
-          </div>
-        </div>
-        <div class="process">
-          <article class="process-card">
-            <span class="feature-icon"><i data-lucide="shield-check"></i></span>
-            <h3>Trust First</h3>
-            <p>Secure UPI payments with receipt verification, privacy-first document handling and a transparent pricing policy &mdash; no hidden charges, ever.</p>
-          </article>
-          <article class="process-card">
-            <span class="feature-icon"><i data-lucide="zap"></i></span>
-            <h3>Speed &amp; Simplicity</h3>
-            <p>Mobile-first service pages, quick-apply flows, WhatsApp-first support and same-day processing for most document services.</p>
-          </article>
-          <article class="process-card">
-            <span class="feature-icon"><i data-lucide="users"></i></span>
-            <h3>Local Human Support</h3>
-            <p>Real people, real help &mdash; our operators guide you through every step from document collection to application submission and tracking.</p>
-          </article>
-          <article class="process-card">
-            <span class="feature-icon"><i data-lucide="route"></i></span>
-            <h3>Track Everything</h3>
-            <p>Every request gets a tracking ID. You can check your application status anytime via our tracking page or WhatsApp.</p>
-          </article>
-        </div>
-      </section>
-
-      <section class="section reveal">
-        <div class="panel story-unified-card">
-          <div class="story-details-pane">
-            <p class="section-kicker">Our Story</p>
-            <h2>Started with one idea: make government services easy <span class="h2-gold">for everyone.</span></h2>
-            <p>One Point Suvidha Kendra started with a simple goal &mdash; to help local families, students, and small business owners navigate complex government portals without confusion, long queues, or middlemen charging extra.</p>
-            <p>Today we serve hundreds of customers monthly across PAN Card, Ayushman, student exam forms, GST registration, travel bookings, design services, and much more &mdash; all from one trusted location in Lucknow.</p>
-            <div class="story-stats-strip">
-              <div class="hero-trust-strip">
-                <span class="hero-trust-badge badge-upi">
-                  <i data-lucide="layers"></i> <strong>45+</strong> Service categories
-                </span>
-                <span class="hero-trust-badge badge-speed">
-                  <i data-lucide="users"></i> <strong>500+</strong> Happy customers
-                </span>
-                <span class="hero-trust-badge badge-whatsapp">
-                  <i data-lucide="clock"></i> <strong>9AM&mdash;8PM</strong> Support
-                </span>
-              </div>
-            </div>
-          </div>
-          <div class="story-offers-pane">
-            <span class="offers-kicker">What We Offer</span>
-            <h2>All in one <span class="h2-gold">place.</span></h2>
-            <div class="offers-grid">
-              <div class="offer-pill">
-                <i data-lucide="id-card"></i>
-                <span>Govt ID Cards</span>
-              </div>
-              <div class="offer-pill">
-                <i data-lucide="file-badge"></i>
-                <span>Certificates</span>
-              </div>
-              <div class="offer-pill">
-                <i data-lucide="briefcase"></i>
-                <span>Business Setup</span>
-              </div>
-              <div class="offer-pill">
-                <i data-lucide="graduation-cap"></i>
-                <span>Student Corner</span>
-              </div>
-              <div class="offer-pill">
-                <i data-lucide="plane"></i>
-                <span>Travel Booking</span>
-              </div>
-              <div class="offer-pill">
-                <i data-lucide="palette"></i>
-                <span>Creative Design</span>
-              </div>
-              <div class="offer-pill">
-                <i data-lucide="printer"></i>
-                <span>Print &amp; Scan</span>
-              </div>
-              <div class="offer-pill">
-                <i data-lucide="receipt"></i>
-                <span>Utility Bills</span>
-              </div>
-              <div class="offer-pill">
-                <i data-lucide="users"></i>
-                <span>Citizen Support</span>
-              </div>
-              <div class="offer-pill">
-                <i data-lucide="shopping-bag"></i>
-                <span>Stationeries</span>
-              </div>
+            <div class="page-hero-console">
+              <article class="hero-command-center dark-mockup">
+                <div class="command-topbar">
+                  <span></span><span></span><span></span>
+                  <strong>Live Service OS</strong>
+                </div>
+                <div class="command-grid">
+                  <div class="command-main">
+                    <span class="tag tag-premium">Suvidha Kendra</span>
+                    <h3>One Point Lucknow</h3>
+                    <p>Transparent pricing, verified workflows, and live milestone tracking.</p>
+                    <div class="command-progress"><span></span></div>
+                  </div>
+                  <div class="command-tile">
+                    <i data-lucide="shield-check"></i>
+                    <strong>Secured</strong>
+                    <small>AES-256</small>
+                  </div>
+                  <div class="command-tile">
+                    <i data-lucide="badge-check"></i>
+                    <strong>Verified</strong>
+                    <small>Government IDs</small>
+                  </div>
+                </div>
+                <div class="command-list">
+                  <div><span><i data-lucide="award"></i></span><strong>Transparent Fees</strong><small class="status-complete">100% Upfront</small></div>
+                  <div><span><i data-lucide="users"></i></span><strong>Operator Assisted</strong><small class="status-complete">Desk Guided</small></div>
+                  <div><span><i data-lucide="message-circle"></i></span><strong>WhatsApp Updates</strong><small class="status-complete">Active</small></div>
+                </div>
+              </article>
+              <article class="hero-mini-card hero-mini-card-one dark-mockup">
+                <span class="secure-flow-kicker">Filing Center</span>
+                <strong>LDA Colony, Lucknow</strong>
+              </article>
+              <article class="hero-mini-card hero-mini-card-two dark-mockup">
+                <span class="helpdesk-kicker">Operating Hours</span>
+                <strong>9:00 AM &mdash; 8:00 PM</strong>
+              </article>
             </div>
           </div>
         </div>
       </section>
 
-      <section class="section reveal brand-gradient-section">
-        <!-- Subtle Glowing Background Orbs (Combining Brand Blue and Gold) -->
-        <div class="ambient-orb"></div>
-        <div class="ambient-orb"></div>
-
-        <div>
+      <!-- 1. Core Pillars Section (How We Work / Philosophy) -->
+      <section class="section-pillars-wrap">
+        <div class="site-container">
           <div class="section-head center">
-            <div>
-              <p class="section-kicker">How We Work</p>
-              <h2>Simple, safe and trackable &mdash; <span class="h2-gold">every time.</span></h2>
-            </div>
+            <p class="section-kicker">How We Work</p>
+            <h2>Built on trust, speed, <span class="h2-gold">and support.</span></h2>
+            <p>We combine modern digital workflows with local human assistance to make citizen services effortless.</p>
           </div>
-          <div class="process-timeline">
-            <article class="timeline-step">
-              <span class="step-number">01</span>
-              <span class="step-icon"><i data-lucide="pointer"></i></span>
-              <h3>Choose Service</h3>
-              <p>Browse our service categories and select exactly what you need.</p>
+
+          <div class="pillars-grid">
+            <article class="pillar-card">
+              <div class="pillar-icon"><i data-lucide="shield-check"></i></div>
+              <h3 class="pillar-title">Trust First</h3>
+              <p class="pillar-desc">Clear upfront pricing and receipt-based payments with zero hidden fees or middleman charges.</p>
             </article>
-            <article class="timeline-step">
-              <span class="step-number">02</span>
-              <span class="step-icon"><i data-lucide="file-up"></i></span>
-              <h3>Share Documents</h3>
-              <p>WhatsApp or visit us &mdash; our team reviews your documents checklist first.</p>
+
+            <article class="pillar-card">
+              <div class="pillar-icon"><i data-lucide="zap"></i></div>
+              <h3 class="pillar-title">Speed &amp; Simplicity</h3>
+              <p class="pillar-desc">Less waiting and fewer steps with direct WhatsApp pre-checks and same-day portal filing.</p>
             </article>
-            <article class="timeline-step">
-              <span class="step-number">03</span>
-              <span class="step-icon"><i data-lucide="qr-code"></i></span>
-              <h3>Pay Securely</h3>
-              <p>UPI payment with receipt verification &mdash; you pay only after confirmation.</p>
+
+            <article class="pillar-card">
+              <div class="pillar-icon"><i data-lucide="users"></i></div>
+              <h3 class="pillar-title">Local Human Support</h3>
+              <p class="pillar-desc">Real operator assistance at every stage &mdash; from document review to portal submission.</p>
             </article>
-            <article class="timeline-step">
-              <span class="step-number">04</span>
-              <span class="step-icon"><i data-lucide="route"></i></span>
-              <h3>Track &amp; Receive</h3>
-              <p>Get tracking ID and receive status updates directly on WhatsApp.</p>
+
+            <article class="pillar-card">
+              <div class="pillar-icon"><i data-lucide="route"></i></div>
+              <h3 class="pillar-title">Track Everything</h3>
+              <p class="pillar-desc">Instant Request ID issued for every application with live WhatsApp alerts and online lookup.</p>
             </article>
           </div>
         </div>
       </section>
 
-      <section class="section reveal">
-        <div class="visit-us-map-wrapper">
-          <div class="visit-map-pane">
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3557.6794410432926!2d80.96067699999999!3d26.9136668!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399957b67a13d94f%3A0xd16b0b38c7f7f320!2sOne%20Point%20Suvidha%20Kendra!5e0!3m2!1sen!2sin!4v1778773792841!5m2!1sen!2sin"
-              width="100%" height="100%" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="One Point Suvidha Kendra location">
-            </iframe>
+      <!-- 2. Our Story + Grouped Offerings (60/40 Editorial Layout) -->
+      <section class="section-story-wrap">
+        <div class="site-container">
+          <div class="story-editorial-container">
+            
+            <!-- Left 60%: Story & Verified Milestones -->
+            <div class="story-left-pane">
+              <span class="section-kicker">Our Story</span>
+              <h2 style="font-size: clamp(1.45rem, 2.5vw, 1.85rem); font-weight: 800; color: #082f61; line-height: 1.25; margin: 0;">
+                Started with one idea: make citizen services <span class="h2-gold">simple and accessible.</span>
+              </h2>
+
+              <div class="story-quote-banner">
+                <i data-lucide="sparkles" style="width: 18px; height: 18px; color: #0a5aa8; flex-shrink: 0;"></i>
+                <span>&ldquo;Digital convenience, backed by local human support.&rdquo;</span>
+              </div>
+
+              <p class="story-body-text">
+                One Point Suvidha Kendra was founded with a straightforward mission &mdash; to help local families, students, and small business owners navigate complex government portals without confusion, long queues, or unverified middlemen.
+              </p>
+
+              <!-- Verified Milestones Timeline -->
+              <div class="milestone-timeline">
+                <div class="milestone-item">
+                  <span class="milestone-num">01</span>
+                  <div>
+                    <div class="milestone-title">Started Local</div>
+                    <p class="milestone-desc">Began as a neighborhood Suvidha Kendra in Lucknow assisting everyday citizen applications.</p>
+                  </div>
+                </div>
+
+                <div class="milestone-item">
+                  <span class="milestone-num">02</span>
+                  <div>
+                    <div class="milestone-title">Expanded Digital</div>
+                    <p class="milestone-desc">Launched fast digital intake, live status tracking, and direct WhatsApp document help.</p>
+                  </div>
+                </div>
+
+                <div class="milestone-item">
+                  <span class="milestone-num">03</span>
+                  <div>
+                    <div class="milestone-title">Added OneMart</div>
+                    <p class="milestone-desc">Integrated professional photo printing, custom design, framing, and student stationery.</p>
+                  </div>
+                </div>
+
+                <div class="milestone-item">
+                  <span class="milestone-num">04</span>
+                  <div>
+                    <div class="milestone-title">Assisted Ecosystem</div>
+                    <p class="milestone-desc">Now delivering full end-to-end hybrid digital services with dedicated operator oversight.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right 40%: Grouped Services Ecosystem -->
+            <div class="story-right-pane">
+              <div>
+                <span class="section-kicker">What We Offer</span>
+                <h3 style="font-size: 1.35rem; font-weight: 800; color: #082f61; margin: 4px 0 2px 0;">All in one <span class="h2-gold">place.</span></h3>
+                <p style="font-size: 0.82rem; color: #64748b; margin: 0 0 16px 0;">Organized across 3 core service departments.</p>
+              </div>
+
+              <!-- Group 1: Government & Citizen -->
+              <div class="offer-group">
+                <div class="offer-group-label">
+                  <i data-lucide="landmark" style="width: 14px; height: 14px;"></i>
+                  <span>Government &amp; Citizen</span>
+                </div>
+                <div class="offer-pills-row">
+                  <a href="service-pan-card.html" class="service-offer-chip"><i data-lucide="id-card"></i> PAN Card</a>
+                  <a href="service-voter-id.html" class="service-offer-chip"><i data-lucide="vote"></i> Voter ID</a>
+                  <a href="service-certificates.html" class="service-offer-chip"><i data-lucide="file-badge"></i> Certificates</a>
+                  <a href="services.html" class="service-offer-chip"><i data-lucide="heart-pulse"></i> Ayushman Bharat</a>
+                </div>
+              </div>
+
+              <!-- Group 2: Student & Business -->
+              <div class="offer-group">
+                <div class="offer-group-label">
+                  <i data-lucide="briefcase" style="width: 14px; height: 14px;"></i>
+                  <span>Student &amp; Business</span>
+                </div>
+                <div class="offer-pills-row">
+                  <a href="services.html" class="service-offer-chip"><i data-lucide="graduation-cap"></i> Exam Forms</a>
+                  <a href="service-gst-itr.html" class="service-offer-chip"><i data-lucide="file-text"></i> GST &amp; ITR</a>
+                  <a href="services.html" class="service-offer-chip"><i data-lucide="receipt"></i> Utility Bills</a>
+                  <a href="services.html" class="service-offer-chip"><i data-lucide="building"></i> Business Setup</a>
+                </div>
+              </div>
+
+              <!-- Group 3: Print, Design & Local -->
+              <div class="offer-group">
+                <div class="offer-group-label">
+                  <i data-lucide="printer" style="width: 14px; height: 14px;"></i>
+                  <span>Print, Design &amp; Local</span>
+                </div>
+                <div class="offer-pills-row">
+                  <a href="products.html" class="service-offer-chip"><i data-lucide="printer"></i> Document Print</a>
+                  <a href="products.html" class="service-offer-chip"><i data-lucide="palette"></i> Creative Design</a>
+                  <a href="services.html" class="service-offer-chip"><i data-lucide="plane"></i> Travel Booking</a>
+                  <a href="products.html" class="service-offer-chip"><i data-lucide="shopping-bag"></i> OneMart Store</a>
+                </div>
+              </div>
+
+            </div>
+
           </div>
-          <div class="visit-card-floating">
+        </div>
+      </section>
+
+      <!-- 3. Signature Dark Navy Process Section -->
+      <section style="padding: clamp(52px, 6vw, 84px) 0; background: #ffffff;">
+        <div class="site-container">
+          <div class="process-navy-section">
+            <div class="section-head center">
+              <p class="section-kicker">Simple Process</p>
+              <h2>Simple, safe and trackable &mdash; <span class="h2-gold">every time.</span></h2>
+              <p>Experience clean, assisted filing from intake review to final certificate delivery.</p>
+            </div>
+
+            <div class="process-cards-grid">
+              <div class="process-connector-line"></div>
+
+              <article class="proc-step-card">
+                <div class="proc-step-header">
+                  <span class="proc-step-num">Step 01</span>
+                  <div class="proc-step-icon"><i data-lucide="pointer"></i></div>
+                </div>
+                <h3 class="proc-step-title">Choose Service</h3>
+                <p class="proc-step-desc">Select your desired service online or consult our operator directly.</p>
+              </article>
+
+              <article class="proc-step-card">
+                <div class="proc-step-header">
+                  <span class="proc-step-num">Step 02</span>
+                  <div class="proc-step-icon"><i data-lucide="file-check"></i></div>
+                </div>
+                <h3 class="proc-step-title">Share Documents</h3>
+                <p class="proc-step-desc">Share files via WhatsApp or counter for an instant compliance check.</p>
+              </article>
+
+              <article class="proc-step-card">
+                <div class="proc-step-header">
+                  <span class="proc-step-num">Step 03</span>
+                  <div class="proc-step-icon"><i data-lucide="credit-card"></i></div>
+                </div>
+                <h3 class="proc-step-title">Pay Securely</h3>
+                <p class="proc-step-desc">Pay via UPI or cash with immediate tax invoice receipt verification.</p>
+              </article>
+
+              <article class="proc-step-card">
+                <div class="proc-step-header">
+                  <span class="proc-step-num">Step 04</span>
+                  <div class="proc-step-icon"><i data-lucide="route"></i></div>
+                </div>
+                <h3 class="proc-step-title">Track &amp; Receive</h3>
+                <p class="proc-step-desc">Track live milestone progress and receive official deliverables.</p>
+              </article>
+            </div>
+
+            <div class="process-cta-wrap">
+              <span class="process-cta-text">Ready to get your request started?</span>
+              <a href="services.html" class="process-cta-btn">
+                <span>Browse All Services</span>
+                <i data-lucide="arrow-right" style="width: 14px; height: 14px;"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. Location & Local Presence Block -->
+      <section class="section-location-wrap">
+        <div class="site-container">
+          <div class="section-head center">
             <p class="section-kicker">Visit Us</p>
             <h2>One Point Suvidha <span class="h2-gold">Kendra</span></h2>
-            <ul class="feature-list">
-              <li><i data-lucide="map-pin"></i> Milan Tower, Kursi Rd, Adil Nagar, Lucknow, UP</li>
-              <li><i data-lucide="clock"></i> Open Daily: 9:00 AM &mdash; 8:00 PM</li>
-              <li><i data-lucide="phone"></i> +91 9473946181</li>
-              <li><i data-lucide="mail"></i> support@bisenonepoint.com</li>
-              <li><i data-lucide="message-circle"></i> WhatsApp: wa.me/919473946181</li>
-            </ul>
-            <div>
-              <a class="btn btn-primary" href="https://wa.me/919473946181" target="_blank" rel="noopener"><i data-lucide="message-circle"></i> WhatsApp</a>
-              <a class="btn btn-ghost" href="contact.html"><i data-lucide="send"></i> Send Request</a>
+            <p>Walk in for assisted filing, document verification, photo printing, and personal support.</p>
+          </div>
+
+          <div class="location-equal-grid" style="margin-top: 36px;">
+            <!-- Map Embed -->
+            <div class="location-map-frame">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3557.6794410432926!2d80.96067699999999!3d26.9136668!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399957b67a13d94f%3A0xd16b0b38c7f7f320!2sOne%20Point%20Suvidha%20Kendra!5e0!3m2!1sen!2sin!4v1778773792841!5m2!1sen!2sin"
+                loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="One Point Suvidha Kendra location in Lucknow">
+              </iframe>
+            </div>
+
+            <!-- Contact & Practical Support Details -->
+            <div class="location-info-card">
+              <div>
+                <span class="visit-open-pill">
+                  <span class="pulse-dot-green"></span>
+                  Open Today: 9:00 AM &ndash; 8:00 PM
+                </span>
+                <h3 class="location-title">Lucknow Suvidha Kendra</h3>
+                
+                <ul class="location-details-list">
+                  <li>
+                    <i data-lucide="map-pin"></i>
+                    <span><strong>Address:</strong> Milan Tower, Kursi Rd, Adil Nagar, LDA Colony, Lucknow, UP &ndash; 226022</span>
+                  </li>
+                  <li>
+                    <i data-lucide="clock"></i>
+                    <span><strong>Working Hours:</strong> Monday to Saturday: 9:00 AM &ndash; 8:00 PM</span>
+                  </li>
+                  <li>
+                    <i data-lucide="check-circle-2"></i>
+                    <span><strong>Assisted Services:</strong> Local document pickup, counter filing, and physical print collection.</span>
+                  </li>
+                  <li>
+                    <i data-lucide="message-circle"></i>
+                    <span><strong>Pre-Visit Advice:</strong> WhatsApp us before visiting for a personalized document checklist.</span>
+                  </li>
+                  <li>
+                    <i data-lucide="phone"></i>
+                    <span><strong>Direct Helpline:</strong> +91 9473946181 &middot; support@bisenonepoint.com</span>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="location-btn-row">
+                <a class="btn-directions-primary" href="https://maps.google.com/?q=One+Point+Suvidha+Kendra+Lucknow" target="_blank" rel="noopener">
+                  <i data-lucide="navigation" style="width: 14px; height: 14px;"></i>
+                  <span>Get Directions</span>
+                </a>
+                <a class="btn-wa-secondary" href="https://wa.me/919473946181" target="_blank" rel="noopener">
+                  <i data-lucide="message-circle" style="width: 14px; height: 14px;"></i>
+                  <span>WhatsApp Desk</span>
+                </a>
+                <a class="btn-contact-ghost" href="contact.html">
+                  <i data-lucide="send" style="width: 13px; height: 13px;"></i>
+                  <span>Send Inquiry</span>
+                </a>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      <section class="section reveal">
-        <div class="section-head">
-          <div>
-            <p class="section-kicker">Our Values</p>
+      <!-- 5. Customer Protections (Why Customers Trust Us) -->
+      <section class="section-trust-wrap">
+        <div class="site-container">
+          <div class="section-head center">
+            <p class="section-kicker">Customer Protections</p>
             <h2>Why customers trust One <span class="h2-gold">Point.</span></h2>
+            <p>Every application is backed by verified workflows, transparent policies, and direct human accountability.</p>
+          </div>
+
+          <div class="protections-grid">
+            <article class="protection-card">
+              <div>
+                <div class="protection-top-row">
+                  <div class="protection-icon"><i data-lucide="badge-percent"></i></div>
+                  <span class="protection-tag">Transparency</span>
+                </div>
+                <h3 class="protection-title">Transparent Pricing</h3>
+                <p class="protection-desc">Exact government portal fees and service charges are clearly displayed before confirmation.</p>
+              </div>
+              <div class="protection-proof">
+                <i data-lucide="check" style="width: 12px; height: 12px;"></i>
+                <span>Fee shown before payment</span>
+              </div>
+            </article>
+
+            <article class="protection-card">
+              <div>
+                <div class="protection-top-row">
+                  <div class="protection-icon"><i data-lucide="shield-check"></i></div>
+                  <span class="protection-tag">Data Privacy</span>
+                </div>
+                <h3 class="protection-title">Secure Documents</h3>
+                <p class="protection-desc">Your Aadhaar, PAN, and identity files are processed strictly for filing and protected under IT Act standards.</p>
+              </div>
+              <div class="protection-proof">
+                <i data-lucide="check" style="width: 12px; height: 12px;"></i>
+                <span>AES-256 encrypted vault</span>
+              </div>
+            </article>
+
+            <article class="protection-card">
+              <div>
+                <div class="protection-top-row">
+                  <div class="protection-icon"><i data-lucide="receipt"></i></div>
+                  <span class="protection-tag">Proof of Filing</span>
+                </div>
+                <h3 class="protection-title">Receipts &amp; Slips</h3>
+                <p class="protection-desc">Every confirmed order includes an official GST tax invoice and government portal intake acknowledgement.</p>
+              </div>
+              <div class="protection-proof">
+                <i data-lucide="check" style="width: 12px; height: 12px;"></i>
+                <span>Immediate PDF invoice</span>
+              </div>
+            </article>
+
+            <article class="protection-card">
+              <div>
+                <div class="protection-top-row">
+                  <div class="protection-icon"><i data-lucide="route"></i></div>
+                  <span class="protection-tag">Live Visibility</span>
+                </div>
+                <h3 class="protection-title">Request Tracking</h3>
+                <p class="protection-desc">Unique Request ID issued for every order with live milestone status and instant WhatsApp updates.</p>
+              </div>
+              <div class="protection-proof">
+                <i data-lucide="check" style="width: 12px; height: 12px;"></i>
+                <span>Real-time status updates</span>
+              </div>
+            </article>
           </div>
         </div>
-        <div class="card-grid">
-          <article class="service-card">
-            <div>
-              <div class="service-top"><span class="service-icon"><i data-lucide="badge-check"></i></span><span class="tag">Transparency</span></div>
-              <h3>No Hidden Charges</h3>
-              <p>Every service page shows the fee upfront. You know exactly what you are paying before we start. No surprises.</p>
+      </section>
+
+      <!-- 6. Pre-Footer Final Conversion Callout -->
+      <section class="section-prefooter-wrap">
+        <div class="site-container">
+          <div class="prefooter-banner">
+            <div class="prefooter-copy">
+              <h3>Ready to get your services handled <span style="color: #f8cf67;">hassle-free?</span></h3>
+              <p>Apply online with expert assistance, or visit our Lucknow Suvidha Kendra today.</p>
             </div>
-          </article>
-          <article class="service-card">
-            <div>
-              <div class="service-top"><span class="service-icon"><i data-lucide="lock"></i></span><span class="tag">Privacy</span></div>
-              <h3>Secure Document Handling</h3>
-              <p>Your Aadhaar, PAN and personal documents are used only for the service requested and never shared without consent.</p>
+            <div class="prefooter-actions">
+              <a class="btn-prefooter-gold" href="services.html">
+                <i data-lucide="sparkles" style="width: 15px; height: 15px;"></i>
+                <span>Explore Services</span>
+              </a>
+              <a class="btn-prefooter-outline" href="contact.html">
+                <i data-lucide="phone" style="width: 15px; height: 15px;"></i>
+                <span>Contact Desk</span>
+              </a>
             </div>
-          </article>
-          <article class="service-card">
-            <div>
-              <div class="service-top"><span class="service-icon"><i data-lucide="headphones"></i></span><span class="tag">Support</span></div>
-              <h3>WhatsApp-First Help</h3>
-              <p>Got a question? WhatsApp us directly. Our team responds quickly with guidance, status and next steps.</p>
-            </div>
-          </article>
-          <article class="service-card">
-            <div>
-              <div class="service-top"><span class="service-icon"><i data-lucide="refresh-cw"></i></span><span class="tag">Accountability</span></div>
-              <h3>Track Every Request</h3>
-              <p>Every application gets a tracking ID so you are never left wondering about the status of your service.</p>
-            </div>
-          </article>
+          </div>
         </div>
       </section>
 
     </main>
+
     <div data-site-footer></div>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
-    <script src="assets/app.js?v=clean_js_v11" defer></script>
-  
-<script id="line-alignment-script">
-  document.addEventListener("DOMContentLoaded", function() {
-    setTimeout(() => {
-      document.querySelectorAll(".section-head h2").forEach(h2 => {
-        let align = window.getComputedStyle(h2).textAlign;
-        let parent = h2.closest('.section-head');
-        if (parent) {
-          if (align === "center") {
-            parent.classList.add("center-line");
-          } else {
-            parent.classList.add("left-line");
-          }
-        }
-      });
-    }, 100); // small delay to ensure CSS is applied
-  });
-</script>
-</body>
+    <script src="assets/app.js?v=customer-checkout-94" defer></script>
+  </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

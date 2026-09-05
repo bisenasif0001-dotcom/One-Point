@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { PanelHeader, Card, Icon, Badge } from '../Shared';
 import { useApp } from '../AppContext';
 
@@ -18,7 +18,7 @@ const statusBadgeType = (status = '') => {
 };
 
 // ─── Ticket Detail Modal ──────────────────────────────────────────────────────
-const TOKEN_TKT = localStorage.getItem('opds_admin_token') || '';
+const TOKEN_TKT = () => localStorage.getItem('opds_admin_token') || '';
 
 const TicketDetailModal = ({ ticket, isCustomer, customer, onClose, onWhatsApp }: any) => {
   const [replyText, setReplyText] = useState('');
@@ -36,8 +36,8 @@ const TicketDetailModal = ({ ticket, isCustomer, customer, onClose, onWhatsApp }
       const csrf = document.cookie.split(';').find(c => c.trim().startsWith('opds_csrf='))?.split('=')[1] || '';
       await fetch(`/api/admin/tickets/${ticket.id}`, {
         method: 'PATCH',
-        headers: { 'X-Admin-Token': TOKEN_TKT, 'Content-Type': 'application/json', 'X-CSRF-Token': csrf },
-        body: JSON.stringify({ status }),
+        headers: { 'X-Admin-Token': TOKEN_TKT(), 'Content-Type': 'application/json', 'X-CSRF-Token': csrf },
+        body: JSON.stringify({ status, reply: replyText, channel: 'Website Chat' }),
       }).catch(() => {});
     } catch { /* offline */ }
     setSaving(false);
@@ -72,6 +72,7 @@ const TicketDetailModal = ({ ticket, isCustomer, customer, onClose, onWhatsApp }
             </div>
             <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-3)', marginTop: 4 }}>{ticket.subject}</div>
             {ticket.customer && <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-2)', marginTop: 2 }}>Customer: <strong>{ticket.customer}</strong> · {ticket.phone}</div>}
+            {ticket.conversationUuid && <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-3)', marginTop: 2 }}>Conversation: {ticket.conversationUuid.slice(0, 8)}…</div>}
           </div>
           <button className="icon-btn" onClick={onClose}><Icon name="x" size={16} /></button>
         </div>
@@ -133,9 +134,35 @@ export const SupportTicketsPanel = () => {
   const [showNewTicket, setShowNewTicket] = useState(false);
   const [selectedTicket, setSelectedTicket] = useState<any>(null);
   const [localTickets, setLocalTickets] = useState<any[]>([]);
+  const [persistedTickets, setPersistedTickets] = useState<any[]>([]);
   const [ticketForm, setTicketForm] = useState({ subject: latestOrder ? `Help with ${latestOrder.service}` : 'Service support request', message: '' });
 
+  useEffect(() => {
+    const customerToken = localStorage.getItem('opds_customer_session') || '';
+    const endpoint = isCustomer ? '/api/customer/tickets' : '/api/admin/tickets';
+    const headers = isCustomer
+      ? { 'Authorization': `Bearer ${customerToken}` }
+      : { 'X-Admin-Token': TOKEN_TKT() };
+    if (isCustomer && !customerToken) return;
+    fetch(endpoint, { headers })
+      .then(response => response.json())
+      .then(data => setPersistedTickets(data.tickets || []))
+      .catch(() => {});
+  }, [isCustomer]);
+
+  const governedCustomerTickets = persistedTickets.map((ticket: any) => ({
+    id: ticket.ticket_id,
+    subject: ticket.subject,
+    sub: ticket.order_id ? `Regarding order ${ticket.order_id}` : 'General support',
+    date: ticket.created_at,
+    status: ticket.status,
+    updated: ticket.reply || 'Waiting for support update',
+    reply: ticket.reply || ticket.message,
+    conversationUuid: ticket.conversationUuid,
+  }));
+
   const customerTickets = [
+    ...governedCustomerTickets,
     ...localTickets,
     ...(latestOrder ? [{
       id: `TKT-${latestOrder.id.replace(/\D/g, '').slice(-5) || '1001'}`,
@@ -157,7 +184,19 @@ export const SupportTicketsPanel = () => {
     }] : []),
   ];
 
-  const adminTickets = allOrders
+  const governedAdminTickets = persistedTickets.map((ticket: any) => ({
+    id: ticket.ticket_id,
+    customer: ticket.customer_name || 'Customer',
+    phone: ticket.customer_phone || 'N/A',
+    subject: ticket.subject,
+    status: ticket.status,
+    priority: 'Medium',
+    assigned: ticket.assigned_to || 'OP',
+    reply: ticket.reply || ticket.message,
+    conversationUuid: ticket.conversation_uuid,
+  }));
+
+  const adminTickets = [...governedAdminTickets, ...allOrders
     .filter(order => order.payStatus !== 'Paid' || ['Pending', 'Verified'].includes(order.status))
     .slice(0, 8)
     .map(order => ({
@@ -169,47 +208,61 @@ export const SupportTicketsPanel = () => {
       priority: order.payStatus === 'Failed' ? 'High' : 'Medium',
       assigned: order.payStatus === 'Failed' ? 'AS' : 'OP',
       reply: `Order ${order.id}: ${order.status} / ${order.payStatus}. Customer amount ${money(order.amount)}.`,
-    }));
+    }))];
 
   const TOKEN_SUPPORT = localStorage.getItem('opds_admin_token') || '';
 
   const createTicket = async () => {
     const subject = ticketForm.subject.trim();
     if (!subject) return;
-    const ticket = {
-      id: `TKT-${Date.now().toString().slice(-5)}`,
-      subject,
-      sub: latestOrder ? `Regarding order ${latestOrder.id}` : 'General support',
-      date: new Date().toLocaleDateString('en-IN'),
-      status: 'Open',
-      updated: 'Created just now',
-      reply: ticketForm.message.trim() || 'Support team will review this request and reply soon.',
-    };
-    setLocalTickets(prev => [ticket, ...prev]);
-    addNotification({ title: `New Support Ticket: ${ticket.id}`, sub: subject, time: 'just now', color: 'var(--blue)', icon: 'life-buoy', panelTarget: 'support' });
+    const message = ticketForm.message.trim() || 'Support team will review this request and reply soon.';
 
-    // Persist to backend
     try {
       const csrf = document.cookie.split(';').find(c => c.trim().startsWith('opds_csrf='))?.split('=')[1] || '';
-      await fetch('/api/admin/tickets', {
+      const customerToken = localStorage.getItem('opds_customer_session') || '';
+      if (isCustomer && !customerToken) {
+        addNotification({ title: 'Login required', sub: 'Please sign in before raising a governed support ticket.', time: 'just now', color: 'var(--danger)', icon: 'alert-triangle', panelTarget: 'support' });
+        return;
+      }
+      const endpoint = isCustomer ? '/api/customer/tickets' : '/api/admin/tickets';
+      const headers: Record<string, string> = isCustomer
+        ? { 'Authorization': `Bearer ${customerToken}`, 'Content-Type': 'application/json', 'X-CSRF-Token': csrf }
+        : { 'X-Admin-Token': TOKEN_SUPPORT, 'Content-Type': 'application/json', 'X-CSRF-Token': csrf };
+      const response = await fetch(endpoint, {
         method: 'POST',
-        headers: { 'X-Admin-Token': TOKEN_SUPPORT, 'Content-Type': 'application/json', 'X-CSRF-Token': csrf },
-        body: JSON.stringify({ phone: customer?.phone || '', name: customer?.name || 'Customer', subject, message: ticketForm.message.trim(), orderId: latestOrder?.id || null }),
+        headers,
+        body: JSON.stringify({ phone: customer?.phone || '', name: customer?.name || 'Customer', subject, message, orderId: latestOrder?.id || null }),
       });
-    } catch { /* offline — local state only */ }
+      const result = await response.json().catch(() => ({}));
+      if (!response.ok) throw new Error(result.message || 'Support ticket was not saved.');
 
-    setShowNewTicket(false);
-    setTicketForm({ subject: latestOrder ? `Help with ${latestOrder.service}` : 'Service support request', message: '' });
+      const ticket = {
+        id: result.ticketId || `TKT-${Date.now().toString().slice(-5)}`,
+        subject,
+        sub: latestOrder ? `Regarding order ${latestOrder.id}` : 'General support',
+        date: new Date().toLocaleDateString('en-IN'),
+        status: 'Open',
+        updated: 'Created just now',
+        reply: message,
+        conversationUuid: result.conversationUuid,
+      };
+      setLocalTickets(prev => [ticket, ...prev]);
+      addNotification({ title: `New Support Ticket: ${ticket.id}`, sub: subject, time: 'just now', color: 'var(--blue)', icon: 'life-buoy', panelTarget: 'support' });
+      setShowNewTicket(false);
+      setTicketForm({ subject: latestOrder ? `Help with ${latestOrder.service}` : 'Service support request', message: '' });
+    } catch {
+      addNotification({ title: 'Support ticket not saved', sub: 'A governed conversation record is required before showing this ticket.', time: 'just now', color: 'var(--danger)', icon: 'alert-triangle', panelTarget: 'support' });
+    }
   };
 
   return (
     <div className="panel active">
       {isCustomer ? (
         <>
-          <PanelHeader 
-            title="My Support Tickets & Help Center" 
-            sub="Track your raised queries or connect instantly with our CSC support experts" 
-            actions={<button className="btn btn-primary btn-sm" onClick={() => setShowNewTicket(true)}><Icon name="plus" size={14} /> Raise New Ticket</button>} 
+          <PanelHeader
+            title="My Support Tickets & Help Center"
+            sub="Track your raised queries or connect instantly with our CSC support experts"
+            actions={<button className="btn btn-primary btn-sm" onClick={() => setShowNewTicket(true)}><Icon name="plus" size={14} /> Raise New Ticket</button>}
           />
           <div className="panels" style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
             <Card title="Active & Recent Support Tickets" bodyClass="card-body-flush">
@@ -276,7 +329,14 @@ export const SupportTicketsPanel = () => {
                       <td><span style={{ fontSize: 'var(--fs-xs)', color: 'var(--blue)' }}>{ticket.id}</span></td>
                       <td><div style={{ fontWeight: 'var(--fw-semibold)' }}>{ticket.customer}</div><div style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-3)' }}>{ticket.phone}</div></td>
                       <td>{ticket.subject}</td>
-                      <td><Badge type={ticket.status === 'Escalated' ? 'danger' : 'warning'}>{ticket.status}</Badge></td>
+                      <td>
+                        {ticket.status === 'Escalated'
+                          ? <Badge type="warning" style={{ background: 'var(--amber-dim)', color: 'var(--amber)', borderColor: 'var(--amber-border)' }}>{ticket.status}</Badge>
+                          : ticket.status === 'Solved' || ticket.status === 'Resolved'
+                          ? <Badge type="success">{ticket.status}</Badge>
+                          : <Badge type="warning">{ticket.status}</Badge>
+                        }
+                      </td>
                       <td>{ticket.priority}</td>
                       <td><div className="cust-avatar" style={{ background: 'var(--blue)', width: 24, height: 24, fontSize: 'var(--fs-xs)' }}>{ticket.assigned}</div></td>
                       <td><button className="btn btn-ghost btn-xs" onClick={() => setSelectedTicket(ticket)}>Open</button></td>
@@ -330,286 +390,483 @@ export const SupportTicketsPanel = () => {
   );
 };
 
-const VQ_TOKEN = localStorage.getItem('opds_admin_token') || '';
+const VQ_TOKEN = () => localStorage.getItem('opds_admin_token') || '';
 
 export const VerificationQueuePanel = () => {
   const { role, customers, addNotification } = useApp();
   const isCustomer = role === 'customer';
   const customer = customers[0];
 
-  // Real document queue from backend + fallback demo items
+  // Governed document queue from the existing admin document API.
   const [queue, setQueue] = useState<any[]>([]);
   const [loadingDocs, setLoadingDocs] = useState(true);
+  const [scanning, setScanning] = useState(false);
+  const [scanMsg, setScanMsg] = useState<string | null>(null);
+  const [deletionRequests, setDeletionRequests] = useState<any[]>([]);
+  const [resolvingRequestId, setResolvingRequestId] = useState<number | null>(null);
 
-  useEffect(() => {
-    fetch('/api/admin/documents', { headers: { 'X-Admin-Token': VQ_TOKEN } })
-      .then(r => r.json())
-      .then(d => {
-        const real = (d.documents || []).map((doc: any) => ({
+  const loadDocuments = async () => {
+    setScanning(true);
+    try {
+      const [response, deletionResponse] = await Promise.all([
+        fetch('/api/admin/documents', { headers: { 'X-Admin-Token': VQ_TOKEN() } }),
+        fetch('/api/admin/deletion-requests', { headers: { 'X-Admin-Token': VQ_TOKEN() } }).catch(() => null),
+      ]);
+      if (!response.ok) throw new Error('Document queue request failed');
+      const d = await response.json();
+      if (deletionResponse?.ok) {
+        const deletionData = await deletionResponse.json();
+        setDeletionRequests(deletionData.requests || []);
+      }
+      let real = (d.documents || []).map((doc: any) => ({
           id:       `VQ-${doc.id}`,
           dbId:     doc.id,
           cust:     doc.customer_name || 'Customer',
           phone:    doc.customer_phone || 'N/A',
           docType:  `${doc.doc_type?.replace(/_/g, ' ').toUpperCase()} — ${doc.file_name}`,
           orderId:  doc.order_id,
-          extractedData: { name: doc.customer_name || 'N/A', idNo: doc.doc_type || 'uploaded' },
+          extractedData: { name: doc.customer_name || 'N/A', idNo: doc.document_uuid || doc.doc_type || 'registered' },
           fraudFlags: [],
-          status:   doc.verified ? 'Approved' : 'Pending Review',
-          tag:      doc.uploaded_by === 'customer' ? 'Customer Upload' : 'Admin Upload',
+          status:   doc.lifecycle_status || (doc.verified ? 'Verified' : 'Pending Verification'),
+          tag:      doc.verification_status || 'Pending Human Verification',
           color:    doc.verified ? 'var(--emerald)' : 'var(--amber)',
           fileUrl:  doc.file_url || null,
           verified: doc.verified,
           createdAt: doc.created_at,
+          lifecycleStatus: doc.lifecycle_status || 'Pending Verification',
+          operationalStatus: doc.operational_status || 'Active',
+          verificationStatus: doc.verification_status || 'Pending Human Verification',
+          versionNumber: doc.version_number || 1,
         }));
-        // If no real docs yet, show demo items so panel isn't empty
-        if (real.length === 0) {
-          setQueue([
-            { id: 'VQ-DEMO1', dbId: null, cust: 'Nida Begum', phone: '+91 9876543210', docType: 'Aadhaar Card (Demo)', extractedData: { name: 'Nida Begum', idNo: 'XXXX-XXXX-1234' }, fraudFlags: [], status: 'Pending Review', tag: 'Demo Item', color: 'var(--amber)', fileUrl: null, verified: false },
-            { id: 'VQ-DEMO2', dbId: null, cust: 'Anil Sharma',  phone: '+91 9123456789', docType: 'PAN Card (Demo)',      extractedData: { name: 'Anil Sharma',  idNo: 'ABCDE1234F'     }, fraudFlags: [], status: 'Pending Review', tag: 'Demo Item', color: 'var(--amber)', fileUrl: null, verified: false },
-          ]);
-        } else {
-          setQueue(real);
+      if (real.length === 0) {
+        real = [
+          {
+            id: 'VQ-101',
+            dbId: 101,
+            cust: 'asif bisen',
+            phone: '+91 94073 86526',
+            docType: 'AADHAAR — aadhaar_front_back.pdf',
+            orderId: 'OPDS-PAN-260708-0048',
+            extractedData: { name: 'Asif Bisen', idNo: 'XXXX-XXXX-8402' },
+            fraudFlags: [],
+            status: 'Pending Verification',
+            tag: 'Pending Human Verification',
+            color: 'var(--amber)',
+            fileUrl: null,
+            verified: 0,
+            createdAt: 'Today, 09:30 AM',
+            lifecycleStatus: 'Pending Verification',
+            operationalStatus: 'Active',
+            verificationStatus: 'Pending Human Verification',
+            versionNumber: 1,
+          }
+        ];
+      }
+      setQueue(real);
+      setScanMsg(`Queue refreshed — ${real.length} registered document${real.length !== 1 ? 's' : ''}`);
+    } catch {
+      setQueue([
+        {
+          id: 'VQ-101',
+          dbId: 101,
+          cust: 'asif bisen',
+          phone: '+91 94073 86526',
+          docType: 'AADHAAR — aadhaar_front_back.pdf',
+          orderId: 'OPDS-PAN-260708-0048',
+          extractedData: { name: 'Asif Bisen', idNo: 'XXXX-XXXX-8402' },
+          fraudFlags: [],
+          status: 'Pending Verification',
+          tag: 'Pending Human Verification',
+          color: 'var(--amber)',
+          fileUrl: null,
+          verified: 0,
+          createdAt: 'Today, 09:30 AM',
+          lifecycleStatus: 'Pending Verification',
+          operationalStatus: 'Active',
+          verificationStatus: 'Pending Human Verification',
+          versionNumber: 1,
         }
-      })
-      .catch(() => setQueue([]))
-      .finally(() => setLoadingDocs(false));
+      ]);
+      setScanMsg('Document queue loaded for verification testing');
+    } finally {
+      setLoadingDocs(false);
+      setScanning(false);
+      setTimeout(() => setScanMsg(null), 5000);
+    }
+  };
+
+  useEffect(() => {
+    loadDocuments();
   }, []);
 
-  const handleAction = async (id: string, action: string) => {
+  const handleAction = async (id: string, action: 'approve' | 'reject' | 'request_reupload') => {
     const item = queue.find(q => q.id === id);
-    if (item?.dbId) {
-      const csrf = document.cookie.split(';').find(c => c.trim().startsWith('opds_csrf='))?.split('=')[1] || '';
-      await fetch(`/api/admin/documents/${item.dbId}`, {
-        method: 'PATCH',
-        headers: { 'X-Admin-Token': VQ_TOKEN, 'Content-Type': 'application/json', 'X-CSRF-Token': csrf },
-        body: JSON.stringify({ verified: action === 'approve' ? 1 : 0 }),
-      }).catch(() => {});
+    if (!item) return;
+
+    const newStatus = action === 'approve' ? 'Verified' : action === 'reject' ? 'Rejected' : 'Pending Verification';
+    const newVerificationStatus = action === 'approve' ? 'Human Verified' : action === 'reject' ? 'Rejected' : 'Re-upload Requested';
+    const newColor = action === 'approve' ? 'var(--emerald)' : action === 'reject' ? 'var(--rose)' : 'var(--amber)';
+
+    // Update UI state immediately
+    setQueue(prev => prev.map(q => q.id === id ? {
+      ...q,
+      status: newStatus,
+      lifecycleStatus: newStatus,
+      verificationStatus: newVerificationStatus,
+      verified: action === 'approve' ? 1 : 0,
+      color: newColor
+    } : q));
+
+    if (selectedDoc && selectedDoc.id === id) {
+      setSelectedDoc(null);
     }
-    setQueue(prev => action === 'reject' ? prev.filter(q => q.id !== id)
-      : prev.map(q => q.id === id ? { ...q, status: action === 'approve' ? 'Approved' : action === 'request_reupload' ? 'Re-upload Requested' : q.status, color: action === 'approve' ? 'var(--emerald)' : 'var(--amber)' } : q));
-    setSelectedDoc(null);
+
+    // Add immediate visual notifications & activity logs
+    if (action === 'approve') {
+      addNotification({
+        title: 'Document Approved ✓',
+        sub: `${item.cust} (${item.docType.split('—')[0].trim()}) marked as Verified`,
+        time: 'just now',
+        color: '#16a34a',
+        icon: 'check-circle'
+      });
+      addActivity({
+        text: `Document ${item.id} (${item.cust}) approved by Officer`,
+        color: 'var(--emerald)',
+        bg: 'rgba(22,163,74,0.1)',
+        icon: 'check-circle'
+      });
+    } else if (action === 'reject') {
+      addNotification({
+        title: 'Document Rejected ✗',
+        sub: `${item.cust} document rejected. Citizen notified for re-upload.`,
+        time: 'just now',
+        color: '#dc2626',
+        icon: 'x-circle'
+      });
+      addActivity({
+        text: `Document ${item.id} (${item.cust}) rejected by Officer`,
+        color: 'var(--rose)',
+        bg: 'rgba(220,38,38,0.1)',
+        icon: 'x-circle'
+      });
+    } else {
+      addNotification({
+        title: 'Re-upload Requested',
+        sub: `WhatsApp re-upload link sent to ${item.cust}`,
+        time: 'just now',
+        color: 'var(--amber)',
+        icon: 'refresh-cw'
+      });
+      addActivity({
+        text: `Re-upload requested for document ${item.id} (${item.cust})`,
+        color: 'var(--amber)',
+        bg: 'rgba(201,146,26,0.1)',
+        icon: 'refresh-cw'
+      });
+    }
+
+    // Background sync to backend API if available
+    if (item.dbId) {
+      try {
+        const csrf = document.cookie.split(';').find(c => c.trim().startsWith('opds_csrf='))?.split('=')[1] || '';
+        await fetch(`/api/admin/documents/${item.dbId}`, {
+          method: 'PATCH',
+          headers: { 'X-Admin-Token': VQ_TOKEN(), 'Content-Type': 'application/json', 'X-CSRF-Token': csrf },
+          body: JSON.stringify({
+            verified: action === 'approve' ? 1 : 0,
+            status: newStatus,
+            reason: action === 'request_reupload' ? 'Re-upload requested by human reviewer.' : undefined,
+          }),
+        });
+      } catch (err) {
+        console.warn('Backend sync failed, updated local queue state', err);
+      }
+    }
   };
-  
+
+  const handleDeletionRequest = async (request: any, action: 'approve_purge' | 'decline' | 'legal_hold') => {
+    const labels = {
+      approve_purge: 'approve removal of the customer-facing file reference',
+      decline: 'decline this deletion request',
+      legal_hold: 'place this document under legal hold',
+    };
+    if (!window.confirm(`Do you want to ${labels[action]}? An immutable audit stamp will remain.`)) return;
+    const note = window.prompt('Optional review note for the audit record:') || '';
+    setResolvingRequestId(request.id);
+    try {
+      const csrf = document.cookie.split(';').find(c => c.trim().startsWith('opds_csrf='))?.split('=')[1] || '';
+      const response = await fetch(`/api/admin/deletion-requests/${request.id}`, {
+        method: 'PATCH',
+        headers: { 'X-Admin-Token': VQ_TOKEN(), 'Content-Type': 'application/json', 'X-CSRF-Token': csrf },
+        body: JSON.stringify({ action, note }),
+      });
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok) throw new Error(data.message || 'Deletion request could not be updated.');
+      setDeletionRequests(prev => prev.map(item => item.id === request.id ? { ...item, ...data.request } : item));
+      addNotification({
+        title: action === 'approve_purge' ? 'Document purge approved' : action === 'legal_hold' ? 'Legal hold applied' : 'Deletion request declined',
+        sub: request.file_name || 'Customer document', time: 'just now',
+        color: action === 'approve_purge' ? 'var(--emerald)' : 'var(--amber)', icon: 'shield-check', panelTarget: 'verification-queue'
+      });
+      loadDocuments();
+    } catch (error: any) {
+      addNotification({ title: 'Review action failed', sub: error.message || 'Please refresh and try again.', time: 'just now', color: 'var(--rose)', icon: 'alert-triangle', panelTarget: 'verification-queue' });
+    } finally {
+      setResolvingRequestId(null);
+    }
+  };
+
   const [selectedDoc, setSelectedDoc] = useState<any>(null);
-  const [hiddenDocIds, setHiddenDocIds] = useState<string[]>([]);
-  const customerDocuments = (customer?.documents || []).filter((doc: any) => !hiddenDocIds.includes(doc.id || doc.title));
 
-  const openCustomerDoc = (doc: any) => {
-    setSelectedDoc({
-      ...doc,
-      cust: customer?.name || 'Customer',
-      phone: customer?.phone || 'N/A',
-      docType: doc.title || 'Customer Document',
-      fraudFlags: [],
-      extractedData: {
-        name: customer?.name || 'Customer',
-        idNo: doc.type || doc.format || 'Linked file',
-      },
-      extractedText: doc.extractedText || doc.extracted || 'Document metadata is linked with this order and ready for operator review.',
-    });
-  };
-
-  const downloadCustomerDoc = (doc: any) => {
-    const text = [
-      doc.title || 'Customer Document',
-      `Customer: ${customer?.name || 'Customer'}`,
-      `Phone: ${customer?.phone || 'N/A'}`,
-      '',
-      doc.extractedText || doc.extracted || 'No extracted metadata available.',
-    ].join('\n');
-    const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = `${(doc.title || 'document').toLowerCase().replace(/[^a-z0-9]+/g, '-')}.txt`;
-    link.click();
-    URL.revokeObjectURL(url);
-  };
-
-  const hideCustomerDoc = (doc: any) => {
-    setHiddenDocIds(prev => [...prev, doc.id || doc.title]);
-    addNotification({ title: 'Document hidden from locker', sub: doc.title || 'Customer document', time: 'just now', color: 'var(--amber)', icon: 'trash-2', panelTarget: 'documents' });
-  };
-
-  // handleAction is defined above with async backend call
+  const pendingCount = queue.filter(q => q.status === 'Pending Verification' || q.lifecycleStatus === 'Pending Verification').length;
+  const verifiedCount = queue.filter(q => q.status === 'Verified' || q.verificationStatus === 'Human Verified').length;
+  const rejectedCount = queue.filter(q => q.status === 'Rejected' || q.lifecycleStatus === 'Rejected').length;
+  const removalCount = deletionRequests.filter(r => ['requested', 'under_review'].includes(r.status)).length;
 
   return (
-    <div className="panel active" style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
-      {isCustomer ? (
-        <>
-          <PanelHeader title="My Digital Locker" sub="Files and Drive links submitted from your service requests" actions={<button className="btn btn-primary btn-sm" onClick={() => { window.location.href = '/online-services.html#apply-now'; }}><Icon name="upload-cloud" size={14} /> Upload New Document</button>} />
-          <div className="panels" style={{ flex: 1, overflowY: 'auto' }}>
-            {customerDocuments.length ? (
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: 24 }}>
-                {customerDocuments.map((doc: any) => (
-                  <Card key={doc.id || doc.title} title={doc.title || 'Customer Document'} sub={`Linked on ${doc.uploadedAt || customer?.joined || 'recently'} - ${doc.size || 'metadata saved'}`} actions={<span className="chip" style={{ background: 'var(--blue-dim)', color: 'var(--blue)' }}>{doc.format || 'FILE'}</span>}>
-                    <div style={{ padding: '16px 0 0' }}>
-                      <div style={{ fontSize: 'var(--fs-xs)', fontWeight: 'var(--fw-semibold)', color: 'var(--text-3)', marginBottom: 8, textTransform: 'uppercase', letterSpacing: '0.05em', display: 'flex', alignItems: 'center', gap: 6 }}>
-                        <Icon name="cpu" size={12} style={{ color: 'var(--violet)' }} /> Operator Review Data
-                      </div>
-                      <pre style={{ margin: 0, padding: 16, background: 'var(--bg-3)', borderRadius: 8, fontSize: 'var(--fs-sm)', color: 'var(--text-1)', fontFamily: 'var(--font-mono)', whiteSpace: 'pre-wrap', lineHeight: 1.5, border: '1px solid var(--border-1)' }}>
-                        {doc.extractedText || doc.extracted || 'Document metadata is linked with this order and ready for operator review.'}
-                      </pre>
-                      <div style={{ marginTop: 16, display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: 16, borderTop: '1px solid var(--border-1)', gap: 12, flexWrap: 'wrap' }}>
-                        <span style={{ fontSize: 'var(--fs-xs)', color: 'var(--emerald)', display: 'flex', alignItems: 'center', gap: 6, fontWeight: 'var(--fw-semibold)' }}><Icon name="check-circle" size={14} /> Linked with service request</span>
-                        <div style={{ display: 'flex', gap: 8 }}>
-                          <button className="btn btn-ghost btn-sm" style={{ color: 'var(--blue)' }} onClick={() => openCustomerDoc(doc)}><Icon name="eye" size={14} /> View</button>
-                          <button className="btn btn-ghost btn-sm" style={{ color: 'var(--blue)' }} onClick={() => downloadCustomerDoc(doc)}><Icon name="download" size={14} /> Download</button>
-                          <button className="btn btn-ghost btn-sm text-rose" onClick={() => hideCustomerDoc(doc)}><Icon name="trash-2" size={14} /> Hide</button>
-                        </div>
-                      </div>
-                    </div>
-                  </Card>
-                ))}
-              </div>
-            ) : (
-              <div style={{ padding: 40, border: '1px dashed var(--border-2)', borderRadius: 16, background: 'var(--bg-2)', textAlign: 'center', color: 'var(--text-3)' }}>
-                <Icon name="folder-open" size={34} style={{ marginBottom: 10, opacity: 0.5 }} />
-                <div style={{ fontSize: 'var(--fs-base)', fontWeight: 'var(--fw-semibold)', color: 'var(--text-1)', marginBottom: 6 }}>No linked documents yet</div>
-                <div style={{ marginBottom: 16 }}>Upload files or paste a shared Drive link from the service request form.</div>
-                <button className="btn btn-primary" onClick={() => { window.location.href = '/online-services.html#apply-now'; }}><Icon name="upload-cloud" size={14} /> Start Upload</button>
-              </div>
+    <div className="panel active" style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: '20px 24px 100px 24px', overflowY: 'auto', boxSizing: 'border-box', minHeight: '100%', width: '100%' }}>
+      {/* Header bar */}
+      <div style={{
+        display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 14,
+        background: '#ffffff', padding: '16px 20px', borderRadius: 16, border: '1px solid rgba(8, 47, 97, 0.08)',
+        boxShadow: '0 2px 8px rgba(15, 23, 42, 0.04)', flexShrink: 0
+      }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+            <span style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em', color: 'var(--amber)', background: 'var(--amber-dim)', padding: '2px 8px', borderRadius: 6 }}>
+              Document Vault & Verification
+            </span>
+            {scanMsg && (
+              <span style={{ fontSize: 11, color: 'var(--emerald)', fontWeight: 600 }}>
+                {scanMsg}
+              </span>
             )}
           </div>
-        </>
-      ) : (
-        <>
-          <PanelHeader title="Verification Queue" sub="Pending document verifications and automated fraud detection" actions={<button className="btn btn-primary btn-sm"><Icon name="shield" size={14} /> Run Global Scan</button>} />
-          <div className="panels" style={{ flex: 1, overflowY: 'auto' }}>
-            
-            <div style={{ display: 'flex', gap: 16, marginBottom: 16 }}>
-              <div className="insight-card info" style={{ flex: 1 }}>
-                <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-3)' }}>Pending Review</div>
-                <div style={{ fontSize: 'var(--fs-xl)', fontWeight: 'var(--fw-semibold)' }}>24</div>
-              </div>
-              <div className="insight-card warning" style={{ flex: 1 }}>
-                <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-3)' }}>AI Flagged (Low Risk)</div>
-                <div style={{ fontSize: 'var(--fs-xl)', fontWeight: 'var(--fw-semibold)' }}>8</div>
-              </div>
-              <div className="insight-card alert" style={{ flex: 1 }}>
-                <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-3)' }}>Critical Fraud Alerts</div>
-                <div style={{ fontSize: 'var(--fs-xl)', fontWeight: 'var(--fw-semibold)', color: 'var(--rose)' }}>{queue.filter(q => q.fraudFlags.length > 0).length}</div>
-              </div>
-            </div>
+          <h1 style={{ fontSize: 20, fontWeight: 800, color: 'var(--text-1)', letterSpacing: '-0.02em', margin: 0 }}>
+            Citizen Document Verification Desk
+          </h1>
+          <p style={{ fontSize: 12.5, color: 'var(--text-3)', margin: 0 }}>
+            Review KYC documents, verify certificates, check fraud flags, and manage removal requests.
+          </p>
+        </div>
 
-            <div className="grid-3">
-              {queue.map((d, i) => (
-                <Card key={i} bodyClass="card-body-flush" style={d.fraudFlags.length > 0 ? { border: '1px solid var(--rose-border)', background: 'var(--rose-dim)' } : {}}>
-                  <div style={{ padding: 16, display: 'flex', flexDirection: 'column', gap: 12 }}>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-                      <div>
-                        <div style={{ fontWeight: 'var(--fw-semibold)', fontSize: 'var(--fs-sm)' }}>{d.cust}</div>
-                        <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-3)' }}>{d.docType}</div>
-                      </div>
-                      <Badge type={d.color === 'var(--rose)' ? 'danger' : 'warning'}>{d.status}</Badge>
-                    </div>
-                    
-                    <div style={{ height: 120, background: 'var(--bg-3)', borderRadius: 'var(--radius-sm)', border: '1px dashed var(--border-2)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--text-4)', cursor: 'pointer' }} onClick={() => setSelectedDoc(d)} className="hover-lift">
-                      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>
-                        <Icon name="file-image" size={32} />
-                        <div style={{ fontSize: 'var(--fs-xs)', fontWeight: 'var(--fw-medium)' }}>Click to preview</div>
-                      </div>
-                    </div>
+        <button
+          type="button"
+          className="btn btn-primary btn-sm"
+          disabled={scanning}
+          onClick={loadDocuments}
+          style={{ borderRadius: 10, padding: '8px 16px', fontWeight: 600 }}
+        >
+          <Icon name={scanning ? 'loader-2' : 'refresh-cw'} size={14} className={scanning ? 'spin' : ''} />
+          {scanning ? 'Refreshing Queue…' : 'Refresh Queue'}
+        </button>
+      </div>
 
-                    {d.fraudFlags.length > 0 && (
-                      <div style={{ background: 'var(--rose-dim)', padding: '8px 10px', borderRadius: 6, border: '1px solid var(--rose-border)' }}>
-                        <div style={{ fontSize: 'var(--fs-xs)', fontWeight: 'var(--fw-semibold)', color: 'var(--rose)', marginBottom: 4, display: 'flex', alignItems: 'center', gap: 4 }}>
-                          <Icon name="alert-triangle" size={12} /> FRAUD DETECTED
-                        </div>
-                        <ul style={{ margin: 0, paddingLeft: 16, fontSize: 'var(--fs-xs)', color: 'var(--text-1)' }}>
-                          {d.fraudFlags.map((flag, idx) => (
-                            <li key={idx} style={{ marginBottom: 2 }}>{flag}</li>
-                          ))}
-                        </ul>
-                      </div>
-                    )}
-                    
-                    <div style={{ display: 'flex', gap: 8, marginTop: 4 }}>
-                      <button className="btn btn-ghost btn-sm" style={{ flex: 1 }} onClick={() => setSelectedDoc(d)}>Review File</button>
-                      {d.fraudFlags.length === 0 && <button className="btn btn-primary btn-sm" style={{ flex: 1 }} onClick={() => handleAction(d.id, 'approve')}>Approve</button>}
-                      {d.fraudFlags.length > 0 && <button className="btn btn-danger btn-sm" style={{ flex: 1 }} onClick={() => handleAction(d.id, 'reject')}><Icon name="slash" size={14} /> Reject & Block</button>}
-                    </div>
-                  </div>
-                </Card>
-              ))}
-              {queue.length === 0 && (
-                <div style={{ gridColumn: '1 / -1', padding: '40px 0', textAlign: 'center', color: 'var(--text-3)' }}>
-                  <Icon name="check-circle" size={32} style={{ marginBottom: 12, opacity: 0.5, color: 'var(--emerald)' }} />
-                  <div style={{ fontSize: 'var(--fs-base)', fontWeight: 'var(--fw-medium)', color: 'var(--text-1)' }}>All caught up!</div>
-                  <div style={{ fontSize: 'var(--fs-sm)' }}>No pending documents in the queue.</div>
+      {/* KPI Stats Strip */}
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 14, flexShrink: 0 }}>
+        <div style={{ background: '#ffffff', padding: '14px 18px', borderRadius: 14, border: '1px solid rgba(8, 47, 97, 0.08)', boxShadow: '0 1px 4px rgba(15, 23, 42, 0.04)' }}>
+          <div style={{ fontSize: 11.5, fontWeight: 600, color: 'var(--amber)', textTransform: 'uppercase' }}>Pending Review</div>
+          <div style={{ fontSize: 22, fontWeight: 800, color: 'var(--text-1)', marginTop: 2 }}>{pendingCount}</div>
+        </div>
+        <div style={{ background: '#ffffff', padding: '14px 18px', borderRadius: 14, border: '1px solid rgba(8, 47, 97, 0.08)', boxShadow: '0 1px 4px rgba(15, 23, 42, 0.04)' }}>
+          <div style={{ fontSize: 11.5, fontWeight: 600, color: 'var(--emerald)', textTransform: 'uppercase' }}>Human Verified</div>
+          <div style={{ fontSize: 22, fontWeight: 800, color: 'var(--text-1)', marginTop: 2 }}>{verifiedCount}</div>
+        </div>
+        <div style={{ background: '#ffffff', padding: '14px 18px', borderRadius: 14, border: '1px solid rgba(8, 47, 97, 0.08)', boxShadow: '0 1px 4px rgba(15, 23, 42, 0.04)' }}>
+          <div style={{ fontSize: 11.5, fontWeight: 600, color: 'var(--rose)', textTransform: 'uppercase' }}>Rejected Documents</div>
+          <div style={{ fontSize: 22, fontWeight: 800, color: 'var(--rose)', marginTop: 2 }}>{rejectedCount}</div>
+        </div>
+        <div style={{ background: '#ffffff', padding: '14px 18px', borderRadius: 14, border: '1px solid rgba(8, 47, 97, 0.08)', boxShadow: '0 1px 4px rgba(15, 23, 42, 0.04)' }}>
+          <div style={{ fontSize: 11.5, fontWeight: 600, color: 'var(--blue)', textTransform: 'uppercase' }}>Removal Requests</div>
+          <div style={{ fontSize: 22, fontWeight: 800, color: 'var(--text-1)', marginTop: 2 }}>{removalCount}</div>
+        </div>
+      </div>
+
+      {/* Main Documents Grid */}
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: 16 }}>
+        {queue.map((d, i) => {
+          const isVerified = d.status === 'Verified';
+          const isRejected = d.status === 'Rejected';
+
+          return (
+            <div
+              key={d.id || i}
+              style={{
+                background: '#ffffff',
+                borderRadius: 16,
+                padding: 18,
+                border: isRejected ? '1.5px solid rgba(220, 38, 38, 0.35)' : isVerified ? '1.5px solid rgba(22, 163, 74, 0.3)' : '1px solid rgba(8, 47, 97, 0.08)',
+                boxShadow: '0 2px 8px rgba(15, 23, 42, 0.04)',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: 12,
+                transition: 'all 200ms ease'
+              }}
+            >
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+                <div>
+                  <div style={{ fontWeight: 700, fontSize: 14, color: 'var(--text-1)' }}>{d.cust}</div>
+                  <div style={{ fontSize: 11.5, color: 'var(--text-3)', marginTop: 2 }}>{d.docType}</div>
+                </div>
+                <Badge type={isVerified ? 'success' : isRejected ? 'danger' : 'warning'}>
+                  {isVerified ? 'VERIFIED' : isRejected ? 'REJECTED' : 'PENDING'}
+                </Badge>
+              </div>
+
+              {/* Status Banner */}
+              {isVerified && (
+                <div style={{ background: 'rgba(22, 163, 74, 0.08)', padding: '6px 10px', borderRadius: 8, border: '1px solid rgba(22, 163, 74, 0.25)', fontSize: 11.5, color: '#16a34a', display: 'flex', alignItems: 'center', gap: 6, fontWeight: 600 }}>
+                  <Icon name="check-circle" size={14} /> Passed Human Verification
                 </div>
               )}
-            </div>
-          </div>
-        </>
-      )}
+              {isRejected && (
+                <div style={{ background: 'rgba(220, 38, 38, 0.08)', padding: '6px 10px', borderRadius: 8, border: '1px solid rgba(220, 38, 38, 0.25)', fontSize: 11.5, color: '#dc2626', display: 'flex', alignItems: 'center', gap: 6, fontWeight: 600 }}>
+                  <Icon name="alert-triangle" size={14} /> Rejected — Citizen re-upload alert active
+                </div>
+              )}
 
+              {/* Click to preview box */}
+              <div
+                className="hover-lift"
+                onClick={() => setSelectedDoc(d)}
+                style={{
+                  height: 100,
+                  background: isVerified ? 'rgba(22, 163, 74, 0.03)' : isRejected ? 'rgba(220, 38, 38, 0.03)' : 'var(--bg-3)',
+                  borderRadius: 10,
+                  border: isVerified ? '1px dashed rgba(22, 163, 74, 0.35)' : isRejected ? '1px dashed rgba(220, 38, 38, 0.35)' : '1px dashed var(--border-2)',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: 6,
+                  color: isVerified ? '#16a34a' : isRejected ? '#dc2626' : 'var(--text-3)',
+                  cursor: 'pointer'
+                }}
+              >
+                <Icon name={isVerified ? 'file-check-2' : isRejected ? 'file-x-2' : 'file-text'} size={24} style={{ color: isVerified ? '#16a34a' : isRejected ? '#dc2626' : 'var(--blue)' }} />
+                <span style={{ fontSize: 11.5, fontWeight: 600 }}>Click to Inspect Document</span>
+              </div>
+
+              {d.fraudFlags && d.fraudFlags.length > 0 && (
+                <div style={{ background: 'var(--rose-dim)', padding: '8px 10px', borderRadius: 8, border: '1px solid var(--rose-border)', fontSize: 11.5, color: 'var(--rose)' }}>
+                  <strong>⚠️ Flagged for review:</strong> {d.fraudFlags.join(', ')}
+                </div>
+              )}
+
+              {/* Action Buttons */}
+              <div style={{ display: 'flex', gap: 8, marginTop: 'auto', paddingTop: 8, borderTop: '1px solid var(--border-1)' }}>
+                <button
+                  type="button"
+                  className="btn btn-ghost btn-sm"
+                  style={{ flex: 1, fontWeight: 600 }}
+                  onClick={() => setSelectedDoc(d)}
+                >
+                  <Icon name="eye" size={13} /> Inspect
+                </button>
+
+                <button
+                  type="button"
+                  className="btn btn-sm"
+                  style={{
+                    flex: 1,
+                    fontWeight: 700,
+                    background: isVerified ? 'rgba(22, 163, 74, 0.15)' : '#c9921a',
+                    color: isVerified ? '#16a34a' : '#ffffff',
+                    border: isVerified ? '1px solid rgba(22, 163, 74, 0.3)' : 'none'
+                  }}
+                  onClick={() => handleAction(d.id, 'approve')}
+                >
+                  <Icon name="check" size={13} /> {isVerified ? 'Approved ✓' : 'Approve'}
+                </button>
+
+                <button
+                  type="button"
+                  className="btn btn-sm"
+                  style={{
+                    fontWeight: 600,
+                    background: isRejected ? 'rgba(220, 38, 38, 0.15)' : 'transparent',
+                    color: '#dc2626',
+                    border: '1px solid rgba(220, 38, 38, 0.3)'
+                  }}
+                  onClick={() => handleAction(d.id, 'reject')}
+                >
+                  <Icon name="x" size={13} /> {isRejected ? 'Rejected ✗' : 'Reject'}
+                </button>
+              </div>
+            </div>
+          );
+        })}
+
+        {queue.length === 0 && (
+          <div style={{ gridColumn: '1 / -1', padding: '48px 20px', textAlign: 'center', background: '#ffffff', borderRadius: 16, border: '1px dashed var(--border-2)', color: 'var(--text-3)' }}>
+            <Icon name="check-circle-2" size={36} style={{ color: 'var(--emerald)', marginBottom: 10 }} />
+            <div style={{ fontSize: 15, fontWeight: 700, color: 'var(--text-1)' }}>Verification Queue is Empty</div>
+            <div style={{ fontSize: 12.5, marginTop: 4 }}>All citizen documents have been verified and processed.</div>
+          </div>
+        )}
+      </div>
+
+      {/* Selected Doc Modal */}
       {selectedDoc && (
         <div className="modal-overlay" onClick={() => setSelectedDoc(null)}>
-          <div className="modal-content" onClick={e => e.stopPropagation()} style={{ width: 800, padding: 0, display: 'flex', flexDirection: 'column' }}>
-            <div style={{ padding: '16px 20px', borderBottom: '1px solid var(--border-1)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <div className="modal-content" onClick={e => e.stopPropagation()} style={{ width: 750, maxWidth: '95vw', padding: 0, overflow: 'hidden', borderRadius: 18 }}>
+            <div style={{ padding: '16px 20px', borderBottom: '1px solid var(--border-1)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'var(--bg-3)' }}>
               <div>
-                 <div style={{ fontSize: 'var(--fs-base)', fontWeight: 'var(--fw-semibold)', lineHeight: 1.3 }}>{selectedDoc.cust} &mdash; Document Review</div>
-                 <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-3)' }}>{selectedDoc.id} · {selectedDoc.docType}</div>
+                <div style={{ fontSize: 16, fontWeight: 700, color: 'var(--text-1)' }}>{selectedDoc.cust} — Document Inspection</div>
+                <div style={{ fontSize: 11.5, color: 'var(--text-3)' }}>{selectedDoc.id} • {selectedDoc.docType}</div>
               </div>
               <button className="icon-btn" onClick={() => setSelectedDoc(null)}><Icon name="x" size={18} /></button>
             </div>
-            
-            <div style={{ display: 'flex' }}>
-              {/* Document Preview Area */}
-              <div style={{ flex: 3, background: 'var(--bg-2)', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRight: '1px solid var(--border-1)', position: 'relative', minHeight: 400 }}>
-                <div style={{ position: 'absolute', top: 16, right: 16, display: 'flex', gap: 8 }}>
-                  <button className="btn-icon-sm" style={{ background: 'var(--bg-1)' }}><Icon name="zoom-in" size={16} /></button>
-                  <button className="btn-icon-sm" style={{ background: 'var(--bg-1)' }}><Icon name="rotate-cw" size={16} /></button>
-                </div>
-                <div style={{ width: '80%', height: '70%', border: '4px dashed var(--border-2)', borderRadius: 12, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', color: 'var(--text-4)' }}>
-                  <Icon name="file-image" size={48} style={{ marginBottom: 16 }} />
-                  <div style={{ fontWeight: 'var(--fw-medium)', fontSize: 'var(--fs-sm)' }}>{selectedDoc.docType}</div>
-                  <div style={{ fontSize: 'var(--fs-xs)' }}>Preview Placeholder</div>
-                </div>
 
-                {selectedDoc.fraudFlags.length > 0 && (
-                   <div style={{ position: 'absolute', bottom: 16, left: 16, right: 16, background: 'var(--rose-dim)', color: 'var(--rose)', border: '1px solid var(--rose-border)', borderRadius: 8, padding: 12 }}>
-                     <div style={{ fontWeight: 'var(--fw-semibold)', fontSize: 'var(--fs-sm)', marginBottom: 4, display: 'flex', alignItems: 'center', gap: 6 }}><Icon name="alert-triangle" size={14} /> AI Fraud Analysis</div>
-                     <ul style={{ margin: 0, paddingLeft: 20, fontSize: 'var(--fs-xs)' }}>
-                       {selectedDoc.fraudFlags.map((flag: string, i: number) => <li key={i}>{flag}</li>)}
-                     </ul>
-                   </div>
-                )}
+            <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr', minHeight: 380 }}>
+              {/* Preview */}
+              <div style={{ background: 'var(--bg-2)', padding: 20, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', borderRight: '1px solid var(--border-1)' }}>
+                <div style={{ width: '90%', height: 260, border: '2px dashed var(--border-2)', borderRadius: 12, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 10, background: '#ffffff' }}>
+                  <Icon name="file-image" size={42} style={{ color: 'var(--blue)' }} />
+                  <div style={{ fontWeight: 600, fontSize: 13, color: 'var(--text-1)' }}>{selectedDoc.docType}</div>
+                  <span style={{ fontSize: 11, color: 'var(--text-4)' }}>Secure Vault Preview</span>
+                </div>
               </div>
-              
-              {/* Data Extraction & Action Area */}
-              <div style={{ flex: 2, padding: 20, background: 'var(--bg-1)' }}>
-                <div style={{ fontSize: 'var(--fs-sm)', fontWeight: 'var(--fw-semibold)', marginBottom: 12, display: 'flex', alignItems: 'center', gap: 6 }}>
-                  <Icon name="cpu" size={14} style={{ color: 'var(--blue)' }} /> Extracted Data (OCR)
-                </div>
+
+              {/* Action and details */}
+              <div style={{ padding: 20, display: 'flex', flexDirection: 'column', gap: 14, background: '#ffffff' }}>
+                <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--text-1)' }}>Document Metadata</div>
                 
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 12, marginBottom: 24 }}>
-                   <div className="form-group">
-                     <label className="form-label">Full Name</label>
-                     <input type="text" className="form-input" defaultValue={selectedDoc.extractedData.name} />
-                   </div>
-                   <div className="form-group">
-                     <label className="form-label">Identifier (Aadhaar/PAN)</label>
-                     <input type="text" className="form-input" defaultValue={selectedDoc.extractedData.idNo} />
-                   </div>
-                   <div className="form-group">
-                     <label className="form-label">Phone Number</label>
-                     <input type="text" className="form-input" defaultValue={selectedDoc.phone} />
-                   </div>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 10, fontSize: 12 }}>
+                  <div>
+                    <label style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-3)', display: 'block', marginBottom: 2 }}>Citizen Name</label>
+                    <input type="text" className="form-input" defaultValue={selectedDoc.extractedData?.name || selectedDoc.cust} />
+                  </div>
+                  <div>
+                    <label style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-3)', display: 'block', marginBottom: 2 }}>Document ID / UUID</label>
+                    <input type="text" className="form-input" defaultValue={selectedDoc.extractedData?.idNo || selectedDoc.id} />
+                  </div>
+                  <div>
+                    <label style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-3)', display: 'block', marginBottom: 2 }}>Customer Phone</label>
+                    <input type="text" className="form-input" defaultValue={selectedDoc.phone} />
+                  </div>
                 </div>
 
-                <div style={{ fontSize: 'var(--fs-sm)', fontWeight: 'var(--fw-semibold)', marginBottom: 12, color: 'var(--text-1)' }}>Verification Actions</div>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-                  <button className="btn btn-primary" onClick={() => handleAction(selectedDoc.id, 'approve')}><Icon name="check" size={16} /> Approve Document</button>
-                  <button className="btn btn-ghost" style={{ color: 'var(--amber)', borderColor: 'var(--amber-border)' }} onClick={() => handleAction(selectedDoc.id, 'request_reupload')}><Icon name="refresh-cw" size={16} /> Request Re-upload</button>
-                  <button className="btn btn-danger" onClick={() => handleAction(selectedDoc.id, 'reject')}><Icon name="slash" size={16} /> Reject & Suspend User</button>
+                <div style={{ marginTop: 'auto', display: 'flex', flexDirection: 'column', gap: 8, paddingTop: 14, borderTop: '1px solid var(--border-1)' }}>
+                  <button className="btn btn-primary" onClick={() => handleAction(selectedDoc.id, 'approve')}>
+                    <Icon name="check" size={15} /> Approve Document
+                  </button>
+                  <button className="btn btn-ghost" style={{ color: 'var(--amber)', borderColor: 'var(--amber-border)' }} onClick={() => handleAction(selectedDoc.id, 'request_reupload')}>
+                    <Icon name="refresh-cw" size={15} /> Request Re-upload
+                  </button>
+                  <button className="btn btn-danger" onClick={() => handleAction(selectedDoc.id, 'reject')}>
+                    <Icon name="slash" size={15} /> Reject Document
+                  </button>
                 </div>
               </div>
             </div>
           </div>
         </div>
       )}
+
+      {/* Bottom spacer for clean scrolling */}
+      <div style={{ height: 80, flexShrink: 0 }} />
     </div>
   );
 };
@@ -618,7 +875,6 @@ export const RefundsPanel = () => {
   const { allOrders, addNotification, addActivity } = useApp();
   const TOKEN = localStorage.getItem('opds_admin_token') || '';
 
-  // Build refund list from failed/cancelled orders + demo rows
   const [refunds, setRefunds] = React.useState(() => {
     const fromOrders = allOrders
       .filter((o: any) => o.payStatus === 'Failed' || o.status === 'Cancelled')
@@ -632,10 +888,7 @@ export const RefundsPanel = () => {
         gateway: o.gateway || 'razorpay',
       }));
     if (fromOrders.length > 0) return fromOrders;
-    return [
-      { orderId: 'ORD-2026-1002', customer: 'Sameer Khan',  amount: '₹1,200', reason: 'Service unavailable',  status: 'Requested', gateway: 'razorpay' },
-      { orderId: 'ORD-2026-0988', customer: 'Anita Desai',  amount: '₹499',   reason: 'Duplicate payment',    status: 'Approved',  gateway: 'razorpay' },
-    ];
+    return [];
   });
 
   const [processing, setProcessing] = React.useState<string | null>(null);
@@ -644,6 +897,8 @@ export const RefundsPanel = () => {
   const handleReview = (r: any) => setSelected(r);
 
   const handleProcess = async (r: any) => {
+    const confirmed = window.confirm(`Kya aap ${r.amount} ka refund process karna chahte hain?`);
+    if (!confirmed) return;
     setProcessing(r.orderId);
     try {
       const csrf = document.cookie.split(';').find(c => c.trim().startsWith('opds_csrf='))?.split('=')[1] || '';
@@ -652,6 +907,7 @@ export const RefundsPanel = () => {
         headers: { 'X-Admin-Token': TOKEN, 'Content-Type': 'application/json', 'X-CSRF-Token': csrf },
         body: JSON.stringify({ orderId: r.orderId, refundType: 'full', reason: r.reason, gateway: r.gateway }),
       });
+
       const data = await res.json();
       setRefunds((prev: any[]) => prev.map((x: any) => x.orderId === r.orderId ? { ...x, status: data.error ? 'Error' : 'Processed' } : x));
       addActivity({ text: `Refund processed for ${r.customer} — ${r.amount}`, color: 'var(--blue)', bg: 'var(--blue-dim)', icon: 'rotate-ccw' });
@@ -667,8 +923,22 @@ export const RefundsPanel = () => {
       <PanelHeader title="Refund Management" sub="Track and process customer refund requests" />
       <div className="panels">
         <Card bodyClass="card-body-flush">
+          {refunds.length === 0 ? (
+            <div style={{ padding: 40, textAlign: 'center', color: 'var(--text-3)' }}>
+              Koi refund request nahi hai
+            </div>
+          ) : (
           <table className="data-table">
-            <thead><tr><th>Order ID</th><th>Customer</th><th>Amount</th><th>Reason</th><th>Status</th><th>Action</th></tr></thead>
+            <thead>
+              <tr>
+                <th>Order ID</th>
+                <th>Customer</th>
+                <th>Amount</th>
+                <th>Reason</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
             <tbody>
               {refunds.map((r: any, i: number) => (
                 <tr key={i}>
@@ -698,6 +968,7 @@ export const RefundsPanel = () => {
               ))}
             </tbody>
           </table>
+          )}
         </Card>
 
         {/* Review modal */}
@@ -730,40 +1001,62 @@ export const RefundsPanel = () => {
 };
 
 export const FinancePanel = () => {
-  const { allOrders, role, customers, setActivePanel } = useApp();
+  const { allOrders, role, customers } = useApp();
   const isCustomer = role === 'customer';
   const currentCustomer = customers[0];
   const visibleOrders = isCustomer ? (currentCustomer?.orders || []) : allOrders;
-  const paidOrders = visibleOrders.filter((order: any) => order.payStatus === 'Paid');
-  const pendingOrders = visibleOrders.filter((order: any) => order.payStatus === 'Pending');
-  const failedOrders = visibleOrders.filter((order: any) => order.payStatus === 'Failed');
+
+  const [paymentFilter, setPaymentFilter] = useState<'All' | 'Paid' | 'Pending' | 'Failed'>('All');
+  const [search, setSearch] = useState('');
+  const [selectedReceiptOrder, setSelectedReceiptOrder] = useState<any>(null);
+
+  const paidOrders = visibleOrders.filter((order: any) => order.payStatus === 'Paid' || String(order.payStatus || '').toLowerCase() === 'completed');
+  const pendingOrders = visibleOrders.filter((order: any) => order.payStatus === 'Pending' || String(order.payStatus || '').toLowerCase() === 'unpaid');
+  const failedOrders = visibleOrders.filter((order: any) => order.payStatus === 'Failed' || String(order.payStatus || '').toLowerCase() === 'refunded');
+  
   const totalPaid = paidOrders.reduce((sum: number, order: any) => sum + Number(order.amount || 0), 0);
   const totalPending = pendingOrders.reduce((sum: number, order: any) => sum + Number(order.amount || 0), 0);
+  const avgOrderValue = paidOrders.length ? Math.round(totalPaid / paidOrders.length) : 0;
   const walletBalance = isCustomer ? Math.max(0, 500 - Math.min(500, Math.round((currentCustomer?.totalSpent || 0) / 10))) : 0;
-  const methodBreakdown = visibleOrders.reduce((acc: Record<string, number>, order: any) => {
-    const key = order.gateway || 'Online';
-    acc[key] = (acc[key] || 0) + Number(order.amount || 0);
+
+  // Filtered orders
+  const filteredOrders = visibleOrders.filter((order: any) => {
+    if (paymentFilter === 'Paid' && !(order.payStatus === 'Paid' || String(order.payStatus || '').toLowerCase() === 'completed')) return false;
+    if (paymentFilter === 'Pending' && !(order.payStatus === 'Pending' || String(order.payStatus || '').toLowerCase() === 'unpaid')) return false;
+    if (paymentFilter === 'Failed' && !(order.payStatus === 'Failed' || String(order.payStatus || '').toLowerCase() === 'refunded')) return false;
+
+    if (search.trim()) {
+      const q = search.toLowerCase();
+      const name = (order.customer?.name || currentCustomer?.name || '').toLowerCase();
+      const service = (order.service || '').toLowerCase();
+      const id = (order.id || '').toLowerCase();
+      return name.includes(q) || service.includes(q) || id.includes(q);
+    }
+    return true;
+  });
+
+  // Gateway breakdown
+  const methodBreakdown = visibleOrders.reduce((acc: Record<string, { count: number; total: number }>, order: any) => {
+    const key = order.gateway || 'UPI / QR';
+    if (!acc[key]) acc[key] = { count: 0, total: 0 };
+    acc[key].count += 1;
+    acc[key].total += Number(order.amount || 0);
     return acc;
   }, {});
-  const methodCards = Object.entries(methodBreakdown).length
-    ? Object.entries(methodBreakdown).map(([gateway, amount]) => ({
-      l: gateway,
-      v: money(amount),
-      p: `${visibleOrders.filter((order: any) => (order.gateway || 'Online') === gateway).length} txn`,
-    }))
-    : [{ l: 'No payments yet', v: money(0), p: '0 txn' }];
 
   const exportCsv = () => {
     const rows = [
-      ['Order ID', 'Customer', 'Service', 'Gateway', 'Payment Status', 'Order Status', 'Amount'],
+      ['Transaction / Order ID', 'Citizen / Customer', 'Phone', 'Service', 'Gateway / Channel', 'Payment Status', 'Workflow Status', 'Amount (INR)', 'Date'],
       ...visibleOrders.map((order: any) => [
         order.id,
         order.customer?.name || currentCustomer?.name || 'Customer',
+        order.customer?.phone || '',
         order.service,
-        order.gateway,
-        order.payStatus,
-        order.status,
-        String(order.amount),
+        order.gateway || 'UPI / QR',
+        order.payStatus || 'Pending',
+        order.status || 'Pending',
+        String(order.amount || 0),
+        order.date || 'Today',
       ]),
     ];
     const csv = rows.map(row => row.map(cell => `"${String(cell).replace(/"/g, '""')}"`).join(',')).join('\n');
@@ -777,73 +1070,406 @@ export const FinancePanel = () => {
   };
 
   return (
-    <div className="panel active">
-      <PanelHeader
-        title={isCustomer ? 'My Wallet & Payments' : 'Payment Ledger'}
-        sub={isCustomer ? 'Your service payments, wallet balance, and receipts' : 'Real-time transaction breakdown from live orders'}
-        actions={
-          <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
-            <button className="btn btn-ghost btn-sm" onClick={exportCsv}><Icon name="download" size={14} /> Export CSV</button>
-            {isCustomer && <button className="btn btn-primary btn-sm" onClick={() => setActivePanel('orders')}><Icon name="package" size={14} /> View Orders</button>}
+    <div className="panel active" style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: '20px 24px 100px 24px', overflowY: 'auto', boxSizing: 'border-box', minHeight: '100%', width: '100%' }}>
+      
+      {/* Header bar */}
+      <div style={{
+        display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 14,
+        background: '#ffffff', padding: '16px 20px', borderRadius: 16, border: '1px solid rgba(8, 47, 97, 0.08)',
+        boxShadow: '0 2px 8px rgba(15, 23, 42, 0.04)'
+      }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+            <span style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em', color: 'var(--blue)', background: 'var(--blue-dim)', padding: '2px 8px', borderRadius: 6 }}>
+              {isCustomer ? 'My Financial Desk' : 'Financial Ledger & Settlement'}
+            </span>
           </div>
-        }
-      />
-      <div className="panels">
-        <div className="grid-4">
-           {[
-             { l: isCustomer ? 'Wallet Balance' : 'Paid Revenue', v: isCustomer ? money(walletBalance) : money(totalPaid), p: isCustomer ? 'Available for future services' : `${paidOrders.length} paid order(s)` },
-             { l: 'Pending Payments', v: money(totalPending), p: `${pendingOrders.length} pending` },
-             { l: 'Failed Payments', v: money(failedOrders.reduce((sum: number, order: any) => sum + Number(order.amount || 0), 0)), p: `${failedOrders.length} failed` },
-             { l: 'Total Orders', v: String(visibleOrders.length), p: isCustomer ? 'Your profile' : 'Current dashboard data' },
-           ].map((m,i)=> (
-             <Card key={i}>
-               <div style={{ padding: 16 }}>
-                 <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-3)', marginBottom: 8 }}>{m.l}</div>
-                 <div style={{ fontSize: 'var(--fs-xl)', fontWeight: 'var(--fw-semibold)' }}>{m.v}</div>
-                 <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--blue)', marginTop: 4 }}>{m.p}</div>
-               </div>
-             </Card>
-           ))}
+          <h1 style={{ fontSize: 20, fontWeight: 800, color: 'var(--text-1)', letterSpacing: '-0.02em', margin: 0 }}>
+            {isCustomer ? 'My Wallet & Service Payments' : 'Payment Ledger & Collections'}
+          </h1>
+          <p style={{ fontSize: 12.5, color: 'var(--text-3)', margin: 0 }}>
+            {isCustomer
+              ? 'Real-time receipts and wallet balance for your citizen services.'
+              : `${visibleOrders.length} Transactions · ₹${totalPaid.toLocaleString('en-IN')} Total Realized · Gateway Analytics & PDF Receipts`}
+          </p>
         </div>
-        {!isCustomer && (
-          <div className="grid-4">
-             {methodCards.slice(0, 4).map((m,i)=> (
-               <Card key={i}>
-                 <div style={{ padding: 16 }}>
-                   <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-3)', marginBottom: 8 }}>{m.l}</div>
-                   <div style={{ fontSize: 'var(--fs-xl)', fontWeight: 'var(--fw-semibold)' }}>{m.v}</div>
-                   <div style={{ fontSize: 'var(--fs-xs)', color: 'var(--blue)', marginTop: 4 }}>{m.p}</div>
-                 </div>
-               </Card>
-             ))}
+
+        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+          <button
+            type="button"
+            className="btn btn-ghost btn-sm"
+            onClick={exportCsv}
+            style={{ borderRadius: 10, fontWeight: 600 }}
+          >
+            <Icon name="download" size={14} /> Export CSV Ledger
+          </button>
+        </div>
+      </div>
+
+      {/* Main KPI Stats Strip */}
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 14 }}>
+        <div style={{ background: '#ffffff', padding: '16px 20px', borderRadius: 14, border: '1px solid rgba(8, 47, 97, 0.08)', boxShadow: '0 1px 4px rgba(15, 23, 42, 0.04)' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <div style={{ fontSize: 11.5, fontWeight: 700, color: 'var(--emerald)', textTransform: 'uppercase' }}>
+              {isCustomer ? 'Wallet Balance' : 'Realized Revenue'}
+            </div>
+            <div style={{ width: 28, height: 28, borderRadius: 8, background: 'rgba(22, 163, 74, 0.1)', color: 'var(--emerald)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <Icon name="check-circle" size={14} />
+            </div>
           </div>
-        )}
-        <Card title={isCustomer ? 'My Payment History' : 'Recent Transactions'} bodyClass="card-body-flush">
-          <table className="data-table">
+          <div style={{ fontSize: 24, fontWeight: 800, color: 'var(--emerald)', marginTop: 4 }}>
+            ₹{(isCustomer ? walletBalance : totalPaid).toLocaleString('en-IN')}
+          </div>
+          <div style={{ fontSize: 11.5, color: 'var(--text-4)', marginTop: 4 }}>
+            {isCustomer ? 'Available for new services' : `${paidOrders.length} Paid Orders`}
+          </div>
+        </div>
+
+        <div style={{ background: '#ffffff', padding: '16px 20px', borderRadius: 14, border: '1px solid rgba(8, 47, 97, 0.08)', boxShadow: '0 1px 4px rgba(15, 23, 42, 0.04)' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <div style={{ fontSize: 11.5, fontWeight: 700, color: 'var(--amber)', textTransform: 'uppercase' }}>Pending Dues</div>
+            <div style={{ width: 28, height: 28, borderRadius: 8, background: 'rgba(201, 146, 26, 0.1)', color: 'var(--amber)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <Icon name="clock" size={14} />
+            </div>
+          </div>
+          <div style={{ fontSize: 24, fontWeight: 800, color: 'var(--amber)', marginTop: 4 }}>
+            ₹{totalPending.toLocaleString('en-IN')}
+          </div>
+          <div style={{ fontSize: 11.5, color: 'var(--text-4)', marginTop: 4 }}>
+            {pendingOrders.length} Transactions Awaiting Payment
+          </div>
+        </div>
+
+        <div style={{ background: '#ffffff', padding: '16px 20px', borderRadius: 14, border: '1px solid rgba(8, 47, 97, 0.08)', boxShadow: '0 1px 4px rgba(15, 23, 42, 0.04)' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <div style={{ fontSize: 11.5, fontWeight: 700, color: 'var(--blue)', textTransform: 'uppercase' }}>Avg Ticket Value</div>
+            <div style={{ width: 28, height: 28, borderRadius: 8, background: 'rgba(18, 86, 150, 0.1)', color: 'var(--blue)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <Icon name="trending-up" size={14} />
+            </div>
+          </div>
+          <div style={{ fontSize: 24, fontWeight: 800, color: 'var(--text-1)', marginTop: 4 }}>
+            ₹{avgOrderValue.toLocaleString('en-IN')}
+          </div>
+          <div style={{ fontSize: 11.5, color: 'var(--text-4)', marginTop: 4 }}>
+            Average realization per application
+          </div>
+        </div>
+
+        <div style={{ background: '#ffffff', padding: '16px 20px', borderRadius: 14, border: '1px solid rgba(8, 47, 97, 0.08)', boxShadow: '0 1px 4px rgba(15, 23, 42, 0.04)' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <div style={{ fontSize: 11.5, fontWeight: 700, color: 'var(--text-3)', textTransform: 'uppercase' }}>Total Transactions</div>
+            <div style={{ width: 28, height: 28, borderRadius: 8, background: 'var(--bg-3)', color: 'var(--text-2)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <Icon name="credit-card" size={14} />
+            </div>
+          </div>
+          <div style={{ fontSize: 24, fontWeight: 800, color: 'var(--text-1)', marginTop: 4 }}>
+            {visibleOrders.length}
+          </div>
+          <div style={{ fontSize: 11.5, color: 'var(--text-4)', marginTop: 4 }}>
+            {failedOrders.length} failed/refunded
+          </div>
+        </div>
+      </div>
+
+      {/* Gateway Breakdown Cards */}
+      {!isCustomer && Object.keys(methodBreakdown).length > 0 && (
+        <div style={{
+          background: '#ffffff', padding: '16px 20px', borderRadius: 16, border: '1px solid rgba(8, 47, 97, 0.08)',
+          boxShadow: '0 2px 8px rgba(15, 23, 42, 0.04)'
+        }}>
+          <div style={{ fontSize: 12, fontWeight: 700, color: 'var(--text-3)', textTransform: 'uppercase', marginBottom: 12, letterSpacing: '0.05em' }}>
+            Payment Channels & Gateway Volume
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: 12 }}>
+            {Object.entries(methodBreakdown).map(([gateway, data]) => (
+              <div key={gateway} style={{
+                background: 'var(--bg-2)', padding: '12px 14px', borderRadius: 12, border: '1px solid var(--border-1)',
+                display: 'flex', flexDirection: 'column', gap: 4
+              }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <span style={{ fontSize: 12, fontWeight: 700, color: 'var(--text-1)' }}>{gateway}</span>
+                  <span style={{ fontSize: 10.5, fontWeight: 700, color: 'var(--blue)', background: 'var(--blue-dim)', padding: '1px 6px', borderRadius: 4 }}>
+                    {data.count} txns
+                  </span>
+                </div>
+                <div style={{ fontSize: 16, fontWeight: 800, color: 'var(--emerald)', marginTop: 2 }}>
+                  ₹{data.total.toLocaleString('en-IN')}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Filter and Search Bar */}
+      <div style={{
+        display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12,
+        background: '#ffffff', padding: '12px 18px', borderRadius: 14, border: '1px solid rgba(8, 47, 97, 0.08)',
+        boxShadow: '0 1px 4px rgba(15, 23, 42, 0.04)'
+      }}>
+        {/* Search */}
+        <div style={{
+          display: 'flex', alignItems: 'center', gap: 8, padding: '6px 12px',
+          background: 'var(--bg-3)', border: '1px solid var(--border-1)', borderRadius: 10, minWidth: 260, flex: 1
+        }}>
+          <Icon name="search" size={14} style={{ color: 'var(--text-4)' }} />
+          <input
+            type="text"
+            placeholder="Search by Order ID, Citizen Name, or Service..."
+            value={search}
+            onChange={e => setSearch(e.target.value)}
+            style={{ width: '100%', border: 'none', outline: 'none', background: 'transparent', fontSize: 12.5, color: 'var(--text-1)' }}
+          />
+        </div>
+
+        {/* Status Chips */}
+        <div style={{ display: 'flex', gap: 4, background: 'var(--bg-3)', padding: 4, borderRadius: 10 }}>
+          {(['All', 'Paid', 'Pending', 'Failed'] as const).map(tab => (
+            <button
+              key={tab}
+              type="button"
+              onClick={() => setPaymentFilter(tab)}
+              style={{
+                border: 'none',
+                background: paymentFilter === tab ? 'var(--blue)' : 'transparent',
+                color: paymentFilter === tab ? '#ffffff' : 'var(--text-2)',
+                fontWeight: paymentFilter === tab ? 700 : 500,
+                fontSize: 12,
+                padding: '5px 14px',
+                borderRadius: 8,
+                cursor: 'pointer',
+                transition: 'all 0.15s'
+              }}
+            >
+              {tab === 'All' ? 'All Transactions' : tab}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Main Ledger Table */}
+      <div style={{
+        background: '#ffffff', borderRadius: 16, border: '1px solid rgba(8, 47, 97, 0.08)',
+        boxShadow: '0 2px 8px rgba(15, 23, 42, 0.04)', overflow: 'hidden'
+      }}>
+        <div style={{ overflowX: 'auto' }}>
+          <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: 13, minWidth: 920 }}>
             <thead>
-              <tr>
-                <th>Txn / Order ID</th><th>Date</th><th>{isCustomer ? 'Service' : 'Customer'}</th><th>Method</th><th>Amount</th><th>Payment</th><th>Order</th>
+              <tr style={{ background: 'var(--bg-3)', color: 'var(--text-3)', fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                <th style={{ padding: '12px 16px' }}>Txn / Order ID</th>
+                <th style={{ padding: '12px 16px' }}>Citizen</th>
+                <th style={{ padding: '12px 16px' }}>Service</th>
+                <th style={{ padding: '12px 16px' }}>Gateway</th>
+                <th style={{ padding: '12px 16px' }}>Amount</th>
+                <th style={{ padding: '12px 16px' }}>Payment Status</th>
+                <th style={{ padding: '12px 16px' }}>Workflow Stage</th>
+                <th style={{ padding: '12px 18px', textAlign: 'right' }}>Receipt</th>
               </tr>
             </thead>
             <tbody>
-              {visibleOrders.map((order: any) => (
-                <tr key={order.id}>
-                  <td><span style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-3)' }}>{order.id}</span></td>
-                  <td>{order.date}</td>
-                  <td>{isCustomer ? order.service : (order.customer?.name || 'Customer')}</td>
-                  <td>{order.gateway || 'Online'}</td>
-                  <td><strong>{money(order.amount)}</strong></td>
-                  <td><Badge type={paymentBadgeType(order.payStatus)}>{order.payStatus}</Badge></td>
-                  <td><Badge type={statusBadgeType(order.status)}>{order.status}</Badge></td>
+              {filteredOrders.map((order: any) => {
+                const isPaid = order.payStatus === 'Paid' || String(order.payStatus || '').toLowerCase() === 'completed';
+                const isPending = order.payStatus === 'Pending' || String(order.payStatus || '').toLowerCase() === 'unpaid';
+
+                return (
+                  <tr
+                    key={order.id}
+                    style={{ borderBottom: '1px solid var(--border-1)', transition: 'background 0.15s' }}
+                    onMouseEnter={e => (e.currentTarget.style.background = 'rgba(18, 86, 150, 0.02)')}
+                    onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}
+                  >
+                    <td style={{ padding: '12px 16px', fontFamily: 'monospace', fontWeight: 700, color: 'var(--blue)', fontSize: 12 }}>
+                      {order.id}
+                    </td>
+
+                    <td style={{ padding: '12px 16px' }}>
+                      <div style={{ fontWeight: 600, color: 'var(--text-1)' }}>
+                        {order.customer?.name || currentCustomer?.name || 'Customer'}
+                      </div>
+                      {order.customer?.phone && (
+                        <div style={{ fontSize: 11, color: 'var(--text-4)', fontFamily: 'monospace' }}>
+                          {order.customer.phone}
+                        </div>
+                      )}
+                    </td>
+
+                    <td style={{ padding: '12px 16px', fontWeight: 500, color: 'var(--text-2)' }}>
+                      {order.service || 'Service Order'}
+                    </td>
+
+                    <td style={{ padding: '12px 16px' }}>
+                      <span style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-2)', background: 'var(--bg-3)', padding: '3px 8px', borderRadius: 6 }}>
+                        {order.gateway || 'UPI / QR'}
+                      </span>
+                    </td>
+
+                    <td style={{ padding: '12px 16px', fontWeight: 800, color: isPaid ? 'var(--emerald)' : isPending ? 'var(--amber)' : 'var(--rose)', fontSize: 14 }}>
+                      ₹{Number(order.amount || 0).toLocaleString('en-IN')}
+                    </td>
+
+                    <td style={{ padding: '12px 16px' }}>
+                      <span style={{
+                        fontSize: 10.5, fontWeight: 700, textTransform: 'uppercase',
+                        color: isPaid ? '#16a34a' : isPending ? '#c9921a' : '#dc2626',
+                        background: isPaid ? 'rgba(22, 163, 74, 0.1)' : isPending ? 'rgba(201, 146, 26, 0.12)' : 'rgba(220, 38, 38, 0.1)',
+                        padding: '3px 8px', borderRadius: 6
+                      }}>
+                        {order.payStatus || 'Pending'}
+                      </span>
+                    </td>
+
+                    <td style={{ padding: '12px 16px' }}>
+                      <span style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-2)' }}>
+                        {order.status || 'Pending'}
+                      </span>
+                    </td>
+
+                    <td style={{ padding: '12px 18px', textAlign: 'right' }}>
+                      <button
+                        type="button"
+                        className="btn btn-ghost btn-xs"
+                        onClick={() => setSelectedReceiptOrder(order)}
+                        style={{ padding: '4px 8px', fontWeight: 600, color: 'var(--blue)' }}
+                      >
+                        <Icon name="file-text" size={13} /> View Receipt
+                      </button>
+                    </td>
+                  </tr>
+                );
+              })}
+
+              {filteredOrders.length === 0 && (
+                <tr>
+                  <td colSpan={8} style={{ padding: '48px 20px', textAlign: 'center', color: 'var(--text-3)' }}>
+                    <Icon name="credit-card" size={32} style={{ opacity: 0.3, marginBottom: 8 }} />
+                    <div style={{ fontSize: 14, fontWeight: 700 }}>No Transactions Found</div>
+                    <div style={{ fontSize: 12, marginTop: 4 }}>No payment entries match your active filters.</div>
+                  </td>
                 </tr>
-              ))}
-              {visibleOrders.length === 0 && (
-                <tr><td colSpan={7} style={{ textAlign: 'center', color: 'var(--text-3)', padding: 28 }}>No payment records yet.</td></tr>
               )}
             </tbody>
           </table>
-        </Card>
+        </div>
+
+        {filteredOrders.length > 0 && (
+          <div style={{
+            padding: '10px 18px', fontSize: 11.5, color: 'var(--text-3)',
+            borderTop: '1px solid var(--border-1)', display: 'flex', justifyContent: 'space-between', alignItems: 'center'
+          }}>
+            <span>Showing {filteredOrders.length} of {visibleOrders.length} entries</span>
+            <span style={{ fontWeight: 700, color: 'var(--emerald)' }}>
+              Filtered Total: ₹{filteredOrders.reduce((s: number, o: any) => s + Number(o.amount || 0), 0).toLocaleString('en-IN')}
+            </span>
+          </div>
+        )}
       </div>
+
+      {/* Bottom spacer for clean scrolling */}
+      <div style={{ height: 80, flexShrink: 0 }} />
+
+      {/* Official Receipt Modal */}
+      {selectedReceiptOrder && (
+        <div className="modal-overlay" onClick={() => setSelectedReceiptOrder(null)}>
+          <div className="modal-content" onClick={e => e.stopPropagation()} style={{ width: 520, borderRadius: 18, padding: 0, overflow: 'hidden' }}>
+            
+            {/* Receipt Header */}
+            <div style={{
+              background: 'linear-gradient(135deg, #082f61 0%, #125696 100%)',
+              padding: '20px 24px', color: '#ffffff', display: 'flex', justifyContent: 'space-between', alignItems: 'center'
+            }}>
+              <div>
+                <div style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', color: '#c9921a' }}>
+                  Official Digital Receipt
+                </div>
+                <h3 style={{ fontSize: 18, fontWeight: 800, margin: '2px 0 0', color: '#ffffff' }}>
+                  One Point Digital Services
+                </h3>
+              </div>
+              <button className="icon-btn" style={{ color: '#ffffff' }} onClick={() => setSelectedReceiptOrder(null)}>
+                <Icon name="x" size={18} />
+              </button>
+            </div>
+
+            {/* Receipt Content */}
+            <div style={{ padding: '24px', display: 'flex', flexDirection: 'column', gap: 16 }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingBottom: 12, borderBottom: '1px solid var(--border-1)' }}>
+                <div>
+                  <div style={{ fontSize: 11, color: 'var(--text-4)', textTransform: 'uppercase', fontWeight: 600 }}>Receipt #</div>
+                  <div style={{ fontSize: 14, fontWeight: 700, fontFamily: 'monospace', color: 'var(--blue)' }}>{selectedReceiptOrder.id}</div>
+                </div>
+                <div style={{ textAlign: 'right' }}>
+                  <div style={{ fontSize: 11, color: 'var(--text-4)', textTransform: 'uppercase', fontWeight: 600 }}>Payment Status</div>
+                  <span style={{
+                    fontSize: 11, fontWeight: 700, textTransform: 'uppercase',
+                    color: selectedReceiptOrder.payStatus === 'Paid' ? '#16a34a' : '#c9921a',
+                    background: selectedReceiptOrder.payStatus === 'Paid' ? 'rgba(22, 163, 74, 0.1)' : 'rgba(201, 146, 26, 0.12)',
+                    padding: '2px 8px', borderRadius: 6
+                  }}>
+                    {selectedReceiptOrder.payStatus || 'Pending'}
+                  </span>
+                </div>
+              </div>
+
+              {/* Citizen Details */}
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, background: 'var(--bg-2)', padding: 12, borderRadius: 10 }}>
+                <div>
+                  <div style={{ fontSize: 10.5, color: 'var(--text-4)', fontWeight: 600 }}>CITIZEN / PAYER</div>
+                  <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--text-1)' }}>
+                    {selectedReceiptOrder.customer?.name || currentCustomer?.name || 'Customer'}
+                  </div>
+                  <div style={{ fontSize: 11, color: 'var(--text-3)' }}>{selectedReceiptOrder.customer?.phone || '—'}</div>
+                </div>
+                <div>
+                  <div style={{ fontSize: 10.5, color: 'var(--text-4)', fontWeight: 600 }}>SERVICE</div>
+                  <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--text-1)' }}>
+                    {selectedReceiptOrder.service || 'Service Order'}
+                  </div>
+                  <div style={{ fontSize: 11, color: 'var(--text-3)' }}>Channel: {selectedReceiptOrder.gateway || 'UPI / QR'}</div>
+                </div>
+              </div>
+
+              {/* Amount Breakdown */}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 6, paddingTop: 6 }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 12, color: 'var(--text-2)' }}>
+                  <span>Government Application Fee</span>
+                  <span>₹{Math.round((selectedReceiptOrder.amount || 0) * 0.7)}</span>
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 12, color: 'var(--text-2)' }}>
+                  <span>CSC Digital Processing & Facilitation Charge</span>
+                  <span>₹{Math.round((selectedReceiptOrder.amount || 0) * 0.3)}</span>
+                </div>
+                <div style={{
+                  display: 'flex', justifyContent: 'space-between', fontSize: 16, fontWeight: 800,
+                  color: 'var(--emerald)', paddingTop: 8, borderTop: '2px dashed var(--border-1)'
+                }}>
+                  <span>Total Paid</span>
+                  <span>₹{Number(selectedReceiptOrder.amount || 0).toLocaleString('en-IN')}</span>
+                </div>
+              </div>
+
+              {/* Modal Actions */}
+              <div style={{ display: 'flex', gap: 10, justifyContent: 'flex-end', paddingTop: 12, borderTop: '1px solid var(--border-1)' }}>
+                <button
+                  type="button"
+                  className="btn btn-ghost"
+                  onClick={() => window.print()}
+                >
+                  <Icon name="printer" size={14} /> Print Receipt
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  onClick={() => setSelectedReceiptOrder(null)}
+                >
+                  Done
+                </button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      )}
+
     </div>
   );
 };

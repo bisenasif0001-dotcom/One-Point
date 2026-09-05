@@ -1,82 +1,702 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Refund Policy for One Point Digital Services covering service charges, payment proof review, duplicate payments and official fee limitations.">
-    <title>Refund Policy | One Point Digital Services</title>
+    <meta name="description" content="Refund & Cancellation Policy for One Point Digital Services Lucknow. Learn about pre-filing cancellation, duplicate UPI payments, government portal fee rules, and refund timelines.">
+    <title>Refund &amp; Cancellation Policy | One Point Digital Services</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-        <link rel="stylesheet" href="assets/onepoint.css?v=2">
-
+    <script src="assets/opds-boot.js?v=anti-fouc-79"></script>
+    <link rel="stylesheet" href="assets/onepoint.css?v=customer-checkout-94">
+    <link rel="stylesheet" href="assets/enterprise-design-system.css?v=eds-2">
+    <link rel="stylesheet" href="assets/enterprise-visual-polish.css?v=polish-3">
     <style>
-      /* Hero */
-      .compact-hero {
+      /* ══════════════════════════════════════════════════════════════════════════
+         REFUND & CANCELLATION POLICY — ENTERPRISE CLEAN DESIGN SYSTEM
+         ══════════════════════════════════════════════════════════════════════════ */
+      :root {
+        --refund-navy: #125696;
+        --refund-navy-mid: #0f4f8b;
+        --refund-navy-dark: #082f61;
+        --refund-gold: #f5c842;
+        --refund-gold-text: #c58a10;
+        --refund-border: #e2e8f0;
+        --refund-border-subtle: #edf2f7;
+        --refund-surface: #ffffff;
+        --refund-bg: #f8fafc;
+      }
+
+      body.refund-page-body {
+        background-color: #f8fafc;
+        color: #0f172a;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        scroll-behavior: smooth;
+      }
+
+      /* ── Top Hero Section ── */
+      .compact-hero.refund-hero-bg {
         background:
-          linear-gradient(90deg, rgba(18,86,150,0.98) 0%, rgba(18,86,150,0.88) 45%, rgba(210,161,42,0.3) 100%),
-          url('assets/csc_hero_bg.png') no-repeat center / cover !important;
+          linear-gradient(100deg, rgba(11, 40, 88, 0.97) 0%, rgba(18, 86, 150, 0.92) 55%, rgba(12, 46, 98, 0.93) 100%),
+          linear-gradient(to bottom, rgba(8, 24, 60, 0.65) 0%, transparent 42%),
+          url('assets/disclaimer_human.png') no-repeat center/cover !important;
+        text-align: left !important;
+        padding-top: clamp(48px, 6vw, 76px) !important;
+        padding-bottom: clamp(48px, 6vw, 76px) !important;
       }
-      .compact-hero::before,
-      .compact-hero::after { display: none !important; }
-      .compact-hero { padding-inline: 0 !important; }
-      .compact-hero h1 { text-align: left !important; margin-inline: 0 !important; }
-      .compact-hero p:not(.eyebrow) { text-align: left !important; margin-inline: 0 !important; }
-      .compact-hero .hero-actions { justify-content: flex-start !important; }
+      .compact-hero.refund-hero-bg::before,
+      .compact-hero.refund-hero-bg::after { display: none !important; }
+      .compact-hero.refund-hero-bg .site-container {
+        width: 100% !important;
+        max-width: var(--max, 1200px) !important;
+        margin-inline: auto !important;
+        padding-inline: var(--gutter, clamp(16px, 4vw, 32px)) !important;
+        box-sizing: border-box !important;
+        text-align: left !important;
+      }
+      .compact-hero.refund-hero-bg h1 {
+        text-align: left !important;
+        margin-left: 0 !important;
+        font-size: clamp(2rem, 3.5vw, 2.75rem) !important;
+        font-weight: 800 !important;
+        letter-spacing: -0.025em !important;
+        color: #ffffff !important;
+      }
+      .compact-hero.refund-hero-bg p:not(.eyebrow) {
+        text-align: left !important;
+        margin-left: 0 !important;
+        max-width: 680px !important;
+        font-size: 1rem !important;
+        line-height: 1.6 !important;
+        color: rgba(235, 245, 255, 0.88) !important;
+      }
+      .compact-hero.refund-hero-bg .eyebrow {
+        margin-left: 0 !important;
+        margin-right: auto !important;
+        background: rgba(245, 200, 66, 0.15) !important;
+        border: 1px solid rgba(245, 200, 66, 0.35) !important;
+        color: #f5c842 !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        gap: 6px !important;
+        padding: 4px 12px !important;
+        border-radius: 999px !important;
+        font-size: 0.76rem !important;
+        font-weight: 700 !important;
+        letter-spacing: 0.06em !important;
+        text-transform: uppercase !important;
+        margin-bottom: 14px !important;
+      }
+      .compact-hero.refund-hero-bg .hero-actions {
+        justify-content: flex-start !important;
+        margin-top: 24px !important;
+        display: flex !important;
+        gap: 12px !important;
+        flex-wrap: wrap !important;
+      }
 
-      /* Content section — 2×2 grid */
-      .legal-content {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 20px;
-        background: #f5f8fe;
-        align-items: start;
-      }
-      .legal-content .legal-action-strip {
-        grid-column: 1 / -1;
-        margin-top: 8px;
+      /* ── Page Shell ── */
+      .refund-page-shell {
+        width: 100%;
+        max-width: var(--max, 1200px);
+        margin-inline: auto;
+        padding-top: clamp(24px, 3.5vw, 36px);
+        padding-bottom: 72px;
+        padding-inline: var(--gutter, clamp(16px, 4vw, 32px));
+        box-sizing: border-box;
       }
 
-      /* Panel cards */
-      .legal-content .panel {
+      /* ── Meta Bar (Breadcrumb + Version Info + Print Action) ── */
+      .refund-meta-bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-bottom: 24px;
+        padding-bottom: 14px;
+        border-bottom: 1px solid var(--refund-border);
+      }
+      .refund-breadcrumb {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 0.82rem;
+        color: #64748b;
+      }
+      .refund-breadcrumb a { color: #475569; text-decoration: none; transition: color 0.15s; }
+      .refund-breadcrumb a:hover { color: #0a5aa8; }
+      .refund-breadcrumb i, .refund-breadcrumb svg { width: 14px; height: 14px; color: #94a3b8; }
+      .refund-breadcrumb span { color: #0f172a; font-weight: 600; }
+
+      .refund-version-tag {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 0.78rem;
+        color: #64748b;
+      }
+      .version-badge {
+        background: #f1f5f9;
+        border: 1px solid #e2e8f0;
+        color: #334155;
+        font-weight: 700;
+        padding: 2px 8px;
+        border-radius: 6px;
+      }
+      .btn-print-policy {
         background: #ffffff;
-        border-radius: 16px;
-        padding: clamp(24px, 3vw, 36px);
-        border: 1px solid rgba(10,44,88,.08);
-        box-shadow: 0 1px 3px rgba(0,0,0,.04), 0 4px 20px rgba(0,0,0,.06);
+        border: 1px solid #cbd5e1;
+        color: #334155;
+        font-size: 0.76rem;
+        font-weight: 600;
+        padding: 4px 10px;
+        border-radius: 6px;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        transition: all 0.15s ease;
       }
-      .legal-content .panel h2 {
-        font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+      .btn-print-policy:hover {
+        background: #f1f5f9;
+        color: #0a5aa8;
+        border-color: #0a5aa8;
+      }
+
+      /* ── 1. Refunds at a Glance (30-Sec Summary Box) ── */
+      .refund-glance-card {
+        background: #ffffff;
+        border: 1px solid var(--refund-border);
+        border-radius: 16px;
+        padding: clamp(20px, 3vw, 28px);
+        box-shadow: 0 1px 3px rgba(15, 23, 42, 0.03);
+        margin-bottom: 28px;
+      }
+      .glance-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 16px;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .glance-kicker {
+        font-size: 0.74rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: #0a5aa8;
+        background: rgba(10, 90, 168, 0.08);
+        border: 1px solid rgba(10, 90, 168, 0.18);
+        padding: 3px 10px;
+        border-radius: 999px;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .glance-title {
+        font-size: 1.15rem;
         font-weight: 800;
-        color: var(--primary, #0a2c58);
-        letter-spacing: -0.02em;
+        color: #082f61;
+        margin: 4px 0 0 0;
+      }
+      .glance-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+      }
+      @media (max-width: 880px) {
+        .glance-grid { grid-template-columns: 1fr; }
+      }
+      .glance-item {
+        background: #f8fafc;
+        border: 1px solid #e2e8f0;
+        border-radius: 10px;
+        padding: 12px 14px;
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+      }
+      .glance-label {
+        font-size: 0.72rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: #0a5aa8;
+        letter-spacing: 0.04em;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+      .glance-desc {
+        font-size: 0.82rem;
+        color: #334155;
+        line-height: 1.45;
+        margin: 0;
+      }
+
+      /* ── 2. Top Core Principles (Concise TL;DR) ── */
+      .refund-principles-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+        margin-bottom: 32px;
+      }
+      @media (max-width: 960px) {
+        .refund-principles-grid { grid-template-columns: repeat(2, 1fr); }
+      }
+      @media (max-width: 540px) {
+        .refund-principles-grid { grid-template-columns: 1fr; }
+      }
+
+      .principle-card {
+        background: #ffffff;
+        border: 1px solid var(--refund-border);
+        border-radius: 14px;
+        padding: 18px 16px;
+        box-shadow: 0 1px 3px rgba(15, 23, 42, 0.02);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        transition: transform 0.2s ease, border-color 0.2s ease;
+      }
+      .principle-card:hover {
+        transform: translateY(-2px);
+        border-color: rgba(18, 86, 150, 0.28);
+      }
+      .principle-top {
+        display: flex;
+        align-items: center;
+        gap: 10px;
         margin-bottom: 10px;
+      }
+      .principle-icon {
+        width: 34px;
+        height: 34px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(18, 86, 150, 0.08);
+        color: #125696;
+        flex-shrink: 0;
+      }
+      .principle-title {
+        font-size: 0.92rem;
+        font-weight: 750;
+        color: #082f61;
+        margin: 0;
+      }
+      .principle-desc {
+        font-size: 0.78rem;
+        color: #475569;
+        line-height: 1.45;
+        margin: 0;
+      }
+
+      /* ── 3. Visual Refund Lifecycle ── */
+      .refund-flow-section {
+        background: #ffffff;
+        border: 1px solid var(--refund-border);
+        border-radius: 16px;
+        padding: clamp(20px, 3vw, 28px);
+        box-shadow: 0 1px 3px rgba(15, 23, 42, 0.03);
+        margin-bottom: 32px;
+      }
+      .refund-flow-title {
+        font-size: 1.05rem;
+        font-weight: 800;
+        color: #082f61;
+        margin: 0 0 4px 0;
+      }
+      .refund-flow-sub {
+        font-size: 0.82rem;
+        color: #64748b;
+        margin: 0 0 18px 0;
+      }
+      .refund-flow-timeline {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 10px;
         position: relative;
       }
-      .legal-content .panel h2::after {
-        content: '';
-        display: block;
-        width: 40px;
-        height: 3px;
-        background: var(--grad-gold, linear-gradient(90deg,#c8982e,#e8b94a));
-        border-radius: 100px;
-        margin-top: 10px;
+      @media (max-width: 880px) {
+        .refund-flow-timeline { grid-template-columns: 1fr; }
       }
-      .legal-content .panel p {
-        font-size: 0.9rem;
-        color: #4a5568;
-        line-height: 1.65;
+      .refund-flow-step {
+        background: #f8fafc;
+        border: 1px solid #e2e8f0;
+        border-radius: 10px;
+        padding: 12px 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        position: relative;
+      }
+      .refund-step-num {
+        font-size: 0.68rem;
+        font-weight: 800;
+        color: #125696;
+        background: rgba(18, 86, 150, 0.08);
+        padding: 2px 6px;
+        border-radius: 4px;
+        margin-bottom: 6px;
+      }
+      .refund-step-title {
+        font-size: 0.82rem;
+        font-weight: 750;
+        color: #0f172a;
+        margin-bottom: 4px;
+      }
+      .refund-step-desc {
+        font-size: 0.72rem;
+        color: #64748b;
+        line-height: 1.35;
         margin: 0;
-        margin-top: 14px;
       }
 
-      @media (max-width: 640px) {
-        .legal-content { grid-template-columns: 1fr; }
+      /* ── 4. Main 2-Column Policy Hub Layout ── */
+      .refund-main-grid {
+        display: grid;
+        grid-template-columns: 270px 1fr;
+        gap: 28px;
+        align-items: start;
       }
+      @media (max-width: 880px) {
+        .refund-main-grid { grid-template-columns: 1fr; }
+      }
+
+      /* Left Sidebar: Sticky Navigation & Payment Review Desk */
+      .refund-sidebar {
+        position: sticky;
+        top: 84px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .toc-card {
+        background: #ffffff;
+        border: 1px solid var(--refund-border);
+        border-radius: 14px;
+        padding: 16px;
+        box-shadow: 0 1px 3px rgba(15, 23, 42, 0.02);
+      }
+      .toc-head {
+        font-size: 0.74rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: #64748b;
+        margin-bottom: 10px;
+        padding-left: 6px;
+      }
+      .toc-nav-list {
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+      }
+      .toc-link {
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: #475569;
+        text-decoration: none;
+        padding: 6px 10px;
+        border-radius: 6px;
+        transition: all 0.15s ease;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .toc-link:hover, .toc-link.active {
+        background: rgba(18, 86, 150, 0.08);
+        color: #125696;
+        font-weight: 700;
+      }
+      .toc-num {
+        font-size: 0.68rem;
+        font-weight: 700;
+        color: #94a3b8;
+        background: #f8fafc;
+        border: 1px solid #e2e8f0;
+        padding: 1px 5px;
+        border-radius: 4px;
+      }
+      .toc-link.active .toc-num {
+        color: #125696;
+        background: #ffffff;
+        border-color: rgba(18, 86, 150, 0.3);
+      }
+
+      /* Payment Proof Submission Desk Card */
+      .payment-proof-card {
+        background: linear-gradient(145deg, #ffffff 0%, #f8fbff 100%);
+        border: 1px solid rgba(18, 86, 150, 0.2);
+        border-radius: 14px;
+        padding: 18px;
+        box-shadow: 0 1px 3px rgba(15, 23, 42, 0.02);
+      }
+      .proof-kicker {
+        font-size: 0.7rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: #125696;
+        background: rgba(18, 86, 150, 0.08);
+        padding: 2px 7px;
+        border-radius: 4px;
+        margin-bottom: 8px;
+        display: inline-block;
+      }
+      .proof-title {
+        font-size: 0.92rem;
+        font-weight: 750;
+        color: #082f61;
+        margin: 0 0 6px 0;
+      }
+      .proof-items {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin: 10px 0 14px 0;
+      }
+      .proof-chk {
+        display: flex;
+        align-items: flex-start;
+        gap: 6px;
+        font-size: 0.76rem;
+        color: #334155;
+        line-height: 1.4;
+      }
+      .proof-chk i { color: #16a34a; width: 14px; height: 14px; flex-shrink: 0; margin-top: 1px; }
+
+      .btn-proof-wa {
+        font-size: 0.78rem;
+        font-weight: 600;
+        padding: 8px 12px;
+        border-radius: 6px;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        background: #125696;
+        color: #ffffff;
+        transition: background 0.15s;
+      }
+      .btn-proof-wa:hover { background: #0b3f72; color: #ffffff; }
+
+      /* Right Column: Policy Document Articles */
+      .refund-doc-card {
+        background: #ffffff;
+        border: 1px solid var(--refund-border);
+        border-radius: 16px;
+        padding: clamp(24px, 4vw, 44px);
+        box-shadow: 0 1px 3px rgba(15, 23, 42, 0.03);
+      }
+
+      .doc-section {
+        padding-bottom: 36px;
+        margin-bottom: 36px;
+        border-bottom: 1px solid var(--refund-border-subtle);
+        scroll-margin-top: 96px;
+      }
+      .doc-section:last-child {
+        padding-bottom: 0;
+        margin-bottom: 0;
+        border-bottom: none;
+      }
+
+      .doc-section-head {
+        margin-bottom: 14px;
+      }
+      .doc-section-kicker {
+        font-size: 0.72rem;
+        font-weight: 750;
+        text-transform: uppercase;
+        color: #0a5aa8;
+        letter-spacing: 0.06em;
+        margin-bottom: 2px;
+        display: block;
+      }
+      .doc-section-title {
+        font-size: 1.25rem;
+        font-weight: 800;
+        color: #082f61;
+        margin: 0 0 6px 0;
+        line-height: 1.3;
+      }
+      .doc-section-summary {
+        font-size: 0.84rem;
+        color: #64748b;
+        margin: 0 0 14px 0;
+        font-weight: 500;
+      }
+
+      .doc-text {
+        font-size: 0.9rem;
+        color: #334155;
+        line-height: 1.7;
+        margin: 0 0 14px 0;
+      }
+
+      .doc-list {
+        margin: 8px 0 14px 20px;
+        padding: 0;
+        font-size: 0.88rem;
+        color: #334155;
+        line-height: 1.65;
+      }
+      .doc-list li { margin-bottom: 6px; }
+
+      /* Reassuring Notice Box */
+      .doc-callout-refund {
+        background: #f0f7ff;
+        border: 1px solid #bfdbfe;
+        border-left: 4px solid #125696;
+        border-radius: 8px;
+        padding: 12px 16px;
+        margin: 14px 0;
+        font-size: 0.84rem;
+        color: #1e40af;
+        line-height: 1.55;
+      }
+      .doc-callout-refund strong { color: #082f61; }
+
+      /* Contact Grievance Box */
+      .refund-contact-box {
+        background: #f8fafc;
+        border: 1px solid var(--refund-border);
+        border-radius: 12px;
+        padding: 18px 20px;
+        margin-top: 16px;
+      }
+      .refund-contact-rows {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+        margin-top: 12px;
+      }
+      @media (max-width: 600px) {
+        .refund-contact-rows { grid-template-columns: 1fr; }
+      }
+      .refund-contact-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        font-size: 0.82rem;
+        color: #334155;
+      }
+      .refund-contact-item i { color: #125696; width: 16px; height: 16px; flex-shrink: 0; margin-top: 2px; }
+
+      /* ── 5. Bottom Trust Assurances Strip ── */
+      .refund-trust-strip {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+        margin-top: 36px;
+      }
+      @media (max-width: 768px) {
+        .refund-trust-strip { grid-template-columns: 1fr; }
+      }
+      .refund-trust-card {
+        background: #ffffff;
+        border: 1px solid var(--refund-border);
+        border-radius: 12px;
+        padding: 16px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .refund-trust-icon {
+        width: 38px;
+        height: 38px;
+        border-radius: 8px;
+        background: rgba(18, 86, 150, 0.08);
+        color: #125696;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+      .refund-trust-title {
+        font-size: 0.84rem;
+        font-weight: 700;
+        color: #0f172a;
+      }
+      .refund-trust-sub {
+        font-size: 0.74rem;
+        color: #64748b;
+        display: block;
+      }
+
+      /* ── 6. Pre-Footer Direct Action Bar ── */
+      .refund-prefooter {
+        background:
+          radial-gradient(circle at 14% 12%, rgba(210, 161, 42, 0.16), transparent 26rem),
+          radial-gradient(circle at 86% 80%, rgba(179, 218, 248, 0.16), transparent 28rem),
+          linear-gradient(180deg, #125696 0%, #0f4f8b 56%, #0b3f72 100%) !important;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        box-shadow: 0 16px 40px rgba(11, 63, 114, 0.18);
+        border-radius: 16px;
+        padding: clamp(24px, 3.5vw, 36px);
+        color: #ffffff;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 18px;
+        margin-top: 32px;
+      }
+      .prefooter-text h3 {
+        font-size: clamp(1.2rem, 2.2vw, 1.45rem);
+        font-weight: 800;
+        color: #ffffff;
+        margin: 0 0 4px 0;
+      }
+      .prefooter-text p {
+        font-size: 0.86rem;
+        color: rgba(235, 245, 255, 0.85);
+        margin: 0;
+      }
+      .prefooter-btns {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+      .btn-prefooter-gold {
+        background: #f5c842;
+        color: #082f61;
+        font-weight: 700;
+        font-size: 0.84rem;
+        padding: 9px 16px;
+        border-radius: 8px;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        transition: transform 0.15s;
+      }
+      .btn-prefooter-gold:hover { transform: translateY(-1px); background: #ffffff; }
+      .btn-prefooter-ghost {
+        background: rgba(255, 255, 255, 0.12);
+        color: #ffffff;
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        font-weight: 600;
+        font-size: 0.84rem;
+        padding: 9px 16px;
+        border-radius: 8px;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .btn-prefooter-ghost:hover { background: rgba(255, 255, 255, 0.22); color: #ffffff; }
     </style>
-</head>
-  <body>
+  </head>
+
+  <body class="refund-page-body">
     <div data-site-nav>
       <header class="site-header fallback-site-header">
         <nav class="nav-bar" aria-label="Primary fallback">
@@ -93,81 +713,457 @@
         </nav>
       </header>
     </div>
-    <main class="page-shell">
-      <section class="compact-hero">
+
+    <main>
+      <!-- Signature Top Hero Section -->
+      <section class="compact-hero refund-hero-bg">
         <div class="site-container">
-          <p class="eyebrow">Refund Policy</p>
-          <h1>Payment review and refund rules.</h1>
-          <p>Last updated: May 14, 2026. Refunds depend on service stage, payment verification and third-party official fee rules.</p>
+          <p class="eyebrow"><i data-lucide="refresh-cw" style="width: 14px; height: 14px;"></i> Transparent Billing &amp; Refunds</p>
+          <h1>Payment review, refunds &amp; cancellation rules.</h1>
+          <p>Understand our clear, fair criteria regarding service cancellations, third-party government challans, duplicate UPI payments, and refund settlement timelines.</p>
           <div class="hero-actions">
-            <a class="btn btn-primary" href="support.html">Raise Payment Issue</a>
-            <a class="btn btn-ghost" href="track-application.html">Track Request</a>
+            <a class="btn btn-primary" href="https://wa.me/919473946181?text=Hello%20One%20Point%2C%20I%20have%20a%20payment%20query%20or%20refund%20request." target="_blank" rel="noopener"><i data-lucide="message-circle"></i> Raise Payment Issue on WhatsApp</a>
+            <a class="btn btn-ghost" href="#sec-duplicate"><i data-lucide="receipt"></i> Report Duplicate UPI Debit</a>
           </div>
         </div>
       </section>
 
-      <section class="section legal-content">
-        <div class="panel">
-          <h2>Before <span class="h2-gold">Processing</span></h2>
-          <p>If payment is made but processing has not started, you may request cancellation and refund review through WhatsApp or the contact form.</p>
+      <!-- Main Refund Policy Shell -->
+      <div class="refund-page-shell">
+        
+        <!-- Meta Bar (Breadcrumb + Version + Print) -->
+        <div class="refund-meta-bar">
+          <nav class="refund-breadcrumb" aria-label="Breadcrumb">
+            <a href="index.html">Home</a>
+            <i data-lucide="chevron-right"></i>
+            <span>Refund &amp; Cancellation Policy</span>
+          </nav>
+
+          <div class="refund-version-tag">
+            <span>Version <strong class="version-badge">2.4</strong></span>
+            <span>&middot;</span>
+            <span>Effective: <strong>July 2026</strong></span>
+            <button type="button" class="btn-print-policy" onclick="window.print()" title="Print policy document">
+              <i data-lucide="printer" style="width: 13px; height: 13px;"></i>
+              <span>Print Policy</span>
+            </button>
+          </div>
         </div>
-        <div class="panel">
-          <h2>After Processing <span class="h2-gold">Starts</span></h2>
-          <p>Service assistance charges may be non-refundable once document review, form filling, booking support or official submission work has started.</p>
+
+        <!-- 1. Refunds at a Glance (30-Second Summary Box) -->
+        <section class="refund-glance-card">
+          <div class="glance-head">
+            <div>
+              <span class="glance-kicker"><i data-lucide="zap" style="width: 12px; height: 12px;"></i> Refunds at a Glance</span>
+              <h2 class="glance-title">Summary of our refund criteria in 30 seconds</h2>
+            </div>
+          </div>
+
+          <div class="glance-grid">
+            <div class="glance-item">
+              <span class="glance-label"><i data-lucide="clock" style="width: 13px; height: 13px;"></i> Pre-Filing Cancel</span>
+              <p class="glance-desc">100% full refund if cancellation is requested before our operator begins official portal submission.</p>
+            </div>
+
+            <div class="glance-item">
+              <span class="glance-label"><i data-lucide="landmark" style="width: 13px; height: 13px;"></i> Govt Portal Challans</span>
+              <p class="glance-desc">Departmental examination fees and challans once paid are strictly non-refundable as per statutory rules.</p>
+            </div>
+
+            <div class="glance-item">
+              <span class="glance-label"><i data-lucide="refresh-cw" style="width: 13px; height: 13px;"></i> Duplicate Debits</span>
+              <p class="glance-desc">Accidental double payments or UPI gateway drops refunded within 24&ndash;48 business hours.</p>
+            </div>
+
+            <div class="glance-item">
+              <span class="glance-label"><i data-lucide="shield-check" style="width: 13px; height: 13px;"></i> Operator Errors</span>
+              <p class="glance-desc">If filing error occurs due to our operator contrary to your draft sign-off, we re-file for free or refund 100%.</p>
+            </div>
+
+            <div class="glance-item">
+              <span class="glance-label"><i data-lucide="package" style="width: 13px; height: 13px;"></i> Store Replacements</span>
+              <p class="glance-desc">Physical PVC cards or photo frames damaged in transit replaced free when reported within 24 hours.</p>
+            </div>
+
+            <div class="glance-item">
+              <span class="glance-label"><i data-lucide="credit-card" style="width: 13px; height: 13px;"></i> Settlement Mode</span>
+              <p class="glance-desc">Approved refunds credited directly back to the original source UPI ID or bank account within 3&ndash;5 days.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- 2. Top Core Principles (Concise TL;DR) -->
+        <section class="refund-principles-grid">
+          
+          <article class="principle-card">
+            <div class="principle-top">
+              <div class="principle-icon"><i data-lucide="clock"></i></div>
+              <h3 class="principle-title">100% Pre-Filing Exit</h3>
+            </div>
+            <p class="principle-desc">Zero cancellation charges if requested before official portal data entry starts.</p>
+          </article>
+
+          <article class="principle-card">
+            <div class="principle-top">
+              <div class="principle-icon"><i data-lucide="refresh-cw"></i></div>
+              <h3 class="principle-title">Rapid Double Debits</h3>
+            </div>
+            <p class="principle-desc">24&ndash;48 hour verified turnaround for duplicate UPI transactions.</p>
+          </article>
+
+          <article class="principle-card">
+            <div class="principle-top">
+              <div class="principle-icon"><i data-lucide="receipt"></i></div>
+              <h3 class="principle-title">Itemized Credit Memos</h3>
+            </div>
+            <p class="principle-desc">Digital confirmation receipt issued with bank reference for every approved refund.</p>
+          </article>
+
+          <article class="principle-card">
+            <div class="principle-top">
+              <div class="principle-icon"><i data-lucide="headphones"></i></div>
+              <h3 class="principle-title">Payment Helpdesk</h3>
+            </div>
+            <p class="principle-desc">Dedicated billing operator available via WhatsApp and at our Lucknow counter.</p>
+          </article>
+
+        </section>
+
+        <!-- 3. Visual Refund Lifecycle Timeline -->
+        <section class="refund-flow-section">
+          <h3 class="refund-flow-title">How payment reviews and refunds are settled</h3>
+          <p class="refund-flow-sub">Structured 5-stage verification from issue intake to bank settlement.</p>
+
+          <div class="refund-flow-timeline">
+            <div class="refund-flow-step">
+              <span class="refund-step-num">Stage 01</span>
+              <div class="refund-step-title">Issue Reported</div>
+              <p class="refund-step-desc">Citizen shares UPI Ref / UTR and Request ID.</p>
+            </div>
+
+            <div class="refund-flow-step">
+              <span class="refund-step-num">Stage 02</span>
+              <div class="refund-step-title">Desk Verification</div>
+              <p class="refund-step-desc">Operator cross-checks gateway logs and filing status.</p>
+            </div>
+
+            <div class="refund-flow-step">
+              <span class="refund-step-num">Stage 03</span>
+              <div class="refund-step-title">Refund Approval</div>
+              <p class="refund-step-desc">Credit memo approved and refund initiated.</p>
+            </div>
+
+            <div class="refund-flow-step">
+              <span class="refund-step-num">Stage 04</span>
+              <div class="refund-step-title">Gateway Reversal</div>
+              <p class="refund-step-desc">Automated reversal triggered via Razorpay / UPI rail.</p>
+            </div>
+
+            <div class="refund-flow-step">
+              <span class="refund-step-num">Stage 05</span>
+              <div class="refund-step-title">Bank Credit</div>
+              <p class="refund-step-desc">Funds reflect in original bank account (3&ndash;5 days).</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- 4. Main 2-Column Policy Hub Layout -->
+        <div class="refund-main-grid">
+          
+          <!-- Left Column: Sticky Navigation & Payment Proof Desk -->
+          <aside class="refund-sidebar">
+            
+            <!-- Sticky Navigation -->
+            <nav class="toc-card" aria-label="Refund Table of Contents">
+              <div class="toc-head">Refund Navigation</div>
+              <div class="toc-nav-list" id="refund-toc">
+                <a href="#sec-prefiling" class="toc-link active">
+                  <span class="toc-num">01</span>
+                  <span>Pre-Filing Cancellations</span>
+                </a>
+                <a href="#sec-postfiling" class="toc-link">
+                  <span class="toc-num">02</span>
+                  <span>Govt Portal Challans</span>
+                </a>
+                <a href="#sec-duplicate" class="toc-link">
+                  <span class="toc-num">03</span>
+                  <span>Duplicate UPI Payments</span>
+                </a>
+                <a href="#sec-operator" class="toc-link">
+                  <span class="toc-num">04</span>
+                  <span>Operator Error Protection</span>
+                </a>
+                <a href="#sec-store" class="toc-link">
+                  <span class="toc-num">05</span>
+                  <span>Physical Store Products</span>
+                </a>
+                <a href="#sec-settlement" class="toc-link">
+                  <span class="toc-num">06</span>
+                  <span>Settlement Timelines</span>
+                </a>
+                <a href="#sec-request" class="toc-link">
+                  <span class="toc-num">07</span>
+                  <span>How to Claim a Refund</span>
+                </a>
+              </div>
+            </nav>
+
+            <!-- Payment Proof Desk Card -->
+            <div class="payment-proof-card">
+              <span class="proof-kicker">Payment Verification</span>
+              <div class="proof-title">Submit Proof for Review</div>
+              
+              <div class="proof-items">
+                <div class="proof-chk">
+                  <i data-lucide="check-circle-2"></i>
+                  <span>12-digit UPI Reference / UTR Number</span>
+                </div>
+                <div class="proof-chk">
+                  <i data-lucide="check-circle-2"></i>
+                  <span>Your Request ID or Service Name</span>
+                </div>
+                <div class="proof-chk">
+                  <i data-lucide="check-circle-2"></i>
+                  <span>Screenshot showing debit timestamp</span>
+                </div>
+              </div>
+
+              <a href="https://wa.me/919473946181?text=Hello%20One%20Point%20Billing%2C%20I%20want%20to%20submit%20payment%20proof%20for%20verification.%20Request%20ID%3A%20" target="_blank" rel="noopener" class="btn-proof-wa">
+                <i data-lucide="receipt" style="width: 14px; height: 14px;"></i>
+                <span>Submit Payment Proof</span>
+              </a>
+            </div>
+
+          </aside>
+
+          <!-- Right Column: Refund Document Articles -->
+          <article class="refund-doc-card">
+            
+            <!-- Section 01: Pre-Filing Cancellations -->
+            <section class="doc-section" id="sec-prefiling">
+              <div class="doc-section-head">
+                <span class="doc-section-kicker">01 / Pre-Filing Cancellations</span>
+                <h2 class="doc-section-title">Pre-Submission Cancellation &amp; Full Refund</h2>
+                <p class="doc-section-summary">Conditions under which 100% of your paid amount is returned.</p>
+              </div>
+              <p class="doc-text">
+                We believe in fair, transparent dealings. If you have made a payment for any citizen, student, or business registration service but wish to cancel before official submission work begins:
+              </p>
+              <div class="doc-callout-refund">
+                <strong>100% Full Refund Guarantee:</strong> If cancellation is requested while your request is in <em>"Payment Received"</em> or <em>"Documents Uploaded"</em> status and prior to our operator initiating filing on the target government portal, you are entitled to a full 100% refund of all charges.
+              </div>
+              <ul class="doc-list">
+                <li>Cancellation requests can be placed instantly through our WhatsApp Helpdesk (+91 9473946181) or via email.</li>
+                <li>Zero cancellation penalty or hidden processing deduction will be applied.</li>
+              </ul>
+            </section>
+
+            <!-- Section 02: Govt Portal Challans -->
+            <section class="doc-section" id="sec-postfiling">
+              <div class="doc-section-head">
+                <span class="doc-section-kicker">02 / Official Portal Fees</span>
+                <h2 class="doc-section-title">Government Portal Challans &amp; Statutory Rules</h2>
+                <p class="doc-section-summary">Non-refundability of government fees once deposited into official treasury accounts.</p>
+              </div>
+              <p class="doc-text">
+                Government departments (including Income Tax Department / NSDL, UPSSSC, SSC, UTIITSL, DigiLocker, and IRCTC) enforce strict statutory guidelines:
+              </p>
+              <ul class="doc-list">
+                <li><strong>Treasury Non-Refundability:</strong> Once an application is officially filed and the government fee/challan has been remitted to the respective department's account, government fees cannot be recalled or refunded by One Point.</li>
+                <li><strong>Application Rejections:</strong> If a government department rejects an application due to applicant ineligibility, discrepancies in official records, or forged documents, the government fee remains non-refundable as per statutory department circulars.</li>
+              </ul>
+            </section>
+
+            <!-- Section 03: Duplicate UPI Payments -->
+            <section class="doc-section" id="sec-duplicate">
+              <div class="doc-section-head">
+                <span class="doc-section-kicker">03 / Duplicate UPI Payments</span>
+                <h2 class="doc-section-title">Duplicate UPI Payments &amp; Erroneous Debits</h2>
+                <p class="doc-section-summary">Expedited turnaround for duplicate scans, network timeouts, or double debits.</p>
+              </div>
+              <p class="doc-text">
+                In cases where network latency or multiple QR code scans result in more than one debit for a single order:
+              </p>
+              <ul class="doc-list">
+                <li><strong>24&ndash;48 Hour Verification:</strong> Report the duplicate transaction with your 12-digit UPI UTR number and payment screenshot. Our billing desk cross-checks with payment gateway logs.</li>
+                <li><strong>Automatic Reversal:</strong> Once confirmed, the duplicate amount is queued for immediate automatic reversal to your originating UPI ID / bank account.</li>
+              </ul>
+            </section>
+
+            <!-- Section 04: Operator Error Protection -->
+            <section class="doc-section" id="sec-operator">
+              <div class="doc-section-head">
+                <span class="doc-section-kicker">04 / Operator Error Guarantee</span>
+                <h2 class="doc-section-title">Operator Error Protection &amp; Free Correction</h2>
+                <p class="doc-section-summary">Assurances against errors made during data entry by our Suvidha Kendra team.</p>
+              </div>
+              <p class="doc-text">
+                We take immense pride in our attention to detail and accuracy. In the rare scenario where an error occurs:
+              </p>
+              <ul class="doc-list">
+                <li><strong>Free Correction Filing:</strong> If an error is made by our operator that contradicts the applicant's verified draft sign-off, One Point will pay all applicable re-filing and portal modification fees at zero additional cost to the customer.</li>
+                <li><strong>Full Refund Alternative:</strong> If re-filing cannot remedy the issue, a 100% full refund of both facilitation and portal fees will be issued.</li>
+              </ul>
+            </section>
+
+            <!-- Section 05: Physical Store Products -->
+            <section class="doc-section" id="sec-store">
+              <div class="doc-section-head">
+                <span class="doc-section-kicker">05 / Physical Store Products</span>
+                <h2 class="doc-section-title">Physical Merchandise, PVC Cards &amp; Photo Frames</h2>
+                <p class="doc-section-summary">Cancellation and transit replacement policy for customized retail goods.</p>
+              </div>
+              <p class="doc-text">
+                For custom retail and store products (such as personalized photo frames, UV-printed PVC cards, and customized corporate stationery):
+              </p>
+              <ul class="doc-list">
+                <li><strong>Customized Items:</strong> Once custom printing or laser engraving has begun, retail orders cannot be cancelled.</li>
+                <li><strong>Transit Damage Guarantee:</strong> If your framed print or PVC card arrives damaged, cracked, or misprinted, share clear photos within 24 hours of delivery. We will ship a brand-new replacement at zero charge.</li>
+              </ul>
+            </section>
+
+            <!-- Section 06: Settlement Timelines -->
+            <section class="doc-section" id="sec-settlement">
+              <div class="doc-section-head">
+                <span class="doc-section-kicker">06 / Settlement Timelines</span>
+                <h2 class="doc-section-title">Settlement Mode &amp; Refund Timelines</h2>
+                <p class="doc-section-summary">Standard bank crediting cycles for approved reversals.</p>
+              </div>
+              <p class="doc-text">
+                All approved refunds are settled transparently through banking channels:
+              </p>
+              <ul class="doc-list">
+                <li><strong>Original Payment Method:</strong> Refunds are credited strictly back to the source account (UPI ID, Debit/Credit Card, or Net Banking) used during checkout.</li>
+                <li><strong>Processing Timelines:</strong>
+                  <ul>
+                    <li>UPI Reversals: 24 to 48 business hours.</li>
+                    <li>Debit / Credit Cards: 3 to 5 banking days (dependent on card issuing bank).</li>
+                  </ul>
+                </li>
+              </ul>
+            </section>
+
+            <!-- Section 07: How to Claim a Refund -->
+            <section class="doc-section" id="sec-request">
+              <div class="doc-section-head">
+                <span class="doc-section-kicker">07 / How to Claim</span>
+                <h2 class="doc-section-title">How to Claim a Refund &amp; Contact Desk</h2>
+                <p class="doc-section-summary">Step-by-step instructions to initiate your payment review.</p>
+              </div>
+              <p class="doc-text">
+                To request a refund review or cancellation, follow these simple steps:
+              </p>
+              <ul class="doc-list">
+                <li><strong>Step 1:</strong> Message our WhatsApp Payment Desk (+91 9473946181) or email support@bisenonepoint.com.</li>
+                <li><strong>Step 2:</strong> Provide your Request ID (e.g. OPDS-20260722-000001) and UPI Reference / UTR Number.</li>
+                <li><strong>Step 3:</strong> Our billing team will verify status and issue a digital confirmation within 15 minutes.</li>
+              </ul>
+
+              <div class="refund-contact-box">
+                <div style="font-weight: 750; font-size: 0.92rem; color: #082f61;">One Point Suvidha Kendra — Payment &amp; Billing Redressal Desk</div>
+                <div class="refund-contact-rows">
+                  <div class="refund-contact-item">
+                    <i data-lucide="map-pin"></i>
+                    <span><strong>Address:</strong> Milan Tower, Kursi Rd, Adil Nagar, LDA Colony, Lucknow, UP &ndash; 226022</span>
+                  </div>
+                  <div class="refund-contact-item">
+                    <i data-lucide="mail"></i>
+                    <span><strong>Email:</strong> <a href="mailto:support@bisenonepoint.com" style="color: #125696; font-weight: 600;">support@bisenonepoint.com</a></span>
+                  </div>
+                  <div class="refund-contact-item">
+                    <i data-lucide="phone"></i>
+                    <span><strong>Helpline:</strong> +91 9473946181</span>
+                  </div>
+                  <div class="refund-contact-item">
+                    <i data-lucide="clock"></i>
+                    <span><strong>Desk Hours:</strong> Mon &ndash; Sat: 9:00 AM &ndash; 8:00 PM</span>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+          </article>
+
         </div>
-        <div class="panel">
-          <h2>Official <span class="h2-gold">Fees</span></h2>
-          <p>Government portal fees, gateway charges, ticket charges and other third-party fees follow the refund rules of the relevant department or provider.</p>
+
+        <!-- 5. Bottom Trust Assurances Strip -->
+        <section class="refund-trust-strip">
+          <div class="refund-trust-card">
+            <div class="refund-trust-icon"><i data-lucide="shield-check"></i></div>
+            <div>
+              <div class="refund-trust-title">100% Pre-Filing Refund</div>
+              <span class="refund-trust-sub">Full return if cancelled before portal submission</span>
+            </div>
+          </div>
+
+          <div class="refund-trust-card">
+            <div class="refund-trust-icon"><i data-lucide="refresh-cw"></i></div>
+            <div>
+              <div class="refund-trust-title">24&ndash;48h Duplicate Resolution</div>
+              <span class="refund-trust-sub">Rapid turnaround for double debits</span>
+            </div>
+          </div>
+
+          <div class="refund-trust-card">
+            <div class="refund-trust-icon"><i data-lucide="receipt"></i></div>
+            <div>
+              <div class="refund-trust-title">Original Source Reversal</div>
+              <span class="refund-trust-sub">Direct credit to your UPI / Bank account</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- 6. Pre-Footer Direct Action Bar -->
+        <div class="refund-prefooter">
+          <div class="prefooter-text">
+            <h3>Have a pending payment inquiry or require a refund review?</h3>
+            <p>Our Lucknow billing desk is available on WhatsApp and phone for prompt assistance.</p>
+          </div>
+          <div class="prefooter-btns">
+            <a href="https://wa.me/919473946181?text=Hello%20One%20Point%2C%20I%20have%20a%20refund%20inquiry." target="_blank" rel="noopener" class="btn-prefooter-gold">
+              <i data-lucide="message-circle" style="width: 14px; height: 14px;"></i>
+              <span>Connect with Payment Desk</span>
+            </a>
+            <a href="contact.html" class="btn-prefooter-ghost">
+              <i data-lucide="mail" style="width: 14px; height: 14px;"></i>
+              <span>Contact Suvidha Kendra</span>
+            </a>
+          </div>
         </div>
-        <div class="panel">
-          <h2>Duplicate <span class="h2-gold">Payments</span></h2>
-          <p>Duplicate or wrong UPI payments should be reported with transaction ID and payment proof. Approved refunds are processed after verification.</p>
-        </div>
-        <div class="legal-action-strip">
-          <span><i data-lucide="receipt-text"></i> Keep your UPI reference, gateway ID or payment screenshot ready for faster review.</span>
-          <a class="btn btn-soft" href="contact.html">Submit Proof</a>
-        </div>
-      </section>
+
+      </div>
     </main>
+
     <div data-site-footer></div>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
-    <script src="assets/app.js?v=clean_js_v11" defer></script>
-  
-<script id="line-alignment-script">
-  document.addEventListener("DOMContentLoaded", function() {
-    setTimeout(() => {
-      document.querySelectorAll(".section-head h2").forEach(h2 => {
-        let align = window.getComputedStyle(h2).textAlign;
-        let parent = h2.closest('.section-head');
-        if (parent) {
-          if (align === "center") {
-            parent.classList.add("center-line");
-          } else {
-            parent.classList.add("left-line");
-          }
+    <script src="assets/app.js?v=customer-checkout-94" defer></script>
+    <script>
+      // Active link highlight on scroll (Scrollspy)
+      document.addEventListener('DOMContentLoaded', () => {
+        const sections = document.querySelectorAll('.doc-section');
+        const navLinks = document.querySelectorAll('#refund-toc .toc-link');
+
+        function onScroll() {
+          let current = '';
+          const scrollPos = window.pageYOffset || document.documentElement.scrollTop;
+
+          sections.forEach(section => {
+            const sectionTop = section.offsetTop - 120;
+            if (scrollPos >= sectionTop) {
+              current = section.getAttribute('id');
+            }
+          });
+
+          navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === '#' + current) {
+              link.classList.add('active');
+            }
+          });
         }
+
+        window.addEventListener('scroll', onScroll);
       });
-    }, 100); // small delay to ensure CSS is applied
-  });
-</script>
-</body>
+    </script>
+  </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

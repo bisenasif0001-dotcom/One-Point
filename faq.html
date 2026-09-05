@@ -3,505 +3,636 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Frequently Asked Questions about One Point Digital Services — PAN Card, GST, student services, travel booking, fees and document requirements.">
-    <title>FAQ | One Point Digital Services</title>
+    <meta name="description" content="Frequently Asked Questions about One Point Digital Services — PAN Card, GST, student services, travel booking, fees, tracking, and document requirements.">
+    <title>Frequently Asked Questions | One Point Digital Services</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="assets/onepoint.css?v=2">
+    <script src="assets/opds-boot.js?v=anti-fouc-79"></script>
+    <link rel="stylesheet" href="assets/onepoint.css?v=customer-checkout-94">
+    <link rel="stylesheet" href="assets/enterprise-design-system.css?v=eds-2">
+    <link rel="stylesheet" href="assets/enterprise-visual-polish.css?v=polish-3">
     <style>
-      /* ── Hero ── */
-      .compact-hero {
+      /* ══════════════════════════════════════════════════════════════════════════
+         FAQ / KNOWLEDGE HUB — ENTERPRISE CLEAN DESIGN SYSTEM
+         ══════════════════════════════════════════════════════════════════════════ */
+      :root {
+        --faq-navy: #125696;
+        --faq-navy-dark: #082f61;
+        --faq-gold: #f5c842;
+        --faq-gold-text: #c58a10;
+        --faq-border: #e2e8f0;
+        --faq-surface: #ffffff;
+        --faq-bg: #f8fafc;
+      }
+
+      body.faq-page-body {
+        background-color: #f8fafc;
+        color: #0f172a;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      }
+
+      /* ── Signature Top Hero ── */
+      .compact-hero.faq-hero-bg {
         background:
-          linear-gradient(100deg, rgba(11,40,88,.97) 0%, rgba(18,86,150,.92) 55%, rgba(12,46,98,.93) 100%),
-          linear-gradient(to bottom, rgba(8,24,60,.65) 0%, transparent 42%),
+          linear-gradient(100deg, rgba(11, 40, 88, 0.97) 0%, rgba(18, 86, 150, 0.92) 55%, rgba(12, 46, 98, 0.93) 100%),
+          linear-gradient(to bottom, rgba(8, 24, 60, 0.65) 0%, transparent 42%),
           url('assets/disclaimer_human.png') no-repeat center/cover !important;
-        padding-inline: 0 !important;
+        text-align: left !important;
+        padding-top: clamp(48px, 6vw, 76px) !important;
+        padding-bottom: clamp(48px, 6vw, 76px) !important;
+      }
+      .compact-hero.faq-hero-bg::before,
+      .compact-hero.faq-hero-bg::after { display: none !important; }
+      .compact-hero.faq-hero-bg .site-container {
+        width: 100% !important;
+        max-width: var(--max, 1200px) !important;
+        margin-inline: auto !important;
+        padding-inline: var(--gutter, clamp(16px, 4vw, 32px)) !important;
+        box-sizing: border-box !important;
         text-align: left !important;
       }
-      .compact-hero::before,
-      .compact-hero::after { display: none !important; }
-      /* Container mirrors nav-bar: same max-width + gutter formula → pixel-perfect alignment */
-      .compact-hero .hero-inner {
-        max-width: calc(var(--max, 1200px) + var(--gutter, 32px) * 2);
-        margin-inline: auto;
-        padding-inline: var(--gutter, 32px);
+      .compact-hero.faq-hero-bg h1 {
+        text-align: left !important;
+        margin-left: 0 !important;
+        font-size: clamp(2rem, 3.5vw, 2.75rem) !important;
+        font-weight: 800 !important;
+        letter-spacing: -0.025em !important;
+        color: #ffffff !important;
+      }
+      .compact-hero.faq-hero-bg p:not(.eyebrow) {
+        text-align: left !important;
+        margin-left: 0 !important;
+        max-width: 680px !important;
+        font-size: 1rem !important;
+        line-height: 1.6 !important;
+        color: rgba(235, 245, 255, 0.88) !important;
+      }
+      .compact-hero.faq-hero-bg .eyebrow {
+        margin-left: 0 !important;
+        margin-right: auto !important;
+        background: rgba(245, 200, 66, 0.15) !important;
+        border: 1px solid rgba(245, 200, 66, 0.35) !important;
+        color: #f5c842 !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        gap: 6px !important;
+        padding: 4px 12px !important;
+        border-radius: 999px !important;
+        font-size: 0.76rem !important;
+        font-weight: 700 !important;
+        letter-spacing: 0.06em !important;
+        text-transform: uppercase !important;
+        margin-bottom: 14px !important;
+      }
+      .compact-hero.faq-hero-bg .hero-actions {
+        justify-content: flex-start !important;
+        margin-top: 24px !important;
+        display: flex !important;
+        gap: 12px !important;
+        flex-wrap: wrap !important;
+      }
+
+      .faq-page-shell {
         width: 100%;
+        max-width: var(--max, 1200px);
+        margin-inline: auto;
+        padding-top: clamp(24px, 3.5vw, 36px);
+        padding-bottom: 72px;
+        padding-inline: var(--gutter, clamp(16px, 4vw, 32px));
         box-sizing: border-box;
       }
-      .compact-hero .eyebrow { margin-left: 0 !important; margin-right: auto !important; }
-      .compact-hero h1 { text-align: left !important; margin-inline: 0 !important; }
-      .compact-hero p:not(.eyebrow) { text-align: left !important; margin-inline: 0 !important; }
-      .compact-hero .hero-actions { justify-content: flex-start !important; }
-      @media (max-width: 680px) {
-        .compact-hero { text-align: center !important; }
-        .compact-hero .eyebrow { margin-left: auto !important; }
-        .compact-hero h1 { text-align: center !important; }
-        .compact-hero p:not(.eyebrow) { text-align: center !important; }
-        .compact-hero .hero-actions { justify-content: center !important; }
-      }
 
-      /* ── Page background ── */
-      .faq-page-section { background: #f3f7fc !important; }
-
-      /* ── Outer card shell ── */
-      .faq-main-card {
-        background: #fff;
-        border-radius: 20px;
-        border: 1px solid rgba(18,86,150,.1);
-        box-shadow:
-          0 1px 3px rgba(0,0,0,.03),
-          0 8px 24px rgba(18,86,150,.07),
-          0 24px 56px rgba(18,86,150,.05);
-        display: grid;
-        grid-template-columns: 268px 1fr;
-        min-height: 600px;
-        position: relative;
-      }
-
-      /* ════════════════════════════
-         LEFT SIDEBAR
-         ════════════════════════════ */
-      .faq-sidebar {
-        background: linear-gradient(170deg, #f4f8ff 0%, #e8f0fb 100%);
-        border-right: 1px solid rgba(18,86,150,.22);
-        border-radius: 20px 0 0 20px;
-        overflow: hidden;
-        box-shadow: 2px 0 10px rgba(18,86,150,.07);
-        z-index: 1;
-        padding: 28px 20px 22px;
+      /* ── Breadcrumb ── */
+      .faq-breadcrumb {
         display: flex;
-        flex-direction: column;
-        gap: 0;
-        position: relative;
+        align-items: center;
+        gap: 8px;
+        font-size: 0.82rem;
+        color: #64748b;
+        margin-bottom: 20px;
       }
+      .faq-breadcrumb a { color: #475569; text-decoration: none; transition: color 0.15s; }
+      .faq-breadcrumb a:hover { color: #0a5aa8; }
+      .faq-breadcrumb i, .faq-breadcrumb svg { width: 14px; height: 14px; color: #94a3b8; }
+      .faq-breadcrumb span { color: #0f172a; font-weight: 600; }
 
-      .faq-sidebar-badge {
+      /* ── Hero Search Box ── */
+      .faq-hero-box {
+        background: #ffffff;
+        border: 1px solid var(--faq-border);
+        border-radius: 16px;
+        padding: clamp(24px, 3.5vw, 32px);
+        box-shadow: 0 1px 3px rgba(15, 23, 42, 0.03), 0 6px 18px rgba(10, 44, 88, 0.03);
+        margin-bottom: 24px;
+      }
+      .faq-kicker {
+        font-size: 0.74rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: #0a5aa8;
+        background: rgba(10, 90, 168, 0.08);
+        border: 1px solid rgba(10, 90, 168, 0.18);
+        padding: 3px 10px;
+        border-radius: 999px;
         display: inline-flex;
         align-items: center;
         gap: 6px;
-        padding: 5px 12px;
-        background: rgba(18,86,150,.08);
-        border: 1px solid rgba(18,86,150,.18);
-        border-radius: 8px;
-        color: var(--primary, #125696);
-        font-size: 11px;
+        margin-bottom: 10px;
+      }
+      .faq-hero-box-title {
+        font-size: clamp(1.25rem, 2.2vw, 1.55rem);
         font-weight: 800;
-        letter-spacing: .06em;
-        text-transform: uppercase;
-        margin-bottom: 16px;
-        width: fit-content;
+        color: #082f61;
+        line-height: 1.25;
+        margin: 0 0 6px 0;
       }
-      .faq-sidebar-badge i,
-      .faq-sidebar-badge svg { width: 12px; height: 12px; stroke-width: 1.3 !important; }
-
-      .faq-sidebar-heading {
-        font-size: clamp(1.4rem, 2.2vw, 1.78rem);
-        font-weight: 800;
-        color: #0d1f35;
-        line-height: 1.14;
-        letter-spacing: -.025em;
-        margin: 0 0 7px;
-      }
-      .faq-sidebar-heading .h2-gold {
-        color: #c9a44a;
-        background: none;
-        -webkit-text-fill-color: #c9a44a;
+      .faq-hero-box-sub {
+        font-size: 0.88rem;
+        color: #64748b;
+        line-height: 1.5;
+        margin: 0 0 18px 0;
+        max-width: 680px;
       }
 
-      .faq-sidebar-desc {
-        font-size: .84rem;
-        color: #5d7a99;
-        line-height: 1.55;
-        margin: 0 0 18px;
-      }
-
-      /* ── Inline search ── */
-      .faq-search-wrap {
-        position: relative;
-        margin-bottom: 18px;
-      }
-      .faq-search-wrap > i,
-      .faq-search-wrap > svg {
-        position: absolute;
-        left: 11px; top: 50%;
-        transform: translateY(-50%);
-        width: 14px !important; height: 14px !important;
-        color: #8faacc;
-        pointer-events: none;
-        flex-shrink: 0;
-        stroke-width: 1.3 !important;
-      }
-      .faq-search-input {
-        width: 100%;
-        height: 38px;
-        padding: 0 12px 0 34px;
-        border: 1px solid rgba(18,86,150,.18);
-        border-radius: 10px;
-        background: #fff;
-        font-size: 13px;
-        font-family: inherit;
-        color: #0d1f35;
-        box-sizing: border-box;
-        outline: none;
-        transition: border-color .18s, box-shadow .18s;
-      }
-      .faq-search-input::placeholder { color: #a0b9cc; }
-      .faq-search-input:focus {
-        border-color: var(--primary, #125696);
-        box-shadow: 0 0 0 3px rgba(18,86,150,.1);
-      }
-
-      /* ── Category nav ── */
-      .faq-cat-nav {
+      /* Search Bar */
+      .faq-search-bar {
         display: flex;
-        flex-direction: column;
-        gap: 2px;
-        flex: 1;
-        margin-bottom: 20px;
+        gap: 10px;
+        max-width: 680px;
       }
-      .faq-cat-btn {
+      .faq-input-wrap {
+        position: relative;
+        flex: 1;
         display: flex;
         align-items: center;
-        gap: 10px;
-        min-height: 42px;
-        padding: 0 10px 0 12px;
+      }
+      .faq-input-wrap .faq-search-icon {
+        position: absolute;
+        left: 14px;
+        color: #94a3b8;
+        width: 18px;
+        height: 18px;
+        pointer-events: none;
+      }
+      .faq-input-wrap input {
+        width: 100%;
+        height: 46px;
+        padding-left: 42px;
+        padding-right: 36px;
         border-radius: 10px;
+        border: 1px solid #cbd5e1;
+        background: #ffffff;
+        color: #0f172a;
+        font-size: 0.92rem;
+        font-family: inherit;
+        outline: none;
+        transition: border-color 0.18s, box-shadow 0.18s;
+      }
+      .faq-input-wrap input:focus {
+        border-color: #0a5aa8;
+        box-shadow: 0 0 0 3px rgba(10, 90, 168, 0.12);
+      }
+      .faq-clear-btn {
+        position: absolute;
+        right: 12px;
+        background: none;
+        border: none;
+        color: #94a3b8;
+        font-size: 1.1rem;
+        cursor: pointer;
+        display: none;
+        padding: 4px;
+      }
+      .faq-clear-btn:hover { color: #0f172a; }
+
+      /* Quick Topic Chips */
+      .faq-topic-chips {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 14px;
+      }
+      .faq-chips-label {
+        font-size: 0.75rem;
+        color: #94a3b8;
+        font-weight: 500;
+      }
+      .faq-chip {
+        background: #f1f5f9;
+        border: 1px solid #e2e8f0;
+        color: #334155;
+        border-radius: 6px;
+        padding: 3px 10px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.15s;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        text-decoration: none;
+      }
+      .faq-chip:hover {
+        background: #e2e8f0;
+        color: #0a5aa8;
+        border-color: #0a5aa8;
+      }
+
+      /* ── 2-Column Responsive Layout ── */
+      .faq-grid {
+        display: grid;
+        grid-template-columns: 280px 1fr;
+        gap: 24px;
+        align-items: start;
+      }
+      @media (max-width: 880px) {
+        .faq-grid { grid-template-columns: 1fr; }
+      }
+
+      /* Sidebar Navigation Card */
+      .faq-nav-card {
+        background: #ffffff;
+        border: 1px solid var(--faq-border);
+        border-radius: 14px;
+        padding: 16px;
+        box-shadow: 0 1px 3px rgba(15, 23, 42, 0.02);
+        margin-bottom: 20px;
+      }
+      .faq-nav-head {
+        font-size: 0.76rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: #64748b;
+        margin-bottom: 10px;
+        padding-left: 6px;
+      }
+      .faq-cat-list {
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+      }
+      .faq-cat-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 8px 12px;
+        border-radius: 8px;
         background: transparent;
         border: none;
         cursor: pointer;
         font-family: inherit;
-        font-size: 13px;
+        font-size: 0.85rem;
         font-weight: 600;
-        color: #5d7a99;
-        text-align: left;
+        color: #334155;
         width: 100%;
-        transition: background .14s, color .14s;
-        position: relative;
+        text-align: left;
+        transition: all 0.15s ease;
       }
-      .faq-cat-btn::before {
-        content: '';
-        position: absolute;
-        left: 0; top: 9px; bottom: 9px;
-        width: 3px;
-        border-radius: 0 3px 3px 0;
-        background: transparent;
-        transition: background .14s;
+      .faq-cat-item:hover {
+        background: #f1f5f9;
+        color: #0a5aa8;
       }
-      .faq-cat-btn:hover {
-        background: rgba(18,86,150,.05);
-        color: var(--primary, #125696);
-      }
-      .faq-cat-btn.active {
-        background: rgba(200,152,46,.08);
-        color: #0d1f35;
+      .faq-cat-item.active {
+        background: rgba(10, 90, 168, 0.08);
+        color: #0a5aa8;
         font-weight: 700;
       }
-      .faq-cat-btn.active::before { background: #c9a44a; }
-
-      .cat-icon {
-        width: 30px; height: 30px;
-        border-radius: 8px;
-        background: rgba(18,86,150,.06);
-        display: flex; align-items: center; justify-content: center;
-        color: var(--primary, #125696);
-        flex-shrink: 0;
-        transition: background .14s;
+      .faq-cat-left {
+        display: flex;
+        align-items: center;
+        gap: 9px;
       }
-      .cat-icon i,
-      .cat-icon svg { width: 14px; height: 14px; stroke-width: 1.3 !important; }
-      .faq-cat-btn.active .cat-icon {
-        background: rgba(200,152,46,.12);
-        color: #a07828;
+      .faq-cat-left i, .faq-cat-left svg {
+        width: 15px;
+        height: 15px;
+        color: #0a5aa8;
       }
-
-      .faq-cat-label { flex: 1; }
-
       .faq-cat-count {
-        font-size: 11px;
+        font-size: 0.72rem;
         font-weight: 700;
-        color: #96b0ca;
-        background: rgba(18,86,150,.05);
-        border-radius: 20px;
-        padding: 2px 8px;
-        flex-shrink: 0;
-        min-width: 22px;
-        text-align: center;
-        line-height: 1.6;
+        color: #64748b;
+        background: #f1f5f9;
+        border-radius: 999px;
+        padding: 2px 7px;
       }
-      .faq-cat-btn.active .faq-cat-count {
-        background: rgba(200,152,46,.11);
-        color: #8a6820;
+      .faq-cat-item.active .faq-cat-count {
+        background: #0a5aa8;
+        color: #ffffff;
       }
 
-      /* ── Sidebar CTA ── */
-      .faq-sidebar-cta {
-        border-top: 1px solid rgba(18,86,150,.1);
-        padding-top: 16px;
+      /* Helpdesk Sidebar Card */
+      .faq-help-card {
+        background: #ffffff;
+        border: 1px solid var(--faq-border);
+        border-radius: 14px;
+        padding: 20px;
+        box-shadow: 0 1px 3px rgba(15, 23, 42, 0.02);
       }
-      .faq-sidebar-cta a {
+      .faq-help-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: rgba(22, 163, 74, 0.08);
+        color: #15803d;
+        border: 1px solid rgba(22, 163, 74, 0.22);
+        padding: 2px 8px;
+        border-radius: 999px;
+        font-size: 0.7rem;
+        font-weight: 700;
+        margin-bottom: 8px;
+      }
+      .pulse-dot-green {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: #16a34a;
+        box-shadow: 0 0 0 0 rgba(22, 163, 74, 0.7);
+        animation: track-pulse 2s infinite;
+      }
+      .faq-help-title {
+        font-size: 0.95rem;
+        font-weight: 750;
+        color: #082f61;
+        margin: 0 0 6px 0;
+      }
+      .faq-help-desc {
+        font-size: 0.8rem;
+        color: #64748b;
+        line-height: 1.45;
+        margin: 0 0 14px 0;
+      }
+      .faq-help-btn-wa {
+        background: #22c55e;
+        color: #ffffff;
+        font-size: 0.82rem;
+        font-weight: 600;
+        padding: 8px 14px;
+        border-radius: 8px;
+        text-decoration: none;
         display: flex;
         align-items: center;
         justify-content: center;
-        gap: 8px;
-        height: 44px;
-        border-radius: 11px;
-        background: var(--primary, #125696);
-        color: #fff;
-        font-size: .875rem;
-        font-weight: 700;
+        gap: 6px;
+        transition: background 0.15s;
+        margin-bottom: 8px;
+      }
+      .faq-help-btn-wa:hover { background: #16a34a; color: #ffffff; }
+      .faq-help-btn-call {
+        background: #f8fafc;
+        border: 1px solid #cbd5e1;
+        color: #334155;
+        font-size: 0.82rem;
+        font-weight: 600;
+        padding: 8px 14px;
+        border-radius: 8px;
         text-decoration: none;
-        transition: opacity .17s, transform .17s;
-        box-shadow: 0 4px 14px rgba(18,86,150,.3);
-      }
-      .faq-sidebar-cta a:hover { opacity: .9; transform: translateY(-1px); }
-      .faq-sidebar-cta a i,
-      .faq-sidebar-cta a svg { width: 15px; height: 15px; flex-shrink: 0; stroke-width: 1.3 !important; }
-
-      /* ════════════════════════════
-         RIGHT CONTENT PANEL
-         ════════════════════════════ */
-      .faq-content-panel {
-        padding: 28px 28px 24px;
-        background: #fff;
-        border-radius: 0 20px 20px 0;
-      }
-
-      .faq-group { display: none; }
-      .faq-group.active { display: block; }
-
-      /* Group header */
-      .faq-group-header {
         display: flex;
         align-items: center;
-        gap: 14px;
-        padding-bottom: 18px;
+        justify-content: center;
+        gap: 6px;
+        transition: all 0.15s;
+      }
+      .faq-help-btn-call:hover { background: #e2e8f0; color: #0f172a; }
+
+      /* ── Right Content Pane ── */
+      .faq-content-card {
+        background: #ffffff;
+        border: 1px solid var(--faq-border);
+        border-radius: 16px;
+        padding: clamp(22px, 3.5vw, 32px);
+        box-shadow: 0 1px 3px rgba(15, 23, 42, 0.02);
+      }
+
+      .faq-group-pane { display: none; }
+      .faq-group-pane.active { display: block; }
+
+      .faq-group-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-bottom: 14px;
         margin-bottom: 18px;
-        border-bottom: 1px solid rgba(18,86,150,.08);
+        border-bottom: 1px solid #f1f5f9;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .faq-group-title-row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
       }
       .faq-group-icon {
-        width: 44px; height: 44px;
-        border-radius: 12px;
-        background: rgba(18,86,150,.07);
-        border: 1px solid rgba(18,86,150,.12);
-        display: flex; align-items: center; justify-content: center;
-        color: var(--primary, #125696);
+        width: 36px;
+        height: 36px;
+        border-radius: 10px;
+        background: rgba(10, 90, 168, 0.08);
+        color: #0a5aa8;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         flex-shrink: 0;
       }
-      .faq-group-icon i { width: 20px; height: 20px; }
       .faq-group-title {
-        font-size: 1.05rem;
+        font-size: 1.15rem;
         font-weight: 800;
-        color: #0d1f35;
+        color: #082f61;
         margin: 0;
-        letter-spacing: -.01em;
       }
-      .faq-group-count {
-        margin-left: auto;
-        font-size: .72rem;
+      .faq-group-badge {
+        font-size: 0.72rem;
         font-weight: 700;
-        color: var(--accent, #c8982e);
-        background: rgba(200,152,46,.1);
-        border: 1px solid rgba(200,152,46,.22);
-        border-radius: 20px;
-        padding: 3px 12px;
-        white-space: nowrap;
+        color: #0a5aa8;
+        background: rgba(10, 90, 168, 0.08);
+        border: 1px solid rgba(10, 90, 168, 0.18);
+        padding: 3px 9px;
+        border-radius: 999px;
       }
 
-      /* ── Accordion ── */
-      .faq-accordion { display: flex; flex-direction: column; gap: 8px; }
+      /* Accordion Items */
+      .faq-accordion-list {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .faq-item-card {
+        border: 1px solid #e2e8f0;
+        border-radius: 10px;
+        background: #ffffff;
+        transition: border-color 0.18s, box-shadow 0.18s;
+        overflow: hidden;
+      }
+      .faq-item-card:hover {
+        border-color: #cbd5e1;
+      }
+      .faq-item-card[open] {
+        border-color: #94a3b8;
+        border-left: 3px solid #0a5aa8;
+        box-shadow: 0 4px 12px rgba(10, 90, 168, 0.04);
+      }
 
-      .faq-item {
-        border: 1px solid rgba(18,86,150,.1);
-        border-radius: 14px;
-        background: #fff;
-        overflow: visible !important;
-        transition: border-color .2s, box-shadow .2s, transform .18s;
-      }
-      .faq-item:hover {
-        border-color: rgba(18,86,150,.22);
-        box-shadow: 0 2px 12px rgba(18,86,150,.07);
-        transform: translateX(2px);
-      }
-      .faq-item[open] {
-        border-color: rgba(18,86,150,.28);
-        box-shadow: 0 4px 20px rgba(18,86,150,.09);
-        border-left: 3px solid var(--primary, #125696);
-        transform: none;
-      }
-
-      .faq-item summary {
+      .faq-item-card summary {
         list-style: none;
         display: flex;
         align-items: center;
-        gap: 13px;
-        padding: 14px 18px 14px 16px;
+        justify-content: space-between;
+        padding: 14px 16px;
         cursor: pointer;
-        font-size: .895rem;
+        font-size: 0.9rem;
         font-weight: 650;
-        color: #1a2d45;
+        color: #0f172a;
         user-select: none;
-        transition: color .15s, background .15s;
+        transition: background 0.15s, color 0.15s;
+        gap: 12px;
       }
-      .faq-item summary::-webkit-details-marker { display: none; }
-      .faq-item[open] > summary {
-        color: var(--primary, #125696);
-        background: rgba(18,86,150,.025);
-        border-bottom: 1px solid rgba(18,86,150,.07);
+      .faq-item-card summary::-webkit-details-marker { display: none; }
+      .faq-item-card[open] summary {
+        color: #0a5aa8;
+        background: #f8fafc;
+        border-bottom: 1px solid #f1f5f9;
       }
-
-      .faq-q-icon {
-        width: 32px; height: 32px;
-        border-radius: 9px;
-        background: rgba(18,86,150,.07);
-        border: 1px solid rgba(18,86,150,.12);
-        display: flex; align-items: center; justify-content: center;
-        color: var(--primary, #125696);
+      .faq-question-text {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .faq-q-dot {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: #f1f5f9;
+        color: #0a5aa8;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.65rem;
+        font-weight: 800;
         flex-shrink: 0;
-        transition: background .2s, border-color .2s, color .2s;
       }
-      .faq-q-icon i,
-      .faq-q-icon svg {
-        width: 13px !important; height: 13px !important;
-        stroke-width: 1.5 !important;
+      .faq-item-card[open] .faq-q-dot {
+        background: #0a5aa8;
+        color: #ffffff;
       }
-      .faq-item[open] summary .faq-q-icon {
-        background: rgba(200,152,46,.1);
-        border-color: rgba(200,152,46,.25);
-        color: var(--accent, #c8982e);
-      }
-
       .faq-chevron {
-        margin-left: auto;
-        width: 17px; height: 17px;
-        color: #a0b4cc;
-        transition: transform .28s cubic-bezier(.4,0,.2,1), color .2s;
+        width: 16px;
+        height: 16px;
+        color: #94a3b8;
+        transition: transform 0.2s ease, color 0.2s ease;
         flex-shrink: 0;
       }
-      .faq-item[open] summary .faq-chevron {
+      .faq-item-card[open] .faq-chevron {
         transform: rotate(180deg);
-        color: var(--primary, #125696);
+        color: #0a5aa8;
       }
 
-      .faq-answer {
-        padding: 14px 22px 18px 61px !important;
-        font-size: .875rem !important;
-        color: #3d4f66 !important;
-        line-height: 1.75 !important;
-        max-height: none !important;
-        overflow: visible !important;
-        animation: faq-fadein .22s ease forwards;
+      .faq-answer-body {
+        padding: 14px 16px 16px 46px;
+        font-size: 0.86rem;
+        color: #334155;
+        line-height: 1.6;
+        animation: faq-fadein 0.2s ease;
       }
       @keyframes faq-fadein {
-        from { opacity: 0; transform: translateY(4px); }
-        to   { opacity: 1; transform: translateY(0); }
+        from { opacity: 0; transform: translateY(2px); }
+        to { opacity: 1; transform: translateY(0); }
       }
-      .faq-answer p {
-        color: #3d4f66 !important;
-        font-size: .875rem !important;
-        margin: 8px 0 0 !important;
-        line-height: 1.75 !important;
-      }
-      .faq-answer a {
-        color: var(--primary, #125696) !important;
-        font-weight: 600 !important;
-        text-decoration: underline !important;
+      .faq-answer-body p { margin: 0 0 8px 0; }
+      .faq-answer-body p:last-child { margin-bottom: 0; }
+      .faq-answer-body a {
+        color: #0a5aa8;
+        font-weight: 600;
+        text-decoration: underline;
         text-underline-offset: 2px;
       }
-      .faq-answer a:hover { opacity: .8; }
 
-      /* ── No results (search) ── */
-      .faq-no-results {
-        display: none;
-        flex-direction: column;
+      /* Contextual Action Footnote inside pane */
+      .faq-pane-footnote {
+        margin-top: 20px;
+        padding: 12px 16px;
+        border-radius: 10px;
+        background: #f0f7ff;
+        border: 1px solid #bfdbfe;
+        color: #1e40af;
+        font-size: 0.82rem;
+        display: flex;
         align-items: center;
-        padding: 48px 24px;
-        text-align: center;
-        color: #8faacc;
-      }
-      .faq-no-results i { width: 36px; height: 36px; margin-bottom: 12px; }
-      .faq-no-results strong { display: block; font-size: .95rem; color: #5d7a99; margin-bottom: 4px; }
-      .faq-no-results span { font-size: .84rem; }
-
-      /* ── Bottom action strip ── */
-      .faq-action-strip {
-        margin-top: 20px !important;
-        background: #fff !important;
-        border: 1px solid rgba(18,86,150,.1) !important;
-        box-shadow: 0 1px 4px rgba(18,86,150,.04) !important;
-        border-radius: 16px !important;
-        padding: 18px 22px !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: space-between !important;
-        gap: 16px !important;
+        justify-content: space-between;
         flex-wrap: wrap;
-        box-sizing: border-box;
+        gap: 10px;
       }
-      .faq-action-strip::before { display: none !important; }
-      .faq-action-strip > span {
-        display: flex !important;
-        align-items: center !important;
-        gap: 10px !important;
-        font-size: .9rem !important;
-        font-weight: 500 !important;
-        color: #374151 !important;
-      }
-      .faq-action-strip > span i {
-        color: var(--accent, #c8982e) !important;
-        width: 18px; height: 18px; flex-shrink: 0;
-      }
-      .faq-strip-actions { display: flex; gap: 8px; flex-wrap: wrap; }
-      .faq-strip-btn {
+      .faq-footnote-btn {
+        background: #0a5aa8;
+        color: #ffffff;
+        font-size: 0.76rem;
+        font-weight: 600;
+        padding: 4px 10px;
+        border-radius: 6px;
+        text-decoration: none;
         display: inline-flex;
         align-items: center;
-        gap: 7px;
-        height: 38px;
-        padding: 0 16px;
-        border-radius: 10px;
-        border: 1px solid rgba(18,86,150,.18);
-        background: #fff;
-        color: var(--primary, #125696);
-        font-family: inherit;
-        font-size: .84rem;
-        font-weight: 600;
-        text-decoration: none;
-        white-space: nowrap;
-        cursor: pointer;
-        transition: background .15s, border-color .15s;
+        gap: 4px;
+        transition: background 0.15s;
       }
-      .faq-strip-btn i { width: 14px; height: 14px; }
-      .faq-strip-btn:hover { background: rgba(18,86,150,.06); border-color: rgba(18,86,150,.28); }
-      .faq-strip-btn-wa {
-        background: var(--primary, #125696) !important;
-        color: #fff !important;
-        border-color: var(--primary, #125696) !important;
-        box-shadow: 0 2px 10px rgba(18,86,150,.25);
-      }
-      .faq-strip-btn-wa:hover { opacity: .9; }
+      .faq-footnote-btn:hover { background: #084c8d; color: #ffffff; }
 
-      /* ── Responsive ── */
-      @media (max-width: 860px) {
-        .faq-main-card { grid-template-columns: 1fr; }
-        .faq-sidebar {
-          border-right: none;
-          border-bottom: 1px solid rgba(18,86,150,.1);
-          border-radius: 20px 20px 0 0;
-          padding: 24px 20px 20px;
-        }
-        .faq-content-panel { border-radius: 0 0 20px 20px; }
-        .faq-cat-nav { flex-direction: row; flex-wrap: wrap; gap: 6px; }
-        .faq-cat-btn { height: 36px; padding: 0 12px; border-radius: 8px; flex: none; }
-        .faq-cat-btn::before { display: none; }
-        .faq-cat-btn.active { border: 1px solid rgba(18,86,150,.3); }
-        .faq-content-panel { padding: 22px 18px; }
-        .faq-action-strip { flex-direction: column; align-items: flex-start !important; }
+      /* No search results */
+      .faq-empty-state {
+        display: none;
+        text-align: center;
+        padding: 40px 20px;
+      }
+      .faq-empty-state i { width: 36px; height: 36px; color: #94a3b8; margin-bottom: 8px; }
+      .faq-empty-title { font-size: 1rem; font-weight: 700; color: #082f61; margin-bottom: 4px; }
+      .faq-empty-desc { font-size: 0.84rem; color: #64748b; margin-bottom: 14px; }
+
+      /* ── Bottom Assurance Strip ── */
+      .faq-trust-strip {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+        margin-top: 24px;
+      }
+      @media (max-width: 768px) {
+        .faq-trust-strip { grid-template-columns: 1fr; }
+      }
+      .faq-trust-item {
+        background: #ffffff;
+        border: 1px solid var(--faq-border);
+        border-radius: 12px;
+        padding: 16px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .faq-trust-icon {
+        width: 36px;
+        height: 36px;
+        border-radius: 8px;
+        background: rgba(10, 90, 168, 0.08);
+        color: #0a5aa8;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+      .faq-trust-text {
+        font-size: 0.82rem;
+        font-weight: 600;
+        color: #0f172a;
+      }
+      .faq-trust-sub {
+        font-size: 0.72rem;
+        color: #64748b;
+        display: block;
       }
     </style>
   </head>
 
-  <body>
+  <body class="faq-page-body">
     <div data-site-nav>
       <header class="site-header fallback-site-header">
         <nav class="nav-bar" aria-label="Primary fallback">
@@ -520,494 +651,708 @@
     </div>
 
     <main>
-
-      <!-- Hero Banner -->
-      <div class="page-shell">
-        <section class="compact-hero">
-          <div class="hero-inner">
-            <p class="eyebrow">Help Center</p>
-            <h1>Frequently Asked Questions</h1>
-            <p>Common questions about our services, fees, documents, payments and how we work.</p>
-            <div class="hero-actions">
-              <a class="btn btn-primary" href="https://wa.me/919473946181" target="_blank" rel="noopener"><i data-lucide="message-circle"></i> Ask on WhatsApp</a>
-              <a class="btn btn-ghost" href="contact.html"><i data-lucide="send"></i> Send a Query</a>
-            </div>
-          </div>
-        </section>
-      </div>
-
-      <!-- FAQ Body -->
-      <section class="faq-page-section reveal section" id="faq-content">
+      <!-- Signature Top Hero Section -->
+      <section class="compact-hero faq-hero-bg">
         <div class="site-container">
-
-          <div class="faq-main-card">
-
-            <!-- ── Sidebar ── -->
-            <aside class="faq-sidebar">
-              <div class="faq-sidebar-badge">
-                <i data-lucide="help-circle"></i>
-                <span>FAQ Categories</span>
-              </div>
-              <h2 class="faq-sidebar-heading">Find Your <span class="h2-gold">Answer</span></h2>
-              <p class="faq-sidebar-desc">Browse by category or WhatsApp us for instant help.</p>
-
-              <!-- Search -->
-              <div class="faq-search-wrap">
-                <i data-lucide="search"></i>
-                <input class="faq-search-input" type="search" placeholder="Search questions…" id="faq-search" autocomplete="off" aria-label="Search FAQ">
-              </div>
-
-              <nav class="faq-cat-nav" aria-label="FAQ categories">
-                <button class="faq-cat-btn active" data-cat="general" onclick="switchCat(this,'general')">
-                  <span class="cat-icon"><i data-lucide="info"></i></span>
-                  <span class="faq-cat-label">General</span>
-                  <span class="faq-cat-count">4</span>
-                </button>
-                <button class="faq-cat-btn" data-cat="payment" onclick="switchCat(this,'payment')">
-                  <span class="cat-icon"><i data-lucide="credit-card"></i></span>
-                  <span class="faq-cat-label">Payment &amp; Fees</span>
-                  <span class="faq-cat-count">4</span>
-                </button>
-                <button class="faq-cat-btn" data-cat="pan" onclick="switchCat(this,'pan')">
-                  <span class="cat-icon"><i data-lucide="id-card"></i></span>
-                  <span class="faq-cat-label">PAN Card</span>
-                  <span class="faq-cat-count">3</span>
-                </button>
-                <button class="faq-cat-btn" data-cat="student" onclick="switchCat(this,'student')">
-                  <span class="cat-icon"><i data-lucide="graduation-cap"></i></span>
-                  <span class="faq-cat-label">Student Services</span>
-                  <span class="faq-cat-count">3</span>
-                </button>
-                <button class="faq-cat-btn" data-cat="business" onclick="switchCat(this,'business')">
-                  <span class="cat-icon"><i data-lucide="briefcase"></i></span>
-                  <span class="faq-cat-label">Business Services</span>
-                  <span class="faq-cat-count">3</span>
-                </button>
-                <button class="faq-cat-btn" data-cat="travel" onclick="switchCat(this,'travel')">
-                  <span class="cat-icon"><i data-lucide="plane"></i></span>
-                  <span class="faq-cat-label">Travel Booking</span>
-                  <span class="faq-cat-count">3</span>
-                </button>
-                <button class="faq-cat-btn" data-cat="privacy" onclick="switchCat(this,'privacy')">
-                  <span class="cat-icon"><i data-lucide="shield-check"></i></span>
-                  <span class="faq-cat-label">Privacy &amp; Documents</span>
-                  <span class="faq-cat-count">2</span>
-                </button>
-              </nav>
-
-              <div class="faq-sidebar-cta">
-                <a href="https://wa.me/919473946181" target="_blank" rel="noopener">
-                  <i data-lucide="message-circle"></i>
-                  Still have a question?
-                </a>
-              </div>
-            </aside>
-
-            <!-- ── Content Panel ── -->
-            <div class="faq-content-panel">
-
-              <!-- No results -->
-              <div class="faq-no-results" id="faq-no-results">
-                <i data-lucide="search-x"></i>
-                <strong>No questions found</strong>
-                <span>Try a different keyword or browse the categories on the left.</span>
-              </div>
-
-              <!-- General -->
-              <div class="faq-group active" id="cat-general">
-                <div class="faq-group-header">
-                  <div class="faq-group-icon"><i data-lucide="info"></i></div>
-                  <h3 class="faq-group-title">General</h3>
-                  <span class="faq-group-count">4 questions</span>
-                </div>
-                <div class="faq-accordion">
-                  <details class="faq-item">
-                    <summary>
-                      <span class="faq-q-icon"><i data-lucide="circle-dot"></i></span>
-                      What is One Point Digital Services?
-                      <i data-lucide="chevron-down" class="faq-chevron"></i>
-                    </summary>
-                    <div class="faq-answer">
-                      <p>One Point Digital Services (One Point Suvidha Kendra) is a local digital service center in Lucknow that helps you with government services (PAN, Ayushman, certificates), student services (exam forms, scholarships), business registrations (GST, MSME), travel bookings, design services and a local products store — all in one place.</p>
-                    </div>
-                  </details>
-                  <details class="faq-item">
-                    <summary>
-                      <span class="faq-q-icon"><i data-lucide="circle-dot"></i></span>
-                      What are your working hours?
-                      <i data-lucide="chevron-down" class="faq-chevron"></i>
-                    </summary>
-                    <div class="faq-answer">
-                      <p>We are open Monday to Sunday, 9:00 AM to 8:00 PM. You can also WhatsApp us anytime and we will respond during business hours.</p>
-                    </div>
-                  </details>
-                  <details class="faq-item">
-                    <summary>
-                      <span class="faq-q-icon"><i data-lucide="circle-dot"></i></span>
-                      Can I get help without visiting the center?
-                      <i data-lucide="chevron-down" class="faq-chevron"></i>
-                    </summary>
-                    <div class="faq-answer">
-                      <p>Yes! Most services can be started online. WhatsApp us your documents and request details, and we will guide you through the entire process remotely. If a service requires physical verification, our team will confirm the visit requirement first.</p>
-                    </div>
-                  </details>
-                  <details class="faq-item">
-                    <summary>
-                      <span class="faq-q-icon"><i data-lucide="circle-dot"></i></span>
-                      How do I track my application status?
-                      <i data-lucide="chevron-down" class="faq-chevron"></i>
-                    </summary>
-                    <div class="faq-answer">
-                      <p>Every application gets a unique tracking ID. You can check your status on our <a href="track-application.html">Track Application</a> page or WhatsApp us your tracking ID directly for an instant update.</p>
-                    </div>
-                  </details>
-                </div>
-              </div>
-
-              <!-- Payment & Fees -->
-              <div class="faq-group" id="cat-payment">
-                <div class="faq-group-header">
-                  <div class="faq-group-icon"><i data-lucide="credit-card"></i></div>
-                  <h3 class="faq-group-title">Payment &amp; Fees</h3>
-                  <span class="faq-group-count">4 questions</span>
-                </div>
-                <div class="faq-accordion">
-                  <details class="faq-item">
-                    <summary>
-                      <span class="faq-q-icon"><i data-lucide="circle-dot"></i></span>
-                      What payment methods do you accept?
-                      <i data-lucide="chevron-down" class="faq-chevron"></i>
-                    </summary>
-                    <div class="faq-answer">
-                      <p>We accept UPI (Google Pay, PhonePe, Paytm, BHIM), cash at our center and bank transfer. For online requests, UPI is preferred — you will receive our UPI QR code and once payment is done, share the transaction screenshot with us for verification.</p>
-                    </div>
-                  </details>
-                  <details class="faq-item">
-                    <summary>
-                      <span class="faq-q-icon"><i data-lucide="circle-dot"></i></span>
-                      Do I pay before or after the service?
-                      <i data-lucide="chevron-down" class="faq-chevron"></i>
-                    </summary>
-                    <div class="faq-answer">
-                      <p>We show you the price upfront before you pay. For most services, you pay after document verification and before we begin processing. For some services like PAN Card, you will see the full fee breakdown on the service page before submitting.</p>
-                    </div>
-                  </details>
-                  <details class="faq-item">
-                    <summary>
-                      <span class="faq-q-icon"><i data-lucide="circle-dot"></i></span>
-                      Are government portal fees separate from your service charge?
-                      <i data-lucide="chevron-down" class="faq-chevron"></i>
-                    </summary>
-                    <div class="faq-answer">
-                      <p>Yes. Our service charge covers the assistance, form filling, document review and application submission. Any government portal fees (like passport fee, GST portal fee) are charged separately and we always inform you about both before you pay.</p>
-                    </div>
-                  </details>
-                  <details class="faq-item">
-                    <summary>
-                      <span class="faq-q-icon"><i data-lucide="circle-dot"></i></span>
-                      What is your refund policy?
-                      <i data-lucide="chevron-down" class="faq-chevron"></i>
-                    </summary>
-                    <div class="faq-answer">
-                      <p>If your application is rejected due to our error, we re-process at no extra charge. For government-rejected applications (due to wrong documents submitted by the customer), a re-application service charge applies. See our <a href="refund-policy.html">Refund Policy</a> for full details.</p>
-                    </div>
-                  </details>
-                </div>
-              </div>
-
-              <!-- PAN Card -->
-              <div class="faq-group" id="cat-pan">
-                <div class="faq-group-header">
-                  <div class="faq-group-icon"><i data-lucide="id-card"></i></div>
-                  <h3 class="faq-group-title">PAN Card</h3>
-                  <span class="faq-group-count">3 questions</span>
-                </div>
-                <div class="faq-accordion">
-                  <details class="faq-item">
-                    <summary>
-                      <span class="faq-q-icon"><i data-lucide="circle-dot"></i></span>
-                      How long does a new PAN Card take?
-                      <i data-lucide="chevron-down" class="faq-chevron"></i>
-                    </summary>
-                    <div class="faq-answer">
-                      <p>A new PAN Card typically takes 2–3 working days after successful application. The physical card may take 7–15 days to arrive by post. An e-PAN (soft copy) is available digitally in 2–3 days.</p>
-                    </div>
-                  </details>
-                  <details class="faq-item">
-                    <summary>
-                      <span class="faq-q-icon"><i data-lucide="circle-dot"></i></span>
-                      What documents are needed for a PAN Card?
-                      <i data-lucide="chevron-down" class="faq-chevron"></i>
-                    </summary>
-                    <div class="faq-answer">
-                      <p>For a new PAN Card: Aadhaar Card (mandatory), Date of Birth proof (Class 10 certificate or birth certificate), and a passport-size photo. For correction: existing PAN details + proof of the change needed.</p>
-                    </div>
-                  </details>
-                  <details class="faq-item">
-                    <summary>
-                      <span class="faq-q-icon"><i data-lucide="circle-dot"></i></span>
-                      What is the fee for PAN Card service?
-                      <i data-lucide="chevron-down" class="faq-chevron"></i>
-                    </summary>
-                    <div class="faq-answer">
-                      <p>New PAN Card: ₹149 &nbsp;|&nbsp; PAN Card Correction: ₹129. This includes our service charge and government fee. No hidden charges.</p>
-                    </div>
-                  </details>
-                </div>
-              </div>
-
-              <!-- Student Services -->
-              <div class="faq-group" id="cat-student">
-                <div class="faq-group-header">
-                  <div class="faq-group-icon"><i data-lucide="graduation-cap"></i></div>
-                  <h3 class="faq-group-title">Student Services</h3>
-                  <span class="faq-group-count">3 questions</span>
-                </div>
-                <div class="faq-accordion">
-                  <details class="faq-item">
-                    <summary>
-                      <span class="faq-q-icon"><i data-lucide="circle-dot"></i></span>
-                      Which exam forms do you fill?
-                      <i data-lucide="chevron-down" class="faq-chevron"></i>
-                    </summary>
-                    <div class="faq-answer">
-                      <p>We assist with SSC, Railway (RRB), UP Police, UPSC, UP Board supplementary, UPTET, CTET, AKTU semester forms, scholarship forms, and most government competitive exam forms. WhatsApp us the exam name and we will confirm availability.</p>
-                    </div>
-                  </details>
-                  <details class="faq-item">
-                    <summary>
-                      <span class="faq-q-icon"><i data-lucide="circle-dot"></i></span>
-                      Can I get my admit card or result here?
-                      <i data-lucide="chevron-down" class="faq-chevron"></i>
-                    </summary>
-                    <div class="faq-answer">
-                      <p>Yes, we help download, save and print admit cards and result mark sheets from UP Board, CBSE, university portals and government exam portals. Service charge is ₹10–30 depending on the portal.</p>
-                    </div>
-                  </details>
-                  <details class="faq-item">
-                    <summary>
-                      <span class="faq-q-icon"><i data-lucide="circle-dot"></i></span>
-                      How much does resume building cost?
-                      <i data-lucide="chevron-down" class="faq-chevron"></i>
-                    </summary>
-                    <div class="faq-answer">
-                      <p>A professional student resume costs ₹79 and includes a clean 1-page format in Word and PDF — covering objective, education, skills, projects and contact sections, ready to print.</p>
-                    </div>
-                  </details>
-                </div>
-              </div>
-
-              <!-- Business Services -->
-              <div class="faq-group" id="cat-business">
-                <div class="faq-group-header">
-                  <div class="faq-group-icon"><i data-lucide="briefcase"></i></div>
-                  <h3 class="faq-group-title">Business Services</h3>
-                  <span class="faq-group-count">3 questions</span>
-                </div>
-                <div class="faq-accordion">
-                  <details class="faq-item">
-                    <summary>
-                      <span class="faq-q-icon"><i data-lucide="circle-dot"></i></span>
-                      How long does GST registration take?
-                      <i data-lucide="chevron-down" class="faq-chevron"></i>
-                    </summary>
-                    <div class="faq-answer">
-                      <p>GST registration typically takes 3–7 working days after successful document submission on the GST portal. We handle the complete application process and keep you updated on every step.</p>
-                    </div>
-                  </details>
-                  <details class="faq-item">
-                    <summary>
-                      <span class="faq-q-icon"><i data-lucide="circle-dot"></i></span>
-                      Is MSME (Udyam) registration free?
-                      <i data-lucide="chevron-down" class="faq-chevron"></i>
-                    </summary>
-                    <div class="faq-answer">
-                      <p>Yes, Udyam registration on the government portal is free of charge. Our service charge of ₹299 covers the application process, form filling and certificate download assistance on your behalf.</p>
-                    </div>
-                  </details>
-                  <details class="faq-item">
-                    <summary>
-                      <span class="faq-q-icon"><i data-lucide="circle-dot"></i></span>
-                      Do I need to be present for business registrations?
-                      <i data-lucide="chevron-down" class="faq-chevron"></i>
-                    </summary>
-                    <div class="faq-answer">
-                      <p>Most business registrations (GST, MSME, Shop License) can be done remotely — just WhatsApp your documents. For Digital Signature (DSC), OTP and biometric verification may be required in person.</p>
-                    </div>
-                  </details>
-                </div>
-              </div>
-
-              <!-- Travel Booking -->
-              <div class="faq-group" id="cat-travel">
-                <div class="faq-group-header">
-                  <div class="faq-group-icon"><i data-lucide="plane"></i></div>
-                  <h3 class="faq-group-title">Travel Booking</h3>
-                  <span class="faq-group-count">3 questions</span>
-                </div>
-                <div class="faq-accordion">
-                  <details class="faq-item">
-                    <summary>
-                      <span class="faq-q-icon"><i data-lucide="circle-dot"></i></span>
-                      How does travel booking work?
-                      <i data-lucide="chevron-down" class="faq-chevron"></i>
-                    </summary>
-                    <div class="faq-answer">
-                      <p>Share your route, travel date, number of passengers and timing on WhatsApp. We check availability, share fare options, and once you confirm, we book and send the ticket on WhatsApp as PDF.</p>
-                    </div>
-                  </details>
-                  <details class="faq-item">
-                    <summary>
-                      <span class="faq-q-icon"><i data-lucide="circle-dot"></i></span>
-                      Do you book Tatkal train tickets?
-                      <i data-lucide="chevron-down" class="faq-chevron"></i>
-                    </summary>
-                    <div class="faq-answer">
-                      <p>Yes, we support Tatkal and Premium Tatkal booking with IRCTC. Tatkal opens at 10 AM (AC) and 11 AM (Sleeper). WhatsApp us a night before with your journey details for best results.</p>
-                    </div>
-                  </details>
-                  <details class="faq-item">
-                    <summary>
-                      <span class="faq-q-icon"><i data-lucide="circle-dot"></i></span>
-                      What is your travel service charge?
-                      <i data-lucide="chevron-down" class="faq-chevron"></i>
-                    </summary>
-                    <div class="faq-answer">
-                      <p>Travel service charges vary: Bus booking ₹30, Train booking ₹40, Flight booking ₹100–150, Hotel booking ₹100–200 (based on hotel rate). Tour packages are custom quoted. Government fare is charged separately.</p>
-                    </div>
-                  </details>
-                </div>
-              </div>
-
-              <!-- Privacy & Documents -->
-              <div class="faq-group" id="cat-privacy">
-                <div class="faq-group-header">
-                  <div class="faq-group-icon"><i data-lucide="shield-check"></i></div>
-                  <h3 class="faq-group-title">Privacy &amp; Documents</h3>
-                  <span class="faq-group-count">2 questions</span>
-                </div>
-                <div class="faq-accordion">
-                  <details class="faq-item">
-                    <summary>
-                      <span class="faq-q-icon"><i data-lucide="circle-dot"></i></span>
-                      Is my Aadhaar and personal data safe with you?
-                      <i data-lucide="chevron-down" class="faq-chevron"></i>
-                    </summary>
-                    <div class="faq-answer">
-                      <p>Yes. Your documents are used strictly for the service you requested and are not shared with any third party. We follow all UIDAI guidelines for Aadhaar handling. See our <a href="privacy.html">Privacy Policy</a> for full details.</p>
-                    </div>
-                  </details>
-                  <details class="faq-item">
-                    <summary>
-                      <span class="faq-q-icon"><i data-lucide="circle-dot"></i></span>
-                      Do you store my documents after the service is done?
-                      <i data-lucide="chevron-down" class="faq-chevron"></i>
-                    </summary>
-                    <div class="faq-answer">
-                      <p>No. We do not retain physical or digital copies of your sensitive documents after the service is completed. You are always in control of your information.</p>
-                    </div>
-                  </details>
-                </div>
-              </div>
-
-            </div><!-- /faq-content-panel -->
-          </div><!-- /faq-main-card -->
-
-          <!-- Bottom Action Strip -->
-          <div class="faq-action-strip">
-            <span>
-              <i data-lucide="message-circle"></i>
-              Still have a question? We're here every day, 9 AM – 8 PM.
-            </span>
-            <div class="faq-strip-actions">
-              <a class="faq-strip-btn faq-strip-btn-wa" href="https://wa.me/919473946181" target="_blank" rel="noopener">
-                <i data-lucide="message-circle"></i> WhatsApp Us
-              </a>
-              <a class="faq-strip-btn" href="contact.html">
-                <i data-lucide="send"></i> Send a Query
-              </a>
-              <a class="faq-strip-btn" href="tel:+919473946181">
-                <i data-lucide="phone"></i> Call Now
-              </a>
-            </div>
+          <p class="eyebrow"><i data-lucide="help-circle" style="width: 14px; height: 14px;"></i> Help &amp; Support Center</p>
+          <h1>Frequently Asked Questions</h1>
+          <p>Clear answers about service fees, required documents, government portal filing, live tracking, and how our Lucknow Suvidha Kendra assists you.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="https://wa.me/919473946181" target="_blank" rel="noopener"><i data-lucide="message-circle"></i> Ask on WhatsApp</a>
+            <a class="btn btn-ghost" href="contact.html"><i data-lucide="send"></i> Send a Query</a>
           </div>
-
         </div>
       </section>
 
+      <!-- Main Content Shell -->
+      <div class="faq-page-shell">
+        
+        <!-- Breadcrumb -->
+        <nav class="faq-breadcrumb" aria-label="Breadcrumb">
+          <a href="index.html">Home</a>
+          <i data-lucide="chevron-right"></i>
+          <span>FAQ &amp; Help Center</span>
+        </nav>
+
+        <!-- Search & Topic Filter Card -->
+        <section class="faq-hero-box">
+          <span class="faq-kicker">
+            <i data-lucide="search" style="width: 13px; height: 13px;"></i>
+            Instant Search &amp; Knowledge Base
+          </span>
+          <h2 class="faq-hero-box-title">Find Your Answer Instantly</h2>
+          <p class="faq-hero-box-sub">Search across all questions, documents, timelines, and services below.</p>
+
+          <!-- Search Bar -->
+          <div class="faq-search-bar">
+            <div class="faq-input-wrap">
+              <i data-lucide="search" class="faq-search-icon"></i>
+              <input type="search" placeholder="Search questions, documents, or services (e.g. PAN Card, Tatkal, Track)..." id="faq-search" autocomplete="off" aria-label="Search FAQ">
+              <button type="button" class="faq-clear-btn" id="faq-clear-search" title="Clear search">&times;</button>
+            </div>
+          </div>
+
+          <!-- Quick Topic Chips -->
+          <div class="faq-topic-chips">
+            <span class="faq-chips-label">Popular Topics:</span>
+            <button type="button" class="faq-chip" onclick="searchTopic('PAN Card')"><i data-lucide="id-card" style="width: 12px; height: 12px;"></i> PAN Documents</button>
+            <button type="button" class="faq-chip" onclick="searchTopic('track')"><i data-lucide="route" style="width: 12px; height: 12px;"></i> How to Track</button>
+            <button type="button" class="faq-chip" onclick="searchTopic('Tatkal')"><i data-lucide="plane" style="width: 12px; height: 12px;"></i> Tatkal Booking</button>
+            <button type="button" class="faq-chip" onclick="searchTopic('receipt')"><i data-lucide="receipt" style="width: 12px; height: 12px;"></i> Payment &amp; Slips</button>
+            <button type="button" class="faq-chip" onclick="searchTopic('safe')"><i data-lucide="shield-check" style="width: 12px; height: 12px;"></i> Document Safety</button>
+          </div>
+        </section>
+
+        <!-- 2-Column Knowledge Hub Layout -->
+        <div class="faq-grid">
+          
+          <!-- Left Column: Navigation & Instant Human Support -->
+          <aside>
+            <!-- Categories Selector Card -->
+            <div class="faq-nav-card">
+              <div class="faq-nav-head">Categories</div>
+              <div class="faq-cat-list" role="tablist">
+                <button class="faq-cat-item active" data-cat="general" onclick="switchCategory(this, 'general')">
+                  <span class="faq-cat-left">
+                    <i data-lucide="info"></i>
+                    <span>General &amp; Overview</span>
+                  </span>
+                  <span class="faq-cat-count">4</span>
+                </button>
+
+                <button class="faq-cat-item" data-cat="payment" onclick="switchCategory(this, 'payment')">
+                  <span class="faq-cat-left">
+                    <i data-lucide="credit-card"></i>
+                    <span>Payment &amp; Fees</span>
+                  </span>
+                  <span class="faq-cat-count">4</span>
+                </button>
+
+                <button class="faq-cat-item" data-cat="pan" onclick="switchCategory(this, 'pan')">
+                  <span class="faq-cat-left">
+                    <i data-lucide="id-card"></i>
+                    <span>PAN &amp; Govt IDs</span>
+                  </span>
+                  <span class="faq-cat-count">3</span>
+                </button>
+
+                <button class="faq-cat-item" data-cat="student" onclick="switchCategory(this, 'student')">
+                  <span class="faq-cat-left">
+                    <i data-lucide="graduation-cap"></i>
+                    <span>Student Services</span>
+                  </span>
+                  <span class="faq-cat-count">3</span>
+                </button>
+
+                <button class="faq-cat-item" data-cat="business" onclick="switchCategory(this, 'business')">
+                  <span class="faq-cat-left">
+                    <i data-lucide="briefcase"></i>
+                    <span>GST &amp; Business</span>
+                  </span>
+                  <span class="faq-cat-count">3</span>
+                </button>
+
+                <button class="faq-cat-item" data-cat="travel" onclick="switchCategory(this, 'travel')">
+                  <span class="faq-cat-left">
+                    <i data-lucide="plane"></i>
+                    <span>Travel Booking</span>
+                  </span>
+                  <span class="faq-cat-count">3</span>
+                </button>
+
+                <button class="faq-cat-item" data-cat="privacy" onclick="switchCategory(this, 'privacy')">
+                  <span class="faq-cat-left">
+                    <i data-lucide="shield-check"></i>
+                    <span>Privacy &amp; Security</span>
+                  </span>
+                  <span class="faq-cat-count">2</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Instant Human Support Card -->
+            <div class="faq-help-card">
+              <span class="faq-help-badge">
+                <span class="pulse-dot-green"></span>
+                Desk Open 9 AM &ndash; 8 PM
+              </span>
+              <div class="faq-help-title">Need direct assistance?</div>
+              <p class="faq-help-desc">Can't find what you need? Our Lucknow Suvidha Kendra operators are available for instant help.</p>
+              
+              <a href="https://wa.me/919473946181" target="_blank" rel="noopener" class="faq-help-btn-wa">
+                <i data-lucide="message-circle" style="width: 15px; height: 15px;"></i>
+                <span>Ask on WhatsApp</span>
+              </a>
+
+              <a href="tel:+919473946181" class="faq-help-btn-call">
+                <i data-lucide="phone" style="width: 14px; height: 14px;"></i>
+                <span>Call +91 9473946181</span>
+              </a>
+            </div>
+          </aside>
+
+          <!-- Right Column: Accordion Questions & Answers -->
+          <section class="faq-content-card">
+            
+            <!-- Empty State for Search -->
+            <div class="faq-empty-state" id="faq-empty-state">
+              <i data-lucide="search-x"></i>
+              <div class="faq-empty-title">No matching questions found</div>
+              <p class="faq-empty-desc">Try searching for a different keyword or contact our operator directly on WhatsApp.</p>
+              <a href="https://wa.me/919473946181" target="_blank" rel="noopener" class="faq-help-btn-wa" style="padding: 6px 14px; display: inline-flex; width: auto;">
+                <i data-lucide="message-circle" style="width: 13px; height: 13px;"></i>
+                <span>Ask on WhatsApp</span>
+              </a>
+            </div>
+
+            <!-- Category 1: General & Overview -->
+            <div class="faq-group-pane active" id="cat-general">
+              <div class="faq-group-head">
+                <div class="faq-group-title-row">
+                  <div class="faq-group-icon"><i data-lucide="info"></i></div>
+                  <h2 class="faq-group-title">General &amp; Overview</h2>
+                </div>
+                <span class="faq-group-badge">4 Verified Answers</span>
+              </div>
+
+              <div class="faq-accordion-list">
+                <details class="faq-item-card" open>
+                  <summary>
+                    <span class="faq-question-text">
+                      <span class="faq-q-dot">Q1</span>
+                      <span>What is One Point Digital Services?</span>
+                    </span>
+                    <i data-lucide="chevron-down" class="faq-chevron"></i>
+                  </summary>
+                  <div class="faq-answer-body">
+                    <p>One Point Digital Services is a local-first, hybrid service center in Lucknow. We help everyday families, students, and businesses apply for government forms, PAN cards, certificates, GST filing, travel tickets, printing, and custom design &mdash; with human assistance at every step.</p>
+                  </div>
+                </details>
+
+                <details class="faq-item-card">
+                  <summary>
+                    <span class="faq-question-text">
+                      <span class="faq-q-dot">Q2</span>
+                      <span>What are your working hours?</span>
+                    </span>
+                    <i data-lucide="chevron-down" class="faq-chevron"></i>
+                  </summary>
+                  <div class="faq-answer-body">
+                    <p>We are open Monday to Saturday from <strong>9:00 AM to 8:00 PM</strong> at our Suvidha Kendra in LDA Colony, Lucknow. Online applications and WhatsApp assistance are monitored throughout the day.</p>
+                  </div>
+                </details>
+
+                <details class="faq-item-card">
+                  <summary>
+                    <span class="faq-question-text">
+                      <span class="faq-q-dot">Q3</span>
+                      <span>Can I get help without visiting the center physically?</span>
+                    </span>
+                    <i data-lucide="chevron-down" class="faq-chevron"></i>
+                  </summary>
+                  <div class="faq-answer-body">
+                    <p>Yes! Most citizen services, form fillings, and document printings can be completely managed online. Simply select your service, share documents securely via WhatsApp or portal, pay via UPI, and receive your acknowledgement slip and final certificates digitally.</p>
+                  </div>
+                </details>
+
+                <details class="faq-item-card">
+                  <summary>
+                    <span class="faq-question-text">
+                      <span class="faq-q-dot">Q4</span>
+                      <span>How do I track my application status?</span>
+                    </span>
+                    <i data-lucide="chevron-down" class="faq-chevron"></i>
+                  </summary>
+                  <div class="faq-answer-body">
+                    <p>Every request submitted through One Point receives a unique Tracking ID (e.g. <code>OPDS-20260722-000001</code>). You can check real-time milestone progress anytime on our <a href="track-application.html">Track Application page</a> or by asking us on WhatsApp.</p>
+                  </div>
+                </details>
+              </div>
+
+              <div class="faq-pane-footnote">
+                <span>Already have a tracking ID for your application?</span>
+                <a href="track-application.html" class="faq-footnote-btn">Track Status Live &rarr;</a>
+              </div>
+            </div>
+
+            <!-- Category 2: Payment & Fees -->
+            <div class="faq-group-pane" id="cat-payment">
+              <div class="faq-group-head">
+                <div class="faq-group-title-row">
+                  <div class="faq-group-icon"><i data-lucide="credit-card"></i></div>
+                  <h2 class="faq-group-title">Payment &amp; Fees</h2>
+                </div>
+                <span class="faq-group-badge">4 Verified Answers</span>
+              </div>
+
+              <div class="faq-accordion-list">
+                <details class="faq-item-card" open>
+                  <summary>
+                    <span class="faq-question-text">
+                      <span class="faq-q-dot">Q1</span>
+                      <span>How much do your services cost?</span>
+                    </span>
+                    <i data-lucide="chevron-down" class="faq-chevron"></i>
+                  </summary>
+                  <div class="faq-answer-body">
+                    <p>Every service has a transparent, fixed price shown upfront on the service page before you submit. There are zero hidden fees or arbitrary middleman markups.</p>
+                  </div>
+                </details>
+
+                <details class="faq-item-card">
+                  <summary>
+                    <span class="faq-question-text">
+                      <span class="faq-q-dot">Q2</span>
+                      <span>Which payment methods are accepted?</span>
+                    </span>
+                    <i data-lucide="chevron-down" class="faq-chevron"></i>
+                  </summary>
+                  <div class="faq-answer-body">
+                    <p>We accept all major UPI apps (Google Pay, PhonePe, Paytm, BHIM), debit/credit cards, net banking via Razorpay, and cash at our counter.</p>
+                  </div>
+                </details>
+
+                <details class="faq-item-card">
+                  <summary>
+                    <span class="faq-question-text">
+                      <span class="faq-q-dot">Q3</span>
+                      <span>Do I get a receipt for my payment?</span>
+                    </span>
+                    <i data-lucide="chevron-down" class="faq-chevron"></i>
+                  </summary>
+                  <div class="faq-answer-body">
+                    <p>Yes. Every payment generates an official digital GST Tax Invoice and Payment Receipt downloadable immediately from your tracking dashboard and sent via WhatsApp.</p>
+                  </div>
+                </details>
+
+                <details class="faq-item-card">
+                  <summary>
+                    <span class="faq-question-text">
+                      <span class="faq-q-dot">Q4</span>
+                      <span>What is your refund policy?</span>
+                    </span>
+                    <i data-lucide="chevron-down" class="faq-chevron"></i>
+                  </summary>
+                  <div class="faq-answer-body">
+                    <p>If a service cannot be processed due to eligibility issues before government portal submission, we refund the fee promptly. Once submitted to the government portal, government fees are non-refundable per official department policies.</p>
+                  </div>
+                </details>
+              </div>
+
+              <div class="faq-pane-footnote">
+                <span>View our comprehensive pricing &amp; refund terms:</span>
+                <a href="refund-policy.html" class="faq-footnote-btn">View Refund Policy &rarr;</a>
+              </div>
+            </div>
+
+            <!-- Category 3: PAN Card & Government IDs -->
+            <div class="faq-group-pane" id="cat-pan">
+              <div class="faq-group-head">
+                <div class="faq-group-title-row">
+                  <div class="faq-group-icon"><i data-lucide="id-card"></i></div>
+                  <h2 class="faq-group-title">PAN &amp; Government IDs</h2>
+                </div>
+                <span class="faq-group-badge">3 Verified Answers</span>
+              </div>
+
+              <div class="faq-accordion-list">
+                <details class="faq-item-card" open>
+                  <summary>
+                    <span class="faq-question-text">
+                      <span class="faq-q-dot">Q1</span>
+                      <span>What documents are required for a New PAN Card?</span>
+                    </span>
+                    <i data-lucide="chevron-down" class="faq-chevron"></i>
+                  </summary>
+                  <div class="faq-answer-body">
+                    <p>For an individual new PAN card, you only need:</p>
+                    <ul style="margin: 6px 0 0 16px; padding: 0;">
+                      <li>Aadhaar Card (front and back)</li>
+                      <li>Passport-size photograph with white background</li>
+                      <li>Signature on plain white paper</li>
+                    </ul>
+                  </div>
+                </details>
+
+                <details class="faq-item-card">
+                  <summary>
+                    <span class="faq-question-text">
+                      <span class="faq-q-dot">Q2</span>
+                      <span>How long does it take to get a PAN Card?</span>
+                    </span>
+                    <i data-lucide="chevron-down" class="faq-chevron"></i>
+                  </summary>
+                  <div class="faq-answer-body">
+                    <p>An e-PAN (digital PDF) is typically generated within <strong>3 to 5 business days</strong> and sent to your email and WhatsApp. The physical laminated PVC card is delivered by India Post to your address within 10 to 15 days.</p>
+                  </div>
+                </details>
+
+                <details class="faq-item-card">
+                  <summary>
+                    <span class="faq-question-text">
+                      <span class="faq-q-dot">Q3</span>
+                      <span>Can I correct my name, father's name, or DOB on an existing PAN?</span>
+                    </span>
+                    <i data-lucide="chevron-down" class="faq-chevron"></i>
+                  </summary>
+                  <div class="faq-answer-body">
+                    <p>Yes. We process PAN corrections and reprints. You will need your existing PAN number, Aadhaar card with corrected details, and supporting proof (e.g. 10th marksheet or gazette notification if name changed after marriage).</p>
+                  </div>
+                </details>
+              </div>
+
+              <div class="faq-pane-footnote">
+                <span>Need to apply for or correct your PAN Card?</span>
+                <a href="service-pan-card.html" class="faq-footnote-btn">Open PAN Card Service &rarr;</a>
+              </div>
+            </div>
+
+            <!-- Category 4: Student Services -->
+            <div class="faq-group-pane" id="cat-student">
+              <div class="faq-group-head">
+                <div class="faq-group-title-row">
+                  <div class="faq-group-icon"><i data-lucide="graduation-cap"></i></div>
+                  <h2 class="faq-group-title">Student Services</h2>
+                </div>
+                <span class="faq-group-badge">3 Verified Answers</span>
+              </div>
+
+              <div class="faq-accordion-list">
+                <details class="faq-item-card" open>
+                  <summary>
+                    <span class="faq-question-text">
+                      <span class="faq-q-dot">Q1</span>
+                      <span>Which competitive exam forms do you assist with?</span>
+                    </span>
+                    <i data-lucide="chevron-down" class="faq-chevron"></i>
+                  </summary>
+                  <div class="faq-answer-body">
+                    <p>We assist with UPSSSC, SSC (CGL, CHSL, MTS, GD), Railway RRB, UP Police, Banking (IBPS, SBI), NTA (NEET, JEE, CUET), CTET/UPTET, and university admission forms.</p>
+                  </div>
+                </details>
+
+                <details class="faq-item-card">
+                  <summary>
+                    <span class="faq-question-text">
+                      <span class="faq-q-dot">Q2</span>
+                      <span>Do you resize photos and signatures to match board specifications?</span>
+                    </span>
+                    <i data-lucide="chevron-down" class="faq-chevron"></i>
+                  </summary>
+                  <div class="faq-answer-body">
+                    <p>Yes! Every government board has strict pixel and KB size guidelines (e.g. 20-50 KB JPG). Our operators crop, enhance, and resize all files to ensure 100% compliance without form rejection.</p>
+                  </div>
+                </details>
+
+                <details class="faq-item-card">
+                  <summary>
+                    <span class="faq-question-text">
+                      <span class="faq-q-dot">Q3</span>
+                      <span>Can you print my Admit Card in color on high-grade paper?</span>
+                    </span>
+                    <i data-lucide="chevron-down" class="faq-chevron"></i>
+                  </summary>
+                  <div class="faq-answer-body">
+                    <p>Yes. We provide crisp laser color and B&amp;W admit card printouts along with optional lamination at our Lucknow desk.</p>
+                  </div>
+                </details>
+              </div>
+
+              <div class="faq-pane-footnote">
+                <span>Explore student form filing and educational tools:</span>
+                <a href="edupoint.html" class="faq-footnote-btn">Visit EduPoint &rarr;</a>
+              </div>
+            </div>
+
+            <!-- Category 5: GST & Business Services -->
+            <div class="faq-group-pane" id="cat-business">
+              <div class="faq-group-head">
+                <div class="faq-group-title-row">
+                  <div class="faq-group-icon"><i data-lucide="briefcase"></i></div>
+                  <h2 class="faq-group-title">GST &amp; Business Services</h2>
+                </div>
+                <span class="faq-group-badge">3 Verified Answers</span>
+              </div>
+
+              <div class="faq-accordion-list">
+                <details class="faq-item-card" open>
+                  <summary>
+                    <span class="faq-question-text">
+                      <span class="faq-q-dot">Q1</span>
+                      <span>What is needed for a new GST Registration?</span>
+                    </span>
+                    <i data-lucide="chevron-down" class="faq-chevron"></i>
+                  </summary>
+                  <div class="faq-answer-body">
+                    <p>For proprietorship GST registration, you need: PAN card, Aadhaar card, electricity bill of business address, rent agreement or NOC, passport photo, and bank account statement/cancelled cheque.</p>
+                  </div>
+                </details>
+
+                <details class="faq-item-card">
+                  <summary>
+                    <span class="faq-question-text">
+                      <span class="faq-q-dot">Q2</span>
+                      <span>Do you assist with monthly GST Return Filing (GSTR-1 / 3B)?</span>
+                    </span>
+                    <i data-lucide="chevron-down" class="faq-chevron"></i>
+                  </summary>
+                  <div class="faq-answer-body">
+                    <p>Yes. We offer regular monthly and quarterly GST return filing packages for local traders and small business owners in Lucknow.</p>
+                  </div>
+                </details>
+
+                <details class="faq-item-card">
+                  <summary>
+                    <span class="faq-question-text">
+                      <span class="faq-q-dot">Q3</span>
+                      <span>Do you support MSME / Udyam registration?</span>
+                    </span>
+                    <i data-lucide="chevron-down" class="faq-chevron"></i>
+                  </summary>
+                  <div class="faq-answer-body">
+                    <p>Yes. Udyam MSME certificate registration is processed same-day with immediate government certificate issuance.</p>
+                  </div>
+                </details>
+              </div>
+
+              <div class="faq-pane-footnote">
+                <span>Start your business compliance or GST filing:</span>
+                <a href="service-gst-itr.html" class="faq-footnote-btn">Open Business Services &rarr;</a>
+              </div>
+            </div>
+
+            <!-- Category 6: Travel Booking -->
+            <div class="faq-group-pane" id="cat-travel">
+              <div class="faq-group-head">
+                <div class="faq-group-title-row">
+                  <div class="faq-group-icon"><i data-lucide="plane"></i></div>
+                  <h2 class="faq-group-title">Travel Booking</h2>
+                </div>
+                <span class="faq-group-badge">3 Verified Answers</span>
+              </div>
+
+              <div class="faq-accordion-list">
+                <details class="faq-item-card" open>
+                  <summary>
+                    <span class="faq-question-text">
+                      <span class="faq-q-dot">Q1</span>
+                      <span>How does ticket booking through One Point work?</span>
+                    </span>
+                    <i data-lucide="chevron-down" class="faq-chevron"></i>
+                  </summary>
+                  <div class="faq-answer-body">
+                    <p>Share your route, journey date, passenger details, and timing preference on WhatsApp. We check live availability, share best fare options, and once confirmed, send the ticket PDF immediately.</p>
+                  </div>
+                </details>
+
+                <details class="faq-item-card">
+                  <summary>
+                    <span class="faq-question-text">
+                      <span class="faq-q-dot">Q2</span>
+                      <span>Do you assist with IRCTC Tatkal train tickets?</span>
+                    </span>
+                    <i data-lucide="chevron-down" class="faq-chevron"></i>
+                  </summary>
+                  <div class="faq-answer-body">
+                    <p>Yes. Tatkal booking opens at 10:00 AM (AC) and 11:00 AM (Sleeper). WhatsApp us the evening prior with passenger names and ID details for timely queuing.</p>
+                  </div>
+                </details>
+
+                <details class="faq-item-card">
+                  <summary>
+                    <span class="faq-question-text">
+                      <span class="faq-q-dot">Q3</span>
+                      <span>What is your travel booking service charge?</span>
+                    </span>
+                    <i data-lucide="chevron-down" class="faq-chevron"></i>
+                  </summary>
+                  <div class="faq-answer-body">
+                    <p>Service charges are fixed and displayed upfront before checkout. Actual railway, flight, or bus ticket costs are charged transparently as per the official carrier rates.</p>
+                  </div>
+                </details>
+              </div>
+
+              <div class="faq-pane-footnote">
+                <span>Book train, flight, or bus tickets via WhatsApp:</span>
+                <a href="https://wa.me/919473946181" target="_blank" rel="noopener" class="faq-footnote-btn">Chat on WhatsApp &rarr;</a>
+              </div>
+            </div>
+
+            <!-- Category 7: Privacy & Security -->
+            <div class="faq-group-pane" id="cat-privacy">
+              <div class="faq-group-head">
+                <div class="faq-group-title-row">
+                  <div class="faq-group-icon"><i data-lucide="shield-check"></i></div>
+                  <h2 class="faq-group-title">Privacy &amp; Security</h2>
+                </div>
+                <span class="faq-group-badge">2 Verified Answers</span>
+              </div>
+
+              <div class="faq-accordion-list">
+                <details class="faq-item-card" open>
+                  <summary>
+                    <span class="faq-question-text">
+                      <span class="faq-q-dot">Q1</span>
+                      <span>Is my Aadhaar and personal identity safe?</span>
+                    </span>
+                    <i data-lucide="chevron-down" class="faq-chevron"></i>
+                  </summary>
+                  <div class="faq-answer-body">
+                    <p>Yes. Your documents are used strictly for the requested filing and protected under 256-bit encryption in compliance with the IT Act 2000 and UIDAI guidelines. We never share or sell personal information.</p>
+                  </div>
+                </details>
+
+                <details class="faq-item-card">
+                  <summary>
+                    <span class="faq-question-text">
+                      <span class="faq-q-dot">Q2</span>
+                      <span>Are document copies deleted after completion?</span>
+                    </span>
+                    <i data-lucide="chevron-down" class="faq-chevron"></i>
+                  </summary>
+                  <div class="faq-answer-body">
+                    <p>Yes. We retain document files only until verification and handover are confirmed, after which files are archived or securely purged per our data retention schedule.</p>
+                  </div>
+                </details>
+              </div>
+
+              <div class="faq-pane-footnote">
+                <span>Read our complete Citizen Data Protection Charter:</span>
+                <a href="privacy.html" class="faq-footnote-btn">Read Privacy Policy &rarr;</a>
+              </div>
+            </div>
+
+          </section>
+
+        </div>
+
+        <!-- Bottom Trust Assurances Strip -->
+        <div class="faq-trust-strip">
+          <div class="faq-trust-item">
+            <div class="faq-trust-icon"><i data-lucide="clock"></i></div>
+            <div>
+              <div class="faq-trust-text">Quick Response Time</div>
+              <span class="faq-trust-sub">Under 15 minutes during desk hours</span>
+            </div>
+          </div>
+
+          <div class="faq-trust-item">
+            <div class="faq-trust-icon"><i data-lucide="lock"></i></div>
+            <div>
+              <div class="faq-trust-text">256-Bit Encrypted Vault</div>
+              <span class="faq-trust-sub">Compliant with IT Act 2000 privacy</span>
+            </div>
+          </div>
+
+          <div class="faq-trust-item">
+            <div class="faq-trust-icon"><i data-lucide="receipt"></i></div>
+            <div>
+              <div class="faq-trust-text">100% Upfront Pricing</div>
+              <span class="faq-trust-sub">Tax invoice receipts for every request</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
     </main>
 
     <div data-site-footer></div>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
-    <script src="assets/app.js?v=clean_js_v11" defer></script>
+    <script src="assets/app.js?v=customer-checkout-94" defer></script>
     <script>
-      function switchCat(btn, cat) {
-        document.querySelectorAll('.faq-cat-btn').forEach(function(b) { b.classList.remove('active'); });
+      function switchCategory(btn, catId) {
+        document.querySelectorAll('.faq-cat-item').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
-        document.querySelectorAll('.faq-group').forEach(function(g) { g.classList.remove('active'); });
-        var panel = document.getElementById('cat-' + cat);
-        if (panel) {
-          panel.classList.add('active');
-          panel.querySelectorAll('details[open]').forEach(function(d) { d.removeAttribute('open'); });
+
+        document.querySelectorAll('.faq-group-pane').forEach(p => p.classList.remove('active'));
+        const target = document.getElementById('cat-' + catId);
+        if (target) {
+          target.classList.add('active');
+          target.querySelectorAll('.faq-item-card').forEach(item => item.style.display = '');
         }
-        // Clear search when switching category
-        var s = document.getElementById('faq-search');
-        if (s) { s.value = ''; runSearch(''); }
+
+        const emptyState = document.getElementById('faq-empty-state');
+        if (emptyState) emptyState.style.display = 'none';
+
+        const searchInput = document.getElementById('faq-search');
+        const clearBtn = document.getElementById('faq-clear-search');
+        if (searchInput && searchInput.value) {
+          searchInput.value = '';
+          if (clearBtn) clearBtn.style.display = 'none';
+        }
       }
 
-      // Live search across all items
-      document.addEventListener('DOMContentLoaded', function() {
-        var input = document.getElementById('faq-search');
+      function searchTopic(query) {
+        const input = document.getElementById('faq-search');
         if (!input) return;
-        input.addEventListener('input', function() { runSearch(this.value.trim().toLowerCase()); });
-      });
+        input.value = query;
+        runFaqFilter(query.toLowerCase());
+      }
 
-      function runSearch(q) {
-        var noResults = document.getElementById('faq-no-results');
-        var allGroups = document.querySelectorAll('.faq-group');
-        var allItems  = document.querySelectorAll('.faq-item');
-        var allBtns   = document.querySelectorAll('.faq-cat-btn');
+      function runFaqFilter(query) {
+        const clearBtn = document.getElementById('faq-clear-search');
+        if (clearBtn) clearBtn.style.display = query ? 'block' : 'none';
 
-        if (!q) {
-          // Restore category view
-          allGroups.forEach(function(g) { g.style.display = ''; g.querySelectorAll('.faq-item').forEach(function(i){ i.style.display = ''; }); });
-          if (noResults) noResults.style.display = 'none';
+        const allPanes = document.querySelectorAll('.faq-group-pane');
+        const emptyState = document.getElementById('faq-empty-state');
+        const catButtons = document.querySelectorAll('.faq-cat-item');
+
+        if (!query) {
+          allPanes.forEach(p => {
+            p.style.display = '';
+            p.querySelectorAll('.faq-item-card').forEach(item => item.style.display = '');
+          });
+          const activeBtn = document.querySelector('.faq-cat-item.active') || catButtons[0];
+          if (activeBtn) switchCategory(activeBtn, activeBtn.getAttribute('data-cat'));
+          if (emptyState) emptyState.style.display = 'none';
           return;
         }
 
-        // Show all groups, filter items
-        var anyVisible = false;
-        allGroups.forEach(function(g) {
-          g.style.display = 'block';
-          g.classList.add('active');
-          var groupVisible = false;
-          g.querySelectorAll('.faq-item').forEach(function(item) {
-            var text = item.textContent.toLowerCase();
-            var match = text.indexOf(q) !== -1;
-            item.style.display = match ? '' : 'none';
-            if (match) { groupVisible = true; anyVisible = true; }
+        let totalMatches = 0;
+        allPanes.forEach(pane => {
+          pane.style.display = 'block';
+          pane.classList.add('active');
+          let paneMatches = 0;
+
+          pane.querySelectorAll('.faq-item-card').forEach(card => {
+            const text = card.textContent.toLowerCase();
+            const match = text.includes(query);
+            card.style.display = match ? '' : 'none';
+            if (match) {
+              card.setAttribute('open', '');
+              paneMatches++;
+              totalMatches++;
+            }
           });
-          // Hide group header if no items visible
-          var header = g.querySelector('.faq-group-header');
-          if (header) header.style.display = groupVisible ? '' : 'none';
-          if (!groupVisible) g.style.display = 'none';
+
+          if (paneMatches === 0) {
+            pane.style.display = 'none';
+          }
         });
 
-        // Deactivate category buttons during search
-        allBtns.forEach(function(b) { b.classList.remove('active'); });
-        if (noResults) noResults.style.display = anyVisible ? 'none' : 'flex';
+        catButtons.forEach(b => b.classList.remove('active'));
+        if (emptyState) {
+          emptyState.style.display = totalMatches === 0 ? 'block' : 'none';
+        }
       }
-    </script>
 
-    <script id="line-alignment-script">
-      document.addEventListener("DOMContentLoaded", function() {
-        setTimeout(() => {
-          document.querySelectorAll(".section-head h2").forEach(h2 => {
-            let align = window.getComputedStyle(h2).textAlign;
-            let parent = h2.closest('.section-head');
-            if (parent) parent.classList.add(align === "center" ? "center-line" : "left-line");
+      document.addEventListener('DOMContentLoaded', () => {
+        const searchInput = document.getElementById('faq-search');
+        const clearBtn = document.getElementById('faq-clear-search');
+
+        if (searchInput) {
+          searchInput.addEventListener('input', (e) => {
+            runFaqFilter(e.target.value.trim().toLowerCase());
           });
-        }, 100);
+        }
+
+        if (clearBtn && searchInput) {
+          clearBtn.addEventListener('click', () => {
+            searchInput.value = '';
+            runFaqFilter('');
+            searchInput.focus();
+          });
+        }
       });
     </script>
   </body>

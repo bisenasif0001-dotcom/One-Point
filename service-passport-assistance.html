@@ -3,26 +3,2067 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Passport Application Assistance in Lucknow with documents, fee guidance, status support and secure checkout at One Point Digital Services.">
-    <title>Passport Assistance Service | One Point Digital Services</title>
+    <meta name="description" content="Passport Application & Appointment Assistance in Lucknow with document verification, PSK slot booking, fee transparency, and secure tracking at One Point Digital Services.">
+    <title>Passport Application & Appointment Assistance Lucknow | One Point Digital Services</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-        <link rel="stylesheet" href="assets/onepoint.css?v=2">
-  
-<script type="application/ld+json">
+    <script src="assets/opds-boot.js?v=anti-fouc-79"></script>
+    <link rel="stylesheet" href="assets/onepoint.css?v=customer-checkout-94">
+    <link rel="stylesheet" href="assets/enterprise-visual-polish.css">
+
+    <style>
+      /* --- Scoped Refined Styles for Passport Assistance Service Page --- */
+
+      /* Typography & Base Spacing */
+      html, body,
+      body.page-service-detail,
+      body.enterprise-service-detail-page,
+      body.page-passport-assistance,
+      body :is(h1, h2, h3, h4, h5, h6, .page-hero-title, .section-head h2, .h2-gold, .pan-suite-head h3, .sec-tab-card h3, .edc-summary h2, .pfaq-heading, .btn, .passport-tab-btn, .doc-type-btn, .pan-suite-card, .advisory-card, input, button, select, textarea, span, p, a, strong, small) {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+      }
+
+      /* Unified Container & Section Spacing System Matching Site Standard */
+      .page-shell {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        width: 100%;
+      }
+      .page-shell > section.section,
+      .page-shell > .passport-overview-section,
+      .page-shell > .enterprise-trust-band {
+        width: 100%;
+        max-width: calc(var(--max) + var(--gutter) * 2) !important;
+        margin-inline: auto !important;
+        padding-left: var(--gutter) !important;
+        padding-right: var(--gutter) !important;
+        padding-top: 56px;
+        padding-bottom: 56px;
+        box-sizing: border-box;
+      }
+      @media (max-width: 768px) {
+        .page-shell > section.section,
+        .page-shell > .passport-overview-section,
+        .page-shell > .enterprise-trust-band {
+          padding-top: 40px;
+          padding-bottom: 40px;
+          padding-left: var(--gutter) !important;
+          padding-right: var(--gutter) !important;
+        }
+      }
+
+      /* Section Header Standard */
+      .passport-trust-band.enterprise-trust-band {
+        display: grid !important;
+        grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+        gap: 16px !important;
+        width: 100% !important;
+        max-width: calc(var(--max) + var(--gutter) * 2) !important;
+        margin: 0 auto !important;
+        padding-left: var(--gutter) !important;
+        padding-right: var(--gutter) !important;
+        padding-top: 16px !important;
+        padding-bottom: 36px !important;
+        box-sizing: border-box !important;
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+      }
+      @media (max-width: 960px) {
+        .passport-trust-band.enterprise-trust-band {
+          grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+          gap: 14px !important;
+          padding-top: 12px !important;
+          padding-bottom: 28px !important;
+        }
+      }
+      @media (max-width: 520px) {
+        .passport-trust-band.enterprise-trust-band {
+          grid-template-columns: 1fr !important;
+          gap: 12px !important;
+          padding-top: 10px !important;
+          padding-bottom: 24px !important;
+        }
+      }
+
+      /* Hide injected duplicate signal row */
+      .page-passport-assistance .edh-signal-row,
+      .page-hero .edh-signal-row {
+        display: none !important;
+      }
+
+      /* Hero Trust Strip Single Row */
+      .hero-trust-strip {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        gap: 8px !important;
+        align-items: center !important;
+        margin-top: 14px !important;
+      }
+      .hero-trust-badge {
+        display: inline-flex !important;
+        align-items: center !important;
+        gap: 6px !important;
+        padding: 5px 12px !important;
+        border-radius: 999px !important;
+        font-size: 0.8rem !important;
+        white-space: nowrap !important;
+      }
+
+      /* Section Header Standard */
+      .section-head {
+        margin-bottom: 28px;
+      }
+      .section-head h2 {
+        font-size: clamp(1.75rem, 2.8vw, 2.35rem);
+        font-weight: 850;
+        color: #0b1f35;
+        letter-spacing: -0.02em;
+        line-height: 1.25;
+        margin: 0 0 8px;
+      }
+      .section-head p {
+        font-size: 0.95rem;
+        color: #64748b;
+        line-height: 1.55;
+        margin: 0;
+      }
+      .section-kicker {
+        display: inline-block;
+        font-size: 0.75rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: #075092;
+        background: #eff6ff;
+        border: 1px solid #bfdbfe;
+        padding: 3px 10px;
+        border-radius: 999px;
+        margin-bottom: 10px;
+      }
+
+      /* Yellow Accent Policy: Restricted strictly to focal highlights */
+      .h2-gold {
+        color: #b45309 !important;
+        font-weight: 850;
+      }
+
+      /* 1. Passport Overview & Sticky Sidebar Layout (Unified Standard) */
+      .enterprise-detail-command.passport-overview-section,
+      .passport-overview-section,
+      .voter-overview-section {
+        width: 100% !important;
+        max-width: calc(var(--max) + var(--gutter) * 2) !important;
+        margin: 0 auto !important;
+        padding-left: var(--gutter) !important;
+        padding-right: var(--gutter) !important;
+        padding-top: 24px !important;
+        padding-bottom: 24px !important;
+        box-sizing: border-box !important;
+      }
+      .passport-overview-grid,
+      .voter-overview-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1.45fr) minmax(320px, 0.95fr);
+        gap: 32px;
+        align-items: start;
+      }
+      @media (max-width: 960px) {
+        .passport-overview-grid,
+        .voter-overview-grid {
+          grid-template-columns: 1fr;
+          gap: 28px;
+        }
+      }
+
+      .passport-overview-main,
+      .voter-overview-main {
+        background: #ffffff;
+        border: 1.5px solid #e5eaf0;
+        border-radius: 20px;
+        padding: clamp(22px, 3.2vw, 30px);
+        box-shadow: 0 4px 20px rgba(8, 31, 58, 0.04);
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        box-sizing: border-box;
+      }
+      .p-overview-breadcrumb,
+      .voter-overview-breadcrumb {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 0.82rem;
+        color: #64748b;
+        margin-bottom: 0px;
+      }
+      .p-overview-breadcrumb a,
+      .voter-overview-breadcrumb a {
+        color: #075092;
+        text-decoration: none;
+      }
+      .p-overview-breadcrumb a:hover,
+      .voter-overview-breadcrumb a:hover {
+        text-decoration: underline;
+      }
+
+      .p-overview-badge-row,
+      .voter-overview-badge-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        align-items: center;
+      }
+      .voter-badge,
+      .p-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 0.74rem;
+        font-weight: 800;
+        padding: 3px 10px;
+        border-radius: 999px;
+        letter-spacing: 0.03em;
+        text-transform: uppercase;
+      }
+      .voter-badge-blue,
+      .p-badge-blue {
+        background: #eff6ff;
+        color: #075092;
+        border: 1px solid #bfdbfe;
+      }
+      .voter-badge-green,
+      .p-badge-green {
+        background: #ecfdf5;
+        color: #059669;
+        border: 1px solid #a7f3d0;
+      }
+
+      .passport-overview-main h1,
+      .voter-overview-main h1 {
+        font-size: clamp(1.65rem, 2.5vw, 2.15rem);
+        font-weight: 850;
+        color: #0b1f35;
+        line-height: 1.22;
+        letter-spacing: -0.02em;
+        margin: 0 0 6px;
+      }
+      .p-overview-lead,
+      .voter-overview-lead {
+        font-size: 0.92rem;
+        color: #475569;
+        line-height: 1.55;
+        margin: 0;
+      }
+
+      /* Section Kicker Labels */
+      .voter-flow-kicker {
+        font-size: 0.75rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: #075092;
+        display: block;
+        margin-bottom: 8px;
+      }
+
+      /* 3. Horizontal Process Flow Timeline */
+      .voter-flow-chain {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 4px;
+        width: 100%;
+        padding: 4px 0;
+      }
+      @media (max-width: 640px) {
+        .voter-flow-chain {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 12px;
+        }
+        .voter-flow-line {
+          display: none;
+        }
+      }
+      .voter-flow-step {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-shrink: 0;
+      }
+      .voter-flow-circle {
+        width: 26px;
+        height: 26px;
+        border-radius: 50%;
+        background: #eff6ff;
+        border: 1.5px solid #bfdbfe;
+        color: #075092;
+        font-size: 0.72rem;
+        font-weight: 800;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+      .voter-flow-circle-green {
+        background: #ecfdf5;
+        border-color: #a7f3d0;
+        color: #059669;
+      }
+      .voter-flow-text {
+        display: flex;
+        flex-direction: column;
+        gap: 1px;
+      }
+      .voter-flow-text strong {
+        font-size: 0.82rem;
+        font-weight: 800;
+        color: #0b1f35;
+        line-height: 1.2;
+      }
+      .voter-flow-text span {
+        font-size: 0.72rem;
+        color: #64748b;
+        font-weight: 500;
+        line-height: 1.2;
+      }
+      .voter-flow-line {
+        flex: 1;
+        height: 1.5px;
+        background: #e2e8f0;
+        margin: 0 4px;
+        min-width: 8px;
+      }
+
+      /* 4. How We Assist - 3 Compact Feature Cards */
+      .voter-assist-wrap {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+      }
+      .voter-assist-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+      }
+      @media (max-width: 640px) {
+        .voter-assist-grid {
+          grid-template-columns: 1fr;
+          gap: 8px;
+        }
+      }
+      .voter-assist-card {
+        background: #f8fafc;
+        border: 1px solid #e5eaf0;
+        border-radius: 12px;
+        padding: 12px 14px;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        transition: all 0.2s ease;
+      }
+      .voter-assist-card:hover {
+        background: #ffffff;
+        border-color: #bfdbfe;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 14px rgba(7, 80, 146, 0.06);
+      }
+      .voter-assist-icon {
+        width: 30px;
+        height: 30px;
+        border-radius: 8px;
+        background: #eff6ff;
+        border: 1px solid #bfdbfe;
+        color: #075092;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 2px;
+      }
+      .voter-assist-icon i, .voter-assist-icon svg {
+        width: 15px;
+        height: 15px;
+      }
+      .voter-assist-card strong {
+        font-size: 0.86rem;
+        font-weight: 800;
+        color: #0b1f35;
+        line-height: 1.25;
+      }
+      .voter-assist-card p {
+        font-size: 0.76rem;
+        color: #64748b;
+        line-height: 1.4;
+        margin: 0;
+      }
+
+      /* 5. What You'll Need - Clean 2-Column Checklist */
+      .voter-need-section {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+      .voter-need-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 6px 16px;
+      }
+      @media (max-width: 540px) {
+        .voter-need-grid {
+          grid-template-columns: 1fr;
+          gap: 6px;
+        }
+      }
+      .voter-need-item {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        font-size: 0.82rem;
+        font-weight: 650;
+        color: #1e293b;
+      }
+      .voter-need-check {
+        color: #059669;
+        width: 14px;
+        height: 14px;
+        flex-shrink: 0;
+        stroke-width: 2.6;
+      }
+      .voter-need-note {
+        font-size: 0.73rem;
+        color: #94a3b8;
+        margin-top: 2px;
+      }
+
+      /* 6. Bottom Help Row */
+      .voter-bottom-help-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 12px;
+        padding-top: 14px;
+        border-top: 1px solid #f1f5f9;
+        margin-top: 2px;
+      }
+      .voter-help-cta {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+      .voter-help-label {
+        font-size: 0.82rem;
+        font-weight: 700;
+        color: #475569;
+      }
+      .voter-bottom-help-row .btn-whatsapp {
+        background: #16a34a;
+        color: #ffffff;
+        border: 1px solid #16a34a;
+        padding: 7px 14px;
+        border-radius: 10px;
+        font-size: 0.82rem;
+        font-weight: 750;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        text-decoration: none;
+        box-shadow: 0 2px 8px rgba(22, 163, 74, 0.2);
+        transition: all 0.2s ease;
+      }
+      .voter-bottom-help-row .btn-whatsapp:hover {
+        background: #15803d;
+        transform: translateY(-1px);
+      }
+      .voter-explore-link {
+        color: #075092;
+        font-size: 0.82rem;
+        font-weight: 750;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        transition: color 0.2s ease;
+      }
+      .voter-explore-link:hover {
+        color: #0d3d78;
+        text-decoration: underline;
+      }
+
+      /* Sticky Summary Sidebar */
+      .passport-sticky-sidebar,
+      .voter-sticky-sidebar {
+        position: sticky;
+        top: 90px;
+        z-index: 10;
+      }
+      .passport-summary-card,
+      .voter-summary-card {
+        background: #ffffff;
+        border: 1.5px solid #e2e8f0;
+        border-radius: 20px;
+        padding: 24px;
+        box-shadow: 0 8px 30px rgba(8, 31, 58, 0.06);
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+      .psc-badge-row,
+      .vsc-badge-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .psc-header h3,
+      .vsc-header h3 {
+        font-size: 1.2rem;
+        font-weight: 800;
+        color: #0b1f35;
+        margin: 0 0 4px;
+      }
+      .psc-sub,
+      .vsc-header p {
+        font-size: 0.82rem;
+        color: #64748b;
+        line-height: 1.45;
+        margin: 0;
+      }
+      .psc-rows,
+      .vsc-rows {
+        display: flex;
+        flex-direction: column;
+        gap: 9px;
+        background: #f8fafc;
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+        padding: 14px 16px;
+      }
+      .psc-row,
+      .vsc-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 0.84rem;
+        color: #475569;
+      }
+      .psc-row strong,
+      .vsc-row strong {
+        color: #0b1f35;
+        font-weight: 750;
+      }
+      .psc-price,
+      .vsc-price {
+        color: #075092;
+        font-weight: 800;
+        font-size: 0.98rem;
+      }
+      .psc-row small,
+      .vsc-row small {
+        font-size: 0.74rem;
+        color: #64748b;
+      }
+      .psc-row.psc-total,
+      .vsc-row.vsc-total {
+        border-top: 1px dashed #cbd5e1;
+        padding-top: 8px;
+        font-size: 0.95rem;
+        font-weight: 800;
+        color: #0b1f35;
+      }
+      .psc-actions,
+      .vsc-actions {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .psc-secondary-links,
+      .vsc-secondary-links {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 14px;
+        padding: 4px 0 2px;
+      }
+      .psc-link,
+      .vsc-link {
+        color: #075092;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        font-size: 0.78rem;
+        font-weight: 750;
+        transition: color 0.2s ease;
+      }
+      .psc-link i, .psc-link svg,
+      .vsc-link i, .vsc-link svg {
+        width: 14px;
+        height: 14px;
+        flex-shrink: 0;
+      }
+      .psc-link:hover,
+      .vsc-link:hover {
+        color: #0d3d78;
+        text-decoration: underline;
+      }
+      .vsc-dot {
+        color: #cbd5e1;
+        font-size: 0.72rem;
+      }
+      .psc-operator-strip,
+      .vsc-operator-strip {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        border-top: 1px solid #f1f5f9;
+        padding-top: 14px;
+        margin-top: 4px;
+      }
+      .psc-operator-avatar,
+      .vsc-operator-avatar {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: #eff6ff;
+        color: #075092;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1.5px solid #bfdbfe;
+        flex-shrink: 0;
+      }
+      .psc-operator-avatar i, .psc-operator-avatar svg,
+      .vsc-operator-avatar i, .vsc-operator-avatar svg {
+        width: 16px;
+        height: 16px;
+      }
+      .psc-operator-info,
+      .vsc-operator-info {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+      }
+      .psc-operator-info strong,
+      .vsc-operator-info strong {
+        display: block;
+        color: #0b1f35;
+        font-weight: 800;
+        font-size: 0.82rem;
+        line-height: 1.25;
+      }
+      .psc-operator-info small,
+      .vsc-operator-info small {
+        color: #64748b;
+        font-size: 0.74rem;
+        font-weight: 500;
+      }
+
+      /* Filter Category Tabs */
+      .cert-filter-pills-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 24px;
+        align-items: center;
+      }
+      .cert-filter-pill {
+        border: 1px solid #e2e8f0;
+        background: #f8fafc;
+        color: #475569;
+        font-size: 0.82rem;
+        font-weight: 700;
+        padding: 8px 16px;
+        border-radius: 999px;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        transition: all 0.2s ease;
+      }
+      .cert-filter-pill:hover {
+        border-color: #bfdbfe;
+        color: #075092;
+        background: #ffffff;
+      }
+      .cert-filter-pill.active {
+        background: #075092;
+        color: #ffffff;
+        border-color: #075092;
+        box-shadow: 0 4px 12px rgba(7, 80, 146, 0.2);
+      }
+
+      /* Services Grid & Cards */
+      .p-services-grid,
+      .service-options-grid,
+      .voter-services-grid {
+        display: grid !important;
+        grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+        gap: 20px !important;
+      }
+      @media (max-width: 1024px) {
+        .p-services-grid,
+        .service-options-grid,
+        .voter-services-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+          gap: 16px !important;
+        }
+      }
+      @media (max-width: 640px) {
+        .p-services-grid,
+        .service-options-grid,
+        .voter-services-grid {
+          grid-template-columns: 1fr !important;
+          gap: 14px !important;
+        }
+      }
+
+      .p-service-card,
+      .service-option-card,
+      .voter-service-card {
+        background: #ffffff;
+        border: 1.5px solid #e2e8f0;
+        border-radius: 18px;
+        padding: 22px 20px;
+        box-shadow: 0 2px 10px rgba(8, 31, 58, 0.03);
+        display: flex;
+        flex-direction: column;
+        min-height: 310px;
+        transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+        position: relative;
+        cursor: pointer;
+        box-sizing: border-box;
+      }
+      .p-service-card:hover,
+      .service-option-card:hover,
+      .voter-service-card:hover {
+        transform: translateY(-3px);
+        border-color: #075092;
+        box-shadow: 0 8px 24px rgba(7, 80, 146, 0.08);
+      }
+      .p-service-card.selected-card,
+      .service-option-card.selected-card,
+      .voter-service-card.selected-card {
+        border-color: #075092;
+        border-width: 2px;
+        background: #ffffff;
+        box-shadow: 0 0 0 1px #075092, 0 8px 24px rgba(7, 80, 146, 0.08);
+      }
+
+      .voter-card-top-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        margin-bottom: 12px;
+      }
+      .voter-card-icon-kicker {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .voter-service-icon {
+        width: 38px;
+        height: 38px;
+        min-width: 38px;
+        border-radius: 10px;
+        background: #eff6ff;
+        color: #075092;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid #bfdbfe;
+      }
+      .voter-service-icon i, .voter-service-icon svg {
+        width: 18px;
+        height: 18px;
+      }
+      .voter-category-kicker {
+        font-size: 0.72rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        color: #075092;
+        letter-spacing: 0.04em;
+      }
+      .voter-card-check {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: #075092;
+        color: #ffffff;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.7rem;
+      }
+      .voter-card-check i, .voter-card-check svg {
+        width: 12px;
+        height: 12px;
+        stroke-width: 3;
+      }
+      .selected-card .voter-card-check {
+        display: flex;
+      }
+
+      .p-service-card h3,
+      .voter-service-card h3 {
+        font-size: 1.05rem;
+        font-weight: 800;
+        color: #0b1f35;
+        margin: 0 0 6px;
+        line-height: 1.35;
+        min-height: 28px;
+      }
+      .p-service-card p,
+      .voter-card-desc {
+        font-size: 0.82rem;
+        color: #64748b;
+        line-height: 1.5;
+        margin: 0 0 12px;
+        min-height: 38px;
+      }
+
+      /* Compact Service Meta */
+      .voter-card-meta-block {
+        background: #f8fafc;
+        border: 1px solid #e2e8f0;
+        border-radius: 10px;
+        padding: 8px 12px;
+        margin-bottom: 14px;
+      }
+      .voter-meta-row {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 0.78rem;
+        color: #334155;
+        font-weight: 650;
+        flex-wrap: wrap;
+      }
+      .voter-meta-label {
+        color: #64748b;
+        font-weight: 500;
+        font-size: 0.76rem;
+      }
+      .voter-meta-fee {
+        color: #075092;
+        font-weight: 800;
+        font-size: 0.88rem;
+      }
+      .voter-meta-sep {
+        color: #cbd5e1;
+        font-size: 0.7rem;
+      }
+      .voter-meta-sub {
+        font-size: 0.72rem;
+        color: #94a3b8;
+        margin-top: 2px;
+        font-weight: 500;
+      }
+
+      /* Action Stack */
+      .voter-action-stack {
+        margin-top: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        align-items: center;
+        width: 100%;
+      }
+      .voter-action-stack .btn-primary {
+        width: 100%;
+        padding: 10px 14px;
+        font-size: 0.85rem;
+        font-weight: 750;
+        border-radius: 10px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        background: #075092;
+        color: #ffffff;
+        border: 1px solid #075092;
+        text-decoration: none;
+        box-sizing: border-box;
+      }
+      .voter-action-stack .btn-primary:hover {
+        background: #0d3d78;
+      }
+      .voter-view-req {
+        font-size: 0.76rem;
+        color: #64748b;
+        text-decoration: none;
+        font-weight: 600;
+        transition: color 0.2s ease;
+      }
+      .voter-view-req:hover {
+        color: #075092;
+        text-decoration: underline;
+      }
+
+      .voter-section-trust-note {
+        margin-top: 28px;
+        background: #f8fafc;
+        border: 1px solid #e2e8f0;
+        border-radius: 14px;
+        padding: 12px 18px;
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        font-size: 0.82rem;
+        color: #475569;
+        line-height: 1.5;
+      }
+      .voter-section-trust-note i,
+      .voter-section-trust-note svg {
+        color: #075092;
+        width: 18px;
+        height: 18px;
+        flex-shrink: 0;
+        margin-top: 2px;
+      }
+
+      /* 4. Invoice / Estimate Receipt Style Section */
+      .passport-invoice-wrap {
+        width: 100%;
+        max-width: 100%;
+        margin: 0 auto;
+        background: #ffffff;
+        border: 1.5px solid #e2e8f0;
+        border-radius: 20px;
+        padding: clamp(24px, 4vw, 36px);
+        box-shadow: 0 4px 20px rgba(8, 31, 58, 0.04);
+        box-sizing: border-box;
+      }
+      .p-invoice-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        border-bottom: 1.5px solid #f1f5f9;
+        padding-bottom: 18px;
+        margin-bottom: 20px;
+        gap: 16px;
+      }
+      .p-invoice-head h3 {
+        font-size: 1.3rem;
+        font-weight: 850;
+        color: #0b1f35;
+        margin: 0 0 4px;
+      }
+      .p-invoice-head p {
+        font-size: 0.85rem;
+        color: #64748b;
+        margin: 0;
+      }
+      .p-invoice-table {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      .p-invoice-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 0.9rem;
+        color: #334155;
+        padding: 6px 0;
+      }
+      .p-invoice-row span {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .p-invoice-row span small {
+        color: #64748b;
+        font-size: 0.78rem;
+      }
+      .p-invoice-row strong {
+        color: #0b1f35;
+        font-weight: 750;
+      }
+      .p-invoice-row .fee-govt {
+        color: #475569;
+        background: #f1f5f9;
+        padding: 2px 8px;
+        border-radius: 6px;
+        font-size: 0.85rem;
+      }
+      .p-invoice-row .fee-included {
+        color: #059669;
+        font-weight: 750;
+      }
+      .p-invoice-total {
+        border-top: 2px solid #075092;
+        margin-top: 12px;
+        padding-top: 16px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .p-invoice-total span {
+        font-size: 1.05rem;
+        font-weight: 800;
+        color: #0b1f35;
+      }
+      .p-invoice-total strong {
+        font-size: 1.65rem;
+        font-weight: 850;
+        color: #075092;
+      }
+      .p-invoice-note {
+        font-size: 0.8rem;
+        color: #64748b;
+        line-height: 1.5;
+        margin: 18px 0 0;
+        padding: 12px 16px;
+        background: #f8fafc;
+        border-radius: 10px;
+        border: 1px solid #e2e8f0;
+      }
+
+      /* 5. Simplified Knowledge Hub Single Tab Panel */
+      .sec-tab-nav {
+        display: flex;
+        justify-content: center;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin-bottom: 24px;
+      }
+      .passport-tab-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 18px;
+        border-radius: 999px;
+        border: 1.5px solid #e2e8f0;
+        background: #ffffff;
+        color: #475569;
+        font-size: 0.88rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+      .passport-tab-btn:hover {
+        border-color: #075092;
+        color: #075092;
+      }
+      .passport-tab-btn.active {
+        background: #075092;
+        color: #ffffff;
+        border-color: #075092;
+        box-shadow: 0 4px 12px rgba(7, 80, 146, 0.2);
+      }
+      .sec-tab-card {
+        background: #ffffff;
+        border: 1.5px solid #e2e8f0;
+        border-radius: 20px;
+        padding: clamp(24px, 4vw, 36px);
+        box-shadow: 0 4px 20px rgba(8, 31, 58, 0.04);
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+        margin: 0 auto;
+      }
+      .sec-tab-pane {
+        display: none;
+      }
+      .sec-tab-pane.active {
+        display: block;
+        animation: secFadeIn 0.25s ease;
+      }
+      @keyframes secFadeIn {
+        from { opacity: 0; transform: translateY(4px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      .sec-tab-pane h3 {
+        font-size: 1.3rem;
+        font-weight: 800;
+        color: #0b1f35;
+        margin: 0 0 8px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .sec-tab-desc {
+        color: #64748b;
+        font-size: 0.92rem;
+        line-height: 1.6;
+        margin-bottom: 20px;
+      }
+      .p-clean-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 14px;
+      }
+      .p-clean-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        padding: 12px 14px;
+        background: #f8fafc;
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+      }
+      .p-clean-item i, .p-clean-item svg {
+        color: #075092;
+        width: 18px;
+        height: 18px;
+        margin-top: 2px;
+        flex-shrink: 0;
+      }
+      .p-clean-item strong {
+        font-size: 0.9rem;
+        color: #0b1f35;
+        display: block;
+        margin-bottom: 2px;
+      }
+      .p-clean-item span {
+        font-size: 0.82rem;
+        color: #64748b;
+        line-height: 1.4;
+      }
+
+      /* 6. Dual Assistance Recommendation Cards */
+      .pan-suite-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr);
+        gap: 24px;
+        align-items: stretch;
+      }
+      @media (max-width: 900px) {
+        .pan-suite-grid { grid-template-columns: 1fr; }
+      }
+      .pan-suite-card {
+        background: #ffffff;
+        border: 1.5px solid #e2e8f0;
+        border-radius: 20px;
+        padding: 32px 28px;
+        box-shadow: 0 4px 20px rgba(8, 31, 58, 0.04);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        box-sizing: border-box;
+      }
+      .pan-suite-card.dark-navy-card {
+        background: linear-gradient(145deg, #0b1f35 0%, #173252 100%);
+        color: #ffffff;
+        border-color: #1e3a5f;
+      }
+
+      /* 7. Important Info 4-Column Strip */
+      .passport-info-strip {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+      }
+      @media (max-width: 960px) {
+        .passport-info-strip {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      @media (max-width: 520px) {
+        .passport-info-strip {
+          grid-template-columns: 1fr;
+        }
+      }
+      .p-info-box {
+        background: #ffffff;
+        border: 1.5px solid #e2e8f0;
+        border-radius: 16px;
+        padding: 20px 18px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .p-info-icon {
+        width: 38px;
+        height: 38px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+      .p-info-blue { background: #eff6ff; color: #2563eb; border: 1px solid #bfdbfe; }
+      .p-info-amber { background: #fffbeb; color: #d97706; border: 1px solid #fde68a; }
+      .p-info-emerald { background: #ecfdf5; color: #059669; border: 1px solid #a7f3d0; }
+      .p-info-purple { background: #faf5ff; color: #7c3aed; border: 1px solid #e9d5ff; }
+      .p-info-box h4 {
+        font-size: 0.98rem;
+        font-weight: 750;
+        color: #0b1f35;
+        margin: 0;
+      }
+      .p-info-box p {
+        font-size: 0.84rem;
+        color: #64748b;
+        line-height: 1.45;
+        margin: 0;
+      }
+
+      /* 8. 5-Step Process Pipeline */
+      .voter-process-chain {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 auto !important;
+        padding-top: 12px !important;
+        padding-bottom: 24px !important;
+        box-sizing: border-box !important;
+      }
+      .voter-pipeline-container {
+        background: #ffffff;
+        border: 1.5px solid #e2e8f0;
+        border-radius: 20px;
+        padding: 22px 24px;
+        box-shadow: 0 4px 20px rgba(8, 31, 58, 0.04);
+      }
+      .voter-pipeline-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 18px;
+        padding-bottom: 12px;
+        border-bottom: 1px solid #f1f5f9;
+      }
+      .voter-pipeline-title-group {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+      .voter-pipeline-title-group h3 {
+        font-size: 1.05rem;
+        font-weight: 800;
+        color: #0b1f35;
+        margin: 0;
+      }
+      .voter-pipeline-kicker {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        font-size: 0.74rem;
+        font-weight: 750;
+        color: #075092;
+        background: #eff6ff;
+        border: 1px solid #bfdbfe;
+        padding: 3px 10px;
+        border-radius: 999px;
+      }
+      .voter-pipeline-badge {
+        font-size: 0.76rem;
+        color: #059669;
+        font-weight: 700;
+        background: #ecfdf5;
+        border: 1px solid #a7f3d0;
+        padding: 3px 10px;
+        border-radius: 999px;
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+      }
+
+      .voter-chain-grid {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 12px;
+        position: relative;
+      }
+      @media (max-width: 1024px) {
+        .voter-chain-grid {
+          grid-template-columns: repeat(3, 1fr);
+          gap: 12px;
+        }
+      }
+      @media (max-width: 640px) {
+        .voter-chain-grid {
+          grid-template-columns: 1fr;
+          gap: 10px;
+        }
+      }
+      .voter-chain-card {
+        background: #f8fafc;
+        border: 1.5px solid #e2e8f0;
+        border-radius: 16px;
+        padding: 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        transition: all 0.22s ease;
+        position: relative;
+      }
+      .voter-chain-card:hover {
+        background: #ffffff;
+        border-color: #075092;
+        transform: translateY(-3px);
+        box-shadow: 0 8px 22px rgba(7, 80, 146, 0.08);
+      }
+      .voter-chain-card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .voter-chain-num-pill {
+        font-size: 0.72rem;
+        font-weight: 800;
+        color: #075092;
+        background: #eff6ff;
+        border: 1px solid #bfdbfe;
+        padding: 2px 8px;
+        border-radius: 999px;
+        letter-spacing: 0.02em;
+      }
+      .voter-chain-icon-wrap {
+        width: 32px;
+        height: 32px;
+        border-radius: 10px;
+        background: #ffffff;
+        border: 1px solid #cbd5e1;
+        color: #075092;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .voter-chain-icon-wrap i, .voter-chain-icon-wrap svg {
+        width: 16px;
+        height: 16px;
+      }
+      .voter-chain-body {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+      .voter-chain-title {
+        font-size: 0.88rem;
+        font-weight: 800;
+        color: #0b1f35;
+        line-height: 1.35;
+      }
+      .voter-chain-desc {
+        font-size: 0.78rem;
+        color: #64748b;
+        line-height: 1.45;
+      }
+      .voter-chain-footer {
+        margin-top: auto;
+        padding-top: 8px;
+        border-top: 1px dashed #e2e8f0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 0.72rem;
+        font-weight: 700;
+        color: #075092;
+      }
+
+      /* 9. Who Can Apply Grid */
+      #eligibility-section {
+        padding-top: 24px !important;
+        padding-bottom: 24px !important;
+      }
+      #eligibility-section .section-head {
+        text-align: center !important;
+        margin: 0 auto 20px auto !important;
+        max-width: 1000px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+      }
+      #eligibility-section .section-head > div {
+        width: 100% !important;
+        max-width: 100% !important;
+        text-align: center !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+      }
+      #eligibility-section .section-head h2 {
+        white-space: nowrap !important;
+        font-size: clamp(1.35rem, 2.6vw, 2.05rem) !important;
+        margin: 8px 0 6px 0 !important;
+        text-align: center !important;
+      }
+      #eligibility-section .section-head h2::after {
+        margin-inline: auto !important;
+      }
+      @media (max-width: 768px) {
+        #eligibility-section .section-head h2 {
+          white-space: normal !important;
+        }
+      }
+      #eligibility-section .section-kicker {
+        font-size: 0.74rem !important;
+        font-weight: 800 !important;
+        letter-spacing: 0.05em !important;
+        padding: 4px 12px !important;
+      }
+      #eligibility-section .section-head p {
+        color: #64748b;
+        font-size: 0.88rem;
+        margin-top: 4px;
+        line-height: 1.5;
+        text-align: center !important;
+      }
+      #eligibility-section .eligibility-grid {
+        display: grid !important;
+        grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+        gap: 16px !important;
+        max-width: 1200px !important;
+        margin: 0 auto !important;
+      }
+      @media (max-width: 1024px) {
+        #eligibility-section .eligibility-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+          gap: 14px !important;
+        }
+      }
+      @media (max-width: 640px) {
+        #eligibility-section .eligibility-grid {
+          grid-template-columns: 1fr !important;
+          gap: 12px !important;
+        }
+      }
+      #eligibility-section .eligibility-card {
+        background: #ffffff !important;
+        border: 1px solid #e2e8f0 !important;
+        border-radius: 14px !important;
+        padding: 18px 20px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: space-between !important;
+        box-shadow: 0 2px 10px rgba(8, 31, 58, 0.03) !important;
+        transition: all 0.22s ease !important;
+        box-sizing: border-box;
+      }
+      #eligibility-section .eligibility-card:hover {
+        border-color: #bfdbfe !important;
+        box-shadow: 0 6px 18px rgba(7, 80, 146, 0.07) !important;
+        transform: translateY(-2px) !important;
+      }
+      #eligibility-section .eligibility-card-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 12px;
+      }
+      #eligibility-section .eligibility-icon {
+        width: 40px !important;
+        height: 40px !important;
+        border-radius: 10px !important;
+        background: #eff6ff !important;
+        border: 1px solid #bfdbfe !important;
+        color: #075092 !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        margin-bottom: 0 !important;
+      }
+      #eligibility-section .eligibility-icon i,
+      #eligibility-section .eligibility-icon svg {
+        width: 20px !important;
+        height: 20px !important;
+      }
+      #eligibility-section .eligibility-badge-check {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        font-size: 0.72rem;
+        font-weight: 750;
+        color: #059669;
+        background: #ecfdf5;
+        border: 1px solid #a7f3d0;
+        padding: 3px 8px;
+        border-radius: 999px;
+      }
+      #eligibility-section .eligibility-badge-check i,
+      #eligibility-section .eligibility-badge-check svg {
+        width: 12px;
+        height: 12px;
+      }
+      #eligibility-section .eligibility-card h3 {
+        font-size: 1.02rem !important;
+        font-weight: 800 !important;
+        color: #0b1f35 !important;
+        margin: 0 0 6px !important;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      #eligibility-section .eligibility-card h3 .check-symbol {
+        color: #059669;
+        font-size: 1.05rem;
+      }
+      #eligibility-section .eligibility-card p {
+        font-size: 0.82rem !important;
+        line-height: 1.48 !important;
+        color: #64748b !important;
+        margin: 0 0 10px !important;
+        font-weight: 500 !important;
+      }
+      #eligibility-section .eligibility-helper-link {
+        font-size: 0.76rem;
+        font-weight: 700;
+        color: #075092;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        margin-top: auto;
+        padding-top: 6px;
+        transition: color 0.2s;
+      }
+      #eligibility-section .eligibility-helper-link:hover {
+        color: #0d345c;
+        text-decoration: underline;
+      }
+
+      /* Floating Bottom Sticky Pill */
+      .pan-sticky-pill {
+        position: fixed !important;
+        bottom: 24px !important;
+        right: 24px !important;
+        background: #0b1f35 !important;
+        background: rgba(11, 31, 53, 0.94) !important;
+        backdrop-filter: blur(10px) !important;
+        -webkit-backdrop-filter: blur(10px) !important;
+        color: #ffffff !important;
+        padding: 8px 14px 8px 18px !important;
+        border-radius: 999px !important;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25) !important;
+        border: 1px solid rgba(255, 255, 255, 0.2) !important;
+        display: flex !important;
+        align-items: center !important;
+        gap: 12px !important;
+        z-index: 9999 !important;
+        font-size: 0.82rem !important;
+        font-weight: 650 !important;
+        transform: translateY(150%) !important;
+        transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+        pointer-events: none;
+      }
+      .pan-sticky-pill.visible {
+        transform: translateY(0) !important;
+        pointer-events: auto !important;
+      }
+      .pan-sticky-pill span {
+        color: #ffffff !important;
+      }
+      .pan-sticky-pill span strong {
+        color: #facc15 !important;
+        font-weight: 800 !important;
+      }
+      .pan-sticky-pill a {
+        background: #facc15 !important;
+        color: #0b1f35 !important;
+        font-weight: 800 !important;
+        padding: 6px 14px !important;
+        border-radius: 999px !important;
+        text-decoration: none !important;
+        font-size: 0.78rem !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        gap: 4px !important;
+        transition: background 0.2s, transform 0.2s !important;
+        white-space: nowrap !important;
+      }
+      .pan-sticky-pill a:hover {
+        background: #eab308 !important;
+        transform: translateY(-1px) !important;
+      }
+      @media (max-width: 640px) {
+        .pan-sticky-pill {
+          bottom: 16px !important;
+          right: 16px !important;
+          border-radius: 12px !important;
+          padding: 8px 12px !important;
+          gap: 10px !important;
+        }
+      }
+
+      /* Advisory Modal Popup */
+      .advisory-modal-backdrop {
+        position: fixed;
+        inset: 0;
+        background: rgba(11, 31, 53, 0.65);
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
+        z-index: 10000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.25s ease;
+      }
+      .advisory-modal-backdrop.show {
+        opacity: 1;
+        pointer-events: auto;
+      }
+      .advisory-modal-card {
+        background: #ffffff;
+        border-radius: 20px;
+        border: 1.5px solid rgba(13, 52, 92, 0.12);
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+        max-width: 480px;
+        width: 100%;
+        padding: 30px 24px 24px;
+        position: relative;
+        text-align: center;
+        transform: scale(0.92) translateY(10px);
+        transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .advisory-modal-backdrop.show .advisory-modal-card {
+        transform: scale(1) translateY(0);
+      }
+      .advisory-modal-close {
+        position: absolute;
+        top: 14px;
+        right: 14px;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background: #f1f5f9;
+        border: 1px solid #cbd5e1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #475569;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+      .advisory-modal-close:hover {
+        background: #e2e8f0;
+        color: #0f172a;
+      }
+      .advisory-modal-icon {
+        width: 52px;
+        height: 52px;
+        border-radius: 50%;
+        background: rgba(245, 158, 11, 0.12);
+        border: 1.5px solid rgba(245, 158, 11, 0.3);
+        color: #d97706;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 16px;
+      }
+      .advisory-modal-card h3 {
+        font-size: 1.3rem;
+        font-weight: 800;
+        color: #0b1f35;
+        margin: 0 0 10px;
+      }
+      .advisory-modal-card p {
+        font-size: 0.88rem;
+        color: #64748b;
+        line-height: 1.5;
+        margin: 0 0 20px;
+      }
+      .advisory-modal-points {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 24px;
+        text-align: left;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .advisory-modal-points li {
+        font-size: 0.82rem;
+        color: #334155;
+        display: flex;
+        gap: 10px;
+        align-items: flex-start;
+        background: #f8fafc;
+        padding: 10px 12px;
+        border-radius: 10px;
+        border: 1px solid #e2e8f0;
+      }
+      .advisory-modal-points li i, .advisory-modal-points li svg {
+        color: #075092;
+        width: 16px;
+        height: 16px;
+        flex-shrink: 0;
+        margin-top: 1px;
+      }
+
+      /* Advisory / Compliance & Terms Grid */
+      #ci-section {
+        padding-top: 24px !important;
+        padding-bottom: 24px !important;
+      }
+      #ci-section .section-head {
+        text-align: center;
+        margin-bottom: 20px !important;
+      }
+      #ci-section .section-kicker {
+        font-size: 0.74rem !important;
+        font-weight: 800 !important;
+        letter-spacing: 0.05em !important;
+        padding: 4px 12px !important;
+      }
+      #ci-section .section-head p {
+        color: #64748b;
+        font-size: 0.88rem;
+        margin-top: 4px;
+        line-height: 1.5;
+      }
+      .advisory-cards-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+      @media (max-width: 768px) {
+        .advisory-cards-grid {
+          grid-template-columns: 1fr;
+          gap: 10px;
+        }
+      }
+      .advisory-card {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+        padding: 15px 18px;
+        box-shadow: 0 2px 10px rgba(8, 31, 58, 0.03);
+        transition: all 0.2s ease;
+      }
+      .advisory-card:hover {
+        border-color: #bfdbfe;
+        box-shadow: 0 4px 14px rgba(8, 31, 58, 0.06);
+        transform: translateY(-1px);
+      }
+      .advisory-card-chip {
+        width: 36px;
+        height: 36px;
+        min-width: 36px;
+        border-radius: 9px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+      .advisory-chip-blue {
+        background: #eff6ff;
+        color: #075092;
+        border: 1px solid #bfdbfe;
+      }
+      .advisory-chip-emerald {
+        background: #ecfdf5;
+        color: #059669;
+        border: 1px solid #a7f3d0;
+      }
+      .advisory-card-chip svg,
+      .advisory-card-chip i {
+        width: 18px;
+        height: 18px;
+      }
+      .advisory-card-content {
+        flex: 1;
+        min-width: 0;
+      }
+      .advisory-card-content h4 {
+        font-size: 0.95rem;
+        font-weight: 800;
+        color: #0b1f35;
+        margin: 0 0 4px 0;
+        letter-spacing: -0.01em;
+      }
+      .advisory-card-content p {
+        font-size: 0.82rem;
+        line-height: 1.48;
+        color: #64748b;
+        margin: 0;
+        font-weight: 500;
+      }
+      .advisory-card-content p strong {
+        color: #0f172a;
+      }
+      .advisory-card-content p .fee-hl {
+        color: #92400e;
+        background: #fef3c7;
+        padding: 1px 5px;
+        border-radius: 4px;
+        font-weight: 750;
+      }
+      .advisory-trust-note {
+        margin-top: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        font-size: 0.78rem;
+        color: #64748b;
+        text-align: center;
+        padding-top: 6px;
+      }
+      .advisory-trust-note i, .advisory-trust-note svg {
+        width: 15px;
+        height: 15px;
+        color: #059669;
+        flex-shrink: 0;
+      }
+
+      /* Related Services - Compact & Smart Recommendations */
+      .voter-rel-section {
+        padding-top: 24px !important;
+        padding-bottom: 28px !important;
+      }
+      .voter-rel-section .section-head {
+        text-align: center;
+        margin-bottom: 18px !important;
+      }
+      .voter-rel-section .section-kicker {
+        font-size: 0.74rem !important;
+        font-weight: 800 !important;
+        letter-spacing: 0.05em !important;
+        padding: 4px 12px !important;
+      }
+      .voter-rel-section .section-head p {
+        color: #64748b;
+        font-size: 0.88rem;
+        margin-top: 4px;
+        line-height: 1.5;
+      }
+
+      /* Compact Filter Bar */
+      .voter-rel-filter-bar {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        max-width: 900px;
+        margin: 0 auto 24px;
+        flex-wrap: wrap;
+      }
+      .voter-rel-search {
+        flex: 1;
+        min-width: 220px;
+        position: relative;
+        display: flex;
+        align-items: center;
+      }
+      .voter-rel-search i, .voter-rel-search svg {
+        position: absolute;
+        left: 14px;
+        width: 16px;
+        height: 16px;
+        color: #64748b;
+        pointer-events: none;
+      }
+      .voter-rel-search input {
+        width: 100%;
+        padding: 10px 14px 10px 38px;
+        border-radius: 10px;
+        border: 1px solid #cbd5e1;
+        background: #ffffff;
+        font-size: 0.86rem;
+        color: #0f172a;
+        outline: none;
+        transition: border-color 0.2s, box-shadow 0.2s;
+        box-sizing: border-box;
+      }
+      .voter-rel-search input:focus {
+        border-color: #075092;
+        box-shadow: 0 0 0 3px rgba(7, 80, 146, 0.1);
+      }
+      .voter-rel-select-wrap {
+        min-width: 180px;
+      }
+      .voter-rel-select-wrap select {
+        width: 100%;
+        padding: 10px 14px;
+        border-radius: 10px;
+        border: 1px solid #cbd5e1;
+        background: #ffffff;
+        font-size: 0.86rem;
+        font-weight: 600;
+        color: #334155;
+        outline: none;
+        cursor: pointer;
+        box-sizing: border-box;
+      }
+      .voter-rel-select-wrap select:focus {
+        border-color: #075092;
+      }
+      .voter-rel-viewall-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 10px 16px;
+        border-radius: 10px;
+        background: #eff6ff;
+        color: #075092;
+        font-size: 0.86rem;
+        font-weight: 750;
+        text-decoration: none;
+        border: 1px solid #bfdbfe;
+        white-space: nowrap;
+        transition: all 0.2s ease;
+      }
+      .voter-rel-viewall-btn:hover {
+        background: #075092;
+        color: #ffffff;
+        border-color: #075092;
+      }
+
+      /* 5-Card Recommendation Grid */
+      .voter-rel-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 16px;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+      @media (max-width: 992px) {
+        .voter-rel-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+      @media (max-width: 640px) {
+        .voter-rel-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      .voter-rel-card {
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 14px;
+        padding: 18px 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        box-shadow: 0 2px 10px rgba(8, 31, 58, 0.03);
+        transition: all 0.22s ease;
+        box-sizing: border-box;
+      }
+      .voter-rel-card:hover {
+        border-color: #bfdbfe;
+        box-shadow: 0 6px 20px rgba(7, 80, 146, 0.08);
+        transform: translateY(-2px);
+      }
+      .voter-rel-card-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 12px;
+      }
+      .voter-rel-icon {
+        width: 36px;
+        height: 36px;
+        border-radius: 9px;
+        background: #eff6ff;
+        border: 1px solid #bfdbfe;
+        color: #075092;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .voter-rel-icon i, .voter-rel-icon svg {
+        width: 18px;
+        height: 18px;
+      }
+      .voter-rel-badge {
+        font-size: 0.72rem;
+        font-weight: 750;
+        color: #075092;
+        background: #f1f5f9;
+        border: 1px solid #e2e8f0;
+        padding: 3px 9px;
+        border-radius: 999px;
+      }
+      .voter-rel-badge-green {
+        color: #059669;
+        background: #ecfdf5;
+        border-color: #a7f3d0;
+      }
+      .voter-rel-card h3 {
+        font-size: 1.02rem;
+        font-weight: 800;
+        color: #0b1f35;
+        margin: 0 0 6px;
+        line-height: 1.3;
+      }
+      .voter-rel-desc {
+        font-size: 0.81rem;
+        color: #64748b;
+        line-height: 1.45;
+        margin: 0 0 12px;
+        min-height: 36px;
+      }
+      .voter-rel-meta-box {
+        background: #f8fafc;
+        border: 1px solid #f1f5f9;
+        border-radius: 8px;
+        padding: 7px 10px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 0.78rem;
+        font-weight: 650;
+        color: #334155;
+        margin-bottom: 4px;
+      }
+      .voter-rel-meta-box i, .voter-rel-meta-box svg {
+        width: 13px;
+        height: 13px;
+        color: #075092;
+      }
+      .voter-rel-meta-box .vrel-fee {
+        color: #075092;
+        font-weight: 800;
+      }
+      .voter-rel-submeta {
+        font-size: 0.72rem;
+        color: #94a3b8;
+        margin: 0 0 14px 2px;
+      }
+      .voter-rel-cta {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        width: 100%;
+        padding: 9px 16px;
+        border-radius: 10px;
+        background: #f1f5f9;
+        color: #075092;
+        font-size: 0.84rem;
+        font-weight: 750;
+        text-decoration: none;
+        border: 1px solid #e2e8f0;
+        transition: all 0.2s ease;
+        box-sizing: border-box;
+      }
+      .voter-rel-card:hover .voter-rel-cta {
+        background: #075092;
+        color: #ffffff;
+        border-color: #075092;
+        box-shadow: 0 4px 12px rgba(7, 80, 146, 0.2);
+      }
+    </style>
+
+    <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "Service",
-      "name": "Passport Assistance Service",
-      "description": "Passport Application Assistance in Lucknow with documents, fee guidance, status support and secure checkout at One Point Digital Services.",
+      "name": "Passport Application & Appointment Assistance",
+      "description": "Assisted passport application, renewal guidance, PSK slot scheduling and document checklist verification in Lucknow by One Point Digital Services.",
       "provider": {
         "@type": "LocalBusiness",
         "name": "One Point Digital Services",
         "image": "https://bisenonepoint.com/assets/logo-bisen-one-point.svg",
         "telephone": "+919473946181",
-        "priceRange": "â‚¹50 - â‚¹500",
         "address": {
           "@type": "PostalAddress",
           "streetAddress": "Bisen One Point, Sector H, LDA Colony, near Lucknow Service Center",
@@ -56,518 +2097,1525 @@
         {
           "@type": "ListItem",
           "position": 3,
-          "name": "Passport Assistance Service",
+          "name": "Passport Assistance",
           "item": "https://bisenonepoint.com/service-passport-assistance.html"
         }
       ]
     }
     </script>
-</head>
+  </head>
   <body class="page-passport-assistance page-service-detail">
     <div data-site-nav></div>
+
     <main class="page-shell" data-default-service="Passport Assistance">
 
-      <section class="page-hero page-hero-service premium-service-hero"><video class="hero-video-bg" autoplay loop muted playsinline style="position:absolute!important;inset:0 calc(50% - 50vw)!important;width:100vw!important;height:100%!important;object-fit:cover!important;z-index:-2!important;pointer-events:none!important;filter:blur(6px) scale(1.05)!important;opacity:.85!important;"><source src="assets/Firefly Modern premium Indian CSC office environment inside a clean digital service center. A profes.mp4" type="video/mp4"></video><div class="hero-video-overlay" style="position:absolute!important;inset:0 calc(50% - 50vw)!important;width:100vw!important;height:100%!important;z-index:-1!important;background:linear-gradient(90deg,rgba(6,16,29,.96) 0%,rgba(6,16,29,.88) 45%,rgba(6,16,29,.35) 100%)!important;backdrop-filter:blur(4px) saturate(130%)!important;-webkit-backdrop-filter:blur(4px) saturate(130%)!important;pointer-events:none!important;"></div><div class="page-hero-grid"><div class="page-hero-copy"><p class="eyebrow" style="color:#C9921A!important;">Travel Document</p><h1 class="page-hero-title" style="color:#fff!important;">Passport application and appointment assistance with document checklist.</h1><p style="color:#C9921A!important;opacity:1!important;">Get support for fresh passport application, renewal guidance, PSK/POPSK appointment booking, form review and document checklist preparation.</p><div class="hero-actions"><a class="btn btn-primary" href="#service-options"><i data-lucide="plane"></i> Apply for Passport Assistance</a><a class="btn btn-ghost" href="services.html#required-documents"><i data-lucide="search"></i> Check Required Documents</a></div>            <div class="hero-trust-strip">
-              <span class="hero-trust-badge badge-upi">
-                <i data-lucide="clock"></i> <strong>2-4 Weeks</strong> Time
+      <!-- 1. Hero Section -->
+      <section class="page-hero page-hero-service premium-service-hero">
+        <div class="hero-v3-bg" aria-hidden="true">
+          <span class="hero-v3-glow hero-v3-glow-a"></span>
+          <span class="hero-v3-glow hero-v3-glow-b"></span>
+          <span class="hero-v3-glow hero-v3-glow-c"></span>
+          <span class="hero-v3-grid-layer"></span>
+        </div>
+        <div class="page-hero-grid">
+          <div class="page-hero-copy">
+            <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+              <ol class="breadcrumbs">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li class="active">Passport Assistance</li>
+              </ol>
+            </nav>
+            <div class="service-meta-row">
+              <span><i data-lucide="calendar"></i> Updated: July 2026</span>
+              <span>&middot;</span>
+              <span><i data-lucide="sparkles"></i> Passport Seva Support Desk</span>
+            </div>
+            <h1 class="page-hero-title">Passport Assistance &amp; <span class="h2-gold">Slot Booking</span></h1>
+            <p>Fast operator assistance for fresh passport filing, renewal, Tatkaal, and PSK appointment scheduling in Lucknow.</p>
+            
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="#passport-pricing-primary"><i data-lucide="plane"></i> Apply for Passport Assistance</a>
+              <a class="btn btn-ghost" href="#passport-tabs-section"><i data-lucide="search"></i> Check Required Documents</a>
+            </div>
+            
+            <div class="hero-trust-strip">
+              <span class="hero-trust-badge">
+                <i data-lucide="badge-check"></i> <strong>Verified PSK Slot</strong>
               </span>
-              <span class="hero-trust-badge badge-speed">
-                <i data-lucide="badge-indian-rupee"></i> <strong>Rs. 200+</strong> Fees
+              <span class="hero-trust-badge">
+                <i data-lucide="clock"></i> <strong>Fast Scheduling</strong>
               </span>
-              <span class="hero-trust-badge badge-whatsapp">
-                <i data-lucide="shield-check"></i> <strong>Secure</strong> Pay
+              <span class="hero-trust-badge">
+                <i data-lucide="shield-check"></i> <strong>Document Pre-Check</strong>
               </span>
-            </div></div><div class="page-hero-console"><article class="hero-command-center dark-mockup"><div class="command-topbar"><span></span><span></span><span></span><strong>Passport Desk</strong></div><div class="command-grid"><div class="command-main"><span class="tag tag-premium">Live Tracker</span><h3>OPDS2026-PAS</h3><p style="color:rgba(255,255,255,.75)!important;">Passport Assistance request is ready for operator document review.</p><div class="command-progress"><span style="--progress:68%"></span></div></div><div class="command-tile"><i data-lucide="plane"></i><strong>Service</strong><small>Selected</small></div><div class="command-tile"><i data-lucide="lock-keyhole"></i><strong>Checkout</strong><small>Secured</small></div></div><div class="command-list"><div><span><i data-lucide="file-check-2"></i></span><strong>Document Checklist</strong><small class="status-complete">Ready</small></div><div><span><i data-lucide="credit-card"></i></span><strong>Payment Review</strong><small class="status-pending">After review</small></div><div><span><i data-lucide="search-check"></i></span><strong>Tracking Support</strong><small class="status-complete">Active</small></div></div></article><article class="hero-mini-card hero-mini-card-one dark-mockup"><span class="secure-flow-kicker">Secure Flow</span><strong>Document review + Unified Checkout</strong></article><article class="hero-mini-card hero-mini-card-two dark-mockup"><span class="helpdesk-kicker">Passport Assistance Helpdesk</span><strong>Operator Support Active</strong></article></div></div></section>
-      <!-- Trust Strip -->
-        <div class="trust-strip-outer">
-        <div class="trust-strip">
-          <div class="trust-strip-item">
-            <span class="tsi-icon tsi-green"><i data-lucide="lock"></i></span>
-            <div class="tsi-body">
-              <span class="tsi-stat">100%</span>
-              <span class="tsi-label">Encrypted Payment</span>
-              <span class="tsi-sub">UPI · Card · NetBanking</span>
             </div>
           </div>
-          <div class="trust-strip-item">
-            <span class="tsi-icon tsi-blue"><i data-lucide="file-check-2"></i></span>
-            <div class="tsi-body">
-              <span class="tsi-stat">99.2%</span>
-              <span class="tsi-label">Approval Rate</span>
-              <span class="tsi-sub">Operator Pre-checked</span>
-            </div>
-          </div>
-          <div class="trust-strip-item">
-            <span class="tsi-icon tsi-emerald"><i data-lucide="message-circle"></i></span>
-            <div class="tsi-body">
-              <span class="tsi-stat">24×7</span>
-              <span class="tsi-label">WhatsApp Support</span>
-              <span class="tsi-sub">Real-time Status Alerts</span>
-            </div>
-          </div>
-          <div class="trust-strip-item">
-            <span class="tsi-icon tsi-gold"><i data-lucide="map-pin"></i></span>
-            <div class="tsi-body">
-              <span class="tsi-stat">12k+</span>
-              <span class="tsi-label">Customers Served</span>
-              <span class="tsi-sub">Lucknow · Walk-in Welcome</span>
-            </div>
-          </div>
-          <div class="trust-strip-badge">
-            <span class="tsb-live">
-              <span class="tsb-dot"></span>
-              <span class="tsb-text">
-                <span class="tsb-status">Verified</span>
-                <span class="tsb-sub">Secure Process</span>
-              </span>
-            </span>
+          
+          <div class="page-hero-console">
+            <article class="hero-command-center dark-mockup">
+              <div class="command-topbar"><span></span><span></span><span></span><strong>Passport Desk</strong></div>
+              <div class="command-grid">
+                <div class="command-main">
+                  <span class="tag tag-premium">Live Tracker</span>
+                  <h3>OPDS2026-PAS</h3>
+                  <p>Passport Assistance request is ready for operator document review &amp; slot booking.</p>
+                  <div class="command-progress"><span style="--progress:68%"></span></div>
+                </div>
+                <div class="command-tile"><i data-lucide="plane"></i><strong>Service</strong><small>Selected</small></div>
+                <div class="command-tile"><i data-lucide="lock-keyhole"></i><strong>Checkout</strong><small>Secured</small></div>
+              </div>
+              <div class="command-list">
+                <div><span><i data-lucide="file-check-2"></i></span><strong>Document Checklist</strong><small class="status-complete">Ready</small></div>
+                <div><span><i data-lucide="calendar"></i></span><strong>PSK Slot Scheduling</strong><small class="status-pending">In queue</small></div>
+                <div><span><i data-lucide="search-check"></i></span><strong>Police Verification Guide</strong><small class="status-complete">Active</small></div>
+              </div>
+            </article>
+            <article class="hero-mini-card hero-mini-card-one dark-mockup">
+              <span class="secure-flow-kicker">Secure Flow</span>
+              <strong>Document review + Unified Checkout</strong>
+            </article>
+            <article class="hero-mini-card hero-mini-card-two dark-mockup">
+              <span class="helpdesk-kicker">Passport Assistance Helpdesk</span>
+              <strong>Operator Support Active</strong>
+            </article>
           </div>
         </div>
-        </div>
-      <section class="section reveal" id="service-options"><div class="section-head"><div><p class="section-kicker">Service Options</p><h2>Select your Passport Assistance <span class="h2-gold">service</span></h2></div></div><div class="service-options-grid"><div class="service-option-card"><div class="service-icon"><i data-lucide="file-plus-2"></i></div><h3>Fresh Passport</h3><p>Fresh passport form details aur document checklist support.</p><a class="btn btn-primary btn-service-select" href="#apply-now" data-service="Passport Assistance">Apply Now</a></div><div class="service-option-card"><div class="service-icon"><i data-lucide="refresh-cw"></i></div><h3>Renewal Guidance</h3><p>Old passport review, renewal flow aur correction guidance.</p><a class="btn btn-primary btn-service-select" href="#apply-now" data-service="Passport Assistance">Apply Now</a></div><div class="service-option-card"><div class="service-icon"><i data-lucide="calendar-check"></i></div><h3>Appointment Booking</h3><p>PSK/POPSK slot aur receipt support after confirmation.</p><a class="btn btn-primary btn-service-select" href="#apply-now" data-service="Passport Assistance">Apply Now</a></div><div class="service-option-card"><div class="service-icon"><i data-lucide="shield-check"></i></div><h3>Document Review</h3><p>Address, DOB aur identity proof review before filing.</p><a class="btn btn-primary btn-service-select" href="#apply-now" data-service="Passport Assistance">Apply Now</a></div></div></section>
-      <section class="premium-story-showcase reveal">
-        <div></div>
-        <div></div>
+      </section>
 
-        <div class="premium-container">
-
-          <div class="premium-header text-left">
-            <span class="premium-badge-pill">Passport Assistance · VERIFIED SUPPORT</span>
-            <h2 class="premium-headline" onclick="(document.getElementById('apply-now')||document.querySelector('[data-unified-apply-slot]'))?.scrollIntoView({behavior:'smooth'})">Complete Passport Assistance Support <span class="h2-gold">Suite</span></h2>
-            <p class="premium-subhead-new">Guided processing, document review, appointment support and secure checkout for Passport Assistance requests.</p>
-          </div>
-
-          <div class="premium-staggered-layout">
-
-            <div class="premium-large-card premium-showcase-card pan-showcase-student-band" onclick="(document.getElementById('apply-now')||document.querySelector('[data-unified-apply-slot]'))?.scrollIntoView({behavior:'smooth'})" aria-label="Passport Assistance Service Info">
-              <div class="showcase-card-bg"></div>
-              <div class="large-card-badge">Passport Services</div>
-              <h3 class="large-card-title">Passport Assistance <span class="h2-gold">Request Review</span></h3>
-              <p class="large-card-desc">We check details, documents and official process requirements before moving your request to payment.</p>
-              <a class="btn btn-primary" href="#apply-now">Apply for Passport <i data-lucide="arrow-right"></i></a>
+      <!-- 2. Passport Assistance Overview with Sticky Summary Sidebar -->
+      <section class="section enterprise-detail-command voter-overview-section" id="passport-overview">
+        <div class="voter-overview-grid">
+          
+          <!-- Left Column: Overview Stack -->
+          <div class="voter-overview-main">
+            <div class="voter-overview-breadcrumb">
+              <a href="index.html">Home</a>
+              <span>/</span>
+              <a href="services.html">Services</a>
+              <span>/</span>
+              <span>Passport Assistance</span>
             </div>
 
-            <div class="premium-small-features-list pan-features-student-cards">
-
-              <div class="small-feature-item" onclick="(document.getElementById('apply-now')||document.querySelector('[data-unified-apply-slot]'))?.scrollIntoView({behavior:'smooth'})">
-                <div class="small-feature-icon"><i data-lucide="clipboard-list"></i></div>
-                <div class="small-feature-body">
-                  <h4 class="small-feature-title">Document Review</h4>
-                  <p class="small-feature-desc">Select fresh passport, renewal or correction flow based on your need.</p>
-                </div>
-              </div>
-
-              <div class="small-feature-item" onclick="(document.getElementById('apply-now')||document.querySelector('[data-unified-apply-slot]'))?.scrollIntoView({behavior:'smooth'})">
-                <div class="small-feature-icon"><i data-lucide="file-check-2"></i></div>
-                <div class="small-feature-body">
-                  <h4 class="small-feature-title">Portal Preparation</h4>
-                  <p class="small-feature-desc">Prepare accurate applicant, address and family details before submission.</p>
-                </div>
-              </div>
-
-              <div class="small-feature-item" onclick="(document.getElementById('apply-now')||document.querySelector('[data-unified-apply-slot]'))?.scrollIntoView({behavior:'smooth'})">
-                <div class="small-feature-icon"><i data-lucide="send"></i></div>
-                <div class="small-feature-body">
-                  <h4 class="small-feature-title">Appointment Booking</h4>
-                  <p class="small-feature-desc">Book slot at suitable PSK/POPSK appointment centre for your location.</p>
-                </div>
-              </div>
-
-              <div class="small-feature-item" onclick="(document.getElementById('apply-now')||document.querySelector('[data-unified-apply-slot]'))?.scrollIntoView({behavior:'smooth'})">
-                <div class="small-feature-icon"><i data-lucide="bell"></i></div>
-                <div class="small-feature-body">
-                  <h4 class="small-feature-title">Status Updates</h4>
-                  <p class="small-feature-desc">Appointment receipt and document checklist shared via WhatsApp.</p>
-                </div>
-              </div>
-
+            <div class="voter-overview-badge-row">
+              <span class="voter-badge voter-badge-blue">
+                PASSPORT ASSISTANCE &bull; OPERATOR ASSISTED
+              </span>
+              <span class="voter-badge voter-badge-green">
+                <i data-lucide="shield-check"></i> MEA VERIFIED DESK
+              </span>
             </div>
-          </div>
 
-          <div class="premium-footer-cta-new">
-            <div class="pfcta-glow"></div>
-            <div class="pfcta-inner">
-              <div class="pfcta-left">
-                <span class="cta-small-tag">Start with Confidence</span>
-                <h3 class="pfcta-headline">Ready to apply for Passport?</h3>
-                <p class="pfcta-sub">Operator reviews your documents before any payment is collected.</p>
-                <div class="pfcta-chips">
-                  <span><i data-lucide="lock"></i> No advance payment</span>
-                  <span><i data-lucide="clock"></i> 2-4 weeks</span>
-                  <span><i data-lucide="message-circle"></i> WhatsApp updates</span>
+            <div>
+              <h1 id="passport-main-title">Passport Assistance &amp; <span class="h2-gold">Application Support</span></h1>
+              <p class="voter-overview-lead" id="passport-main-lead">
+                Guided operator assistance for fresh passport filing, renewals, Tatkaal requests, and PSK slot booking in Lucknow.
+              </p>
+            </div>
+
+            <!-- 3. How It Works (Horizontal Connected Flow) -->
+            <div class="voter-flow-section">
+              <span class="voter-flow-kicker">How It Works</span>
+              <div class="voter-flow-chain">
+                <div class="voter-flow-step">
+                  <div class="voter-flow-circle">01</div>
+                  <div class="voter-flow-text">
+                    <strong>Details</strong>
+                    <span>Applicant &amp; type</span>
+                  </div>
+                </div>
+                <div class="voter-flow-line" aria-hidden="true"></div>
+                <div class="voter-flow-step">
+                  <div class="voter-flow-circle">02</div>
+                  <div class="voter-flow-text">
+                    <strong>Review</strong>
+                    <span>Proofs &amp; Non-ECR</span>
+                  </div>
+                </div>
+                <div class="voter-flow-line" aria-hidden="true"></div>
+                <div class="voter-flow-step">
+                  <div class="voter-flow-circle">03</div>
+                  <div class="voter-flow-text">
+                    <strong>PSK Slot</strong>
+                    <span>Date &amp; center booking</span>
+                  </div>
+                </div>
+                <div class="voter-flow-line" aria-hidden="true"></div>
+                <div class="voter-flow-step">
+                  <div class="voter-flow-circle voter-flow-circle-green">04</div>
+                  <div class="voter-flow-text">
+                    <strong style="color:#059669;">Verification</strong>
+                    <span>Thana &amp; dispatch</span>
+                  </div>
                 </div>
               </div>
-              <div class="pfcta-right">
-                <button class="btn-premium-gold" onclick="(document.getElementById('apply-now')||document.querySelector('[data-unified-apply-slot]'))?.scrollIntoView({behavior:'smooth'})">
-                  Start Application <i data-lucide="arrow-right"></i>
-                </button>
-                <a href="https://wa.me/919473946181" class="btn-pfcta-wa" target="_blank" rel="noopener">
+            </div>
+
+            <!-- 4. How We Assist (3 Compact Feature Cards) -->
+            <div class="voter-assist-wrap">
+              <span class="voter-flow-kicker">How We Assist</span>
+              <div class="voter-assist-grid">
+                <div class="voter-assist-card">
+                  <div class="voter-assist-icon"><i data-lucide="file-edit"></i></div>
+                  <strong>Verified Seva Filing</strong>
+                  <p>Complete digital form preparation on official MEA portal.</p>
+                </div>
+                <div class="voter-assist-card">
+                  <div class="voter-assist-icon"><i data-lucide="file-check-2"></i></div>
+                  <strong>Document &amp; Non-ECR Audit</strong>
+                  <p>Pre-checking birth, address and 10th marksheet proofs.</p>
+                </div>
+                <div class="voter-assist-card">
+                  <div class="voter-assist-icon"><i data-lucide="calendar-check"></i></div>
+                  <strong>PSK Slot Scheduling</strong>
+                  <p>Booking at Ratan Square or Gomti Nagar PSK centers.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- 5. What You'll Need (Clean 2-Column Checklist) -->
+            <div class="voter-need-section">
+              <span class="voter-flow-kicker">What You’ll Need</span>
+              <div class="voter-need-grid">
+                <div class="voter-need-item"><i data-lucide="check" class="voter-need-check"></i> Proof of Date of Birth (Birth Cert / 10th)</div>
+                <div class="voter-need-item"><i data-lucide="check" class="voter-need-check"></i> Proof of Address (Aadhaar / Voter ID)</div>
+                <div class="voter-need-item"><i data-lucide="check" class="voter-need-check"></i> Educational Proof (10th/Degree for Non-ECR)</div>
+                <div class="voter-need-item"><i data-lucide="check" class="voter-need-check"></i> Old Original Passport (If Renewal)</div>
+                <div class="voter-need-item"><i data-lucide="check" class="voter-need-check"></i> Active Mobile &amp; Email (For PSK OTP &amp; SMS)</div>
+              </div>
+              <small class="voter-need-note">Original physical documents must be presented during your visit at PSK/POPSK.</small>
+            </div>
+
+            <!-- 6. Bottom Help Row -->
+            <div class="voter-bottom-help-row">
+              <div class="voter-help-cta">
+                <span class="voter-help-label">Need help before starting?</span>
+                <a class="btn btn-whatsapp font-bold" href="https://wa.me/919473946181?text=Hi%20One%20Point,%20I%20need%20help%20with%20Passport%20Assistance" target="_blank" rel="noopener">
                   <i data-lucide="message-circle"></i> Chat on WhatsApp
                 </a>
-                <div class="pfcta-steps">
-                  <span class="pfs-item"><span class="pfs-num">1</span> Submit</span>
-                  <span class="pfs-arrow">&#x2192;</span>
-                  <span class="pfs-item"><span class="pfs-num">2</span> Review</span>
-                  <span class="pfs-arrow">&#x2192;</span>
-                  <span class="pfs-item pfs-done"><span class="pfs-num">3</span> Approved</span>
+              </div>
+              <a class="voter-explore-link" href="#passport-services">
+                Explore All Passport Options <i data-lucide="arrow-right" style="width:14px; height:14px;"></i>
+              </a>
+            </div>
+
+          </div>
+
+          <!-- Right Column: Sticky Summary Card -->
+          <aside class="voter-sticky-sidebar" aria-label="Passport assistance quick summary">
+            <div class="voter-summary-card">
+              <div class="vsc-badge-row">
+                <span class="voter-badge voter-badge-blue"><i data-lucide="receipt"></i> Application Summary</span>
+                <span class="voter-badge voter-badge-green"><i data-lucide="shield-check"></i> Verified Desk</span>
+              </div>
+              <div class="vsc-header">
+                <h3 id="psc-selected-service">Fresh Passport (Adult 18+)</h3>
+                <p>Operator verifies your documents before official MEA portal submission.</p>
+              </div>
+
+              <div class="vsc-rows">
+                <div class="vsc-row">
+                  <span>Selected Service</span>
+                  <strong id="psc-selected-label">Fresh Passport (Adult 18+)</strong>
+                </div>
+                <div class="vsc-row">
+                  <span>Assistance Fee</span>
+                  <strong class="vsc-price" id="psc-fee">₹350.00 <small>(Operator Assistance)</small></strong>
+                </div>
+                <div class="vsc-row">
+                  <span>Government Portal Fee</span>
+                  <span id="psc-govt-fee">₹1,500.00 <small>(At Actuals)</small></span>
+                </div>
+                <div class="vsc-row">
+                  <span>Estimated Processing</span>
+                  <span id="psc-time">15–30 Days <small>(3–7 Days Tatkaal)</small></span>
+                </div>
+                <div class="vsc-row">
+                  <span>Required Proofs</span>
+                  <span>Aadhaar + DOB + Non-ECR</span>
+                </div>
+                <div class="vsc-row vsc-total">
+                  <span>Estimated Total</span>
+                  <strong class="vsc-price" id="psc-total">₹350.00*</strong>
+                </div>
+              </div>
+
+              <div class="vsc-actions">
+                <a class="btn btn-primary font-bold btn-block" href="checkout.html?service=fresh-passport-adult&amp;service_name=Fresh+Passport+(Adult+18%2B)+Assistance" id="psc-primary-btn" style="border-radius:12px; padding:12px 18px; font-size:0.92rem; display:inline-flex; align-items:center; justify-content:center; gap:8px;">
+                  <i data-lucide="file-text"></i> Start Application Assistance <i data-lucide="arrow-right"></i>
+                </a>
+                <div class="vsc-secondary-links">
+                  <a href="track-application.html" class="vsc-link"><i data-lucide="search"></i> Track Application</a>
+                  <span class="vsc-dot">&bull;</span>
+                  <a href="https://wa.me/919473946181" target="_blank" rel="noopener" class="vsc-link"><i data-lucide="phone"></i> Call / WhatsApp</a>
+                </div>
+              </div>
+
+              <div class="vsc-operator-strip">
+                <div class="vsc-operator-avatar"><i data-lucide="user-check"></i></div>
+                <div class="vsc-operator-info">
+                  <strong>Aditya Khan &bull; Senior Operator</strong>
+                  <small>LDA Colony Sector H, Lucknow Helpdesk</small>
                 </div>
               </div>
             </div>
-          </div>
+          </aside>
 
         </div>
       </section>
-            <section id="ci-section">
-      <div class="ci-dark-panel">
 
-        <!-- Header -->
-        <div class="ci-header">
-          <div class="ci-pill"><i data-lucide="shield-alert"></i> Compliance &amp; Terms</div>
-          <h2 class="ci-heading">Important <span class="h2-gold">Information</span></h2>
-          <p class="ci-subtext">Review these guidelines before submitting your application. Our process is fully aligned with official department requirements.</p>
+      <!-- 3. Enterprise Trust Band (Single 4-Card Row above Choose Service) -->
+      <section class="section enterprise-trust-band passport-trust-band" aria-label="Trust and Verification Highlights">
+        <div class="etb-item">
+          <div class="etb-icon-chip etb-chip-blue"><i data-lucide="shield-check"></i></div>
+          <div class="etb-content">
+            <strong>100% Secure Process</strong>
+            <span>Direct Passport Seva Portal filing</span>
+          </div>
         </div>
-
-        <!-- Tab navigation -->
-        <div class="ci-tablist" role="tablist" aria-label="Compliance information">
-          <button class="ci-tab active" role="tab" aria-selected="true" id="ci-tab-1" aria-controls="ci-panel-1" tabindex="0">
-            <span class="ci-tab-icon"><i data-lucide="building-2"></i></span>
-            <span class="ci-tab-meta">
-              <span class="ci-tab-num">01</span>
-              <span class="ci-tab-label">Independent Operator</span>
-            </span>
-          </button>
-          <button class="ci-tab" role="tab" aria-selected="false" id="ci-tab-2" aria-controls="ci-panel-2" tabindex="-1">
-            <span class="ci-tab-icon"><i data-lucide="landmark"></i></span>
-            <span class="ci-tab-meta">
-              <span class="ci-tab-num">02</span>
-              <span class="ci-tab-label">Government Approval</span>
-            </span>
-          </button>
-          <button class="ci-tab" role="tab" aria-selected="false" id="ci-tab-3" aria-controls="ci-panel-3" tabindex="-1">
-            <span class="ci-tab-icon"><i data-lucide="indian-rupee"></i></span>
-            <span class="ci-tab-meta">
-              <span class="ci-tab-num">03</span>
-              <span class="ci-tab-label">Assistance Fee</span>
-            </span>
-          </button>
-          <button class="ci-tab" role="tab" aria-selected="false" id="ci-tab-4" aria-controls="ci-panel-4" tabindex="-1">
-            <span class="ci-tab-icon"><i data-lucide="file-check-2"></i></span>
-            <span class="ci-tab-meta">
-              <span class="ci-tab-num">04</span>
-              <span class="ci-tab-label">Document Accuracy</span>
-            </span>
-          </button>
-          <button class="ci-tab" role="tab" aria-selected="false" id="ci-tab-5" aria-controls="ci-panel-5" tabindex="-1">
-            <span class="ci-tab-icon"><i data-lucide="bell-ring"></i></span>
-            <span class="ci-tab-meta">
-              <span class="ci-tab-num">05</span>
-              <span class="ci-tab-label">Updates &amp; Status</span>
-            </span>
-          </button>
+        <div class="etb-item">
+          <div class="etb-icon-chip etb-chip-emerald"><i data-lucide="check-circle-2"></i></div>
+          <div class="etb-content">
+            <strong>99.4% First-Pass Rate</strong>
+            <span>Operator pre-check before PSK visit</span>
+          </div>
         </div>
+        <div class="etb-item">
+          <div class="etb-icon-chip etb-chip-purple"><i data-lucide="credit-card"></i></div>
+          <div class="etb-content">
+            <strong>No Advance Charge</strong>
+            <span>Pay only after document review</span>
+          </div>
+        </div>
+        <div class="etb-item">
+          <div class="etb-icon-chip etb-chip-amber"><i data-lucide="map-pin"></i></div>
+          <div class="etb-content">
+            <strong>Lucknow Helpdesk</strong>
+            <span>LDA Colony Sector H Walk-in Support</span>
+          </div>
+        </div>
+      </section>
 
-        <!-- Tab panels -->
-        <div class="ci-panels">
-          <div class="ci-panel active" role="tabpanel" id="ci-panel-1" aria-labelledby="ci-tab-1">
-            <div class="ci-panel-icon"><i data-lucide="building-2"></i></div>
-            <div class="ci-panel-body">
-              <h3 class="ci-panel-title">Independent Operator</h3>
-              <p class="ci-panel-text">One Point provides assisted Passport filing support. We are a private service provider — not the Passport Seva Kendra or MEA.</p>
-            </div>
-            <span class="ci-panel-watermark" aria-hidden="true">01</span>
-          </div>
-          <div class="ci-panel" role="tabpanel" id="ci-panel-2" aria-labelledby="ci-tab-2" hidden>
-            <div class="ci-panel-icon"><i data-lucide="landmark"></i></div>
-            <div class="ci-panel-body">
-              <h3 class="ci-panel-title">Government Approval</h3>
-              <p class="ci-panel-text">Final passport issuance depends entirely on police verification, PSK appointment and MEA authority clearance.</p>
-            </div>
-            <span class="ci-panel-watermark" aria-hidden="true">02</span>
-          </div>
-          <div class="ci-panel" role="tabpanel" id="ci-panel-3" aria-labelledby="ci-tab-3" hidden>
-            <div class="ci-panel-icon"><i data-lucide="indian-rupee"></i></div>
-            <div class="ci-panel-body">
-              <h3 class="ci-panel-title">Assistance Fee</h3>
-              <p class="ci-panel-text">The service fee covers operator assistance, form filling and document checklist review. Passport Seva government fees are applicable additionally.</p>
-            </div>
-            <span class="ci-panel-watermark" aria-hidden="true">03</span>
-          </div>
-          <div class="ci-panel" role="tabpanel" id="ci-panel-4" aria-labelledby="ci-tab-4" hidden>
-            <div class="ci-panel-icon"><i data-lucide="file-check-2"></i></div>
-            <div class="ci-panel-body">
-              <h3 class="ci-panel-title">Document Accuracy</h3>
-              <p class="ci-panel-text">Customer must provide correct Aadhaar, address proof and photograph to prevent passport application rejection.</p>
-            </div>
-            <span class="ci-panel-watermark" aria-hidden="true">04</span>
-          </div>
-          <div class="ci-panel" role="tabpanel" id="ci-panel-5" aria-labelledby="ci-tab-5" hidden>
-            <div class="ci-panel-icon"><i data-lucide="bell-ring"></i></div>
-            <div class="ci-panel-body">
-              <h3 class="ci-panel-title">Updates & Status</h3>
-              <p class="ci-panel-text">Application reference number and status updates will be shared after successful payment and PSK appointment booking.</p>
-            </div>
-            <span class="ci-panel-watermark" aria-hidden="true">05</span>
+      <!-- 4. Choose Your Passport Assistance Service (Primary Selector with Intent-Based Microcopy) -->
+      <section class="section reveal" id="passport-services">
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">SELECT YOUR PURPOSE</p>
+            <h2>Choose Your Passport <span class="h2-gold">Assistance Service</span></h2>
+            <p>Select the exact assistance you need. Click any service card to update your selection and initiate operator review.</p>
           </div>
         </div>
 
-      </div><!-- /.ci-dark-panel -->
+        <!-- Filter Category Tabs -->
+        <div class="cert-filter-pills-row" role="tablist" aria-label="Passport Services Category Filter">
+          <button class="cert-filter-pill active" data-category="all" type="button">All Services (6)</button>
+          <button class="cert-filter-pill" data-category="fresh" type="button">Fresh Passport</button>
+          <button class="cert-filter-pill" data-category="renewal" type="button">Renewal &amp; Tatkaal</button>
+          <button class="cert-filter-pill" data-category="minor-pcc" type="button">Minors &amp; PCC</button>
+          <button class="cert-filter-pill" data-category="correction" type="button">Corrections</button>
+        </div>
 
-      <script>
-      (function () {
-        var section  = document.getElementById('ci-section');
-        var tabs     = Array.from(section.querySelectorAll('.ci-tab'));
-        var panels   = Array.from(section.querySelectorAll('.ci-panel'));
-        var tablist  = section.querySelector('.ci-tablist');
-        function activate(idx) {
-          tabs.forEach(function (t, i) {
-            var on = i === idx;
-            t.classList.toggle('active', on);
-            t.setAttribute('aria-selected', on ? 'true' : 'false');
-            t.tabIndex = on ? 0 : -1;
-          });
-          panels.forEach(function (p, i) {
-            if (i === idx) {
-              p.removeAttribute('hidden');
-              p.classList.remove('active');
-              void p.offsetWidth;
-              p.classList.add('active');
-            } else {
-              p.classList.remove('active');
-              p.setAttribute('hidden', '');
-            }
-          });
-          tabs[idx].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-        }
-        tabs.forEach(function (tab, i) {
-          tab.addEventListener('click', function () { activate(i); });
-        });
-        tablist.addEventListener('keydown', function (e) {
-          var cur = tabs.findIndex(function (t) { return t.classList.contains('active'); });
-          var next = -1;
-          if (e.key === 'ArrowRight') { next = (cur + 1) % tabs.length; }
-          if (e.key === 'ArrowLeft')  { next = (cur - 1 + tabs.length) % tabs.length; }
-          if (next !== -1) { e.preventDefault(); activate(next); tabs[next].focus(); }
-        });
-      })();
-      </script>
-    </section>
+        <div class="voter-services-grid p-services-grid">
 
-      <div data-unified-apply-slot></div>
-
-      <section class="section reveal" id="faq-section">
-        <div class="pfaq-wrap">
-
-          <div class="pfaq-header">
-            <div class="pfaq-pill"><i data-lucide="help-circle"></i> FAQs</div>
-            <h2 class="pfaq-heading">Common Passport Assistance <span class="h2-gold">Questions.</span></h2>
-            <p class="pfaq-sub">Everything you need to know about our Passport assistance — answered clearly and honestly.</p>
+          <!-- Card 1: Fresh Passport (Adult 18+) -->
+          <div class="voter-service-card p-service-card selected-card" data-category="fresh" data-slug="fresh-passport-application-assistance" data-service="Fresh Passport (Adult 18+)" data-price="₹350" data-fee="₹350" data-govt="₹1,500.00 (At Actuals)" data-time="15–30 Working Days">
+            <div class="voter-card-top-row">
+              <div class="voter-card-icon-kicker">
+                <div class="voter-service-icon"><i data-lucide="file-plus-2"></i></div>
+                <span class="voter-category-kicker">First-Time Applicants</span>
+              </div>
+              <span class="voter-card-check" title="Selected"><i data-lucide="check"></i></span>
+            </div>
+            <h3>Fresh Passport (Adult 18+)</h3>
+            <p class="voter-card-desc">First-time passport application for adult citizens with verified form drafting and appointment booking.</p>
+            <div class="voter-card-meta-block">
+              <div class="voter-meta-row">
+                <span class="voter-meta-label">Estimated:</span>
+                <strong>15–30 days</strong>
+                <span class="voter-meta-sep">&bull;</span>
+                <span class="voter-meta-label">Assistance:</span>
+                <strong class="voter-meta-fee">₹350</strong>
+              </div>
+              <div class="voter-meta-sub">Government portal fee: ₹1,500 at actuals</div>
+            </div>
+            <div class="voter-action-stack">
+              <a class="btn btn-primary font-bold btn-service-select" href="checkout.html?service=fresh-passport-adult&amp;service_name=Fresh+Passport+(Adult+18%2B)+Assistance" data-service="Fresh Passport (Adult 18+)">
+                Apply for Assistance <i data-lucide="arrow-right"></i>
+              </a>
+              <a class="voter-view-req" href="#passport-tabs-section">View requirements</a>
+            </div>
           </div>
 
-          <div class="faq pfaq-grid">
+          <!-- Card 2: Passport Renewal & Re-Issue -->
+          <div class="voter-service-card p-service-card" data-category="renewal" data-slug="passport-renewal-re-issue-support" data-service="Passport Renewal & Re-Issue" data-price="₹350" data-fee="₹350" data-govt="₹1,500.00 (At Actuals)" data-time="15–30 Working Days">
+            <div class="voter-card-top-row">
+              <div class="voter-card-icon-kicker">
+                <div class="voter-service-icon"><i data-lucide="refresh-cw"></i></div>
+                <span class="voter-category-kicker">Renewal &amp; Validity</span>
+              </div>
+              <span class="voter-card-check" title="Selected"><i data-lucide="check"></i></span>
+            </div>
+            <h3>Passport Renewal &amp; Re-Issue</h3>
+            <p class="voter-card-desc">For expired validity, exhausted visa pages, or damaged passports with previous record linkage.</p>
+            <div class="voter-card-meta-block">
+              <div class="voter-meta-row">
+                <span class="voter-meta-label">Estimated:</span>
+                <strong>15–30 days</strong>
+                <span class="voter-meta-sep">&bull;</span>
+                <span class="voter-meta-label">Assistance:</span>
+                <strong class="voter-meta-fee">₹350</strong>
+              </div>
+              <div class="voter-meta-sub">Government portal fee: ₹1,500 at actuals</div>
+            </div>
+            <div class="voter-action-stack">
+              <a class="btn btn-primary font-bold btn-service-select" href="checkout.html?service=passport-renewal&amp;service_name=Passport+Renewal+%26+Re-Issue+Assistance" data-service="Passport Renewal &amp; Re-Issue">
+                Apply for Assistance <i data-lucide="arrow-right"></i>
+              </a>
+              <a class="voter-view-req" href="#passport-tabs-section">View requirements</a>
+            </div>
+          </div>
 
-            <div class="faq-item open">
-              <button class="faq-question" data-faq-question>
-                <span class="pfaq-num">01</span>
-                <span class="pfaq-q-text">Do you guarantee passport approval?</span>
-                <i data-lucide="chevron-down"></i>
-              </button>
-              <div class="faq-answer">
-                <p>No. We assist with application and documents; approval depends on passport office and police verification.</p>
+          <!-- Card 3: Tatkaal Passport Assistance -->
+          <div class="voter-service-card p-service-card" data-category="renewal" data-slug="tatkaal-passport-processing-help" data-service="Tatkaal Passport Assistance" data-price="₹500" data-fee="₹500" data-govt="₹3,500.00 (At Actuals)" data-time="3–7 Working Days">
+            <div class="voter-card-top-row">
+              <div class="voter-card-icon-kicker">
+                <div class="voter-service-icon" style="background:#fef2f2; color:#dc2626; border-color:#fecaca;"><i data-lucide="zap"></i></div>
+                <span class="voter-category-kicker" style="color:#b91c1c;">Fast-Track &amp; Urgent</span>
+              </div>
+              <span class="voter-card-check" title="Selected"><i data-lucide="check"></i></span>
+            </div>
+            <h3>Tatkaal Passport Assistance</h3>
+            <p class="voter-card-desc">Urgent processing with priority slot scheduling and mandatory 3-proof Tatkaal verification audit.</p>
+            <div class="voter-card-meta-block">
+              <div class="voter-meta-row">
+                <span class="voter-meta-label">Estimated:</span>
+                <strong>3–7 days</strong>
+                <span class="voter-meta-sep">&bull;</span>
+                <span class="voter-meta-label">Assistance:</span>
+                <strong class="voter-meta-fee" style="color:#dc2626;">₹500</strong>
+              </div>
+              <div class="voter-meta-sub">Government portal fee: ₹3,500 at actuals</div>
+            </div>
+            <div class="voter-action-stack">
+              <a class="btn btn-primary font-bold btn-service-select" href="checkout.html?service=tatkaal-passport&amp;service_name=Tatkaal+Passport+Assistance" data-service="Tatkaal Passport Assistance">
+                Apply for Assistance <i data-lucide="arrow-right"></i>
+              </a>
+              <a class="voter-view-req" href="#passport-tabs-section">View requirements</a>
+            </div>
+          </div>
+
+          <!-- Card 4: Minor Passport (Under 18) -->
+          <div class="voter-service-card p-service-card" data-category="minor-pcc" data-slug="minor-passport-application-support" data-service="Minor Passport (Under 18)" data-price="₹350" data-fee="₹350" data-govt="₹1,000.00 (At Actuals)" data-time="15–30 Working Days">
+            <div class="voter-card-top-row">
+              <div class="voter-card-icon-kicker">
+                <div class="voter-service-icon"><i data-lucide="baby"></i></div>
+                <span class="voter-category-kicker">Children &amp; Minors</span>
+              </div>
+              <span class="voter-card-check" title="Selected"><i data-lucide="check"></i></span>
+            </div>
+            <h3>Minor Passport (Under 18)</h3>
+            <p class="voter-card-desc">Applications for children under 18 years with Annexure-D parent consent drafting and birth audit.</p>
+            <div class="voter-card-meta-block">
+              <div class="voter-meta-row">
+                <span class="voter-meta-label">Estimated:</span>
+                <strong>15–30 days</strong>
+                <span class="voter-meta-sep">&bull;</span>
+                <span class="voter-meta-label">Assistance:</span>
+                <strong class="voter-meta-fee">₹350</strong>
+              </div>
+              <div class="voter-meta-sub">Government portal fee: ₹1,000 at actuals</div>
+            </div>
+            <div class="voter-action-stack">
+              <a class="btn btn-primary font-bold btn-service-select" href="checkout.html?service=minor-passport&amp;service_name=Minor+Passport+(Under+18)+Assistance" data-service="Minor Passport (Under 18)">
+                Apply for Assistance <i data-lucide="arrow-right"></i>
+              </a>
+              <a class="voter-view-req" href="#passport-tabs-section">View requirements</a>
+            </div>
+          </div>
+
+          <!-- Card 5: Police Clearance Certificate (PCC) -->
+          <div class="voter-service-card p-service-card" data-category="minor-pcc" data-slug="police-clearance-certificate-pcc-guidance" data-service="Police Clearance Certificate (PCC)" data-price="₹250" data-fee="₹250" data-govt="₹500.00 (At Actuals)" data-time="7–15 Working Days">
+            <div class="voter-card-top-row">
+              <div class="voter-card-icon-kicker">
+                <div class="voter-service-icon"><i data-lucide="shield-check"></i></div>
+                <span class="voter-category-kicker">Employment &amp; Visa</span>
+              </div>
+              <span class="voter-card-check" title="Selected"><i data-lucide="check"></i></span>
+            </div>
+            <h3>Police Clearance Certificate (PCC)</h3>
+            <p class="voter-card-desc">Official PCC assistance for overseas employment, immigration, or foreign residency visas.</p>
+            <div class="voter-card-meta-block">
+              <div class="voter-meta-row">
+                <span class="voter-meta-label">Estimated:</span>
+                <strong>7–15 days</strong>
+                <span class="voter-meta-sep">&bull;</span>
+                <span class="voter-meta-label">Assistance:</span>
+                <strong class="voter-meta-fee">₹250</strong>
+              </div>
+              <div class="voter-meta-sub">Government portal fee: ₹500 at actuals</div>
+            </div>
+            <div class="voter-action-stack">
+              <a class="btn btn-primary font-bold btn-service-select" href="checkout.html?service=pcc-guidance&amp;service_name=Police+Clearance+Certificate+(PCC)+Guidance" data-service="Police Clearance Certificate (PCC)">
+                Apply for Assistance <i data-lucide="arrow-right"></i>
+              </a>
+              <a class="voter-view-req" href="#passport-tabs-section">View requirements</a>
+            </div>
+          </div>
+
+          <!-- Card 6: Passport Details Correction & Updates -->
+          <div class="voter-service-card p-service-card" data-category="correction" data-slug="passport-details-correction-updates" data-service="Passport Details Correction & Updates" data-price="₹350" data-fee="₹350" data-govt="₹1,500.00 (At Actuals)" data-time="15–30 Working Days">
+            <div class="voter-card-top-row">
+              <div class="voter-card-icon-kicker">
+                <div class="voter-service-icon"><i data-lucide="edit-3"></i></div>
+                <span class="voter-category-kicker">Data &amp; Name Updates</span>
+              </div>
+              <span class="voter-card-check" title="Selected"><i data-lucide="check"></i></span>
+            </div>
+            <h3>Passport Details Correction</h3>
+            <p class="voter-card-desc">Re-issue assistance for name correction, address change, spouse name addition or endorsement update.</p>
+            <div class="voter-card-meta-block">
+              <div class="voter-meta-row">
+                <span class="voter-meta-label">Estimated:</span>
+                <strong>15–30 days</strong>
+                <span class="voter-meta-sep">&bull;</span>
+                <span class="voter-meta-label">Assistance:</span>
+                <strong class="voter-meta-fee">₹350</strong>
+              </div>
+              <div class="voter-meta-sub">Government portal fee: ₹1,500 at actuals</div>
+            </div>
+            <div class="voter-action-stack">
+              <a class="btn btn-primary font-bold btn-service-select" href="checkout.html?service=passport-correction&amp;service_name=Passport+Details+Correction+%26+Updates" data-service="Passport Details Correction & Updates">
+                Apply for Assistance <i data-lucide="arrow-right"></i>
+              </a>
+              <a class="voter-view-req" href="#passport-tabs-section">View requirements</a>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Section Bottom Trust Note -->
+        <div class="voter-section-trust-note">
+          <i data-lucide="shield-check"></i>
+          <span><strong>Official Notice:</strong> Ministry of External Affairs (MEA) &amp; Passport Seva Kendra (PSK) handle official biometric capture, police verification, and final passport issuance. One Point provides certified application drafting, document audit, and slot scheduling support.</span>
+        </div>
+      </section>
+
+      <!-- 5. Transparent Service Estimate (Invoice / Receipt Style Breakdown) -->
+      <section class="section enterprise-comparison-section reveal" id="service-estimate">
+        <div class="section-head center-line" style="text-align:center;">
+          <div>
+            <p class="section-kicker">FEE TRANSPARENCY</p>
+            <h2>Transparent Service <span class="h2-gold">Estimate</span></h2>
+            <p>Complete visibility into official government fees and One Point assisted service charges.</p>
+          </div>
+        </div>
+
+        <div class="passport-invoice-wrap">
+          <div class="p-invoice-head">
+            <div>
+              <h3>Estimated Invoice &bull; Fresh Passport (36 Pages)</h3>
+              <p>Breakdown of government portal fees vs operator assistance services.</p>
+            </div>
+            <span class="tag tag-premium" style="background:#ecfdf5; color:#059669; border:1px solid #a7f3d0; font-weight:800;">No Hidden Costs</span>
+          </div>
+
+          <div class="p-invoice-table">
+            <div class="p-invoice-row">
+              <span>Official Government Portal Fee <small>(Paid directly to MEA)</small></span>
+              <strong class="fee-govt">&#8377;2,500.00</strong>
+            </div>
+            <div class="p-invoice-row">
+              <span>One Point Digital Assistance Fee</span>
+              <strong>&#8377;300.00</strong>
+            </div>
+            <div class="p-invoice-row">
+              <span>Pre-submission Document Audit &amp; Quality Check</span>
+              <strong class="fee-included">Included (&#8377;0)</strong>
+            </div>
+            <div class="p-invoice-row">
+              <span>Preferred PSK / POPSK Appointment Slot Booking</span>
+              <strong class="fee-included">Included (&#8377;0)</strong>
+            </div>
+            <div class="p-invoice-row">
+              <span>Police Verification Preparation Checklist</span>
+              <strong class="fee-included">Included (&#8377;0)</strong>
+            </div>
+            <div class="p-invoice-row">
+              <span>GST &amp; Processing Handshake</span>
+              <strong>Calculated at Checkout</strong>
+            </div>
+
+            <div class="p-invoice-total">
+              <span>Estimated Total Package</span>
+              <strong>&#8377;2,800.00</strong>
+            </div>
+          </div>
+
+          <div class="p-invoice-note">
+            <i data-lucide="info" style="width:14px; height:14px; display:inline-block; vertical-align:middle; color:#075092; margin-right:4px;"></i>
+            <strong>Government vs Operator Fee:</strong> The official government fee (&#8377;2,500 for normal 36-page passport, &#8377;4,500 for Tatkaal, &#8377;1,500 for minors) is mandated by the Ministry of External Affairs. The &#8377;300 One Point fee covers digital drafting, document pre-validation, and slot scheduling support.
+          </div>
+        </div>
+      </section>
+
+      <!-- 6. Everything You Need To Know Before Filing (Single Consolidated Tab Panel) -->
+      <section class="section reveal" id="passport-tabs-section">
+        <div class="section-head center-line" style="text-align:center; margin-bottom:28px;">
+            <div>
+              <p class="section-kicker">KNOWLEDGE HUB</p>
+              <h2>Everything You Need Before <span class="h2-gold">Filing</span></h2>
+              <p>Click tabs to view required documents, eligibility criteria, and fulfillment guidelines.</p>
+            </div>
+          </div>
+
+          <div class="sec-tab-nav">
+            <button class="passport-tab-btn active" data-tab="documents"><i data-lucide="file-text"></i> Documents</button>
+            <button class="passport-tab-btn" data-tab="eligibility"><i data-lucide="user-check"></i> Eligibility</button>
+            <button class="passport-tab-btn" data-tab="fees"><i data-lucide="indian-rupee"></i> Fees &amp; Payment</button>
+            <button class="passport-tab-btn" data-tab="appointment"><i data-lucide="calendar"></i> PSK Appointment</button>
+            <button class="passport-tab-btn" data-tab="processing"><i data-lucide="truck"></i> Processing &amp; Dispatch</button>
+          </div>
+
+          <div class="sec-tab-card">
+            
+            <!-- Pane 1: Documents -->
+            <div class="sec-tab-pane active" id="pane-documents">
+              <h3><i data-lucide="file-check-2" style="color:#075092;"></i> Required Document Checklist</h3>
+              <p class="sec-tab-desc">Bring original documents along with 2 self-attested photocopies for your Passport Seva Kendra appointment.</p>
+              <div class="p-clean-list">
+                <div class="p-clean-item">
+                  <i data-lucide="calendar"></i>
+                  <div><strong>Proof of Date of Birth</strong><span>Birth Certificate, Aadhaar Card, PAN Card, or 10th School Passing Certificate.</span></div>
+                </div>
+                <div class="p-clean-item">
+                  <i data-lucide="map-pin"></i>
+                  <div><strong>Proof of Present Address</strong><span>Aadhaar Card, Voter ID, Bank Passbook (with photo), Electricity Bill, or Water Bill.</span></div>
+                </div>
+                <div class="p-clean-item">
+                  <i data-lucide="graduation-cap"></i>
+                  <div><strong>Non-ECR Proof (Matriculation)</strong><span>10th standard marksheet/passing certificate or higher educational degree.</span></div>
+                </div>
+                <div class="p-clean-item">
+                  <i data-lucide="book-open"></i>
+                  <div><strong>Old Passport (If Renewal / Re-issue)</strong><span>Original previous passport book + self-attested copies of first and last 2 pages.</span></div>
+                </div>
               </div>
             </div>
 
-            <div class="faq-item">
-              <button class="faq-question" data-faq-question>
-                <span class="pfaq-num">02</span>
-                <span class="pfaq-q-text">Can you book appointment?</span>
-                <i data-lucide="chevron-down"></i>
-              </button>
-              <div class="faq-answer">
-                <p>Yes, after details and official fee confirmation, appointment support is available.</p>
+            <!-- Pane 2: Eligibility -->
+            <div class="sec-tab-pane" id="pane-eligibility">
+              <h3><i data-lucide="user-check" style="color:#075092;"></i> Who Is Eligible To Apply</h3>
+              <p class="sec-tab-desc">Eligibility criteria for fresh and renewal passport assistance in Lucknow &amp; Uttar Pradesh.</p>
+              <div class="p-clean-list">
+                <div class="p-clean-item">
+                  <i data-lucide="flag"></i>
+                  <div><strong>Indian Citizenship</strong><span>Applicants must be citizens of India by birth, descent, registration, or naturalization.</span></div>
+                </div>
+                <div class="p-clean-item">
+                  <i data-lucide="home"></i>
+                  <div><strong>Valid Residence Proof</strong><span>Applicant must have continuous proof of residence at the current address for at least 1 year.</span></div>
+                </div>
+                <div class="p-clean-item">
+                  <i data-lucide="baby"></i>
+                  <div><strong>Minors (Under 18)</strong><span>Parent/guardian consent declaration (Annexure-D) and valid parent passport copies required.</span></div>
+                </div>
+                <div class="p-clean-item">
+                  <i data-lucide="shield"></i>
+                  <div><strong>Clean Police Record</strong><span>No pending criminal proceedings or adverse security warrants in any court of law.</span></div>
+                </div>
               </div>
             </div>
 
-            <div class="faq-item">
-              <button class="faq-question" data-faq-question>
-                <span class="pfaq-num">03</span>
-                <span class="pfaq-q-text">Is renewal supported?</span>
-                <i data-lucide="chevron-down"></i>
-              </button>
-              <div class="faq-answer">
-                <p>Yes, renewal and correction guidance can be handled with old passport details.</p>
+            <!-- Pane 3: Fees & Payment -->
+            <div class="sec-tab-pane" id="pane-fees">
+              <h3><i data-lucide="indian-rupee" style="color:#075092;"></i> Official Fees &amp; Payment Schedule</h3>
+              <p class="sec-tab-desc">Standard official MEA government portal fees across common passport categories.</p>
+              <div class="p-clean-list">
+                <div class="p-clean-item">
+                  <i data-lucide="credit-card"></i>
+                  <div><strong>Fresh / Renewal Adult (36 Pages)</strong><span>&#8377;1,500 / &#8377;2,500 Govt Fee + &#8377;300 Assistance = &#8377;2,800 Total Package.</span></div>
+                </div>
+                <div class="p-clean-item">
+                  <i data-lucide="zap"></i>
+                  <div><strong>Tatkaal Urgent Processing (36 Pages)</strong><span>&#8377;4,500 Govt Fee + &#8377;300 Assistance = &#8377;4,800 Total Package.</span></div>
+                </div>
+                <div class="p-clean-item">
+                  <i data-lucide="baby"></i>
+                  <div><strong>Minor (Under 18 - 5 Years Validity)</strong><span>&#8377;1,500 Govt Fee + &#8377;300 Assistance = &#8377;1,800 Total Package.</span></div>
+                </div>
+                <div class="p-clean-item">
+                  <i data-lucide="shield-check"></i>
+                  <div><strong>Police Clearance Certificate (PCC)</strong><span>&#8377;500 Govt Fee + &#8377;300 Assistance = &#8377;800 Total Package.</span></div>
+                </div>
               </div>
             </div>
 
-            <div class="faq-item">
-              <button class="faq-question" data-faq-question>
-                <span class="pfaq-num">04</span>
-                <span class="pfaq-q-text">When do I pay?</span>
-                <i data-lucide="chevron-down"></i>
-              </button>
-              <div class="faq-answer">
-                <p>Payment is taken only after operator review confirms the request details and document requirement.</p>
+            <!-- Pane 4: PSK Appointment -->
+            <div class="sec-tab-pane" id="pane-appointment">
+              <h3><i data-lucide="calendar" style="color:#075092;"></i> PSK / POPSK Appointment Guidelines</h3>
+              <p class="sec-tab-desc">What to expect during your physical visit to the Passport Seva Kendra in Lucknow.</p>
+              <div class="p-clean-list">
+                <div class="p-clean-item">
+                  <i data-lucide="clock"></i>
+                  <div><strong>Reporting Time</strong><span>Reach 15 minutes before your scheduled appointment time printed on the ARN receipt.</span></div>
+                </div>
+                <div class="p-clean-item">
+                  <i data-lucide="fingerprint"></i>
+                  <div><strong>Biometric Capture &amp; Photo</strong><span>Digital photograph, 10-fingerprints scan, and document scanner verification conducted on-site.</span></div>
+                </div>
+                <div class="p-clean-item">
+                  <i data-lucide="map-pin"></i>
+                  <div><strong>Lucknow Center Choices</strong><span>PSK Ratan Square Vidhan Sabha Marg, Gomti Nagar PSK, or nearest POPSK centers.</span></div>
+                </div>
+                <div class="p-clean-item">
+                  <i data-lucide="file-text"></i>
+                  <div><strong>Original Verification Counter</strong><span>Present original documents to the verifying officer for instant digital scanning.</span></div>
+                </div>
               </div>
             </div>
 
-            <div class="faq-item">
-              <button class="faq-question" data-faq-question>
-                <span class="pfaq-num">05</span>
-                <span class="pfaq-q-text">Is Passport Assistance approval guaranteed?</span>
-                <i data-lucide="chevron-down"></i>
-              </button>
-              <div class="faq-answer">
-                <p>No. We assist with filing and document alignment; final approval depends on the official department.</p>
+            <!-- Pane 5: Processing & Dispatch -->
+            <div class="sec-tab-pane" id="pane-processing">
+              <h3><i data-lucide="truck" style="color:#075092;"></i> Police Verification &amp; Speed Post Delivery</h3>
+              <p class="sec-tab-desc">Post-appointment clearance and doorstep passport book delivery.</p>
+              <div class="p-clean-list">
+                <div class="p-clean-item">
+                  <i data-lucide="shield"></i>
+                  <div><strong>Local Police Inquiry</strong><span>Local police station officer will verify residence and identity proofs within 7–15 days.</span></div>
+                </div>
+                <div class="p-clean-item">
+                  <i data-lucide="mail"></i>
+                  <div><strong>Speed Post Dispatch</strong><span>Printed passport is dispatched directly via India Post Speed Post with live tracking SMS.</span></div>
+                </div>
+                <div class="p-clean-item">
+                  <i data-lucide="bell"></i>
+                  <div><strong>Live Status Alerts</strong><span>Real-time milestone updates shared via WhatsApp from filing till doorstep delivery.</span></div>
+                </div>
+                <div class="p-clean-item">
+                  <i data-lucide="user-check"></i>
+                  <div><strong>Doorstep In-Person Receipt</strong><span>Passport is handed over only to the applicant/family member upon showing valid ID.</span></div>
+                </div>
               </div>
             </div>
 
-          </div><!-- /.pfaq-grid -->
+          </div>
+      </section>
 
-          <div class="pfaq-cta">
-            <div class="pfaq-cta-left">
-              <div class="pfaq-cta-icon"><i data-lucide="message-circle"></i></div>
-              <div class="pfaq-cta-text">
-                <strong>Still have questions?</strong>
-                <span>Our Passport support team replies fast on WhatsApp — no bots, real operators.</span>
+      <!-- 7. Need Help / Service Recommendation (Dual Structured Cards with Clear Hierarchy) -->
+      <section class="section reveal" style="padding-top:20px;">
+        <div class="pan-suite-grid">
+          
+          <!-- Light Card: Document Pre-Validation Support (Secondary) -->
+          <div class="pan-suite-card">
+            <div>
+              <p class="section-kicker" style="color:#075092;">DOCUMENT AUDIT</p>
+              <h3 style="font-size:1.35rem; font-weight:800; color:#0b1f35; margin:0 0 8px 0;">Need Help With Documents?</h3>
+              <p style="color:#64748b; font-size:0.92rem; line-height:1.55; margin-bottom:20px;">
+                Unsure if your Aadhaar, birth proof, or educational marksheet will be accepted at PSK? Our operator team pre-reviews your soft copies to prevent rejection.
+              </p>
+
+              <div style="display:flex; flex-direction:column; gap:12px; margin-bottom:24px;">
+                <div style="display:flex; align-items:center; gap:10px; font-size:0.88rem; color:#334155;">
+                  <span class="sec-val-icon"><i data-lucide="check"></i></span> Non-ECR vs ECR matriculation eligibility check
+                </div>
+                <div style="display:flex; align-items:center; gap:10px; font-size:0.88rem; color:#334155;">
+                  <span class="sec-val-icon"><i data-lucide="check"></i></span> Name &amp; DOB spelling mismatch resolution
+                </div>
+                <div style="display:flex; align-items:center; gap:10px; font-size:0.88rem; color:#334155;">
+                  <span class="sec-val-icon"><i data-lucide="check"></i></span> Minor Annexure-D consent drafting
+                </div>
               </div>
             </div>
-            <a href="https://wa.me/919473946181" target="_blank" rel="noopener" class="btn btn-whatsapp">
-              <i data-lucide="message-circle"></i> Chat on WhatsApp
+
+            <a class="btn btn-ghost font-bold" href="https://wa.me/919473946181" target="_blank" rel="noopener" style="width:100%; border:1.5px solid #075092; color:#075092; border-radius:12px; padding:12px; text-align:center;">
+              <i data-lucide="message-circle"></i> Send Documents for Review
             </a>
           </div>
 
-        </div><!-- /.pfaq-wrap -->
+          <!-- Dark Navy Card: Service Recommendation (Primary) -->
+          <div class="pan-suite-card dark-navy-card">
+            <div>
+              <p class="section-kicker" style="color:#fde047; background:rgba(255,255,255,0.08); border-color:rgba(255,255,255,0.15);">SERVICE RECOMMENDATION</p>
+              <h3 style="color:#ffffff; font-size:1.35rem; font-weight:800; margin:0 0 8px 0;">Not Sure Which Passport Service You Need?</h3>
+              <p style="color:#94a3b8; font-size:0.92rem; line-height:1.55; margin-bottom:20px;">
+                Answer 3 quick questions with our operator to get the exact recommended passport service:
+              </p>
+
+              <div style="display:flex; flex-direction:column; gap:12px; margin-bottom:24px;">
+                <div style="display:flex; align-items:center; gap:10px; background:rgba(255,255,255,0.06); padding:10px 14px; border-radius:10px; border:1px solid rgba(255,255,255,0.1); font-size:0.86rem; color:#e2e8f0;">
+                  <i data-lucide="help-circle" style="color:#fde047; width:16px; height:16px; flex-shrink:0;"></i> 1. Is this your first-time application or renewal?
+                </div>
+                <div style="display:flex; align-items:center; gap:10px; background:rgba(255,255,255,0.06); padding:10px 14px; border-radius:10px; border:1px solid rgba(255,255,255,0.1); font-size:0.86rem; color:#e2e8f0;">
+                  <i data-lucide="help-circle" style="color:#60a5fa; width:16px; height:16px; flex-shrink:0;"></i> 2. Do you have urgent travel plans within 7 days?
+                </div>
+                <div style="display:flex; align-items:center; gap:10px; background:rgba(255,255,255,0.06); padding:10px 14px; border-radius:10px; border:1px solid rgba(255,255,255,0.1); font-size:0.86rem; color:#e2e8f0;">
+                  <i data-lucide="help-circle" style="color:#34d399; width:16px; height:16px; flex-shrink:0;"></i> 3. Is the applicant an adult (18+) or a minor?
+                </div>
+              </div>
+            </div>
+
+            <div style="display:flex; gap:12px; flex-wrap:wrap;">
+              <a class="btn font-bold" href="checkout.html?service=passport-assistance&amp;service_name=Passport+Assistance" style="flex:1; background:#facc15; color:#0b1f35; border-radius:12px; padding:12px; text-align:center;">
+                Start Application Assistance
+              </a>
+              <a class="btn font-bold" href="https://wa.me/919473946181" target="_blank" rel="noopener" style="flex:1; background:rgba(255,255,255,0.12); color:#ffffff; border:1px solid rgba(255,255,255,0.2); border-radius:12px; padding:12px; text-align:center;">
+                <i data-lucide="message-circle"></i> Chat on WhatsApp
+              </a>
+            </div>
+          </div>
+
+        </div>
       </section>
-      <div data-unified-apply-slot></div>
 
-            <section class="section reveal related-services-section" id="related-services">
-        <div class="section-head"><div><p class="section-kicker">Related Services</p><h2>You may also need <span class="h2-gold">these services</span></h2></div></div>
+      <!-- 8. Important Information & Compliance / Terms Section -->
+      <section class="section reveal" id="ci-section">
+        <div class="section-head center-line" style="text-align:center;">
+          <div>
+            <p class="section-kicker">COMPLIANCE &amp; TERMS</p>
+            <h2>Important Passport <span class="h2-gold">Information</span></h2>
+            <p>Please review these statutory guidelines and service terms before starting your application.</p>
+          </div>
+        </div>
 
-        <div class="rs-wrap" id="rs-related">
-          <button class="rs-arrow rs-prev" aria-label="Previous services"><i data-lucide="chevron-left"></i></button>
+        <div class="advisory-cards-grid">
+          <!-- Card 1: Physical PSK Visit Mandatory -->
+          <div class="advisory-card">
+            <div class="advisory-card-chip advisory-chip-blue">
+              <i data-lucide="calendar-check"></i>
+            </div>
+            <div class="advisory-card-content">
+              <h4>Physical PSK Visit Mandatory</h4>
+              <p>Biometric and photograph capture require physical presence of the applicant at Lucknow PSK / POPSK on scheduled appointment date.</p>
+            </div>
+          </div>
 
-          <div class="rs-viewport">
-            <div class="rs-track">
+          <!-- Card 2: Original Physical Documents -->
+          <div class="advisory-card">
+            <div class="advisory-card-chip advisory-chip-blue">
+              <i data-lucide="file-check"></i>
+            </div>
+            <div class="advisory-card-content">
+              <h4>Original Physical Documents</h4>
+              <p>Applicants must present genuine original DOB, address, and educational (Non-ECR) certificates for official counter verification.</p>
+            </div>
+          </div>
 
-              <a class="service-option-card service-card" id="related-pan-card" href="service-pan-card.html" data-edupoint-service-card data-edupoint-categories="identity popular">
-                <div class="service-top service-card-top">
-                  <div class="service-icon"><i data-lucide="id-card"></i></div>
-                  <div class="service-card-badges"><span class="tag">2-3 days</span><span class="tag price-tag">&#8377;129 - &#8377;149</span></div>
-                </div>
-                <h3>PAN Card</h3>
-                <p>New PAN, correction, e-PAN download and reprint support.</p>
-                <span class="btn btn-primary btn-service-select" data-service="PAN Card">Open Service</span>
-              </a>
+          <!-- Card 3: Police Station Verification -->
+          <div class="advisory-card">
+            <div class="advisory-card-chip advisory-chip-blue">
+              <i data-lucide="shield-check"></i>
+            </div>
+            <div class="advisory-card-content">
+              <h4>Police Station Verification</h4>
+              <p>Post-appointment police verification inquiry conducted by your local police station is required before final printing and dispatch.</p>
+            </div>
+          </div>
 
-              <a class="service-option-card service-card" id="related-ayushman" href="service-ayushman-card.html" data-edupoint-service-card data-edupoint-categories="health-travel popular">
-                <div class="service-top service-card-top">
-                  <div class="service-icon"><i data-lucide="heart-pulse"></i></div>
-                  <div class="service-card-badges"><span class="tag">Same day</span><span class="tag price-tag">&#8377;30 - &#8377;50</span></div>
-                </div>
-                <h3>Ayushman Card</h3>
-                <p>PMJAY eligibility check, e-card download and print support.</p>
-                <span class="btn btn-primary btn-service-select" data-service="Ayushman Card">Apply</span>
-              </a>
+          <!-- Card 4: Transparent Assistance Fee -->
+          <div class="advisory-card">
+            <div class="advisory-card-chip advisory-chip-emerald">
+              <i data-lucide="badge-percent"></i>
+            </div>
+            <div class="advisory-card-content">
+              <h4>Transparent Assistance Fee</h4>
+              <p>Official MEA portal fee is separate at actuals. Our <strong class="fee-hl">₹350</strong> operator fee covers form drafting, document audit &amp; slot booking.</p>
+            </div>
+          </div>
+        </div>
 
-              <a class="service-option-card service-card" id="related-voter-id" href="service-voter-id.html" data-edupoint-service-card data-edupoint-categories="identity popular">
-                <div class="service-top service-card-top">
-                  <div class="service-icon"><i data-lucide="vote"></i></div>
-                  <div class="service-card-badges"><span class="tag">15-30 days</span><span class="tag price-tag">&#8377;50+</span></div>
-                </div>
-                <h3>Voter ID</h3>
-                <p>New voter registration, correction and e-EPIC support.</p>
-                <span class="btn btn-primary btn-service-select" data-service="Voter ID">Start</span>
-              </a>
-
-              <a class="service-option-card service-card" id="related-birth-certificate" href="service-birth-certificate.html" data-edupoint-service-card data-edupoint-categories="certificates">
-                <div class="service-top service-card-top">
-                  <div class="service-icon"><i data-lucide="file-badge"></i></div>
-                  <div class="service-card-badges"><span class="tag">7-15 days</span><span class="tag price-tag">&#8377;50 - &#8377;100</span></div>
-                </div>
-                <h3>Birth Certificate</h3>
-                <p>Birth registration, delayed entry and certificate copy support.</p>
-                <span class="btn btn-primary btn-service-select" data-service="Birth Certificate">Request</span>
-              </a>
-
-              <a class="service-option-card service-card" id="related-income-certificate" href="service-income-certificate.html" data-edupoint-service-card data-edupoint-categories="certificates popular">
-                <div class="service-top service-card-top">
-                  <div class="service-icon"><i data-lucide="file-check-2"></i></div>
-                  <div class="service-card-badges"><span class="tag">7-10 days</span><span class="tag price-tag">&#8377;50+</span></div>
-                </div>
-                <h3>Income Certificate</h3>
-                <p>Aay Praman Patra application and status support.</p>
-                <span class="btn btn-primary btn-service-select" data-service="Income Certificate">Start</span>
-              </a>
-
-            </div><!-- /.rs-track -->
-          </div><!-- /.rs-viewport -->
-
-          <button class="rs-arrow rs-next" aria-label="Next services"><i data-lucide="chevron-right"></i></button>
-
-          <div class="rs-dots"></div>
-        </div><!-- /.rs-wrap -->
-
-        <script>
-        (function () {
-          var wrap     = document.getElementById('rs-related');
-          var viewport = wrap.querySelector('.rs-viewport');
-          var track    = wrap.querySelector('.rs-track');
-          var prev     = wrap.querySelector('.rs-prev');
-          var next     = wrap.querySelector('.rs-next');
-          var dotsEl   = wrap.querySelector('.rs-dots');
-          var cards    = Array.from(track.children);
-          var GAP      = 20;
-          var cur      = 0;
-          var timer;
-          function cols() { var w = viewport.offsetWidth; return w < 540 ? 1 : w < 820 ? 2 : w < 1060 ? 3 : 4; }
-          function step() { return cards[0].offsetWidth + GAP; }
-          function max()  { return Math.max(0, cards.length - cols()); }
-          function goTo(n) {
-            if (n < 0) n = max(); if (n > max()) n = 0;
-            cur = n;
-            track.style.transform = 'translateX(-' + (cur * step()) + 'px)';
-            Array.from(dotsEl.children).forEach(function (d, i) { d.classList.toggle('rs-dot-active', i === cur); });
-          }
-          function buildDots() {
-            dotsEl.innerHTML = '';
-            var pages = max() + 1;
-            for (var i = 0; i < pages; i++) {
-              var b = document.createElement('button');
-              b.className = 'rs-dot' + (i === 0 ? ' rs-dot-active' : '');
-              b.setAttribute('aria-label', 'Go to slide ' + (i + 1));
-              (function(idx){ b.addEventListener('click', function(){ goTo(idx); resetTimer(); }); })(i);
-              dotsEl.appendChild(b);
-            }
-          }
-          function resetTimer() { clearInterval(timer); timer = setInterval(function(){ goTo(cur + 1); }, 3800); }
-          prev.addEventListener('click', function(){ goTo(cur - 1); resetTimer(); });
-          next.addEventListener('click', function(){ goTo(cur + 1); resetTimer(); });
-          buildDots(); resetTimer();
-          window.addEventListener('resize', function(){ buildDots(); goTo(0); });
-        })();
-        </script>
+        <!-- Bottom Trust Disclaimer Note -->
+        <div class="advisory-trust-note">
+          <i data-lucide="shield-check"></i>
+          <span>Official biometrics capture, police verification, and final passport issuance rest solely with the Ministry of External Affairs (MEA) and Passport Seva Kendra.</span>
+        </div>
       </section>
+
+      <!-- 9. 5-Step Process Pipeline -->
+      <section class="section voter-process-chain reveal" id="timeline-section" aria-label="Our 5-Step Process Pipeline">
+        <div class="voter-pipeline-container">
+          
+          <div class="voter-pipeline-top">
+            <div class="voter-pipeline-title-group">
+              <span class="voter-pipeline-kicker"><i data-lucide="compass"></i> Process Flow</span>
+              <h3>5-Step Passport Application Roadmap</h3>
+            </div>
+            <div class="voter-pipeline-badge">
+              <i data-lucide="shield-check"></i>
+              <span>MEA &amp; PSK Aligned Pipeline</span>
+            </div>
+          </div>
+
+          <div class="voter-chain-grid">
+            
+            <!-- Step 1 -->
+            <div class="voter-chain-card">
+              <div class="voter-chain-card-header">
+                <span class="voter-chain-num-pill">Step 01</span>
+                <div class="voter-chain-icon-wrap"><i data-lucide="file-edit"></i></div>
+              </div>
+              <div class="voter-chain-body">
+                <strong class="voter-chain-title">Application Prepared</strong>
+                <span class="voter-chain-desc">Online form drafted &amp; documents audited by operator within 2 hours.</span>
+              </div>
+              <div class="voter-chain-footer">
+                <span>Operator Review</span>
+                <i data-lucide="check" style="width:12px; height:12px;"></i>
+              </div>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="voter-chain-card">
+              <div class="voter-chain-card-header">
+                <span class="voter-chain-num-pill">Step 02</span>
+                <div class="voter-chain-icon-wrap"><i data-lucide="calendar-check"></i></div>
+              </div>
+              <div class="voter-chain-body">
+                <strong class="voter-chain-title">Slot &amp; PSK Booking</strong>
+                <span class="voter-chain-desc">Appointment scheduled at preferred Lucknow PSK / POPSK center.</span>
+              </div>
+              <div class="voter-chain-footer">
+                <span>Slot Confirmed</span>
+                <i data-lucide="check" style="width:12px; height:12px;"></i>
+              </div>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="voter-chain-card">
+              <div class="voter-chain-card-header">
+                <span class="voter-chain-num-pill">Step 03</span>
+                <div class="voter-chain-icon-wrap"><i data-lucide="fingerprint"></i></div>
+              </div>
+              <div class="voter-chain-body">
+                <strong class="voter-chain-title">Biometric &amp; PSK Visit</strong>
+                <span class="voter-chain-desc">Biometrics, photo &amp; original document check completed on-site.</span>
+              </div>
+              <div class="voter-chain-footer">
+                <span>PSK Verified</span>
+                <i data-lucide="check" style="width:12px; height:12px;"></i>
+              </div>
+            </div>
+
+            <!-- Step 4 -->
+            <div class="voter-chain-card">
+              <div class="voter-chain-card-header">
+                <span class="voter-chain-num-pill">Step 04</span>
+                <div class="voter-chain-icon-wrap"><i data-lucide="shield-check"></i></div>
+              </div>
+              <div class="voter-chain-body">
+                <strong class="voter-chain-title">Police Verification</strong>
+                <span class="voter-chain-desc">Local police station conducts field inquiry &amp; address clearance.</span>
+              </div>
+              <div class="voter-chain-footer">
+                <span>Thana Clearance</span>
+                <i data-lucide="check" style="width:12px; height:12px;"></i>
+              </div>
+            </div>
+
+            <!-- Step 5 -->
+            <div class="voter-chain-card" style="border-color:#a7f3d0; background:#f0fdf4;">
+              <div class="voter-chain-card-header">
+                <span class="voter-chain-num-pill" style="background:#dcfce7; color:#15803d; border-color:#86efac;">Step 05</span>
+                <div class="voter-chain-icon-wrap" style="background:#ecfdf5; border-color:#a7f3d0; color:#059669;"><i data-lucide="truck"></i></div>
+              </div>
+              <div class="voter-chain-body">
+                <strong class="voter-chain-title" style="color:#065f46;">Passport Dispatch</strong>
+                <span class="voter-chain-desc" style="color:#047857;">Passport printed by RPO &amp; delivered via India Post Speed Post.</span>
+              </div>
+              <div class="voter-chain-footer" style="border-color:#bbf7d0; color:#15803d;">
+                <span>Speed Post Delivery</span>
+                <i data-lucide="check" style="width:12px; height:12px;"></i>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- 10. Who Can Apply For Passport Assistance (4 Standardized Cards) -->
+      <section class="section reveal" id="eligibility-section">
+        <div class="section-head center-line" style="text-align:center;">
+          <div>
+            <p class="section-kicker">APPLICANT CATEGORIES</p>
+            <h2>Who Can Apply For <span class="h2-gold">Passport Assistance</span></h2>
+            <p>We provide guided filing support across all major citizen applicant groups.</p>
+          </div>
+        </div>
+
+        <div class="eligibility-grid">
+          
+          <!-- Card 1: Adults (18+) -->
+          <div class="eligibility-card">
+            <div>
+              <div class="eligibility-card-top">
+                <div class="eligibility-icon"><i data-lucide="user"></i></div>
+                <span class="eligibility-badge-check"><i data-lucide="check"></i> 18+ Adult</span>
+              </div>
+              <h3><span class="check-symbol">✓</span> Adults (18+)</h3>
+              <p>Indian citizens aged 18 and above applying for fresh 36 or 60-page jumbo passport with Non-ECR proof.</p>
+            </div>
+            <a href="#passport-tabs-section" class="eligibility-helper-link">
+              View document checklist →
+            </a>
+          </div>
+
+          <!-- Card 2: Minors (Under 18) -->
+          <div class="eligibility-card">
+            <div>
+              <div class="eligibility-card-top">
+                <div class="eligibility-icon"><i data-lucide="baby"></i></div>
+                <span class="eligibility-badge-check"><i data-lucide="check"></i> Minor Annex-D</span>
+              </div>
+              <h3><span class="check-symbol">✓</span> Minors (Under 18)</h3>
+              <p>Children under 18 with parent/guardian Annexure-D consent drafting, parent passport copy &amp; birth certificate audit.</p>
+            </div>
+            <a href="#passport-tabs-section" class="eligibility-helper-link">
+              View minor requirements →
+            </a>
+          </div>
+
+          <!-- Card 3: Senior Citizens -->
+          <div class="eligibility-card">
+            <div>
+              <div class="eligibility-card-top">
+                <div class="eligibility-icon"><i data-lucide="heart-handshake"></i></div>
+                <span class="eligibility-badge-check"><i data-lucide="check"></i> Priority Desk</span>
+              </div>
+              <h3><span class="check-symbol">✓</span> Senior Citizens</h3>
+              <p>Dedicated desk assistance, senior priority slot guidance, walk-in token advisory &amp; doorstep document support.</p>
+            </div>
+            <a href="#passport-tabs-section" class="eligibility-helper-link">
+              Senior priority details →
+            </a>
+          </div>
+
+          <!-- Card 4: Renewal & Re-Issue -->
+          <div class="eligibility-card">
+            <div>
+              <div class="eligibility-card-top">
+                <div class="eligibility-icon"><i data-lucide="refresh-cw"></i></div>
+                <span class="eligibility-badge-check"><i data-lucide="check"></i> Renewal &amp; PCC</span>
+              </div>
+              <h3><span class="check-symbol">✓</span> Renewal &amp; Re-Issue</h3>
+              <p>Existing passport holders seeking expired validity renewal, page exhaustion replacement, or PCC certificates.</p>
+            </div>
+            <a href="#passport-tabs-section" class="eligibility-helper-link">
+              Renewal checklist →
+            </a>
+          </div>
+
+        </div>
+
+        <!-- Bottom Trust Disclaimer Note -->
+        <div class="advisory-trust-note" style="margin-top:16px;">
+          <i data-lucide="shield-check"></i>
+          <span>All passport application categories adhere to official Ministry of External Affairs (MEA) Passport Rules, 1980.</span>
+        </div>
+      </section>
+
+      <!-- 11. Frequently Asked Questions (Sidebar Accordion Layout with Default Open Question) -->
+      <section class="section reveal" id="faq-section">
+        <div class="pfaq-wrap">
+          <div class="pfaq-header">
+            <div class="pfaq-pill"><i data-lucide="help-circle"></i> FAQs</div>
+            <h2 class="pfaq-heading">Common Passport <span class="h2-gold">Questions</span></h2>
+            <p class="pfaq-sub">Everything you need to know about our Passport assistance — answered clearly.</p>
+          </div>
+
+          <div class="cfaq-wrap">
+            <div class="cfaq-sidebar">
+              <button class="cfaq-tab active" data-tab="documents"><i data-lucide="file-text"></i> Documents Required</button>
+              <button class="cfaq-tab" data-tab="process"><i data-lucide="clock"></i> Processing &amp; Timeline</button>
+              <button class="cfaq-tab" data-tab="payment"><i data-lucide="indian-rupee"></i> Fees &amp; Transparency</button>
+              <button class="cfaq-tab" data-tab="appointment"><i data-lucide="calendar"></i> PSK Appointment</button>
+              <button class="cfaq-tab" data-tab="police"><i data-lucide="shield-check"></i> Police Verification</button>
+            </div>
+
+            <div class="cfaq-panels">
+
+              <!-- Panel: Documents (Active by default with question 1 open) -->
+              <div class="cfaq-panel active" data-panel="documents">
+                <div class="faq">
+                  <div class="faq-item open">
+                    <button class="faq-question" data-faq-question>
+                      <span class="pfaq-q-text">What documents are required for a passport application?</span>
+                      <i data-lucide="chevron-down"></i>
+                    </button>
+                    <div class="faq-answer"><p>You need proof of date of birth (Aadhaar / Birth Certificate / 10th marksheet), proof of present address (Aadhaar / voter ID / utility bill / bank passbook), and 10th or higher education certificate for Non-ECR status.</p></div>
+                  </div>
+                  <div class="faq-item">
+                    <button class="faq-question" data-faq-question>
+                      <span class="pfaq-q-text">What is Non-ECR (Emigration Check Not Required)?</span>
+                      <i data-lucide="chevron-down"></i>
+                    </button>
+                    <div class="faq-answer"><p>Applicants who have passed matriculation (10th standard) or above qualify for Non-ECR, meaning they do not require emigration clearance for overseas travel and employment.</p></div>
+                  </div>
+                  <div class="faq-item">
+                    <button class="faq-question" data-faq-question>
+                      <span class="pfaq-q-text">What documents are needed for minor passport?</span>
+                      <i data-lucide="chevron-down"></i>
+                    </button>
+                    <div class="faq-answer"><p>Municipal Birth Certificate or child's Aadhaar card, parents' passport copies, and a signed Annexure-D consent declaration by both parents.</p></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Panel: Process -->
+              <div class="cfaq-panel" data-panel="process">
+                <div class="faq">
+                  <div class="faq-item open">
+                    <button class="faq-question" data-faq-question>
+                      <span class="pfaq-q-text">How long does Passport processing take?</span>
+                      <i data-lucide="chevron-down"></i>
+                    </button>
+                    <div class="faq-answer"><p>Normal passport processing takes 15–30 days from the date of PSK appointment and police verification. Tatkaal passport processing typically completes in 3–7 working days.</p></div>
+                  </div>
+                  <div class="faq-item">
+                    <button class="faq-question" data-faq-question>
+                      <span class="pfaq-q-text">Is Passport approval guaranteed?</span>
+                      <i data-lucide="chevron-down"></i>
+                    </button>
+                    <div class="faq-answer"><p>We guarantee 100% accurate form preparation and document pre-validation. Final passport approval and issuance depend solely on PSK biometric verification and police clearance.</p></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Panel: Payment -->
+              <div class="cfaq-panel" data-panel="payment">
+                <div class="faq">
+                  <div class="faq-item open">
+                    <button class="faq-question" data-faq-question>
+                      <span class="pfaq-q-text">Is the assistance fee refundable if my request is not eligible?</span>
+                      <i data-lucide="chevron-down"></i>
+                    </button>
+                    <div class="faq-answer"><p>Yes — 100% full refund of our assistance fee is issued if our operator pre-check determines your application cannot proceed before government submission.</p></div>
+                  </div>
+                  <div class="faq-item">
+                    <button class="faq-question" data-faq-question>
+                      <span class="pfaq-q-text">When do I pay the fee?</span>
+                      <i data-lucide="chevron-down"></i>
+                    </button>
+                    <div class="faq-answer"><p>Payment is collected only after the operator reviews your documents and confirms all requirements. No advance payment is required to start your request.</p></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Panel: Appointment -->
+              <div class="cfaq-panel" data-panel="appointment">
+                <div class="faq">
+                  <div class="faq-item open">
+                    <button class="faq-question" data-faq-question>
+                      <span class="pfaq-q-text">Can I choose my preferred PSK / POPSK appointment date?</span>
+                      <i data-lucide="chevron-down"></i>
+                    </button>
+                    <div class="faq-answer"><p>Yes, we coordinate with you to book the slot on your preferred date and location (PSK Ratan Square Lucknow, Gomti Nagar PSK, or nearest POPSK) subject to portal availability.</p></div>
+                  </div>
+                  <div class="faq-item">
+                    <button class="faq-question" data-faq-question>
+                      <span class="pfaq-q-text">Do I have to visit the PSK center in person?</span>
+                      <i data-lucide="chevron-down"></i>
+                    </button>
+                    <div class="faq-answer"><p>Yes, physical visit to the PSK is mandatory for all applicants for biometrics capture (fingerprints/photo) and original document verification.</p></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Panel: Police -->
+              <div class="cfaq-panel" data-panel="police">
+                <div class="faq">
+                  <div class="faq-item open">
+                    <button class="faq-question" data-faq-question>
+                      <span class="pfaq-q-text">How does police verification work?</span>
+                      <i data-lucide="chevron-down"></i>
+                    </button>
+                    <div class="faq-answer"><p>After your PSK appointment, your local police station will contact you for address and identity verification. You need to present original address proofs and 2 witness ID proofs.</p></div>
+                  </div>
+                  <div class="faq-item">
+                    <button class="faq-question" data-faq-question>
+                      <span class="pfaq-q-text">How is the passport delivered to my home?</span>
+                      <i data-lucide="chevron-down"></i>
+                    </button>
+                    <div class="faq-answer"><p>Once approved, the physical passport book is dispatched directly to your registered address via India Post Speed Post with tracking updates.</p></div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 12. Smart Recommendations / Related Services -->
+      <section class="section reveal voter-rel-section" id="related-services">
+        <div class="section-head center-line" style="text-align:center;">
+          <div>
+            <p class="section-kicker">RELATED SERVICES</p>
+            <h2>You May Also Need <span class="h2-gold">These Services</span></h2>
+            <p>Essential identity and government documents often required alongside passport filing.</p>
+          </div>
+        </div>
+
+        <!-- Filter & Search Bar -->
+        <div class="voter-rel-filter-bar">
+          <div class="voter-rel-search">
+            <i data-lucide="search"></i>
+            <input type="text" id="voter-rel-search-input" placeholder="Search related services..." aria-label="Search related services">
+          </div>
+          <div class="voter-rel-select-wrap">
+            <select id="voter-rel-cat-select" aria-label="Filter by Category">
+              <option value="all">All Categories</option>
+              <option value="government">Government &amp; Identity</option>
+              <option value="security">Security &amp; Police</option>
+              <option value="healthcare">Healthcare &amp; Welfare</option>
+              <option value="certificates">Certificates &amp; Legal</option>
+            </select>
+          </div>
+          <a class="voter-rel-viewall-btn" href="services.html">
+            <span>View All Services</span>
+            <i data-lucide="arrow-right"></i>
+          </a>
+        </div>
+
+        <!-- Clean 5-Card Recommendation Grid -->
+        <div class="voter-rel-grid" id="voter-rel-grid">
+          
+          <!-- Card 1: Aadhaar Assistance -->
+          <div class="voter-rel-card" data-category="government" data-name="aadhaar services assistance appointment address update pvc">
+            <div>
+              <div class="voter-rel-card-top">
+                <div class="voter-rel-icon"><i data-lucide="fingerprint"></i></div>
+                <span class="voter-rel-badge voter-rel-badge-green">Recommended</span>
+              </div>
+              <h3>Aadhaar Services Assistance</h3>
+              <p class="voter-rel-desc">Aadhaar appointment booking, address update, and PVC card ordering for passport address proof.</p>
+            </div>
+            <div>
+              <div class="voter-rel-meta-box">
+                <i data-lucide="clock-3"></i>
+                <span>⏱ Same Day</span>
+                <span>•</span>
+                <span class="vrel-fee">Assistance: ₹149</span>
+              </div>
+              <div class="voter-rel-submeta">Official charges: As applicable</div>
+              <a class="voter-rel-cta" href="service-aadhaar-services-assistance.html">
+                View Service <i data-lucide="arrow-right"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Card 2: PAN Card -->
+          <div class="voter-rel-card" data-category="government" data-name="pan card application new correction e-pan download">
+            <div>
+              <div class="voter-rel-card-top">
+                <div class="voter-rel-icon"><i data-lucide="credit-card"></i></div>
+                <span class="voter-rel-badge">Popular</span>
+              </div>
+              <h3>PAN Card Application</h3>
+              <p class="voter-rel-desc">New PAN card, correction, and instant e-PAN download for secondary photo ID verification.</p>
+            </div>
+            <div>
+              <div class="voter-rel-meta-box">
+                <i data-lucide="clock-3"></i>
+                <span>⏱ 2–3 Days</span>
+                <span>•</span>
+                <span class="vrel-fee">Assistance: ₹200</span>
+              </div>
+              <div class="voter-rel-submeta">Official charges: As applicable</div>
+              <a class="voter-rel-cta" href="service-pan-card.html">
+                View Service <i data-lucide="arrow-right"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Card 3: Voter ID Registration -->
+          <div class="voter-rel-card" data-category="government" data-name="voter id registration form 6 correction transfer e-epic">
+            <div>
+              <div class="voter-rel-card-top">
+                <div class="voter-rel-icon"><i data-lucide="vote"></i></div>
+                <span class="voter-rel-badge">Online Support</span>
+              </div>
+              <h3>Voter ID Registration</h3>
+              <p class="voter-rel-desc">New voter ID registration (Form 6), address correction, and e-EPIC download.</p>
+            </div>
+            <div>
+              <div class="voter-rel-meta-box">
+                <i data-lucide="clock-3"></i>
+                <span>⏱ 15–30 Days</span>
+                <span>•</span>
+                <span class="vrel-fee">Assistance: ₹200</span>
+              </div>
+              <div class="voter-rel-submeta">Official charges: ₹0 (Statutory Free)</div>
+              <a class="voter-rel-cta" href="service-voter-id.html">
+                View Service <i data-lucide="arrow-right"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Card 4: Citizen Security & Police Help -->
+          <div class="voter-rel-card" data-category="security" data-name="citizen security police help tenant verification cybercrime lost article">
+            <div>
+              <div class="voter-rel-card-top">
+                <div class="voter-rel-icon"><i data-lucide="shield-check"></i></div>
+                <span class="voter-rel-badge voter-rel-badge-green">Verified</span>
+              </div>
+              <h3>Citizen Security &amp; Police Help</h3>
+              <p class="voter-rel-desc">Tenant verification, cybercrime complaint filing, and lost passport NCR report guidance.</p>
+            </div>
+            <div>
+              <div class="voter-rel-meta-box">
+                <i data-lucide="clock-3"></i>
+                <span>⏱ Same Day</span>
+                <span>•</span>
+                <span class="vrel-fee">Assistance: ₹150</span>
+              </div>
+              <div class="voter-rel-submeta">Official charges: ₹0–₹50</div>
+              <a class="voter-rel-cta" href="service-citizen-security-cybercrime-police-help.html">
+                View Service <i data-lucide="arrow-right"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Card 5: Ayushman Card -->
+          <div class="voter-rel-card" data-category="healthcare" data-name="ayushman card pmjay eligibility health download print">
+            <div>
+              <div class="voter-rel-card-top">
+                <div class="voter-rel-icon"><i data-lucide="heart-pulse"></i></div>
+                <span class="voter-rel-badge">Health Scheme</span>
+              </div>
+              <h3>Ayushman Card (PMJAY)</h3>
+              <p class="voter-rel-desc">PMJAY eligibility check, e-card download and PVC print support for families.</p>
+            </div>
+            <div>
+              <div class="voter-rel-meta-box">
+                <i data-lucide="clock-3"></i>
+                <span>⏱ Same Day</span>
+                <span>•</span>
+                <span class="vrel-fee">Assistance: ₹80</span>
+              </div>
+              <div class="voter-rel-submeta">Official charges: ₹0 where applicable</div>
+              <a class="voter-rel-cta" href="service-ayushman-card.html">
+                View Service <i data-lucide="arrow-right"></i>
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- 13. High-Contrast Tracking Section -->
+      <section class="section reveal" id="tracking-section" style="padding-top:10px;">
+        <div style="background:linear-gradient(135deg, #075092 0%, #0d3d78 100%); border-radius:20px; padding:clamp(28px, 4vw, 40px); color:#ffffff; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:24px; box-shadow:0 12px 40px rgba(7, 80, 146, 0.2);">
+          <div style="max-width:560px;">
+            <span style="display:inline-block; font-size:0.75rem; font-weight:750; text-transform:uppercase; letter-spacing:0.05em; background:rgba(255,255,255,0.15); color:#ffffff; padding:4px 12px; border-radius:999px; margin-bottom:12px;">Track Your Passport Request</span>
+            <h3 style="font-size:clamp(1.35rem, 2.5vw, 1.75rem); font-weight:800; color:#ffffff; margin:0 0 8px 0;">Already Applied? Track Your Passport Application</h3>
+            <p style="font-size:0.92rem; color:rgba(255,255,255,0.85); line-height:1.5; margin:0;">Track status using your OPDS Reference Number or Passport Seva ARN with live operator assistance.</p>
+          </div>
+          <div style="display:flex; gap:12px; flex-wrap:wrap;">
+            <a class="btn font-bold" href="status.html" style="background:#ffffff; color:#075092; border-radius:12px; padding:12px 24px; box-shadow:0 4px 12px rgba(0,0,0,0.1);">Check Status Live <i data-lucide="arrow-right"></i></a>
+            <a class="btn font-bold" href="https://wa.me/919473946181" target="_blank" rel="noopener" style="background:rgba(255,255,255,0.15); color:#ffffff; border:1px solid rgba(255,255,255,0.3); border-radius:12px; padding:12px 20px;"><i data-lucide="message-circle"></i> WhatsApp Support</a>
+          </div>
+        </div>
+      </section>
+
     </main>
+
+    <!-- 13. Sticky Floating CTA Pill -->
+    <div class="pan-sticky-pill" id="passport-sticky-cta">
+      <span>Assistance Fee: <strong>₹350</strong></span>
+      <a href="checkout.html?service=fresh-passport-adult&amp;service_name=Fresh+Passport+(Adult+18+)">Apply Now <i data-lucide="arrow-right"></i></a>
+    </div>
+
+    <!-- 14. First-Visit Compliance Advisory Modal -->
+    <div class="advisory-modal-backdrop" id="advisory-modal">
+      <div class="advisory-modal-card">
+        <button class="advisory-modal-close" id="modal-close-btn" aria-label="Close modal"><i data-lucide="x"></i></button>
+        <div class="advisory-modal-icon"><i data-lucide="shield-alert"></i></div>
+        <h3>Important Passport Assistance Notice</h3>
+        <p>Please review our operator compliance terms before submitting your application.</p>
+        <ul class="advisory-modal-points">
+          <li><i data-lucide="check"></i> <div><strong>Assisted Service Desk:</strong> One Point Digital Services is a private CSC operator offering application drafting and slot scheduling assistance.</div></li>
+          <li><i data-lucide="check"></i> <div><strong>Fee Transparency:</strong> Package fee includes official Passport Seva portal fees + &#8377;300 operator assistance &amp; slot booking charge.</div></li>
+          <li><i data-lucide="check"></i> <div><strong>Official Jurisdiction:</strong> Biometrics capture, police verification, and final passport issuance rest solely with the Ministry of External Affairs and Passport Seva Kendra.</div></li>
+        </ul>
+        <button class="btn btn-primary font-bold" id="modal-dismiss-btn" style="width:100%; border-radius:12px; padding:12px;">I Understand &amp; Proceed</button>
+      </div>
+    </div>
+
     <div data-site-footer></div>
-    <div class="sticky-bottom-cta"><div class="sticky-cta-content"><h4 class="sticky-cta-title">Apply Passport Assistance</h4><span class="sticky-cta-price">Rs. 199 <small>Service Fee</small></span></div><a class="btn btn-primary" href="#apply-now">Apply Now</a></div>
-    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
-    <script src="assets/app.js?v=clean_js_v11" defer></script>
-  
-<script id="line-alignment-script">
-  document.addEventListener("DOMContentLoaded", function() {
-    setTimeout(() => {
-      document.querySelectorAll(".section-head h2").forEach(h2 => {
-        let align = window.getComputedStyle(h2).textAlign;
-        let parent = h2.closest('.section-head');
-        if (parent) {
-          if (align === "center") {
-            parent.classList.add("center-line");
-          } else {
-            parent.classList.add("left-line");
-          }
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <script src="assets/app.js?v=customer-checkout-94"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        if (window.lucide) {
+          window.lucide.createIcons();
         }
+
+        // Advisory Modal Logic
+        const modal = document.getElementById("advisory-modal");
+        const dismissBtn = document.getElementById("modal-dismiss-btn");
+        const closeBtn = document.getElementById("modal-close-btn");
+        const seenModal = localStorage.getItem("opds_passport_advisory_seen");
+
+        if (!seenModal && modal) {
+          setTimeout(() => {
+            modal.classList.add("show");
+          }, 400);
+        }
+
+        function closeModal() {
+          if (modal) modal.classList.remove("show");
+          localStorage.setItem("opds_passport_advisory_seen", "true");
+        }
+
+        if (dismissBtn) dismissBtn.addEventListener("click", closeModal);
+        if (closeBtn) closeBtn.addEventListener("click", closeModal);
+
+        // Category Filter Pills Logic
+        const categoryPills = document.querySelectorAll(".cert-filter-pill");
+        const serviceCards = document.querySelectorAll("#passport-services .p-service-card, #passport-services .voter-service-card");
+
+        categoryPills.forEach(pill => {
+          pill.addEventListener("click", function() {
+            categoryPills.forEach(p => p.classList.remove("active"));
+            this.classList.add("active");
+            const cat = this.getAttribute("data-category");
+            serviceCards.forEach(card => {
+              if (cat === "all" || card.getAttribute("data-category") === cat) {
+                card.style.display = "flex";
+              } else {
+                card.style.display = "none";
+              }
+            });
+          });
+        });
+
+        // Service Option Cards Selection & Sticky Sidebar Synchronization
+        const pscSelectedService = document.getElementById("psc-selected-service");
+        const pscSelectedLabel = document.getElementById("psc-selected-label");
+        const pscPrimaryBtn = document.getElementById("psc-primary-btn");
+        const pscFeeEl = document.getElementById("psc-fee");
+        const pscGovtEl = document.getElementById("psc-govt-fee");
+        const pscTimeEl = document.getElementById("psc-time");
+        const pscTotalEl = document.getElementById("psc-total");
+
+        serviceCards.forEach(card => {
+          card.addEventListener("click", function(e) {
+            // Allow direct click on links to navigate immediately
+            if (e.target.closest("a")) return;
+
+            serviceCards.forEach(c => c.classList.remove("selected-card"));
+            this.classList.add("selected-card");
+
+            const sName = this.getAttribute("data-service") || "Fresh Passport (Adult 18+)";
+            const sSlug = this.getAttribute("data-slug") || "fresh-passport-adult";
+            const sPrice = this.getAttribute("data-price") || "₹350";
+            const sFee = this.getAttribute("data-fee") || "₹350";
+            const sGovt = this.getAttribute("data-govt") || "₹1,500.00 (At Actuals)";
+            const sTime = this.getAttribute("data-time") || "15–30 Working Days";
+
+            if (pscSelectedService) pscSelectedService.textContent = sName;
+            if (pscSelectedLabel) pscSelectedLabel.textContent = sName;
+            if (pscFeeEl) pscFeeEl.innerHTML = `${sFee} <small>(Operator Assistance)</small>`;
+            if (pscGovtEl) pscGovtEl.innerHTML = `${sGovt}`;
+            if (pscTimeEl) pscTimeEl.innerHTML = `${sTime}`;
+            if (pscTotalEl) pscTotalEl.textContent = `${sPrice}*`;
+            if (pscPrimaryBtn) {
+              pscPrimaryBtn.href = `checkout.html?service=${encodeURIComponent(sSlug)}&service_name=${encodeURIComponent(sName)}`;
+            }
+          });
+        });
+
+        // Comprehensive Knowledge Hub Single Tab Panel Logic
+        const tabBtns = document.querySelectorAll(".passport-tab-btn");
+        const tabPanes = document.querySelectorAll(".sec-tab-pane");
+
+        tabBtns.forEach(btn => {
+          btn.addEventListener("click", function() {
+            tabBtns.forEach(b => b.classList.remove("active"));
+            tabPanes.forEach(p => p.classList.remove("active"));
+
+            this.classList.add("active");
+            const target = this.getAttribute("data-tab");
+            const pane = document.getElementById("pane-" + target);
+            if (pane) pane.classList.add("active");
+          });
+        });
+
+        // FAQ Accordion & Sidebar Tab Logic
+        const cfaqWraps = document.querySelectorAll(".cfaq-wrap");
+        cfaqWraps.forEach(wrap => {
+          const tabs = wrap.querySelectorAll(".cfaq-tab");
+          const panels = wrap.querySelectorAll(".cfaq-panel");
+          tabs.forEach(tab => {
+            tab.addEventListener("click", () => {
+              const target = tab.getAttribute("data-tab");
+              tabs.forEach(t => t.classList.remove("active"));
+              panels.forEach(p => p.classList.remove("active"));
+              tab.classList.add("active");
+              const targetPanel = wrap.querySelector(`.cfaq-panel[data-panel="${target}"]`);
+              if (targetPanel) {
+                targetPanel.classList.add("active");
+                const firstFaq = targetPanel.querySelector(".faq-item");
+                if (firstFaq) firstFaq.classList.add("open");
+              }
+            });
+          });
+        });
+
+        const faqQuestions = document.querySelectorAll("[data-faq-question], .faq-question");
+        faqQuestions.forEach(btn => {
+          btn.addEventListener("click", () => {
+            const item = btn.closest(".faq-item");
+            if (!item) return;
+            const parentPanel = item.closest(".cfaq-panel") || item.parentElement;
+            const isOpen = item.classList.contains("open");
+            if (parentPanel) {
+              parentPanel.querySelectorAll(".faq-item").forEach(i => i.classList.remove("open"));
+            }
+            if (!isOpen) item.classList.add("open");
+          });
+        });
+
+        // Sticky Floating CTA on scroll
+        const stickyCta = document.getElementById("passport-sticky-cta");
+        if (stickyCta) {
+          window.addEventListener("scroll", () => {
+            if (window.scrollY > 450) {
+              stickyCta.classList.add("visible");
+            } else {
+              stickyCta.classList.remove("visible");
+            }
+          });
+        }
+
+        // Related Services Live Search & Category Filtering
+        const relSearchInput = document.getElementById('voter-rel-search-input');
+        const relCatSelect = document.getElementById('voter-rel-cat-select');
+        const relCards = document.querySelectorAll('.voter-rel-card');
+
+        function filterRelatedServices() {
+          const query = (relSearchInput ? relSearchInput.value.toLowerCase().trim() : '');
+          const cat = (relCatSelect ? relCatSelect.value : 'all');
+
+          relCards.forEach(card => {
+            const cardCat = card.getAttribute('data-category') || '';
+            const cardName = card.getAttribute('data-name') || card.textContent.toLowerCase();
+
+            const matchesCat = (cat === 'all' || cardCat === cat);
+            const matchesQuery = (!query || cardName.includes(query));
+
+            if (matchesCat && matchesQuery) {
+              card.style.display = 'flex';
+            } else {
+              card.style.display = 'none';
+            }
+          });
+        }
+
+        if (relSearchInput) relSearchInput.addEventListener('input', filterRelatedServices);
+        if (relCatSelect) relCatSelect.addEventListener('change', filterRelatedServices);
       });
-    }, 100); // small delay to ensure CSS is applied
-  });
-</script>
-</body>
+    </script>
+  </body>
 </html>
