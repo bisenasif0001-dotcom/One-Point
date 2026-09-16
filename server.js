@@ -306,6 +306,64 @@ function publicTrackingHeaders() {
   };
 }
 
+const BLOCKED_HOSTS = new Set([
+  "umesoftwaresolutions.com",
+  "www.umesoftwaresolutions.com"
+]);
+
+function isHostAllowed(req) {
+  const rawHost = req.headers && req.headers.host;
+  if (!rawHost) return false;
+  // Strip port: "example.com:4173" -> "example.com"
+  const host = String(rawHost).trim().split(":")[0].toLowerCase();
+  if (!host) return false;
+
+  // 1. Explicit blocklist (always rejected immediately)
+  if (BLOCKED_HOSTS.has(host) || host.endsWith(".umesoftwaresolutions.com")) {
+    return false;
+  }
+
+  // 2. Localhost & Loopback are always allowed for development/local admin
+  if (host === "localhost" || host === "127.0.0.1" || host === "::1") {
+    return true;
+  }
+
+  // 3. Environment configured ALLOWED_HOSTS (if provided in .env)
+  const configured = Array.isArray(config.allowedHosts) ? config.allowedHosts : [];
+  if (configured.length > 0) {
+    return configured.some(pattern => {
+      const p = pattern.trim().toLowerCase();
+      if (p === "*") return true;
+      if (p.startsWith("*.")) {
+        const base = p.slice(2);
+        return host === base || host.endsWith("." + base);
+      }
+      return host === p;
+    });
+  }
+
+  // 4. If NEXT_PUBLIC_SITE_URL is defined, allow its hostname
+  if (config.siteUrl) {
+    try {
+      const parsed = new URL(config.siteUrl);
+      if (parsed.hostname && host === parsed.hostname.toLowerCase()) {
+        return true;
+      }
+    } catch {
+      // ignore
+    }
+  }
+
+  // 5. Allow direct IP address access if no explicit ALLOWED_HOSTS list is set
+  const isIp = /^(\d{1,3}\.){3}\d{1,3}$/.test(host) || host.includes(":");
+  if (isIp) {
+    return true;
+  }
+
+  // 6. Any other unknown domain name is rejected!
+  return false;
+}
+
 function isInside(base, target) {
   const relative = path.relative(base, target);
   return relative === "" || (!relative.startsWith("..") && !path.isAbsolute(relative));
@@ -2163,6 +2221,16 @@ function serveStatic(req, res) {
 db.getDb();
 
 const server = http.createServer((req, res) => {
+  if (!isHostAllowed(req)) {
+    console.warn(`[SECURITY] Blocked request from unauthorized host: "${req.headers && req.headers.host}" for URL: ${req.url}`);
+    res.writeHead(403, {
+      "Content-Type": "text/plain; charset=utf-8",
+      "Connection": "close"
+    });
+    res.end("403 Forbidden: Host not authorized. Access Denied.");
+    return;
+  }
+
   if (req.url.startsWith("/api/")) {
     handleApi(req, res);
     return;
@@ -2174,3 +2242,6 @@ server.listen(port, () => {
   console.log(`One Point Digital Services: http://localhost:${port}`);
   console.log("Payment API ready: /api/health");
 });
+
+module.exports = { isHostAllowed, BLOCKED_HOSTS };
+

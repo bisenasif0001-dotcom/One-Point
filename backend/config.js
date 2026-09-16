@@ -25,10 +25,16 @@ loadLocalEnv();
 
 const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || `http://localhost:${process.env.PORT || 4173}`).replace(/\/$/, "");
 
+const rawAllowedHosts = process.env.ALLOWED_HOSTS || "";
+const allowedHosts = rawAllowedHosts
+  ? rawAllowedHosts.split(",").map(h => h.trim().toLowerCase()).filter(Boolean)
+  : [];
+
 const config = {
   rootDir,
   port: Number(process.env.PORT || 4173),
   siteUrl,
+  allowedHosts,
   databaseUrl: process.env.DATABASE_URL || path.join(rootDir, "backend", "data", "opds-payments.sqlite"),
   jwtSecret: process.env.JWT_SECRET || "",
   adminApiToken: process.env.ADMIN_API_TOKEN || DEFAULT_ADMIN_API_TOKEN,
