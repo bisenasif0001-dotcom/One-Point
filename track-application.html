@@ -342,6 +342,26 @@
       @media (max-width: 900px) {
         .track-grid { grid-template-columns: 1fr; }
       }
+      @media (max-width: 640px) {
+        .track-search-bar {
+          flex-direction: column !important;
+          align-items: stretch !important;
+          gap: 10px !important;
+        }
+        .track-input-wrap,
+        .track-input-wrap input {
+          width: 100% !important;
+        }
+        .track-search-btn {
+          width: 100% !important;
+          justify-content: center !important;
+          height: 48px !important;
+          font-size: 1rem !important;
+        }
+        .track-hero-box {
+          padding: 20px 16px !important;
+        }
+      }
 
       /* Clean Surface Card */
       .track-card {

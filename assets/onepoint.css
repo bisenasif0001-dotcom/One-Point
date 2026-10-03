@@ -26179,15 +26179,213 @@ body.enterprise-checkout-body .checkout-applicant-summary > button:hover {
     min-height: 36px !important;
   }
 
-  /* 5. Safe Area Insets for bezel-less screens (Notch, Home Indicator) */
+  /* 5. Safe Area Insets & Bottom Clearance for fixed mobile navigation */
   body {
-    padding-bottom: env(safe-area-inset-bottom, 0px);
+    padding-bottom: calc(76px + env(safe-area-inset-bottom, 0px)) !important;
+  }
+
+  /* 6. Bento Comparison Column Mobile Grid Constraints */
+  .bento-comparison-container {
+    grid-template-columns: minmax(0, 1fr) !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  .bento-comparison-container > *,
+  .comparison-column-wrapper,
+  .bento-comparison-column {
+    min-width: 0 !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
   }
 
   .mobile-bottom-nav,
   .cart-floating-btn,
   .whatsapp-float {
     bottom: calc(16px + env(safe-area-inset-bottom, 0px)) !important;
+  }
+}
+
+/* Mobile interaction clearance — keep one persistent action rail per screen. */
+@media (max-width: 768px) {
+  /* Checkout has its own primary action bar; the global rail would sit beneath it. */
+  body.enterprise-checkout-body .mobile-bottom-nav {
+    display: none !important;
+  }
+
+  body.enterprise-checkout-body {
+    padding-bottom: calc(104px + env(safe-area-inset-bottom, 0px)) !important;
+  }
+
+  /* Primary product actions and footer links meet the 44px touch-target minimum. */
+  :is(.om-card-wa-btn, .om-card-cta) {
+    min-height: 44px !important;
+  }
+
+  .om-card-wa-btn {
+    min-width: 44px !important;
+  }
+
+  .footer :is(.footer-links a, .footer-bottom a, .footer-contact-row a) {
+    display: inline-flex;
+    align-items: center;
+    min-width: 44px !important;
+    min-height: 44px !important;
+  }
+}
+
+/* Narrow-phone checkout: show the complete service summary and journey labels. */
+@media (max-width: 760px) {
+  body.enterprise-checkout-body .checkout-panel-hero {
+    gap: 12px !important;
+    padding: 18px 16px !important;
+  }
+
+  body.enterprise-checkout-body .checkout-kicker {
+    min-height: 22px !important;
+    padding: 3px 10px !important;
+    font-size: 0.66rem !important;
+  }
+
+  body.enterprise-checkout-body .checkout-panel-hero h1 {
+    margin: 10px 0 6px !important;
+    font-size: clamp(1.65rem, 8vw, 2rem) !important;
+    line-height: 1.1 !important;
+  }
+
+  body.enterprise-checkout-body .checkout-panel-hero p {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    font-size: 0.84rem !important;
+    line-height: 1.42 !important;
+  }
+
+  body.enterprise-checkout-body .checkout-session-chip {
+    padding: 7px 12px !important;
+  }
+
+  body.enterprise-checkout-body .enterprise-journey,
+  body.enterprise-checkout-body .enterprise-journey.modern-journey-3 {
+    gap: 6px !important;
+    padding: 7px !important;
+  }
+
+  body.enterprise-checkout-body .progress-node,
+  body.enterprise-checkout-body .enterprise-journey .progress-node {
+    flex-direction: column !important;
+    gap: 4px !important;
+    min-height: 66px !important;
+    padding: 7px 4px !important;
+  }
+
+  body.enterprise-checkout-body .progress-node .journey-copy,
+  body.enterprise-checkout-body .enterprise-journey .progress-node .journey-copy {
+    display: block !important;
+    flex: 0 0 auto !important;
+    width: 100% !important;
+    overflow: visible !important;
+    text-align: center !important;
+  }
+
+  body.enterprise-checkout-body .progress-node .journey-copy strong,
+  body.enterprise-checkout-body .enterprise-journey .progress-node .journey-copy strong {
+    display: block !important;
+    overflow: visible !important;
+    font-size: 0 !important;
+    line-height: 1 !important;
+    text-overflow: clip !important;
+    white-space: normal !important;
+  }
+
+  body.enterprise-checkout-body #node-1 .journey-copy strong::after,
+  body.enterprise-checkout-body #node-2 .journey-copy strong::after,
+  body.enterprise-checkout-body #node-3 .journey-copy strong::after {
+    color: #334155;
+    font-size: 0.72rem;
+    font-weight: 800;
+  }
+
+  body.enterprise-checkout-body #node-1 .journey-copy strong::after { content: "Details"; }
+  body.enterprise-checkout-body #node-2 .journey-copy strong::after { content: "Documents"; }
+  body.enterprise-checkout-body #node-3 .journey-copy strong::after { content: "Payment"; }
+
+  body.enterprise-checkout-body .selected-service-modern-card {
+    padding: 16px !important;
+  }
+
+  body.enterprise-checkout-body .selected-service-header {
+    display: grid !important;
+    grid-template-columns: 46px minmax(0, 1fr) !important;
+    align-items: start !important;
+    gap: 12px !important;
+  }
+
+  body.enterprise-checkout-body .selected-service-title-group {
+    min-width: 0 !important;
+  }
+
+  body.enterprise-checkout-body .selected-service-badges {
+    flex-wrap: wrap !important;
+    gap: 5px !important;
+  }
+
+  body.enterprise-checkout-body .selected-service-heading {
+    overflow: visible !important;
+    white-space: normal !important;
+    text-overflow: clip !important;
+  }
+
+  body.enterprise-checkout-body .selected-service-price-pill {
+    grid-column: 1 / -1 !important;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 8px !important;
+    margin-top: 2px !important;
+    padding: 12px 0 0 !important;
+    border-top: 1px solid #d0e2f4 !important;
+    border-left: 0 !important;
+  }
+
+  body.enterprise-checkout-body .selected-service-price-pill small {
+    margin-right: auto;
+  }
+
+  body.enterprise-checkout-body .change-service-link {
+    min-width: 44px;
+    min-height: 40px;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 360px) {
+  body.enterprise-checkout-body #node-2 .journey-copy strong::after { content: "Docs"; }
+
+  body.enterprise-checkout-body .checkout-mobile-cta {
+    grid-template-columns: 84px minmax(0, 1fr) !important;
+    gap: 6px !important;
+    min-height: 64px !important;
+    padding: 8px !important;
+  }
+
+  body.enterprise-checkout-body .checkout-mobile-cta span,
+  body.enterprise-checkout-body .checkout-mobile-cta strong {
+    white-space: nowrap;
+  }
+
+  body.enterprise-checkout-body .checkout-mobile-cta span {
+    font-size: 0.6rem !important;
+  }
+
+  body.enterprise-checkout-body .checkout-mobile-cta strong {
+    font-size: 1rem !important;
+  }
+
+  body.enterprise-checkout-body .checkout-mobile-cta .eds-btn {
+    min-height: 44px !important;
+    padding-inline: 8px !important;
+    font-size: 0.72rem !important;
   }
 }
 

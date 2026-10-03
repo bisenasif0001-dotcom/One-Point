@@ -145,7 +145,14 @@
     `;
     status.hidden = false;
     if (window.lucide) window.lucide.createIcons();
-    if (focusTarget && typeof focusTarget.focus === "function") focusTarget.focus({ preventScroll: true });
+    if (focusTarget && typeof focusTarget.focus === "function") {
+      focusTarget.focus({ preventScroll: false });
+      if (typeof focusTarget.scrollIntoView === "function") {
+        focusTarget.scrollIntoView({ behavior: "smooth", block: "center" });
+      }
+    } else {
+      status.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
   }
 
   function clearCheckoutStatus() {
@@ -372,8 +379,13 @@
 
     const mobileCta = document.getElementById("mobile-checkout-cta");
     if (mobileCta) {
-      const nextLabel = currentStepIndex >= 5 ? "Pay Securely" : `Continue: ${checkoutStepLabels[currentStepIndex + 1] || "Next"}`;
-      mobileCta.textContent = currentStepIndex === 6 ? "Track Application" : nextLabel;
+      let nextLabel = `Continue: ${checkoutStepLabels[currentStepIndex + 1] || "Next"}`;
+      if (currentStepIndex === 3) {
+        nextLabel = "Pay Securely";
+      } else if (currentStepIndex >= 4) {
+        nextLabel = "Track Application";
+      }
+      mobileCta.textContent = nextLabel;
     }
 
     document.querySelectorAll(".profile-choice-card").forEach(card => {

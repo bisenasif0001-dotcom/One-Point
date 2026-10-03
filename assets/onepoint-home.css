@@ -5996,4 +5996,58 @@ html:not(.customer-session-active) [data-customer-auth] {
   transform: scale(1.08) !important;
 }
 
+/* Keep the hero search immediately usable above the fixed mobile navigation. */
+@media (max-width: 620px) {
+  #homepage-body .hero-v3 {
+    padding-block: 44px 46px !important;
+  }
+
+  /* Contact remains available in the header and bottom navigation; a third
+     floating control obscures the hero search on short phone screens. */
+  #homepage-body .whatsapp-float {
+    display: none !important;
+  }
+}
+
+/* The three comparison tabs need short, deliberate labels on narrow screens. */
+@media (max-width: 640px) {
+  #homepage-body .bento-stepper-header {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 6px !important;
+  }
+
+  #homepage-body .bento-stepper-btn {
+    display: flex !important;
+    min-height: 60px !important;
+    padding: 7px 4px !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+  }
+
+  #homepage-body .stepper-tab-num,
+  #homepage-body .stepper-tab-progress-track {
+    display: none !important;
+  }
+
+  #homepage-body .stepper-tab-label {
+    font-size: 0 !important;
+    line-height: 1 !important;
+  }
+
+  #homepage-body .bento-stepper-btn:nth-child(1) .stepper-tab-label::after,
+  #homepage-body .bento-stepper-btn:nth-child(2) .stepper-tab-label::after,
+  #homepage-body .bento-stepper-btn:nth-child(3) .stepper-tab-label::after {
+    color: #0f172a;
+    font-size: 0.68rem;
+    font-weight: 750;
+    line-height: 1.1;
+  }
+
+  #homepage-body .bento-stepper-btn:nth-child(1) .stepper-tab-label::after { content: "Services"; }
+  #homepage-body .bento-stepper-btn:nth-child(2) .stepper-tab-label::after { content: "Tracking"; }
+  #homepage-body .bento-stepper-btn:nth-child(3) .stepper-tab-label::after { content: "Local Help"; }
+}
+
 
