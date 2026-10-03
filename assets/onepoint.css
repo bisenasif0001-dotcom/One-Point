@@ -26853,3 +26853,207 @@ body.enterprise-checkout-body .checkout-applicant-summary > button:hover {
 body.keyboard-open .checkout-mobile-cta {
   display: none !important;
 }
+
+
+/* ============================================================================
+   MOBILE UX IMPROVEMENTS — PHASE 3 (Bottom Sheet Price Drawer & Shortcuts)
+   Target: <= 900px screens. Desktop remains 100% untouched.
+   ============================================================================ */
+@media (max-width: 900px) {
+  .mobile-cta-price-block {
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+  }
+  .mobile-cta-price-row {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .mobile-cta-details-badge {
+    font-size: 0.65rem;
+    font-weight: 750;
+    color: #0c487d;
+    background: rgba(18, 86, 150, 0.12);
+    padding: 1px 7px;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    line-height: 1.2;
+    transition: background 0.15s ease, transform 0.15s ease;
+  }
+  .mobile-cta-details-badge svg,
+  .mobile-cta-details-badge i {
+    width: 10px;
+    height: 10px;
+    stroke-width: 2.5;
+  }
+  .mobile-cta-price-block:active .mobile-cta-details-badge {
+    background: rgba(18, 86, 150, 0.22);
+    transform: scale(0.96);
+  }
+
+  /* Backdrop */
+  .mobile-price-drawer-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(11, 31, 53, 0.48);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    z-index: 998;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.28s ease;
+  }
+  .mobile-price-drawer-backdrop.is-open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* Drawer */
+  .mobile-price-drawer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    max-height: 85vh;
+    overflow-y: auto;
+    background: #ffffff;
+    border-radius: 22px 22px 0 0;
+    box-shadow: 0 -12px 40px rgba(8, 36, 69, 0.2);
+    padding: 12px 18px calc(24px + env(safe-area-inset-bottom, 0px));
+    z-index: 999;
+    transform: translateY(100%);
+    transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+    box-sizing: border-box;
+  }
+  .mobile-price-drawer.is-open {
+    transform: translateY(0);
+  }
+  .drawer-handle-bar {
+    display: flex;
+    justify-content: center;
+    padding: 4px 0 10px;
+    cursor: pointer;
+  }
+  .drawer-handle {
+    width: 38px;
+    height: 4px;
+    background: #cbd5e1;
+    border-radius: 999px;
+  }
+  .drawer-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eef2f7;
+  }
+  .drawer-head h3 {
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: #0f172a;
+    margin: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+  }
+  .drawer-head h3 svg,
+  .drawer-head h3 i {
+    width: 18px;
+    height: 18px;
+    color: #125696;
+  }
+  .drawer-close-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 1px solid #e2e8f0;
+    background: #f8fafc;
+    color: #64748b;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+  }
+  .drawer-close-btn svg,
+  .drawer-close-btn i {
+    width: 16px;
+    height: 16px;
+  }
+  .drawer-body {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .drawer-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.88rem;
+    color: #334155;
+  }
+  .drawer-row strong {
+    font-weight: 750;
+    color: #0f172a;
+  }
+  .drawer-discount-row {
+    color: #16a34a;
+  }
+  .drawer-discount-row strong {
+    color: #16a34a;
+  }
+  .drawer-divider {
+    height: 1px;
+    background: #e2e8f0;
+    margin: 4px 0;
+  }
+  .drawer-total-row {
+    font-size: 1.05rem;
+    color: #0f172a;
+    font-weight: 850;
+  }
+  .drawer-total-row strong {
+    font-size: 1.25rem;
+    color: #125696;
+  }
+  .drawer-notes {
+    margin-top: 10px;
+    padding: 8px 12px;
+    background: #f8fafc;
+    border-radius: 10px;
+    border: 1px dashed #cbd5e1;
+    text-align: center;
+  }
+  .drawer-notes small {
+    font-size: 0.72rem;
+    color: #64748b;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    justify-content: center;
+  }
+  .drawer-notes small svg,
+  .drawer-notes small i {
+    width: 13px;
+    height: 13px;
+    color: #16a34a;
+  }
+
+  body.price-drawer-open {
+    overflow: hidden !important;
+  }
+}
+
+@media (min-width: 901px) {
+  .mobile-price-drawer,
+  .mobile-price-drawer-backdrop {
+    display: none !important;
+  }
+  .mobile-cta-details-badge {
+    display: none !important;
+  }
+}

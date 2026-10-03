@@ -473,9 +473,48 @@
         </div>
       </aside>
 
+      <!-- Mobile Price Breakdown Bottom Sheet Drawer -->
+      <div id="mobile-price-drawer-backdrop" class="mobile-price-drawer-backdrop" onclick="toggleMobilePriceDrawer(false)"></div>
+      <div id="mobile-price-drawer" class="mobile-price-drawer" role="dialog" aria-modal="true" aria-label="Price breakdown">
+        <div class="drawer-handle-bar" onclick="toggleMobilePriceDrawer(false)"><span class="drawer-handle"></span></div>
+        <div class="drawer-head">
+          <h3><i data-lucide="calculator"></i> Price Breakdown</h3>
+          <button type="button" class="drawer-close-btn" onclick="toggleMobilePriceDrawer(false)" aria-label="Close price details"><i data-lucide="x"></i></button>
+        </div>
+        <div class="drawer-body">
+          <div class="drawer-row">
+            <span>Government Department Fee</span>
+            <strong id="drawer-gov">Rs. 0.00</strong>
+          </div>
+          <div class="drawer-row">
+            <span>One Point Service Charge</span>
+            <strong id="drawer-platform">Rs. 0.00</strong>
+          </div>
+          <div class="drawer-row">
+            <span>GST on Service Charge (18%)</span>
+            <strong id="drawer-gst">Rs. 0.00</strong>
+          </div>
+          <div class="drawer-row drawer-discount-row" id="drawer-discount-row" style="display: none;">
+            <span>Coupon Discount</span>
+            <strong id="drawer-discount">-Rs. 0.00</strong>
+          </div>
+          <div class="drawer-divider"></div>
+          <div class="drawer-row drawer-total-row">
+            <span>Grand Total Payable</span>
+            <strong id="drawer-total">Rs. 0.00</strong>
+          </div>
+          <div class="drawer-notes">
+            <small><i data-lucide="shield-check"></i> 100% transparent pricing &bull; CSC authorized desk &bull; Lucknow Suvidha Kendra</small>
+          </div>
+        </div>
+      </div>
+
       <div class="checkout-mobile-cta" aria-label="Mobile checkout action">
-        <div>
-          <span>Total payable</span>
+        <div class="mobile-cta-price-block" onclick="toggleMobilePriceDrawer()" role="button" tabindex="0" aria-label="View price breakdown">
+          <div class="mobile-cta-price-row">
+            <span>Total payable</span>
+            <span class="mobile-cta-details-badge">Details <i data-lucide="chevron-up"></i></span>
+          </div>
           <strong id="summary-payable-total">Rs. 0.00</strong>
         </div>
         <button type="button" class="eds-btn eds-btn-primary" id="mobile-checkout-cta">Continue</button>

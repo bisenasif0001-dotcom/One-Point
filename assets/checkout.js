@@ -726,6 +726,15 @@
     setText("summary-savings", formatINR(discount));
     setText("summary-delivery", estimatedDeliveryText(checkoutItems[0]));
 
+    // Sync Mobile Price Breakdown Drawer
+    setText("drawer-gov", governmentFeeLabel);
+    setText("drawer-platform", formatINR(platformFee));
+    setText("drawer-gst", gstLabel);
+    setText("drawer-total", formatINR(totalPayable));
+    setText("drawer-discount", `-${formatINR(discount)}`);
+    const drawerDiscountRow = document.getElementById("drawer-discount-row");
+    if (drawerDiscountRow) drawerDiscountRow.style.display = discount > 0 ? "flex" : "none";
+
     // Submit button + plan summary react to plan/method selection
     lastTotalPayable = totalPayable;
     updatePaymentCtaUI();
@@ -930,6 +939,17 @@
       `;
     }
   }
+
+  window.toggleMobilePriceDrawer = function(forceOpen) {
+    const drawer = document.getElementById("mobile-price-drawer");
+    const backdrop = document.getElementById("mobile-price-drawer-backdrop");
+    if (!drawer || !backdrop) return;
+    const isOpen = drawer.classList.contains("is-open");
+    const shouldOpen = typeof forceOpen === "boolean" ? forceOpen : !isOpen;
+    drawer.classList.toggle("is-open", shouldOpen);
+    backdrop.classList.toggle("is-open", shouldOpen);
+    document.body.classList.toggle("price-drawer-open", shouldOpen);
+  };
 
   function setupCheckoutInteractions() {
     // Smart Virtual Keyboard Detection for Mobile
