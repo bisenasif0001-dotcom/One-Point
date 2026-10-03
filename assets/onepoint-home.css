@@ -6050,4 +6050,58 @@ html:not(.customer-session-active) [data-customer-auth] {
   #homepage-body .bento-stepper-btn:nth-child(3) .stepper-tab-label::after { content: "Local Help"; }
 }
 
+/* Ensure bento comparison card and timeline are strictly bounded within parent container on mobile */
+@media (max-width: 768px) {
+  #homepage-body .bento-card {
+    padding: 16px 12px !important;
+  }
+  #homepage-body .bento-comparison-column {
+    padding: 14px 10px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+  }
+  #homepage-body .comparison-steps-carousel,
+  #homepage-body .comparison-step-slide {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  #homepage-body .carousel-slide-inner-card {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 14px 10px !important;
+    box-sizing: border-box !important;
+  }
+  #homepage-body .bento-visual {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  #homepage-body .horizontal-timeline-container {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+  }
+  #homepage-body .horizontal-timeline {
+    width: 100% !important;
+    gap: 2px !important;
+  }
+  #homepage-body .horizontal-step .step-dot {
+    width: 20px !important;
+    height: 20px !important;
+  }
+  #homepage-body .horizontal-step-info strong {
+    font-size: 0.68rem !important;
+  }
+  #homepage-body .horizontal-step-info span {
+    font-size: 0.58rem !important;
+  }
+  #homepage-body .bento-stepper-header {
+    width: 100% !important;
+  }
+}
+
+
 
