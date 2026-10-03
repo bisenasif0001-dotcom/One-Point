@@ -932,6 +932,15 @@
   }
 
   function setupCheckoutInteractions() {
+    // Smart Virtual Keyboard Detection for Mobile
+    if (window.visualViewport) {
+      const initialHeight = window.visualViewport.height;
+      window.visualViewport.addEventListener("resize", () => {
+        const isKeyboardOpen = window.visualViewport.height < initialHeight * 0.78;
+        document.body.classList.toggle("keyboard-open", isKeyboardOpen);
+      });
+    }
+
     const mobileCta = document.getElementById("mobile-checkout-cta");
     if (mobileCta) {
       mobileCta.addEventListener("click", () => {

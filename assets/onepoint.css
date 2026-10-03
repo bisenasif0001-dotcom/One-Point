@@ -26389,3 +26389,467 @@ body.enterprise-checkout-body .checkout-applicant-summary > button:hover {
   }
 }
 
+
+
+/* ============================================================================
+   MOBILE UX IMPROVEMENTS — PHASE 1 (Quick Wins, Mobile-Only)
+   Target: <= 768px and <= 900px screens. Desktop remains 100% untouched.
+   ============================================================================ */
+
+/* 1. Solution 6: Input Helper Text Compact / Focus-only */
+@media (max-width: 768px) {
+  body.enterprise-checkout-body .enterprise-form-grid .enterprise-field small:not(#gstin-help) {
+    display: none !important;
+  }
+  body.enterprise-checkout-body .enterprise-form-grid .enterprise-field:focus-within small:not(#gstin-help) {
+    display: block !important;
+    font-size: 0.72rem !important;
+    line-height: 1.3 !important;
+    margin-top: 4px !important;
+    color: var(--primary) !important;
+  }
+
+  /* Compact Trust Grid in Step 1 */
+  body.enterprise-checkout-body .checkout-trust-grid {
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 8px !important;
+    margin-top: 14px !important;
+    overflow-x: auto !important;
+    padding-bottom: 4px !important;
+    scrollbar-width: none !important;
+  }
+  body.enterprise-checkout-body .checkout-trust-grid::-webkit-scrollbar {
+    display: none !important;
+  }
+  body.enterprise-checkout-body .checkout-trust-grid .trust-tile {
+    flex: 1 1 0 !important;
+    min-width: 90px !important;
+    padding: 8px 6px !important;
+    text-align: center !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 4px !important;
+  }
+  body.enterprise-checkout-body .checkout-trust-grid .trust-icon {
+    width: 24px !important;
+    height: 24px !important;
+    font-size: 12px !important;
+  }
+  body.enterprise-checkout-body .checkout-trust-grid .trust-info strong {
+    font-size: 0.68rem !important;
+    display: block !important;
+    line-height: 1.1 !important;
+  }
+  body.enterprise-checkout-body .checkout-trust-grid .trust-info small {
+    display: none !important;
+  }
+}
+
+/* 2. Solution 7: Remove Duplicate Action Buttons on Mobile */
+@media (max-width: 900px) {
+  /* In Step 1, hide in-page continue button as floating mobile CTA handles forward navigation */
+  body.enterprise-checkout-body #step-1 .checkout-actions.end {
+    display: none !important;
+  }
+  /* In Step 2, hide redundant in-page forward button, keep clean Back button */
+  body.enterprise-checkout-body #step-2 .checkout-actions.split .eds-btn-primary {
+    display: none !important;
+  }
+  body.enterprise-checkout-body #step-2 .checkout-actions.split {
+    justify-content: flex-start !important;
+    margin-top: 14px !important;
+  }
+  /* In Step 3, hide redundant full-width submit button as mobile CTA is "Pay Securely" */
+  body.enterprise-checkout-body #step-3 .checkout-submit-btn {
+    display: none !important;
+  }
+}
+
+/* 3. Solution 3: Compact Service Hero (Mobile-Only) */
+@media (max-width: 768px) {
+  .page-service-detail .premium-service-hero,
+  body.enterprise-service-detail-page .premium-service-hero {
+    padding: 24px 16px 18px !important;
+  }
+  .page-service-detail .premium-service-hero .page-hero-title,
+  body.enterprise-service-detail-page .premium-service-hero .page-hero-title {
+    font-size: clamp(1.4rem, 5.5vw, 1.8rem) !important;
+    margin-bottom: 6px !important;
+    line-height: 1.22 !important;
+  }
+  .page-service-detail .premium-service-hero .page-hero-copy > p,
+  body.enterprise-service-detail-page .premium-service-hero .page-hero-copy > p {
+    font-size: 0.86rem !important;
+    line-height: 1.42 !important;
+    margin-bottom: 12px !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 3 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+  }
+  .page-service-detail .breadcrumb-nav,
+  body.enterprise-service-detail-page .premium-service-hero .breadcrumb-nav {
+    margin-bottom: 8px !important;
+  }
+  .page-hero-grid {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+  .page-hero-console,
+  body.public-site-page .public-hero-home-system .page-hero-console,
+  body.public-site-page .public-hero-home-system .page-hero-console.public-home-dashboard,
+  body.page-service-detail .page-hero-console,
+  body .page-hero-console,
+  .hero-command-center,
+  .hero-mini-card {
+    display: none !important;
+  }
+  .page-service-detail .hero-trust-strip,
+  body.enterprise-service-detail-page .hero-trust-strip {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    gap: 6px !important;
+    padding-bottom: 4px !important;
+    scrollbar-width: none !important;
+  }
+  .page-service-detail .hero-trust-strip::-webkit-scrollbar,
+  body.enterprise-service-detail-page .hero-trust-strip::-webkit-scrollbar {
+    display: none !important;
+  }
+  .page-service-detail .hero-trust-badge,
+  body.enterprise-service-detail-page .hero-trust-badge {
+    flex: 0 0 auto !important;
+    white-space: nowrap !important;
+    padding: 4px 10px !important;
+    font-size: 0.72rem !important;
+  }
+  .page-service-detail .hero-actions {
+    margin-bottom: 10px !important;
+    gap: 8px !important;
+  }
+  .page-service-detail .hero-actions .btn {
+    min-height: 42px !important;
+    padding: 0 16px !important;
+    font-size: 0.88rem !important;
+  }
+}
+
+/* 4. Solution 5: Horizontal Chip Filter Bar & Compact Search */
+@media (max-width: 768px) {
+  .shub-quick-chips,
+  .ghub-quick-chips {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    gap: 8px !important;
+    padding: 4px 2px 8px !important;
+    margin-top: 10px !important;
+    scrollbar-width: none !important;
+  }
+  .shub-quick-chips::-webkit-scrollbar,
+  .ghub-quick-chips::-webkit-scrollbar {
+    display: none !important;
+  }
+  .shub-chip,
+  .ghub-chip {
+    flex: 0 0 auto !important;
+    white-space: nowrap !important;
+    padding: 7px 13px !important;
+    font-size: 0.78rem !important;
+    border-radius: 999px !important;
+  }
+  .shub-search-toolbar,
+  .ghub-search-toolbar {
+    gap: 8px !important;
+    margin-top: 12px !important;
+  }
+  .shub-search-input-wrap,
+  .ghub-search-input-wrap {
+    flex: 1 1 100% !important;
+    width: 100% !important;
+  }
+  #shub-search-input,
+  #ghub-search-input {
+    height: 44px !important;
+    font-size: 0.88rem !important;
+    padding-left: 42px !important;
+  }
+  .shub-toolbar-filters,
+  .ghub-toolbar-filters {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    width: 100% !important;
+    gap: 8px !important;
+  }
+  .shub-select,
+  .ghub-select {
+    width: 100% !important;
+    height: 42px !important;
+    font-size: 0.8rem !important;
+    padding: 0 28px 0 10px !important;
+  }
+  .shub-view-switcher {
+    margin: 14px 0 12px !important;
+    padding: 3px !important;
+  }
+  .shub-view-tab {
+    padding: 7px 12px !important;
+    font-size: 0.8rem !important;
+  }
+}
+
+
+/* ============================================================================
+   MOBILE UX IMPROVEMENTS — PHASE 2 (High-Impact Flow Optimizations)
+   Target: <= 768px and <= 600px screens. Desktop remains 100% untouched.
+   ============================================================================ */
+
+/* 1. Solution 1: Compact Payment Method Grid & Accordion Tabs (Step 3) */
+@media (max-width: 768px) {
+  body.enterprise-checkout-body .pay-method-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 8px !important;
+  }
+  body.enterprise-checkout-body .pay-method-tile {
+    min-height: 52px !important;
+    padding: 8px 10px !important;
+    border-radius: 12px !important;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 8px !important;
+    box-sizing: border-box !important;
+  }
+  body.enterprise-checkout-body .pay-method-icon {
+    width: 28px !important;
+    height: 28px !important;
+    min-width: 28px !important;
+    border-radius: 8px !important;
+  }
+  body.enterprise-checkout-body .pay-method-icon svg,
+  body.enterprise-checkout-body .pay-method-icon i {
+    width: 16px !important;
+    height: 16px !important;
+  }
+  body.enterprise-checkout-body .pay-method-copy {
+    padding-right: 0 !important;
+    min-width: 0 !important;
+    flex: 1 1 auto !important;
+  }
+  body.enterprise-checkout-body .pay-method-copy strong {
+    font-size: 0.8rem !important;
+    display: block !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    line-height: 1.2 !important;
+  }
+  body.enterprise-checkout-body .pay-method-copy small,
+  body.enterprise-checkout-body .pay-method-copy em,
+  body.enterprise-checkout-body .pay-method-badge {
+    display: none !important;
+  }
+  body.enterprise-checkout-body .pay-cat-tabs {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    gap: 6px !important;
+    padding-bottom: 6px !important;
+    margin-bottom: 12px !important;
+    scrollbar-width: none !important;
+  }
+  body.enterprise-checkout-body .pay-cat-tabs::-webkit-scrollbar {
+    display: none !important;
+  }
+  body.enterprise-checkout-body .pay-cat-tab {
+    flex: 0 0 auto !important;
+    white-space: nowrap !important;
+    padding: 7px 12px !important;
+    font-size: 0.78rem !important;
+    border-radius: 999px !important;
+  }
+  body.enterprise-checkout-body .review-grid {
+    grid-template-columns: 1fr !important;
+    gap: 8px !important;
+  }
+  body.enterprise-checkout-body .review-card {
+    padding: 10px 12px !important;
+    border-radius: 12px !important;
+  }
+  body.enterprise-checkout-body .enterprise-fee-card {
+    padding: 12px !important;
+    margin-top: 12px !important;
+    border-radius: 12px !important;
+  }
+  body.enterprise-checkout-body .checkout-coupon-card {
+    padding: 12px !important;
+    border-radius: 12px !important;
+  }
+  body.enterprise-checkout-body .coupon-pill-btn {
+    font-size: 0.76rem !important;
+    padding: 6px 10px !important;
+  }
+}
+
+/* 2. Solution 10: WhatsApp-First Document Flow (Step 2) */
+@media (max-width: 768px) {
+  body.enterprise-checkout-body .document-command-grid > div {
+    display: flex !important;
+    flex-direction: column !important;
+  }
+  body.enterprise-checkout-body .checkout-whatsapp-doc-card {
+    order: -1 !important;
+    margin-bottom: 14px !important;
+    padding: 12px 14px !important;
+    background: rgba(37, 211, 102, 0.08) !important;
+    border: 1.5px solid #25D366 !important;
+    border-radius: 14px !important;
+    box-shadow: 0 4px 14px rgba(37, 211, 102, 0.10) !important;
+  }
+  body.enterprise-checkout-body .whatsapp-toggle-title {
+    font-size: 0.86rem !important;
+    font-weight: 800 !important;
+    color: #0e6b35 !important;
+  }
+  body.enterprise-checkout-body .whatsapp-toggle-desc {
+    font-size: 0.74rem !important;
+    line-height: 1.35 !important;
+    margin-top: 4px !important;
+  }
+  body.enterprise-checkout-body .drag-drop-area {
+    padding: 16px 12px !important;
+    border-radius: 14px !important;
+  }
+  body.enterprise-checkout-body .drag-drop-area .upload-orb {
+    width: 36px !important;
+    height: 36px !important;
+    margin-bottom: 6px !important;
+  }
+  body.enterprise-checkout-body .drag-drop-area h3 {
+    font-size: 0.88rem !important;
+    margin-bottom: 4px !important;
+  }
+  body.enterprise-checkout-body .drag-drop-area p {
+    font-size: 0.74rem !important;
+    margin-bottom: 8px !important;
+  }
+  body.enterprise-checkout-body .upload-action-row .eds-btn {
+    min-height: 38px !important;
+    padding: 0 12px !important;
+    font-size: 0.78rem !important;
+  }
+  body.enterprise-checkout-body .document-checklist-card {
+    padding: 10px 12px !important;
+    border-radius: 12px !important;
+    margin-bottom: 10px !important;
+  }
+  body.enterprise-checkout-body .document-checklist-card h3 {
+    font-size: 0.84rem !important;
+    margin-bottom: 4px !important;
+  }
+  body.enterprise-checkout-body .document-checklist-card ul {
+    gap: 4px !important;
+    font-size: 0.76rem !important;
+  }
+  body.enterprise-checkout-body .document-checklist-card p {
+    display: none !important;
+  }
+}
+
+/* 3. Solution 4: Compact Service Cards (Services Discovery) */
+@media (max-width: 600px) {
+  .shub-cards-grid,
+  .shub-popular-grid {
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+  }
+  .shub-card {
+    padding: 12px 14px !important;
+    gap: 8px !important;
+    border-radius: 12px !important;
+  }
+  .shub-card-top {
+    gap: 8px !important;
+  }
+  .shub-card-icon {
+    width: 32px !important;
+    height: 32px !important;
+  }
+  .shub-card-icon i, .shub-card-icon svg {
+    width: 16px !important;
+    height: 16px !important;
+  }
+  .shub-badge {
+    font-size: 9.5px !important;
+    padding: 2px 6px !important;
+  }
+  .shub-card-title {
+    font-size: 0.95rem !important;
+  }
+  .shub-card-desc {
+    font-size: 0.78rem !important;
+    line-height: 1.35 !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+  }
+  .shub-card-meta {
+    padding: 6px 8px !important;
+    font-size: 0.78rem !important;
+  }
+  .shub-card-footer {
+    gap: 8px !important;
+  }
+  .shub-btn-card {
+    height: 38px !important;
+    font-size: 0.82rem !important;
+    padding: 0 14px !important;
+  }
+  .shub-btn-card-wa {
+    height: 38px !important;
+    width: 38px !important;
+    min-width: 38px !important;
+    padding: 0 !important;
+    justify-content: center !important;
+  }
+
+  /* Compact Cards for Citizen E-Services (online-services.html) */
+  .ghub-cards-grid {
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+  }
+  .ghub-card {
+    padding: 12px 14px !important;
+    gap: 8px !important;
+    border-radius: 12px !important;
+  }
+  .ghub-card-title {
+    font-size: 0.95rem !important;
+  }
+  .ghub-card-desc {
+    font-size: 0.78rem !important;
+    line-height: 1.35 !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+  }
+  .ghub-fee-box {
+    padding: 6px 8px !important;
+  }
+  .ghub-card-footer .ghub-btn-card {
+    height: 38px !important;
+    font-size: 0.82rem !important;
+  }
+}
+
+/* 4. Solution 8: Smart Virtual Keyboard Handling */
+body.keyboard-open .checkout-mobile-cta {
+  display: none !important;
+}
