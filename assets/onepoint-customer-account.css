@@ -3084,6 +3084,168 @@ body[data-account-page] #opds-wa-float {
   }
 }
 
+/* ==================== COMPREHENSIVE MOBILE VIEW ENHANCEMENTS (<= 900px & <= 640px) ==================== */
+@media (max-width: 900px) {
+  .acc-shell {
+    grid-template-columns: minmax(0, 1fr) !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    overflow-x: hidden;
+  }
+  .acc-content-area,
+  .acc-page {
+    min-width: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+}
+
+@media (max-width: 640px) {
+  /* Grids & Cards */
+  .acc-summary-grid,
+  .acc-summary-grid-4,
+  #acc-vault-summary-grid,
+  #acc-payments-summary-grid,
+  #acc-invoices-summary-grid {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+  .acc-summary-card {
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+    padding: 14px 12px !important;
+  }
+  .acc-quick-actions {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+  .acc-support-card {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+  .acc-support-card .cpf-support-links {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+  .acc-order-stepper-full {
+    max-width: 100% !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    padding-bottom: 4px !important;
+    scrollbar-width: none !important;
+  }
+  .acc-order-stepper-full::-webkit-scrollbar { display: none !important; }
+  .stepper-step { flex-shrink: 0 !important; }
+
+  /* Orders list & Command Bar */
+  .acc-command-bar {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 10px !important;
+  }
+  .acc-command-search-wrap {
+    min-width: 0 !important;
+    width: 100% !important;
+  }
+  .acc-command-filters {
+    width: 100% !important;
+    flex-wrap: wrap !important;
+  }
+  .acc-command-select {
+    flex: 1 !important;
+    min-width: 120px !important;
+  }
+  .acc-order-row {
+    padding: 14px !important;
+  }
+  .acc-order-row-top {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 12px !important;
+  }
+  .acc-order-info {
+    min-width: 0 !important;
+    width: 100% !important;
+  }
+  .acc-order-amount-col {
+    margin-left: 0 !important;
+    align-items: flex-start !important;
+    flex-direction: row !important;
+    gap: 8px !important;
+  }
+  .acc-btn-view-order,
+  .acc-btn-journey-view {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+
+  /* History rows & Journey Stepper */
+  .acc-history-row {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 12px !important;
+    padding: 14px !important;
+  }
+  .acc-history-left {
+    min-width: 0 !important;
+    width: 100% !important;
+  }
+  .acc-history-right {
+    width: 100% !important;
+    margin-left: 0 !important;
+    justify-content: space-between !important;
+    gap: 10px !important;
+  }
+  .acc-journey-stepper {
+    max-width: 100% !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: none !important;
+    padding-bottom: 4px !important;
+  }
+  .acc-journey-stepper::-webkit-scrollbar { display: none !important; }
+  .journey-step { flex-shrink: 0 !important; }
+
+  /* Vault Grid & Cards */
+  .acc-vault-grid {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+  .acc-vault-card {
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+    padding: 14px !important;
+  }
+
+  /* Order Detail */
+  .acc-detail-2col {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 16px !important;
+  }
+  .acc-detail-top-nav {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 8px !important;
+  }
+
+  /* Greeting box */
+  .acc-greeting {
+    padding: 16px 14px !important;
+  }
+  .acc-greeting-actions {
+    flex-wrap: wrap !important;
+  }
+
+  /* Form control font size for mobile iOS auto-zoom prevention */
+  input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="color"]):not([type="hidden"]),
+  select,
+  textarea,
+  .eds-input,
+  .acc-search-row select.eds-input,
+  .acc-search-select-wrap select,
+  .acc-search-row input.eds-input {
+    font-size: 16px !important;
+  }
+}
+
 @media (prefers-color-scheme: dark) {
   .acc-sidebar { background: #0a1628; border-color: rgba(255,255,255,.08); }
   .acc-sidebar-user { background: linear-gradient(140deg, #040c1a 0%, #081e40 100%); }

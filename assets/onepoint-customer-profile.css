@@ -706,13 +706,31 @@ body[data-account-page="profile"] .cpf-page { width: 100%; max-width: none; marg
 @keyframes cpf-fadein { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
 @media (max-width: 768px) {
+  .cpf-page-heading {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    padding: 16px 14px !important;
+    gap: 12px !important;
+  }
+  .cpf-tab-nav {
+    display: flex !important;
+    overflow-x: auto !important;
+    flex-wrap: nowrap !important;
+    -webkit-overflow-scrolling: touch !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    scrollbar-width: none !important;
+  }
+  .cpf-tab-nav::-webkit-scrollbar { display: none !important; }
+  .cpf-tab-btn { flex-shrink: 0 !important; }
   .cpf-activation-stepper-card { flex-direction: column; align-items: flex-start; gap: 14px; }
   .cpf-stepper-action { width: 100%; }
   .cpf-stepper-action .eds-btn { flex: 1; justify-content: center; }
-  .cpf-header-card { flex-direction: column; align-items: flex-start; }
+  .cpf-header-card { flex-direction: column; align-items: flex-start; padding: 16px 14px !important; gap: 16px !important; }
+  .cpf-card { padding: 16px 14px !important; }
   .cpf-completion-box { width: 100%; }
   .cpf-form-grid { grid-template-columns: 1fr; }
-  .cpf-view-grid { grid-template-columns: 1fr; }
+  .cpf-view-grid { grid-template-columns: minmax(0, 1fr) !important; }
   .cpf-address-cards-grid { grid-template-columns: 1fr; }
   .cpf-privacy-action-row { flex-direction: column; align-items: flex-start; gap: 10px; }
   .cpf-privacy-action-row .eds-btn { width: 100%; justify-content: center; }

@@ -27,19 +27,22 @@
         <span><i data-lucide="layout-dashboard"></i>Portal</span>
       </div>
       <section class="payment-result-card pending-state">
-        <div class="processing-animation"><span></span><span></span><span></span></div>
+        <div class="pending-animation"><div class="pending-ping"></div><i data-lucide="clock-3"></i></div>
         <p class="section-kicker">Payment Status</p>
         <h1>Payment Processing</h1>
         <p class="status-copy">Gateway confirmation pending hai. Refresh karke transaction status check kar sakte hain.</p>
         <div data-payment-status></div>
         <div class="result-next-steps" aria-label="Pending payment guidance">
           <span><i data-lucide="clock-3"></i><strong>Wait briefly</strong><small>Some UPI and gateway confirmations take a few minutes.</small></span>
-          <span><i data-lucide="refresh-cw"></i><strong>Refresh status</strong><small>Use the button after checking your bank app.</small></span>
-          <span><i data-lucide="message-circle"></i><strong>Share proof</strong><small>Support can verify a debit screenshot or UTR.</small></span>
+          <span><i data-lucide="refresh-cw"></i><strong>Auto-refreshing</strong><small>Status checks automatically every 6 seconds.</small></span>
+          <span><i data-lucide="message-circle"></i><strong>Share proof</strong><small>Support can verify a debit screenshot or UTR instantly.</small></span>
         </div>
         <div class="status-actions">
-          <button class="btn btn-primary" type="button" onclick="window.location.reload()">Refresh Status</button>
-          <a class="btn btn-soft" href="support.html">Contact Support</a>
+          <button class="btn btn-primary" id="manual-refresh-status-btn" type="button"><i data-lucide="refresh-cw"></i> Refresh Status</button>
+          <a class="btn btn-soft" id="payment-support-link" href="support.html"><i data-lucide="message-circle"></i> Contact Support</a>
+        </div>
+        <div class="polling-countdown-badge" id="polling-countdown-wrapper">
+          <span class="pulse-dot"></span> Auto-checking status in <span id="polling-timer-sec">6</span>s
         </div>
       </section>
     </main>

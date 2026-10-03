@@ -1455,8 +1455,17 @@ section.section.reveal:has(.bento-grid) {
   border-bottom: 1px solid var(--hairline) !important;
 }
 
-#homepage-body .nav-action-glass {
-  border: 1px solid var(--hairline-soft) !important;
+#homepage-body .nav-action-glass,
+#homepage-body .customer-guest-login {
+  border: 1px solid rgba(12, 72, 125, .2) !important;
+  color: #0c487d !important;
+  background: #f1f6fb !important;
+}
+#homepage-body .nav-action-glass:hover,
+#homepage-body .customer-guest-login:hover {
+  border-color: rgba(7, 90, 168, .45) !important;
+  color: #062b4c !important;
+  background: #e3effa !important;
 }
 
 #homepage-body .btn-gold {

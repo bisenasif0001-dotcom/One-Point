@@ -3194,8 +3194,10 @@ function renderNav() {
       </div>
       <div class="mega-content-panel" style="opacity: 1; transition: opacity 0.15s ease;">
         <div class="mega-content-header">
-          <h3 class="mega-content-title">${servicesMegaGroups[0].title}</h3>
-          <p class="mega-content-desc">${servicesMegaGroups[0].desc}</p>
+          <div class="mega-content-heading-group">
+            <h3 class="mega-content-title">${servicesMegaGroups[0].title}</h3>
+            <p class="mega-content-desc">${servicesMegaGroups[0].desc}</p>
+          </div>
           <a class="mega-browse-link" href="${servicesMegaGroups[0].href}">Browse all ${servicesMegaGroups[0].title} ${icon("arrow-right", 13)}</a>
         </div>
         <div class="mega-items-grid">
@@ -3269,7 +3271,7 @@ function renderNav() {
     ["Track", "track-application.html", "search-check"]
   ].map(([label, href, iconName]) => `
     <a class="mobile-quick-chip" href="${href}">
-      ${icon(iconName, 15)}
+      <span class="mobile-quick-icon">${icon(iconName, 15)}</span>
       <span>${label}</span>
     </a>
   `).join("");
@@ -3277,7 +3279,7 @@ function renderNav() {
   const mobileAccordions = servicesMegaGroups.map((group, idx) => `
     <section class="mobile-accordion mobile-mega-card${idx === 0 ? ' open' : ''}" data-mobile-menu-text="${group.title} ${group.desc} ${group.items.map(([label]) => label).join(' ')}">
       <button class="nav-trigger mobile-mega-trigger" type="button" aria-expanded="${idx === 0 ? 'true' : 'false'}" data-mobile-accordion>
-        <span class="mobile-mega-icon">${icon(group.icon, 18)}</span>
+        <span class="mobile-mega-icon">${icon(group.icon, 19)}</span>
         <span class="mobile-mega-copy">
           <strong>${group.title}</strong>
           <small>${group.desc}</small>
@@ -3287,17 +3289,18 @@ function renderNav() {
       </button>
       <div class="mobile-accordion-panel">
         <a class="mobile-overview-link" href="${group.href}">
-          ${icon("arrow-up-right", 14)}
           <span>Browse all ${group.title}</span>
+          ${icon("arrow-up-right", 14)}
         </a>
         <div class="mobile-service-list">
           ${group.items.map(([label, href, desc, iconName]) => `
             <a class="mobile-service-link" href="${href}" data-mobile-menu-text="${label} ${desc || ''}">
-              <span class="mobile-service-icon">${icon(iconName || "file-text", 16)}</span>
+              <span class="mobile-service-icon">${icon(iconName || "file-text", 15)}</span>
               <span class="mobile-service-copy">
                 <strong>${label}</strong>
                 <small>${desc || "Access online application and support services."}</small>
               </span>
+              <span class="mobile-service-arrow">${icon("chevron-right", 13)}</span>
             </a>
           `).join("")}
         </div>
@@ -3333,39 +3336,128 @@ function renderNav() {
                 <span class="mobile-nav-title">Services Menu</span>
                 <small class="mobile-nav-subtitle">Search, choose category, then apply.</small>
               </span>
-              <button class="mobile-nav-close" type="button" aria-label="Close menu" data-mobile-close>${icon("x", 22)}</button>
+              <button class="mobile-nav-close" type="button" aria-label="Close menu" data-mobile-close>${icon("x", 20)}</button>
             </div>
             <div class="mobile-menu-search">
               ${icon("search", 17)}
-              <input type="search" data-mobile-menu-search placeholder="Search PAN, GST, admit card...">
+              <input type="search" data-mobile-menu-search placeholder="Search PAN, GST, recharge, admit card..." aria-label="Search services" autocomplete="off" spellcheck="false">
+              <button class="mobile-search-clear" type="button" aria-label="Clear search" data-mobile-search-clear hidden>&times;</button>
             </div>
-            <div class="mobile-quick-grid">
-              ${mobilePopularLinks}
-            </div>
-            <a class="nav-link mobile-home-link ${current === "index.html" ? "active" : ""}" href="index.html">${icon("home", 17)} Home</a>
-            ${mobileAccordions}
-            <div class="mobile-accordion">
-              <button class="nav-trigger" type="button" aria-expanded="false" data-mobile-accordion>
-                <span>${icon("user", 17)} Portals & Login</span>
-                ${icon("chevron-down", 15)}
-              </button>
-              <div class="mobile-accordion-panel">
-                <a href="customer-account-overview.html">${icon("user-circle", 14)} Customer Account</a>
-                <a href="admin.html">${icon("shield-check", 14)} Admin Dashboard</a>
-                <a href="login.html" data-customer-guest>${icon("log-in", 14)} Secure Login</a>
-                <a href="customer-account-overview.html" data-customer-auth hidden>${icon("layout-dashboard", 14)} My Account</a>
-                <a href="customer-profile.html" data-customer-auth hidden>${icon("user-round", 14)} My Profile</a>
-                <button type="button" class="mobile-account-logout" data-customer-logout data-customer-auth hidden>${icon("log-out", 14)} Logout</button>
+            <div class="mobile-search-feedback" data-mobile-search-feedback hidden></div>
+            <div class="mobile-search-results-list" data-mobile-search-results hidden></div>
+            <div class="mobile-search-empty" data-mobile-search-empty hidden></div>
+            <div class="mobile-nav-default-group" data-mobile-default-group>
+              <div class="mobile-section-header">
+                <span>Quick Access</span>
+              </div>
+              <a class="nav-link mobile-home-link ${current === "index.html" ? "active" : ""}" href="index.html">
+                <span class="mobile-home-icon">${icon("home", 17)}</span>
+                <span class="mobile-home-copy">
+                  <strong>Home Page</strong>
+                  <small>Main Overview & Live Status</small>
+                </span>
+                <span class="mobile-home-badge">${current === "index.html" ? "Current" : "Visit"}</span>
+              </a>
+              <div class="mobile-quick-grid">
+                ${mobilePopularLinks}
+              </div>
+
+              <div class="mobile-section-header">
+                <span>Service Categories</span>
+                <span>${servicesMegaGroups.length} Categories</span>
+              </div>
+              <div class="mobile-categories-list">
+                ${mobileAccordions}
+              </div>
+
+              <div class="mobile-section-header">
+                <span>Portals & Account</span>
+              </div>
+              <div class="mobile-accordion mobile-mega-card">
+                <button class="nav-trigger mobile-mega-trigger" type="button" aria-expanded="false" data-mobile-accordion>
+                  <span class="mobile-mega-icon">${icon("user", 19)}</span>
+                  <span class="mobile-mega-copy">
+                    <strong>Portals & Login</strong>
+                    <small>Customer account, admin & secure login</small>
+                  </span>
+                  <span class="mobile-mega-count">3</span>
+                  ${icon("chevron-down", 16)}
+                </button>
+                <div class="mobile-accordion-panel">
+                  <div class="mobile-service-list">
+                    <a class="mobile-service-link" href="customer-account-overview.html">
+                      <span class="mobile-service-icon">${icon("user-circle", 15)}</span>
+                      <span class="mobile-service-copy">
+                        <strong>Customer Account</strong>
+                        <small>Orders, status & active services</small>
+                      </span>
+                      <span class="mobile-service-arrow">${icon("chevron-right", 13)}</span>
+                    </a>
+                    <a class="mobile-service-link" href="admin.html">
+                      <span class="mobile-service-icon">${icon("shield-check", 15)}</span>
+                      <span class="mobile-service-copy">
+                        <strong>Admin Dashboard</strong>
+                        <small>Operator portal & verification</small>
+                      </span>
+                      <span class="mobile-service-arrow">${icon("chevron-right", 13)}</span>
+                    </a>
+                    <a class="mobile-service-link" href="login.html" data-customer-guest>
+                      <span class="mobile-service-icon">${icon("log-in", 15)}</span>
+                      <span class="mobile-service-copy">
+                        <strong>Secure Login</strong>
+                        <small>Sign in to your One Point account</small>
+                      </span>
+                      <span class="mobile-service-arrow">${icon("chevron-right", 13)}</span>
+                    </a>
+                    <a class="mobile-service-link" href="customer-account-overview.html" data-customer-auth hidden>
+                      <span class="mobile-service-icon">${icon("layout-dashboard", 15)}</span>
+                      <span class="mobile-service-copy">
+                        <strong>My Account</strong>
+                        <small>Active session overview</small>
+                      </span>
+                      <span class="mobile-service-arrow">${icon("chevron-right", 13)}</span>
+                    </a>
+                    <a class="mobile-service-link" href="customer-profile.html" data-customer-auth hidden>
+                      <span class="mobile-service-icon">${icon("user-round", 15)}</span>
+                      <span class="mobile-service-copy">
+                        <strong>My Profile</strong>
+                        <small>Manage contact details</small>
+                      </span>
+                      <span class="mobile-service-arrow">${icon("chevron-right", 13)}</span>
+                    </a>
+                  </div>
+                  <button type="button" class="mobile-account-logout" data-customer-logout data-customer-auth hidden>${icon("log-out", 14)} Logout</button>
+                </div>
+              </div>
+
+              <div class="mobile-section-header">
+                <span>Support & Helpdesk</span>
+              </div>
+              <div class="mobile-nav-bottom-actions">
+                <a class="mobile-action-card ${current === "track-application.html" ? "active" : ""}" href="track-application.html">
+                  <span class="mobile-action-icon">${icon("search", 16)}</span>
+                  <span class="mobile-action-copy">
+                    <strong>Track Application</strong>
+                    <small>Real-time status check</small>
+                  </span>
+                  <span class="mobile-service-arrow">${icon("chevron-right", 14)}</span>
+                </a>
+                <a class="mobile-action-card ${current === "contact.html" ? "active" : ""}" href="contact.html">
+                  <span class="mobile-action-icon">${icon("message-circle", 16)}</span>
+                  <span class="mobile-action-copy">
+                    <strong>Contact Support</strong>
+                    <small>Direct desk & WhatsApp</small>
+                  </span>
+                  <span class="mobile-service-arrow">${icon("chevron-right", 14)}</span>
+                </a>
               </div>
             </div>
-            <a class="nav-link ${current === "track-application.html" ? "active" : ""}" href="track-application.html">${icon("search", 17)} Track Status</a>
-            <a class="nav-link ${current === "contact.html" ? "active" : ""}" href="contact.html">${icon("message-circle", 17)} Contact Support</a>
           </div>
         </div>
         <div class="nav-actions">
           <button class="icon-button cart-nav-button nav-action-glass" type="button" aria-label="Open OneMart cart" title="Cart" data-cart-button>${icon("shopping-cart", 19)}<span data-cart-count>0</span></button>
           <div class="customer-nav-account" data-customer-nav-account>
-            <a class="icon-button nav-action-glass customer-guest-login" href="login.html" aria-label="Customer login" title="Customer login" data-customer-guest>${icon("log-in", 19)}</a>
+            <a class="icon-button nav-action-glass customer-guest-login" href="login.html" aria-label="Customer login" title="Customer login" data-customer-guest><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-log-in" data-lucide="log-in" aria-hidden="true"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" x2="3" y1="12" y2="12"/></svg></a>
             <button class="customer-account-trigger" type="button" aria-haspopup="menu" aria-expanded="false" aria-label="Open customer account menu" title="Customer account — signed in" data-customer-account-trigger data-customer-auth hidden>
               <span class="customer-account-avatar" data-customer-initials>C</span>
               <span class="customer-online-indicator" aria-hidden="true"></span>
@@ -3383,7 +3475,7 @@ function renderNav() {
             </div>
           </div>
           <a class="btn btn-gold" href="services.html">${icon("sparkles", 18)} Get Started</a>
-          <button class="icon-button mobile-toggle nav-action-glass" aria-label="Open menu" aria-expanded="false" data-mobile-toggle>${icon("menu", 21)}</button>
+          <button class="icon-button mobile-toggle nav-action-glass" aria-label="Open menu" aria-expanded="false" data-mobile-toggle><svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu" data-lucide="menu" aria-hidden="true"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg></button>
         </div>
       </nav>
       <div class="nav-backdrop" data-nav-backdrop></div>
@@ -3454,11 +3546,23 @@ const OPDSCustomerSession = (() => {
     document.documentElement.classList.toggle("customer-session-active", signedIn);
     document.querySelectorAll("[data-customer-guest]").forEach((element) => {
       element.hidden = signedIn;
+      if (signedIn) {
+        element.style.setProperty("display", "none", "important");
+      } else {
+        element.style.removeProperty("display");
+      }
       if (!signedIn && element.tagName === "A" && element.getAttribute("href")?.startsWith("login.html")) {
         element.setAttribute("href", loginUrl());
       }
     });
-    document.querySelectorAll("[data-customer-auth]").forEach((element) => { element.hidden = !signedIn; });
+    document.querySelectorAll("[data-customer-auth]").forEach((element) => {
+      element.hidden = !signedIn;
+      if (!signedIn) {
+        element.style.setProperty("display", "none", "important");
+      } else {
+        element.style.removeProperty("display");
+      }
+    });
     if (!signedIn) {
       setAccountMenu(false);
       return;
@@ -3803,16 +3907,104 @@ function setupMobileNav() {
   const backdrop = document.querySelector("[data-nav-backdrop]");
   const closeBtn = menu.querySelector("[data-mobile-close]");
 
+  const updateHeaderOffset = () => {
+    const header = document.querySelector(".site-header");
+    if (header) {
+      document.documentElement.style.setProperty("--site-header-height", `${header.offsetHeight}px`);
+    }
+  };
+  updateHeaderOffset();
+  window.addEventListener("resize", updateHeaderOffset, { passive: true });
+  window.addEventListener("scroll", updateHeaderOffset, { passive: true });
+
   const setOpen = (open) => {
+    updateHeaderOffset();
     menu.classList.toggle("open", open);
     document.body.classList.toggle("nav-open", open);
     toggle.setAttribute("aria-expanded", String(open));
+    if (open) {
+      menu.scrollTop = 0;
+      const scrollable = menu.querySelector(".mobile-nav-menu");
+      if (scrollable) scrollable.scrollTop = 0;
+    }
   };
 
-  toggle.addEventListener("click", () => setOpen(!menu.classList.contains("open")));
-  backdrop?.addEventListener("click", () => setOpen(false));
-  closeBtn?.addEventListener("click", () => setOpen(false));
-  document.addEventListener("keydown", (e) => { if (e.key === "Escape") setOpen(false); });
+  let hideTimer = null;
+  let lastHoverOpenTime = 0;
+
+  const cancelAutoHide = () => {
+    if (hideTimer) {
+      clearTimeout(hideTimer);
+      hideTimer = null;
+    }
+  };
+
+  const scheduleAutoHide = (delay = 350) => {
+    cancelAutoHide();
+    hideTimer = setTimeout(() => {
+      const toggleHover = toggle.matches(":hover");
+      const menuHover = menu.matches(":hover");
+      const hasFocusInside = menu.contains(document.activeElement);
+      if (!toggleHover && !menuHover && !hasFocusInside) {
+        setOpen(false);
+      }
+    }, delay);
+  };
+
+  toggle.addEventListener("click", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    cancelAutoHide();
+    const now = Date.now();
+    // If drawer was just opened by hover within the last 450ms, keep it open (prevent hover-click conflict)
+    if (menu.classList.contains("open") && now - lastHoverOpenTime < 450) {
+      return;
+    }
+    setOpen(!menu.classList.contains("open"));
+  });
+
+  // Desktop mouse hover open & smooth auto-hide on mouse leave
+  toggle.addEventListener("mouseenter", () => {
+    cancelAutoHide();
+    if (!menu.classList.contains("open")) {
+      lastHoverOpenTime = Date.now();
+      setOpen(true);
+    }
+  });
+
+  toggle.addEventListener("mouseleave", () => {
+    scheduleAutoHide(350);
+  });
+
+  menu.addEventListener("mouseenter", () => {
+    cancelAutoHide();
+  });
+
+  menu.addEventListener("mouseleave", () => {
+    scheduleAutoHide(350);
+  });
+
+  menu.addEventListener("focusout", (e) => {
+    if (!menu.contains(e.relatedTarget)) {
+      scheduleAutoHide(400);
+    }
+  });
+
+  backdrop?.addEventListener("click", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setOpen(false);
+  });
+
+  closeBtn?.addEventListener("click", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setOpen(false);
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") setOpen(false);
+  });
 
   menu.querySelectorAll("[data-mobile-accordion]").forEach((button) => {
     button.addEventListener("click", () => {
@@ -3822,30 +4014,202 @@ function setupMobileNav() {
     });
   });
 
+  // Intelligent Live Search Implementation
+  const allServices = (typeof servicesMegaGroups !== "undefined" ? servicesMegaGroups : []).flatMap((group) =>
+    (group.items || []).map(([label, href, desc, iconName]) => ({
+      title: label,
+      href,
+      desc: desc || "Access online application and support services.",
+      icon: iconName || "file-text",
+      category: group.title,
+      categoryHref: group.href,
+      titleLower: label.toLowerCase(),
+      directText: `${label} ${desc || ""}`.toLowerCase(),
+      categoryLower: group.title.toLowerCase()
+    }))
+  );
+
   const mobileSearch = menu.querySelector("[data-mobile-menu-search]");
-  mobileSearch?.addEventListener("input", () => {
-    const query = mobileSearch.value.trim().toLowerCase();
-    menu.querySelectorAll(".mobile-mega-card").forEach((card) => {
-      const groupText = (card.querySelector(".mobile-mega-copy strong")?.textContent || "").toLowerCase();
-      const links = [...card.querySelectorAll(".mobile-service-link")];
-      const matchingLinks = links.filter((link) =>
-        (link.getAttribute("data-mobile-menu-text") || link.textContent || "").toLowerCase().includes(query)
-      );
-      const groupMatches = !query || groupText.includes(query);
-      links.forEach((link) => {
-        const text = (link.getAttribute("data-mobile-menu-text") || link.textContent || "").toLowerCase();
-        link.hidden = Boolean(query) && !groupMatches && !text.includes(query);
-      });
-      card.hidden = Boolean(query) && !groupMatches && matchingLinks.length === 0;
-      if (query && (groupMatches || matchingLinks.length)) {
-        card.classList.add("open");
-        card.querySelector("[data-mobile-accordion]")?.setAttribute("aria-expanded", "true");
-      }
+  const clearBtn = menu.querySelector("[data-mobile-search-clear]");
+  const feedbackEl = menu.querySelector("[data-mobile-search-feedback]");
+  const resultsContainer = menu.querySelector("[data-mobile-search-results]");
+  const emptyEl = menu.querySelector("[data-mobile-search-empty]");
+  const defaultGroup = menu.querySelector("[data-mobile-default-group]");
+
+  const safeHtml = (str) =>
+    String(str || "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+
+  const highlightMatch = (text, queryWords) => {
+    if (!text || !queryWords.length) return safeHtml(text);
+    let result = safeHtml(text);
+    queryWords.forEach((word) => {
+      if (!word) return;
+      const escaped = word.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+      const regex = new RegExp(`(${escaped})`, "gi");
+      result = result.replace(regex, `<mark class="search-highlight">$1</mark>`);
     });
+    return result;
+  };
+
+  const performSearch = () => {
+    const rawQuery = mobileSearch ? mobileSearch.value.trim() : "";
+    const query = rawQuery.toLowerCase();
+
+    if (!query) {
+      if (clearBtn) clearBtn.hidden = true;
+      if (feedbackEl) {
+        feedbackEl.hidden = true;
+        feedbackEl.innerHTML = "";
+      }
+      if (resultsContainer) {
+        resultsContainer.hidden = true;
+        resultsContainer.innerHTML = "";
+      }
+      if (emptyEl) {
+        emptyEl.hidden = true;
+        emptyEl.innerHTML = "";
+      }
+      if (defaultGroup) defaultGroup.hidden = false;
+      return;
+    }
+
+    if (clearBtn) clearBtn.hidden = false;
+    if (defaultGroup) defaultGroup.hidden = true;
+
+    const queryWords = query.split(/\s+/).filter(Boolean);
+
+    const aliasMap = {
+      "aadhar": "aadhaar",
+      "adhaar": "aadhaar",
+      "adhar": "aadhaar",
+      "pancard": "pan",
+      "gstin": "gst",
+      "ayusman": "ayushman",
+      "rashan": "ration",
+      "bijli": "electricity",
+      "dl": "driving",
+      "voterid": "voter"
+    };
+    const normalizedWords = queryWords.map((w) => aliasMap[w] || w);
+
+    // Direct match on service title / desc with alias support
+    const directMatches = allServices.filter((svc) =>
+      queryWords.every((word, idx) => {
+        const norm = normalizedWords[idx];
+        return svc.directText.includes(word) || (norm && svc.directText.includes(norm));
+      })
+    );
+
+    // Category match (only if no direct matches or if category itself matches query)
+    let matches = directMatches;
+    if (matches.length === 0) {
+      matches = allServices.filter((svc) =>
+        queryWords.every((word, idx) => {
+          const norm = normalizedWords[idx];
+          return svc.categoryLower.includes(word) || (norm && svc.categoryLower.includes(norm));
+        })
+      );
+    }
+
+    // Sort: exact title start first, then title contains, then others
+    matches.sort((a, b) => {
+      const aTitle = a.titleLower.includes(query);
+      const bTitle = b.titleLower.includes(query);
+      if (aTitle && !bTitle) return -1;
+      if (!aTitle && bTitle) return 1;
+      return 0;
+    });
+
+    if (matches.length > 0) {
+      if (emptyEl) {
+        emptyEl.hidden = true;
+        emptyEl.innerHTML = "";
+      }
+      if (feedbackEl) {
+        feedbackEl.hidden = false;
+        feedbackEl.innerHTML = `<span>Found <strong>${matches.length}</strong> service${matches.length > 1 ? "s" : ""} matching "<strong>${safeHtml(rawQuery)}</strong>"</span>`;
+      }
+      if (resultsContainer) {
+        resultsContainer.hidden = false;
+        resultsContainer.innerHTML = matches.map((svc) => `
+          <a class="mobile-search-result-item" href="${svc.href}">
+            <span class="mobile-search-result-icon">${icon(svc.icon, 18)}</span>
+            <span class="mobile-search-result-info">
+              <strong class="mobile-search-result-title">${highlightMatch(svc.title, queryWords)}</strong>
+              <small class="mobile-search-result-desc">${highlightMatch(svc.desc, queryWords)}</small>
+              <span class="mobile-search-result-category">${safeHtml(svc.category)}</span>
+            </span>
+            <span class="mobile-search-result-arrow"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg></span>
+          </a>
+        `).join("");
+
+        if (window.lucide && typeof window.lucide.createIcons === "function") {
+          window.lucide.createIcons({ root: resultsContainer });
+        }
+      }
+    } else {
+      if (feedbackEl) {
+        feedbackEl.hidden = true;
+        feedbackEl.innerHTML = "";
+      }
+      if (resultsContainer) {
+        resultsContainer.hidden = true;
+        resultsContainer.innerHTML = "";
+      }
+      if (emptyEl) {
+        emptyEl.hidden = false;
+        emptyEl.innerHTML = `
+          <div class="mobile-search-empty-icon"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg></div>
+          <strong>No services found for "${safeHtml(rawQuery)}"</strong>
+          <p>Try searching for popular services:</p>
+          <div class="search-suggest-chips">
+            <button type="button" class="search-suggest-chip" data-search-chip="Mobile Recharge">Mobile Recharge</button>
+            <button type="button" class="search-suggest-chip" data-search-chip="PAN Card">PAN Card</button>
+            <button type="button" class="search-suggest-chip" data-search-chip="Aadhaar">Aadhaar</button>
+            <button type="button" class="search-suggest-chip" data-search-chip="GST">GST</button>
+            <button type="button" class="search-suggest-chip" data-search-chip="Ticket">Ticket</button>
+          </div>
+        `;
+        emptyEl.querySelectorAll("[data-search-chip]").forEach((chip) => {
+          chip.addEventListener("click", () => {
+            if (mobileSearch) {
+              mobileSearch.value = chip.getAttribute("data-search-chip") || "";
+              mobileSearch.focus();
+              performSearch();
+            }
+          });
+        });
+      }
+    }
+  };
+
+  mobileSearch?.addEventListener("input", performSearch);
+
+  clearBtn?.addEventListener("click", () => {
+    if (mobileSearch) {
+      mobileSearch.value = "";
+      mobileSearch.focus();
+      performSearch();
+    }
   });
 
-  menu.querySelectorAll("a").forEach((link) => {
-    link.addEventListener("click", () => setOpen(false));
+  mobileSearch?.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && mobileSearch.value) {
+      e.stopPropagation();
+      mobileSearch.value = "";
+      performSearch();
+    }
+  });
+
+  menu.addEventListener("click", (e) => {
+    const link = e.target.closest("a");
+    if (link && !link.classList.contains("nav-trigger")) {
+      setOpen(false);
+    }
   });
 }
 
@@ -12572,8 +12936,10 @@ function setupMegaMenuTabs() {
 
       return `
       <div class="mega-content-header">
-        <h3 class="mega-content-title">${group.title}</h3>
-        <p class="mega-content-desc">${group.desc}</p>
+        <div class="mega-content-heading-group">
+          <h3 class="mega-content-title">${group.title}</h3>
+          <p class="mega-content-desc">${group.desc}</p>
+        </div>
         <a class="mega-browse-link" href="${group.href}">Browse all ${group.title} ${arrowIcon}</a>
       </div>
       <div class="mega-items-grid">
