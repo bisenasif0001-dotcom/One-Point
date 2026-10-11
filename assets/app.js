@@ -3268,7 +3268,7 @@ function renderNav() {
         </div>
       `;
     }
-    return `<a class="nav-link ${active}" href="${item.href}">${item.label}</a>`;
+    return `<a class="nav-link ${active}" href="${item.href}">${item.label}${item.href === 'products.html' ? '<span class="onemart-coming-badge">Coming soon</span>' : ''}</a>`;
   }).join("");
 
   const mobilePopularLinks = [
@@ -3899,7 +3899,7 @@ function renderFooter() {
     <nav class="mobile-bottom-nav" aria-label="Mobile quick navigation">
       <a href="index.html">${icon("home", 19)}<span>Home</span></a>
       <a href="services.html">${icon("grid-3x3", 19)}<span>Services</span></a>
-      <a href="products.html">${icon("shopping-bag", 19)}<span>Store</span></a>
+      <a href="products.html">${icon("shopping-bag", 19)}<span>Store <span class="onemart-coming-badge">Coming soon</span></span></a>
       <a href="track-application.html">${icon("search", 19)}<span>Track</span></a>
       <a href="contact.html">${icon("message-circle", 19)}<span>Contact</span></a>
     </nav>

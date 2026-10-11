@@ -4,6 +4,14 @@
    Sections are authored fresh and verified against the live design.
    ============================================================================ */
 
+/* OneMart remains available as a preview notice until its catalog is ready. */
+.onemart-coming-badge { display: inline-flex; align-items: center; margin-inline-start: var(--eds-space-2); padding: 2px 6px; border-radius: var(--r-sm); background: var(--primary); color: var(--white); font-size: 10px; line-height: 1.4; white-space: nowrap; animation: onemart-coming-pulse 2s ease-in-out infinite; }
+@keyframes onemart-coming-pulse { 0%, 100% { opacity: 1; } 50% { opacity: .65; } }
+@media (prefers-reduced-motion: reduce) { .onemart-coming-badge { animation: none !important; } }
+.onemart-coming-page { min-height: 60vh; display: grid; place-items: center; padding-block: var(--eds-space-6); text-align: center; }
+.onemart-coming-page h1 { font-size: clamp(2rem, 7vw, 4rem); color: var(--primary); }
+.onemart-coming-page p { max-width: 40ch; margin-inline: auto; color: var(--muted); }
+
 /* ---------------------------------------------------------------------------
    1. TOKENS
    --------------------------------------------------------------------------- */
