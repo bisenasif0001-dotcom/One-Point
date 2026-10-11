@@ -11,9 +11,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@700;800;900&display=swap" rel="stylesheet">
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
     <script src="assets/opds-boot.js?v=anti-fouc-79"></script>
-    <link rel="stylesheet" href="assets/onepoint.css?v=customer-checkout-94">
-  </head>
+    <link rel="stylesheet" href="assets/onepoint.css?v=performance-105">
+    <link rel="stylesheet" href="assets/checkout-ux.css?v=performance-105">
+    <script src="assets/deployment-config.js?v=1"></script>
+  <script src="assets/transaction-host.js?v=1"></script>
+</head>
   <body class="elite-console-body enterprise-checkout-body">
+    <a class="opds-skip-link" href="#main-content">Skip to checkout form</a>
     <header class="elite-console-topbar enterprise-checkout-topbar">
       <div class="checkout-topbar-inner">
         <div class="topbar-left">
@@ -38,7 +42,7 @@
       </div>
     </header>
 
-    <main class="checkout-grid-container enterprise-checkout-page" aria-labelledby="checkout-title">
+    <main id="main-content" tabindex="-1" class="checkout-grid-container enterprise-checkout-page" aria-labelledby="checkout-title">
       <section class="checkout-wizard-card enterprise-checkout-panel">
         <div class="checkout-panel-hero">
           <div>
@@ -51,7 +55,7 @@
               <span class="pulse-dot-green"></span>
               <span>Secure Session</span>
             </div>
-            <strong id="slot-timer">15:00</strong>
+            <strong>Ready when you are</strong>
           </div>
         </div>
 
@@ -99,26 +103,12 @@
               </div>
             </div>
 
+            <a id="scope-quote-link" class="eds-btn eds-btn-secondary" hidden target="_blank" rel="noopener">Request a scope and price quote</a>
             <!-- Saved Customer Quick Fill -->
             <div class="checkout-saved-customer" id="checkout-saved-customer" hidden></div>
 
             <!-- Applicant Form Editor -->
             <div id="checkout-customer-editor">
-              <div class="profile-choice-row" role="radiogroup" aria-label="Filing profile type">
-                <label class="profile-choice-card active">
-                  <i data-lucide="user-round"></i>
-                  <span><strong>Personal applicant</strong><small>Individual citizen filing & certificates</small></span>
-                  <span class="choice-dot"></span>
-                  <input type="radio" name="profileType" value="personal" checked onclick="toggleProfileType('personal')">
-                </label>
-                <label class="profile-choice-card">
-                  <i data-lucide="building-2"></i>
-                  <span><strong>Business entity</strong><small>GSTIN & corporate filings</small></span>
-                  <span class="choice-dot"></span>
-                  <input type="radio" name="profileType" value="business" onclick="toggleProfileType('business')">
-                </label>
-              </div>
-
               <div class="form-grid elite-form-grid enterprise-form-grid">
                 <div class="form-field enterprise-field span-2">
                   <input class="eds-input" id="checkout-name" name="name" autocomplete="name" required placeholder=" " oninput="validateLiveInput(this)">
@@ -128,24 +118,44 @@
                 <div class="form-field enterprise-field">
                   <input class="eds-input" id="checkout-mobile" name="mobile" type="tel" inputmode="numeric" autocomplete="tel" required placeholder=" " pattern="[0-9]{10}" maxlength="10" oninput="validateLiveInput(this)">
                   <label for="checkout-mobile">Mobile Number *</label>
-                  <small>Real-time WhatsApp & SMS application updates are sent here.</small>
+                  <small>Contact number for your order and document follow-up.</small>
                 </div>
                 <div class="form-field enterprise-field">
                   <input class="eds-input" id="checkout-email" name="email" type="email" autocomplete="email" required placeholder=" " oninput="validateLiveInput(this)">
                   <label for="checkout-email">Email Address *</label>
-                  <small>Official receipt and tracking link will be sent to this email.</small>
+                  <small>Email for your receipt and order updates.</small>
                 </div>
+              </div>
+              <details class="checkout-optional-details" id="checkout-optional-details">
+                <summary>Address &amp; invoice details (optional)</summary>
+              <div class="profile-choice-row" role="radiogroup" aria-label="Invoice details">
+                <label class="profile-choice-card active">
+                  <i data-lucide="user-round"></i>
+                  <span><strong>Personal invoice</strong><small>Individual invoice</small></span>
+                  <span class="choice-dot"></span>
+                  <input type="radio" name="profileType" value="personal" checked onclick="toggleProfileType('personal')">
+                </label>
+                <label class="profile-choice-card">
+                  <i data-lucide="building-2"></i>
+                  <span><strong>Business invoice</strong><small>Add GSTIN if available</small></span>
+                  <span class="choice-dot"></span>
+                  <input type="radio" name="profileType" value="business" onclick="toggleProfileType('business')">
+                </label>
+              </div>
+
+              <div class="form-grid elite-form-grid enterprise-form-grid">
                 <div class="form-field enterprise-field span-2">
-                  <input class="eds-input" id="checkout-address" name="address" autocomplete="street-address" required placeholder=" " oninput="validateLiveInput(this)">
-                  <label for="checkout-address">Complete Postal Address *</label>
-                  <small>Your mailing / communication address for certificate delivery.</small>
+                  <input class="eds-input" id="checkout-address" name="address" autocomplete="street-address" placeholder=" " oninput="validateLiveInput(this)">
+                  <label for="checkout-address">Postal Address (optional)</label>
+                  <small>Add an address if your request needs postal delivery.</small>
                 </div>
                 <div class="form-field enterprise-field span-2" id="gst-field-container" style="display: none;">
                   <input class="eds-input" id="checkout-gst" name="gstin" placeholder=" " oninput="validateGstinInput(this)">
-                  <label for="checkout-gst">GSTIN Number *</label>
+                  <label for="checkout-gst">Invoice GSTIN (optional)</label>
                   <small id="gstin-help">Example: 07AAAAA1111A1Z1</small>
                 </div>
               </div>
+              </details>
             </div>
 
             <div class="checkout-trust-grid" aria-label="Checkout trust layer">
@@ -172,6 +182,10 @@
               </div>
             </div>
 
+            <div class="checkout-docs-later-shortcut">
+              <button type="button" class="eds-btn eds-btn-secondary" id="details-docs-later-btn" onclick="continueWithDocumentsLater()">Send documents later &amp; continue to payment <i data-lucide="arrow-right"></i></button>
+              <small>Share required documents on WhatsApp after ordering. Processing starts after document review.</small>
+            </div>
             <div class="checkout-actions end">
               <button type="button" class="eds-btn eds-btn-primary" id="service-continue-btn" onclick="continueFromStep1()">Continue to Documents <i data-lucide="arrow-right"></i></button>
             </div>
@@ -191,22 +205,19 @@
 
             <div class="document-command-grid">
               <aside class="document-checklist-card">
-                <span class="mini-eyebrow"><i data-lucide="list-checks"></i> Recommended Checklist</span>
+                <span class="mini-eyebrow"><i data-lucide="list-checks"></i> Selected Service Checklist</span>
                 <h3>Keep these ready</h3>
-                <ul>
-                  <li><i data-lucide="check"></i> Identity proof (Aadhaar / Voter ID)</li>
-                  <li><i data-lucide="check"></i> Address proof / Certificate copy</li>
-                  <li><i data-lucide="check"></i> Passport-size photograph</li>
-                  <li><i data-lucide="check"></i> Signature / Marksheet (if needed)</li>
+                <ul id="service-document-checklist">
+                  <li>Loading requirements for your selected service…</li>
                 </ul>
-                <p>Your documents stay 100% encrypted and are used strictly for portal filing.</p>
+                <p id="service-document-policy-note">Our operator will review the documents needed for your selected task.</p>
               </aside>
 
               <div>
                 <div class="drag-drop-area" id="drag-drop-zone" onclick="triggerFileInput()" role="button" tabindex="0" aria-label="Upload documents">
                   <span class="upload-orb"><i data-lucide="upload-cloud"></i></span>
                   <h3>Drop documents here or browse</h3>
-                  <p>PDF, JPG, PNG supported. Up to 10MB per file.</p>
+                  <p>PDF, JPG, PNG supported. Up to 3MB per file.</p>
                   <div class="upload-action-row">
                     <button type="button" class="eds-btn eds-btn-primary" onclick="event.stopPropagation(); triggerFileInput();"><i data-lucide="folder-open"></i> Browse Files</button>
                     <button type="button" class="eds-btn eds-btn-secondary" onclick="event.stopPropagation(); triggerCamera();"><i data-lucide="camera"></i> Camera</button>
@@ -263,23 +274,9 @@
             </div>
 
             <!-- 1-Click Coupon Section -->
-            <div class="checkout-coupon-card">
-              <div class="coupon-command-row">
-                <div class="enterprise-field coupon-field">
-                  <input class="eds-input" id="coupon-code" placeholder=" " autocomplete="off">
-                  <label for="coupon-code">Have a Coupon Code?</label>
-                  <small>Enter promo code or tap the special offer below.</small>
-                </div>
-                <button type="button" class="eds-btn eds-btn-primary" onclick="applyPromoCoupon()">Apply Code</button>
-              </div>
-              <div class="coupon-quick-row">
-                <span class="coupon-quick-label">Special Offer:</span>
-                <button type="button" class="coupon-pill-btn" onclick="applyQuickCoupon('ONEPOINT10')">
-                  <i data-lucide="sparkles"></i> Use <strong>ONEPOINT10</strong> for 10% Instant OFF
-                </button>
-              </div>
-              <div id="coupon-feedback" class="coupon-feedback" style="display: none;"></div>
-            </div>
+            <details class="checkout-optional-details"><summary>Have a coupon?</summary><p>Offers appear here when verified by the server. No coupon is currently configured.</p></details>
+            <p id="server-price-status" role="status">Preview total. The server verifies the amount before payment.</p>
+
 
             <input type="hidden" name="payment_method" id="payment-method-input" value="">
             <input type="hidden" name="payment_plan" id="payment-plan-input" value="full">
@@ -304,11 +301,11 @@
                   <td id="breakdown-gov">Rs. 0.00</td>
                 </tr>
                 <tr>
-                  <td>One Point Service Charge</td>
+                  <td>Selected items / service fee</td>
                   <td id="breakdown-platform">Rs. 0.00</td>
                 </tr>
                 <tr>
-                  <td>GST on Service Charge (18%)</td>
+                  <td>Tax (catalogue rate)</td>
                   <td id="breakdown-gst">Rs. 0.00</td>
                 </tr>
                 <tr id="discount-row" class="discount-row" style="display: none;">
@@ -431,7 +428,7 @@
             <strong id="summary-gov">Rs. 0.00</strong>
           </div>
           <div>
-            <span>Service charge</span>
+            <span>Selected items / service fee</span>
             <strong id="summary-platform">Rs. 0.00</strong>
           </div>
           <div>
@@ -475,7 +472,7 @@
 
       <!-- Mobile Price Breakdown Bottom Sheet Drawer -->
       <div id="mobile-price-drawer-backdrop" class="mobile-price-drawer-backdrop" onclick="toggleMobilePriceDrawer(false)"></div>
-      <div id="mobile-price-drawer" class="mobile-price-drawer" role="dialog" aria-modal="true" aria-label="Price breakdown">
+      <dialog id="mobile-price-drawer" class="mobile-price-drawer" aria-modal="true" aria-label="Price breakdown">
         <div class="drawer-handle-bar" onclick="toggleMobilePriceDrawer(false)"><span class="drawer-handle"></span></div>
         <div class="drawer-head">
           <h3><i data-lucide="calculator"></i> Price Breakdown</h3>
@@ -487,11 +484,11 @@
             <strong id="drawer-gov">Rs. 0.00</strong>
           </div>
           <div class="drawer-row">
-            <span>One Point Service Charge</span>
+            <span>Selected items / service fee</span>
             <strong id="drawer-platform">Rs. 0.00</strong>
           </div>
           <div class="drawer-row">
-            <span>GST on Service Charge (18%)</span>
+            <span>Tax (catalogue rate)</span>
             <strong id="drawer-gst">Rs. 0.00</strong>
           </div>
           <div class="drawer-row drawer-discount-row" id="drawer-discount-row" style="display: none;">
@@ -507,7 +504,7 @@
             <small><i data-lucide="shield-check"></i> 100% transparent pricing &bull; CSC authorized desk &bull; Lucknow Suvidha Kendra</small>
           </div>
         </div>
-      </div>
+      </dialog>
 
       <div class="checkout-mobile-cta" aria-label="Mobile checkout action">
         <div class="mobile-cta-price-block" onclick="toggleMobilePriceDrawer()" role="button" tabindex="0" aria-label="View price breakdown">
@@ -524,8 +521,12 @@
     <div data-site-footer></div>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
     <script src="assets/catalog-pricing.js?v=checkout-pricing-83"></script>
-    <script src="assets/app.js?v=customer-checkout-94" defer></script>
-    <script src="assets/payment-methods.js?v=checkout-polish-81" defer></script>
-    <script src="assets/checkout.js?v=saved-customer-94" defer></script>
-  </body>
+    <script src="assets/pilot-metrics.js?v=release-107" defer></script>
+    <script src="assets/app.js?v=release-108" defer></script>
+    <script src="assets/payment-methods.js?v=pricing-101" defer></script>
+    <script src="assets/print-product-rules.js?v=1" defer></script>
+    <script src="assets/service-policy.js?v=1" defer></script>
+    <script src="assets/checkout.js?v=release-107" defer></script>
+  <script src="assets/document-upload.js?v=release-107" defer></script>
+</body>
 </html>

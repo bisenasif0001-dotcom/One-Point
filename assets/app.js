@@ -185,6 +185,7 @@ function renderPublicHeroDashboard(hero) {
 }
 
 function initializeLivePerformanceAnalytics(root = document) {
+  if (document.body.id === "homepage-body" && matchMedia("(max-width: 720px)").matches) return;
   root.querySelectorAll("[data-live-performance]").forEach((panel) => {
     if (panel.dataset.livePerformanceReady === "true") return;
     panel.dataset.livePerformanceReady = "true";
@@ -660,6 +661,7 @@ initializeLivePerformanceAnalytics(document);
    ============================================================================ */
 
 function initializeHeroIndiaNetworkMap() {
+  if (window.matchMedia("(max-width: 720px), (prefers-reduced-motion: reduce)").matches) return;
   const host = document.querySelector("[data-hero-india-map]");
   const canvas = document.getElementById("hero-india-map-canvas");
   const badgesLayer = document.getElementById("hero-india-badges-layer");
@@ -1468,6 +1470,7 @@ if (document.readyState === "loading") {
    - Battery efficient: IntersectionObserver pauses rendering when off-screen
    ============================================================================ */
 function initializeStudentStripeCurves() {
+  if (matchMedia("(max-width: 720px)").matches) return;
   const section = document.getElementById("student-corner-section");
   const canvas = document.getElementById("student-stripe-curves-canvas");
   if (!section || !canvas) return;
@@ -1567,7 +1570,7 @@ function initializeStudentStripeCurves() {
     }
 
     if (reducedMotion) {
-      render(0);
+      queueMicrotask(() => render(0));
     }
   }
 
@@ -1766,6 +1769,7 @@ function initializeStudentStripeCurves() {
    - ResizeObserver + high DPI support
    ============================================================================ */
 function initializeBentoComparisonPulseHighway() {
+  if (matchMedia("(max-width: 720px)").matches) return;
   const canvas = document.getElementById("bento-comparison-canvas");
   if (!canvas) return;
 
@@ -1790,7 +1794,7 @@ function initializeBentoComparisonPulseHighway() {
     dpr = Math.min(window.devicePixelRatio || 1, 2);
     canvas.width = Math.round(width * dpr);
     canvas.height = Math.round(height * dpr);
-    if (reducedMotion) render(0);
+    if (reducedMotion) queueMicrotask(() => render(0));
   }
 
   if (window.ResizeObserver) {
@@ -2710,7 +2714,7 @@ const serviceRoutes = {
   "GST Registration": "service-gst-registration.html",
   "Income Tax Assistance": "service-income-tax-assistance.html",
   "Business Registration & Corporate Setup": "service-business-registration-corporate-setup.html",
-  "MSME Registration": "service-business-registration-corporate-setup.html",
+  "MSME Registration": "checkout.html?service=msme-registration",
   "Legal Drafting & Court Services Assistance": "service-legal-drafting-court-services.html",
   "FSSAI": "service-business-registration-corporate-setup.html",
   "FSSAI License": "service-business-registration-corporate-setup.html",
@@ -2857,6 +2861,8 @@ const mobileServiceGroups = [
 ];
 
 const searchIndex = [
+  { term: "msme udyam udyog aadhaar registration business certificate", title: "MSME / Udyam Registration", href: "checkout.html?service=msme-registration" },
+  { term: "visiting business cards printing pack", title: "Visiting Cards", href: "product-detail.html?product=visiting-cards" },
   { term: "pan banana hai pan card apply", title: "PAN Card Apply", href: "service-pan-card.html" },
   { term: "admit card download hall ticket", title: "Admit Card Download", href: "edupoint.html#admit-card-download" },
   { term: "gst registration gst number goods services tax", title: "GST Registration", href: "service-gst-registration.html" },
@@ -2978,11 +2984,12 @@ function serviceApplyHref(service, category = "general") {
   if (isWhatsAppLaunchMode()) return buildServiceWhatsAppUrl(service, category);
   const serviceName = (service || "General Support").trim();
   const panAlias = panServiceAlias(serviceName);
+  const catalogTask = findCatalogPricing(serviceName, panAlias?.slug || "");
   const params = new URLSearchParams();
-  params.set("service", panAlias?.slug || slugify(serviceName) || "general-support");
+  params.set("service", panAlias?.slug || catalogTask?.slug || slugify(serviceName) || "general-support");
   params.set("service_name", serviceName);
   if (category && category !== "general") params.set("category", category);
-  return `checkout.html?${params.toString()}`;
+  return `${(!catalogTask && !panAlias) || catalogTask?.pricingModel === 'starting_from' ? 'service-request.html' : 'checkout.html'}?${params.toString()}`;
 }
 
 function isPanServiceLabel(label = "") {
@@ -3917,7 +3924,14 @@ function setupMobileNav() {
   window.addEventListener("resize", updateHeaderOffset, { passive: true });
   window.addEventListener("scroll", updateHeaderOffset, { passive: true });
 
-  const setOpen = (open) => {
+  const mobileLayout = () => window.matchMedia('(max-width: 980px)').matches;
+  const setOpen = (open, fromHistory = false) => {
+    const wasOpen = menu.classList.contains('open');
+    if (mobileLayout() && open && !wasOpen && !fromHistory) history.pushState({ ...history.state, opdsMobileMenu: true }, '', location.href);
+    if (!open && history.state?.opdsMobileMenu && !fromHistory) {
+      const state = { ...history.state }; delete state.opdsMobileMenu;
+      history.replaceState(state, '', location.href);
+    }
     updateHeaderOffset();
     menu.classList.toggle("open", open);
     document.body.classList.toggle("nav-open", open);
@@ -3926,8 +3940,17 @@ function setupMobileNav() {
       menu.scrollTop = 0;
       const scrollable = menu.querySelector(".mobile-nav-menu");
       if (scrollable) scrollable.scrollTop = 0;
-    }
+      if (mobileLayout()) closeBtn?.focus({ preventScroll: true });
+    } else if (wasOpen && mobileLayout()) toggle.focus({ preventScroll: true });
   };
+  window.addEventListener('popstate', () => setOpen(Boolean(history.state?.opdsMobileMenu), true));
+  menu.addEventListener('keydown', event => {
+    if (event.key !== 'Tab' || !mobileLayout() || !menu.classList.contains('open')) return;
+    const controls = [...menu.querySelectorAll('a[href], button, input')].filter(el => !el.disabled && el.getClientRects().length);
+    const first = controls[0], last = controls.at(-1);
+    if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last?.focus(); }
+    else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first?.focus(); }
+  });
 
   let hideTimer = null;
   let lastHoverOpenTime = 0;
@@ -3965,6 +3988,7 @@ function setupMobileNav() {
 
   // Desktop mouse hover open & smooth auto-hide on mouse leave
   toggle.addEventListener("mouseenter", () => {
+    if (!matchMedia("(hover: hover) and (pointer: fine)").matches || mobileLayout()) return;
     cancelAutoHide();
     if (!menu.classList.contains("open")) {
       lastHoverOpenTime = Date.now();
@@ -5297,69 +5321,30 @@ function setupTracker() {
     if (fileInput) fileInput.click();
   };
 
+  let trackerUploadBusy = false;
   const uploadSelectedFile = async (file, docType) => {
-    if (!file) return;
-    const orderId = currentOrderData?.order?.orderId || (new URLSearchParams(window.location.search).get("id") || new URLSearchParams(window.location.search).get("order") || "");
-    if (!orderId) {
-      alert("Please track an application first before uploading documents.");
-      return;
-    }
-
-    if (file.size > 5 * 1024 * 1024) {
-      alert("File size exceeds 5MB limit. Please upload a smaller file.");
-      return;
-    }
-
-    if (progressWrapper) progressWrapper.style.display = "block";
-    if (progressFill) progressFill.style.width = "40%";
-    if (progressText) progressText.textContent = `Uploading ${file.name}…`;
-
+    if (!file || trackerUploadBusy) return;
+    const orderId = currentOrderData?.order?.orderId;
+    if (!orderId) { alert('Track your application before sending documents.'); return; }
+    trackerUploadBusy = true;
+    if (browseBtn) browseBtn.disabled = true;
+    if (progressWrapper) progressWrapper.style.display = 'block';
+    if (progressText) progressText.textContent = 'Sending document…';
+    if (progressFill) progressFill.style.width = '0%';
     try {
-      const csrf = await getCsrfToken();
-      if (progressFill) progressFill.style.width = "75%";
-
-      const res = await fetch("/api/orders/documents", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "X-CSRF-Token": csrf
-        },
-        body: JSON.stringify({
-          orderId,
-          docType: docType || docTypeSelect?.value || "supporting_doc",
-          fileName: file.name,
-          fileSizeBytes: file.size,
-          mimeType: file.type || "application/octet-stream"
-        })
-      });
-
-      const json = await res.json();
-      if (!res.ok) throw new Error(json.message || "Upload failed");
-
-      if (progressFill) progressFill.style.width = "100%";
-      if (progressText) progressText.textContent = `✓ '${file.name}' uploaded successfully! Auto-verification running…`;
-
-      setTimeout(() => {
-        if (progressWrapper) progressWrapper.style.display = "none";
-        if (progressFill) progressFill.style.width = "0%";
-        trackApplication(orderId, { silent: true });
-      }, 1500);
-    } catch (err) {
-      if (progressFill) {
-        progressFill.style.width = "100%";
-        progressFill.style.background = "#ef4444";
-      }
-      if (progressText) progressText.textContent = `Upload failed: ${err.message}`;
-      setTimeout(() => {
-        if (progressWrapper) progressWrapper.style.display = "none";
-        if (progressFill) {
-          progressFill.style.width = "0%";
-          progressFill.style.background = "#16a34a";
-        }
-      }, 3000);
+      if (!window.OPDSDocuments) await import('./document-upload.js?v=verification-106');
+      await window.OPDSDocuments.send(orderId, file, docType || docTypeSelect?.value || 'supporting_document');
+      if (progressFill) progressFill.style.width = '100%';
+      if (progressText) progressText.textContent = 'Document received. Operator review pending.';
+      if (fileInput) fileInput.value = '';
+      await trackApplication(orderId, { silent: true });
+    } catch (error) {
+      if (progressText) progressText.textContent = 'Document not sent: ' + error.message + ' Retry the selected file or open order documents.';
+    } finally {
+      trackerUploadBusy = false;
+      if (browseBtn) browseBtn.disabled = false;
     }
   };
-
   if (browseBtn && fileInput) {
     browseBtn.addEventListener("click", (e) => {
       e.stopPropagation();
@@ -7077,6 +7062,18 @@ function renderProductDetail() {
 
   // 3. Calculation and UI Sync Function
   function syncPricingEngine() {
+    if (product.slug === "visiting-cards") {
+      root.querySelectorAll('.pd-config-desk, #pd-btn-cart, #pd-sum-save, .pd-sum-timeline, .pd-sum-pickup-note').forEach(el => { el.hidden = true; el.style.display = 'none'; });
+      const setCopy = (selector, text) => { const el = root.querySelector(selector); if (el) el.textContent = text; };
+      setCopy('#pd-sum-price', `₹${product.price} per pack before tax`);
+      setCopy('#pd-sum-config', '100 visiting cards per catalogue pack. Custom specifications require a quote.');
+      setCopy('#pd-sum-unit', 'Artwork and finish reviewed before printing');
+      setCopy('#pd-floating-summary', '100 cards per pack · choose pack count');
+      root.querySelectorAll('#pd-btn-buy, #pd-floating-buy').forEach(el => { el.href = `checkout.html?product=visiting-cards&qty=1&pack_size=100`; el.textContent = 'Choose packs'; });
+      const help = root.querySelector('#pd-btn-wa');
+      if (help) help.href = 'https://wa.me/919473946181?text=Please%20quote%20custom%20visiting%20cards';
+      return;
+    }
     let materialExtra = (selectedMaterial === "Holographic") ? (selectedQty * 0.5) : 0;
     let calculatedTotal = Math.round((basePrice * sizeMultiplier) + materialExtra);
     let perItem = (calculatedTotal / selectedQty).toFixed(2);
@@ -7105,9 +7102,13 @@ function renderProductDetail() {
     }
     if (floatingSummary) floatingSummary.textContent = `${selectedQty} pcs (${selectedSize}) · ₹${calculatedTotal}`;
 
-    const checkoutUrl = `checkout.html?product=${product.slug}&shape=${encodeURIComponent(selectedShape)}&size=${encodeURIComponent(selectedSize)}&material=${encodeURIComponent(selectedMaterial)}&finish=${encodeURIComponent(selectedFinish)}&qty=${selectedQty}&total=${calculatedTotal}`;
+    // Only catalog packs have verified configuration pricing. Custom designs
+    // need a confirmed quote before any fixed-price checkout.
+    const checkoutUrl = `service-request.html?service=${encodeURIComponent(product.slug)}&service_name=${encodeURIComponent(product.name)}`;
     if (buyBtn) buyBtn.href = checkoutUrl;
     if (floatingBuy) floatingBuy.href = checkoutUrl;
+    if (buyBtn) buyBtn.textContent = 'Request custom quote';
+    if (floatingBuy) floatingBuy.textContent = 'Request custom quote';
 
     const waMsg = `Hi One Point, I want to order ${selectedQty} pcs ${product.name}.\n• Shape: ${selectedShape}\n• Size: ${selectedSize}\n• Material: ${selectedMaterial}\n• Finish: ${selectedFinish}\n• Total: Rs.${calculatedTotal}${uploadedFileName ? "\n• File: " + uploadedFileName : ""}`;
     if (waBtn) waBtn.href = `https://wa.me/919473946181?text=${encodeURIComponent(waMsg)}`;
@@ -10615,6 +10616,12 @@ function setupDynamicQuickServices() {
 
   const rotatingPool = [
     {
+      title: "MSME Registration", tag: "Operator review", category: "business", popular: true,
+      accent: "#d2a12a", icon: "file-badge", desc: "Udyam registration assistance with your business details.",
+      actions: [{ label: "Order now", href: "checkout.html?service=msme-registration", primary: true }],
+      detailsHref: "service-business-registration-corporate-setup.html"
+    },
+    {
       title: "Admit Card & Results",
       tag: "Instant",
       category: "student",
@@ -10858,6 +10865,16 @@ function setupDynamicQuickServices() {
   }
 
   function updateCarousel() {
+    if (window.innerWidth <= 720) {
+      currentIndex = 0;
+      grid.style.transform = "none";
+      grid.style.width = "100%";
+      [...grid.children].forEach((card, index) => {
+        card.hidden = index >= 6;
+        card.style.setProperty("display", index < 6 ? "flex" : "none", "important");
+      });
+      return;
+    }
     const visible = getVisibleCards();
     const maxIndex = Math.max(0, currentFilteredList.length - visible);
     
@@ -10902,6 +10919,7 @@ function setupDynamicQuickServices() {
 
   function startAutoRotate() {
     stopAutoRotate();
+    if (window.innerWidth <= 720 || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     autoRotateInterval = setInterval(() => {
       const visible = getVisibleCards();
       const maxIndex = Math.max(0, currentFilteredList.length - visible);
@@ -10930,6 +10948,7 @@ function setupDynamicQuickServices() {
   }, { passive: true });
 
   function handleSwipe() {
+    if (window.innerWidth <= 720) return;
     const swipeThreshold = 50; // minimum swipe distance in px
     const diff = touchStartX - touchEndX;
     
@@ -11034,10 +11053,10 @@ function setupDynamicQuickServices() {
           <div class="voter-meta-sub">Government portal fee: ${officialFeeLabel}</div>
         </div>
         <div class="voter-action-stack">
-          <a class="btn btn-primary font-bold btn-service-select" href="${primaryAct.href}"${String(primaryAct.href).includes("wa.me") ? ' target="_blank" rel="noopener"' : ""}>
-            Apply for Assistance <i data-lucide="arrow-right"></i>
+          <a class="btn btn-primary font-bold btn-service-select" href="${primaryAct.href}"${service.title === "PAN Card Assistance" ? ' data-quick-order="pan"' : ""}${String(primaryAct.href).includes("wa.me") ? ' target="_blank" rel="noopener"' : ""}>
+            ${service.title === "PAN Card Assistance" ? "Choose Service" : service.title === "MSME Registration" ? "Order now" : "Apply for Assistance"} <i data-lucide="arrow-right"></i>
           </a>
-          <a class="voter-view-req" href="${primaryAct.href}">View requirements</a>
+          <a class="voter-view-req" href="${service.detailsHref || primaryAct.href}">View requirements</a>
         </div>
       </article>
     `;
@@ -11087,6 +11106,7 @@ function setupDynamicQuickServices() {
   // Handle Resize and Orientation changes
   window.addEventListener("resize", () => {
     updateCarousel();
+    startAutoRotate();
   });
 
   renderGrid("all");
@@ -13983,28 +14003,10 @@ function setupFormAbandonmentRecovery() {
   restoreFormState();
 }
 
-window.trackAnalyticsEvent = function(eventName, eventParams = {}) {
-  const payload = {
-    event: eventName,
-    params: {
-      ...eventParams,
-      timestamp: new Date().toISOString(),
-      url: window.location.href,
-      referrer: document.referrer
-    }
-  };
-
-  console.log(`[Analytics] Event Logged: ${eventName}`, payload);
-
-  let logs = [];
-  try {
-    logs = JSON.parse(localStorage.getItem('opds_analytics_logs') || '[]');
-  } catch (e) {}
-  logs.push(payload);
-  if (logs.length > 100) logs.shift();
-  localStorage.setItem('opds_analytics_logs', JSON.stringify(logs));
+// Legacy analytics callers must never persist their raw parameters or URLs.
+window.trackAnalyticsEvent = function(eventName) {
+  window.OPDSPilotMetrics?.track(eventName);
 };
-
 document.addEventListener("DOMContentLoaded", () => {
   const filename = window.location.pathname.split('/').pop() || 'index.html';
   const isServicePage = filename.startsWith('service-') || 
@@ -14041,6 +14043,7 @@ document.addEventListener("DOMContentLoaded", () => {
   (function initDashboard() {
     const mainCard = document.querySelector('.command-main');
     if (!mainCard) return;
+    if (window.matchMedia('(max-width: 720px), (prefers-reduced-motion: reduce)').matches) return;
 
     const orders = [
       { id: 'OPDS2026-PAN', status: 'Documents verified. Review in progress.', progress: 68, color: 'var(--accent-gold)' },
@@ -14146,6 +14149,7 @@ document.addEventListener("DOMContentLoaded", () => {
   (function initHeroCanvas() {
     const canvas = document.getElementById('hero-canvas');
     if (!canvas) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     const ctx = canvas.getContext('2d');
     let W, H, particles, mouse = { x: -9999, y: -9999 };
     const COUNT = 72, CONNECT_DIST = 130, MOUSE_RADIUS = 160;

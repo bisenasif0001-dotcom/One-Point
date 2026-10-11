@@ -1,0 +1,12 @@
+body main { max-width: var(--container-sm, 48rem); margin: var(--eds-space-5) auto; padding: var(--eds-space-4); }
+main h1 { font-size: var(--eds-fs-xl); line-height: var(--eds-lh-heading); }
+main p, main li { overflow-wrap: anywhere; line-height: var(--eds-lh-body); }
+#order-document-form { display: grid; gap: var(--eds-space-3); margin: var(--eds-space-4) 0; }
+#order-document-form[hidden] { display: none; }
+#order-document-files { min-width: 0; max-width: 100%; }
+main a { display: inline-block; padding-block: var(--eds-space-2); }
+main [hidden] { display: none !important; }
+
+#order-document-files { font-size: var(--eds-fs-lg); min-height: var(--touch-target); }
+#order-document-form button, main a { min-height: var(--touch-target); }
+#order-document-selected p { overflow-wrap: anywhere; }

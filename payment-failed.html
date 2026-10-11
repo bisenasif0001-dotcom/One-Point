@@ -11,6 +11,8 @@
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
         <script src="assets/opds-boot.js?v=anti-fouc-79"></script>
         <link rel="stylesheet" href="assets/onepoint.css?v=customer-checkout-94">
+  <script src="assets/deployment-config.js?v=1"></script>
+  <script src="assets/transaction-host.js?v=1"></script>
 </head>
   <body>
     <div data-site-nav></div>
@@ -39,16 +41,17 @@
         </div>
         <div class="retry-gateway-rail" data-retry-rail aria-label="Retry with a different gateway"></div>
         <div class="status-actions">
-          <a class="btn btn-primary" href="checkout.html">Retry Payment</a>
+          <button class="btn btn-primary" type="button" data-retry-payment="razorpay">Retry Payment</button>
           <a class="btn btn-ghost" id="payment-support-link" href="support.html">Contact Support</a>
         </div>
-        <p class="payment-redirect-note" style="margin-top: 14px;">Amount debited but payment failed? It is auto-refunded by the gateway within 5&ndash;7 working days.</p>
+        <p class="payment-redirect-note" style="margin-top: 14px;">Amount debited? Check the existing order status and contact support before paying again. Refund timing depends on the bank and gateway.</p>
       </section>
     </main>
     <div data-site-footer></div>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
-    <script src="assets/app.js?v=customer-checkout-94" defer></script>
+    <script src="assets/pilot-metrics.js?v=release-107" defer></script>
+    <script src="assets/app.js?v=release-108" defer></script>
     <script src="assets/payment-methods.js?v=pay-registry-v1" defer></script>
-    <script src="assets/payment-status.js?v=payment-system-v3" defer></script>
+    <script src="assets/payment-status.js?v=release-107" defer></script>
 </body>
 </html>

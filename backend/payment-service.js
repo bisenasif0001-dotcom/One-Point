@@ -26,6 +26,7 @@ const {
 } = require("./utils");
 
 const gatewayAdapters = { razorpay, phonepe };
+const servicePolicy = require("../assets/service-policy");
 const gatewayOrder = ["razorpay", "phonepe"];
 
 function objectPayload(sourceTable, sourcePk) {
@@ -61,10 +62,12 @@ function normalizeCustomer(input = {}) {
     name: safeString(input.name, 120),
     phone: safePhone(input.phone),
     email: safeString(input.email, 160),
-    address: safeString(input.address, 500)
+    address: safeString(input.address, 500),
+    gstin: safeString(input.gstin, 40).toUpperCase()
   };
-  if (!customer.name) throw new Error("Customer name is required.");
-  if (customer.phone.length < 10) throw new Error("A valid phone number is required.");
+  const errors = servicePolicy.validateApplicant(customer);
+  if (errors.length) throw new Error(errors[0]);
+  if (customer.gstin && !/^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z][1-9A-Z]Z[0-9A-Z]$/.test(customer.gstin)) throw new Error('Enter a valid invoice GSTIN or leave it blank.');
   return customer;
 }
 
@@ -79,8 +82,7 @@ function serviceLookupCandidates(item = {}) {
   return unique([
     rawSlug,
     pricingEngine.canonicalSlug(rawSlug),
-    pricingEngine.slugify(rawName),
-    pricingEngine.canonicalSlug(rawName)
+    ...(!rawSlug ? [pricingEngine.slugify(rawName), pricingEngine.canonicalSlug(rawName)] : [])
   ]);
 }
 
@@ -92,7 +94,7 @@ function findServicePricingRow(item = {}) {
     const variant = db.get("SELECT * FROM service_pricing_variants WHERE variant_slug = ? AND active = 1", [candidate]);
     if (variant) return { row: variant, source: "variant" };
   }
-  if (rawName) {
+  if (!item.slug && !item.item_slug && rawName) {
     const variantByName = db.get(
       "SELECT * FROM service_pricing_variants WHERE LOWER(variant_name) = LOWER(?) AND active = 1",
       [rawName]
@@ -104,7 +106,7 @@ function findServicePricingRow(item = {}) {
     const service = db.get("SELECT * FROM services WHERE slug = ? AND active = 1", [candidate]);
     if (service) return { row: service, source: "service" };
   }
-  if (rawName) {
+  if (!item.slug && !item.item_slug && rawName) {
     const serviceByName = db.get("SELECT * FROM services WHERE LOWER(name) = LOWER(?) AND active = 1", [rawName]);
     if (serviceByName) return { row: serviceByName, source: "service" };
   }
@@ -118,6 +120,8 @@ function buildServiceItem(item, quantity) {
 
   const row = serviceEngine.applyActiveServiceDnaToPricingRow(match.row);
   const pricing = pricingEngine.publicPricingPayload(row);
+  if (pricing.model === 'starting_from') throw new Error('This service needs a scope review. Request a quote before payment.');
+  if (Number(item.actualAmount || item.actual_amount || 0) !== 0) throw new Error('Additional charges require an operator-confirmed quote.');
   const actualAmountPaise = Math.max(0, Math.round(Number(item.actualAmount || item.actual_amount || 0) * 100));
   const unit = Number(row.price_paise || 0) + (
     pricing.model === pricingEngine.PRICING_MODELS.SERVICE_PLUS_ACTUAL ? actualAmountPaise : 0
@@ -152,17 +156,20 @@ function buildItems(payload) {
 
   return inputItems.map((item) => {
     const slug = safeString(item.slug || item.item_slug, 120);
-    const quantity = Math.max(1, Math.min(999, Number(item.quantity || 1)));
-    if (orderType === "service" || item.type === "service") {
+    const quantity = Number(item.quantity ?? 1);
+    if (!Number.isInteger(quantity) || quantity < 1 || quantity > 999) throw new Error('Choose a valid whole-number quantity.');
+    if (item.type === "service" || (!item.type && orderType === 'service')) {
       return buildServiceItem(item, quantity);
     }
-    const table = orderType === "service" || item.type === "service" ? "services" : "products";
+    const table = "products";
     const row = db.get(`SELECT * FROM ${table} WHERE slug = ? AND active = 1`, [slug]);
     if (!row) throw new Error(`Item not found: ${slug}`);
     const unit = Number(row.price_paise);
     const taxRate = Number(row.tax_rate || 0);
     const taxable = unit * quantity;
     const tax = Math.round((taxable * taxRate) / 100);
+    const configuration = slug === "visiting-cards" && item.configuration
+      ? require("../assets/print-product-rules").validate(item.configuration, quantity) : null;
     return {
       itemType: table === "services" ? "service" : "product",
       slug: row.slug,
@@ -172,7 +179,8 @@ function buildItems(payload) {
       unitPricePaise: unit,
       taxRate,
       taxPaise: tax,
-      totalPaise: taxable + tax
+      totalPaise: taxable + tax,
+      configuration
     };
   });
 }
@@ -180,8 +188,11 @@ function buildItems(payload) {
 function calculateTotals(items, payload = {}) {
   const subtotal = items.reduce((sum, item) => sum + item.unitPricePaise * item.quantity, 0);
   const gst = items.reduce((sum, item) => sum + item.taxPaise, 0);
-  const discount = Math.max(0, Math.round(Number(payload.discount || 0) * 100));
-  const delivery = Math.max(0, Math.round(Number(payload.deliveryCharge || payload.delivery || 0) * 100));
+  if (payload.couponCode || Number(payload.discount || 0) !== 0) throw new Error('No server-verified coupon is available for this order.');
+  if (Number(payload.deliveryCharge || payload.delivery || 0) !== 0) throw new Error('Delivery charges require an operator-confirmed quote.');
+  if (payload.paymentPlan && payload.paymentPlan !== 'full') throw new Error('Only full payment is currently supported.');
+  const discount = 0;
+  const delivery = 0;
   return {
     subtotal,
     gst,
@@ -189,6 +200,13 @@ function calculateTotals(items, payload = {}) {
     delivery,
     total: Math.max(0, subtotal + gst + delivery - discount)
   };
+}
+
+function quoteCheckout(payload = {}) {
+  const items = buildItems(payload);
+  const totals = calculateTotals(items, payload);
+  return { ok: true, subtotal: fromPaise(totals.subtotal), tax: fromPaise(totals.gst), discount: 0, delivery: 0, total: fromPaise(totals.total), totalPaise: totals.total,
+    items: items.map(item => ({ slug: item.slug, name: item.name, quantity: item.quantity, unitPrice: fromPaise(item.unitPricePaise), taxRate: item.taxRate, tax: fromPaise(item.taxPaise), total: fromPaise(item.totalPaise), pricing: item.pricing || null })) };
 }
 
 function selectGateway(preferredGateway) {
@@ -215,9 +233,7 @@ function getOrCreateUser(dbConn, customer, sessionUserId) {
   if (sessionUserId) {
     const sessionUser = dbConn.prepare("SELECT * FROM users WHERE id = ?").get(Number(sessionUserId));
     if (sessionUser) {
-      dbConn.prepare("UPDATE users SET name = ?, address = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?")
-        .run(customer.name || sessionUser.name, customer.address || sessionUser.address || "", sessionUser.id);
-      return { ...sessionUser, name: customer.name || sessionUser.name, address: customer.address || sessionUser.address || "" };
+      return sessionUser;
     }
   }
 
@@ -225,13 +241,16 @@ function getOrCreateUser(dbConn, customer, sessionUserId) {
   // customer who checks out with a different email doesn't get a duplicate account.
   const existing = findExistingUserForCheckout(dbConn, customer);
   if (existing) {
-    dbConn.prepare("UPDATE users SET name = ?, address = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?")
-      .run(customer.name, customer.address || existing.address || "", existing.id);
-    return { ...existing, name: customer.name, address: customer.address || existing.address || "" };
+    return existing;
   }
   const result = dbConn.prepare("INSERT INTO users (name, phone, email, address) VALUES (?, ?, ?, ?)")
     .run(customer.name, customer.phone, customer.email || null, customer.address || null);
   return dbConn.prepare("SELECT * FROM users WHERE id = ?").get(Number(result.lastInsertRowid));
+}
+
+function orderApplicant(order, account) {
+  const applicant = parseOrderMetadata(order.metadata_json).applicant;
+  return applicant ? { ...account, ...applicant } : account;
 }
 
 function createOrderRecords({ customer, items, totals, orderType, metadata, paymentMethod, sourceChannel, clientReference, sessionUserId }) {
@@ -309,6 +328,7 @@ function getExistingCheckout(clientReference) {
     order: publicOrderWithObject(row),
     payment: row.payment_id ? {
       gateway: row.gateway,
+      status: row.payment_status,
       sessionType: hasRedirectSession ? "redirect" : (hasRazorpaySession ? "razorpay_checkout" : "pending"),
       paymentId: row.payment_id,
       orderId: row.order_id,
@@ -397,7 +417,7 @@ function notifyPaymentSuccess(order, payment) {
   } catch (error) {
     console.warn("[order-workflow] payment success transition skipped:", error.message);
   }
-  const customer = db.get("SELECT * FROM users WHERE id = ?", [order.user_id]);
+  const customer = orderApplicant(order, db.get("SELECT * FROM users WHERE id = ?", [order.user_id]));
   const invoice = db.get("SELECT * FROM invoices WHERE order_id = ?", [order.id]);
   notifications.notifyEvent("payment_success", {
     customer,
@@ -426,7 +446,7 @@ function notifyPaymentFailed(order, payment, reason) {
   } catch (error) {
     console.warn("[order-workflow] payment failure transition skipped:", error.message);
   }
-  const customer = db.get("SELECT * FROM users WHERE id = ?", [order.user_id]);
+  const customer = orderApplicant(order, db.get("SELECT * FROM users WHERE id = ?", [order.user_id]));
   notifications.notifyEvent("payment_failed", {
     customer,
     order: { ...order, status: "payment_failed" },
@@ -442,10 +462,26 @@ async function createCheckout(payload = {}, context = {}) {
   const sourceChannel = safeString(payload.sourceChannel || payload.channel || "online", 40);
   const clientReference = safeString(payload.idempotencyKey || payload.clientReference, 160);
   const existingCheckout = getExistingCheckout(clientReference);
-  if (existingCheckout) return existingCheckout;
+  if (existingCheckout) {
+    const previous = db.get('SELECT * FROM orders WHERE client_reference = ?', [clientReference]);
+    const metadata = parseOrderMetadata(previous.metadata_json);
+    const identity = JSON.stringify({ customer, items: payload.items, gateway: payload.gateway, method: paymentMethod });
+    if (metadata.checkoutIdentity !== identity || (context.sessionUserId && Number(previous.user_id) !== Number(context.sessionUserId))) throw new Error('Checkout details changed. Start a new checkout.');
+    if (!context.sessionUserId) {
+      const guest = db.get('SELECT * FROM users WHERE id = ?', [previous.user_id]);
+      if (guest && !guest.password_hash) {
+        existingCheckout.session = auth.createSession(guest.id);
+        existingCheckout.user = publicOrderCustomer(guest);
+      }
+    }
+    return existingCheckout;
+  }
 
   const items = buildItems({ ...payload, orderType });
+  const policyCatalog = require("./catalog-service").listCatalog();
+  const policySnapshots = items.map(item => servicePolicy.resolve(policyCatalog, item.slug, item.itemType)?.policy).filter(Boolean);
   const totals = calculateTotals(items, payload);
+  if (payload.expectedTotalPaise !== undefined && Number(payload.expectedTotalPaise) !== totals.total) throw new Error('Price changed. Review the updated total before payment.');
   if (totals.total <= 0) throw new Error("Total amount must be greater than zero.");
 
   let records;
@@ -460,9 +496,14 @@ async function createCheckout(payload = {}, context = {}) {
       clientReference,
       sessionUserId: context.sessionUserId,
       metadata: {
+        checkoutIdentity: JSON.stringify({ customer, items: payload.items, gateway: payload.gateway, method: paymentMethod }),
+        applicant: customer,
+        applicantMode: payload.applicantMode === 'other' ? 'other' : 'self',
         notes: safeString(payload.notes, 1000),
         attachments: payload.attachments || {},
         paymentMethod,
+        servicePolicies: policySnapshots,
+        productConfigurations: items.filter(item => item.configuration).map(item => ({ slug: item.slug, ...item.configuration })),
         pricing: items
           .filter((item) => item.itemType === "service")
           .map((item) => ({
@@ -478,7 +519,11 @@ async function createCheckout(payload = {}, context = {}) {
     });
   } catch (error) {
     const duplicate = getExistingCheckout(clientReference);
-    if (duplicate) return duplicate;
+    if (duplicate) {
+      const previous = db.get('SELECT * FROM orders WHERE client_reference = ?', [clientReference]);
+      if (parseOrderMetadata(previous.metadata_json).checkoutIdentity !== JSON.stringify({ customer, items: payload.items, gateway: payload.gateway, method: paymentMethod })) throw new Error('Checkout details changed. Start a new checkout.');
+      return duplicate;
+    }
     throw error;
   }
   ensureCustomerGenome(records.user);
@@ -487,11 +532,11 @@ async function createCheckout(payload = {}, context = {}) {
     actorId: "checkout",
     eventType: "order.created"
   });
-  const session = await attachGatewaySession({ ...records, preferredGateway: payload.gateway || "razorpay" });
+  const session = await attachGatewaySession({ ...records, user: orderApplicant(records.order, records.user), preferredGateway: payload.gateway || "razorpay" });
 
   // Auto-reply: notify customer that order was received
   notifications.notifyEvent("order.created", {
-    customer: records.user,
+    customer: orderApplicant(records.order, records.user),
     order: records.order,
     message: `Aapka application #${records.order.order_id} mil gaya! Payment complete karein aur required documents upload karein.`
   });
@@ -535,10 +580,16 @@ function publicOrderCustomer(user) {
 async function retryPayment(paymentId, preferredGateway) {
   const oldPayment = db.get("SELECT p.*, o.id AS order_db_id, o.order_id AS public_order_id, o.user_id FROM payments p JOIN orders o ON o.id = p.order_id WHERE p.payment_id = ?", [paymentId]);
   if (!oldPayment) throw new Error("Payment not found.");
-  if (oldPayment.status === "captured") throw new Error("This payment is already captured.");
+  if (db.get("SELECT id FROM payments WHERE order_id = ? AND status = 'captured' LIMIT 1", [oldPayment.order_db_id])) throw new Error("This order is already paid. Check its status before retrying.");
   const order = db.get("SELECT * FROM orders WHERE id = ?", [oldPayment.order_db_id]);
-  const user = db.get("SELECT * FROM users WHERE id = ?", [order.user_id]);
+  const user = orderApplicant(order, db.get("SELECT * FROM users WHERE id = ?", [order.user_id]));
   const nextGateway = preferredGateway || (oldPayment.gateway === "razorpay" ? "phonepe" : "razorpay");
+  const reusable = db.get("SELECT * FROM payments WHERE order_id = ? AND gateway = ? AND status IN ('created', 'session_created') ORDER BY id DESC LIMIT 1", [order.id, nextGateway]);
+  if (reusable) {
+    let session = {}; try { session = JSON.parse(reusable.gateway_session_json || '{}'); } catch {}
+    if (!session.redirectUrl && !(session.key && session.order_id)) throw new Error('Payment session is being prepared. Check the order status and retry shortly.');
+    return { gateway: reusable.gateway, sessionType: session.redirectUrl ? 'redirect' : 'razorpay_checkout', paymentId: reusable.payment_id, orderId: order.order_id, amount: fromPaise(reusable.amount_paise), currency: reusable.currency, session };
+  }
   const newPaymentId = randomId("pay");
   const result = db.run(
     `INSERT INTO payments (payment_id, order_id, gateway, method, amount_paise, currency, status, retry_of_payment_id)
@@ -580,7 +631,7 @@ function materializeInvoicePdf(orderId) {
   if (!invoice) return null;
   if (invoice.pdf_path && fs.existsSync(invoice.pdf_path)) return invoice;
   const order = db.get("SELECT * FROM orders WHERE id = ?", [invoice.order_id]);
-  const customer = db.get("SELECT * FROM users WHERE id = ?", [order.user_id]);
+  const customer = orderApplicant(order, db.get("SELECT * FROM users WHERE id = ?", [order.user_id]));
   const transaction = invoice.transaction_id ? db.get("SELECT * FROM transactions WHERE id = ?", [invoice.transaction_id]) : null;
   const items = db.all("SELECT * FROM order_items WHERE order_id = ?", [order.id]);
   const pdfPath = saveInvoicePdf({ invoice, order, transaction, customer, items });
@@ -636,7 +687,7 @@ async function verifyPayment(payload = {}) {
 function getOrderStatus(orderId) {
   const order = db.get("SELECT * FROM orders WHERE order_id = ?", [orderId]);
   if (!order) throw new Error("Order not found.");
-  const customer = db.get("SELECT id, name, phone, email, address FROM users WHERE id = ?", [order.user_id]);
+  const customer = orderApplicant(order, db.get("SELECT id, name, phone, email, address FROM users WHERE id = ?", [order.user_id]));
   const items = db.all("SELECT * FROM order_items WHERE order_id = ?", [order.id]);
   const payment = db.get("SELECT * FROM payments WHERE order_id = ? ORDER BY id DESC LIMIT 1", [order.id]);
   const transaction = db.get("SELECT * FROM transactions WHERE order_id = ? ORDER BY id DESC LIMIT 1", [order.id]);
@@ -679,7 +730,9 @@ function getOrderStatus(orderId) {
       downloadUrl: `/api/invoices/${encodeURIComponent(invoice.invoice_no)}.pdf`,
       object: objectPayload("invoices", invoice.id)
     } : null,
-    workflow: workflowEngine.getPublicWorkflowForOrder(order.id)
+    workflow: workflowEngine.getPublicWorkflowForOrder(order.id),
+    documentSubmission: require('./customer-file-upload').submission(order),
+    documentRequirements: [...new Set((JSON.parse(order.metadata_json || '{}').servicePolicies || []).flatMap(policy => policy.documents?.required || []))]
   };
 }
 
@@ -1254,7 +1307,7 @@ function buildTrackingTimeline(stage, order, latestBotCheck) {
 
 function getPublicTrackingStatus(trackingNumber) {
   const { clean, order } = findOrderByTrackingNumber(trackingNumber);
-  const customer = db.get("SELECT name, phone FROM users WHERE id = ?", [order.user_id]);
+  const customer = orderApplicant(order, db.get("SELECT name, phone FROM users WHERE id = ?", [order.user_id]));
   const items = db.all("SELECT item_name, item_type, quantity FROM order_items WHERE order_id = ? ORDER BY id ASC", [order.id]);
   const payment = db.get("SELECT * FROM payments WHERE order_id = ? ORDER BY id DESC LIMIT 1", [order.id]);
   const transaction = db.get("SELECT * FROM transactions WHERE order_id = ? ORDER BY id DESC LIMIT 1", [order.id]);
@@ -1480,7 +1533,7 @@ async function requestRefund(payload = {}) {
     }
   });
   notifications.notifyEvent("refund_initiated", {
-    customer: db.get("SELECT * FROM users WHERE id = ?", [order.user_id]),
+    customer: orderApplicant(order, db.get("SELECT * FROM users WHERE id = ?", [order.user_id])),
     order,
     payment,
     refund: { ...refundRow, status: "processing" },
@@ -1538,8 +1591,10 @@ function parseOrderMetadata(raw) {
   try {
     const metadata = JSON.parse(raw || "{}");
     return {
+      checkoutIdentity: metadata.checkoutIdentity || null,
       notes: metadata.notes || "",
-      attachments: metadata.attachments || {}
+      attachments: metadata.attachments || {},
+      applicant: metadata.applicant || null
     };
   } catch {
     return { notes: "", attachments: {} };
@@ -1573,10 +1628,10 @@ function getAdminOrders() {
         sourceChannel: order.source_channel,
         object: objectPayload("orders", order.order_db_id),
         customer: {
-          name: order.customer_name,
-          phone: order.customer_phone,
-          email: order.customer_email || "N/A",
-          address: order.customer_address || "N/A",
+          name: metadata.applicant?.name ?? order.customer_name,
+          phone: metadata.applicant?.phone ?? order.customer_phone,
+          email: metadata.applicant?.email ?? order.customer_email ?? "N/A",
+          address: metadata.applicant?.address ?? order.customer_address ?? "N/A",
           object: objectPayload("users", order.customer_db_id)
         },
         payment: {
@@ -1590,6 +1645,7 @@ function getAdminOrders() {
         invoiceObject: objectPayload("invoices", order.invoice_db_id),
         workflow: workflowEngine.getWorkflowForOrder(order.order_db_id, { timelineLimit: 8, taskLimit: 12 }),
         documents: documentService.listOrderDocuments(order.order_db_id),
+        documentSubmission: require('./customer-file-upload').submission({ id: order.order_db_id, order_id: order.order_id }),
         notes: metadata.notes,
         attachments: metadata.attachments,
         items: []
@@ -1734,6 +1790,7 @@ function getCustomerDashboard(rawPhone) {
         createdAt: order.created_at,
         orderType: order.order_type,
         gateway: order.gateway || "razorpay",
+        applicant: metadata.applicant || null,
         paymentStatus,
         paymentMethod: order.method || "upi",
         invoiceNo: order.invoice_no || "N/A",
@@ -1794,6 +1851,7 @@ function getCustomerDashboard(rawPhone) {
 
 module.exports = {
   paymentMethods,
+  quoteCheckout,
   createCheckout,
   retryPayment,
   verifyPayment,

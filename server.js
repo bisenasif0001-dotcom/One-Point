@@ -374,6 +374,7 @@ function resolvePath(url) {
   const clean = requested === "/" ? "/index.html" : requested;
   const filePath = path.normalize(path.join(root, clean));
   if (!isInside(root, filePath)) return null;
+  if (path.relative(root, filePath).split(path.sep)[0].toLowerCase() === 'backend') return null;
   return filePath;
 }
 
@@ -453,7 +454,7 @@ function requireOwnedOrder(req, res, orderReference, options = {}) {
     return null;
   }
   if (Number(order.user_id) !== Number(user.id)) {
-    jsonResponse(res, 403, { error: "forbidden", message: "You do not have permission to access documents for this order." });
+    jsonResponse(res, 403, { error: "forbidden", message: "You do not have permission to access this order." });
     return null;
   }
   return { user, order };
@@ -914,6 +915,11 @@ async function handleApi(req, res) {
       return;
     }
 
+    if (req.method === 'POST' && pathname === '/api/checkout-quote') {
+      const { body } = await parseJsonBody(req);
+      jsonResponse(res, 200, payments.quoteCheckout(body));
+      return;
+    }
     if (req.method === "POST" && pathname === "/api/orders") {
       const { body } = await parseJsonBody(req);
       const sessionUser = getSessionUser(req);
@@ -935,6 +941,9 @@ async function handleApi(req, res) {
 
     if (req.method === "POST" && pathname === "/api/payments/retry") {
       const { body } = await parseJsonBody(req);
+      const payment = db.get('SELECT order_id FROM payments WHERE payment_id = ?', [String(body.paymentId || '')]);
+      if (!payment) { notFound(res); return; }
+      if (!requireOwnedOrder(req, res, payment.order_id)) return;
       const result = await payments.retryPayment(body.paymentId, body.gateway);
       jsonResponse(res, 201, { payment: result });
       return;
@@ -1742,7 +1751,17 @@ async function handleApi(req, res) {
       return;
     }
 
-    // ── Document Upload (customer) — 5MB max ───────────────────────────────
+    if (req.method === 'POST' && pathname === '/api/orders/document-files') {
+      const { body } = await parseJsonBody(req, { limit: 5 * 1024 * 1024 });
+      const ownership = requireOwnedOrder(req, res, String(body.orderId || ''));
+      if (!ownership) return;
+      const uploader = require('./backend/customer-file-upload');
+      const result = uploader.store(ownership.order, body, ownership.order.user_id);
+      jsonResponse(res, 201, { ok: true, ...result, submission: uploader.submission(ownership.order), documents: documentService.listOrderDocuments(ownership.order.id) });
+      return;
+    }
+
+    // ── Legacy document metadata bridge ───────────────────────────────
     if (req.method === "POST" && pathname === "/api/orders/documents") {
       const contentLength = Number(req.headers["content-length"] || 0);
       if (contentLength > 5 * 1024 * 1024) { badRequest(res, "File too large. Maximum 5MB allowed."); return; }
@@ -1773,23 +1792,11 @@ async function handleApi(req, res) {
         jsonResponse(res, 422, { error: "invalid_file_type", message: "Only JPG, PNG, PDF and WebP documents are accepted." });
         return;
       }
-      // ── Order check: session user if authenticated, or valid order by ID for public tracking ──
+      // Document metadata also requires ownership; an order ID is not authorization.
       const sessionUser = getSessionUser(req);
-      let order = null;
-      if (sessionUser) {
-        const ownership = requireOwnedOrder(req, res, orderId, { missingAsBadRequest: true });
-        if (!ownership) return;
-        order = ownership.order;
-      } else {
-        order = db.get(
-          "SELECT id, order_id, user_id FROM orders WHERE id = ? OR LOWER(order_id) = LOWER(?) LIMIT 1",
-          [Number(orderId) || 0, String(orderId || "").trim()]
-        );
-        if (!order) {
-          badRequest(res, "Order not found.");
-          return;
-        }
-      }
+      const ownership = requireOwnedOrder(req, res, orderId, { missingAsBadRequest: true });
+      if (!ownership) return;
+      const order = ownership.order;
       documentService.registerUpload({
         orderId: order.id,
         docType,

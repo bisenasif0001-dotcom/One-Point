@@ -69,42 +69,48 @@ function ensureDatabase() {
   }
 
   // Fallback local SQLite storage for dev and validation
-  const localDbUrl = "file:" + path.join(__dirname, "data", "opds-payments.sqlite");
-  if (!fs.existsSync(path.join(__dirname, "data"))) {
-    fs.mkdirSync(path.join(__dirname, "data"), { recursive: true });
-  }
-
-  const rawSqlite = new DatabaseSync(path.join(__dirname, "data", "opds-payments.sqlite"));
+  const sqlitePath = isPostgres
+    ? path.join(__dirname, "data", "opds-payments.sqlite")
+    : path.resolve(config.databaseUrl.replace(/^file:/, ""));
+  fs.mkdirSync(path.dirname(sqlitePath), { recursive: true });
+  const rawSqlite = new DatabaseSync(sqlitePath);
   rawSqlite.exec("PRAGMA foreign_keys = ON;");
   rawSqlite.exec("PRAGMA journal_mode = WAL;");
 
   database = new EROSDatabaseAdapter(rawSqlite, pgPool);
-
-  const schema = fs.readFileSync(path.join(__dirname, "migrations", "001_payments_schema.sql"), "utf8")
-    .replace(/CREATE UNIQUE INDEX IF NOT EXISTS idx_orders_client_reference[\s\S]*?;\s*/m, "");
-  database.exec(schema);
-  ensureRuntimeMigrations(database);
-  seedCatalog(rawSqlite);
-  applyUniversalBusinessObjectFoundation(rawSqlite);
-  applyCustomerDigitalGenomeFoundation(rawSqlite);
-  applyUniversalServiceEngineFoundation(rawSqlite);
-  applyOrderOrchestrationFoundation(rawSqlite);
-  applyDocumentIntelligenceFoundation(rawSqlite);
-  applyCustomerPrivacyRetentionFoundation(rawSqlite);
-  applyCustomerExperienceOmnichannelFoundation(rawSqlite);
-  applyWorkforceBranchExecutiveFoundation(rawSqlite);
-  applyEnterpriseIntelligenceFoundation(rawSqlite);
-  applyEnterpriseDatabaseEvolutionFoundation(rawSqlite);
-  applyEnterpriseApiIdentityPermissionFoundation(rawSqlite);
-  applyEnterpriseEventBusFoundation(rawSqlite);
-  applyEnterpriseAutomationIntegrationsToolGovernance(rawSqlite);
-  applyEnterpriseInfrastructure(rawSqlite);
-  applyEnterpriseWorkflowEngineFoundation(rawSqlite);
-  applyEnterpriseWorkflowRuntimeGovernance(rawSqlite);
-  applyEnterpriseHumanTaskWorkQueueFoundation(rawSqlite);
-  applyEnterpriseAiCommandCenter(rawSqlite);
-  applyProductionRolloutEnterpriseValidation(rawSqlite);
-  return database;
+  try {
+    const schema = fs.readFileSync(path.join(__dirname, "migrations", "001_payments_schema.sql"), "utf8")
+      .replace(/CREATE UNIQUE INDEX IF NOT EXISTS idx_orders_client_reference[\s\S]*?;\s*/m, "");
+    database.exec(schema);
+    ensureRuntimeMigrations(database);
+    seedCatalog(rawSqlite);
+    applyUniversalBusinessObjectFoundation(rawSqlite);
+    applyCustomerDigitalGenomeFoundation(rawSqlite);
+    applyUniversalServiceEngineFoundation(rawSqlite);
+    applyOrderOrchestrationFoundation(rawSqlite);
+    applyDocumentIntelligenceFoundation(rawSqlite);
+    applyCustomerPrivacyRetentionFoundation(rawSqlite);
+    applyCustomerExperienceOmnichannelFoundation(rawSqlite);
+    applyWorkforceBranchExecutiveFoundation(rawSqlite);
+    applyEnterpriseIntelligenceFoundation(rawSqlite);
+    applyEnterpriseDatabaseEvolutionFoundation(rawSqlite);
+    applyEnterpriseApiIdentityPermissionFoundation(rawSqlite);
+    applyEnterpriseEventBusFoundation(rawSqlite);
+    applyEnterpriseAutomationIntegrationsToolGovernance(rawSqlite);
+    applyEnterpriseInfrastructure(rawSqlite);
+    applyEnterpriseWorkflowEngineFoundation(rawSqlite);
+    applyEnterpriseWorkflowRuntimeGovernance(rawSqlite);
+    applyEnterpriseHumanTaskWorkQueueFoundation(rawSqlite);
+    applyEnterpriseAiCommandCenter(rawSqlite);
+    applyProductionRolloutEnterpriseValidation(rawSqlite);
+    return database;
+  } catch (error) {
+    // Never cache a partially migrated connection as a ready database.
+    database = null;
+    rawSqlite.close();
+    if (pgPool) pgPool.end().catch(() => {});
+    throw error;
+  }
 }
 
 function ensureRuntimeMigrations(db) {
@@ -156,13 +162,6 @@ function ensureRuntimeMigrations(db) {
   const hasAuthSessionColumn = (name) => authSessionColumns.some((column) => column.name === name);
   if (!hasAuthSessionColumn("last_seen_at")) db.exec("ALTER TABLE auth_sessions ADD COLUMN last_seen_at TEXT;");
   db.exec("UPDATE auth_sessions SET last_seen_at = COALESCE(last_seen_at, created_at);");
-
-  const customerProfileColumns = db.prepare("PRAGMA table_info(customer_profiles)").all();
-  const hasCustomerProfileColumn = (name) => customerProfileColumns.some((column) => column.name === name);
-  if (!hasCustomerProfileColumn("address_line_2")) db.exec("ALTER TABLE customer_profiles ADD COLUMN address_line_2 TEXT;");
-  if (!hasCustomerProfileColumn("landmark")) db.exec("ALTER TABLE customer_profiles ADD COLUMN landmark TEXT;");
-  if (!hasCustomerProfileColumn("district")) db.exec("ALTER TABLE customer_profiles ADD COLUMN district TEXT;");
-  if (!hasCustomerProfileColumn("country")) db.exec("ALTER TABLE customer_profiles ADD COLUMN country TEXT NOT NULL DEFAULT 'India';");
 
   const serviceColumns = db.prepare("PRAGMA table_info(services)").all();
   const hasServiceColumn = (name) => serviceColumns.some((column) => column.name === name);
@@ -584,6 +583,13 @@ function applyCustomerDigitalGenomeFoundation(dbConn) {
   const migrationPath = path.join(__dirname, "migrations", "004_customer_digital_genome.sql");
   const migration = fs.readFileSync(migrationPath, "utf8");
   dbConn.exec(migration);
+  // Extend profiles only after their foundation table exists on a fresh install.
+  const columns = dbConn.prepare("PRAGMA table_info(customer_profiles)").all();
+  const hasColumn = name => columns.some(column => column.name === name);
+  if (!hasColumn("address_line_2")) dbConn.exec("ALTER TABLE customer_profiles ADD COLUMN address_line_2 TEXT;");
+  if (!hasColumn("landmark")) dbConn.exec("ALTER TABLE customer_profiles ADD COLUMN landmark TEXT;");
+  if (!hasColumn("district")) dbConn.exec("ALTER TABLE customer_profiles ADD COLUMN district TEXT;");
+  if (!hasColumn("country")) dbConn.exec("ALTER TABLE customer_profiles ADD COLUMN country TEXT NOT NULL DEFAULT 'India';");
 }
 
 function applyUniversalServiceEngineFoundation(dbConn) {

@@ -7,6 +7,7 @@ const { DEFAULT_ADMIN_API_TOKEN } = require("./security/security-policy");
 const rootDir = path.join(__dirname, "..");
 
 function loadLocalEnv() {
+  if (process.env.OPDS_SKIP_LOCAL_ENV === "true") return;
   const envPath = path.join(rootDir, ".env");
   if (!fs.existsSync(envPath)) return;
   const lines = fs.readFileSync(envPath, "utf8").split(/\r?\n/);

@@ -87,6 +87,8 @@
   --tint-gold: rgba(210, 161, 42, .05);
   --icon-chip: linear-gradient(150deg, rgba(18,86,150,.12), rgba(18,86,150,.045));
   --hairline: rgba(18, 86, 150, .10);
+  --quick-order-backdrop: rgba(7, 24, 41, .60);
+  --touch-target: 44px;
 
   /* Enterprise Spacing Scale (from polish layer) */
   --sp-1:   4px;
@@ -27056,4 +27058,51 @@ body.keyboard-open .checkout-mobile-cta {
   .mobile-cta-details-badge {
     display: none !important;
   }
+}
+
+/* Keyboard entry point: visible only while focused; normal layout is unchanged. */
+.opds-skip-link {
+  position: fixed;
+  top: var(--eds-space-2);
+  left: var(--eds-space-2);
+  z-index: 100000;
+  transform: translateY(-200%);
+  padding: var(--eds-space-3) var(--eds-space-4);
+  background: var(--surface);
+  color: var(--ink);
+  border: 2px solid var(--primary);
+  border-radius: var(--r-sm);
+  font-weight: 700;
+}
+.opds-skip-link:focus { transform: none; outline: 2px solid var(--primary); outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) {
+  :where(*, *::before, *::after) {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+  }
+}
+
+/* Text can wrap when users enlarge it; fixed widths must not crop headings. */
+@media (max-width: 720px) {
+  #homepage-body .hero-v3-title :is(.hero-v3-title-line, .hero-v3-title-accent),
+  body.mobile-directory-ready .page-hero-title > span {
+    white-space: normal !important;
+    width: auto !important;
+    max-width: 100%;
+    overflow-wrap: anywhere;
+  }
+}
+@media (max-width: 900px) {
+  body.enterprise-checkout-body .checkout-mobile-cta {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr) !important;
+  }
+  body.enterprise-checkout-body .checkout-mobile-cta :is(.mobile-cta-price-block, .eds-btn) { min-width: 0; }
+  body.enterprise-checkout-body .checkout-mobile-cta :is(span, strong, .eds-btn) {
+    white-space: normal !important;
+    overflow-wrap: anywhere;
+    height: auto;
+  }
+  body.enterprise-checkout-body .mobile-cta-price-row { flex-wrap: wrap; }
 }

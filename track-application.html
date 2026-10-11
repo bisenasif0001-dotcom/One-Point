@@ -811,7 +811,9 @@
       .idle-title { font-size: 0.9rem; font-weight: 700; color: #0f172a; margin-bottom: 3px; }
       .idle-desc { font-size: 0.8rem; color: #64748b; line-height: 1.45; margin: 0; }
     </style>
-  </head>
+    <script src="assets/deployment-config.js?v=1"></script>
+  <script src="assets/transaction-host.js?v=1"></script>
+</head>
   <body class="online-services-page">
     <div data-site-nav>
       <header class="site-header fallback-site-header">
@@ -952,7 +954,7 @@
                 <div class="track-dropzone" id="doc-dropzone">
                   <div class="dropzone-desc">
                     <i data-lucide="upload-cloud" style="width: 20px; height: 20px; vertical-align: middle; margin-right: 4px; color: #0a5eb0;"></i>
-                    <strong>Upload document:</strong> Drag file here or select file (PDF, JPG, PNG up to 5MB)
+                    <strong>Upload document:</strong> Drag file here or select file (PDF, JPG, PNG up to 3MB)
                   </div>
                   <div class="dropzone-actions" onclick="event.stopPropagation()">
                     <select class="dropzone-select" id="dropzone-doc-type" aria-label="Document Type">
@@ -962,7 +964,7 @@
                       <option value="address_proof">Address Proof</option>
                       <option value="supporting_doc">Supporting Document</option>
                     </select>
-                    <input type="file" id="dropzone-file-input" style="display: none;" accept=".jpg,.jpeg,.png,.pdf,.webp">
+                    <input type="file" id="dropzone-file-input" style="display: none;" accept=".jpg,.jpeg,.png,.pdf">
                     <button type="button" class="dropzone-btn-sm" id="dropzone-browse-btn">
                       <i data-lucide="paperclip" style="width: 13px; height: 13px;"></i>
                       <span>Select File</span>
@@ -1107,6 +1109,7 @@
 
     <div data-site-footer></div>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
-    <script src="assets/app.js?v=customer-checkout-94" defer></script>
+    <script src="assets/pilot-metrics.js?v=release-107" defer></script>
+    <script src="assets/app.js?v=release-108" defer></script>
   </body>
 </html>

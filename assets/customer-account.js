@@ -246,25 +246,10 @@
   }
 
   async function resumePayment(order, button) {
-    if (!order || !order.paymentId) {
-      window.location.href = `checkout.html?orderId=${encodeURIComponent(order.orderId)}`;
-      return;
-    }
-    if (button) button.disabled = true;
     try {
-      const data = await window.OPDSAuth.request("POST", "/api/payments/retry", {
-        paymentId: order.paymentId,
-        gateway: order.gateway || "razorpay"
-      });
-      if (data.payment && data.payment.sessionType === "redirect" && data.payment.session?.redirectUrl) {
-        window.location.href = data.payment.session.redirectUrl;
-      } else {
-        window.location.href = `checkout.html?orderId=${encodeURIComponent(order.orderId)}`;
-      }
-    } catch (error) {
-      showToast(error.message || "Payment could not be started. Please try again.", "error");
-      if (button) button.disabled = false;
-    }
+      if (!window.OPDSPaymentRecovery) await import('./payment-recovery.js?v=verification-106');
+      await window.OPDSPaymentRecovery.retry(order?.paymentId, order?.gateway || 'razorpay', button);
+    } catch (error) { showToast(error.message || 'Payment could not be resumed.', 'error'); }
   }
 
   function money(amount, currency) {

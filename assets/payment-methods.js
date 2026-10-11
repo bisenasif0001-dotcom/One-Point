@@ -36,7 +36,7 @@
      flow: "offline" → booking confirmed now, payment collected at counter */
   var METHODS = [
     /* ── UPI & QR ─────────────────────────────────────────────── */
-    { id: "razorpay_upi", category: "upi", label: "Razorpay UPI / QR", sub: "Any UPI app · instant verification",
+    { id: "razorpay_upi", category: "upi", label: "UPI / QR", sub: "Choose Google Pay, BHIM or another UPI app in the gateway",
       icon: "qr-code", gateway: "razorpay", apiMethod: "upi", flow: "gateway", enabled: true, recommended: true },
     { id: "gpay_upi", category: "upi", label: "Google Pay UPI", sub: "Direct bank transfer",
       icon: "smartphone", gateway: "razorpay", apiMethod: "upi", flow: "gateway", enabled: true },
@@ -91,6 +91,7 @@
     if (plan.id !== "full") plan.enabled = false;
   });
 
+  ['gpay_upi','bhim_upi','paytm_upi','cashfree_checkout','payu_checkout','pay_later'].forEach(function(id){ var method=METHODS.find(function(m){return m.id===id;}); if(method) method.enabled=false; });
   function getCategories() {
     return CATEGORIES.filter(function (cat) {
       return getMethods(cat.id).length > 0;

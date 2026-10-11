@@ -1114,8 +1114,10 @@
         }
       }
     </style>
-  </head>
-  <body class="page-onemart-store">
+  <link rel="stylesheet" href="assets/quick-order.css?v=2">
+  <link rel="stylesheet" href="assets/service-expansion.css?v=108">
+</head>
+  <body class="page-onemart-store service-family-expanded">
     <div data-site-nav></div>
 
     <main class="page-shell">
@@ -1136,7 +1138,7 @@
             <p class="hero-desc">Custom vinyl stickers, fine art prints, wooden frames, personalized photo mugs, corporate branding, and apparel — crafted with museum-grade precision.</p>
             <div class="hero-actions">
               <a class="btn btn-primary font-bold" href="#best-sellers"><i data-lucide="sparkles"></i> Shop Best Sellers</a>
-              <a class="btn btn-ghost font-bold" href="checkout.html?service=custom-print-order&amp;service_name=Custom+Print+Order"><i data-lucide="upload-cloud"></i> Upload Artwork / Get Quote</a>
+              <a class="btn btn-ghost font-bold" href="service-request.html?service=custom-print-order&service_name=Custom+Print+Order"><i data-lucide="upload-cloud"></i> Request service</a>
             </div>
             <div class="hero-trust-strip">
               <span class="hero-trust-badge">
@@ -1894,9 +1896,7 @@
             <p>Upload your high-res design, PDF, or photos. Our print specialists inspect file resolution, adjust bleed margins, and deliver showroom-grade prints directly to you.</p>
           </div>
           <div class="om-promo-actions">
-            <a href="checkout.html?service=custom-print-order&amp;service_name=Custom+Print+Order" class="btn-promo-primary">
-              <i data-lucide="upload-cloud"></i> Upload Design &amp; Order
-            </a>
+            <a href="service-request.html?service=custom-print-order&service_name=Custom+Print+Order" class="btn-promo-primary"><i data-lucide="upload-cloud"></i> Request service</a>
             <a href="https://wa.me/919473946181?text=Hi%20One%20Point,%20I%20have%20a%20custom%20design%20to%20print" class="btn-promo-secondary" target="_blank" rel="noopener">
               <i data-lucide="message-circle"></i> Get Free Quote
             </a>
@@ -2167,7 +2167,7 @@
               </div>
               <div class="om-card-btn-group">
                 <a href="https://wa.me/919473946181?text=Order%20Visiting%20Cards" class="om-card-wa-btn" target="_blank" rel="noopener"><i data-lucide="message-circle"></i></a>
-                <a href="product-detail.html?product=visiting-cards" class="om-card-cta">Customize <i data-lucide="arrow-right" style="width:13px;height:13px"></i></a>
+                <a href="product-detail.html?product=visiting-cards" class="om-card-cta" data-print-pilot>Choose packs <i data-lucide="arrow-right" style="width:13px;height:13px"></i></a>
               </div>
             </div>
           </article>
@@ -2791,7 +2791,8 @@
     <div data-site-footer></div>
 
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
-    <script src="assets/app.js?v=customer-checkout-94" defer></script>
+    <script src="assets/pilot-metrics.js?v=release-107" defer></script>
+    <script src="assets/app.js?v=release-108" defer></script>
 
     <!-- Client-Side Modern Interactivity Script -->
     <script>
@@ -2907,5 +2908,7 @@
         setTimeout(refreshIcons, 150);
       });
     </script>
-  </body>
+  <script src="assets/print-product-rules.js?v=1" defer></script>
+<script src="assets/print-quick-order.js?v=1" defer></script>
+</body>
 </html>

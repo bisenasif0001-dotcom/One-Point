@@ -2,6 +2,7 @@
   "use strict";
 
   const money = (value) => `Rs. ${Number(value || 0).toFixed(2)}`;
+  const escapeHtml = value => String(value ?? '').replace(/[&<>"']/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]));
   const isSuccessPage = () => Boolean(document.querySelector(".payment-result-card.success-state"));
   const isPendingPage = () => Boolean(document.querySelector(".payment-result-card.pending-state"));
   const isFailedPage = () => Boolean(document.querySelector(".payment-result-card.failed-state"));
@@ -94,13 +95,17 @@
   }
 
   function renderStatusGrid(details) {
+    const orderId = details.orderId;
+    const paymentId = details.paymentId;
+    const downloadUrl = details.downloadUrl;
+    details = { ...details, ...Object.fromEntries(['orderId', 'paymentId', 'amountFormatted', 'method', 'gateway', 'dateTime'].map(key => [key, escapeHtml(details[key])])) };
     return `
       <div class="status-detail-grid">
         <span>
           <small>Order ID</small>
           <strong>
             ${details.orderId}
-            <button type="button" class="copy-btn-inline" onclick="window.copyPaymentText('${details.orderId}', this)">Copy</button>
+            <button type="button" class="copy-btn-inline" data-copy-payment="${escapeHtml(orderId)}">Copy</button>
           </strong>
         </span>
         <span>
@@ -111,7 +116,7 @@
           <small>Transaction ID</small>
           <strong>
             ${details.paymentId}
-            ${details.paymentId && details.paymentId !== "Processing" && details.paymentId !== "Pending" ? `<button type="button" class="copy-btn-inline" onclick="window.copyPaymentText('${details.paymentId}', this)">Copy</button>` : ""}
+            ${paymentId && paymentId !== "Processing" && paymentId !== "Pending" ? `<button type="button" class="copy-btn-inline" data-copy-payment="${escapeHtml(paymentId)}">Copy</button>` : ""}
           </strong>
         </span>
         <span>
@@ -128,8 +133,8 @@
         </span>
       </div>
       <div class="status-actions" style="margin-bottom: 22px;">
-        ${details.downloadUrl ? `<a class="btn btn-primary" href="${details.downloadUrl}"><i data-lucide="download"></i> Invoice Download</a>` : ""}
-        <a class="btn btn-soft" href="track-application.html?id=${encodeURIComponent(details.orderId)}"><i data-lucide="radar"></i> Track Order</a>
+        ${downloadUrl && /^\/(?!\/)/.test(downloadUrl) ? `<a class="btn btn-primary" href="${escapeHtml(downloadUrl)}"><i data-lucide="download"></i> Invoice Download</a>` : ""}
+        <a class="btn btn-soft" href="track-application.html?id=${encodeURIComponent(orderId)}"><i data-lucide="radar"></i> Track Order</a>
         <a class="btn btn-ghost" href="products.html"><i data-lucide="shopping-bag"></i> Continue Shopping</a>
       </div>
     `;
@@ -148,10 +153,13 @@
     updateSupportLinks(orderId, urlPaymentId, urlAmount);
 
     if (!orderId) {
+      const heading = document.querySelector('.payment-result-card h1');
+      if (heading) heading.textContent = 'Payment reference missing';
+      document.querySelectorAll('[data-retry-payment]').forEach(button => button.disabled = true);
       root.innerHTML = isSuccessPage()
-        ? `<p class="status-copy">Payment confirmed. Your order details will appear in the customer dashboard.</p>`
+        ? `<p class="status-copy">Order ID missing. Payment cannot be confirmed.</p>`
         : `<p class="status-copy">Order ID missing in URL parameters.</p>`;
-      setupDashboardRedirect(params);
+
       return;
     }
 
@@ -164,6 +172,7 @@
       const transaction = data.transaction || {};
       const order = data.order || {};
       const rawStatus = (payment.status || order.paymentStatus || "pending").toLowerCase();
+      window.OPDSPilotMetrics?.track(['captured', 'success', 'paid'].includes(rawStatus) ? 'payment_verified' : 'payment_pending', { once: true });
       const finalPaymentId = transaction.transactionId || payment.paymentId || urlPaymentId || "Processing";
       const finalAmount = order.total != null ? order.total : urlAmount;
       const finalGateway = payment.gateway || urlGateway;
@@ -203,16 +212,29 @@
       });
 
       if (window.lucide) window.lucide.createIcons();
-      setupDashboardRedirect(params);
+      const statusHeading = document.querySelector('.payment-result-card h1');
+      if (statusHeading) statusHeading.textContent = ['captured', 'success', 'paid'].includes(rawStatus) ? 'Payment successful' : rawStatus === 'failed' ? 'Payment failed' : 'Payment awaiting confirmation';
+      if (['captured', 'success', 'paid'].includes(rawStatus)) document.querySelectorAll('[data-retry-payment]').forEach(button => button.disabled = true);
+      if (["captured", "success", "paid"].includes(rawStatus)) {
+        const heading = document.querySelector('.payment-result-card h1');
+        if (heading) heading.textContent = 'Payment successful';
+        localStorage.removeItem('opds_checkout_intent');
+        localStorage.removeItem('opds_checkout_draft');
+        setupDashboardRedirect(params);
+      }
+      if (data.documentSubmission) {
+        const documents = document.createElement('p');
+        documents.textContent = data.documentSubmission.label + ' ';
+        const link = document.createElement('a');
+        link.href = 'order-documents.html?order=' + encodeURIComponent(order.orderId || orderId);
+        link.textContent = 'Send / retry documents';
+        documents.append(link); root.append(documents);
+      }
 
     } catch (error) {
-      // Fallback cleanly using URL params so user always gets a clean, beautiful grid
-      const statusBadge = isSuccessPage()
-        ? `<span style="color:#16a34a;">✓ Confirmed</span>`
-        : isFailedPage()
-        ? `<span style="color:#dc2626;">❌ Failed</span>`
-        : `<span style="color:#d97706;">⏳ Verification in Progress</span>`;
-
+      const statusBadge = '<span>Verification unavailable — check again before paying.</span>';
+      const heading = document.querySelector('.payment-result-card h1');
+      if (heading) heading.textContent = 'Payment status unavailable';
       root.innerHTML = renderStatusGrid({
         orderId: orderId,
         paymentId: urlPaymentId || "Processing",
@@ -225,7 +247,7 @@
       });
 
       if (window.lucide) window.lucide.createIcons();
-      setupDashboardRedirect(params);
+
     }
   }
 
@@ -235,19 +257,10 @@
     event.preventDefault();
     const paymentId = new URLSearchParams(window.location.search).get("payment_id");
     if (!paymentId) return;
-    const csrf = await fetch("/api/csrf").then((res) => res.json());
-    const response = await fetch("/api/payments/retry", {
-      method: "POST",
-      headers: { "Content-Type": "application/json", "X-CSRF-Token": csrf.csrfToken },
-      body: JSON.stringify({ paymentId, gateway: button.dataset.retryPayment || "phonepe" })
-    });
-    const data = await response.json();
-    if (!response.ok) {
-      alert(data.message || "Retry failed");
-      return;
-    }
-    if (data.payment.sessionType === "redirect") window.location.href = data.payment.session.redirectUrl;
-    else window.location.href = `checkout.html`;
+    try {
+      if (!window.OPDSPaymentRecovery) await import('./payment-recovery.js?v=verification-106');
+      await window.OPDSPaymentRecovery.retry(paymentId, button.dataset.retryPayment || 'razorpay', button);
+    } catch (error) { const root = document.querySelector('[data-payment-status]'); const message = document.createElement('p'); message.setAttribute('role', 'alert'); message.textContent = error.message; root?.append(message); }
   }
 
   function renderRetryRail() {
@@ -304,4 +317,5 @@
     setupPendingPolling();
   });
   document.addEventListener("click", retryPayment);
+  document.addEventListener('click', event => { const button = event.target.closest('[data-copy-payment]'); if (button) window.copyPaymentText(button.dataset.copyPayment, button); });
 })();

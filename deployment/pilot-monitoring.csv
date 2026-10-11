@@ -1,0 +1,1 @@
+date_utc,release_id,device_class,selected_events,checkout_attempts,verified_orders,median_order_to_capture_seconds,validation_errors,upload_errors,payment_errors,pending_orders,awaiting_documents,awaiting_review,support_requests,blocking_issues,observation_source,notes

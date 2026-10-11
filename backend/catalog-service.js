@@ -4,6 +4,7 @@ const db = require("./db");
 const { safeString, toPaise, fromPaise } = require("./utils");
 const pricingEngine = require("./pricing-engine");
 const serviceEngine = require("./service-engine");
+const servicePolicy = require("../assets/service-policy");
 
 const VALID_TYPES = new Set(["service", "product"]);
 
@@ -189,13 +190,17 @@ function listCatalog({ includeInactive = false, includeInternal = false } = {}) 
     ORDER BY category COLLATE NOCASE, name COLLATE NOCASE
   `).map(publicProduct);
 
-  return {
+  const catalog = {
     services,
     serviceVariants,
     products,
     categories: Array.from(new Set([...services, ...products].map((item) => item.category))).sort((a, b) => a.localeCompare(b)),
     updatedAt: new Date().toISOString()
   };
+  [...services, ...serviceVariants, ...products].forEach(item => {
+    item.policy = servicePolicy.resolve(catalog, item.slug, item.type === "product" ? "product" : "service")?.policy;
+  });
+  return catalog;
 }
 
 function upsertCatalogItem(input = {}) {

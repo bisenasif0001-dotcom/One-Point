@@ -1,0 +1,24 @@
+.service-request-panel { padding-block: var(--eds-space-6); }
+.service-request-panel h1 { overflow-wrap: anywhere; }
+.service-request-actions { display: flex; flex-wrap: wrap; gap: var(--eds-space-3); }
+.service-request-actions a { min-height: var(--touch-target); white-space: normal; }
+@media (max-width: 720px) {
+  .service-family-expanded .page-hero-console,
+  .service-family-expanded .hero-trust-strip { display: none !important; }
+  .service-family-expanded .page-hero { min-height: 0 !important; padding-block: var(--eds-space-4) !important; }
+  .service-family-expanded .page-hero-grid { grid-template-columns: minmax(0, 1fr) !important; }
+  .service-family-expanded .page-hero-title { font-size: var(--eds-fs-2xl) !important; overflow-wrap: anywhere; }
+  .service-family-expanded #category-services-grid { grid-template-columns: minmax(0, 1fr) !important; }
+  .service-family-expanded .admission-services-grid { grid-template-columns: minmax(0, 1fr) !important; }
+  .service-family-expanded #admission-cards-grid { grid-template-columns: minmax(0, 1fr) !important; }
+  .service-family-expanded .edupoint-cat-header,
+  .service-family-expanded .edupoint-cat-left,
+  .service-family-expanded .edupoint-cat-actions { flex-wrap: wrap; min-width: 0; }
+  .service-family-expanded .admission-filter-top { flex-wrap: wrap; }
+  .service-family-expanded .admission-search-box { min-width: 0; width: 100%; }
+  .service-family-expanded .admission-filter-pills { max-width: 100%; overflow-x: auto; }
+  .service-family-expanded .edupoint-service-card { min-width: 0; }
+  .service-family-expanded .btn-apply-now { min-height: var(--touch-target); white-space: normal !important; }
+  .service-family-expanded .hero-actions { flex-wrap: wrap; }
+  .service-request-actions { flex-direction: column; }
+}

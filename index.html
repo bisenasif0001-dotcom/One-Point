@@ -15,9 +15,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;650;700;800;900&display=swap" rel="stylesheet">
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
     <script src="assets/opds-boot.js?v=anti-fouc-79"></script>
-    <link rel="stylesheet" href="assets/onepoint.css?v=bento-smooth-57">
+    <link rel="stylesheet" href="assets/onepoint.css?v=performance-105">
     <link rel="stylesheet" href="assets/enterprise-visual-polish.css?v=polish-3">
   <link rel="stylesheet" href="assets/onepoint-home.css?v=mobile-menu-65">
+    <link rel="stylesheet" href="assets/quick-order.css?v=2">
+    <link rel="stylesheet" href="assets/mobile-ordering.css?v=home-103">
     <script id="opds-localization-config">
       window.OPDS_LOCALIZATION = {
         CITY: "Lucknow",
@@ -33,6 +35,7 @@
     </script>
 </head>
   <body id="homepage-body">
+    <a class="opds-skip-link" href="#main-content">Skip to main content</a>
     <div data-site-nav>
       <header class="site-header fallback-site-header">
         <nav class="nav-bar" aria-label="Primary fallback">
@@ -53,7 +56,7 @@
       </header>
     </div>
 
-    <main class="page-shell">
+    <main id="main-content" tabindex="-1" class="page-shell">
       <section class="hero hero-v3" aria-labelledby="homepage-hero-title">
         <div class="hero-v3-bg" aria-hidden="true">
           <div class="hero-india-map-host" data-hero-india-map>
@@ -78,6 +81,10 @@
             </h1>
             <p class="hero-v3-subtitle">Get expert assistance with essential government and citizen services, track your requests, and access trusted digital services, all from one convenient platform.</p>
 
+            <nav class="home-mobile-tasks" aria-label="Quick service booking">
+              <a class="btn btn-soft" href="service-pan-card.html" data-quick-order="pan">PAN tasks</a>
+              <a class="btn btn-soft" href="checkout.html?service=msme-registration&amp;service_name=MSME%20Registration%20Assistance">MSME registration</a>
+            </nav>
             <div class="hero-actions hero-actions-v3">
               <a class="eds-btn eds-btn-primary hero-cta-primary" href="services.html"><i data-lucide="grid-3x3"></i> Explore Services</a>
               <a class="eds-btn eds-btn-secondary hero-cta-secondary" href="track-application.html"><i data-lucide="compass"></i> Track Application</a>
@@ -97,7 +104,7 @@
             <div class="hos-search">
               <div class="hos-search-field">
                 <i data-lucide="search" class="hos-search-icon"></i>
-                <input class="eds-input hos-search-input" data-ai-search placeholder="Search services or applications" aria-label="Search services">
+                <input class="eds-input hos-search-input" data-ai-search type="search" autocomplete="off" placeholder="Search PAN, certificates, business…" aria-label="Search services">
                 <button type="button" class="hos-search-voice" aria-label="Voice search" title="Voice search (Click to speak)"><i data-lucide="mic"></i></button>
                 <kbd class="hos-search-kbd">Ctrl&nbsp;K</kbd>
               </div>
@@ -721,7 +728,7 @@
             </div>
           </div>
           <div class="tracker-image-panel">
-            <img src="assets/happy_indian_customer.png" alt="Happy Customer Tracking Service" class="tracker-happy-customer-img">
+            <img src="assets/happy_indian_customer.png" alt="Happy Customer Tracking Service" loading="lazy" decoding="async" class="tracker-happy-customer-img">
             <div class="tracker-image-overlay"></div>
             <div class="tracker-badge-floating">
               <span class="badge-icon"><i data-lucide="shield-check"></i></span>
@@ -1233,7 +1240,7 @@
             <article class="product-card featured-product-card om-product-card" data-tags="personalized gifts keychain under199">
               <div class="om-card-media">
                 <a href="product-detail.html?product=acrylic-keychain" class="om-card-media-link">
-                  <img data-rotating-product="acrylic-keychain" alt="Personalized Acrylic Keychain" src="assets/products_images/Personalized Gifts/Acrylic Keychain/image_1.png" loading="lazy">
+                  <img data-rotating-product="acrylic-keychain" alt="Personalized Acrylic Keychain" src="assets/products_images/Personalized Gifts/Keychain/image_1.png" loading="lazy">
                 </a>
                 <span class="om-card-badge blue">POPULAR</span>
                 <span class="om-card-rating"><span>★</span> 4.8</span>
@@ -1386,7 +1393,11 @@
     <div data-site-footer></div>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
     <script src="assets/globe-land-points.js?v=chain-journey-17" defer></script>
-    <script src="assets/app.js?v=student-dense-fine-v1" defer></script>
+    <script src="assets/pilot-metrics.js?v=release-107" defer></script>
+    <script src="assets/app.js?v=release-108" defer></script>
+    <script src="assets/quick-order.js?v=2" defer></script>
   
+<script src="assets/print-product-rules.js?v=1" defer></script>
+<script src="assets/print-quick-order.js?v=1" defer></script>
 </body>
 </html>

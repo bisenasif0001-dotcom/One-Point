@@ -14,23 +14,7 @@ const MODEL_LABELS = Object.freeze({
 
 const LAST_UPDATED = "2026-06-29";
 
-const SLUG_ALIASES = Object.freeze({
-  "fssai-license": "fssai",
-  "trademark-registration": "trademark",
-  "flight-ticket": "flight-booking",
-  "flight-booking": "flight-booking",
-  "train-ticket-booking": "train-ticket",
-  "tour-package-assistance": "tour-package",
-  "photocopy-print": "photocopy-printing",
-  "photocopy-and-print": "photocopy-printing",
-  "scanning": "document-scanning",
-  "pension-assistance": "pension",
-  "fastag-recharge": "fastag",
-  "recharge-and-bills": "electricity-bill",
-  "social-media-creative": "social-media-post",
-  "travel-booking": "bus-ticket",
-  "general-support": "jan-seva"
-});
+const SLUG_ALIASES = require("../assets/service-policy").aliases;
 
 const DEFAULT_DOCS = Object.freeze(["Identity proof", "Mobile number"]);
 

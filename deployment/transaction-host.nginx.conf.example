@@ -1,0 +1,21 @@
+# Template only: replace domain and certificate paths. Validate with nginx -t.
+# Deploy frontend HTML/assets AND backend to this transactional host.
+server {
+    listen 80;
+    server_name orders.example.com;
+    return 301 https://$host$request_uri;
+}
+server {
+    listen 443 ssl;
+    server_name orders.example.com;
+    ssl_certificate /etc/letsencrypt/live/orders.example.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/orders.example.com/privkey.pem;
+    client_max_body_size 25m;
+    location / {
+        proxy_pass http://127.0.0.1:4173;
+        proxy_set_header Host $host;
+        proxy_set_header X-Forwarded-Proto https;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Real-IP $remote_addr;
+    }
+}

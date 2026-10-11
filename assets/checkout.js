@@ -89,11 +89,25 @@
   let currentStepIndex = 1;
   let activeCoupon = null;
   let uploadFiles = [];
-  let checkoutTimerVal = 900; // 15 minutes timer countdown
-  let checkoutSessionExpired = false;
   let loggedInCheckoutCustomer = null;
   let checkoutProfilePromise = null;
   let applicantMode = "self";
+  let applicantEditing = false;
+  let applicantTouched = false;
+  let otherApplicantValues = null;
+  const applicantIds = ['checkout-name', 'checkout-mobile', 'checkout-email', 'checkout-address', 'checkout-gst'];
+  function applicantValues() {
+    return Object.fromEntries(applicantIds.map(id => [id, document.getElementById(id)?.value || '']));
+  }
+  function restoreApplicantValues(values) {
+    applicantIds.forEach(id => {
+      const input = document.getElementById(id);
+      if (!input) return;
+      input.value = values?.[id] || '';
+      input.classList.remove('eds-input-valid', 'eds-input-invalid');
+      input.closest('.enterprise-field')?.classList.remove('is-valid', 'is-invalid');
+    });
+  }
 
   // Payment selection state (backed by the OPDSPay registry, no hardcoded providers)
   let selectedMethodId = "";
@@ -134,6 +148,7 @@
   }
 
   function showCheckoutStatus(message, type = "info", focusTarget = null) {
+    if (type === 'error') window.OPDSPilotMetrics?.track('checkout_error');
     const status = document.getElementById("checkout-step-status");
     if (!status) return;
     status.className = `checkout-step-status is-${type}`;
@@ -216,9 +231,9 @@
   function savedIdentityComplete(identity = savedIdentity()) {
     if (!identity) return false;
     const name = String(identity.name || "").trim();
-    const mobile = String(identity.mobile || identity.phone || "").replace(/\D/g, "");
+    const mobile = String(identity.mobile || identity.phone || "").replace(/\D/g, "").slice(-10);
     const email = String(identity.email || "").trim();
-    return Boolean(name && !/^customer$/i.test(name) && /^\d{10}$/.test(mobile) && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) && checkoutProfileAddress(identity));
+    return Boolean(name && !/^customer$/i.test(name) && /^\d{10}$/.test(mobile) && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email));
   }
 
   function fillCheckoutCustomer(identity = savedIdentity()) {
@@ -274,14 +289,17 @@
         <small>${complete ? "SIGNED-IN CUSTOMER" : "PROFILE DETAILS FOUND"}</small>
         <strong>${escapeHtml(identity.name || "Customer")}</strong>
         <em>${escapeHtml([mobile, email].filter(Boolean).join(" · "))}</em>
-        <span>${escapeHtml(address || "Please add the missing address below.")}</span>
+        <span>${escapeHtml(address || "No postal address added (optional).")}</span>
       </span>
       <span class="checkout-saved-actions">
+        ${usingSaved ? `<button type="button" class="eds-btn eds-btn-secondary" onclick="editCheckoutApplicant(false)">Edit my details</button>` : ""}
         ${complete && !usingSaved ? `<button type="button" class="eds-btn eds-btn-primary" onclick="useSavedCustomerDetails()"><i data-lucide="check"></i> Use my details</button>` : ""}
         ${usingSaved ? `<button type="button" class="eds-btn eds-btn-secondary" onclick="editCheckoutApplicant(true)"><i data-lucide="users"></i> Apply for someone else</button>` : ""}
       </span>
     `;
-    editor.hidden = complete && usingSaved;
+    editor.hidden = complete && usingSaved && !applicantEditing;
+    const continueButton = document.getElementById('service-continue-btn');
+    if (continueButton) continueButton.textContent = editor.hidden ? 'Continue with saved details' : 'Continue to Documents';
     if (window.lucide) window.lucide.createIcons();
   }
 
@@ -296,11 +314,8 @@
       if (!response.ok) return null;
       const data = await response.json();
       loggedInCheckoutCustomer = data.customer || null;
-      applicantMode = new URLSearchParams(window.location.search).get("for_other") === "1"
-        || localStorage.getItem("opds_checkout_applicant_mode") === "other" ? "other" : "self";
-      if (applicantMode === "self") fillCheckoutCustomer();
+      if (applicantMode === "self" && !applicantTouched && !applicantEditing) fillCheckoutCustomer();
       renderSavedCustomer();
-      if (button && savedIdentityComplete()) button.innerHTML = `Continue with saved details <i data-lucide="arrow-right"></i>`;
       if (window.lucide) window.lucide.createIcons();
       return loggedInCheckoutCustomer;
     } catch {
@@ -309,9 +324,15 @@
   }
 
   window.useSavedCustomerDetails = function() {
+    if (applicantMode === 'other') otherApplicantValues = applicantValues();
     applicantMode = "self";
+    applicantEditing = false;
+    applicantTouched = false;
     localStorage.setItem("opds_checkout_applicant_mode", "self");
+    localStorage.removeItem('opds_checkout_draft');
     fillCheckoutCustomer();
+    document.getElementById('checkout-gst').value = '';
+    window.toggleProfileType('personal');
     renderSavedCustomer();
     if (validateStep1Form()) {
       updateApplicantSummary();
@@ -320,7 +341,13 @@
   };
 
   window.editCheckoutApplicant = function(forOther = false) {
+    if (forOther && applicantMode !== 'other') {
+      restoreApplicantValues(otherApplicantValues);
+      localStorage.removeItem('opds_checkout_draft');
+      window.toggleProfileType(otherApplicantValues?.['checkout-gst'] ? 'business' : 'personal');
+    }
     applicantMode = forOther ? "other" : applicantMode;
+    applicantEditing = true;
     if (forOther) localStorage.setItem("opds_checkout_applicant_mode", "other");
     const editor = document.getElementById("checkout-customer-editor");
     if (editor) editor.hidden = false;
@@ -334,12 +361,28 @@
       showCheckoutStatus("Select a service or add a product before continuing.", "error", document.getElementById("service-continue-btn"));
       return;
     }
+    if (!await validateSelectedCatalogItems()) return;
     if (checkoutProfilePromise) await checkoutProfilePromise;
     if (!validateStep1Form()) return;
     updateApplicantSummary();
     window.navigateToStep(2);
   };
   window.continueFromService = window.continueFromStep1;
+
+  window.continueWithDocumentsLater = async function() {
+    if (checkoutProfilePromise) await checkoutProfilePromise;
+    if (!validateStep1Form()) return;
+    if (!checkoutItems.length) {
+      showCheckoutStatus("Choose a service before continuing.", "error");
+      return;
+    }
+    if (!await validateSelectedCatalogItems()) return;
+    const later = document.getElementById("whatsapp-doc-later");
+    if (!later) return;
+    later.checked = true;
+    updateApplicantSummary();
+    window.navigateToStep(3);
+  };
 
   function pricingKey(value) {
     return String(value || "")
@@ -376,16 +419,24 @@
     setText("summary-current-step", checkoutStepLabels[currentStepIndex] || "Checkout");
     setText("summary-payment-method", selectedPaymentLabel());
     setText("summary-service-type", checkoutItems.some(i => i.type === "service") ? "Assisted" : "Store order");
+    const documentsLabel = document.querySelector("#node-2 .journey-copy small");
+    if (documentsLabel) documentsLabel.textContent = document.getElementById("whatsapp-doc-later")?.checked ? "Send later" : "Upload / Attach";
 
     const mobileCta = document.getElementById("mobile-checkout-cta");
     if (mobileCta) {
       let nextLabel = `Continue: ${checkoutStepLabels[currentStepIndex + 1] || "Next"}`;
       if (currentStepIndex === 3) {
-        nextLabel = "Pay Securely";
+        const registry = payRegistry();
+        const method = registry?.getMethod(selectedMethodId);
+        const plan = registry?.getPlan(selectedPlanId);
+        const amount = Math.round(lastTotalPayable * (plan ? plan.nowFactor : 1) * 100) / 100;
+        nextLabel = method?.flow === "offline" ? "Confirm Booking" : `Pay ${formatINR(amount)}`;
+        if (checkoutItems.some(item => item.policy?.purchase.mode === 'scope_review')) nextLabel = 'Request scope quote';
       } else if (currentStepIndex >= 4) {
         nextLabel = "Track Application";
       }
       mobileCta.textContent = nextLabel;
+      mobileCta.disabled = checkoutSubmitting || gatewayOpen;
     }
 
     document.querySelectorAll(".profile-choice-card").forEach(card => {
@@ -396,7 +447,7 @@
 
   // API Utilities
   async function getCheckoutCsrfToken() {
-    if (checkoutCsrfToken) return checkoutCsrfToken;
+    // Renew at submission instead of forcing a customer to restart a long draft.
     const { response, data } = await fetchJsonWithRetry("/api/csrf");
     if (!response.ok || !data.csrfToken) throw new Error(data.message || "Secure checkout token could not be created.");
     checkoutCsrfToken = data.csrfToken;
@@ -408,7 +459,7 @@
   }
 
   function apiUrl(path) {
-    return new URL(path, window.location.origin).toString();
+    return new URL(path, path.startsWith("/api/") ? window.location.origin : window.location.href).toString();
   }
 
   function xhrJson(url, options = {}) {
@@ -476,8 +527,9 @@
 
   async function pingCheckoutServer() {
     try {
-      const { response } = await fetchJsonWithRetry("/api/health", {}, 0);
-      return response.ok;
+      const { response, data } = await fetchJsonWithRetry("/api/health", {}, 0);
+      // Static hosts can return a 200 HTML fallback. Require the API contract.
+      return response.ok && (data.ok === true || data.status === "healthy");
     } catch {
       return false;
     }
@@ -495,7 +547,7 @@
       script.src = src;
       script.async = true;
       script.onload = resolve;
-      script.onerror = () => reject(new Error("Secure payment gateway could not be loaded."));
+      script.onerror = () => { script.remove(); reject(new Error("Secure payment gateway could not be loaded. Please try again.")); };
       document.head.appendChild(script);
     });
   }
@@ -517,6 +569,12 @@
     const payment = orderResponse && orderResponse.payment;
     if (!payment) throw new Error("Payment session was not returned by the server.");
 
+    if (payment.status === 'captured') {
+      localStorage.removeItem('opds_checkout_intent');
+      localStorage.removeItem('opds_checkout_draft');
+      location.href = 'payment-success.html?order_id=' + encodeURIComponent(payment.orderId);
+      return;
+    }
     const successUrl = () => {
       const params = new URLSearchParams({ redirect: "account-order" });
       if (payment.orderId) params.set("order_id", payment.orderId);
@@ -534,6 +592,7 @@
       const options = {
         ...payment.session,
         handler: async response => {
+          try {
           const csrfToken = await getCheckoutCsrfToken();
           const verified = await fetchJsonWithRetry("/api/payments/verify", {
             method: "POST",
@@ -547,22 +606,41 @@
           localStorage.removeItem("opds_checkout_draft");
           localStorage.removeItem("opds_checkout_applicant_mode");
           localStorage.removeItem("opds_cart");
+          localStorage.removeItem('opds_checkout_intent');
           window.location.href = successUrl();
+          } catch (error) {
+            gatewayOpen = false;
+            showCheckoutStatus('Payment verification is incomplete. Check the existing order before paying again.', 'error');
+            location.href = 'payment-pending.html?order_id=' + encodeURIComponent(payment.orderId) + '&payment_id=' + encodeURIComponent(payment.paymentId);
+          }
         },
         modal: {
           ondismiss: () => {
-            window.location.href = `payment-pending.html?order_id=${encodeURIComponent(payment.orderId || "")}&payment_id=${encodeURIComponent(payment.paymentId || "")}`;
+            gatewayOpen = false;
+            document.querySelector('#checkout-form button[type="submit"]')?.removeAttribute('disabled');
+            updatePaymentCtaUI();
+            showCheckoutStatus('Payment closed. Your booking is saved; press Pay again to reopen the same payment. Do not pay again if money was debited—check your order status first.', 'info');
           }
         }
       };
-      new window.Razorpay(options).open();
+      gatewayOpen = true;
+      updateCheckoutChrome();
+      try { new window.Razorpay(options).open(); } catch (error) { gatewayOpen = false; throw error; }
       return;
     }
 
     window.location.href = `payment-pending.html?order_id=${encodeURIComponent(payment.orderId || "")}`;
   }
 
-  async function fetchProductCatalog() {
+  let checkoutCatalogPromise = null;
+  function fetchProductCatalog() {
+    if (!checkoutCatalogPromise) checkoutCatalogPromise = requestProductCatalog().catch(error => {
+      checkoutCatalogPromise = null;
+      throw error;
+    });
+    return checkoutCatalogPromise;
+  }
+  async function requestProductCatalog() {
     const isWa = window.OPDSLaunch && window.OPDSLaunch.isWhatsAppMode && window.OPDSLaunch.isWhatsAppMode();
     const sources = isWa ? ["assets/catalog.json", "/api/products"] : ["/api/products", "assets/catalog.json"];
     for (const url of sources) {
@@ -575,6 +653,98 @@
   }
 
   // Load and Parse Functions
+  let policySelection = "";
+  let policyCatalog = null;
+  async function validateSelectedCatalogItems() {
+    if (!window.OPDSServicePolicy) return true;
+    try {
+      const catalog = policyCatalog || await fetchProductCatalog();
+      if (checkoutItems.length && checkoutItems.every(item => window.OPDSServicePolicy.resolve(catalog, item.slug, item.type))) return true;
+      showCheckoutStatus("This task is not currently listed for online booking. Please choose a service from the catalog or contact support.", "error", document.getElementById("step-1-details-container"));
+    } catch {
+      showCheckoutStatus("Service details could not be loaded. Please try again before continuing.", "error");
+    }
+    return false;
+  }
+  function applyCheckoutPolicyCatalog(catalog) {
+    checkoutItems = checkoutItems.map(item => {
+      const entry = window.OPDSServicePolicy.resolve(catalog, item.slug, item.type);
+      if (!entry) return item;
+      return { ...item, slug: entry.slug, name: entry.name, price: entry.policy.pricing.amount,
+        taxRate: Number(entry.taxRate || 0), displayPrice: entry.policy.pricing.displayPrice,
+        pricingModel: entry.policy.pricing.model, priceNote: entry.policy.pricing.note,
+        duration: entry.policy.fulfilment.duration, policy: entry.policy };
+    });
+    renderServicePolicy();
+  }
+  async function hydrateCheckoutPolicies() {
+    if (!window.OPDSServicePolicy) return;
+    if (policyCatalog) {
+      if (checkoutItems.some(item => !item.policy)) applyCheckoutPolicyCatalog(policyCatalog);
+      return;
+    }
+    const key = checkoutItems.map(item => `${item.type}:${item.slug}:${item.quantity}`).join("|");
+    if (!key || key === policySelection) return;
+    policySelection = key;
+    try {
+      const catalog = await fetchProductCatalog();
+      if (key !== checkoutItems.map(item => `${item.type}:${item.slug}:${item.quantity}`).join("|")) return;
+      policyCatalog = catalog;
+      applyCheckoutPolicyCatalog(catalog);
+      calculatePricingDetails();
+    } catch { policySelection = ""; }
+  }
+  function renderServicePolicy() {
+    const list = document.getElementById("service-document-checklist");
+    const note = document.getElementById("service-document-policy-note");
+    if (!list || !note) return;
+    const policies = checkoutItems.map(item => item.policy).filter(Boolean);
+    if (policies.length !== checkoutItems.length || !policies.length) {
+      list.replaceChildren();
+      const row = document.createElement("li");
+      row.textContent = "Select a service to see its document requirements.";
+      list.append(row);
+      note.textContent = "The operator will confirm requirements if catalog details are unavailable.";
+      return;
+    }
+    const labels = [...new Set(policies.flatMap(policy => policy.documents.required))];
+    list.replaceChildren();
+    for (const label of labels) {
+      const row = document.createElement("li");
+      const icon = document.createElement("i"); icon.dataset.lucide = "check";
+      row.append(icon, document.createTextNode(label)); list.append(row);
+    }
+    for (const label of [...new Set(policies.flatMap(policy => policy.documents.optional || []))].filter(label => !labels.includes(label))) {
+      const row = document.createElement('li'); row.textContent = 'If applicable: ' + label; list.append(row);
+    }
+    if (!labels.length) {
+      const row = document.createElement("li");
+      row.textContent = "The operator will confirm the requirements for this task.";
+      list.append(row);
+    }
+    note.textContent = "Required files are reviewed before processing. Upload now or send them from your order later. Sending later does not waive requirements.";
+    if (policies.some(policy => policy.purchase.mode === "scope_review")) {
+      note.textContent += " The displayed price is a starting price; final scope and charges need review.";
+    }
+  }
+
+  async function refreshCartPricing() {
+    const selection = checkoutItems.map(item => `${item.type}:${item.slug}:${item.quantity}`).join("|");
+    try {
+      const catalog = await fetchProductCatalog();
+      if (selection !== checkoutItems.map(item => `${item.type}:${item.slug}:${item.quantity}`).join("|")) return;
+      checkoutItems = checkoutItems.map(item => {
+        const entries = item.type === "service"
+          ? [...(catalog.serviceVariants || []), ...(catalog.services || [])] : (catalog.products || []);
+        const match = entries.find(entry => entry.slug === item.slug);
+        return match ? { ...item, name: match.name, price: Number(match.price || 0),
+          taxRate: Number(match.taxRate || 0), imageUrl: match.imageUrl || "",
+          displayPrice: match.displayPrice || "", pricingModel: match.pricingModel || "" } : item;
+      });
+      calculatePricingDetails();
+    } catch { /* Keep resolved local pricing; server remains authoritative at booking. */ }
+  }
+
   async function loadProductCheckoutItem(productSlug, quantity) {
     try {
       const data = await fetchProductCatalog();
@@ -592,8 +762,14 @@
         type: "product",
         price: Number(product.price || 0),
         quantity,
+        taxRate: Number(product.taxRate || 0),
         imageUrl: product.imageUrl || ""
       }];
+      const packSize = new URLSearchParams(location.search).get("pack_size");
+      if (productSlug === "visiting-cards" && packSize) {
+        const configuration = window.OPDSPrintProduct.validate({ packSize: Number(packSize), packs: quantity }, quantity);
+        checkoutItems[0].configuration = configuration;
+      }
     } catch (e) {
       const fallback = staticPricingFor(productSlug);
       checkoutItems = fallback ? [{ ...fallback, type: "product", quantity }] : [];
@@ -615,6 +791,10 @@
     if (savedDraft) {
       try {
         const draft = JSON.parse(savedDraft);
+        if (!draft.savedAt || Date.now() - draft.savedAt > recoveryLifetime) { localStorage.removeItem('opds_checkout_draft'); throw new Error('Expired draft'); }
+        if (params.get('for_other') === '1' && draft.applicantMode !== 'other') throw new Error('Different applicant draft');
+        applicantMode = draft.applicantMode === 'other' ? 'other' : 'self';
+        applicantEditing = true;
         if (document.getElementById("checkout-name")) document.getElementById("checkout-name").value = draft.name || "";
         if (document.getElementById("checkout-mobile")) document.getElementById("checkout-mobile").value = draft.mobile || "";
         if (document.getElementById("checkout-email")) document.getElementById("checkout-email").value = draft.email || "";
@@ -623,12 +803,15 @@
           document.getElementById("checkout-gst").value = draft.gstin;
           document.querySelector('input[name="profileType"][value="business"]').checked = true;
           toggleProfileType("business");
+          document.getElementById('checkout-optional-details').open = true;
         }
       } catch (e) { /* ignore */ }
     }
 
     // Explicit apply-flow values are newer than an older local draft.
-    hydrateCustomerFromParams(params);
+    if (!applicantTouched) hydrateCustomerFromParams(params);
+    if (['name', 'phone', 'mobile', 'email', 'address'].some(key => params.get(key))) applicantEditing = true;
+    if (params.get('for_other') === '1') { applicantMode = 'other'; applicantEditing = true; }
 
     if (serviceSlug) {
       let name = serviceName || "E-Service Booking";
@@ -658,19 +841,47 @@
       }];
       calculatePricingDetails();
     } else if (productSlug) {
+      if (productSlug === "visiting-cards" && params.has("pack_size")) {
+        try { window.OPDSPrintProduct.validate({ packSize: Number(params.get("pack_size")), packs: quantity }, quantity); }
+        catch (error) { checkoutItems = []; calculatePricingDetails(); showCheckoutStatus(error.message, "error"); return; }
+      }
       loadProductCheckoutItem(productSlug, quantity);
     } else {
       try {
         checkoutItems = JSON.parse(localStorage.getItem("opds_cart") || "[]");
+        checkoutItems = checkoutItems.map(item => {
+          const pricing = resolvedPricing(window.OPDSPricing?.find?.(item.slug), staticPricingFor(item.slug, item.name));
+          return pricing ? { ...item, name: pricing.name || item.name || item.slug,
+            price: Number(pricing.price || 0), taxRate: Number(pricing.taxRate || 0),
+            displayPrice: pricing.displayPrice || "", pricingModel: pricing.pricingModel || "" } : item;
+        });
       } catch (e) {
         checkoutItems = [];
       }
       calculatePricingDetails();
+      if (checkoutItems.length) refreshCartPricing();
     }
   }
 
   // Live Calculations & Breakdowns
   function calculatePricingDetails() {
+    const needsQuote = checkoutItems.some(item => item.policy?.purchase.mode === 'scope_review');
+    document.body.classList.toggle('scope-review-checkout', needsQuote);
+    const continueButton = document.getElementById('service-continue-btn');
+    if (continueButton && needsQuote) continueButton.disabled = true;
+    const quoteLink = document.getElementById('scope-quote-link');
+    if (quoteLink) {
+      quoteLink.hidden = !needsQuote;
+      quoteLink.href = 'https://wa.me/919473946181?text=' + encodeURIComponent('Please review scope and quote for ' + checkoutItems.map(item => item.name).join(', '));
+    }
+    const paymentButton = document.querySelector('.checkout-submit-btn');
+    if (paymentButton) paymentButton.disabled = needsQuote;
+    const productOnly = checkoutItems.length > 0 && checkoutItems.every(item => item.type === 'product');
+    const nameLabel = document.querySelector('label[for="checkout-name"]');
+    const nameHelp = document.getElementById('checkout-name')?.closest('.enterprise-field')?.querySelector('small');
+    if (nameLabel) nameLabel.textContent = productOnly ? 'Contact Full Name *' : 'Applicant Full Name *';
+    if (nameHelp) nameHelp.textContent = productOnly ? 'Name of the person placing this order.' : 'Enter the legal name from Aadhaar, PAN, or official identity card.';
+    hydrateCheckoutPolicies();
     let subtotal = 0;
     const staticMaster = window.OPDS_MASTER_PRICING || window.OPDS_STATIC_PRICING || {};
 
@@ -680,9 +891,9 @@
     checkoutItems.forEach(item => {
       const slugKey = pricingKey(item.slug || item.id || item.name || "");
       const masterInfo = staticMaster[slugKey] || {};
-      const itemPrice = masterInfo.price || Number(item.price || 0);
-      const itemServiceCharge = masterInfo.serviceCharge !== undefined ? masterInfo.serviceCharge : itemPrice;
-      const itemOfficialFee = masterInfo.officialFee !== undefined ? masterInfo.officialFee : 0;
+      const itemPrice = item.policy ? item.policy.pricing.amount : (masterInfo.price || Number(item.price || 0));
+      const itemServiceCharge = item.policy ? itemPrice : (masterInfo.serviceCharge !== undefined ? masterInfo.serviceCharge : itemPrice);
+      const itemOfficialFee = item.policy ? 0 : (masterInfo.officialFee !== undefined ? masterInfo.officialFee : 0);
       
       const qty = item.quantity || 1;
       subtotal += itemPrice * qty;
@@ -695,12 +906,16 @@
 
     const governmentFeeLabel = !isService
       ? formatINR(0)
+      : serviceItem.policy?.pricing.model === "service_charge_plus_actual" ? "Payable separately"
+      : serviceItem.policy?.pricing.model === "starting_from" ? "Scope review"
+      : serviceItem.policy ? (serviceItem.policy.pricing.includesGovernmentFee ? "Included" : "Not specified")
       : (totalOfficialFee > 0 ? formatINR(totalOfficialFee) : "Included / ₹0");
     const platformFee = isService ? totalServiceCharge : subtotal;
 
     const gstRate = isService ? Number(serviceItem.taxRate || 0) : 0;
-    const gstAmount = Math.round(platformFee * gstRate);
-    const gstLabel = gstRate > 0 ? formatINR(gstAmount) : "Not applicable";
+    const gstAmount = checkoutItems.reduce((sum, item) =>
+      sum + Math.round(Number(item.price || 0) * (item.quantity || 1) * Number(item.type === "service" ? 0 : item.taxRate || 0)) / 100, 0);
+    const gstLabel = gstAmount > 0 ? formatINR(gstAmount) : "Not applicable";
 
     let discount = 0;
     if (activeCoupon) {
@@ -829,7 +1044,7 @@
         <span class="summary-item-icon"><i data-lucide="${item.type === 'service' ? 'layers' : 'package'}"></i></span>
         <div>
           <strong>${escapeHtml(item.name || item.slug || "Selected item")}</strong>
-          <small>${item.type === 'service' ? 'Government service workflow' : 'Store product'} &bull; Qty ${item.quantity || 1}</small>
+          <small>${item.configuration?.packSize === 100 ? `${item.quantity} pack(s) · ${item.quantity * 100} cards` : `${item.type === 'service' ? 'Government service workflow' : 'Store product'} · Qty ${item.quantity || 1}`}</small>
         </div>
         <b>${formatINR(Number(item.price || 0) * (item.quantity || 1))}</b>
       </article>
@@ -849,11 +1064,11 @@
                 <span class="modern-micro-badge turnaround"><i data-lucide="clock"></i> ${escapeHtml(estimatedDeliveryText(service))}</span>
               </div>
               <h3 class="selected-service-heading">${escapeHtml(service.name || "Selected service")}</h3>
-              <p class="selected-service-desc">${escapeHtml(service.priceNote || service.displayPrice || "Operator reviewed government filing with live status tracking.")}</p>
+              <p class="selected-service-desc">${escapeHtml(service.configuration?.packSize === 100 ? `${service.quantity} pack(s) · ${service.quantity * 100} cards. Artwork and finish reviewed before printing.` : service.priceNote || service.displayPrice || "Operator reviewed government filing with live status tracking.")}</p>
             </div>
             <div class="selected-service-price-pill">
-              <small>Total Fee</small>
-              <strong>${formatINR(service.price)}</strong>
+              <small>${escapeHtml(service.configuration ? "Pack subtotal" : service.policy?.pricing.label || "Total Fee")}</small>
+              <strong>${formatINR(service.price * (service.configuration ? service.quantity : 1))}</strong>
               <button type="button" class="change-service-link" onclick="window.clearSelectedCheckoutItem()"><i data-lucide="refresh-cw"></i> Change</button>
             </div>
           </div>
@@ -865,6 +1080,7 @@
   }
 
   window.selectQuickService = function(slug, name, price) {
+    slug = String(slug).replace(/^service-/, "");
     checkoutItems = [{
       slug,
       name,
@@ -882,6 +1098,8 @@
 
   window.clearSelectedCheckoutItem = function() {
     checkoutItems = [];
+    policySelection = "";
+    renderServicePolicy();
     localStorage.removeItem("opds_cart");
     calculatePricingDetails();
   };
@@ -940,29 +1158,72 @@
     }
   }
 
-  window.toggleMobilePriceDrawer = function(forceOpen) {
-    const drawer = document.getElementById("mobile-price-drawer");
-    const backdrop = document.getElementById("mobile-price-drawer-backdrop");
-    if (!drawer || !backdrop) return;
-    const isOpen = drawer.classList.contains("is-open");
-    const shouldOpen = typeof forceOpen === "boolean" ? forceOpen : !isOpen;
-    drawer.classList.toggle("is-open", shouldOpen);
-    backdrop.classList.toggle("is-open", shouldOpen);
-    document.body.classList.toggle("price-drawer-open", shouldOpen);
+  let priceDrawerOpener = null;
+  function clearPriceDrawerHistory() {
+    if (history.state?.opdsCheckoutPrice) {
+      const state = { ...history.state }; delete state.opdsCheckoutPrice; history.replaceState(state, '', location.href);
+    }
+  }
+  window.toggleMobilePriceDrawer = function(forceOpen, fromHistory = false) {
+    const drawer = document.getElementById('mobile-price-drawer');
+    if (!drawer) return;
+    const shouldOpen = typeof forceOpen === 'boolean' ? forceOpen : !drawer.open;
+    if (shouldOpen && !drawer.open) {
+      clearPriceDrawerHistory();
+      priceDrawerOpener = document.activeElement;
+      document.querySelector('.mobile-cta-price-block')?.setAttribute('aria-expanded', 'true');
+      drawer.showModal(); drawer.classList.add('is-open'); document.body.classList.add('price-drawer-open');
+      if (!fromHistory) history.pushState({ ...history.state, opdsCheckoutPrice: true }, '', location.href);
+    } else if (!shouldOpen && drawer.open) { clearPriceDrawerHistory(); drawer.close(); }
   };
 
   function setupCheckoutInteractions() {
-    // Smart Virtual Keyboard Detection for Mobile
-    if (window.visualViewport) {
-      const initialHeight = window.visualViewport.height;
-      window.visualViewport.addEventListener("resize", () => {
-        const isKeyboardOpen = window.visualViewport.height < initialHeight * 0.78;
-        document.body.classList.toggle("keyboard-open", isKeyboardOpen);
-      });
-    }
+    const drawer = document.getElementById('mobile-price-drawer');
+    const priceControl = document.querySelector('.mobile-cta-price-block');
+    priceControl?.setAttribute('aria-haspopup', 'dialog');
+    priceControl?.setAttribute('aria-controls', 'mobile-price-drawer');
+    window.addEventListener('resize', () => { if (innerWidth > 900 && drawer?.open) toggleMobilePriceDrawer(false); });
+    priceControl?.addEventListener('keydown', event => {
+      if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); toggleMobilePriceDrawer(); }
+    });
+    drawer?.addEventListener('cancel', event => { event.preventDefault(); toggleMobilePriceDrawer(false); });
+    drawer?.addEventListener('close', () => {
+      if (drawer.open) return;
+      document.querySelector('.mobile-cta-price-block')?.setAttribute('aria-expanded', 'false');
+      drawer.classList.remove('is-open'); document.body.classList.remove('price-drawer-open');
+      if (history.state?.opdsCheckoutPrice) {
+        const state = { ...history.state }; delete state.opdsCheckoutPrice; history.replaceState(state, '', location.href);
+      }
+      if (document.activeElement === document.body || drawer.contains(document.activeElement)) priceDrawerOpener?.focus({ preventScroll: true });
+    });
+    drawer?.addEventListener('click', event => {
+      const rect = drawer.getBoundingClientRect();
+      if (event.target === drawer && (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom)) drawer.close();
+    });
+    window.addEventListener('popstate', () => { if (drawer?.open && !history.state?.opdsCheckoutPrice) drawer.close(); });
+    let viewportBaseline = window.visualViewport?.height || innerHeight;
+    const syncKeyboard = () => {
+      const viewport = window.visualViewport;
+      const focused = document.activeElement;
+      const editing = focused?.matches('input:not([type=radio]):not([type=checkbox]):not([type=file]), textarea');
+      const keyboard = !!(editing && viewport && viewport.scale === 1 && Math.max(innerHeight, viewportBaseline) - viewport.height > 120);
+      document.body.classList.toggle('keyboard-open', keyboard);
+      if (!editing) viewportBaseline = viewport?.height || innerHeight;
+      if (keyboard) focused.scrollIntoView({ block: 'nearest', behavior: 'instant' });
+    };
+    window.visualViewport?.addEventListener('resize', syncKeyboard);
+    document.addEventListener('focusin', syncKeyboard);
+    document.addEventListener('focusout', () => setTimeout(syncKeyboard, 0));
+    window.addEventListener('orientationchange', () => { viewportBaseline = 0; syncKeyboard(); });
 
     const mobileCta = document.getElementById("mobile-checkout-cta");
     if (mobileCta) {
+      const actionBar = mobileCta.closest('.checkout-mobile-cta');
+      if (actionBar && window.ResizeObserver) {
+        new ResizeObserver(() => {
+          document.documentElement.style.setProperty('--checkout-action-height', Math.ceil(actionBar.getBoundingClientRect().height + 24) + 'px');
+        }).observe(actionBar);
+      }
       mobileCta.addEventListener("click", () => {
         if (currentStepIndex === 4) {
           const link = document.getElementById("success-track-link");
@@ -970,6 +1231,7 @@
           return;
         }
         if (currentStepIndex === 3) {
+          if (checkoutItems.some(item => item.policy?.purchase.mode === 'scope_review')) { document.getElementById('scope-quote-link')?.click(); return; }
           const form = document.getElementById("checkout-form");
           if (form) form.requestSubmit();
           return;
@@ -982,6 +1244,7 @@
       });
     }
 
+    document.getElementById('file-input')?.addEventListener('cancel', () => { replacementIndex = null; });
     const dropZone = document.getElementById("drag-drop-zone");
     if (dropZone) {
       ["dragenter", "dragover"].forEach(type => {
@@ -1001,7 +1264,7 @@
         if (files && files.length) addUploadFiles(files);
       });
       dropZone.addEventListener("keydown", event => {
-        if (event.key === "Enter" || event.key === " ") {
+        if (event.target === dropZone && (event.key === "Enter" || event.key === " ")) {
           event.preventDefault();
           window.triggerFileInput();
         }
@@ -1016,7 +1279,9 @@
     if (stepIndex === 5 || (stepIndex === 4 && !orderCompleted)) stepIndex = 3;
     if (stepIndex === 6) stepIndex = 4;
     if (stepIndex === 4 && !orderCompleted) return; // Success step only after a confirmed order
-    if (stepIndex > currentStepIndex + 1) stepIndex = currentStepIndex + 1;
+    const skipDeferredDocuments = currentStepIndex === 1 && stepIndex === 3
+      && document.getElementById("whatsapp-doc-later")?.checked;
+    if (stepIndex > currentStepIndex + 1 && !skipDeferredDocuments) stepIndex = currentStepIndex + 1;
     clearCheckoutStatus();
 
     // Validate current step before proceeding
@@ -1066,6 +1331,7 @@
     if (progressFill) progressFill.style.width = `${fillPercent}%`;
 
     currentStepIndex = stepIndex;
+    if (stepIndex === 3) verifyPayableTotal().catch(error => showCheckoutStatus(error.message, 'error'));
     if (stepIndex === 2) updateApplicantSummary();
     if (stepIndex === 3) {
       renderReviewStep();
@@ -1074,7 +1340,11 @@
     updateCheckoutChrome();
     if (window.lucide) window.lucide.createIcons();
     const activeHeading = targetStep?.querySelector("h2");
-    if (activeHeading) activeHeading.scrollIntoView({ behavior: "smooth", block: "start" });
+    if (activeHeading) { activeHeading.tabIndex = -1; activeHeading.focus({ preventScroll: true }); }
+    if (activeHeading) activeHeading.scrollIntoView({
+      behavior: window.innerWidth <= 768 || window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth",
+      block: "start"
+    });
   };
 
   window.nextStep = function(stepIndex) {
@@ -1098,10 +1368,13 @@
     if (mobile && !validateLiveInput(mobile)) valid = false;
     if (email && !validateLiveInput(email)) valid = false;
     if (address && !validateLiveInput(address)) valid = false;
-    if (isBusiness && gstin && !validateGstinInput(gstin)) valid = false;
+    if (isBusiness && gstin?.value.trim() && !validateGstinInput(gstin)) valid = false;
+    if (window.OPDSServicePolicy?.validateApplicant({ name: name?.value, phone: mobile?.value, email: email?.value }).length) valid = false;
 
     if (!valid) {
       const firstInvalid = document.querySelector("#step-1 .eds-input-invalid");
+      const optionalSection = firstInvalid?.closest('details');
+      if (optionalSection) optionalSection.open = true;
       showCheckoutStatus("Check the highlighted applicant details before continuing.", "error", firstInvalid);
     } else {
       // Autosave draft state
@@ -1110,7 +1383,9 @@
         mobile: mobile?.value || "",
         email: email?.value || "",
         address: address?.value || "",
-        gstin: isBusiness ? (gstin?.value || "") : ""
+        gstin: isBusiness ? (gstin?.value || "") : "",
+        applicantMode,
+        savedAt: Date.now()
       };
       localStorage.setItem("opds_checkout_draft", JSON.stringify(draft));
     }
@@ -1124,6 +1399,11 @@
       input.value = input.value.replace(/\D/g, "").slice(0, 10);
     }
     let valid = true;
+    if (!input.required && !input.value.trim()) {
+      input.classList.remove("eds-input-invalid", "eds-input-valid");
+      input.closest(".enterprise-field")?.classList.remove("is-valid");
+      return true;
+    }
     if (input.type === "email") {
       valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input.value);
     } else if (input.type === "tel") {
@@ -1149,7 +1429,7 @@
     input.value = input.value.toUpperCase().replace(/[^0-9A-Z]/g, "").slice(0, 15);
     const val = input.value.trim().toUpperCase();
     const gstinPattern = /^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/;
-    const valid = gstinPattern.test(val);
+    const valid = !val || gstinPattern.test(val);
 
     if (valid) {
       input.classList.remove("eds-input-invalid");
@@ -1174,7 +1454,7 @@
     if (gstContainer) {
       if (type === "business") {
         gstContainer.style.display = "block";
-        document.getElementById("checkout-gst").setAttribute("required", "required");
+        document.getElementById("checkout-gst").removeAttribute("required");
       } else {
         gstContainer.style.display = "none";
         document.getElementById("checkout-gst").removeAttribute("required");
@@ -1185,21 +1465,27 @@
     updateCheckoutChrome();
   };
 
-  // Step 3 Document Upload Simulation
+  // Files are selected here and sent to the owning order after booking.
   window.triggerFileInput = function() {
     const fileInput = document.getElementById("file-input");
-    if (fileInput) fileInput.click();
+    if (!arguments[0]) replacementIndex = null;
+    if (fileInput) { fileInput.multiple = !arguments[0]; fileInput.removeAttribute('capture'); fileInput.setAttribute('accept', '.pdf,.jpg,.jpeg,.png'); fileInput.click(); }
   };
 
   window.triggerCamera = function() {
     const fileInput = document.getElementById("file-input");
     if (fileInput) {
-      fileInput.setAttribute("accept", "image/*,.pdf");
+      replacementIndex = null; fileInput.multiple = false;
+      fileInput.setAttribute("accept", "image/jpeg,image/png");
       fileInput.setAttribute("capture", "environment");
     }
-    window.triggerFileInput();
+    if (fileInput) fileInput.click();
   };
 
+  let replacementIndex = null;
+  const filePreviews = new Map();
+  function releasePreview(file) { const url = filePreviews.get(file); if (url) URL.revokeObjectURL(url); filePreviews.delete(file); }
+  window.addEventListener('pagehide', () => { for (const file of filePreviews.keys()) releasePreview(file); });
   function addUploadFiles(files) {
     if (!files || files.length === 0) return;
 
@@ -1207,13 +1493,13 @@
     const accepted = [];
     const rejected = [];
     Array.from(files).forEach(file => {
-      const duplicate = uploadFiles.some(existing => existing.name === file.name && existing.size === file.size);
+      const duplicate = uploadFiles.some((existing, index) => index !== replacementIndex && existing.name === file.name && existing.size === file.size) || accepted.some(existing => existing.name === file.name && existing.size === file.size);
       if (duplicate) {
         rejected.push(`${file.name} is already attached`);
       } else if (!allowedExtensions.test(file.name)) {
         rejected.push(`${file.name} is not a supported file`);
-      } else if (file.size > 10 * 1024 * 1024) {
-        rejected.push(`${file.name} exceeds 10MB`);
+      } else if (!file.size || file.size > 3 * 1024 * 1024) {
+        rejected.push(`${file.name} is empty or exceeds 3MB`);
       } else {
         accepted.push(file);
       }
@@ -1222,40 +1508,20 @@
     if (rejected.length) showCheckoutStatus(rejected.join(". "), "error");
     if (!accepted.length) return;
 
-    const progressContainer = document.getElementById("upload-progress-container");
-    const progressFill = document.getElementById("upload-progress-fill");
-
-    if (progressContainer && progressFill) {
-      progressContainer.style.display = "block";
-      progressFill.style.width = "0%";
-
-      let prg = 0;
-      const interval = setInterval(() => {
-        prg += 20;
-        progressFill.style.width = `${prg}%`;
-        if (prg >= 100) {
-          clearInterval(interval);
-          progressContainer.style.display = "none";
-
-          for (let i = 0; i < accepted.length; i++) {
-            uploadFiles.push(accepted[i]);
-          }
-          renderUploadedFileList();
-          renderReviewStep();
-        }
-      }, 100);
-    } else {
-      for (let i = 0; i < accepted.length; i++) {
-        uploadFiles.push(accepted[i]);
-      }
-      renderUploadedFileList();
-      renderReviewStep();
+    if (replacementIndex !== null && uploadFiles[replacementIndex]) {
+      releasePreview(uploadFiles[replacementIndex]); uploadFiles.splice(replacementIndex, 1, accepted.shift());
     }
+    replacementIndex = null;
+    uploadFiles.push(...accepted);
+    if (!rejected.length) showCheckoutStatus('Documents selected. You can preview or replace them before they are sent with your booking.', 'info');
+    renderUploadedFileList();
+    renderReviewStep();
   }
 
   window.handleFileSelect = function(event) {
     addUploadFiles(event.target.files);
     event.target.value = "";
+    replacementIndex = null;
   };
 
   function renderUploadedFileList() {
@@ -1266,7 +1532,7 @@
       container.innerHTML = `
         <div class="upload-empty-state">
           <i data-lucide="file-search"></i>
-          <span>No documents uploaded yet.</span>
+          <span>No documents selected yet.</span>
         </div>
       `;
       const hiddenAttach = document.getElementById("checkout-attachments");
@@ -1276,14 +1542,17 @@
       return;
     }
 
+    for (const file of uploadFiles) if (!filePreviews.has(file)) filePreviews.set(file, URL.createObjectURL(file));
     container.innerHTML = uploadFiles.map((file, idx) => `
       <article class="uploaded-file-card">
         <span class="uploaded-file-icon"><i data-lucide="${/pdf/i.test(file.type || file.name) ? 'file-text' : 'image'}"></i></span>
+        ${/\.(png|jpe?g)$/i.test(file.name) ? `<img class="checkout-file-thumbnail" src="${filePreviews.get(file)}" alt="Preview of ${escapeHtml(file.name)}">` : ''}
         <div class="uploaded-file-copy">
           <strong>${escapeHtml(file.name)}</strong>
-          <small>${Math.max(1, Math.round(file.size / 1024))} KB &bull; Ready for preview</small>
+          <small>${Math.max(1, Math.round(file.size / 1024))} KB &bull; Selected — sent after order creation</small>
         </div>
         <div class="uploaded-file-actions">
+          <a class="eds-btn eds-btn-secondary" href="${filePreviews.get(file)}" target="_blank" rel="noopener" aria-label="Preview ${escapeHtml(file.name)}">Preview</a>
           <button type="button" class="eds-btn eds-btn-secondary" onclick="replaceUploadedFile(${idx})"><i data-lucide="refresh-cw"></i> Replace</button>
           <button type="button" class="eds-btn eds-btn-secondary danger" onclick="removeUploadedFile(${idx})"><i data-lucide="trash-2"></i> Remove</button>
         </div>
@@ -1301,14 +1570,15 @@
   }
 
   window.removeUploadedFile = function(idx) {
+    if (uploadFiles[idx]) releasePreview(uploadFiles[idx]);
     uploadFiles.splice(idx, 1);
     renderUploadedFileList();
     renderReviewStep();
   };
 
   window.replaceUploadedFile = function(idx) {
-    window.removeUploadedFile(idx);
-    window.triggerFileInput();
+    replacementIndex = idx;
+    window.triggerFileInput(true);
   };
 
   // Promo Coupon apply
@@ -1317,19 +1587,41 @@
     const feedback = document.getElementById("coupon-feedback");
     if (!input || !feedback) return;
 
-    const val = input.value.trim().toUpperCase();
-    if (val === "ONEPOINT10") {
-      activeCoupon = { code: "ONEPOINT10", percent: 0.10 };
-      feedback.style.color = "var(--eds-color-success)";
-      feedback.textContent = "Coupon Applied successfully! 10% Discount applied.";
-      feedback.style.display = "block";
-      calculatePricingDetails();
-    } else {
-      feedback.style.color = "var(--eds-color-danger)";
-      feedback.textContent = "Invalid Coupon code. Try ONEPOINT10.";
-      feedback.style.display = "block";
-    }
+    activeCoupon = null;
+    feedback.textContent = 'No server-verified coupon is currently available.';
+    feedback.style.display = 'block';
+    calculatePricingDetails();
   };
+
+  let pendingQuoteVerification = null;
+  async function verifyPayableTotal(required = false) {
+    if (pendingQuoteVerification) {
+      const previous = await pendingQuoteVerification;
+      if (required && previous?.priceChanged) throw new Error('Price updated. Review the new amount and press Pay again.');
+    }
+    const task = verifyPayableTotalImpl(required); pendingQuoteVerification = task;
+    try { return await task; } finally { if (pendingQuoteVerification === task) pendingQuoteVerification = null; }
+  }
+  async function verifyPayableTotalImpl(required = false) {
+    if (!await pingCheckoutServer()) {
+      if (required) throw new Error('Online price verification is unavailable. Please try again later.');
+      return null;
+    }
+    const csrf = await getCheckoutCsrfToken();
+    const response = await fetch('/api/checkout-quote', { method: 'POST', headers: { 'Content-Type': 'application/json', 'X-CSRF-Token': csrf }, credentials: 'same-origin', body: JSON.stringify({ items: checkoutItems, paymentPlan: 'full' }) });
+    const quote = await response.json();
+    if (!response.ok || !quote.ok) throw new Error(quote.message || 'The selected service needs a confirmed quote before payment.');
+    const changed = Math.round(lastTotalPayable * 100) !== quote.totalPaise;
+    quote.priceChanged = changed;
+    if (changed) {
+      quote.items.forEach((quoted, index) => { const item = checkoutItems[index]; item.price = quoted.unitPrice; item.taxRate = quoted.taxRate; if (item.policy) item.policy.pricing.amount = quoted.unitPrice; });
+      calculatePricingDetails();
+    }
+    const status = document.getElementById('server-price-status');
+    if (status) status.textContent = changed ? 'Price updated by the server. Review the new total before paying.' : 'Server-verified total: ' + formatINR(quote.total);
+    if (changed && required) throw new Error('Price updated. Review the new amount and press Pay again.');
+    return quote;
+  }
 
   // 1-Click Quick coupon applicator
   window.applyQuickCoupon = function(code) {
@@ -1488,7 +1780,9 @@
     const plan = registry.getPlan(selectedPlanId);
     const method = registry.getMethod(selectedMethodId);
     const offline = method && method.flow === "offline";
-    const payNow = Math.round(lastTotalPayable * (plan ? plan.nowFactor : 1));
+    const payNow = Math.round(lastTotalPayable * (plan ? plan.nowFactor : 1) * 100) / 100;
+    const needsQuote = checkoutItems.some(item => item.policy?.purchase.mode === 'scope_review');
+    if (needsQuote && submitBtnText) { submitBtnText.textContent = 'Scope review needed before payment'; return; }
     const payLater = lastTotalPayable - payNow;
 
     if (planSummary) {
@@ -1524,7 +1818,7 @@
     if (note && registry) {
       const method = registry.getMethod(selectedMethodId);
       const plan = registry.getPlan(selectedPlanId);
-      const payNow = Math.round(lastTotalPayable * (plan ? plan.nowFactor : 1));
+      const payNow = Math.round(lastTotalPayable * (plan ? plan.nowFactor : 1) * 100) / 100;
       const payLater = lastTotalPayable - payNow;
       const parts = [];
       if (method && method.flow === "offline") {
@@ -1544,22 +1838,41 @@
     updateCheckoutChrome();
   }
 
+  let checkoutSubmitting = false;
+  let gatewayOpen = false;
+  const recoveryLifetime = 24 * 60 * 60 * 1000;
+  function savePartialDraft() {
+    const values = Object.fromEntries(applicantIds.map(id => [id.replace('checkout-', ''), document.getElementById(id)?.value || '']));
+    localStorage.setItem('opds_checkout_draft', JSON.stringify({ name: values.name, mobile: values.mobile, email: values.email, address: values.address, gstin: values.gst, applicantMode, savedAt: Date.now() }));
+  }
+  function checkoutIntent(customer, gateway, paymentMethod) {
+    const fingerprint = JSON.stringify({ customer, applicantMode, gateway, paymentMethod, items: checkoutItems.map(item => ({ slug: item.slug, type: item.type, quantity: item.quantity || 1, configuration: item.configuration || null })) });
+    let intent;
+    try { intent = JSON.parse(localStorage.getItem('opds_checkout_intent')); } catch {}
+    if (!intent || intent.fingerprint !== fingerprint || Date.now() - intent.savedAt > recoveryLifetime) {
+      intent = { fingerprint, savedAt: Date.now(), key: 'checkout_' + crypto.randomUUID() };
+      localStorage.setItem('opds_checkout_intent', JSON.stringify(intent));
+    }
+    return intent.key;
+  }
+
   // Checkout submission handler
   async function handleCheckoutSubmit(event) {
     event.preventDefault();
+    if (checkoutSubmitting || gatewayOpen) return;
     const errorEl = document.getElementById("checkout-error");
     const submitBtnText = document.getElementById("submit-btn-text");
     const submitButton = event.currentTarget.querySelector('button[type="submit"]');
 
     if (errorEl) errorEl.style.display = "none";
 
-    if (checkoutSessionExpired) {
-      showCheckoutStatus("This checkout session has expired. Refresh the page to start a new secure session.", "error");
-      return;
-    }
     if (checkoutItems.length === 0) {
       window.navigateToStep(1);
       showCheckoutStatus("Select a service or add a product before payment.", "error", document.getElementById("service-continue-btn"));
+      return;
+    }
+    if (!await validateSelectedCatalogItems()) {
+      window.navigateToStep(1);
       return;
     }
     if (!validateStep1Form()) {
@@ -1601,12 +1914,16 @@
     }
     if (submitButton) submitButton.disabled = true;
 
+    if (checkoutSubmitting || gatewayOpen) return;
+    checkoutSubmitting = true;
+    updateCheckoutChrome();
     try {
       const serverReady = await pingCheckoutServer();
-      if (!serverReady) throw new Error("Checkout server connection failed.");
+      if (!serverReady) throw new Error("Online booking is temporarily unavailable. Your details are saved; please try again later.");
 
       const isService = checkoutItems.some(i => i.type === "service");
       const endpoint = isService ? "/api/service-bookings" : "/api/orders";
+      const verifiedQuote = await verifyPayableTotal(true);
       const csrfToken = await getCheckoutCsrfToken();
       const existingSessionToken = localStorage.getItem("opds_customer_session") || "";
 
@@ -1624,21 +1941,27 @@
         },
         body: JSON.stringify({
           customer,
+          applicantMode,
+          expectedTotalPaise: verifiedQuote.totalPaise,
           items: checkoutItems,
           paymentMethod,
           gateway,
           paymentPlan: plan ? plan.id : "full",
           paymentChannel: selectedMethodId,
-          idempotencyKey: "checkout_" + Date.now() + "_" + Math.random().toString(36).substring(2, 9),
+          idempotencyKey: checkoutIntent(customer, gateway, paymentMethod),
           attachments
         })
       });
 
       if (!response.ok) throw new Error(data.message || "Payment Gateway declined session.");
 
+      const orderId = data.order?.orderId || data.booking?.bookingId;
+      if (!orderId) throw new Error("Booking confirmation could not be verified. Please contact support before retrying.");
       storeGuestSession(data);
-
-      const orderId = data.order?.orderId || data.booking?.bookingId || "OPDS-4692-VALID";
+      if (uploadFiles.length) {
+        const failures = await window.OPDSDocuments.sendFiles(orderId, uploadFiles, (done, total) => showCheckoutStatus(`Sending documents ${done}/${total}…`, "info"));
+        if (failures.length) showCheckoutStatus("Some files could not be sent. Continue payment, then retry from your order document page.", "info");
+      }
       const service = checkoutItems[0];
       const timeEstimate = service ? (service.tag || "2-3 Days") : "2 Days";
 
@@ -1663,32 +1986,27 @@
       showCheckoutStatus(message, "error");
       updatePaymentCtaUI();
     } finally {
-      if (submitButton && !orderCompleted) submitButton.disabled = false;
+      checkoutSubmitting = false;
+      updateCheckoutChrome();
+      if (submitButton && !orderCompleted && !gatewayOpen) submitButton.disabled = false;
     }
-  }
-
-  // Session Slot countdown timer helper
-  function startSessionTimer() {
-    const timerEl = document.getElementById("slot-timer");
-    if (!timerEl) return;
-
-    const interval = setInterval(() => {
-      checkoutTimerVal--;
-      const min = Math.floor(checkoutTimerVal / 60);
-      const sec = checkoutTimerVal % 60;
-      timerEl.textContent = `${min.toString().padStart(2, '0')}:${sec.toString().padStart(2, '0')}`;
-
-      if (checkoutTimerVal <= 0) {
-        clearInterval(interval);
-        checkoutSessionExpired = true;
-        timerEl.textContent = "Expired";
-        showCheckoutStatus("This secure session has expired. Refresh the page before submitting payment.", "error");
-      }
-    }, 1000);
   }
 
   // Initial Load hooks
   document.addEventListener("DOMContentLoaded", () => {
+    window.OPDSPilotMetrics?.track('checkout_started', { once: true });
+    applicantMode = new URLSearchParams(location.search).get('for_other') === '1' || localStorage.getItem('opds_checkout_applicant_mode') === 'other' ? 'other' : 'self';
+    applicantIds.forEach(id => document.getElementById(id)?.addEventListener('input', () => { applicantTouched = true; applicantEditing = true; savePartialDraft(); }));
+    const reset = document.createElement('button');
+    reset.type = 'button'; reset.className = 'btn btn-soft'; reset.textContent = 'Clear saved applicant details';
+    reset.addEventListener('click', () => {
+      if (checkoutSubmitting || gatewayOpen) return;
+      localStorage.removeItem('opds_checkout_draft');
+      applicantIds.forEach(id => { const input = document.getElementById(id); if (input) input.value = ''; });
+      applicantTouched = true; applicantEditing = true;
+      showCheckoutStatus('Saved applicant details cleared. Existing orders remain in your account.', 'info');
+    });
+    document.getElementById('step-1')?.append(reset);
     parseCheckoutParams();
     checkoutProfilePromise = loadLoggedInCheckoutCustomer();
     // Re-resolve item pricing once the catalog arrives — prices captured
@@ -1700,7 +2018,6 @@
     renderReviewStep();
     setupCheckoutInteractions();
     updateCheckoutChrome();
-    startSessionTimer();
 
     const form = document.getElementById("checkout-form");
     if (form) form.addEventListener("submit", handleCheckoutSubmit);

@@ -10,7 +10,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <script src="assets/opds-boot.js?v=anti-fouc-79"></script>
-<link rel="stylesheet" href="assets/onepoint.css?v=customer-checkout-94">
+<link rel="stylesheet" href="assets/onepoint.css?v=performance-105">
+    <link rel="stylesheet" href="assets/quick-order.css?v=2">
+    <link rel="stylesheet" href="assets/mobile-ordering.css?v=1">
     <style>
       /* ── One Point Services Discovery Hub Styles ──────────────────── */
       :root {
@@ -1277,8 +1279,10 @@
         color: #cbd5e1;
       }
     </style>
+  <link rel="stylesheet" href="assets/mobile-services.css?v=1">
 </head>
-  <body class="services-page">
+  <body class="services-page mobile-directory-ready">
+    <a class="opds-skip-link" href="#main-content">Skip to main content</a>
     <div data-site-nav>
       <header class="site-header fallback-site-header">
         <nav class="nav-bar" aria-label="Primary fallback">
@@ -1295,7 +1299,7 @@
         </nav>
       </header>
     </div>
-    <main class="page-shell">
+    <main id="main-content" tabindex="-1" class="page-shell">
       <section class="page-hero page-hero-service premium-service-hero services-hero">
         <!-- Background Video -->
         <video class="hero-video-bg" autoplay loop muted playsinline>
@@ -1311,8 +1315,8 @@
             </h1>
             <p>Search, filter and apply across government, student, business, travel, store and local support services from one guided catalog.</p>
             <div class="hero-actions">
-              <a class="btn btn-primary" href="#service-options"><i data-lucide="grid-3x3"></i> Browse Services</a>
-              <a class="btn btn-ghost" href="service-pan-card.html"><i data-lucide="id-card"></i> Apply PAN</a>
+              <a class="btn btn-primary" href="#find-service"><i data-lucide="grid-3x3"></i> Browse Services</a>
+              <a class="btn btn-ghost" href="service-pan-card.html" data-quick-order="pan"><i data-lucide="id-card"></i> Choose PAN Service</a>
             </div>
             <div class="hero-trust-strip">
               <span class="hero-trust-badge">
@@ -1681,7 +1685,7 @@
                 <span class="shub-meta-price">From <strong>₹107</strong></span>
               </div>
               <div class="shub-card-footer">
-                <a href="service-pan-card.html" class="shub-btn-card">Get Assistance <i data-lucide="arrow-right"></i></a>
+                <a href="service-pan-card.html" class="shub-btn-card" data-quick-order="pan">Choose Service <i data-lucide="arrow-right"></i></a>
                 <a href="https://wa.me/919473946181?text=Hi%20One%20Point,%20I%20need%20help%20with%20PAN%20Card" class="shub-btn-card-wa" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><i data-lucide="message-circle"></i></a>
               </div>
             </div>
@@ -1744,7 +1748,7 @@
                 <span class="shub-meta-price">From <strong>₹299</strong></span>
               </div>
               <div class="shub-card-footer">
-                <a href="business-solutions.html" class="shub-btn-card">Get Udyam <i data-lucide="arrow-right"></i></a>
+                <a href="checkout.html?service=msme-registration" class="shub-btn-card" data-direct-order="msme">Order now <i data-lucide="arrow-right"></i></a>
                 <a href="https://wa.me/919473946181?text=Hi%20One%20Point,%20I%20need%20help%20with%20Udyam%20Registration" class="shub-btn-card-wa" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><i data-lucide="message-circle"></i></a>
               </div>
             </div>
@@ -2256,8 +2260,8 @@
             icon: 'file-badge',
             iconBg: '#fef3c7',
             iconColor: '#b45309',
-            url: 'business-solutions.html',
-            cta: 'Get Udyam',
+            url: 'checkout.html?service=msme-registration',
+            cta: 'Order now',
             keywords: 'udyam msme registration certificate udyog aadhar subsidy loan bank tender small business',
             popular: true
           },
@@ -2547,7 +2551,7 @@
                 <span class="shub-meta-price">From <strong>${s.price}</strong></span>
               </div>
               <div class="shub-card-footer">
-                <a href="${s.url}" class="shub-btn-card">${s.cta} <i data-lucide="arrow-right"></i></a>
+                <a href="${s.url}" class="shub-btn-card"${s.id === 'pan' ? ' data-quick-order="pan"' : ''}>${s.id === 'pan' ? 'Choose Service' : s.cta} <i data-lucide="arrow-right"></i></a>
                 <a href="https://wa.me/919473946181?text=Hi%20One%20Point,%20I%20need%20help%20with%20${encodeURIComponent(s.title)}" class="shub-btn-card-wa" target="_blank" rel="noopener" aria-label="WhatsApp"><i data-lucide="message-circle"></i></a>
               </div>
             `;
@@ -2842,6 +2846,11 @@
       </main>
     <div data-site-footer></div>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
-    <script src="assets/app.js?v=customer-checkout-94" defer></script>
+    <script src="assets/mobile-services.js?v=performance-105" defer></script>
+    <script src="assets/pilot-metrics.js?v=release-107" defer></script>
+    <script src="assets/app.js?v=release-108" defer></script>
+    <script src="assets/quick-order.js?v=2" defer></script>
+<script src="assets/print-product-rules.js?v=1" defer></script>
+<script src="assets/print-quick-order.js?v=1" defer></script>
 </body>
 </html>

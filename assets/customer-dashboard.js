@@ -162,11 +162,11 @@
     if (msgEl)    msgEl.innerHTML = `<span style="color:#3b82f6;">⟳ Uploading ${docLabel}...</span>`;
 
     try {
-      // For now we send the filename. In production you'd upload to a CDN first.
-      const result = await uploadDocument(orderId, docType, file.name, "");
+      // Send actual bytes to the authenticated order upload endpoint.
+      const result = await window.OPDSDocuments.send(orderId, file, docType);
       if (result.ok) {
         if (statusEl) { statusEl.textContent = "✓ Uploaded"; statusEl.style.color = "#22c55e"; }
-        if (msgEl)    msgEl.innerHTML = `<span style="color:#22c55e;">✓ ${docLabel} uploaded successfully! Bot will re-check your application.</span>`;
+        if (msgEl)    msgEl.innerHTML = `<span style="color:#22c55e;">✓ ${docLabel} received. Operator review is pending.</span>`;
         // Update label style
         const label = document.querySelector(`[data-order="${orderId}"][data-doctype="${docType}"]`);
         if (label) { label.style.borderColor = "#22c55e"; label.style.background = "#f0fdf4"; }

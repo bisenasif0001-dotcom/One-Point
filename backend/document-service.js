@@ -597,6 +597,7 @@ function projectDocument(row, options = {}) {
     file_name: row.file_name,
     mime_type: row.mime_type,
     file_size_bytes: row.file_size_bytes,
+    has_file_content: Boolean(row.file_path || row.file_url),
     uploaded_by: row.uploaded_by,
     verified: row.verified,
     verified_at: row.verified_at,

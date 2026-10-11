@@ -271,45 +271,11 @@
     if (!container) return;
     const acc = window.OPDSAccount;
 
-    const docs = order.documents || [
-      { name: "Aadhaar Card (Front & Back)", docType: "Identity Proof", status: "accepted", statusLabel: "Accepted", note: "UIDAI compliant" },
-      { name: "Passport Size Photograph", docType: "Candidate Photo", status: "needs_replacement", statusLabel: "Needs Replacement", note: "Photo appears slightly blurred. Please re-upload clear scan." },
-      { name: "10th Marksheet / Birth Proof", docType: "DOB Proof", status: "under_review", statusLabel: "Under Review", note: "Being verified by operator" }
-    ];
-
-    container.innerHTML = docs.map((doc, idx) => {
-      const isAccepted = doc.status === "accepted";
-      const isNeedsRep = doc.status === "needs_replacement";
-      const isUnderReview = doc.status === "under_review";
-
-      return `
-        <div class="acc-doc-checklist-item ${isNeedsRep ? 'acc-doc-item-warning' : ''}">
-          <div class="acc-doc-check-left">
-            <span class="acc-doc-check-icon ${isAccepted ? 'ok' : isNeedsRep ? 'warn' : 'info'}">
-              <i data-lucide="${isAccepted ? 'check' : isNeedsRep ? 'alert-triangle' : 'clock'}"></i>
-            </span>
-            <div class="acc-doc-check-info">
-              <strong>${acc.escapeHtml(doc.name)}</strong>
-              <small class="cpf-muted">${acc.escapeHtml(doc.docType)} &middot; ${acc.escapeHtml(doc.note)}</small>
-            </div>
-          </div>
-          <div class="acc-doc-check-right">
-            <span class="acc-doc-status-tag ${doc.status}">
-              ${doc.statusLabel}
-            </span>
-            ${isNeedsRep ? `
-              <button type="button" class="eds-btn eds-btn-primary" style="font-size:.76rem; padding:4px 10px; min-height:30px;" onclick="alert('Open file selector for ${doc.name}')">
-                <i data-lucide="upload" style="width:12px; height:12px;"></i> Upload
-              </button>
-            ` : `
-              <button type="button" class="eds-btn eds-btn-secondary" style="font-size:.76rem; padding:4px 10px; min-height:30px;" onclick="alert('Viewing verified file: ${doc.name}')">
-                <i data-lucide="eye" style="width:12px; height:12px;"></i> View
-              </button>
-            `}
-          </div>
-        </div>
-      `;
-    }).join("");
+    const docs = order.documents || [];
+    container.replaceChildren();
+    const note = document.createElement('p'); note.textContent = docs.some(doc => doc.has_file_content) ? 'Files submitted. Operator review determines whether further documents are needed.' : 'Documents pending — send files for this order.'; container.append(note);
+    for (const doc of docs) { const row = document.createElement('p'); row.textContent = (doc.file_name || doc.name || 'Supporting file') + ' — ' + (doc.has_file_content ? (doc.verification_status || 'Review pending') : 'File content still needed'); container.append(row); }
+    const link = document.createElement('a'); link.className = 'eds-btn eds-btn-primary'; link.href = 'order-documents.html?order=' + encodeURIComponent(order.orderId); link.textContent = 'Send / retry order documents'; container.append(link);
   }
 
   function renderActivityStream(order) {
@@ -318,10 +284,7 @@
     const acc = window.OPDSAccount;
 
     const activities = [
-      { time: "Today, 2:14 PM", title: "Document verification completed by Lucknow Kendra desk.", icon: "user-check", actor: "Operator" },
-      { time: "Today, 12:42 PM", title: "Candidate photo and application data uploaded.", icon: "upload", actor: "Citizen" },
-      { time: "24 Aug, 10:32 AM", title: `Payment of ${acc.money(order.amount)} received via Razorpay UPI.`, icon: "credit-card", actor: "Payment" },
-      { time: "24 Aug, 10:28 AM", title: "Service request created on One Point Citizen Portal.", icon: "plus-circle", actor: "System" }
+      { time: acc.formatDate(order.createdAt), title: "Service request created.", icon: "plus-circle", actor: "Order" }
     ];
 
     container.innerHTML = activities.map((act) => `
@@ -502,7 +465,7 @@
     if (!data) return;
     const params = new URLSearchParams(window.location.search);
     const orderId = params.get("id") || "";
-    const order = data.orders.find((item) => item.orderId === orderId) || data.orders[0];
+    const order = orderId ? data.orders.find((item) => item.orderId === orderId) : data.orders[0];
 
     // Preserve back link query
     const backLink = byId("acc-detail-back-link");

@@ -51,6 +51,7 @@ function generateInvoicePdf({ invoice, order, transaction, customer, items }) {
     textLine(`Phone: ${customer.phone}`, 48, 628),
     textLine(`Email: ${customer.email || "-"}`, 48, 610),
     textLine(`Address: ${customer.address || "-"}`, 48, 592),
+    ...(customer.gstin ? [textLine(`Invoice GSTIN: ${customer.gstin}`, 48, 574)] : []),
     textLine("Items", 48, 558, 14)
   ];
 
