@@ -69,6 +69,15 @@ if (process.argv[2] === '--worker') {
       const csrf = await request('/api/csrf');
       const cookie = csrf.response.headers.get('set-cookie').split(';')[0];
       const headers = { 'Content-Type': 'application/json', Cookie: cookie, 'X-CSRF-Token': csrf.data.csrfToken };
+      for (const slug of ['tenant-police-verification', 'domestic-staff-police-verification', 'cyber-fraud-complaint-filing']) {
+        const exact = serviceCatalog.data.services.find(item => item.slug === slug);
+        assert(exact, 'Exact security task must exist: ' + slug);
+        assert.equal(exact.price, 199);
+        assert.equal(exact.pricingModel, 'service_charge_plus_actual');
+        const quote = await request('/api/checkout-quote', { method: 'POST', headers, body: JSON.stringify({ customer: { name: 'Security QA', phone: '9999999999', email: 'qa@example.com' }, items: [{ type: 'service', slug, quantity: 1, price: 1 }] }) });
+        assert.equal(quote.response.status, 200, JSON.stringify(quote.data));
+        assert.equal(quote.data.total, 199, 'Server must ignore client amount for ' + slug);
+      }
       const body = { customer: { name: 'Local QA Customer', phone: '9999999999', email: 'local-qa@example.com', address: '' },
         items: [{ type: 'service', slug: 'pan-correction', name: 'PAN Card Correction & Update Support', quantity: 1, price: 1 }],
         gateway: 'razorpay', paymentMethod: 'upi', idempotencyKey: 'local_smoke_order' };

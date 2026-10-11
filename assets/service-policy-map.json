@@ -3377,6 +3377,167 @@
     },
     {
       "version": 1,
+      "id": "tenant-police-verification",
+      "type": "service",
+      "name": "Tenant Police Verification Assistance",
+      "parentId": null,
+      "fields": {
+        "required": [
+          "name",
+          "phone",
+          "email"
+        ],
+        "optional": [
+          "address"
+        ],
+        "conditional": []
+      },
+      "pricing": {
+        "model": "service_charge_plus_actual",
+        "amount": 199,
+        "includesGovernmentFee": false,
+        "displayPrice": "Rs. 199 + actual amount",
+        "note": "Rs.199 assistance charge. Applicable official portal fees are separate and confirmed before filing.",
+        "label": "Service charge"
+      },
+      "purchase": {
+        "mode": "assistance_plus_actual",
+        "finalScopeConfirmed": false,
+        "configurationRules": null
+      },
+      "documents": {
+        "required": [
+          "Tenant / Worker Aadhaar Card",
+          "Recent Passport Size Color Photo",
+          "Native Permanent Address Proof",
+          "Active Mobile Number for Verification",
+          "Landlord / Property Owner Aadhaar Card",
+          "Property address details"
+        ],
+        "optional": [],
+        "conditional": [],
+        "submission": "existing_upload_or_whatsapp_later",
+        "fulfilmentReviewRequired": true,
+        "source": "exact_catalog_item"
+      },
+      "fulfilment": {
+        "duration": "Operator review required",
+        "deliveryType": "unconfirmed"
+      },
+      "reviewNeeded": [
+        "eligibility",
+        "document_deferral_per_service",
+        "delivery_type"
+      ]
+    },
+    {
+      "version": 1,
+      "id": "domestic-staff-police-verification",
+      "type": "service",
+      "name": "Domestic Staff Police Verification Support",
+      "parentId": null,
+      "fields": {
+        "required": [
+          "name",
+          "phone",
+          "email"
+        ],
+        "optional": [
+          "address"
+        ],
+        "conditional": []
+      },
+      "pricing": {
+        "model": "service_charge_plus_actual",
+        "amount": 199,
+        "includesGovernmentFee": false,
+        "displayPrice": "Rs. 199 + actual amount",
+        "note": "Rs.199 assistance charge. Applicable official portal fees are separate and confirmed before filing.",
+        "label": "Service charge"
+      },
+      "purchase": {
+        "mode": "assistance_plus_actual",
+        "finalScopeConfirmed": false,
+        "configurationRules": null
+      },
+      "documents": {
+        "required": [
+          "Tenant / Worker Aadhaar Card",
+          "Recent Passport Size Color Photo",
+          "Native Permanent Address Proof",
+          "Active Mobile Number for Verification",
+          "Property address details"
+        ],
+        "optional": [],
+        "conditional": [],
+        "submission": "existing_upload_or_whatsapp_later",
+        "fulfilmentReviewRequired": true,
+        "source": "exact_catalog_item"
+      },
+      "fulfilment": {
+        "duration": "Operator review required",
+        "deliveryType": "unconfirmed"
+      },
+      "reviewNeeded": [
+        "eligibility",
+        "document_deferral_per_service",
+        "delivery_type"
+      ]
+    },
+    {
+      "version": 1,
+      "id": "cyber-fraud-complaint-filing",
+      "type": "service",
+      "name": "Cyber Fraud Complaint Filing Assistance",
+      "parentId": null,
+      "fields": {
+        "required": [
+          "name",
+          "phone",
+          "email"
+        ],
+        "optional": [
+          "address"
+        ],
+        "conditional": []
+      },
+      "pricing": {
+        "model": "service_charge_plus_actual",
+        "amount": 199,
+        "includesGovernmentFee": false,
+        "displayPrice": "Rs. 199 + actual amount",
+        "note": "Rs.199 operator assistance charge. Any applicable official portal fees are separate.",
+        "label": "Service charge"
+      },
+      "purchase": {
+        "mode": "assistance_plus_actual",
+        "finalScopeConfirmed": false,
+        "configurationRules": null
+      },
+      "documents": {
+        "required": [
+          "Bank Statement / UPI Transaction Screenshot",
+          "Scammer Mobile / WhatsApp Chat Screenshot",
+          "Complainant Aadhaar Card / ID Proof"
+        ],
+        "optional": [],
+        "conditional": [],
+        "submission": "existing_upload_or_whatsapp_later",
+        "fulfilmentReviewRequired": true,
+        "source": "exact_catalog_item"
+      },
+      "fulfilment": {
+        "duration": "Operator review required",
+        "deliveryType": "unconfirmed"
+      },
+      "reviewNeeded": [
+        "eligibility",
+        "document_deferral_per_service",
+        "delivery_type"
+      ]
+    },
+    {
+      "version": 1,
       "id": "ayushman-card-check",
       "type": "service",
       "name": "Ayushman Card Check",

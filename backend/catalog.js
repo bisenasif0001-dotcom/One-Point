@@ -135,6 +135,13 @@ function getService(slug) {
   return services.find((item) => item.slug === slug);
 }
 
+// Exact tasks approved at Rs.199 assistance; portal charges remain separate.
+services.push(
+  { slug: 'tenant-police-verification', name: 'Tenant Police Verification Assistance', category: 'E-Services', price: 199, taxRate: 0, requiredDocs: ['Tenant / Worker Aadhaar Card', 'Recent Passport Size Color Photo', 'Native Permanent Address Proof', 'Active Mobile Number for Verification', 'Landlord / Property Owner Aadhaar Card', 'Property address details'] },
+  { slug: 'domestic-staff-police-verification', name: 'Domestic Staff Police Verification Support', category: 'E-Services', price: 199, taxRate: 0, requiredDocs: ['Tenant / Worker Aadhaar Card', 'Recent Passport Size Color Photo', 'Native Permanent Address Proof', 'Active Mobile Number for Verification', 'Property address details'] },
+  { slug: 'cyber-fraud-complaint-filing', name: 'Cyber Fraud Complaint Filing Assistance', category: 'E-Services', price: 199, taxRate: 0, requiredDocs: ['Bank Statement / UPI Transaction Screenshot', 'Scammer Mobile / WhatsApp Chat Screenshot', 'Complainant Aadhaar Card / ID Proof'] }
+);
+
 module.exports = {
   products,
   services,

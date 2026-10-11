@@ -181,6 +181,9 @@ function defaultPricingForService(service = {}) {
 }
 
 const SERVICE_PRICING = Object.freeze({
+  'tenant-police-verification': { pricingModel: PRICING_MODELS.SERVICE_PLUS_ACTUAL, operatorFee: 199, governmentFee: 0, gstRate: 0, customerPriceNote: 'Rs.199 assistance charge. Applicable official portal fees are separate and confirmed before filing.' },
+  'domestic-staff-police-verification': { pricingModel: PRICING_MODELS.SERVICE_PLUS_ACTUAL, operatorFee: 199, governmentFee: 0, gstRate: 0, customerPriceNote: 'Rs.199 assistance charge. Applicable official portal fees are separate and confirmed before filing.' },
+  'cyber-fraud-complaint-filing': { pricingModel: PRICING_MODELS.SERVICE_PLUS_ACTUAL, operatorFee: 199, governmentFee: 0, gstRate: 0, customerPriceNote: 'Rs.199 operator assistance charge. Any applicable official portal fees are separate.' },
   "pan-card": {
     subCategory: "Identity",
     pricingModel: PRICING_MODELS.ALL_INCLUSIVE,

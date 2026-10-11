@@ -6899,6 +6899,95 @@
           }
         }
       ]
+    },
+    {
+      "slug": "tenant-police-verification",
+      "name": "Tenant Police Verification Assistance",
+      "category": "E-Services",
+      "price": 199,
+      "taxRate": 0,
+      "requiredDocs": [
+        "Tenant / Worker Aadhaar Card",
+        "Recent Passport Size Color Photo",
+        "Native Permanent Address Proof",
+        "Active Mobile Number for Verification",
+        "Landlord / Property Owner Aadhaar Card",
+        "Property address details"
+      ],
+      "active": true,
+      "pricingModel": "service_charge_plus_actual",
+      "displayPrice": "Rs. 199 + actual amount",
+      "pricing": {
+        "model": "service_charge_plus_actual",
+        "modelLabel": "Service Charge + Actual Amount",
+        "displayPrice": "Rs. 199 + actual amount",
+        "payableAmount": 199,
+        "payableAmountPaise": 19900,
+        "customerPriceNote": "Rs.199 assistance charge. Applicable official portal fees are separate and confirmed before filing.",
+        "includesGovernmentFee": false,
+        "calculationMode": "service_charge_plus_actual"
+      },
+      "duration": "Operator review required",
+      "icon": "shield-check",
+      "automationCount": 0
+    },
+    {
+      "slug": "domestic-staff-police-verification",
+      "name": "Domestic Staff Police Verification Support",
+      "category": "E-Services",
+      "price": 199,
+      "taxRate": 0,
+      "requiredDocs": [
+        "Tenant / Worker Aadhaar Card",
+        "Recent Passport Size Color Photo",
+        "Native Permanent Address Proof",
+        "Active Mobile Number for Verification",
+        "Property address details"
+      ],
+      "active": true,
+      "pricingModel": "service_charge_plus_actual",
+      "displayPrice": "Rs. 199 + actual amount",
+      "pricing": {
+        "model": "service_charge_plus_actual",
+        "modelLabel": "Service Charge + Actual Amount",
+        "displayPrice": "Rs. 199 + actual amount",
+        "payableAmount": 199,
+        "payableAmountPaise": 19900,
+        "customerPriceNote": "Rs.199 assistance charge. Applicable official portal fees are separate and confirmed before filing.",
+        "includesGovernmentFee": false,
+        "calculationMode": "service_charge_plus_actual"
+      },
+      "duration": "Operator review required",
+      "icon": "shield-check",
+      "automationCount": 0
+    },
+    {
+      "slug": "cyber-fraud-complaint-filing",
+      "name": "Cyber Fraud Complaint Filing Assistance",
+      "category": "E-Services",
+      "price": 199,
+      "taxRate": 0,
+      "requiredDocs": [
+        "Bank Statement / UPI Transaction Screenshot",
+        "Scammer Mobile / WhatsApp Chat Screenshot",
+        "Complainant Aadhaar Card / ID Proof"
+      ],
+      "active": true,
+      "pricingModel": "service_charge_plus_actual",
+      "displayPrice": "Rs. 199 + actual amount",
+      "pricing": {
+        "model": "service_charge_plus_actual",
+        "modelLabel": "Service Charge + Actual Amount",
+        "displayPrice": "Rs. 199 + actual amount",
+        "payableAmount": 199,
+        "payableAmountPaise": 19900,
+        "customerPriceNote": "Rs.199 operator assistance charge. Any applicable official portal fees are separate.",
+        "includesGovernmentFee": false,
+        "calculationMode": "service_charge_plus_actual"
+      },
+      "duration": "Operator review required",
+      "icon": "shield-check",
+      "automationCount": 0
     }
   ],
   "serviceVariants": [
