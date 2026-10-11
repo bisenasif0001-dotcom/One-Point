@@ -47,6 +47,13 @@ const server = http.createServer((req, res) => {
       if (baseline) continue;
       assert(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), 'Home overflow ' + width);
       if (width <= 720) {
+        const taskLayout = await page.$eval('.home-mobile-tasks', el => {
+          const links = [...el.querySelectorAll('a')];
+          return { gap: parseFloat(getComputedStyle(el).columnGap), font: parseFloat(getComputedStyle(links[0]).fontSize),
+            fits: links.every(link => link.scrollWidth <= link.clientWidth + 1),
+            separated: links[1].getBoundingClientRect().left > links[0].getBoundingClientRect().right };
+        });
+        assert(taskLayout.gap >= 8 && taskLayout.font <= 16 && taskLayout.fits && taskLayout.separated, 'Task spacing and text fit ' + width);
         const search = await page.$eval('[data-ai-search]', el => { const r = el.getBoundingClientRect(); return { bottom: r.bottom, height: r.height }; });
         assert(search.bottom < 440 && search.height >= 44, 'Search visible and touchable ' + width);
         assert(await page.$eval('.home-mobile-tasks', el => el.getBoundingClientRect().bottom < 480), 'Direct actions available early ' + width);

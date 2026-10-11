@@ -72,6 +72,10 @@
 @media (max-width: 720px) {
   #homepage-body .home-mobile-tasks { order: 3; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--eds-space-2); }
   #homepage-body .home-mobile-tasks a { min-height: var(--touch-target); font-size: var(--eds-fs-base); padding: var(--eds-space-2); white-space: normal; }
+  #homepage-body .home-mobile-tasks a,
+  #homepage-body .hero-actions-v3 a { min-width: 0; width: 100%; height: auto !important; line-height: var(--eds-lh-body); justify-content: center; }
+  #homepage-body .hero-actions-v3 a { font-size: var(--eds-fs-base) !important; }
+  #homepage-body .hero-trust-badge-privacy { font-size: var(--eds-fs-sm) !important; width: fit-content; }
   #homepage-body .hero-actions-v3 { order: 4; }
   #homepage-body .hero-v3-copy > .hero-trust-strip { order: 5; }
   #homepage-body #trending-services .category-filters > button { height: var(--touch-target) !important; min-height: var(--touch-target) !important; max-height: var(--touch-target); }
