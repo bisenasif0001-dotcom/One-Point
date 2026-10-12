@@ -92,6 +92,12 @@
   });
 
   ['gpay_upi','bhim_upi','paytm_upi','cashfree_checkout','payu_checkout','pay_later'].forEach(function(id){ var method=METHODS.find(function(m){return m.id===id;}); if(method) method.enabled=false; });
+  // One customer-facing checkout; choose the payment instrument inside Razorpay.
+  METHODS.forEach(function(method) { method.enabled = method.id === 'razorpay_upi'; });
+  METHODS[0].label = 'Razorpay';
+  METHODS[0].sub = 'Choose an available UPI, card or net banking option in the secure Razorpay window';
+  CATEGORIES[0].label = 'Razorpay';
+  GATEWAYS.phonepe.live = false;
   function getCategories() {
     return CATEGORIES.filter(function (cat) {
       return getMethods(cat.id).length > 0;
@@ -120,7 +126,8 @@
      collapse onto their configured live fallback so the customer's choice
      always produces a valid session without any page knowing gateway state. */
   function resolveRouting(methodId) {
-    var method = getMethod(methodId) || getMethod("razorpay_upi");
+    var requestedMethod = getMethod(methodId);
+    var method = requestedMethod && requestedMethod.enabled ? requestedMethod : getMethod("razorpay_upi");
     var gw = GATEWAYS[method.gateway] || GATEWAYS.razorpay;
     var routedId = gw.live ? gw.id : (gw.fallback || "razorpay");
     return {

@@ -1653,6 +1653,9 @@
     if (!registry || !tabs) return;
 
     const categories = registry.getCategories();
+    tabs.hidden = categories.length <= 1;
+    if (categories.length <= 1) tabs.style.setProperty('display', 'none', 'important');
+    else tabs.style.removeProperty('display');
     if (!activePayCategory && categories[0]) activePayCategory = categories[0].id;
 
     tabs.innerHTML = categories.map(cat => `

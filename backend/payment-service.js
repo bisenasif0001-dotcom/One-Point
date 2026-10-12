@@ -27,7 +27,7 @@ const {
 
 const gatewayAdapters = { razorpay, phonepe };
 const servicePolicy = require("../assets/service-policy");
-const gatewayOrder = ["razorpay", "phonepe"];
+const gatewayOrder = ["razorpay"];
 
 function objectPayload(sourceTable, sourcePk) {
   return sourcePk === undefined || sourcePk === null ? null : db.getUniversalObjectPayload(sourceTable, sourcePk);
@@ -210,8 +210,7 @@ function quoteCheckout(payload = {}) {
 }
 
 function selectGateway(preferredGateway) {
-  const requested = safeString(preferredGateway || "razorpay", 20);
-  const ordered = requested === "phonepe" ? ["phonepe", "razorpay"] : gatewayOrder;
+  const ordered = gatewayOrder;
   return ordered.filter((gateway, index, arr) => arr.indexOf(gateway) === index);
 }
 
@@ -583,7 +582,7 @@ async function retryPayment(paymentId, preferredGateway) {
   if (db.get("SELECT id FROM payments WHERE order_id = ? AND status = 'captured' LIMIT 1", [oldPayment.order_db_id])) throw new Error("This order is already paid. Check its status before retrying.");
   const order = db.get("SELECT * FROM orders WHERE id = ?", [oldPayment.order_db_id]);
   const user = orderApplicant(order, db.get("SELECT * FROM users WHERE id = ?", [order.user_id]));
-  const nextGateway = preferredGateway || (oldPayment.gateway === "razorpay" ? "phonepe" : "razorpay");
+  const nextGateway = "razorpay";
   const reusable = db.get("SELECT * FROM payments WHERE order_id = ? AND gateway = ? AND status IN ('created', 'session_created') ORDER BY id DESC LIMIT 1", [order.id, nextGateway]);
   if (reusable) {
     let session = {}; try { session = JSON.parse(reusable.gateway_session_json || '{}'); } catch {}

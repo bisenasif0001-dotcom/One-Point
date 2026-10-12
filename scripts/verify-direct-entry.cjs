@@ -52,7 +52,7 @@ const server = http.createServer((req, res) => {
         navigateToStep(3);
       });
       assert.match(await page.$eval('#submit-btn-text', el => el.textContent), new RegExp(total.toFixed(2).replace('.', '\\.')), 'Pay button must preserve paise');
-      assert.equal(await page.$$eval('#payment-methods-grid .pay-method-tile', els => els.length), 2, 'UPI app duplicates must be consolidated');
+      assert.equal(await page.$$eval('#payment-methods-grid .pay-method-tile', els => els.length), 1, 'Only Razorpay should be offered');
       if (width === 390) await page.screenshot({ path: path.join(root, 'artifacts/ux-pilot/payment-390.png'), fullPage: true });
       await page.goBack({ waitUntil: 'networkidle0' });
       await page.waitForFunction(() => document.querySelector('#print-order-dialog')?.open);
