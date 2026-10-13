@@ -1,0 +1,15 @@
+{
+  "name": "ai-form-agent-mvp",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Human-controlled AI form preparation MVP",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "tesseract.js": "^6.0.1"
+  }
+}

@@ -7,6 +7,21 @@
   const isPendingPage = () => Boolean(document.querySelector(".payment-result-card.pending-state"));
   const isFailedPage = () => Boolean(document.querySelector(".payment-result-card.failed-state"));
 
+  function announceStatus(root, message) {
+    let announcement = document.getElementById('payment-status-announcement');
+    if (!announcement) {
+      announcement = document.createElement('p');
+      announcement.id = 'payment-status-announcement';
+      announcement.className = 'sr-only';
+      announcement.setAttribute('role', 'status');
+      announcement.setAttribute('aria-live', 'polite');
+      announcement.setAttribute('aria-atomic', 'true');
+      root.before(announcement);
+    }
+    if (announcement.textContent !== message) announcement.textContent = message;
+    return announcement;
+  }
+
   function dashboardUrl(params) {
     const target = new URLSearchParams({
       portal: "customer",
@@ -143,6 +158,9 @@
   async function loadStatus(isManual = false) {
     const root = document.querySelector("[data-payment-status]");
     if (!root) return;
+    root.removeAttribute('role');
+    root.removeAttribute('aria-live');
+    root.removeAttribute('aria-atomic');
     const params = new URLSearchParams(window.location.search);
     const orderId = params.get("order_id");
     const urlPaymentId = params.get("payment_id") || "";
@@ -160,9 +178,14 @@
         ? `<p class="status-copy">Order ID missing. Payment cannot be confirmed.</p>`
         : `<p class="status-copy">Order ID missing in URL parameters.</p>`;
 
+      announceStatus(root, 'Payment reference missing. Open your existing order or contact support.');
+
       return;
     }
 
+    root.setAttribute('aria-busy', 'true');
+    root.textContent = 'Checking the existing order’s payment status…';
+    if (!document.getElementById('payment-status-announcement')?.textContent || isManual) announceStatus(root, 'Checking the existing order’s payment status.');
     try {
       const response = await fetch(`/api/payments/status/${encodeURIComponent(orderId)}`);
       if (!response.ok) throw new Error("Order status API returned " + response.status);
@@ -193,11 +216,11 @@
         }
       }
 
-      let statusBadge = `<span style="color:#d97706;">⏳ Awaiting Confirmation</span>`;
+      let statusBadge = `<span class="payment-status-label--pending">⏳ Awaiting Confirmation</span>`;
       if (rawStatus === "captured" || rawStatus === "success" || rawStatus === "paid") {
-        statusBadge = `<span style="color:#16a34a;">✓ Confirmed</span>`;
+        statusBadge = `<span class="payment-status-label--confirmed">✓ Confirmed</span>`;
       } else if (rawStatus === "failed") {
-        statusBadge = `<span style="color:#dc2626;">❌ Payment Failed</span>`;
+        statusBadge = `<span class="payment-status-label--failed">❌ Payment Failed</span>`;
       }
 
       root.innerHTML = renderStatusGrid({
@@ -215,6 +238,7 @@
       const statusHeading = document.querySelector('.payment-result-card h1');
       if (statusHeading) statusHeading.textContent = ['captured', 'success', 'paid'].includes(rawStatus) ? 'Payment successful' : rawStatus === 'failed' ? 'Payment failed' : 'Payment awaiting confirmation';
       if (['captured', 'success', 'paid'].includes(rawStatus)) document.querySelectorAll('[data-retry-payment]').forEach(button => button.disabled = true);
+      announceStatus(root, statusHeading?.textContent || 'Payment awaiting confirmation');
       if (["captured", "success", "paid"].includes(rawStatus)) {
         const heading = document.querySelector('.payment-result-card h1');
         if (heading) heading.textContent = 'Payment successful';
@@ -235,6 +259,7 @@
       const statusBadge = '<span>Verification unavailable — check again before paying.</span>';
       const heading = document.querySelector('.payment-result-card h1');
       if (heading) heading.textContent = 'Payment status unavailable';
+      announceStatus(root, 'Payment status unavailable. Check the existing order before paying.');
       root.innerHTML = renderStatusGrid({
         orderId: orderId,
         paymentId: urlPaymentId || "Processing",
@@ -248,6 +273,8 @@
 
       if (window.lucide) window.lucide.createIcons();
 
+    } finally {
+      root.setAttribute('aria-busy', 'false');
     }
   }
 
@@ -312,8 +339,13 @@
   }
 
   document.addEventListener("DOMContentLoaded", () => {
-    loadStatus();
     renderRetryRail();
+    // The existing retry handler requires a payment reference from the URL.
+    // Do not present an actionable retry when that reference is unavailable.
+    if (!new URLSearchParams(window.location.search).get('payment_id')) {
+      document.querySelectorAll('[data-retry-payment]').forEach(button => { button.disabled = true; });
+    }
+    loadStatus();
     setupPendingPolling();
   });
   document.addEventListener("click", retryPayment);

@@ -16,5 +16,8 @@
   const heading = document.querySelector('[data-request-task]');
   if (heading) heading.textContent = name;
   const link = document.querySelector('[data-request-whatsapp]');
-  if (link) link.href = 'https://wa.me/919473946181?text=' + encodeURIComponent('Please confirm availability, requirements and the complete price for: ' + name);
+  if (link) {
+    link.href = 'https://wa.me/919473946181?text=' + encodeURIComponent('Please confirm availability, requirements and the complete price for: ' + name);
+    document.querySelectorAll('[data-request-sticky-link]').forEach(action => { action.href = link.href; });
+  }
 })();

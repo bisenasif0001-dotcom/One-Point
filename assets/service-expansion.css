@@ -22,3 +22,15 @@
   .service-family-expanded .hero-actions { flex-wrap: wrap; }
   .service-request-actions { flex-direction: column; }
 }
+@media (max-width: 1080px) {
+  .service-family-expanded #category-services-grid { padding-block: var(--eds-space-6) !important; }
+  .service-family-expanded .edupoint-cat-header { margin-bottom: var(--eds-space-4); gap: var(--eds-space-3); }
+  .service-family-expanded .edupoint-cat-left, .service-family-expanded .admission-filter-top { min-width: 0; flex-wrap: wrap; }
+  .service-family-expanded .admission-search-box { min-width: 0; width: 100%; }
+  .service-family-expanded .admission-filter-pills { display: flex; flex-wrap: nowrap; max-width: 100%; overflow-x: auto; gap: var(--eds-space-2); }
+  .service-family-expanded .adm-filter-pill { flex: 0 0 auto; white-space: nowrap; font-size: var(--eds-fs-base); }
+  .service-request-panel { margin-block: var(--eds-space-4); padding: var(--eds-space-6) var(--eds-space-4); }
+  .service-request-panel h1 { font-size: var(--eds-fs-2xl) !important; line-height: var(--eds-lh-heading); margin-bottom: var(--eds-space-3); }
+  .service-request-panel p { font-size: var(--eds-fs-lg); line-height: var(--eds-lh-body); margin-bottom: var(--eds-space-3); }
+  .service-request-actions { margin-top: var(--eds-space-4); }
+}

@@ -152,6 +152,9 @@
     const status = document.getElementById("checkout-step-status");
     if (!status) return;
     status.className = `checkout-step-status is-${type}`;
+    status.setAttribute("role", type === "error" ? "alert" : "status");
+    status.setAttribute("aria-live", type === "error" ? "assertive" : "polite");
+    status.setAttribute("aria-atomic", "true");
     const iconName = type === "error" ? "alert-circle" : (type === "success" ? "check-circle-2" : "info");
     status.innerHTML = `
       <div class="checkout-status-icon"><i data-lucide="${iconName}"></i></div>
@@ -1178,6 +1181,15 @@
   };
 
   function setupCheckoutInteractions() {
+    const syncLabelLayout = label => {
+      const field = label.closest('.enterprise-field');
+      const enlarged = parseFloat(getComputedStyle(label).fontSize) > parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--eds-fs-lg'));
+      field?.classList.toggle('is-label-expanded', enlarged);
+    };
+    document.querySelectorAll('.enterprise-field > label').forEach(label => {
+      syncLabelLayout(label);
+      if (window.ResizeObserver) new ResizeObserver(() => syncLabelLayout(label)).observe(label);
+    });
     const drawer = document.getElementById('mobile-price-drawer');
     const priceControl = document.querySelector('.mobile-cta-price-block');
     priceControl?.setAttribute('aria-haspopup', 'dialog');
@@ -1220,9 +1232,14 @@
     if (mobileCta) {
       const actionBar = mobileCta.closest('.checkout-mobile-cta');
       if (actionBar && window.ResizeObserver) {
-        new ResizeObserver(() => {
-          document.documentElement.style.setProperty('--checkout-action-height', Math.ceil(actionBar.getBoundingClientRect().height + 24) + 'px');
-        }).observe(actionBar);
+        const syncActionSpace = () => {
+          const height = actionBar.getBoundingClientRect().height;
+          const inline = height > innerHeight / 3;
+          document.body.classList.toggle('checkout-inline-actions', inline);
+          document.documentElement.style.setProperty('--checkout-action-height', inline ? '24px' : Math.ceil(height + 24) + 'px');
+        };
+        new ResizeObserver(syncActionSpace).observe(actionBar);
+        window.addEventListener('resize', syncActionSpace, { passive: true });
       }
       mobileCta.addEventListener("click", () => {
         if (currentStepIndex === 4) {
@@ -1394,6 +1411,33 @@
   window.validateStep1Form = validateStep1Form;
   window.validateStep2Form = validateStep1Form;
 
+  function updateFieldFeedback(input, valid) {
+    input.setAttribute('aria-invalid', String(!valid));
+    const field = input.closest('.enterprise-field');
+    if (!field || !input.id) return;
+    const helper = field.querySelector('small');
+    if (helper && !helper.id) helper.id = input.id + '-help';
+    let error = field.querySelector('.checkout-field-error');
+    if (!error) {
+      error = document.createElement('div');
+      error.className = 'checkout-field-error';
+      error.id = input.id + '-error';
+      field.append(error);
+    }
+    const messages = {
+      'checkout-name': 'Enter the applicant’s full name.',
+      'checkout-mobile': 'Enter a 10-digit mobile number.',
+      'checkout-email': 'Enter a valid email address.',
+      'checkout-gst': 'Enter a valid 15-character GSTIN or leave it blank.'
+    };
+    error.textContent = valid ? '' : (messages[input.id] || 'Check this field before continuing.');
+    error.hidden = valid;
+    const ids = new Set((input.getAttribute('aria-describedby') || '').split(/\s+/).filter(Boolean));
+    if (helper) ids.add(helper.id);
+    ids.add(error.id);
+    input.setAttribute('aria-describedby', [...ids].join(' '));
+  }
+
   window.validateLiveInput = function(input) {
     if (input.type === "tel") {
       input.value = input.value.replace(/\D/g, "").slice(0, 10);
@@ -1402,6 +1446,8 @@
     if (!input.required && !input.value.trim()) {
       input.classList.remove("eds-input-invalid", "eds-input-valid");
       input.closest(".enterprise-field")?.classList.remove("is-valid");
+      input.closest(".enterprise-field")?.classList.remove("is-invalid");
+      updateFieldFeedback(input, true);
       return true;
     }
     if (input.type === "email") {
@@ -1421,6 +1467,7 @@
     }
     input.closest(".enterprise-field")?.classList.toggle("is-valid", valid);
     input.closest(".enterprise-field")?.classList.toggle("is-invalid", !valid && input.value.trim().length > 0);
+    updateFieldFeedback(input, valid);
     renderReviewStep();
     return valid;
   };
@@ -1440,6 +1487,7 @@
     }
     input.closest(".enterprise-field")?.classList.toggle("is-valid", valid);
     input.closest(".enterprise-field")?.classList.toggle("is-invalid", !valid && input.value.trim().length > 0);
+    updateFieldFeedback(input, valid);
     renderReviewStep();
     return valid;
   };

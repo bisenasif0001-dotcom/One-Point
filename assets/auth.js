@@ -9,6 +9,9 @@
 
   function setStatus(target, message, type = "info") {
     if (!target) return;
+    target.setAttribute("role", type === "error" ? "alert" : "status");
+    target.setAttribute("aria-live", type === "error" ? "assertive" : "polite");
+    target.setAttribute("aria-atomic", "true");
     target.textContent = message || "";
     target.className = `login-status ${type}`;
     target.style.display = message ? "block" : "none";
@@ -16,6 +19,7 @@
 
   function setBusy(form, busy, label, activeButton) {
     if (!form) return;
+    form.setAttribute("aria-busy", String(Boolean(busy)));
     const buttons = form.querySelectorAll("button");
     buttons.forEach((button) => {
       button.disabled = Boolean(busy);
@@ -359,6 +363,11 @@
   }
 
   document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll('.login-status').forEach(target => {
+      target.setAttribute('role', 'status');
+      target.setAttribute('aria-live', 'polite');
+      target.setAttribute('aria-atomic', 'true');
+    });
     initSignup();
     initSocialSignup();
     initOtp();

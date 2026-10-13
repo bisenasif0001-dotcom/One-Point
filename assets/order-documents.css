@@ -10,3 +10,10 @@ main [hidden] { display: none !important; }
 #order-document-files { font-size: var(--eds-fs-lg); min-height: var(--touch-target); }
 #order-document-form button, main a { min-height: var(--touch-target); }
 #order-document-selected p { overflow-wrap: anywhere; }
+@media (max-width: 1080px) {
+  body.utility-page main { width: min(48rem, calc(100% - var(--eds-space-8))); margin-block: var(--eds-space-4); padding: var(--eds-space-4); background: var(--surface); border: 1px solid var(--line-2); border-radius: var(--r-lg); }
+  body.utility-page main h1 { font-size: var(--eds-fs-2xl); margin-block: var(--eds-space-3); }
+  body.utility-page main p, body.utility-page main li { font-size: var(--eds-fs-lg); margin-block: var(--eds-space-3); }
+  body.utility-page main a { font-size: var(--eds-fs-lg); }
+  #document-login { display: flex; align-items: center; justify-content: center; padding: var(--eds-space-3); background: var(--primary); color: var(--white); border-radius: var(--r-sm); text-align: center; }
+}

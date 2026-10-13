@@ -190,7 +190,7 @@
 
 #homepage-body .desktop-nav-menu,
 #homepage-body .fallback-nav-links {
-  display: flex !important;
+  display: var(--home-desktop-nav-display, flex) !important;
   align-items: center !important;
   justify-content: center !important;
   gap: clamp(3px, 0.6vw, 8px) !important;
@@ -327,10 +327,8 @@
   word-break: normal !important;
 }
 
-/* BUGFIX: the `#homepage-body .nav-menu { display: flex !important }` rule above
-   is for the DESKTOP horizontal nav. Without a mobile guard its !important leaked
-   into the ≤980px drawer, forcing the mobile nav drawer permanently open (covering
-   the homepage). Restore the drawer's toggle: hidden until app.js adds `.open`. */
+/* Header content needs the drawer before the desktop links stop fitting.
+   Keep the closed drawer hidden and preserve the wide desktop navigation. */
 #homepage-body .nav-menu.open {
   display: flex !important;
   flex-direction: column !important;
@@ -338,7 +336,8 @@
   align-items: stretch !important;
 }
 
-@media (max-width: 980px) {
+@media (max-width: 1180px) {
+  #homepage-body { --home-desktop-nav-display: none; }
   #homepage-body .nav-menu { display: none !important; }
   #homepage-body .nav-menu.open {
     display: flex !important;
@@ -664,7 +663,7 @@ html:not(.customer-session-active) [data-customer-auth] {
   }
 
   #homepage-body .top-contact-bar {
-    height: 36px !important;
+    height: auto !important;
     min-height: 36px !important;
     overflow: hidden !important;
   }
@@ -675,11 +674,12 @@ html:not(.customer-session-active) [data-customer-auth] {
     padding-inline: 14px !important;
     justify-content: center !important;
     min-height: 36px !important;
-    height: 36px !important;
+    height: auto !important;
   }
 
   #homepage-body .top-contact-links {
     justify-content: center !important;
+    flex-wrap: wrap;
     gap: 18px !important;
     width: 100% !important;
   }
@@ -2053,7 +2053,7 @@ html:not(.customer-session-active) [data-customer-auth] {
 
 #homepage-body #trending-services .voter-meta-sub {
   font-size: 0.75rem !important;
-  color: #718096 !important;
+  color: var(--eds-text-accessible-muted);
   margin-top: 4px !important;
   font-weight: 500 !important;
 }
@@ -3810,7 +3810,7 @@ html:not(.customer-session-active) [data-customer-auth] {
 }
 
 #homepage-body #trust-metrics-section .tm-mini-gold .tm-mini-num {
-  color: var(--op-gold, #b98218) !important;
+  color: var(--eds-text-accessible-gold) !important;
 }
 
 #homepage-body #trust-metrics-section .tm-mini-label {
@@ -5222,7 +5222,7 @@ html:not(.customer-session-active) [data-customer-auth] {
   display: flex;
   justify-content: space-between;
   font-size: 0.75rem;
-  color: #a1a1aa;
+  color: var(--eds-text-accessible-muted);
   margin-top: 8px;
 }
 
@@ -5244,7 +5244,7 @@ html:not(.customer-session-active) [data-customer-auth] {
 /* Hero OS Console — metric sub-labels */
 #homepage-body .hero-os-metric-sub {
   font-size: 0.7rem;
-  color: #10b981;
+  color: var(--eds-status-success-ink);
 }
 #homepage-body .hero-os-metric-sub--muted {
   font-size: 0.7rem;

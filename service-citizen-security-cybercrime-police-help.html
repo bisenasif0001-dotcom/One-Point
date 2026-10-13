@@ -538,7 +538,7 @@
         font-weight: 750;
         text-transform: uppercase;
         letter-spacing: 0.03em;
-        color: #059669;
+        color: var(--eds-status-success-ink);
         background: #ecfdf5;
         padding: 3px 8px;
         border-radius: 6px;
@@ -610,7 +610,7 @@
         font-weight: 750;
         text-transform: uppercase;
         letter-spacing: 0.04em;
-        color: #059669;
+        color: var(--eds-status-success-ink);
         background: #ecfdf5;
         padding: 3px 8px;
         border-radius: 4px;
@@ -872,7 +872,7 @@
       }
       .voter-badge-green {
         background: #ecfdf5;
-        color: #059669;
+        color: var(--eds-status-success-ink);
         border: 1px solid #a7f3d0;
       }
 
@@ -943,8 +943,8 @@
       }
       .voter-flow-circle-green {
         background: #ecfdf5;
-        border-color: #a7f3d0;
-        color: #059669;
+        border-color: var(--eds-status-success-ink);
+        color: var(--eds-status-success-ink);
       }
       .voter-flow-text {
         display: flex;
@@ -1067,7 +1067,7 @@
       }
       .voter-need-note {
         font-size: 0.73rem;
-        color: #94a3b8;
+        color: var(--eds-text-accessible-muted);
         margin-top: 2px;
       }
 
@@ -1486,7 +1486,7 @@
       }
       .voter-meta-sub {
         font-size: 0.72rem;
-        color: #94a3b8;
+        color: var(--eds-text-accessible-muted);
         margin-top: 2px;
         font-weight: 500;
       }
@@ -1888,7 +1888,7 @@
       }
       .voter-pipeline-badge {
         font-size: 0.76rem;
-        color: #059669;
+        color: var(--eds-status-success-ink);
         font-weight: 700;
         background: #ecfdf5;
         border: 1px solid #a7f3d0;
@@ -2059,7 +2059,7 @@
       }
       .voter-est-desc {
         font-size: 0.8rem;
-        color: #64748b;
+        color: var(--eds-text-accessible-muted);
         line-height: 1.45;
         margin: 0;
       }
@@ -2341,7 +2341,7 @@
         border-radius: 999px;
       }
       .voter-rel-badge-green {
-        color: #059669;
+        color: var(--eds-status-success-ink);
         background: #ecfdf5;
         border-color: #a7f3d0;
       }
@@ -2383,7 +2383,7 @@
       }
       .voter-rel-submeta {
         font-size: 0.72rem;
-        color: #94a3b8;
+        color: var(--eds-text-accessible-muted);
         margin: 0 0 14px 2px;
       }
       .voter-rel-cta {
@@ -3601,8 +3601,9 @@
         <h2 style="color:#ffffff !important; margin:0 0 10px;"><span style="color:#ffffff !important;">Already Applied?</span> <span class="h2-gold" style="color:#facc15 !important;">Track Your Request</span></h2>
         <p style="color:#94a3b8; max-width:600px; margin:0 auto 24px; font-size:0.92rem;">Enter your One Point Reference ID or Mobile Number to check real-time status of your verification application.</p>
         
-        <form action="track-application.html" method="get" style="display:flex; justify-content:center; gap:10px; max-width:480px; margin:0 auto; flex-wrap:wrap;">
-          <input type="text" name="ref" placeholder="Enter Reference ID (e.g. OPDS-2026-POL)" required style="flex:1; min-width:240px; padding:12px 16px; border-radius:999px; border:1px solid #334155; background:#1e293b; color:#ffffff; font-size:0.9rem;">
+          <form action="track-application.html" method="get" style="display:flex; justify-content:center; gap:10px; max-width:480px; margin:0 auto; flex-wrap:wrap;">
+            <label for="security-tracking-reference" style="flex-basis:100%; color:var(--white);">Reference ID or Mobile Number</label>
+            <input id="security-tracking-reference" type="text" name="ref" inputmode="text" autocomplete="off" placeholder="Enter Reference ID (e.g. OPDS-2026-POL)" required style="flex:1; min-width:0; padding:12px 16px; border-radius:999px; border:1px solid #334155; background:#1e293b; color:#ffffff; font-size:0.9rem;">
           <button type="submit" class="btn btn-primary font-bold" style="border-radius:999px; padding:12px 24px;">Track Now</button>
         </form>
       </section>

@@ -203,7 +203,7 @@
         gap: 5px;
         transition: all 0.15s ease;
       }
-      .btn-wa-fill { background: #22c55e; color: #ffffff; }
+      .btn-wa-fill { background: #22c55e; color: var(--ink); }
       .btn-wa-fill:hover { background: #16a34a; }
       .btn-blue-outline { background: #f0f7ff; color: #125696; border: 1px solid rgba(18, 86, 150, 0.2); }
       .btn-blue-outline:hover { background: #125696; color: #ffffff; }
@@ -471,7 +471,7 @@
         gap: 6px;
         transition: all 0.15s;
       }
-      .btn-wa-previsit:hover { background: #22c55e; color: #ffffff; }
+      .btn-wa-previsit:hover { background: #22c55e; color: var(--ink); }
 
       /* ── Bottom Trust Strip ── */
       .contact-trust-strip {
@@ -658,20 +658,20 @@
               </div>
 
               <!-- Alert Success -->
-              <div class="inquiry-alert-success" id="inquiry-success-msg">
+              <div class="inquiry-alert-success" id="inquiry-success-msg" role="status" aria-live="polite" aria-atomic="true">
                 <i data-lucide="check-circle-2" style="width: 18px; height: 18px;"></i>
-                <span>Thank you! Your inquiry has been routed to our Lucknow desk. We will contact you shortly.</span>
+                <span>Your inquiry details are ready. Send the message in WhatsApp to contact our team. Your entered details remain here if you need to try again.</span>
               </div>
 
               <form class="contact-form" id="contact-inquiry-form">
                 <div class="form-row-2">
                   <div class="form-group">
                     <label class="form-label" for="contact-name">Your Full Name *</label>
-                    <input type="text" id="contact-name" class="form-input" placeholder="e.g. Rahul Sharma" required>
+                    <input type="text" id="contact-name" class="form-input" placeholder="e.g. Rahul Sharma" autocomplete="name" required>
                   </div>
                   <div class="form-group">
                     <label class="form-label" for="contact-phone">WhatsApp / Phone Number *</label>
-                    <input type="tel" id="contact-phone" class="form-input" placeholder="e.g. +91 9876543210" required>
+                    <input type="tel" id="contact-phone" class="form-input" placeholder="e.g. +91 9876543210" inputmode="tel" autocomplete="tel" required>
                   </div>
                 </div>
 
@@ -691,7 +691,7 @@
                   </div>
                   <div class="form-group">
                     <label class="form-label" for="contact-tracking">Existing Tracking ID (Optional)</label>
-                    <input type="text" id="contact-tracking" class="form-input" placeholder="e.g. OPDS-20260722-000001">
+                    <input type="text" id="contact-tracking" class="form-input" placeholder="e.g. OPDS-20260722-000001" autocomplete="off" autocapitalize="characters" spellcheck="false">
                   </div>
                 </div>
 
@@ -832,7 +832,7 @@
             // Display success message
             if (successMsg) {
               successMsg.style.display = 'flex';
-              form.reset();
+              // Retain the inquiry details in case the WhatsApp handoff is blocked.
               successMsg.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
             }
 

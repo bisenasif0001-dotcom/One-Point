@@ -289,10 +289,11 @@
         max-width: 440px;
       }
       .admission-search-box input {
+        --field-padding-inline-end: calc(var(--touch-target) + var(--eds-space-3) + var(--eds-space-2));
         width: 100%;
         height: 46px;
-        padding: 10px 40px 10px 44px;
-        border: 1.5px solid #cbd5e1;
+        padding: 10px var(--field-padding-inline-end) 10px 44px;
+        border: 1.5px solid var(--eds-control-boundary);
         border-radius: 999px;
         font-size: 0.92rem;
         background: #ffffff;
@@ -338,8 +339,8 @@
         background: #f1f5f9;
         border: none;
         border-radius: 50%;
-        width: 22px;
-        height: 22px;
+        width: var(--touch-target);
+        height: var(--touch-target);
         display: none;
         align-items: center;
         justify-content: center;
@@ -1214,7 +1215,7 @@
               <span class="public-hero-title-line">Competitive Exam</span>
               <span class="public-hero-title-line public-hero-title-line-accent">Assistance.</span>
             </h1>
-            <p>Online application filling, photo/signature sizing &amp; submission for UPSC, SSC, RRB, Banking, Police, Defense, CUET, NEET, JEE and State PSC.</p>
+            <p class="hero-introduction">Online application filling, photo/signature sizing &amp; submission for UPSC, SSC, RRB, Banking, Police, Defense, CUET, NEET, JEE and State PSC.</p>
             <div class="hero-actions">
               <a class="btn btn-primary" href="#category-services-grid"><i data-lucide="layout-grid"></i> Explore Competitive Exams (24)</a>
               <a class="btn btn-ghost" href="edupoint.html"><i data-lucide="arrow-left"></i> All EduPoint Categories</a>
@@ -1375,9 +1376,9 @@
                 
                 <div style="border-top: 1px solid #f1f5f9; padding-top: 16px; margin-top: 12px; display: flex; align-items: flex-end; justify-content: space-between;">
                   <div>
-                    <span style="display: block; font-size: 10px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.5px;">STARTING FROM</span>
+                    <span style="display: block; font-size: 10px; font-weight: 700; color: var(--eds-text-accessible-muted); text-transform: uppercase; letter-spacing: 0.5px;">STARTING FROM</span>
                     <div style="font-size: 1.35rem; font-weight: 800; color: #0f172a; margin-top: 2px; line-height: 1;">₹299</div>
-                    <div style="font-size: 10px; color: #94a3b8; margin-top: 4px;">Govt / University / Exam Fee extra (if applicable)</div>
+                    <div style="font-size: 10px; color: var(--eds-text-accessible-muted); margin-top: 4px;">Govt / University / Exam Fee extra (if applicable)</div>
                   </div>
                   <a href="service-request.html?service=upsc-civil-services-nda-cds-application&service_name=UPSC+Civil+Services+%26+NDA%2FCDS+Application" class="btn-apply-now" style="background: #125696; color: #ffffff; padding: 10px 18px; border-radius: 12px; font-size: 13px; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; transition: background 0.2s ease;"> Request service</a>
                 </div>
@@ -1409,9 +1410,9 @@
                 
                 <div style="border-top: 1px solid #f1f5f9; padding-top: 16px; margin-top: 12px; display: flex; align-items: flex-end; justify-content: space-between;">
                   <div>
-                    <span style="display: block; font-size: 10px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.5px;">STARTING FROM</span>
+                    <span style="display: block; font-size: 10px; font-weight: 700; color: var(--eds-text-accessible-muted); text-transform: uppercase; letter-spacing: 0.5px;">STARTING FROM</span>
                     <div style="font-size: 1.35rem; font-weight: 800; color: #0f172a; margin-top: 2px; line-height: 1;">₹199</div>
-                    <div style="font-size: 10px; color: #94a3b8; margin-top: 4px;">Govt / University / Exam Fee extra (if applicable)</div>
+                    <div style="font-size: 10px; color: var(--eds-text-accessible-muted); margin-top: 4px;">Govt / University / Exam Fee extra (if applicable)</div>
                   </div>
                   <a href="service-request.html?service=ssc-exams-cgl-chsl-mts-gd-cpo-form&service_name=SSC+Exams+%28CGL%2C+CHSL%2C+MTS%2C+GD%2C+CPO%29+Form" class="btn-apply-now" style="background: #125696; color: #ffffff; padding: 10px 18px; border-radius: 12px; font-size: 13px; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; transition: background 0.2s ease;"> Request service</a>
                 </div>
@@ -1443,9 +1444,9 @@
                 
                 <div style="border-top: 1px solid #f1f5f9; padding-top: 16px; margin-top: 12px; display: flex; align-items: flex-end; justify-content: space-between;">
                   <div>
-                    <span style="display: block; font-size: 10px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.5px;">STARTING FROM</span>
+                    <span style="display: block; font-size: 10px; font-weight: 700; color: var(--eds-text-accessible-muted); text-transform: uppercase; letter-spacing: 0.5px;">STARTING FROM</span>
                     <div style="font-size: 1.35rem; font-weight: 800; color: #0f172a; margin-top: 2px; line-height: 1;">₹199</div>
-                    <div style="font-size: 10px; color: #94a3b8; margin-top: 4px;">Govt / University / Exam Fee extra (if applicable)</div>
+                    <div style="font-size: 10px; color: var(--eds-text-accessible-muted); margin-top: 4px;">Govt / University / Exam Fee extra (if applicable)</div>
                   </div>
                   <a href="service-request.html?service=rrb-railway-recruitment-ntpc-group-d-alp&service_name=RRB+Railway+Recruitment+%28NTPC%2C+Group+D%2C+ALP%29" class="btn-apply-now" style="background: #125696; color: #ffffff; padding: 10px 18px; border-radius: 12px; font-size: 13px; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; transition: background 0.2s ease;"> Request service</a>
                 </div>
@@ -1477,9 +1478,9 @@
                 
                 <div style="border-top: 1px solid #f1f5f9; padding-top: 16px; margin-top: 12px; display: flex; align-items: flex-end; justify-content: space-between;">
                   <div>
-                    <span style="display: block; font-size: 10px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.5px;">STARTING FROM</span>
+                    <span style="display: block; font-size: 10px; font-weight: 700; color: var(--eds-text-accessible-muted); text-transform: uppercase; letter-spacing: 0.5px;">STARTING FROM</span>
                     <div style="font-size: 1.35rem; font-weight: 800; color: #0f172a; margin-top: 2px; line-height: 1;">₹249</div>
-                    <div style="font-size: 10px; color: #94a3b8; margin-top: 4px;">Govt / University / Exam Fee extra (if applicable)</div>
+                    <div style="font-size: 10px; color: var(--eds-text-accessible-muted); margin-top: 4px;">Govt / University / Exam Fee extra (if applicable)</div>
                   </div>
                   <a href="service-request.html?service=ibps-bank-po-clerk-so-form&service_name=IBPS+Bank+PO+%2F+Clerk+%2F+SO+Form" class="btn-apply-now" style="background: #125696; color: #ffffff; padding: 10px 18px; border-radius: 12px; font-size: 13px; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; transition: background 0.2s ease;"> Request service</a>
                 </div>
@@ -1511,9 +1512,9 @@
                 
                 <div style="border-top: 1px solid #f1f5f9; padding-top: 16px; margin-top: 12px; display: flex; align-items: flex-end; justify-content: space-between;">
                   <div>
-                    <span style="display: block; font-size: 10px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.5px;">STARTING FROM</span>
+                    <span style="display: block; font-size: 10px; font-weight: 700; color: var(--eds-text-accessible-muted); text-transform: uppercase; letter-spacing: 0.5px;">STARTING FROM</span>
                     <div style="font-size: 1.35rem; font-weight: 800; color: #0f172a; margin-top: 2px; line-height: 1;">₹249</div>
-                    <div style="font-size: 10px; color: #94a3b8; margin-top: 4px;">Govt / University / Exam Fee extra (if applicable)</div>
+                    <div style="font-size: 10px; color: var(--eds-text-accessible-muted); margin-top: 4px;">Govt / University / Exam Fee extra (if applicable)</div>
                   </div>
                   <a href="service-request.html?service=sbi-bank-po-clerk-application&service_name=SBI+Bank+PO+%2F+Clerk+Application" class="btn-apply-now" style="background: #125696; color: #ffffff; padding: 10px 18px; border-radius: 12px; font-size: 13px; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; transition: background 0.2s ease;"> Request service</a>
                 </div>
@@ -1545,9 +1546,9 @@
                 
                 <div style="border-top: 1px solid #f1f5f9; padding-top: 16px; margin-top: 12px; display: flex; align-items: flex-end; justify-content: space-between;">
                   <div>
-                    <span style="display: block; font-size: 10px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.5px;">STARTING FROM</span>
+                    <span style="display: block; font-size: 10px; font-weight: 700; color: var(--eds-text-accessible-muted); text-transform: uppercase; letter-spacing: 0.5px;">STARTING FROM</span>
                     <div style="font-size: 1.35rem; font-weight: 800; color: #0f172a; margin-top: 2px; line-height: 1;">₹199</div>
-                    <div style="font-size: 10px; color: #94a3b8; margin-top: 4px;">Govt / University / Exam Fee extra (if applicable)</div>
+                    <div style="font-size: 10px; color: var(--eds-text-accessible-muted); margin-top: 4px;">Govt / University / Exam Fee extra (if applicable)</div>
                   </div>
                   <a href="service-request.html?service=up-state-police-recruitment-application&service_name=UP+%26+State+Police+Recruitment+Application" class="btn-apply-now" style="background: #125696; color: #ffffff; padding: 10px 18px; border-radius: 12px; font-size: 13px; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; transition: background 0.2s ease;"> Request service</a>
                 </div>
@@ -1579,9 +1580,9 @@
                 
                 <div style="border-top: 1px solid #f1f5f9; padding-top: 16px; margin-top: 12px; display: flex; align-items: flex-end; justify-content: space-between;">
                   <div>
-                    <span style="display: block; font-size: 10px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.5px;">STARTING FROM</span>
+                    <span style="display: block; font-size: 10px; font-weight: 700; color: var(--eds-text-accessible-muted); text-transform: uppercase; letter-spacing: 0.5px;">STARTING FROM</span>
                     <div style="font-size: 1.35rem; font-weight: 800; color: #0f172a; margin-top: 2px; line-height: 1;">₹249</div>
-                    <div style="font-size: 10px; color: #94a3b8; margin-top: 4px;">Govt / University / Exam Fee extra (if applicable)</div>
+                    <div style="font-size: 10px; color: var(--eds-text-accessible-muted); margin-top: 4px;">Govt / University / Exam Fee extra (if applicable)</div>
                   </div>
                   <a href="service-request.html?service=indian-army-agnipath-officer-entry&service_name=Indian+Army+Agnipath+%26+Officer+Entry" class="btn-apply-now" style="background: #125696; color: #ffffff; padding: 10px 18px; border-radius: 12px; font-size: 13px; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; transition: background 0.2s ease;"> Request service</a>
                 </div>
@@ -1613,9 +1614,9 @@
                 
                 <div style="border-top: 1px solid #f1f5f9; padding-top: 16px; margin-top: 12px; display: flex; align-items: flex-end; justify-content: space-between;">
                   <div>
-                    <span style="display: block; font-size: 10px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.5px;">STARTING FROM</span>
+                    <span style="display: block; font-size: 10px; font-weight: 700; color: var(--eds-text-accessible-muted); text-transform: uppercase; letter-spacing: 0.5px;">STARTING FROM</span>
                     <div style="font-size: 1.35rem; font-weight: 800; color: #0f172a; margin-top: 2px; line-height: 1;">₹249</div>
-                    <div style="font-size: 10px; color: #94a3b8; margin-top: 4px;">Govt / University / Exam Fee extra (if applicable)</div>
+                    <div style="font-size: 10px; color: var(--eds-text-accessible-muted); margin-top: 4px;">Govt / University / Exam Fee extra (if applicable)</div>
                   </div>
                   <a href="service-request.html?service=indian-navy-recruitment-application&service_name=Indian+Navy+Recruitment+Application" class="btn-apply-now" style="background: #125696; color: #ffffff; padding: 10px 18px; border-radius: 12px; font-size: 13px; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; transition: background 0.2s ease;"> Request service</a>
                 </div>
@@ -1647,9 +1648,9 @@
                 
                 <div style="border-top: 1px solid #f1f5f9; padding-top: 16px; margin-top: 12px; display: flex; align-items: flex-end; justify-content: space-between;">
                   <div>
-                    <span style="display: block; font-size: 10px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.5px;">STARTING FROM</span>
+                    <span style="display: block; font-size: 10px; font-weight: 700; color: var(--eds-text-accessible-muted); text-transform: uppercase; letter-spacing: 0.5px;">STARTING FROM</span>
                     <div style="font-size: 1.35rem; font-weight: 800; color: #0f172a; margin-top: 2px; line-height: 1;">₹249</div>
-                    <div style="font-size: 10px; color: #94a3b8; margin-top: 4px;">Govt / University / Exam Fee extra (if applicable)</div>
+                    <div style="font-size: 10px; color: var(--eds-text-accessible-muted); margin-top: 4px;">Govt / University / Exam Fee extra (if applicable)</div>
                   </div>
                   <a href="service-request.html?service=indian-air-force-agnipath-application&service_name=Indian+Air+Force+Agnipath+Application" class="btn-apply-now" style="background: #125696; color: #ffffff; padding: 10px 18px; border-radius: 12px; font-size: 13px; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; transition: background 0.2s ease;"> Request service</a>
                 </div>
@@ -1681,9 +1682,9 @@
                 
                 <div style="border-top: 1px solid #f1f5f9; padding-top: 16px; margin-top: 12px; display: flex; align-items: flex-end; justify-content: space-between;">
                   <div>
-                    <span style="display: block; font-size: 10px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.5px;">STARTING FROM</span>
+                    <span style="display: block; font-size: 10px; font-weight: 700; color: var(--eds-text-accessible-muted); text-transform: uppercase; letter-spacing: 0.5px;">STARTING FROM</span>
                     <div style="font-size: 1.35rem; font-weight: 800; color: #0f172a; margin-top: 2px; line-height: 1;">₹249</div>
-                    <div style="font-size: 10px; color: #94a3b8; margin-top: 4px;">Govt / University / Exam Fee extra (if applicable)</div>
+                    <div style="font-size: 10px; color: var(--eds-text-accessible-muted); margin-top: 4px;">Govt / University / Exam Fee extra (if applicable)</div>
                   </div>
                   <a href="service-request.html?service=nda-examination-application-support&service_name=NDA+Examination+Application+Support" class="btn-apply-now" style="background: #125696; color: #ffffff; padding: 10px 18px; border-radius: 12px; font-size: 13px; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; transition: background 0.2s ease;"> Request service</a>
                 </div>
@@ -1715,9 +1716,9 @@
                 
                 <div style="border-top: 1px solid #f1f5f9; padding-top: 16px; margin-top: 12px; display: flex; align-items: flex-end; justify-content: space-between;">
                   <div>
-                    <span style="display: block; font-size: 10px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.5px;">STARTING FROM</span>
+                    <span style="display: block; font-size: 10px; font-weight: 700; color: var(--eds-text-accessible-muted); text-transform: uppercase; letter-spacing: 0.5px;">STARTING FROM</span>
                     <div style="font-size: 1.35rem; font-weight: 800; color: #0f172a; margin-top: 2px; line-height: 1;">₹249</div>
-                    <div style="font-size: 10px; color: #94a3b8; margin-top: 4px;">Govt / University / Exam Fee extra (if applicable)</div>
+                    <div style="font-size: 10px; color: var(--eds-text-accessible-muted); margin-top: 4px;">Govt / University / Exam Fee extra (if applicable)</div>
                   </div>
                   <a href="service-request.html?service=cds-examination-application-support&service_name=CDS+Examination+Application+Support" class="btn-apply-now" style="background: #125696; color: #ffffff; padding: 10px 18px; border-radius: 12px; font-size: 13px; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; transition: background 0.2s ease;"> Request service</a>
                 </div>
@@ -1749,9 +1750,9 @@
                 
                 <div style="border-top: 1px solid #f1f5f9; padding-top: 16px; margin-top: 12px; display: flex; align-items: flex-end; justify-content: space-between;">
                   <div>
-                    <span style="display: block; font-size: 10px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.5px;">STARTING FROM</span>
+                    <span style="display: block; font-size: 10px; font-weight: 700; color: var(--eds-text-accessible-muted); text-transform: uppercase; letter-spacing: 0.5px;">STARTING FROM</span>
                     <div style="font-size: 1.35rem; font-weight: 800; color: #0f172a; margin-top: 2px; line-height: 1;">₹299</div>
-                    <div style="font-size: 10px; color: #94a3b8; margin-top: 4px;">Govt / University / Exam Fee extra (if applicable)</div>
+                    <div style="font-size: 10px; color: var(--eds-text-accessible-muted); margin-top: 4px;">Govt / University / Exam Fee extra (if applicable)</div>
                   </div>
                   <a href="service-request.html?service=cuet-ug-pg-application-support&service_name=CUET+UG+%26+PG+Application+Support" class="btn-apply-now" style="background: #125696; color: #ffffff; padding: 10px 18px; border-radius: 12px; font-size: 13px; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; transition: background 0.2s ease;"> Request service</a>
                 </div>
@@ -1783,9 +1784,9 @@
                 
                 <div style="border-top: 1px solid #f1f5f9; padding-top: 16px; margin-top: 12px; display: flex; align-items: flex-end; justify-content: space-between;">
                   <div>
-                    <span style="display: block; font-size: 10px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.5px;">STARTING FROM</span>
+                    <span style="display: block; font-size: 10px; font-weight: 700; color: var(--eds-text-accessible-muted); text-transform: uppercase; letter-spacing: 0.5px;">STARTING FROM</span>
                     <div style="font-size: 1.35rem; font-weight: 800; color: #0f172a; margin-top: 2px; line-height: 1;">₹349</div>
-                    <div style="font-size: 10px; color: #94a3b8; margin-top: 4px;">Govt / University / Exam Fee extra (if applicable)</div>
+                    <div style="font-size: 10px; color: var(--eds-text-accessible-muted); margin-top: 4px;">Govt / University / Exam Fee extra (if applicable)</div>
                   </div>
                   <a href="service-request.html?service=neet-ug-medical-entrance-form&service_name=NEET+UG+Medical+Entrance+Form" class="btn-apply-now" style="background: #125696; color: #ffffff; padding: 10px 18px; border-radius: 12px; font-size: 13px; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; transition: background 0.2s ease;"> Request service</a>
                 </div>
@@ -1817,9 +1818,9 @@
                 
                 <div style="border-top: 1px solid #f1f5f9; padding-top: 16px; margin-top: 12px; display: flex; align-items: flex-end; justify-content: space-between;">
                   <div>
-                    <span style="display: block; font-size: 10px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.5px;">STARTING FROM</span>
+                    <span style="display: block; font-size: 10px; font-weight: 700; color: var(--eds-text-accessible-muted); text-transform: uppercase; letter-spacing: 0.5px;">STARTING FROM</span>
                     <div style="font-size: 1.35rem; font-weight: 800; color: #0f172a; margin-top: 2px; line-height: 1;">₹349</div>
-                    <div style="font-size: 10px; color: #94a3b8; margin-top: 4px;">Govt / University / Exam Fee extra (if applicable)</div>
+                    <div style="font-size: 10px; color: var(--eds-text-accessible-muted); margin-top: 4px;">Govt / University / Exam Fee extra (if applicable)</div>
                   </div>
                   <a href="service-request.html?service=jee-main-advanced-engineering-form&service_name=JEE+Main+%26+Advanced+Engineering+Form" class="btn-apply-now" style="background: #125696; color: #ffffff; padding: 10px 18px; border-radius: 12px; font-size: 13px; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; transition: background 0.2s ease;"> Request service</a>
                 </div>
@@ -1851,9 +1852,9 @@
                 
                 <div style="border-top: 1px solid #f1f5f9; padding-top: 16px; margin-top: 12px; display: flex; align-items: flex-end; justify-content: space-between;">
                   <div>
-                    <span style="display: block; font-size: 10px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.5px;">STARTING FROM</span>
+                    <span style="display: block; font-size: 10px; font-weight: 700; color: var(--eds-text-accessible-muted); text-transform: uppercase; letter-spacing: 0.5px;">STARTING FROM</span>
                     <div style="font-size: 1.35rem; font-weight: 800; color: #0f172a; margin-top: 2px; line-height: 1;">₹349</div>
-                    <div style="font-size: 10px; color: #94a3b8; margin-top: 4px;">Govt / University / Exam Fee extra (if applicable)</div>
+                    <div style="font-size: 10px; color: var(--eds-text-accessible-muted); margin-top: 4px;">Govt / University / Exam Fee extra (if applicable)</div>
                   </div>
                   <a href="service-request.html?service=cat-management-entrance-form&service_name=CAT+Management+Entrance+Form" class="btn-apply-now" style="background: #125696; color: #ffffff; padding: 10px 18px; border-radius: 12px; font-size: 13px; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; transition: background 0.2s ease;"> Request service</a>
                 </div>
@@ -1885,9 +1886,9 @@
                 
                 <div style="border-top: 1px solid #f1f5f9; padding-top: 16px; margin-top: 12px; display: flex; align-items: flex-end; justify-content: space-between;">
                   <div>
-                    <span style="display: block; font-size: 10px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.5px;">STARTING FROM</span>
+                    <span style="display: block; font-size: 10px; font-weight: 700; color: var(--eds-text-accessible-muted); text-transform: uppercase; letter-spacing: 0.5px;">STARTING FROM</span>
                     <div style="font-size: 1.35rem; font-weight: 800; color: #0f172a; margin-top: 2px; line-height: 1;">₹299</div>
-                    <div style="font-size: 10px; color: #94a3b8; margin-top: 4px;">Govt / University / Exam Fee extra (if applicable)</div>
+                    <div style="font-size: 10px; color: var(--eds-text-accessible-muted); margin-top: 4px;">Govt / University / Exam Fee extra (if applicable)</div>
                   </div>
                   <a href="service-request.html?service=clat-law-entrance-application&service_name=CLAT+Law+Entrance+Application" class="btn-apply-now" style="background: #125696; color: #ffffff; padding: 10px 18px; border-radius: 12px; font-size: 13px; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; transition: background 0.2s ease;"> Request service</a>
                 </div>
@@ -1919,9 +1920,9 @@
                 
                 <div style="border-top: 1px solid #f1f5f9; padding-top: 16px; margin-top: 12px; display: flex; align-items: flex-end; justify-content: space-between;">
                   <div>
-                    <span style="display: block; font-size: 10px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.5px;">STARTING FROM</span>
+                    <span style="display: block; font-size: 10px; font-weight: 700; color: var(--eds-text-accessible-muted); text-transform: uppercase; letter-spacing: 0.5px;">STARTING FROM</span>
                     <div style="font-size: 1.35rem; font-weight: 800; color: #0f172a; margin-top: 2px; line-height: 1;">₹249</div>
-                    <div style="font-size: 10px; color: #94a3b8; margin-top: 4px;">Govt / University / Exam Fee extra (if applicable)</div>
+                    <div style="font-size: 10px; color: var(--eds-text-accessible-muted); margin-top: 4px;">Govt / University / Exam Fee extra (if applicable)</div>
                   </div>
                   <a href="service-request.html?service=ctet-national-teacher-eligibility-test&service_name=CTET+National+Teacher+Eligibility+Test" class="btn-apply-now" style="background: #125696; color: #ffffff; padding: 10px 18px; border-radius: 12px; font-size: 13px; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; transition: background 0.2s ease;"> Request service</a>
                 </div>
@@ -1953,9 +1954,9 @@
                 
                 <div style="border-top: 1px solid #f1f5f9; padding-top: 16px; margin-top: 12px; display: flex; align-items: flex-end; justify-content: space-between;">
                   <div>
-                    <span style="display: block; font-size: 10px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.5px;">STARTING FROM</span>
+                    <span style="display: block; font-size: 10px; font-weight: 700; color: var(--eds-text-accessible-muted); text-transform: uppercase; letter-spacing: 0.5px;">STARTING FROM</span>
                     <div style="font-size: 1.35rem; font-weight: 800; color: #0f172a; margin-top: 2px; line-height: 1;">₹249</div>
-                    <div style="font-size: 10px; color: #94a3b8; margin-top: 4px;">Govt / University / Exam Fee extra (if applicable)</div>
+                    <div style="font-size: 10px; color: var(--eds-text-accessible-muted); margin-top: 4px;">Govt / University / Exam Fee extra (if applicable)</div>
                   </div>
                   <a href="service-request.html?service=uptet-state-teacher-eligibility-test&service_name=UPTET+State+Teacher+Eligibility+Test" class="btn-apply-now" style="background: #125696; color: #ffffff; padding: 10px 18px; border-radius: 12px; font-size: 13px; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; transition: background 0.2s ease;"> Request service</a>
                 </div>
@@ -1987,9 +1988,9 @@
                 
                 <div style="border-top: 1px solid #f1f5f9; padding-top: 16px; margin-top: 12px; display: flex; align-items: flex-end; justify-content: space-between;">
                   <div>
-                    <span style="display: block; font-size: 10px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.5px;">STARTING FROM</span>
+                    <span style="display: block; font-size: 10px; font-weight: 700; color: var(--eds-text-accessible-muted); text-transform: uppercase; letter-spacing: 0.5px;">STARTING FROM</span>
                     <div style="font-size: 1.35rem; font-weight: 800; color: #0f172a; margin-top: 2px; line-height: 1;">₹249</div>
-                    <div style="font-size: 10px; color: #94a3b8; margin-top: 4px;">Govt / University / Exam Fee extra (if applicable)</div>
+                    <div style="font-size: 10px; color: var(--eds-text-accessible-muted); margin-top: 4px;">Govt / University / Exam Fee extra (if applicable)</div>
                   </div>
                   <a href="service-request.html?service=state-tet-examination-application&service_name=State+TET+Examination+Application" class="btn-apply-now" style="background: #125696; color: #ffffff; padding: 10px 18px; border-radius: 12px; font-size: 13px; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; transition: background 0.2s ease;"> Request service</a>
                 </div>
@@ -2021,9 +2022,9 @@
                 
                 <div style="border-top: 1px solid #f1f5f9; padding-top: 16px; margin-top: 12px; display: flex; align-items: flex-end; justify-content: space-between;">
                   <div>
-                    <span style="display: block; font-size: 10px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.5px;">STARTING FROM</span>
+                    <span style="display: block; font-size: 10px; font-weight: 700; color: var(--eds-text-accessible-muted); text-transform: uppercase; letter-spacing: 0.5px;">STARTING FROM</span>
                     <div style="font-size: 1.35rem; font-weight: 800; color: #0f172a; margin-top: 2px; line-height: 1;">₹299</div>
-                    <div style="font-size: 10px; color: #94a3b8; margin-top: 4px;">Govt / University / Exam Fee extra (if applicable)</div>
+                    <div style="font-size: 10px; color: var(--eds-text-accessible-muted); margin-top: 4px;">Govt / University / Exam Fee extra (if applicable)</div>
                   </div>
                   <a href="service-request.html?service=state-psc-uppsc-bpsc-mppsc-application&service_name=State+PSC+%28UPPSC%2FBPSC%2FMPPSC%29+Application" class="btn-apply-now" style="background: #125696; color: #ffffff; padding: 10px 18px; border-radius: 12px; font-size: 13px; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; transition: background 0.2s ease;"> Request service</a>
                 </div>
@@ -2055,9 +2056,9 @@
                 
                 <div style="border-top: 1px solid #f1f5f9; padding-top: 16px; margin-top: 12px; display: flex; align-items: flex-end; justify-content: space-between;">
                   <div>
-                    <span style="display: block; font-size: 10px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.5px;">STARTING FROM</span>
+                    <span style="display: block; font-size: 10px; font-weight: 700; color: var(--eds-text-accessible-muted); text-transform: uppercase; letter-spacing: 0.5px;">STARTING FROM</span>
                     <div style="font-size: 1.35rem; font-weight: 800; color: #0f172a; margin-top: 2px; line-height: 1;">₹199</div>
-                    <div style="font-size: 10px; color: #94a3b8; margin-top: 4px;">Govt / University / Exam Fee extra (if applicable)</div>
+                    <div style="font-size: 10px; color: var(--eds-text-accessible-muted); margin-top: 4px;">Govt / University / Exam Fee extra (if applicable)</div>
                   </div>
                   <a href="service-request.html?service=state-govt-recruitment-form&service_name=State+Govt+Recruitment+Form" class="btn-apply-now" style="background: #125696; color: #ffffff; padding: 10px 18px; border-radius: 12px; font-size: 13px; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; transition: background 0.2s ease;"> Request service</a>
                 </div>
@@ -2089,9 +2090,9 @@
                 
                 <div style="border-top: 1px solid #f1f5f9; padding-top: 16px; margin-top: 12px; display: flex; align-items: flex-end; justify-content: space-between;">
                   <div>
-                    <span style="display: block; font-size: 10px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.5px;">STARTING FROM</span>
+                    <span style="display: block; font-size: 10px; font-weight: 700; color: var(--eds-text-accessible-muted); text-transform: uppercase; letter-spacing: 0.5px;">STARTING FROM</span>
                     <div style="font-size: 1.35rem; font-weight: 800; color: #0f172a; margin-top: 2px; line-height: 1;">₹199</div>
-                    <div style="font-size: 10px; color: #94a3b8; margin-top: 4px;">Govt / University / Exam Fee extra (if applicable)</div>
+                    <div style="font-size: 10px; color: var(--eds-text-accessible-muted); margin-top: 4px;">Govt / University / Exam Fee extra (if applicable)</div>
                   </div>
                   <a href="service-request.html?service=railway-public-sector-apprentice-form&service_name=Railway+%26+Public+Sector+Apprentice+Form" class="btn-apply-now" style="background: #125696; color: #ffffff; padding: 10px 18px; border-radius: 12px; font-size: 13px; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; transition: background 0.2s ease;"> Request service</a>
                 </div>
@@ -2123,9 +2124,9 @@
                 
                 <div style="border-top: 1px solid #f1f5f9; padding-top: 16px; margin-top: 12px; display: flex; align-items: flex-end; justify-content: space-between;">
                   <div>
-                    <span style="display: block; font-size: 10px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.5px;">STARTING FROM</span>
+                    <span style="display: block; font-size: 10px; font-weight: 700; color: var(--eds-text-accessible-muted); text-transform: uppercase; letter-spacing: 0.5px;">STARTING FROM</span>
                     <div style="font-size: 1.35rem; font-weight: 800; color: #0f172a; margin-top: 2px; line-height: 1;">₹149</div>
-                    <div style="font-size: 10px; color: #94a3b8; margin-top: 4px;">Govt / University / Exam Fee extra (if applicable)</div>
+                    <div style="font-size: 10px; color: var(--eds-text-accessible-muted); margin-top: 4px;">Govt / University / Exam Fee extra (if applicable)</div>
                   </div>
                   <a href="service-request.html?service=skill-development-training-application&service_name=Skill+Development+Training+Application" class="btn-apply-now" style="background: #125696; color: #ffffff; padding: 10px 18px; border-radius: 12px; font-size: 13px; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; transition: background 0.2s ease;"> Request service</a>
                 </div>
@@ -2157,9 +2158,9 @@
                 
                 <div style="border-top: 1px solid #f1f5f9; padding-top: 16px; margin-top: 12px; display: flex; align-items: flex-end; justify-content: space-between;">
                   <div>
-                    <span style="display: block; font-size: 10px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.5px;">STARTING FROM</span>
+                    <span style="display: block; font-size: 10px; font-weight: 700; color: var(--eds-text-accessible-muted); text-transform: uppercase; letter-spacing: 0.5px;">STARTING FROM</span>
                     <div style="font-size: 1.35rem; font-weight: 800; color: #0f172a; margin-top: 2px; line-height: 1;">₹199</div>
-                    <div style="font-size: 10px; color: #94a3b8; margin-top: 4px;">Govt / University / Exam Fee extra (if applicable)</div>
+                    <div style="font-size: 10px; color: var(--eds-text-accessible-muted); margin-top: 4px;">Govt / University / Exam Fee extra (if applicable)</div>
                   </div>
                   <a href="service-request.html?service=special-govt-job-online-application&service_name=Special+Govt+Job+Online+Application" class="btn-apply-now" style="background: #125696; color: #ffffff; padding: 10px 18px; border-radius: 12px; font-size: 13px; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; transition: background 0.2s ease;"> Request service</a>
                 </div>
@@ -2249,7 +2250,7 @@
               </div>
               <div class="doc-card-footer">
                 <span class="doc-format-pill"><i data-lucide="file-check"></i> Marksheet / Roll No</span>
-                <span style="color:#059669; font-weight:700;">Verified</span>
+                <span style="color:var(--eds-status-success-ink); font-weight:700;">Verified</span>
               </div>
             </div>
 
@@ -2265,7 +2266,7 @@
               </div>
               <div class="doc-card-footer">
                 <span class="doc-format-pill"><i data-lucide="image"></i> JPG / Exact KB</span>
-                <span style="color:#d97706; font-weight:700;">Portal Formatted</span>
+                <span style="color:var(--eds-status-warning-ink); font-weight:700;">Portal Formatted</span>
               </div>
             </div>
 
@@ -2323,7 +2324,7 @@
               </div>
               <div class="doc-card-footer">
                 <span class="doc-format-pill"><i data-lucide="file-text"></i> State Domicile</span>
-                <span style="color:#059669; font-weight:700;">State Quota</span>
+                <span style="color:var(--eds-status-success-ink); font-weight:700;">State Quota</span>
               </div>
             </div>
 
@@ -2355,7 +2356,7 @@
               </div>
               <div class="doc-card-footer">
                 <span class="doc-format-pill"><i data-lucide="zap"></i> Instant Official</span>
-                <span style="color:#d97706; font-weight:700;">Portal Receipt</span>
+                <span style="color:var(--eds-status-warning-ink); font-weight:700;">Portal Receipt</span>
               </div>
             </div>
           </div>

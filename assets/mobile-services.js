@@ -1,6 +1,6 @@
 (function () {
   'use strict';
-  const phone = matchMedia('(max-width: 720px)');
+  const phone = matchMedia('(max-width: 1080px)');
   const disclosures = [];
   function wrap(nodes, label) {
     nodes = nodes.filter(Boolean);
@@ -22,11 +22,12 @@
         label.textContent = count ? 'Filters (' + count + ' active)' : 'Filters';
       };
       filters.addEventListener('change', update); update();
-      wrap([document.querySelector('.shub-view-switcher'), document.getElementById('shub-cat-grid'), document.getElementById('shub-goals-grid')], 'Browse categories or needs');
+      wrap([document.querySelector('.shub-view-switcher'), document.getElementById('shub-cat-grid'), document.getElementById('shub-goals-grid')], 'Categories & needs');
     }
     const detail = document.querySelector('.voter-overview-main')?.closest('section') || document.querySelector('.enterprise-detail-command');
     if (detail) {
       document.body.classList.add('mobile-service-detail-ready');
+      wrap([document.querySelector('.voter-trust-row')], 'Service standards');
       const nativeMain = detail.querySelector('.voter-overview-main');
       if (nativeMain && !detail.querySelector('.edc-summary')) {
         const action = document.createElement('a'); action.href = '#service-options';

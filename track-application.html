@@ -107,14 +107,23 @@
       .compact .track-hero-sub { display: none; }
 
       /* Search Row */
+      .track-field-label {
+        display: block;
+        margin-bottom: var(--eds-space-2);
+        font-size: var(--eds-fs-base);
+        font-weight: 600;
+        color: var(--ink);
+      }
       .track-search-bar {
         display: flex;
         gap: 10px;
         max-width: 680px;
       }
       .track-input-wrap {
+        --field-padding-inline-start: calc(var(--eds-space-8) + var(--eds-space-3));
         position: relative;
         flex: 1;
+        min-width: 0;
         display: flex;
         align-items: center;
       }
@@ -129,7 +138,7 @@
       .track-input-wrap input {
         width: 100%;
         height: 46px;
-        padding-left: 42px;
+        padding-left: var(--field-padding-inline-start);
         padding-right: 14px;
         border-radius: 10px;
         border: 1px solid #cbd5e1;
@@ -853,10 +862,11 @@
           <h1 class="track-hero-title">Track your service request in real-time.</h1>
           <p class="track-hero-sub">Enter your Application Tracking ID or registered reference to view milestone progress, verify uploaded documents, and access official receipts.</p>
           
-          <form class="track-search-bar" data-tracker-form>
+          <label class="track-field-label" for="tracking-reference">Application ID</label>
+          <form class="track-search-bar" data-tracker-form aria-busy="false">
             <div class="track-input-wrap">
               <i data-lucide="search" class="track-search-icon"></i>
-              <input name="applicationId" placeholder="Enter Application ID (e.g. OPDS-20260722-000001)" aria-label="Application ID" autocomplete="off">
+              <input id="tracking-reference" name="applicationId" type="text" inputmode="text" placeholder="Enter Application ID (e.g. OPDS-20260722-000001)" autocomplete="off" autocapitalize="characters" spellcheck="false" aria-describedby="tracking-status">
             </div>
             <button class="track-search-btn" type="submit">
               <i data-lucide="compass" style="width: 16px; height: 16px;"></i>
@@ -870,7 +880,7 @@
           <!-- Inline Status / Error Message -->
           <div class="track-status-message" id="tracker-output-wrapper">
             <i data-lucide="info"></i>
-            <div data-tracker-output role="status" aria-live="polite">Enter your tracking ID to view live progress.</div>
+            <div id="tracking-status" data-tracker-output role="status" aria-live="polite" aria-atomic="true">Enter your tracking ID to view live progress.</div>
           </div>
         </section>
 

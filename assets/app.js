@@ -3906,6 +3906,22 @@ function renderFooter() {
   `;
 }
 
+function createDialogIsolation(surface) {
+  const saved = new Map();
+  return open => {
+    saved.forEach((wasInert, element) => { element.inert = wasInert; });
+    saved.clear();
+    if (!open) return;
+    for (let branch = surface; branch.parentElement && branch !== document.body; branch = branch.parentElement) {
+      [...branch.parentElement.children].forEach(sibling => {
+        if (sibling === branch || sibling.matches('script,style,link,[data-nav-backdrop],.cart-backdrop')) return;
+        saved.set(sibling, sibling.inert);
+        sibling.inert = true;
+      });
+    }
+  };
+}
+
 function setupMobileNav() {
   const toggle = document.querySelector("[data-mobile-toggle]");
   const menu = document.querySelector("#nav-menu");
@@ -3921,10 +3937,27 @@ function setupMobileNav() {
     }
   };
   updateHeaderOffset();
+  const header = document.querySelector('.site-header');
+  if (header && window.ResizeObserver) new ResizeObserver(updateHeaderOffset).observe(header);
   window.addEventListener("resize", updateHeaderOffset, { passive: true });
   window.addEventListener("scroll", updateHeaderOffset, { passive: true });
 
-  const mobileLayout = () => window.matchMedia('(max-width: 980px)').matches;
+  const mobileLayout = () => window.matchMedia(document.body.id === 'homepage-body' ? '(max-width: 1180px)' : '(max-width: 980px)').matches;
+  const isolateMenu = createDialogIsolation(menu);
+  const syncMenuModality = () => {
+    const open = menu.classList.contains('open');
+    isolateMenu(open && mobileLayout());
+    menu.inert = !open;
+    if (open && mobileLayout()) {
+      menu.setAttribute('role', 'dialog');
+      menu.setAttribute('aria-modal', 'true');
+      menu.setAttribute('aria-label', 'Site navigation');
+    } else {
+      menu.removeAttribute('role'); menu.removeAttribute('aria-modal'); menu.removeAttribute('aria-label');
+    }
+  };
+  toggle.setAttribute('aria-controls', menu.id);
+  syncMenuModality();
   const setOpen = (open, fromHistory = false) => {
     const wasOpen = menu.classList.contains('open');
     if (mobileLayout() && open && !wasOpen && !fromHistory) history.pushState({ ...history.state, opdsMobileMenu: true }, '', location.href);
@@ -3936,13 +3969,19 @@ function setupMobileNav() {
     menu.classList.toggle("open", open);
     document.body.classList.toggle("nav-open", open);
     toggle.setAttribute("aria-expanded", String(open));
+    syncMenuModality();
     if (open) {
       menu.scrollTop = 0;
       const scrollable = menu.querySelector(".mobile-nav-menu");
       if (scrollable) scrollable.scrollTop = 0;
       if (mobileLayout()) closeBtn?.focus({ preventScroll: true });
-    } else if (wasOpen && mobileLayout()) toggle.focus({ preventScroll: true });
+    } else if (wasOpen && (mobileLayout() || menu.contains(document.activeElement))) toggle.focus({ preventScroll: true });
   };
+  const layoutQuery = window.matchMedia(document.body.id === 'homepage-body' ? '(max-width: 1180px)' : '(max-width: 980px)');
+  layoutQuery.addEventListener('change', () => {
+    if (menu.classList.contains('open')) setOpen(false);
+    else syncMenuModality();
+  });
   window.addEventListener('popstate', () => setOpen(Boolean(history.state?.opdsMobileMenu), true));
   menu.addEventListener('keydown', event => {
     if (event.key !== 'Tab' || !mobileLayout() || !menu.classList.contains('open')) return;
@@ -4427,10 +4466,10 @@ function setupHeroWords() {
       word.classList.add("is-animating");
     };
 
-    word.setAttribute("aria-live", "polite");
+    word.setAttribute("aria-live", "off");
     word.innerHTML = words[index];  // Set initial word with HTML support
     word.classList.add("is-animating");
-    if (words.length > 1) setInterval(swapWord, 1800);
+    if (words.length > 1 && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) setInterval(swapWord, 1800);
   });
 }
 
@@ -4895,6 +4934,7 @@ function setupTracker() {
   };
 
   const setLoading = (trackingNumber) => {
+    form.setAttribute("aria-busy", "true");
     if (submitButton) {
       submitButton.disabled = true;
       submitButton.innerHTML = '<i data-lucide="loader-2" class="spin" style="width: 14px; height: 14px;"></i> Checking…';
@@ -4904,6 +4944,7 @@ function setupTracker() {
   };
 
   const clearLoading = () => {
+    form.setAttribute("aria-busy", "false");
     if (!submitButton) return;
     submitButton.disabled = false;
     submitButton.innerHTML = submitHtml;
@@ -5247,6 +5288,8 @@ function setupTracker() {
     if (waBtn && data.supportContext?.whatsappUrl) {
       waBtn.href = data.supportContext.whatsappUrl;
     }
+
+    renderMessage(`<strong>Tracking updated:</strong> ${escapeHtml(order.orderId || data.trackingNumber || "")} — ${escapeHtml(application.displayStatus || order.statusLabel || "Processing")}.`, application.isIssue ? "error" : "success");
 
     // 6. Store in recent tracking
     if (order.orderId) {
@@ -7299,14 +7342,17 @@ function updateCartCount() {
   });
 }
 
+let cartDrawerOpener = null;
+let isolateCart = null;
 function renderCartDrawer() {
   if (document.querySelector("[data-cart-drawer]")) return;
   const drawer = document.createElement("div");
   drawer.className = "cart-drawer-shell";
   drawer.setAttribute("data-cart-drawer", "");
+  drawer.inert = true;
   drawer.innerHTML = `
     <div class="cart-backdrop" data-cart-close></div>
-    <aside class="cart-drawer" aria-label="OneMart cart">
+    <aside class="cart-drawer" role="dialog" aria-modal="true" aria-label="OneMart cart">
       <div class="cart-drawer-head">
         <div>
           <p class="section-kicker">OneMart</p>
@@ -7323,6 +7369,15 @@ function renderCartDrawer() {
     </aside>
   `;
   document.body.appendChild(drawer);
+  const panel = drawer.querySelector('.cart-drawer');
+  isolateCart = createDialogIsolation(panel);
+  panel.addEventListener('keydown', event => {
+    if (event.key !== 'Tab') return;
+    const controls = [...panel.querySelectorAll('a[href],button')].filter(e => !e.disabled && e.getClientRects().length);
+    if (event.shiftKey && document.activeElement === controls[0]) { event.preventDefault(); controls.at(-1)?.focus(); }
+    else if (!event.shiftKey && document.activeElement === controls.at(-1)) { event.preventDefault(); controls[0]?.focus(); }
+  });
+  document.addEventListener('keydown', event => { if (event.key === 'Escape' && drawer.classList.contains('open')) hideCartDrawer(); });
 }
 
 function refreshCartDrawer() {
@@ -7358,11 +7413,20 @@ function refreshCartDrawer() {
 
 function showCartDrawer() {
   refreshCartDrawer();
-  document.querySelector("[data-cart-drawer]")?.classList.add("open");
+  cartDrawerOpener = document.activeElement;
+  const drawer = document.querySelector('[data-cart-drawer]');
+  drawer.inert = false; drawer.classList.add('open');
+  document.body.classList.add('cart-open');
+  isolateCart?.(true);
+  drawer.querySelector('button[data-cart-close]')?.focus({ preventScroll: true });
 }
 
 function hideCartDrawer() {
   document.querySelector("[data-cart-drawer]")?.classList.remove("open");
+  isolateCart?.(false);
+  document.body.classList.remove('cart-open');
+  document.querySelector('[data-cart-drawer]')?.setAttribute('inert', '');
+  if (cartDrawerOpener?.isConnected) cartDrawerOpener.focus({ preventScroll: true });
 }
 
 function showCartToast(message) {
@@ -7570,6 +7634,7 @@ function setupActiveMobileNav() {
   document.querySelectorAll(".mobile-bottom-nav a").forEach((link) => {
     if (link.getAttribute("href") === current) {
       link.classList.add("active");
+      link.setAttribute('aria-current', 'page');
     }
   });
 }
@@ -10196,11 +10261,110 @@ function setupPaymentFlow() {
 }
 
 function setupLucide() {
-  if (window.lucide) {
+  if (typeof window.lucide?.createIcons === "function") {
     document.querySelectorAll("[data-lucide]").forEach((item) => item.setAttribute("aria-hidden", "true"));
     window.lucide.createIcons();
+    return;
   }
+
+  // Keep shared shell controls visible if the CDN is unavailable. These use
+  // the existing Lucide stroke style; accessible names stay
+  // on the parent controls. A later dependency load replaces the fallbacks.
+  const shellPaths = {
+    "shopping-cart": '<path d="m2 2 3 3 3 13h10l3-13H5"/><circle cx="8" cy="21" r="1"/><circle cx="18" cy="21" r="1"/>',
+    "x": '<path d="m6 6 12 12M6 18 18 6"/>',
+    "home": '<path d="m3 10 9-7 9 7v11H3zM9 21V12h6v9"/>',
+    "house": '<path d="m3 10 9-7 9 7v11H3zM9 21V12h6v9"/>',
+    "layout-grid": '<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>',
+    "grid-3x3": '<rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/>',
+    "shopping-bag": '<path d="M5 7h14l1 14H4zM9 7V5a3 3 0 0 1 6 0v2"/>',
+    "search": '<circle cx="11" cy="11" r="8"/><path d="m17 17 4 4"/>',
+    "message-circle": '<path d="M21 11.5a9 9 0 0 1-9 9 9 9 0 0 1-4-1L3 21l1.5-5a9 9 0 1 1 16.5-4.5Z"/>',
+    "phone": '<path d="M22 16.9v3a2 2 0 0 1-2.2 2A19.8 19.8 0 0 1 3.1 5.2 2 2 0 0 1 5.1 3h3a2 2 0 0 1 2 1.7l.5 2.4a2 2 0 0 1-.6 2.1L8.7 10.5a16 16 0 0 0 4.8 4.8l1.3-1.3a2 2 0 0 1 2.1-.6l2.4.5a2 2 0 0 1 1.7 2Z"/>'
+  };
+  document.querySelectorAll("[data-site-nav] i[data-lucide], [data-site-footer] i[data-lucide], .mobile-bottom-nav i[data-lucide], [data-cart-drawer] i[data-lucide]").forEach(item => {
+    const paths = shellPaths[item.dataset.lucide];
+    if (!paths) return;
+    item.setAttribute("aria-hidden", "true");
+    item.style.display = "inline-flex";
+    item.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="100%" height="100%" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${paths}</svg>`;
+  });
 }
+
+function setupResponsiveDiscovery() {
+  const compact = matchMedia('(max-width: 1080px)');
+  const groups = [];
+  const home = document.querySelector('#homepage-body .hero-v3-shell');
+  const hero = document.querySelector('.public-hero-home-system');
+  const directory = document.body.classList.contains('mobile-directory-ready');
+  const host = home || (directory ? document.querySelector('#find-service .shub-search-toolbar') : hero?.querySelector('.page-hero-grid'));
+  const categories = directory && document.querySelector('#find-service .shub-container > .mobile-service-disclosure');
+  const categorySlot = categories && document.createComment('category controls position');
+  if (categories) { categories.before(categorySlot); categories.classList.add('discovery-categories'); }
+  if (host) {
+    const nodes = home
+      ? [...home.querySelectorAll('.hero-v3-subtitle, .hero-os-console, :scope > .hos-trust-strip, .hero-v3-copy > .hero-trust-strip')]
+      : [...hero.querySelectorAll(directory ? '.page-hero-copy > p, .page-hero-copy > .hero-actions, .page-hero-copy > .hero-trust-strip, .page-hero-console' : '.page-hero-console')];
+    if (directory && document.querySelector('.shub-trust-section')) nodes.push(document.querySelector('.shub-trust-section'));
+    const overview = document.createElement('details');
+    overview.className = 'discovery-overview';
+    const summary = document.createElement('summary');
+    summary.textContent = 'Service overview';
+    overview.append(summary);
+    const slots = nodes.map(node => {
+      const slot = document.createComment('responsive overview position');
+      node.before(slot);
+      return {node,slot};
+    });
+    if (slots.length) groups.push({host,overview,slots});
+  }
+  const sync = () => groups.forEach(({host,overview,slots}) => {
+    if (compact.matches) {
+      if (categories) host.append(categories);
+      host.append(overview);
+      slots.forEach(({node}) => { node.classList.add('discovery-preserved'); overview.append(node); });
+    } else {
+      if (categories) categorySlot.after(categories);
+      slots.forEach(({node,slot}) => { node.classList.remove('discovery-preserved'); slot.after(node); });
+      overview.remove();
+      overview.open = false;
+    }
+  });
+  compact.addEventListener('change',sync);
+  sync();
+
+  document.querySelectorAll('[data-service-filters], .shub-quick-chips, .admission-filter-pills').forEach(rail => {
+    rail.classList.add('discovery-rail');
+    rail.setAttribute('role','group');
+    if (!rail.hasAttribute('aria-label')) rail.setAttribute('aria-label','Service filters');
+    const hint = document.createElement('p');
+    hint.className = 'discovery-rail-hint';
+    hint.textContent = 'More choices →';
+    rail.after(hint);
+    const update = () => {
+      hint.hidden = !compact.matches || rail.scrollWidth <= rail.clientWidth + 1;
+      rail.querySelectorAll('button').forEach(button => button.setAttribute('aria-pressed',String(button.classList.contains('active'))));
+    };
+    rail.addEventListener('keydown',event => {
+      if (!compact.matches || !['ArrowLeft','ArrowRight','Home','End'].includes(event.key) || !event.target.matches('button')) return;
+      const buttons = [...rail.querySelectorAll('button:not([disabled])')];
+      const index = buttons.indexOf(event.target);
+      const next = event.key === 'Home' ? 0 : event.key === 'End' ? buttons.length - 1 : (index + (event.key === 'ArrowRight' ? 1 : -1) + buttons.length) % buttons.length;
+      event.preventDefault();
+      buttons[next]?.focus({preventScroll:true});
+      buttons[next]?.scrollIntoView({block:'nearest',inline:'nearest',behavior:'instant'});
+    });
+    new MutationObserver(update).observe(rail,{subtree:true,attributes:true,attributeFilter:['class']});
+    new ResizeObserver(update).observe(rail);
+    compact.addEventListener('change',update);
+    update();
+  });
+}
+
+// Deferred or late-loaded Lucide scripts can finish after shared markup insertion.
+document.addEventListener("load", event => {
+  if (event.target.tagName === "SCRIPT" && event.target.src.includes("lucide")) setupLucide();
+}, true);
 
 function setupInternalComponentVisualContracts() {
   if (document.body?.id === "homepage-body") return;
@@ -12855,15 +13019,26 @@ function injectEnterpriseComparisonTable(isDetailPage) {
 function injectEnterpriseStickyActions(isDetailPage) {
   if (document.querySelector(".enterprise-sticky-actions") || document.querySelector(".bos-sticky-mobile-bar") || document.querySelector(".ps-sticky-mobile-bar") || document.body.classList.contains("page-business-setup") || document.body.classList.contains("print-scan-page") || document.querySelector(".bos-container") || document.querySelector(".ps-container")) return;
   const serviceName = enterpriseCurrentServiceName();
+  const requestLink = getCurrentPage() === "service-request.html" ? document.querySelector('[data-request-whatsapp]') : null;
+  const primaryHref = requestLink ? requestLink.getAttribute('href') : serviceApplyHref(serviceName, inferApplyCategory("", serviceName));
   const bar = document.createElement("div");
   bar.className = "enterprise-sticky-actions";
   bar.setAttribute("aria-label", "Quick service actions");
   bar.innerHTML = `
-    <a class="esa-apply" href="${serviceApplyHref(serviceName, inferApplyCategory("", serviceName))}">${icon("arrow-right", 16)} ${isDetailPage ? "Apply Now" : "Apply"}</a>
-    <a class="esa-whatsapp" href="${buildServiceWhatsAppUrl(serviceName)}" target="_blank" rel="noopener">${icon("message-circle", 16)} WhatsApp</a>
+    <a class="esa-apply" href="${primaryHref}" ${requestLink ? 'data-request-sticky-link target="_blank" rel="noopener"' : ''}>${icon("arrow-right", 16)} ${requestLink ? "Confirm availability" : isDetailPage ? "Apply Now" : "Apply"}</a>
+    <a class="esa-whatsapp" href="${requestLink ? primaryHref : buildServiceWhatsAppUrl(serviceName)}" ${requestLink ? 'data-request-sticky-link' : ''} target="_blank" rel="noopener">${icon("message-circle", 16)} WhatsApp</a>
     <a class="esa-call" href="tel:+919473946181">${icon("phone", 16)} Call</a>
   `;
   document.body.appendChild(bar);
+  // Reserve the rendered rail height, including wrapped labels, for the last links.
+  const syncClearance = () => {
+    const height = bar.getBoundingClientRect().height;
+    if (height > 0) document.body.style.setProperty('--mobile-action-clearance', Math.ceil(height + 24) + 'px');
+    else document.body.style.removeProperty('--mobile-action-clearance');
+  };
+  syncClearance();
+  if (window.ResizeObserver) new ResizeObserver(syncClearance).observe(bar);
+  else window.addEventListener('resize', syncClearance, { passive: true });
 }
 
 function setupMegaMenuTabs() {
@@ -13097,6 +13272,9 @@ setupWhatsAppPrefills();
 setupFormAbandonmentRecovery();
 setupInternalComponentVisualContracts();
 setupLucide();
+// Shared heroes have finished rendering before grouping their supporting content.
+if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded',setupResponsiveDiscovery,{once:true});
+else setupResponsiveDiscovery();
 
 // Release the first paint only after the current shared layout and dynamic
 // components have replaced their legacy HTML fallbacks.
@@ -13227,6 +13405,14 @@ function setupBentoSwitcher() {
   btn.className = "whatsapp-float";
   btn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="28" height="28"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg><span>WhatsApp</span>`;
   document.body.appendChild(btn);
+  const reserveSupportSpace = () => {
+    const bounds = btn.getBoundingClientRect();
+    const visible = innerWidth > 768 && bounds.height > 0 && getComputedStyle(btn).position === 'fixed';
+    if (visible) document.body.style.setProperty('--support-float-width', Math.ceil(bounds.width + 24) + 'px');
+    else document.body.style.removeProperty('--support-float-width');
+  };
+  if (window.ResizeObserver) new ResizeObserver(reserveSupportSpace).observe(btn);
+  window.addEventListener('resize', reserveSupportSpace, { passive: true });
 })();
 
 function setupMobileChromeState() {
@@ -13256,6 +13442,14 @@ function setupMobileChromeState() {
     syncGeneratedTouchTargets(isMobile);
   };
 
+  const bottomNav = document.querySelector('.mobile-bottom-nav');
+  if (bottomNav && window.ResizeObserver) {
+    new ResizeObserver(() => {
+      const height = bottomNav.getBoundingClientRect().height;
+      if (height) document.body.style.setProperty('--mobile-nav-clearance', Math.ceil(height + 24) + 'px');
+      else document.body.style.removeProperty('--mobile-nav-clearance');
+    }).observe(bottomNav);
+  }
   syncChromeState();
   window.addEventListener("resize", syncChromeState, { passive: true });
   if (typeof mobileQuery.addEventListener === "function") {

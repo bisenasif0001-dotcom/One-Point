@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Payment failed page with retry and gateway switch options.">
+    <meta name="description" content="Review payment status, Razorpay retry guidance and support options.">
     <title>Payment Failed | One Point</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -32,16 +32,16 @@
         <div class="success-animation"><i data-lucide="x"></i></div>
         <p class="section-kicker">Payment Status</p>
         <h1>Payment Failed</h1>
-        <p class="status-copy">Failure reason will appear below. You can retry payment or switch gateway.</p>
-        <div data-payment-status></div>
+        <p class="status-copy">Review the payment status below before retrying through Razorpay or contacting support.</p>
+        <div data-payment-status role="status" aria-live="polite" aria-atomic="true"></div>
         <div class="result-next-steps" aria-label="Payment recovery checklist">
-          <span><i data-lucide="wifi"></i><strong>Check network</strong><small>Gateway failures often resolve after one clean retry.</small></span>
-          <span><i data-lucide="landmark"></i><strong>Try another gateway</strong><small>Switch payment mode if your bank declined the first attempt.</small></span>
+          <span><i data-lucide="wifi"></i><strong>Check network</strong><small>Check your connection before trying again.</small></span>
+          <span><i data-lucide="landmark"></i><strong>Retry through Razorpay</strong><small>Retry requires the existing payment reference. If it is missing, contact support with your order ID.</small></span>
           <span><i data-lucide="headphones"></i><strong>Keep reference</strong><small>Share any debit SMS or transaction ID with support.</small></span>
         </div>
-        <div class="retry-gateway-rail" data-retry-rail aria-label="Retry with a different gateway"></div>
+        <div class="retry-gateway-rail" data-retry-rail aria-label="Available Razorpay retry options"></div>
         <div class="status-actions">
-          <button class="btn btn-primary" type="button" data-retry-payment="razorpay">Retry Payment</button>
+          <button class="btn btn-primary" type="button" data-retry-payment="razorpay">Retry through Razorpay</button>
           <a class="btn btn-ghost" id="payment-support-link" href="support.html">Contact Support</a>
         </div>
         <p class="payment-redirect-note" style="margin-top: 14px;">Amount debited? Check the existing order status and contact support before paying again. Refund timing depends on the bank and gateway.</p>

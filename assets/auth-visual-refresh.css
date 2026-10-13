@@ -608,7 +608,7 @@ body.elite-auth-body .elite-input-wrapper {
   padding: 0 15px !important;
   gap: 12px !important;
   background: rgba(18, 86, 150, 0.03) !important;
-  border: 1px solid var(--auth-line) !important;
+  border: 1px solid var(--eds-control-boundary) !important;
   border-radius: var(--radius-sm, 12px) !important;
   box-shadow: none !important;
   transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease !important;
@@ -884,7 +884,7 @@ body.elite-auth-body .spin {
 
 @media (max-width: 920px) {
   body.elite-auth-body .auth-shell-card {
-    grid-template-columns: 1fr !important;
+    grid-template-columns: minmax(0, 1fr) !important;
     max-width: 620px !important;
     min-height: auto !important;
     background: transparent !important;
@@ -918,6 +918,7 @@ body.elite-auth-body .spin {
   }
 
   body.elite-auth-body .form-pane {
+    min-width: 0;
     padding: 28px 22px !important;
     background: transparent !important;
   }
@@ -925,7 +926,7 @@ body.elite-auth-body .spin {
 
 @media (max-width: 560px) {
   body.elite-auth-body .elite-auth-shell {
-    padding: 12px !important;
+    padding: var(--eds-space-4) !important;
     align-items: flex-start !important;
   }
 
@@ -980,7 +981,8 @@ body.elite-auth-body .spin {
   }
 
   body.elite-auth-body .segment-item {
-    font-size: 11px !important;
+    font-size: var(--eds-fs-base) !important;
+    white-space: normal;
     gap: 5px !important;
     padding-inline: 5px !important;
   }
@@ -992,6 +994,8 @@ body.elite-auth-body .spin {
   }
 
   body.elite-auth-body .auth-inline-actions {
+    display: grid;
+    min-width: 0;
     grid-template-columns: 1fr !important;
   }
 }
@@ -1156,7 +1160,7 @@ body.elite-auth-body .auth-step {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  color: #7a8da4;
+  color: var(--eds-text-accessible-muted);
 }
 
 body.elite-auth-body .auth-step b {
@@ -1398,8 +1402,12 @@ body.elite-auth-body .login-status:not(:empty) {
 @media (max-width: 560px) {
   body.elite-auth-body .main-auth-tabs > .segment-item {
     padding: 0 6px !important;
-    font-size: 11px !important;
+    font-size: var(--eds-fs-base) !important;
+    min-width: 0;
+    white-space: normal !important;
+    line-height: var(--eds-lh-heading) !important;
   }
+  body.elite-auth-body .main-auth-tabs > .segment-item > span { min-width: 0; }
 
   body.elite-auth-body .main-auth-tabs > .segment-item svg,
   body.elite-auth-body .main-auth-tabs > .segment-item i {

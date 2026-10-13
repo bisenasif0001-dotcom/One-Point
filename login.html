@@ -171,7 +171,7 @@
                   <label for="otp-phone">Mobile Number <span aria-hidden="true">*</span></label>
                   <div class="elite-input-wrapper">
                     <i data-lucide="smartphone"></i>
-                    <input class="input" id="otp-phone" name="phone" inputmode="numeric" placeholder="10-digit mobile number" required autocomplete="tel">
+                    <input class="input" id="otp-phone" name="phone" type="tel" inputmode="numeric" placeholder="10-digit mobile number" required autocomplete="tel">
                   </div>
                 </div>
 
@@ -334,11 +334,14 @@
 
         // Tab selection change logic
         tabs.forEach(tab => {
+          tab.setAttribute('aria-pressed', String(tab.classList.contains('active')));
+          tab.setAttribute('aria-controls', tab.dataset.tab === 'password' ? 'password-login-card' : tab.dataset.tab === 'otp' ? 'otp-login-card' : 'gmail-login-card');
           tab.addEventListener("click", () => {
             const targetTab = tab.dataset.tab;
             mainTabSwitcher.setAttribute("data-active", targetTab);
-            tabs.forEach(t => t.classList.remove("active"));
+            tabs.forEach(t => { t.classList.remove("active"); t.setAttribute('aria-pressed', 'false'); });
             tab.classList.add("active");
+            tab.setAttribute('aria-pressed', 'true');
 
             // Hide all standard cards
             passwordCard.classList.add("auth-card-hidden");
@@ -386,6 +389,7 @@
 
         // Busy status helper for Password form
         function setLoginBusy(isBusy) {
+          passwordCard.setAttribute('aria-busy', String(Boolean(isBusy)));
           const submitText = passwordCard.querySelector('button[type="submit"] .btn-text');
           const button = passwordCard.querySelector('button[type="submit"]');
           if (button) button.disabled = Boolean(isBusy);
