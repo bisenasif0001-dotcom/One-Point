@@ -12,7 +12,7 @@
     location.replace('checkout.html?' + query);
     return;
   }
-  const name = (params.get('service_name') || 'Your service').slice(0, 180);
+  const name = (params.get('service_name') || params.get('task') || params.get('service') || 'Your service').slice(0, 180);
   const heading = document.querySelector('[data-request-task]');
   if (heading) heading.textContent = name;
   const link = document.querySelector('[data-request-whatsapp]');

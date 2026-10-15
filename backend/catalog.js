@@ -33,14 +33,14 @@ const products = [
 ];
 
 const services = [
-  { slug: "pan-card", name: "PAN Card", category: "E-Services", price: 199, taxRate: 0 },
-  { slug: "new-pan", name: "New PAN", category: "E-Services", price: 199, taxRate: 0 },
-  { slug: "pan-correction", name: "PAN Correction", category: "E-Services", price: 199, taxRate: 0 },
-  { slug: "e-pan-download", name: "E-PAN Download", category: "E-Services", price: 199, taxRate: 0 },
-  { slug: "card-reprint", name: "Card Reprint", category: "E-Services", price: 199, taxRate: 0 },
-  { slug: "pan-status-check", name: "PAN Application Status Check", category: "E-Services", price: 199, taxRate: 0 },
-  { slug: "pan-aadhaar-link", name: "PAN–Aadhaar Linking & Status Support", category: "E-Services", price: 199, taxRate: 0 },
-  { slug: "duplicate-pan-surrender", name: "Duplicate PAN Surrender Guidance", category: "E-Services", price: 199, taxRate: 0 },
+  { slug: "pan-card", name: "PAN Card", category: "E-Services", price: 220, taxRate: 0 },
+  { slug: "new-pan", name: "New PAN", category: "E-Services", price: 220, taxRate: 0 },
+  { slug: "pan-correction", name: "PAN Correction", category: "E-Services", price: 250, taxRate: 0 },
+  { slug: "e-pan-download", name: "E-PAN Download", category: "E-Services", price: 150, taxRate: 0 },
+  { slug: "card-reprint", name: "Card Reprint", category: "E-Services", price: 100, taxRate: 0 },
+  { slug: "pan-status-check", name: "PAN Application Status Check", category: "E-Services", price: 0, taxRate: 0 },
+  { slug: "pan-aadhaar-link", name: "PAN–Aadhaar Linking & Status Support", category: "E-Services", price: 100, taxRate: 0 },
+  { slug: "duplicate-pan-surrender", name: "Duplicate PAN Surrender Guidance", category: "E-Services", price: 250, taxRate: 0 },
   { slug: "ayushman-card", name: "Ayushman Card", category: "E-Services", price: 199, taxRate: 0 },
   { slug: "voter-id", name: "Voter ID", category: "E-Services", price: 149, taxRate: 0 },
   { slug: "voter-id-new-enrollment", name: "Voter ID New Enrollment Assistance", category: "E-Services", price: 149, taxRate: 0 },

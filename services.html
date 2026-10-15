@@ -39,6 +39,12 @@
         padding: 0 24px;
         box-sizing: border-box;
       }
+      @media (max-width: 768px) {
+        .shub-container { padding: 0 16px; }
+      }
+      @media (max-width: 360px) {
+        .shub-container { padding: 0 12px; }
+      }
 
       .shub-section {
         padding: clamp(48px, 6vw, 76px) 0;
@@ -197,7 +203,7 @@
       #shub-search-input {
         width: 100%;
         height: 50px;
-        padding: 0 42px 0 46px;
+        padding: 0 48px 0 46px;
         border: 1.5px solid #cbd5e1;
         border-radius: var(--shub-radius-md);
         font-size: 14.5px;
@@ -214,20 +220,25 @@
       }
       .shub-search-clear {
         position: absolute;
-        right: 12px;
+        right: 8px;
+        top: 50%;
+        transform: translateY(-50%);
         background: #f1f5f9;
         border: none;
         border-radius: 50%;
-        width: 24px;
-        height: 24px;
+        width: 36px;
+        height: 36px;
+        min-width: 36px;
+        min-height: 36px;
         display: flex;
         align-items: center;
         justify-content: center;
         cursor: pointer;
         color: #64748b;
+        transition: background 0.15s, color 0.15s;
       }
       .shub-search-clear:hover { background: #e2e8f0; color: #0b1f35; }
-      .shub-search-clear i, .shub-search-clear svg { width: 14px; height: 14px; }
+      .shub-search-clear i, .shub-search-clear svg { width: 16px; height: 16px; }
 
       .shub-toolbar-filters {
         display: flex;
@@ -623,7 +634,9 @@
       }
       .shub-btn-card {
         flex: 1;
+        min-height: 44px;
         padding: 9px 12px;
+        box-sizing: border-box;
         background: #eff6ff;
         color: var(--shub-primary);
         border: 1px solid #bfdbfe;
@@ -644,8 +657,10 @@
       }
       .shub-btn-card i, .shub-btn-card svg { width: 14px; height: 14px; }
       .shub-btn-card-wa {
-        width: 38px;
-        height: 38px;
+        width: 44px;
+        height: 44px;
+        min-width: 44px;
+        min-height: 44px;
         border-radius: var(--shub-radius-sm);
         background: #f0fdf4;
         border: 1px solid #bbf7d0;
@@ -708,6 +723,22 @@
         font-size: 13.5px;
         font-weight: 800;
         text-decoration: none;
+      }
+      .shub-zero-clear-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        cursor: pointer;
+        border: 1.5px solid var(--shub-primary);
+        color: var(--shub-primary);
+        background: #ffffff;
+        font-weight: 800;
+        min-height: 44px;
+        transition: all var(--shub-transition);
+      }
+      .shub-zero-clear-btn:hover {
+        background: var(--shub-primary);
+        color: #ffffff;
       }
 
       /* ── 4. Ecosystem Hubs ── */
@@ -1287,7 +1318,7 @@
       <header class="site-header fallback-site-header">
         <nav class="nav-bar" aria-label="Primary fallback">
           <a class="brand" href="index.html" aria-label="One Point Digital Services home">
-            <img class="brand-logo brand-logo-header" src="assets/logo-bisen-one-point-footer.svg" alt="Bisen One Point Suvidha Kendra">
+            <img class="brand-logo brand-logo-header" src="assets/logo-bisen-one-point-footer.svg" alt="Bisen One Point Suvidha Kendra" width="160" height="40">
           </a>
           <div class="fallback-nav-links">
             <a class="nav-link" href="index.html">Home</a>
@@ -1402,17 +1433,17 @@
               </div>
             </div>
             <div class="shub-trust-card">
-              <div class="shub-trust-icon"><i data-lucide="star"></i></div>
+              <div class="shub-trust-icon"><i data-lucide="receipt"></i></div>
               <div class="shub-trust-content">
-                <strong>4.8★ Rating</strong>
-                <span>1,200+ verified client reviews</span>
+                <strong>Transparent Fees</strong>
+                <span>Fixed catalog rates &amp; tax receipts</span>
               </div>
             </div>
             <div class="shub-trust-card">
-              <div class="shub-trust-icon"><i data-lucide="file-check"></i></div>
+              <div class="shub-trust-icon"><i data-lucide="map-pin"></i></div>
               <div class="shub-trust-content">
-                <strong>12,000+ Service Requests</strong>
-                <span>Fulfilled across all categories</span>
+                <strong>Physical &amp; Remote</strong>
+                <span>Lucknow center desk or 100% online</span>
               </div>
             </div>
           </div>
@@ -1433,7 +1464,7 @@
           <div class="shub-search-toolbar">
             <div class="shub-search-input-wrap">
               <i data-lucide="search" class="shub-search-icon"></i>
-              <input type="text" id="shub-search-input" placeholder="Search by service name, keyword, or requirement (e.g. PAN, GST, admit card, flex banner, passport)..." aria-label="Search all services">
+              <input type="text" id="shub-search-input" placeholder="Search by service name, keyword, or requirement (e.g. PAN, GST, admit card, flex banner, passport)..." aria-label="Search all services" autocomplete="off" autocorrect="off" spellcheck="false">
               <button type="button" id="shub-search-clear" class="shub-search-clear" style="display:none;" aria-label="Clear search">
                 <i data-lucide="x"></i>
               </button>
@@ -1635,6 +1666,7 @@
           <div class="shub-search-results-panel" id="shub-search-results-panel" style="display:none;">
             <div class="shub-results-head">
               <h3 id="shub-results-heading">Matching Services (<span id="shub-results-count">0</span>)</h3>
+              <p class="sr-only" id="shub-results-status" role="status" aria-live="polite" aria-atomic="true"></p>
               <button type="button" id="shub-reset-search-btn" class="shub-results-reset">Clear Search &amp; Show Categories</button>
             </div>
             <div class="shub-cards-grid" id="shub-search-grid"></div>
@@ -1645,6 +1677,9 @@
               <h3>Can't find exactly what you need?</h3>
               <p>Tell us what you want to get done and our helpdesk will guide you directly to the exact portal, documents &amp; processing steps.</p>
               <div class="shub-zero-actions">
+                <button type="button" id="shub-zero-clear-btn" class="shub-btn-ghost shub-zero-clear-btn">
+                  <i data-lucide="rotate-ccw"></i> Clear Search &amp; View Categories
+                </button>
                 <a href="https://wa.me/919473946181?text=Hi%20One%20Point,%20I%20could%20not%20find%20a%20specific%20service%20on%20your%20website.%20My%20requirement%20is:%20" class="shub-btn-wa" target="_blank" rel="noopener">
                   <i data-lucide="message-circle"></i> Describe Requirement on WhatsApp
                 </a>
@@ -1727,7 +1762,7 @@
                 <span class="shub-meta-price">From <strong>₹499</strong></span>
               </div>
               <div class="shub-card-footer">
-                <a href="business-solutions.html" class="shub-btn-card">Start Filing <i data-lucide="arrow-right"></i></a>
+                <a href="service-gst-registration.html" class="shub-btn-card">Start Filing <i data-lucide="arrow-right"></i></a>
                 <a href="https://wa.me/919473946181?text=Hi%20One%20Point,%20I%20need%20help%20with%20GST%20Registration" class="shub-btn-card-wa" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><i data-lucide="message-circle"></i></a>
               </div>
             </div>
@@ -2184,7 +2219,7 @@
             icon: 'heart-pulse',
             iconBg: '#ecfdf5',
             iconColor: '#059669',
-            url: 'service-ayushman-card.html',
+            url: 'online-services.html#welfare',
             cta: 'Get Card',
             keywords: 'ayushman card pmjay golden card health scheme 5 lakh free hospital medical ration card',
             popular: true
@@ -2222,7 +2257,7 @@
             icon: 'file-text',
             iconBg: '#eff6ff',
             iconColor: '#1d4ed8',
-            url: 'online-services.html',
+            url: 'service-state-certificates-civil-registration.html',
             cta: 'Apply Certificate',
             keywords: 'niwas jati aay praman patra domicile caste income certificate edistrict tehsildar sdm',
             popular: false
@@ -2241,7 +2276,7 @@
             icon: 'building-2',
             iconBg: '#faf5ff',
             iconColor: '#7e22ce',
-            url: 'business-solutions.html',
+            url: 'service-gst-registration.html',
             cta: 'Start Filing',
             keywords: 'gst registration gstin tax gstr-1 gstr-3b invoice business firm compliance',
             popular: true
@@ -2279,7 +2314,7 @@
             icon: 'utensils',
             iconBg: '#fff7ed',
             iconColor: '#c2410c',
-            url: 'business-solutions.html',
+            url: 'service-business-registration-corporate-setup.html',
             cta: 'Get License',
             keywords: 'fssai food license food registration foscos hotel restaurant cloud kitchen grocery cafe',
             popular: false
@@ -2450,7 +2485,7 @@
             icon: 'plane',
             iconBg: '#fefce8',
             iconColor: '#a16207',
-            url: 'travel-services.html',
+            url: 'service-passport-assistance.html',
             cta: 'Book Passport',
             keywords: 'passport online seva kendra psk appointment tatkaal visa renewal travel document',
             popular: false
@@ -2488,7 +2523,7 @@
             icon: 'scale',
             iconBg: '#f8fafc',
             iconColor: '#334155',
-            url: 'online-services.html#legal',
+            url: 'service-legal-drafting-court-services.html',
             cta: 'Draft Agreement',
             keywords: 'affidavit agreement rent agreement e-stamp notary gazette legal drafting declaration',
             popular: false
@@ -2518,6 +2553,9 @@
 
         function renderSearchResults(items) {
           if (!searchGrid) return;
+          const status = document.getElementById('shub-results-status');
+          const message = items.length + ' matching services.';
+          if (status && status.textContent !== message) status.textContent = message;
           searchGrid.innerHTML = '';
           
           if (items.length === 0) {
@@ -2575,6 +2613,7 @@
           if (!isFiltering) {
             // Restore standard views
             if (resultsPanel) resultsPanel.style.display = 'none';
+            if (zeroState) zeroState.style.display = 'none';
             if (viewSwitcher) viewSwitcher.style.display = 'inline-flex';
             if (currentView === 'categories') {
               if (catGrid) catGrid.style.display = 'grid';
@@ -2660,6 +2699,20 @@
           });
         }
 
+        // Zero state clear button
+        const zeroClearBtn = document.getElementById('shub-zero-clear-btn');
+        if (zeroClearBtn) {
+          zeroClearBtn.addEventListener('click', function () {
+            if (searchInput) searchInput.value = '';
+            if (catSelect) catSelect.value = 'all';
+            if (modeSelect) modeSelect.value = 'all';
+            activeFilterChip = 'all';
+            quickChips.forEach(c => c.classList.toggle('active', c.getAttribute('data-chip') === 'all'));
+            executeFilter();
+            if (searchInput) searchInput.focus();
+          });
+        }
+
         // View Switcher (Categories vs Goals)
         if (tabBtnCategories && tabBtnGoals) {
           tabBtnCategories.addEventListener('click', function () {
@@ -2693,21 +2746,21 @@
             fee: '₹0 (Free Govt Registration)',
             govt: '₹0 Govt Fee / ₹50 PVC Card Print',
             time: 'Same Day (Instant)',
-            url: 'service-ayushman-card.html'
+            url: 'online-services.html#welfare'
           },
           gst: {
             name: 'GST Registration & Certificate',
             fee: 'From ₹499',
             govt: '₹0 Govt Fee (Application filing)',
             time: '3–5 Business Days',
-            url: 'business-solutions.html'
+            url: 'service-gst-registration.html'
           },
           udyam: {
             name: 'MSME / Udyam Registration',
             fee: 'From ₹299',
             govt: '₹0 Govt Fee (Official Portal)',
             time: '24–48 Hours',
-            url: 'business-solutions.html'
+            url: 'service-business-registration-corporate-setup.html'
           },
           cuet: {
             name: 'College Admission / Entrance Form',
@@ -2742,14 +2795,14 @@
             fee: 'From ₹150',
             govt: '₹10/₹50/₹100 e-Stamp at actuals',
             time: 'Same Day',
-            url: 'online-services.html#legal'
+            url: 'service-legal-drafting-court-services.html'
           },
           passport: {
             name: 'Passport Online Application',
             fee: 'From ₹250',
             govt: '₹1,500 Govt Fee (Standard PSK)',
             time: '1–2 Days (Appointment)',
-            url: 'travel-services.html'
+            url: 'service-passport-assistance.html'
           }
         };
 
@@ -2845,7 +2898,7 @@
     </script>
       </main>
     <div data-site-footer></div>
-    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+    <script src="https://unpkg.com/lucide@1.57.0/dist/umd/lucide.min.js" defer></script>
     <script src="assets/mobile-services.js?v=performance-105" defer></script>
     <script src="assets/pilot-metrics.js?v=release-107" defer></script>
     <script src="assets/app.js?v=onemart-109" defer></script>

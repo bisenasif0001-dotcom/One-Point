@@ -865,7 +865,7 @@
         align-items: center;
         gap: 4px;
       }
-      .bos-table-tag-actual {
+            .bos-table-tag-actual {
         font-size: 12px;
         font-weight: 750;
         color: #92400e;
@@ -873,6 +873,62 @@
         border: 1px solid var(--bos-gold-border);
         padding: 3px 10px;
         border-radius: 999px;
+      }
+      /* Phase 9: Mobile Responsive Estimate Table */
+      @media (max-width: 680px) {
+        .bos-estimate-table-wrap {
+          padding: 14px 16px;
+          overflow-x: visible;
+        }
+        .bos-estimate-table {
+          display: block;
+          width: 100%;
+        }
+        .bos-estimate-table thead {
+          display: none;
+        }
+        .bos-estimate-table tbody {
+          display: grid;
+          gap: 12px;
+        }
+        .bos-estimate-table tr {
+          display: flex;
+          flex-direction: column;
+          background: #ffffff;
+          border: 1.5px solid var(--bos-border);
+          border-radius: 12px;
+          padding: 12px 14px;
+          gap: 6px;
+          box-shadow: 0 2px 6px rgba(15, 23, 42, 0.03);
+        }
+        .bos-estimate-table td {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 6px 0 !important;
+          border-bottom: 1px dashed var(--bos-border);
+          font-size: 0.85rem;
+          flex-wrap: wrap;
+          gap: 6px;
+        }
+        .bos-estimate-table td:first-child {
+          border-bottom: 1.5px solid var(--bos-border);
+          padding-bottom: 8px !important;
+        }
+        .bos-estimate-table td:last-child {
+          border-bottom: none;
+        }
+        .bos-estimate-table td::before {
+          content: attr(data-label);
+          font-size: 0.72rem;
+          font-weight: 800;
+          text-transform: uppercase;
+          color: var(--bos-muted);
+          letter-spacing: 0.03em;
+        }
+        .bos-estimate-table td:first-child::before {
+          display: none;
+        }
       }
       .bos-estimate-footnote {
         background: var(--bos-bg-soft);
@@ -2564,29 +2620,29 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <td><strong>Documentation &amp; Profile Pre-Audit</strong></td>
-                    <td><span class="bos-table-tag-inc"><i data-lucide="check" style="width:12px;height:12px;"></i> Included</span></td>
-                    <td>Same Day (2–4 Hours)</td>
+                    <td data-label="Service Component"><strong>Documentation &amp; Profile Pre-Audit</strong></td>
+                    <td data-label="Included Status"><span class="bos-table-tag-inc"><i data-lucide="check" style="width:12px;height:12px;"></i> Included</span></td>
+                    <td data-label="Typical Turnaround">Same Day (2–4 Hours)</td>
                   </tr>
                   <tr>
-                    <td><strong>Technical Setup, Optimization &amp; Configuration</strong></td>
-                    <td><span class="bos-table-tag-inc"><i data-lucide="check" style="width:12px;height:12px;"></i> Included</span></td>
-                    <td id="bos-table-turnaround-row">1–2 Business Days</td>
+                    <td data-label="Service Component"><strong>Technical Setup, Optimization &amp; Configuration</strong></td>
+                    <td data-label="Included Status"><span class="bos-table-tag-inc"><i data-lucide="check" style="width:12px;height:12px;"></i> Included</span></td>
+                    <td data-label="Typical Turnaround" id="bos-table-turnaround-row">1–2 Business Days</td>
                   </tr>
                   <tr>
-                    <td><strong>Graphic Formatting, Logo &amp; High-Res QR Generation</strong></td>
-                    <td><span class="bos-table-tag-inc"><i data-lucide="check" style="width:12px;height:12px;"></i> Included</span></td>
-                    <td>Same Day</td>
+                    <td data-label="Service Component"><strong>Graphic Formatting, Logo &amp; High-Res QR Generation</strong></td>
+                    <td data-label="Included Status"><span class="bos-table-tag-inc"><i data-lucide="check" style="width:12px;height:12px;"></i> Included</span></td>
+                    <td data-label="Typical Turnaround">Same Day</td>
                   </tr>
                   <tr>
-                    <td><strong>Third-Party / Platform Verification Charges</strong></td>
-                    <td><span class="bos-table-tag-actual">Zero Platform Fee (Free)</span></td>
-                    <td>Standard Platform Timeline</td>
+                    <td data-label="Service Component"><strong>Third-Party / Platform Verification Charges</strong></td>
+                    <td data-label="Included Status"><span class="bos-table-tag-actual">Zero Platform Fee (Free)</span></td>
+                    <td data-label="Typical Turnaround">Standard Platform Timeline</td>
                   </tr>
                   <tr>
-                    <td><strong>Post-Setup Verification &amp; WhatsApp Handover Support</strong></td>
-                    <td><span class="bos-table-tag-inc"><i data-lucide="check" style="width:12px;height:12px;"></i> Included</span></td>
-                    <td>Included Throughout</td>
+                    <td data-label="Service Component"><strong>Post-Setup Verification &amp; WhatsApp Handover Support</strong></td>
+                    <td data-label="Included Status"><span class="bos-table-tag-inc"><i data-lucide="check" style="width:12px;height:12px;"></i> Included</span></td>
+                    <td data-label="Typical Turnaround">Included Throughout</td>
                   </tr>
                 </tbody>
               </table>
@@ -2787,7 +2843,7 @@
                 <span>Receive instant WhatsApp and SMS progress updates from submission to final handover.</span>
               </div>
             </div>
-            <a class="bos-btn-secondary" href="track-status.html" style="padding: 10px 18px; font-weight: 800; white-space: nowrap;">
+            <a class="bos-btn-secondary" href="track-application.html" style="padding: 10px 18px; font-weight: 800; white-space: nowrap;">
               <span>Track Existing Request</span> <i data-lucide="arrow-right" style="width:14px;height:14px;"></i>
             </a>
           </div>
@@ -3341,7 +3397,7 @@
 
     <div data-site-footer></div>
 
-    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+    <script src="https://unpkg.com/lucide@1.57.0/dist/umd/lucide.min.js" defer></script>
     <script src="assets/pilot-metrics.js?v=release-107" defer></script>
     <script src="assets/app.js?v=onemart-109" defer></script>
 

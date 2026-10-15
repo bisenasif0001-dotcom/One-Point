@@ -1326,10 +1326,66 @@
       .tax-fee-table tr:hover td {
         background: #f8fafc;
       }
-      .tax-fee-table .tax-fee-total {
+            .tax-fee-table .tax-fee-total {
         font-weight: 850;
         color: #075092;
         font-size: 0.92rem;
+      }
+      /* Phase 9: Mobile Responsive Tax Fee Table */
+      @media (max-width: 768px) {
+        .tax-fee-table-wrap {
+          overflow-x: visible;
+          border: none;
+        }
+        .tax-fee-table {
+          display: block;
+          width: 100%;
+        }
+        .tax-fee-table thead {
+          display: none;
+        }
+        .tax-fee-table tbody {
+          display: grid;
+          gap: 12px;
+        }
+        .tax-fee-table tr {
+          display: flex;
+          flex-direction: column;
+          background: #ffffff;
+          border: 1.5px solid #e2e8f0;
+          border-radius: 12px;
+          padding: 14px 16px;
+          gap: 6px;
+          box-shadow: 0 2px 8px rgba(15, 23, 42, 0.03);
+        }
+        .tax-fee-table td {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 6px 0 !important;
+          border-bottom: 1px dashed #f1f5f9;
+          font-size: 0.85rem;
+          flex-wrap: wrap;
+          gap: 6px;
+        }
+        .tax-fee-table td:first-child {
+          border-bottom: 1.5px solid #e2e8f0;
+          padding-bottom: 8px !important;
+        }
+        .tax-fee-table td:last-child {
+          border-bottom: none;
+        }
+        .tax-fee-table td::before {
+          content: attr(data-label);
+          font-size: 0.72rem;
+          font-weight: 800;
+          text-transform: uppercase;
+          color: #64748b;
+          letter-spacing: 0.03em;
+        }
+        .tax-fee-table td:first-child::before {
+          display: none;
+        }
       }
       .tax-fee-guarantee {
         background: #ecfdf5;
@@ -2042,40 +2098,40 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <td><strong>ITR-1 Filing Consultancy (Salaried)</strong></td>
-                    <td>₹0.00 (Statutory Free)</td>
-                    <td>₹299.00</td>
-                    <td class="tax-fee-total">₹299.00*</td>
+                    <td data-label="Service Category"><strong>ITR-1 Filing Consultancy (Salaried)</strong></td>
+                    <td data-label="Govt Portal Fee">₹0.00 (Statutory Free)</td>
+                    <td data-label="Operator Assistance">₹299.00</td>
+                    <td data-label="Total Estimated" class="tax-fee-total">₹299.00*</td>
                   </tr>
                   <tr>
-                    <td><strong>ITR-3 / ITR-4 (Business &amp; Professionals)</strong></td>
-                    <td>₹0.00 (Statutory Free)</td>
-                    <td>₹499.00</td>
-                    <td class="tax-fee-total">₹499.00*</td>
+                    <td data-label="Service Category"><strong>ITR-3 / ITR-4 (Business &amp; Professionals)</strong></td>
+                    <td data-label="Govt Portal Fee">₹0.00 (Statutory Free)</td>
+                    <td data-label="Operator Assistance">₹499.00</td>
+                    <td data-label="Total Estimated" class="tax-fee-total">₹499.00*</td>
                   </tr>
                   <tr>
-                    <td><strong>Income Tax Portal Registration / Login Support</strong></td>
-                    <td>₹0.00</td>
-                    <td>₹149.00</td>
-                    <td class="tax-fee-total">₹149.00*</td>
+                    <td data-label="Service Category"><strong>Income Tax Portal Registration / Login Support</strong></td>
+                    <td data-label="Govt Portal Fee">₹0.00</td>
+                    <td data-label="Operator Assistance">₹149.00</td>
+                    <td data-label="Total Estimated" class="tax-fee-total">₹149.00*</td>
                   </tr>
                   <tr>
-                    <td><strong>Form 26AS &amp; AIS / TIS Download</strong></td>
-                    <td>₹0.00</td>
-                    <td>₹99.00</td>
-                    <td class="tax-fee-total">₹99.00*</td>
+                    <td data-label="Service Category"><strong>Form 26AS &amp; AIS / TIS Download</strong></td>
+                    <td data-label="Govt Portal Fee">₹0.00</td>
+                    <td data-label="Operator Assistance">₹99.00</td>
+                    <td data-label="Total Estimated" class="tax-fee-total">₹99.00*</td>
                   </tr>
                   <tr>
-                    <td><strong>Income Tax Refund Status Check &amp; Re-issue</strong></td>
-                    <td>₹0.00</td>
-                    <td>₹99.00</td>
-                    <td class="tax-fee-total">₹99.00*</td>
+                    <td data-label="Service Category"><strong>Income Tax Refund Status Check &amp; Re-issue</strong></td>
+                    <td data-label="Govt Portal Fee">₹0.00</td>
+                    <td data-label="Operator Assistance">₹99.00</td>
+                    <td data-label="Total Estimated" class="tax-fee-total">₹99.00*</td>
                   </tr>
                   <tr>
-                    <td><strong>PAN–Aadhaar Link Status Verification</strong></td>
-                    <td>At Actuals (If penalty challan pending)</td>
-                    <td>₹99.00</td>
-                    <td class="tax-fee-total">₹99.00*</td>
+                    <td data-label="Service Category"><strong>PAN–Aadhaar Link Status Verification</strong></td>
+                    <td data-label="Govt Portal Fee">At Actuals (If penalty challan pending)</td>
+                    <td data-label="Operator Assistance">₹99.00</td>
+                    <td data-label="Total Estimated" class="tax-fee-total">₹99.00*</td>
                   </tr>
                 </tbody>
               </table>
@@ -2548,7 +2604,7 @@
 
     <div data-site-footer></div>
     
-    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+    <script src="https://unpkg.com/lucide@1.57.0/dist/umd/lucide.min.js" defer></script>
     <script src="assets/pilot-metrics.js?v=release-107" defer></script>
     <script src="assets/app.js?v=onemart-109" defer></script>
 

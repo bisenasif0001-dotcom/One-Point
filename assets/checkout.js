@@ -1194,7 +1194,15 @@
     const priceControl = document.querySelector('.mobile-cta-price-block');
     priceControl?.setAttribute('aria-haspopup', 'dialog');
     priceControl?.setAttribute('aria-controls', 'mobile-price-drawer');
-    window.addEventListener('resize', () => { if (innerWidth > 900 && drawer?.open) toggleMobilePriceDrawer(false); });
+    const focusCheckoutHeading = () => {
+      const heading = [...document.querySelectorAll('.wizard-step h2')].find(e => e.getClientRects().length);
+      if (heading) { heading.tabIndex = -1; heading.focus({ preventScroll: true }); heading.scrollIntoView({ block: 'center', behavior: 'instant' }); }
+    };
+    window.addEventListener('resize', () => {
+      if (innerWidth <= 900) return;
+      if (drawer?.open) toggleMobilePriceDrawer(false);
+      if (document.activeElement === document.body || document.activeElement === priceDrawerOpener) setTimeout(focusCheckoutHeading, 0);
+    });
     priceControl?.addEventListener('keydown', event => {
       if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); toggleMobilePriceDrawer(); }
     });
@@ -1206,7 +1214,16 @@
       if (history.state?.opdsCheckoutPrice) {
         const state = { ...history.state }; delete state.opdsCheckoutPrice; history.replaceState(state, '', location.href);
       }
-      if (document.activeElement === document.body || drawer.contains(document.activeElement)) priceDrawerOpener?.focus({ preventScroll: true });
+      if (innerWidth > 900) {
+        focusCheckoutHeading();
+        return;
+      }
+      if (document.activeElement === document.body || drawer.contains(document.activeElement)) {
+        const openerStyle = priceDrawerOpener && getComputedStyle(priceDrawerOpener);
+        const openerVisible = innerWidth <= 900 && priceDrawerOpener?.getClientRects().length && openerStyle?.display !== 'none' && openerStyle?.visibility !== 'hidden';
+        if (openerVisible) priceDrawerOpener.focus({ preventScroll: true });
+        else focusCheckoutHeading();
+      }
     });
     drawer?.addEventListener('click', event => {
       const rect = drawer.getBoundingClientRect();
@@ -1465,8 +1482,8 @@
       input.classList.remove("eds-input-valid");
       input.classList.add("eds-input-invalid");
     }
-    input.closest(".enterprise-field")?.classList.toggle("is-valid", valid);
-    input.closest(".enterprise-field")?.classList.toggle("is-invalid", !valid && input.value.trim().length > 0);
+    input.closest(".enterprise-field")?.classList.toggle("is-valid", valid && input.value.trim().length > 0);
+    input.closest(".enterprise-field")?.classList.toggle("is-invalid", !valid);
     updateFieldFeedback(input, valid);
     renderReviewStep();
     return valid;

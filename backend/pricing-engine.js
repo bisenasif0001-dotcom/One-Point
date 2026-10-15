@@ -222,7 +222,8 @@ const SERVICE_PRICING = Object.freeze({
   "e-pan-download": {
     subCategory: "Identity",
     pricingModel: PRICING_MODELS.ALL_INCLUSIVE,
-    operatorFee: 99,
+    governmentFee: 0,
+    operatorFee: 150,
     timeline: "Same day",
     requiredDocs: ["PAN number", "Aadhaar linked mobile"],
     description: "E-PAN download support with operator charge included."
@@ -230,11 +231,29 @@ const SERVICE_PRICING = Object.freeze({
   "card-reprint": {
     subCategory: "Identity",
     pricingModel: PRICING_MODELS.ALL_INCLUSIVE,
-    governmentFee: 50,
-    operatorFee: 99,
+    governmentFee: 0,
+    operatorFee: 100,
     timeline: "5-7 days",
     requiredDocs: ["Existing PAN", "Aadhaar card", "Mobile number"],
     description: "PAN card reprint assistance with final payable amount."
+  },
+  "pan-aadhaar-link": {
+    subCategory: "Identity",
+    pricingModel: PRICING_MODELS.ALL_INCLUSIVE,
+    governmentFee: 0,
+    operatorFee: 100,
+    timeline: "1-2 days",
+    requiredDocs: ["PAN card", "Aadhaar card", "Mobile number"],
+    description: "PAN-Aadhaar linking and status support with operator charge included."
+  },
+  "duplicate-pan-surrender": {
+    subCategory: "Identity",
+    pricingModel: PRICING_MODELS.ALL_INCLUSIVE,
+    governmentFee: 0,
+    operatorFee: 250,
+    timeline: "3-7 days",
+    requiredDocs: ["Multiple PAN details", "Aadhaar card", "AO letter details"],
+    description: "Duplicate PAN surrender guidance with drafting assistance included."
   },
   "ayushman-card": {
     subCategory: "Health",
@@ -750,8 +769,10 @@ function makeVariant(parentSlug, variantName, label, pricingModel, operatorFee, 
 const SERVICE_VARIANTS = Object.freeze([
   makeVariant("pan-card", "New PAN", "New PAN", PRICING_MODELS.ALL_INCLUSIVE, 113, { governmentFee: 107, timeline: "2-3 days", popular: true, homepageVisibility: true }),
   makeVariant("pan-card", "PAN Correction", "Correction", PRICING_MODELS.ALL_INCLUSIVE, 143, { governmentFee: 107, timeline: "2-3 days" }),
-  makeVariant("pan-card", "E-PAN Download", "E-PAN", PRICING_MODELS.ALL_INCLUSIVE, 99, { timeline: "Same day" }),
-  makeVariant("pan-card", "Card Reprint", "Reprint", PRICING_MODELS.ALL_INCLUSIVE, 99, { governmentFee: 50, timeline: "5-7 days" }),
+  makeVariant("pan-card", "E-PAN Download", "E-PAN", PRICING_MODELS.ALL_INCLUSIVE, 150, { governmentFee: 0, timeline: "Same day" }),
+  makeVariant("pan-card", "Card Reprint", "Reprint", PRICING_MODELS.ALL_INCLUSIVE, 100, { governmentFee: 0, timeline: "5-7 days" }),
+  makeVariant("pan-card", "PAN-Aadhaar Link", "PAN Link", PRICING_MODELS.ALL_INCLUSIVE, 100, { variantSlug: "pan-aadhaar-link", governmentFee: 0, timeline: "1-2 days" }),
+  makeVariant("pan-card", "Duplicate PAN Surrender", "Surrender", PRICING_MODELS.ALL_INCLUSIVE, 250, { variantSlug: "duplicate-pan-surrender", governmentFee: 0, timeline: "3-7 days" }),
 
   makeVariant("bus-ticket", "Bus Ticket One Way", "One Way", PRICING_MODELS.SERVICE_PLUS_ACTUAL, 49, { customerPriceNote: "Actual bus fare is payable as per selected route." }),
   makeVariant("bus-ticket", "Bus Ticket Round", "Round Trip", PRICING_MODELS.SERVICE_PLUS_ACTUAL, 79, { customerPriceNote: "Actual bus fare is payable as per selected route." }),

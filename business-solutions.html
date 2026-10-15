@@ -1933,18 +1933,43 @@
         .biz-matrix-top-bar { align-items: flex-start; flex-direction: column; }
         .biz-matrix-tabs { width: 100%; }
       }
-      @media (max-width: 680px) {
+      @media (max-width: 768px) {
         .biz-matrix-top-bar { padding: 16px; }
-        .biz-matrix-tabs { overflow-x: auto; flex-wrap: nowrap; justify-content: flex-start; }
-        .biz-mtab-btn { white-space: nowrap; }
+        .biz-matrix-tabs { overflow-x: auto; flex-wrap: nowrap; justify-content: flex-start; -webkit-overflow-scrolling: touch; }
+        .biz-mtab-btn { white-space: nowrap; min-height: 40px; }
         .biz-mtab-badge { display: none; }
-        .biz-matrix-table { min-width: 620px; }
-        .biz-matrix-table th, .biz-matrix-row td { padding: 14px 15px; }
-        .biz-matrix-footer { padding: 16px; }
-        .biz-mtrust-strip { gap: 10px 14px; }
+        .biz-matrix-table-wrap { overflow-x: visible; }
+        .biz-matrix-table { display: block; width: 100%; min-width: 0 !important; }
+        .biz-matrix-table thead { display: none; }
+        .biz-matrix-table tbody { display: grid; gap: 14px; }
+        .biz-matrix-row {
+          display: flex; flex-direction: column;
+          background: #ffffff; border: 1.5px solid #d5e2ee;
+          border-radius: 14px; padding: 14px; gap: 10px;
+          box-shadow: 0 2px 10px rgba(15, 23, 42, 0.04);
+        }
+        .biz-matrix-row td {
+          display: block; padding: 0 !important;
+          border: none !important; width: 100%; box-sizing: border-box;
+        }
+        .biz-matrix-row td.col-param {
+          border-bottom: 1px solid #e8eff5 !important; padding-bottom: 8px !important;
+        }
+        .biz-matrix-row td.col-unassisted {
+          background: #fffafa !important; border: 1px solid #fee2e2 !important;
+          border-radius: 10px; padding: 10px !important;
+        }
+        .biz-matrix-row td.col-assisted {
+          background: #f0f7ff !important; border: 1.5px solid #bfdbfe !important;
+          border-radius: 10px; padding: 10px !important;
+        }
+        .biz-matrix-footer { padding: 16px; flex-direction: column; gap: 14px; align-items: stretch; }
+        .biz-mtrust-strip { gap: 10px 14px; justify-content: center; }
         .biz-mtrust-item { font-size: .76rem; }
-        .biz-mcta-group { width: 100%; }
-        .biz-mcta-primary, .biz-mcta-whatsapp { flex: 1; justify-content: center; padding: 0 10px; }
+        .biz-mcta-group { width: 100%; flex-direction: column; gap: 8px; }
+        .biz-mcta-primary, .biz-mcta-whatsapp {
+          width: 100%; min-height: 44px; justify-content: center; padding: 0 16px;
+        }
       }
 
       /* ── 5. How Registration Works (Connected Timeline) ──────────── */
@@ -3214,7 +3239,7 @@
       <header class="site-header fallback-site-header">
         <nav class="nav-bar" aria-label="Primary fallback">
           <a class="brand" href="index.html" aria-label="One Point Digital Services home">
-            <img class="brand-logo brand-logo-header" src="assets/logo-bisen-one-point-footer.svg" alt="Bisen One Point Suvidha Kendra">
+            <img class="brand-logo brand-logo-header" src="assets/logo-bisen-one-point-footer.svg" alt="Bisen One Point Suvidha Kendra" width="160" height="40">
           </a>
           <div class="fallback-nav-links">
             <a class="nav-link" href="index.html">Home</a>
@@ -4118,7 +4143,7 @@
             <!-- Right: Smart Pre-Audit & Help Assistant Card -->
             <div class="biz-doc-helper-card">
               <div class="biz-doc-helper-top">
-                <span class="biz-doc-helper-badge"><i data-lucide="shield-check" style="width:12px;height:12px;"></i> Zero-Rejection Guarantee</span>
+                <span class="biz-doc-helper-badge"><i data-lucide="shield-check" style="width:12px;height:12px;"></i> Pre-Filing Document Audit</span>
                 <h3>Free Document Pre-Audit in 30 Mins</h3>
                 <p>Avoid departmental objections, resubmission delays, and notice queries with our expert checklist review.</p>
                 <ul class="biz-doc-helper-checklist">
@@ -4284,7 +4309,7 @@
             <div class="biz-cmp-footer">
               <div class="biz-cmp-footer-cell left">
                 <i data-lucide="check-circle-2"></i>
-                <span>100% Assisted Error-Free Guarantee prior to portal submission</span>
+                <span>100% Assisted Pre-Filing Quality Check prior to portal submission</span>
               </div>
               <div class="biz-cmp-footer-mid"></div>
               <div class="biz-cmp-footer-cell right">
@@ -4715,7 +4740,7 @@
     </main>
 
     <div data-site-footer></div>
-    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+    <script src="https://unpkg.com/lucide@1.57.0/dist/umd/lucide.min.js" defer></script>
     <script src="assets/pilot-metrics.js?v=release-107" defer></script>
     <script src="assets/app.js?v=onemart-109" defer></script>
 
@@ -4859,12 +4884,12 @@
             },
             {
               param: 'Fee Protection Policy',
-              paramSub: 'Citizen guarantee',
+              paramSub: 'Cancellation policy',
               icon: 'shield-alert',
               unassistedTitle: 'No Refund Policy',
               unassistedDesc: 'Zero refund if application fails or if service cannot be processed.',
-              assistedTitle: '100% Assistance Refund Guarantee',
-              assistedDesc: '100% full assistance fee refund guarantee if request is not initiated on portal.'
+              assistedTitle: '100% Pre-Filing Refund Policy',
+              assistedDesc: '100% full assistance fee refund if request is cancelled before portal initiation.'
             }
           ],
           quality: [
@@ -4903,8 +4928,8 @@
               icon: 'clock',
               unassistedTitle: 'Uncertain Timelines & Delays',
               unassistedDesc: 'No committed timeline, unpredictable backlog, and endless waiting without updates.',
-              assistedTitle: 'Guaranteed Priority SLA Dispatch',
-              assistedDesc: 'Fast-track same-day or committed working-day SLA with milestone tracking & prompt submission.'
+              assistedTitle: 'Priority SLA Dispatch Desk',
+              assistedDesc: 'Fast-track same-day or scheduled working-day processing with milestone tracking & prompt submission.'
             },
             {
               param: 'Application Tracking & Live Alerts',
@@ -4935,11 +4960,11 @@
                   </div>
                 </div>
               </td>
-              <td class="col-unassisted">
+              <td class="col-unassisted" data-label="Unassisted DIY">
                 <div class="biz-mc-tag danger"><i data-lucide="x-circle"></i> ${r.unassistedTitle}</div>
                 <p class="biz-mc-desc">${r.unassistedDesc}</p>
               </td>
-              <td class="col-assisted">
+              <td class="col-assisted" data-label="One Point Assisted">
                 <div class="biz-mc-tag success"><i data-lucide="check-circle-2"></i> ${r.assistedTitle}</div>
                 <p class="biz-mc-desc">${r.assistedDesc}</p>
               </td>

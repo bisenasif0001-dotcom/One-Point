@@ -2688,7 +2688,8 @@ const serviceRoutes = {
   "PAN Card": "service-pan-card.html",
   "PAN Card Assistance": "service-pan-card.html",
   "Citizen Security Assistance": "service-citizen-security-cybercrime-police-help.html",
-  "Ayushman Card": "service-citizen-security-cybercrime-police-help.html",
+  "Ayushman Card": "online-services.html#welfare",
+  "Police Verification": "service-citizen-security-cybercrime-police-help.html",
   "Citizen Security, Cybercrime & Police Help": "service-citizen-security-cybercrime-police-help.html",
   "Voter ID": "service-voter-id.html",
   "Voter ID Card": "service-voter-id.html",
@@ -2868,7 +2869,9 @@ const searchIndex = [
   { term: "gst registration gst number goods services tax", title: "GST Registration", href: "service-gst-registration.html" },
   { term: "resume builder cv job application internship", title: "Resume Builder", href: "edupoint.html#resume" },
   { term: "onemart printing stickers mugs tshirt gifts branding", title: "OneMart Printing Store", href: "products.html#onemart-catalog" },
-  { term: "ayushman card health card pmjay citizen security cybercrime police help", title: "Citizen Security, Cybercrime & Police Help", href: "service-citizen-security-cybercrime-police-help.html" },
+  { term: "citizen security cybercrime police help tenant verification character certificate ldr lost article", title: "Citizen Security, Cybercrime & Police Help", href: "service-citizen-security-cybercrime-police-help.html" },
+  { term: "ayushman card health card pmjay golden card free medical treatment hospital 5 lakh", title: "Ayushman Bharat Golden Card", href: "online-services.html#welfare" },
+  { term: "police verification pcc tenant verification domestic worker servant verification character", title: "Police Verification Assistance", href: "service-citizen-security-cybercrime-police-help.html" },
   { term: "bus ticket train ticket flight ticket hotel booking tour", title: "Travel Services", href: "travel-services.html" },
   { term: "voter id election card voter registration", title: "Voter ID", href: "service-voter-id.html" },
   { term: "passport passport form passport appointment", title: "Passport Assistance", href: "service-passport-assistance.html" },
@@ -2879,10 +2882,10 @@ const searchIndex = [
   { term: "pension welfare family id e-shram jeevan pramaan atal pension", title: "Pension & Welfare Schemes", href: "service-pension-welfare-schemes-assistance.html" },
   { term: "msme udyam registration small business", title: "MSME Registration", href: "service-business-registration-corporate-setup.html" },
   { term: "legal drafting court services affidavit agreement gazette notary rent agreement sale deed partnership deed nda", title: "Legal Drafting & Court Services Assistance", href: "service-legal-drafting-court-services.html" },
-  { term: "fssai food license food business", title: "FSSAI Registration", href: "service-fssai-license.html" },
-  { term: "shop license dukaan license trade license", title: "Shop License", href: "service-shop-license.html" },
-  { term: "trademark brand registration tm", title: "Trademark", href: "service-trademark-registration.html" },
-  { term: "company registration pvt ltd startup private limited", title: "Company Registration", href: "service-company-registration.html" },
+  { term: "fssai food license food business", title: "FSSAI Registration", href: "service-business-registration-corporate-setup.html" },
+  { term: "shop license dukaan license trade license", title: "Shop License", href: "service-business-registration-corporate-setup.html" },
+  { term: "trademark brand registration tm", title: "Trademark", href: "service-business-registration-corporate-setup.html" },
+  { term: "company registration pvt ltd startup private limited", title: "Company Registration", href: "service-business-registration-corporate-setup.html" },
   { term: "logo design logo banana brand logo", title: "Logo Design", href: "design-services.html#logo-design" },
   { term: "flex design banner design print", title: "Flex / Banner Design", href: "design-services.html#flex-design" },
   { term: "visiting card business card", title: "Visiting Card", href: "design-services.html#visiting-card" },
@@ -2902,7 +2905,7 @@ const searchIndex = [
   { term: "insurance pmsby pmjjby jeevan jyoti", title: "Insurance", href: "online-services.html" },
   { term: "photocopy print lamination scan xerox", title: "Print & Scan", href: "print-scan.html" },
   { term: "tour package yatra travel package", title: "Tour Package", href: "travel-services.html#tour-package" },
-  { term: "iec code import export trading", title: "IEC Code", href: "service-iec-code.html" },
+  { term: "iec code import export trading", title: "IEC Code", href: "service-business-registration-corporate-setup.html" },
   { term: "logo sticker waterproof sticker vinyl holographic label packaging print", title: "Sticker Printing", href: "products.html#sticker-printing" },
   { term: "uv dtf cup bottle glass acrylic name plate logo transfer branding", title: "UV DTF Printing", href: "products.html#uv-dtf-printing" },
   { term: "custom tshirt t shirt hoodie polo couple dtf transfer", title: "T-Shirt Printing", href: "products.html#t-shirt-printing" },
@@ -3321,7 +3324,7 @@ function renderNav() {
         <div class="top-contact-inner">
           <div class="top-contact-links">
             <a href="${siteConfig.phoneHref}" class="top-contact-link">${icon("phone", 14)} ${siteConfig.phone}</a>
-            <a href="${siteConfig.whatsapp}" target="_blank" class="top-contact-link">${icon("message-circle", 14)} WhatsApp</a>
+            <a href="${siteConfig.whatsapp}" target="_blank" rel="noopener noreferrer" class="top-contact-link">${icon("message-circle", 14)} WhatsApp</a>
             <a href="mailto:${siteConfig.email}" class="top-contact-link hide-mobile-sm">${icon("mail", 14)} ${siteConfig.email}</a>
           </div>
           <div class="top-contact-links hide-mobile-sm top-hours">
@@ -3802,9 +3805,9 @@ function renderFooter() {
               <span>${icon("clock", 16)} ${siteConfig.hours}</span>
             </div>
             <div class="footer-actions">
-              <a class="btn footer-pill" href="${siteConfig.whatsapp}" target="_blank">${icon("message-circle", 18)} Chat on WhatsApp</a>
-              <a class="btn footer-pill" href="${siteConfig.mapUrl}" target="_blank">${icon("map", 18)} View Location on Google Maps</a>
-              ${launchConfig.razorpayPaymentLink ? `<a class="btn footer-pill" href="${launchConfig.razorpayPaymentLink}" target="_blank" rel="noopener">${icon("shield-check", 18)} Pay Online Securely</a>` : ""}
+              <a class="btn footer-pill" href="${siteConfig.whatsapp}" target="_blank" rel="noopener noreferrer">${icon("message-circle", 18)} Chat on WhatsApp</a>
+              <a class="btn footer-pill" href="${siteConfig.mapUrl}" target="_blank" rel="noopener noreferrer">${icon("map", 18)} View Location on Google Maps</a>
+              ${launchConfig.razorpayPaymentLink ? `<a class="btn footer-pill" href="${launchConfig.razorpayPaymentLink}" target="_blank" rel="noopener noreferrer">${icon("shield-check", 18)} Pay Online Securely</a>` : ""}
             </div>
           </div>
           <div class="footer-map-card">
@@ -3850,7 +3853,7 @@ function renderFooter() {
               <a href="about.html">About One Point</a>
               <a href="faq.html">FAQ</a>
               <a href="contact.html">Contact Us</a>
-              <a href="${siteConfig.whatsapp}" target="_blank">WhatsApp Help</a>
+              <a href="${siteConfig.whatsapp}" target="_blank" rel="noopener noreferrer">WhatsApp Help</a>
             </div>
           </div>
           <div>
@@ -3960,6 +3963,7 @@ function setupMobileNav() {
   syncMenuModality();
   const setOpen = (open, fromHistory = false) => {
     const wasOpen = menu.classList.contains('open');
+    const focusWasInside = menu.contains(document.activeElement);
     if (mobileLayout() && open && !wasOpen && !fromHistory) history.pushState({ ...history.state, opdsMobileMenu: true }, '', location.href);
     if (!open && history.state?.opdsMobileMenu && !fromHistory) {
       const state = { ...history.state }; delete state.opdsMobileMenu;
@@ -3975,7 +3979,7 @@ function setupMobileNav() {
       const scrollable = menu.querySelector(".mobile-nav-menu");
       if (scrollable) scrollable.scrollTop = 0;
       if (mobileLayout()) closeBtn?.focus({ preventScroll: true });
-    } else if (wasOpen && (mobileLayout() || menu.contains(document.activeElement))) toggle.focus({ preventScroll: true });
+    } else if (wasOpen && (mobileLayout() || focusWasInside)) toggle.focus({ preventScroll: true });
   };
   const layoutQuery = window.matchMedia(document.body.id === 'homepage-body' ? '(max-width: 1180px)' : '(max-width: 980px)');
   layoutQuery.addEventListener('change', () => {
@@ -5135,8 +5139,9 @@ function setupTracker() {
       if (deliv.type === "pdf" || deliv.id === "invoice") icon = "receipt";
       if (deliv.type === "certificate") icon = "award";
 
-      const btnHtml = deliv.available && deliv.downloadUrl
-        ? `<a href="${escapeHtml(deliv.downloadUrl)}" target="_blank" class="deliverable-btn-sm active"><i data-lucide="download" style="width:11px;height:11px;"></i> Download</a>`
+      const isSafeDownload = Boolean(deliv.available && deliv.downloadUrl && /^(https?:\/\/|\/(?!\/))/i.test(deliv.downloadUrl));
+      const btnHtml = isSafeDownload
+        ? `<a href="${escapeHtml(deliv.downloadUrl)}" target="_blank" rel="noopener noreferrer" class="deliverable-btn-sm active"><i data-lucide="download" style="width:11px;height:11px;"></i> Download</a>`
         : (deliv.action === "print_slip"
           ? `<button type="button" onclick="window.print()" class="deliverable-btn-sm active"><i data-lucide="printer" style="width:11px;height:11px;"></i> Print</button>`
           : `<span class="deliverable-btn-sm locked"><i data-lucide="lock" style="width:10px;height:10px;"></i> Locked</span>`);
@@ -5455,7 +5460,7 @@ function setupTracker() {
   renderRecentTrackingList();
 
   const params = new URLSearchParams(window.location.search);
-  const initialTrackingNumber = params.get("id") || params.get("order") || params.get("tracking") || params.get("order_id") || "";
+  const initialTrackingNumber = params.get("id") || params.get("order") || params.get("tracking") || params.get("order_id") || params.get("ref") || "";
   if (initialTrackingNumber && input) {
     input.value = initialTrackingNumber;
     trackApplication(initialTrackingNumber, { silent: false });
@@ -5547,12 +5552,31 @@ function setupSearch() {
   const input = document.querySelector("[data-ai-search]");
   const suggestions = document.querySelector("[data-ai-suggestions]");
   if (!input || !suggestions) return;
+  suggestions.id ||= 'service-search-suggestions';
+  suggestions.setAttribute('role', 'listbox');
+  suggestions.setAttribute('aria-label', 'Service suggestions');
+  input.setAttribute('role', 'combobox');
+  input.setAttribute('aria-autocomplete', 'list');
+  input.setAttribute('aria-controls', suggestions.id);
+  input.setAttribute('aria-expanded', 'false');
+  const searchStatus = document.createElement('span');
+  searchStatus.className = 'sr-only';
+  searchStatus.setAttribute('role', 'status');
+  searchStatus.setAttribute('aria-live', 'polite');
+  input.after(searchStatus);
+  const closeSuggestions = () => {
+    suggestions.classList.remove('show');
+    input.setAttribute('aria-expanded', 'false');
+    input.removeAttribute('aria-activedescendant');
+  };
+  const searchEscape = value => { const span = document.createElement('span'); span.textContent = value; return span.innerHTML; };
 
   let activeIndex = -1;
 
   // Popular defaults shown when input is empty / focused blank
   const popularSuggestions = [
     "PAN Card Apply",
+    "Ayushman Bharat Golden Card",
     "GST Registration",
     "Aadhaar Services Assistance",
     "Legal Drafting & Court Services Assistance",
@@ -5584,6 +5608,8 @@ function setupSearch() {
   function suggestionSubtitle(item) {
     const t = item.title;
     if (/pan/i.test(t)) return "Apply, correction, e-PAN and reprint support";
+    if (/ayushman/i.test(t)) return "PM-JAY health card check, KYC verification & print";
+    if (/police|security|cybercrime/i.test(t)) return "Police verification, Cybercrime reporting & LDR assistance";
     if (/aadhaar|aadhar/i.test(t)) return "Enrolment, update, PVC card and corrections";
     if (/voter/i.test(t)) return "Voter ID registration and correction support";
     if (/passport/i.test(t)) return "Fresh, renewal and Tatkal passport assistance";
@@ -5664,7 +5690,7 @@ function setupSearch() {
 
     if (items.length === 0) {
       suggestions.innerHTML = `
-        <div class="srch-section-label">No results for &ldquo;${query}&rdquo;</div>
+        <div class="srch-section-label">No results for &ldquo;${searchEscape(query)}&rdquo;</div>
         <a href="services.html" data-suggestion-idx="0">
           <span>
             <strong>Browse all services</strong>
@@ -5709,6 +5735,16 @@ function setupSearch() {
     }
 
     suggestions.classList.add("show");
+    input.setAttribute('aria-expanded', 'true');
+    input.removeAttribute('aria-activedescendant');
+    suggestions.querySelectorAll('a[data-suggestion-idx]').forEach((option, index) => {
+      option.id = suggestions.id + '-option-' + index;
+      option.setAttribute('role', 'option');
+      option.setAttribute('aria-selected', 'false');
+      option.tabIndex = -1;
+    });
+    const countMessage = items.length ? items.length + ' service suggestions.' : 'No matching services. Browse services or contact support.';
+    if (searchStatus.textContent !== countMessage) searchStatus.textContent = countMessage;
     if (window.lucide) window.lucide.createIcons();
   }
 
@@ -5742,22 +5778,30 @@ function setupSearch() {
       const target = activeIndex >= 0 ? links[activeIndex] : links[0];
       if (target) target.click();
     } else if (e.key === "Escape") {
-      suggestions.classList.remove("show");
-      input.blur();
+      e.preventDefault();
+      activeIndex = -1;
+      closeSuggestions();
+      input.focus({ preventScroll: true });
     }
   });
 
   function updateActive(links) {
     links.forEach((link, idx) => {
       link.classList.toggle("active", idx === activeIndex);
+      link.setAttribute('aria-selected', String(idx === activeIndex));
       if (idx === activeIndex) link.scrollIntoView({ block: "nearest" });
     });
+    if (links[activeIndex]) input.setAttribute('aria-activedescendant', links[activeIndex].id);
+    else input.removeAttribute('aria-activedescendant');
   }
+  input.addEventListener('blur', () => setTimeout(() => {
+    if (!suggestions.contains(document.activeElement)) closeSuggestions();
+  }, 0));
 
   // Close when clicking outside
   document.addEventListener("click", (e) => {
     if (!input.closest(".hos-search").contains(e.target)) {
-      suggestions.classList.remove("show");
+      closeSuggestions();
     }
   });
 
@@ -6430,7 +6474,7 @@ function renderProductDetail() {
   const slug = params.get("product") || root.dataset.productSlug || oneMartProducts[0]?.slug;
   const product = productBySlug(slug);
   if (!product) {
-    root.innerHTML = '<section class="section" style="text-align:center;padding:64px 24px;"><p class="section-kicker">OneMart</p><h1>Product not found.</h1><p style="color:#64748b;">This product may have been removed or the link is invalid.</p><a class="btn btn-primary" href="products.html">Browse All Products</a></section>';
+    root.innerHTML = '<section class="section" style="text-align:center;padding:64px 24px;"><p class="section-kicker">OnePoint Suvidha</p><h1>Product not found.</h1><p style="color:#64748b;">This product may have been removed or the link is invalid.</p><a class="btn btn-primary" href="products.html">Browse All Products</a></section>';
     return;
   }
 
@@ -7361,11 +7405,11 @@ function renderCartDrawer() {
         <button class="icon-button" type="button" data-cart-close aria-label="Close cart">${icon("x", 18)}</button>
       </div>
       <div class="cart-items" data-cart-items></div>
-      <div class="cart-total">
+      <div class="cart-total" data-cart-total-section style="display: none;">
         <span>Estimated total</span>
         <strong data-cart-total>Rs. 0</strong>
       </div>
-      <a class="btn btn-primary" href="checkout.html" data-cart-checkout>${icon("credit-card", 18)} Checkout</a>
+      <a class="btn btn-primary" href="checkout.html" data-cart-checkout style="display: none;" aria-disabled="true">${icon("credit-card", 18)} Checkout</a>
     </aside>
   `;
   document.body.appendChild(drawer);
@@ -7385,6 +7429,7 @@ function refreshCartDrawer() {
   const cart = getCart();
   const itemsRoot = document.querySelector("[data-cart-items]");
   const totalRoot = document.querySelector("[data-cart-total]");
+  const totalSection = document.querySelector("[data-cart-total-section]");
   const checkout = document.querySelector("[data-cart-checkout]");
   if (!itemsRoot || !totalRoot || !checkout) return;
 
@@ -7393,8 +7438,8 @@ function refreshCartDrawer() {
     .filter((item) => item.product);
   const total = enriched.reduce((sum, item) => sum + item.product.price * item.quantity, 0);
 
-  itemsRoot.innerHTML = enriched.length
-    ? enriched.map((item) => `
+  if (enriched.length) {
+    itemsRoot.innerHTML = enriched.map((item) => `
       <div class="cart-item">
         <img src="${item.product.images[0]}" alt="${item.product.name}" loading="lazy" decoding="async">
         <div>
@@ -7403,11 +7448,33 @@ function refreshCartDrawer() {
         </div>
         <button type="button" data-remove-cart="${item.product.slug}" aria-label="Remove ${item.product.name}">${icon("trash-2", 16)}</button>
       </div>
-    `).join("")
-    : `<p class="cart-empty">Cart is empty. Add products from OneMart.</p>`;
-
-  totalRoot.textContent = `Rs. ${total}`;
-  checkout.href = "checkout.html";
+    `).join("");
+    totalRoot.textContent = `Rs. ${total}`;
+    if (totalSection) totalSection.style.display = "";
+    checkout.style.display = "";
+    checkout.removeAttribute("aria-disabled");
+    checkout.href = "checkout.html";
+  } else {
+    itemsRoot.innerHTML = `
+      <div class="cart-empty-state">
+        <div class="cart-empty-icon-wrap">
+          <div class="cart-empty-icon">${icon("shopping-bag", 28)}</div>
+        </div>
+        <strong>Your Cart is Empty</strong>
+        <p>Explore authorized government, citizen, and business services to get started.</p>
+        <div class="cart-empty-chips">
+          <a href="services.html" class="cart-empty-chip" data-cart-close>${icon("file-text", 13)} Govt Services</a>
+          <a href="services.html" class="cart-empty-chip" data-cart-close>${icon("graduation-cap", 13)} Student Services</a>
+          <a href="business-solutions.html" class="cart-empty-chip" data-cart-close>${icon("briefcase", 13)} Business Solutions</a>
+        </div>
+        <a class="btn btn-primary cart-browse-btn" href="services.html" data-cart-close>${icon("compass", 16)} Browse All Services</a>
+      </div>
+    `;
+    totalRoot.textContent = `Rs. 0`;
+    if (totalSection) totalSection.style.display = "none";
+    checkout.style.display = "none";
+    checkout.setAttribute("aria-disabled", "true");
+  }
   if (window.lucide) window.lucide.createIcons();
 }
 
@@ -7428,6 +7495,9 @@ function hideCartDrawer() {
   document.querySelector('[data-cart-drawer]')?.setAttribute('inert', '');
   if (cartDrawerOpener?.isConnected) cartDrawerOpener.focus({ preventScroll: true });
 }
+window.refreshCartDrawer = refreshCartDrawer;
+window.showCartDrawer = showCartDrawer;
+window.hideCartDrawer = hideCartDrawer;
 
 function showCartToast(message) {
   let toast = document.querySelector("[data-cart-toast]");
@@ -7445,6 +7515,7 @@ function showCartToast(message) {
 
 function setupOneMartInteractions() {
   renderCartDrawer();
+  refreshCartDrawer();
   updateCartCount();
 
   const rotators = [...document.querySelectorAll("[data-rotating-product]")].map((img) => {
@@ -7482,9 +7553,12 @@ function setupOneMartInteractions() {
       return;
     }
 
-    if (event.target.closest("[data-cart-close]")) {
-      event.preventDefault();
+    const closeBtn = event.target.closest("[data-cart-close]");
+    if (closeBtn) {
       hideCartDrawer();
+      if (!closeBtn.hasAttribute("href")) {
+        event.preventDefault();
+      }
       return;
     }
 
@@ -8703,7 +8777,7 @@ function defaultApplyServiceForPage() {
     "service-domicile-certificate.html": "Learner’s Licence Online Application Support",
     "service-caste-certificate.html": "Caste Certificate",
     "service-pension-welfare-schemes-assistance.html": "Pension & Welfare Schemes",
-    "service-police-verification.html": "Pension & Welfare Schemes",
+    "service-police-verification.html": "Citizen Security, Cybercrime & Police Help",
     "online-services.html": "Ayushman Card",
     "business-solutions.html": "GST Registration",
     "service-gst-registration.html": "GST New Registration Support",
@@ -10297,7 +10371,7 @@ function setupResponsiveDiscovery() {
   const home = document.querySelector('#homepage-body .hero-v3-shell');
   const hero = document.querySelector('.public-hero-home-system');
   const directory = document.body.classList.contains('mobile-directory-ready');
-  const host = home || (directory ? document.querySelector('#find-service .shub-search-toolbar') : hero?.querySelector('.page-hero-grid'));
+  const host = directory ? document.querySelector('#find-service .shub-search-toolbar') : hero?.querySelector('.page-hero-grid');
   const categories = directory && document.querySelector('#find-service .shub-container > .mobile-service-disclosure');
   const categorySlot = categories && document.createComment('category controls position');
   if (categories) { categories.before(categorySlot); categories.classList.add('discovery-categories'); }
@@ -12933,7 +13007,7 @@ function injectEnterpriseComparisonTable(isDetailPage) {
       <div class="ect-tab-header">
         <div class="ect-tab-nav" role="tablist" aria-label="Comparison Categories">
           ${comparisonCategories.map((cat, idx) => `
-            <button class="ect-tab-btn ${idx === 0 ? "active" : ""}" data-ect-tab="${cat.id}" type="button" role="tab" aria-selected="${idx === 0 ? "true" : "false"}">
+            <button class="ect-tab-btn ${idx === 0 ? "active" : ""}" data-ect-tab="${cat.id}" type="button" role="tab" id="${cat.id}-tab" aria-controls="${cat.id}" aria-selected="${idx === 0 ? "true" : "false"}" tabindex="${idx === 0 ? "0" : "-1"}">
               <i data-lucide="${cat.icon}"></i>
               <span>${cat.label}</span>
               <span class="ect-tab-pill">${cat.count}</span>
@@ -12944,7 +13018,7 @@ function injectEnterpriseComparisonTable(isDetailPage) {
 
       <!-- Tab Panels -->
       ${comparisonCategories.map((cat, idx) => `
-        <div class="ect-tab-panel ${idx === 0 ? "active" : ""}" id="${cat.id}" role="tabpanel">
+        <div class="ect-tab-panel ${idx === 0 ? "active" : ""}" id="${cat.id}" role="tabpanel" aria-labelledby="${cat.id}-tab">
           <div class="enterprise-comparison-table" role="table" aria-label="${cat.label} Comparison">
             <div class="ect-head-row" role="row">
               <span role="columnheader" class="ect-th-param">Service Parameter</span>
@@ -12996,19 +13070,34 @@ function injectEnterpriseComparisonTable(isDetailPage) {
   // Attach interactive tab click handler
   const tabBtns = comparison.querySelectorAll(".ect-tab-btn");
   const tabPanels = comparison.querySelectorAll(".ect-tab-panel");
-  tabBtns.forEach(btn => {
-    btn.addEventListener("click", () => {
+  const activateComparisonTab = (btn, moveFocus = false) => {
       const target = btn.getAttribute("data-ect-tab");
       tabBtns.forEach(b => {
         b.classList.remove("active");
         b.setAttribute("aria-selected", "false");
+        b.tabIndex = -1;
       });
       tabPanels.forEach(p => p.classList.remove("active"));
       btn.classList.add("active");
       btn.setAttribute("aria-selected", "true");
+      btn.tabIndex = 0;
       const activePanel = comparison.querySelector(`#${target}`);
       if (activePanel) activePanel.classList.add("active");
       if (window.lucide) window.lucide.createIcons();
+      if (moveFocus) btn.focus();
+  };
+  tabBtns.forEach((btn, index) => {
+    btn.addEventListener("click", () => activateComparisonTab(btn));
+    btn.addEventListener("keydown", event => {
+      const lastIndex = tabBtns.length - 1;
+      let nextIndex = null;
+      if (event.key === "ArrowRight") nextIndex = index === lastIndex ? 0 : index + 1;
+      if (event.key === "ArrowLeft") nextIndex = index === 0 ? lastIndex : index - 1;
+      if (event.key === "Home") nextIndex = 0;
+      if (event.key === "End") nextIndex = lastIndex;
+      if (nextIndex === null) return;
+      event.preventDefault();
+      activateComparisonTab(tabBtns[nextIndex], true);
     });
   });
 
@@ -13045,10 +13134,13 @@ function setupMegaMenuTabs() {
   const containers = document.querySelectorAll(".onemart-mega");
   if (!containers.length) return;
 
-  containers.forEach((container) => {
+  containers.forEach((container, containerIndex) => {
     const sidebarItems = container.querySelectorAll(".mega-sidebar-item");
     const contentPanel = container.querySelector(".mega-content-panel");
     if (!sidebarItems.length || !contentPanel) return;
+    contentPanel.id ||= 'nav-category-preview-' + containerIndex;
+    contentPanel.setAttribute('role', 'region');
+    contentPanel.setAttribute('aria-label', 'Service category preview');
 
     let hoverTimer = null;
 
@@ -13149,10 +13241,10 @@ function setupMegaMenuTabs() {
       sidebarItems.forEach((item, idx) => {
         if (idx === targetIdx) {
           item.classList.add("active");
-          item.setAttribute("aria-selected", "true");
+          item.setAttribute("aria-expanded", "true");
         } else {
           item.classList.remove("active");
-          item.setAttribute("aria-selected", "false");
+          item.setAttribute("aria-expanded", "false");
         }
       });
 
@@ -13184,7 +13276,10 @@ function setupMegaMenuTabs() {
 
     // Add event listeners for hover, focus, and click
     sidebarItems.forEach(item => {
-      item.setAttribute("role", "tab");
+      item.removeAttribute('role');
+      item.removeAttribute('aria-selected');
+      item.setAttribute('aria-controls', contentPanel.id);
+      item.setAttribute('aria-expanded', String(item.classList.contains('active')));
 
       item.addEventListener("pointerenter", () => {
         const idx = item.getAttribute("data-sidebar-idx");
@@ -13276,20 +13371,11 @@ setupLucide();
 if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded',setupResponsiveDiscovery,{once:true});
 else setupResponsiveDiscovery();
 
-// Release the first paint only after the current shared layout and dynamic
-// components have replaced their legacy HTML fallbacks.
+// Release the first paint immediately once the current shared layout and dynamic
+// components have replaced their legacy HTML fallbacks, without delaying for fonts.
 if (typeof window.__OPDS_REVEAL_INITIAL_RENDER__ === "function") {
   const revealInitialRender = window.__OPDS_REVEAL_INITIAL_RENDER__;
-  const revealAfterFonts = () => window.requestAnimationFrame(revealInitialRender);
-
-  if (document.fonts?.status === "loading") {
-    Promise.race([
-      document.fonts.ready,
-      new Promise((resolve) => window.setTimeout(resolve, 400))
-    ]).then(revealAfterFonts, revealAfterFonts);
-  } else {
-    revealAfterFonts();
-  }
+  window.requestAnimationFrame(revealInitialRender);
 }
 
 fetchWebsiteCatalog().then(hydrateCatalogPriceLabels).catch(() => {});
@@ -13407,13 +13493,36 @@ function setupBentoSwitcher() {
   document.body.appendChild(btn);
   const reserveSupportSpace = () => {
     const bounds = btn.getBoundingClientRect();
-    const visible = innerWidth > 768 && bounds.height > 0 && getComputedStyle(btn).position === 'fixed';
+    const visible = innerWidth >= 768 && bounds.height > 0 && getComputedStyle(btn).position === 'fixed';
     if (visible) document.body.style.setProperty('--support-float-width', Math.ceil(bounds.width + 24) + 'px');
     else document.body.style.removeProperty('--support-float-width');
   };
   if (window.ResizeObserver) new ResizeObserver(reserveSupportSpace).observe(btn);
   window.addEventListener('resize', reserveSupportSpace, { passive: true });
 })();
+
+function keepFocusedControlVisible() {
+  const target = document.activeElement;
+  if (!target?.matches('a,button,input,select,textarea,summary,[role="button"]') || !target.getClientRects().length) return;
+  if (target.closest('.site-header,dialog,[role="dialog"]')) return;
+  const actionSurface = target.closest('.mobile-bottom-nav,.enterprise-sticky-actions,.checkout-mobile-cta');
+  if (actionSurface && getComputedStyle(actionSurface).position === 'fixed') return;
+  const viewport = window.visualViewport;
+  const viewportTop = viewport?.offsetTop || 0;
+  const viewportBottom = viewportTop + (viewport?.height || innerHeight);
+  const header = document.querySelector('.site-header,.checkout-topbar');
+  const headerBounds = header?.getBoundingClientRect();
+  const top = Math.max(viewportTop, headerBounds?.top <= viewportTop ? headerBounds.bottom : viewportTop) + 8;
+  const panels = [...document.querySelectorAll('.mobile-bottom-nav,.enterprise-sticky-actions,.checkout-mobile-cta')].filter(e => e.getClientRects().length && getComputedStyle(e).position === 'fixed');
+  const panelTops = panels.map(e => {
+    const r = e.getBoundingClientRect(), badge = e.querySelector('.onemart-coming-badge')?.getBoundingClientRect();
+    return badge?.height ? Math.min(r.top, badge.top) : r.top;
+  });
+  const bottom = Math.min(viewportBottom, ...panelTops) - 8;
+  const r = target.getBoundingClientRect();
+  const distance = r.top < top ? r.top - top : r.bottom > bottom ? r.bottom - bottom : 0;
+  if (distance) window.scrollBy({ top: distance, behavior: 'instant' });
+}
 
 function setupMobileChromeState() {
   const mobileQuery = window.matchMedia("(max-width: 768px)");
@@ -13445,8 +13554,11 @@ function setupMobileChromeState() {
   const bottomNav = document.querySelector('.mobile-bottom-nav');
   if (bottomNav && window.ResizeObserver) {
     new ResizeObserver(() => {
-      const height = bottomNav.getBoundingClientRect().height;
-      if (height) document.body.style.setProperty('--mobile-nav-clearance', Math.ceil(height + 24) + 'px');
+      const bounds = bottomNav.getBoundingClientRect();
+      const badge = bottomNav.querySelector('.onemart-coming-badge')?.getBoundingClientRect();
+      const overhang = badge?.height ? Math.max(0, bounds.top - badge.top) : 0;
+      const gap = Math.max(0, innerHeight - bounds.bottom);
+      if (bounds.height && getComputedStyle(bottomNav).position === 'fixed') document.body.style.setProperty('--mobile-nav-clearance', Math.ceil(bounds.height + overhang + gap + 8) + 'px');
       else document.body.style.removeProperty('--mobile-nav-clearance');
     }).observe(bottomNav);
   }
@@ -13458,6 +13570,14 @@ function setupMobileChromeState() {
     mobileQuery.addListener(syncChromeState);
   }
   new MutationObserver(syncChromeState).observe(document.body, { childList: true, subtree: true });
+  let focusFrame;
+  const scheduleFocusVisibility = () => {
+    cancelAnimationFrame(focusFrame);
+    focusFrame = requestAnimationFrame(() => requestAnimationFrame(keepFocusedControlVisible));
+  };
+  document.addEventListener('focusin', scheduleFocusVisibility);
+  window.addEventListener('resize', scheduleFocusVisibility, { passive: true });
+  window.visualViewport?.addEventListener('resize', scheduleFocusVisibility);
 }
 
 function setupProcessStepper() {
@@ -14453,8 +14573,9 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Localization dynamic substitution engine
+  // Localization dynamic substitution engine (Optimized: fast-bailout + precompiled regexes)
   function runOPDSLocalization() {
+    if (!document.body || !document.body.innerHTML.includes('{{')) return;
     const vars = window.OPDS_LOCALIZATION || {
       CITY: "Lucknow",
       LOCALITY: "LDA Colony",
@@ -14466,13 +14587,15 @@ document.addEventListener("DOMContentLoaded", () => {
       PRICE: "₹150",
       SUPPORT_HOURS: "9:00 AM - 8:00 PM"
     };
+    const compiled = Object.entries(vars).map(([k, v]) => [new RegExp(`{{\\s*${k}\\s*}}`, 'g'), v]);
 
     const walkDOM = (node) => {
       if (node.nodeType === Node.TEXT_NODE) {
         let text = node.nodeValue;
+        if (!text.includes('{{')) return;
         let replaced = false;
-        for (const [key, val] of Object.entries(vars)) {
-          const regex = new RegExp(`{{\\s*${key}\\s*}}`, 'g');
+        for (let i = 0; i < compiled.length; i++) {
+          const [regex, val] = compiled[i];
           if (regex.test(text)) {
             text = text.replace(regex, val);
             replaced = true;
@@ -14481,27 +14604,18 @@ document.addEventListener("DOMContentLoaded", () => {
         if (replaced) {
           node.nodeValue = text;
         }
-      } else {
-        if (node.nodeName !== 'SCRIPT' && node.nodeName !== 'STYLE') {
-          node.childNodes.forEach(walkDOM);
-        }
+      } else if (node.nodeName !== 'SCRIPT' && node.nodeName !== 'STYLE') {
+        node.childNodes.forEach(walkDOM);
       }
     };
 
     // Also replace in inputs / placeholders
-    document.querySelectorAll('input, textarea').forEach(el => {
+    document.querySelectorAll('input[placeholder*="{{"], textarea[placeholder*="{{"]').forEach(el => {
       let plh = el.placeholder || '';
-      let replaced = false;
-      for (const [key, val] of Object.entries(vars)) {
-        const regex = new RegExp(`{{\\s*${key}\\s*}}`, 'g');
-        if (regex.test(plh)) {
-          plh = plh.replace(regex, val);
-          replaced = true;
-        }
+      for (let i = 0; i < compiled.length; i++) {
+        plh = plh.replace(compiled[i][0], compiled[i][1]);
       }
-      if (replaced) {
-        el.placeholder = plh;
-      }
+      el.placeholder = plh;
     });
 
     walkDOM(document.body);

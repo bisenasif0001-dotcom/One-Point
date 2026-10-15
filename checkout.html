@@ -13,8 +13,8 @@
     <script src="assets/opds-boot.js?v=anti-fouc-79"></script>
     <link rel="stylesheet" href="assets/onepoint.css?v=mobile-layout-111">
     <link rel="stylesheet" href="assets/checkout-ux.css?v=performance-105">
-    <script src="assets/deployment-config.js?v=1"></script>
-  <script src="assets/transaction-host.js?v=1"></script>
+    <script src="assets/deployment-config.js?v=1" defer></script>
+  <script src="assets/transaction-host.js?v=1" defer></script>
 </head>
   <body class="elite-console-body enterprise-checkout-body">
     <a class="opds-skip-link" href="#main-content">Skip to checkout form</a>
@@ -22,7 +22,7 @@
       <div class="checkout-topbar-inner">
         <div class="topbar-left">
           <a class="brand" href="index.html" aria-label="One Point Digital Services home">
-            <img class="console-logo" src="assets/logo-bisen-one-point.svg" alt="Bisen One Point Suvidha Kendra">
+            <img class="console-logo" src="assets/logo-bisen-one-point.svg" alt="Bisen One Point Suvidha Kendra" width="160" height="38">
           </a>
           <span class="console-title-tag badge-checkout">Secure Checkout</span>
         </div>
@@ -47,7 +47,7 @@
         <div class="checkout-panel-hero">
           <div>
             <span class="checkout-kicker"><i data-lucide="shield-check"></i> One Point Secure Checkout</span>
-            <h1 id="checkout-title"><span>Complete your request.</span><span class="checkout-title-accent">Secure at every step.</span></h1>
+            <h1 id="checkout-title"><span>Complete your request. </span><span class="checkout-title-accent">Secure at every step.</span></h1>
             <p>Review the service, add applicant details, upload documents, and complete payment through one guided flow.</p>
           </div>
           <div class="checkout-session-chip">
@@ -214,7 +214,7 @@
               </aside>
 
               <div>
-                <div class="drag-drop-area" id="drag-drop-zone" onclick="triggerFileInput()" role="button" tabindex="0" aria-label="Upload documents">
+                <div class="drag-drop-area" id="drag-drop-zone" onclick="triggerFileInput()" role="group" tabindex="-1" aria-label="Upload documents">
                   <span class="upload-orb"><i data-lucide="upload-cloud"></i></span>
                   <h3>Drop documents here or browse</h3>
                   <p>PDF, JPG, PNG supported. Up to 3MB per file.</p>
@@ -519,7 +519,7 @@
     </main>
 
     <div data-site-footer></div>
-    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+    <script src="https://unpkg.com/lucide@1.57.0/dist/umd/lucide.min.js" defer></script>
     <script src="assets/catalog-pricing.js?v=checkout-pricing-83"></script>
     <script src="assets/pilot-metrics.js?v=release-107" defer></script>
     <script src="assets/app.js?v=onemart-109" defer></script>

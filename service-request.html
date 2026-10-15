@@ -1,12 +1,92 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Confirm your service | One Point</title>
-<link rel="icon" href="assets/favicon.svg"><link rel="stylesheet" href="assets/onepoint.css?v=mobile-layout-111">
-<link rel="stylesheet" href="assets/service-expansion.css?v=108">
-</head><body><a class="opds-skip-link" href="#main-content">Skip to service request</a><div data-site-nav></div>
-<main id="main-content" tabindex="-1" class="site-container service-request-panel"><p>Service assistance</p><h1 data-request-task>Your service</h1>
-<p>Confirm availability, required documents and the complete price before placing an order.</p>
-<p>This task needs confirmation from our team. No order or payment has been created.</p>
-<div class="service-request-actions"><a class="btn btn-primary" data-request-whatsapp href="contact.html" target="_blank" rel="noopener">Ask on WhatsApp</a><a class="btn btn-secondary" href="contact.html">Other contact options</a><a class="btn btn-secondary" href="services.html">Browse services</a></div>
-</main><div data-site-footer></div><script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script><script src="assets/pilot-metrics.js?v=107" defer></script><script src="assets/app.js?v=onemart-109" defer></script><script src="assets/service-request.js?v=security-routing-110" defer></script></body></html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Confirm Your Service | One Point Suvidha Kendra</title>
+  <link rel="icon" href="assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="assets/opds-boot.js?v=anti-fouc-79"></script>
+  <link rel="stylesheet" href="assets/onepoint.css?v=mobile-layout-111">
+  <link rel="stylesheet" href="assets/service-expansion.css?v=109">
+</head>
+<body class="service-request-page">
+  <a class="opds-skip-link" href="#main-content">Skip to service request</a>
+  <div data-site-nav></div>
 
+  <main id="main-content" tabindex="-1" class="site-container service-request-panel">
+    <div class="service-request-header-badge">
+      <span class="sr-kicker-tag"><i data-lucide="shield-check"></i> Official E-Service Consultation</span>
+      <span class="sr-status-chip"><span class="pulse-dot-amber"></span> Direct Operator Review</span>
+    </div>
+
+    <div class="service-request-hero">
+      <p class="service-request-eyebrow">Service assistance</p>
+      <h1 data-request-task class="service-request-title">Your service</h1>
+      <p class="service-request-intro">Confirm availability, required documents and the complete price before placing an order.</p>
+    </div>
+
+    <!-- Structured 3-Step Guidance Matrix -->
+    <div class="service-request-guide-grid">
+      <div class="sr-guide-step">
+        <div class="sr-step-num">01</div>
+        <div class="sr-step-info">
+          <strong>Eligibility &amp; Scope Review</strong>
+          <small>Our CSC VLE operator reviews your jurisdiction and requirements against current official portal rules.</small>
+        </div>
+      </div>
+      <div class="sr-guide-step">
+        <div class="sr-step-num">02</div>
+        <div class="sr-step-info">
+          <strong>Document Checklist Confirmation</strong>
+          <small>We verify exactly which identity, address, or supporting documents you need before proceeding.</small>
+        </div>
+      </div>
+      <div class="sr-guide-step">
+        <div class="sr-step-num">03</div>
+        <div class="sr-step-info">
+          <strong>Assisted Portal Submission</strong>
+          <small>Once verified, your application is submitted directly to the official government portal with tracking.</small>
+        </div>
+      </div>
+    </div>
+
+    <!-- Reassurance / Transparency Callout -->
+    <div class="service-request-notice-box" role="status">
+      <div class="sr-notice-icon"><i data-lucide="info"></i></div>
+      <div class="sr-notice-copy">
+        <strong>Zero Risk &bull; No Prior Payment Required</strong>
+        <p>This task needs confirmation from our team. No order or payment has been created.</p>
+      </div>
+    </div>
+
+    <!-- Action Group -->
+    <div class="service-request-actions">
+      <a class="btn btn-primary sr-btn-whatsapp" data-request-whatsapp href="contact.html" target="_blank" rel="noopener">
+        <i data-lucide="message-circle"></i> Ask on WhatsApp
+      </a>
+      <a class="btn btn-secondary sr-btn-contact" href="contact.html">
+        <i data-lucide="phone-call"></i> Other contact options
+      </a>
+      <a class="btn btn-secondary sr-btn-browse" href="services.html">
+        <i data-lucide="grid-3x3"></i> Browse services
+      </a>
+    </div>
+
+    <!-- Operator Guarantee Footer Strip -->
+    <div class="service-request-footer-strip">
+      <div class="sr-trust-item"><i data-lucide="lock"></i> <span>Data privacy protected</span></div>
+      <div class="sr-trust-item"><i data-lucide="landmark"></i> <span>Authorized CSC center</span></div>
+      <div class="sr-trust-item"><i data-lucide="clock"></i> <span>Quick response &bull; 9 AM – 8 PM</span></div>
+    </div>
+  </main>
+
+  <div data-site-footer></div>
+  <script src="https://unpkg.com/lucide@1.57.0/dist/umd/lucide.min.js" defer></script>
+  <script src="assets/pilot-metrics.js?v=107" defer></script>
+  <script src="assets/app.js?v=onemart-109" defer></script>
+  <script src="assets/service-request.js?v=security-routing-110" defer></script>
+</body>
+</html>

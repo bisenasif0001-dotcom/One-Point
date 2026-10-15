@@ -23,7 +23,13 @@
   const picker = document.getElementById('order-document-files');
   const selection = document.getElementById('order-document-selected');
   let previews = [];
-  const clearPreviews = () => { previews.forEach(url => URL.revokeObjectURL(url)); previews = []; selection.replaceChildren(); };
+  const clearPreviews = () => {
+    previews.forEach(url => URL.revokeObjectURL(url));
+    previews = [];
+    selection.replaceChildren();
+    picker.removeAttribute('aria-invalid');
+    picker.removeAttribute('aria-describedby');
+  };
   document.getElementById('order-document-camera').addEventListener('click', () => {
     picker.accept = 'image/jpeg,image/png'; picker.setAttribute('capture', 'environment'); picker.multiple = false; picker.click();
   });
@@ -31,13 +37,24 @@
   picker.addEventListener('change', () => {
     picker.removeAttribute('capture'); picker.accept = '.pdf,.jpg,.jpeg,.png'; picker.multiple = true;
     clearPreviews();
+    let hasInvalid = false;
     for (const file of picker.files) {
       const item = document.createElement('p'); item.textContent = file.name + ' — ';
       if (/\.(pdf|jpe?g|png)$/i.test(file.name) && file.size && file.size <= OPDSDocuments.MAX_BYTES) {
         const url = URL.createObjectURL(file); previews.push(url);
-        const link = document.createElement('a'); link.href = url; link.target = '_blank'; link.rel = 'noopener'; link.textContent = 'Preview selected file'; item.append(link);
-      } else item.append('Choose a supported non-empty file up to 3MB.');
+        const link = document.createElement('a'); link.href = url; link.target = '_blank'; link.rel = 'noopener noreferrer'; link.textContent = 'Preview selected file'; item.append(link);
+      } else {
+        hasInvalid = true;
+        item.append('Choose a supported non-empty file up to 3MB.');
+      }
       selection.append(item);
+    }
+    if (hasInvalid) {
+      picker.setAttribute('aria-invalid', 'true');
+      picker.setAttribute('aria-describedby', 'order-document-selected');
+    } else {
+      picker.removeAttribute('aria-invalid');
+      picker.removeAttribute('aria-describedby');
     }
   });
   window.addEventListener('pagehide', clearPreviews);

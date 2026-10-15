@@ -13,6 +13,7 @@
   inset: 0;
   background: rgba(5, 18, 36, .72);
   backdrop-filter: blur(7px);
+  -webkit-backdrop-filter: blur(7px);
 }
 .voter-consent-dialog {
   position: relative;

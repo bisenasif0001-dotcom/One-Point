@@ -2760,7 +2760,7 @@ html:not(.customer-session-active) [data-customer-auth] {
   justify-content: center !important;
   border-radius: 999px !important;
   background: linear-gradient(180deg, #2bd96b 0%, #20c75c 100%) !important;
-  color: #fff !important;
+  color: var(--ink) !important;
   box-shadow: 0 18px 42px -24px rgba(37, 211, 102, .72) !important;
   line-height: 1 !important;
 }
@@ -4624,6 +4624,7 @@ html:not(.customer-session-active) [data-customer-auth] {
   font-size: 0.78rem !important;
   font-weight: 600 !important;
   backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
 }
 
 #homepage-body #student-corner-section .student-photo .btn {

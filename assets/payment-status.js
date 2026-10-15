@@ -120,7 +120,7 @@
           <small>Order ID</small>
           <strong>
             ${details.orderId}
-            <button type="button" class="copy-btn-inline" data-copy-payment="${escapeHtml(orderId)}">Copy</button>
+            <button type="button" class="copy-btn-inline" aria-label="Copy order ID" data-copy-payment="${escapeHtml(orderId)}">Copy</button>
           </strong>
         </span>
         <span>
@@ -131,7 +131,7 @@
           <small>Transaction ID</small>
           <strong>
             ${details.paymentId}
-            ${paymentId && paymentId !== "Processing" && paymentId !== "Pending" ? `<button type="button" class="copy-btn-inline" data-copy-payment="${escapeHtml(paymentId)}">Copy</button>` : ""}
+            ${paymentId && paymentId !== "Processing" && paymentId !== "Pending" ? `<button type="button" class="copy-btn-inline" aria-label="Copy transaction ID" data-copy-payment="${escapeHtml(paymentId)}">Copy</button>` : ""}
           </strong>
         </span>
         <span>

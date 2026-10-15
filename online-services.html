@@ -470,6 +470,8 @@
       }
       .ghub-btn-card {
         flex: 1;
+        min-height: 44px;
+        box-sizing: border-box;
         background: #075092;
         color: #ffffff;
         font-weight: 750;
@@ -490,8 +492,10 @@
         box-shadow: 0 6px 18px rgba(7, 80, 146, 0.35);
       }
       .ghub-btn-card-wa {
-        width: 42px;
-        height: 42px;
+        width: 44px;
+        height: 44px;
+        min-width: 44px;
+        min-height: 44px;
         background: #ecfdf5;
         border: 1px solid #a7f3d0;
         border-radius: 10px;
@@ -1528,6 +1532,18 @@
       .ghub-cmp-footer-mid {
         border-left: 1px solid rgba(13,52,92,0.07); border-right: 1px solid rgba(13,52,92,0.07);
       }
+      @media (max-width: 860px) {
+        .ghub-cmp-header { grid-template-columns: 1fr; gap: 10px; }
+        .ghub-cmp-sep-mid { display: none; }
+        .ghub-cmp-row { grid-template-columns: 1fr; }
+        .ghub-cmp-cell.left { border-right: none; border-bottom: 1px solid rgba(13, 52, 92, 0.07); }
+        .ghub-cmp-cell.right { border-left: none; }
+        .ghub-cmp-cell-mid { display: none; }
+        .ghub-cmp-footer { grid-template-columns: 1fr; }
+        .ghub-cmp-footer-cell.left { border-right: none; border-bottom: 1px solid rgba(13, 52, 92, 0.07); }
+        .ghub-cmp-footer-cell.right { border-left: none; }
+        .ghub-cmp-footer-mid { display: none; }
+      }
 
       /* Elevated Compliance & Transparency Disclaimer Card */
       .ghub-disclaimer-card {
@@ -2314,7 +2330,7 @@
       <header class="site-header fallback-site-header">
         <nav class="nav-bar" aria-label="Primary fallback">
           <a class="brand" href="index.html" aria-label="One Point Digital Services home">
-            <img class="brand-logo brand-logo-header" src="assets/logo-bisen-one-point-footer.svg" alt="Bisen One Point Suvidha Kendra">
+            <img class="brand-logo brand-logo-header" src="assets/logo-bisen-one-point-footer.svg" alt="Bisen One Point Suvidha Kendra" width="160" height="40">
           </a>
           <div class="fallback-nav-links">
             <a class="nav-link" href="index.html">Home</a>
@@ -2856,6 +2872,9 @@
             <h3>Can't find your specific government service?</h3>
             <p>Tell us what document, certificate, or portal filing you need and our local operator will guide you directly with the exact procedure.</p>
             <div class="ghub-zero-actions">
+              <button type="button" id="ghub-zero-clear-btn" class="ghub-btn-ghost" style="display:inline-flex; align-items:center; gap:6px; cursor:pointer;">
+                <i data-lucide="rotate-ccw"></i> Clear Search &amp; Show All
+              </button>
               <a href="https://wa.me/919473946181?text=Hi%20One%20Point,%20I%20could%20not%20find%20a%20specific%20government%20service%20on%20your%20website.%20My%20requirement%20is:%20" class="ghub-btn-wa" target="_blank" rel="noopener">
                 <i data-lucide="message-circle"></i> Tell Us on WhatsApp
               </a>
@@ -3207,7 +3226,7 @@
 
             <!-- Concierge Side Card -->
             <div class="ghub-concierge-side-card">
-              <img class="ghub-concierge-side-img" src="assets/happy_indian_customer.png" alt="Assisted document verification specialist">
+              <img class="ghub-concierge-side-img" src="assets/happy_indian_customer.png" alt="Assisted document verification specialist" width="512" height="512" loading="lazy" decoding="async">
               <h3>Not sure what documents you need?</h3>
               <p>Send your requirements to our operator. We will review your case and share the exact customized checklist before you start.</p>
               <a href="https://wa.me/919473946181?text=Hi%20One%20Point,%20I%20need%20help%20with%20document%20checklist%20for%20a%20government%20service." class="ghub-btn-concierge-side" target="_blank" rel="noopener">
@@ -3899,6 +3918,17 @@
             searchInput.focus();
           });
         }
+        const zeroClearBtn = document.getElementById('ghub-zero-clear-btn');
+        if (zeroClearBtn) {
+          zeroClearBtn.addEventListener('click', function () {
+            if (searchInput) searchInput.value = '';
+            if (catSelect) catSelect.value = 'all';
+            activeChip = 'all';
+            quickChips.forEach(c => c.classList.toggle('active', c.getAttribute('data-chip') === 'all'));
+            filterGovCards();
+            if (searchInput) searchInput.focus();
+          });
+        }
         if (catSelect) catSelect.addEventListener('change', filterGovCards);
         if (modeSelect) modeSelect.addEventListener('change', filterGovCards);
 
@@ -4195,7 +4225,7 @@
     <div data-site-footer></div>
     <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js" defer></script>
     <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js" defer></script>
-    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+    <script src="https://unpkg.com/lucide@1.57.0/dist/umd/lucide.min.js" defer></script>
     <script src="assets/pilot-metrics.js?v=release-107" defer></script>
     <script src="assets/app.js?v=onemart-109" defer></script>
 </body>

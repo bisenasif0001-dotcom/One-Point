@@ -1088,10 +1088,66 @@
       .tax-fee-table tr:hover td {
         background: #f8fafc;
       }
-      .tax-fee-table .tax-fee-total {
+            .tax-fee-table .tax-fee-total {
         font-weight: 850;
         color: #075092;
         font-size: 0.92rem;
+      }
+      /* Phase 9: Mobile Responsive Tax Fee Table */
+      @media (max-width: 768px) {
+        .tax-fee-table-wrap {
+          overflow-x: visible;
+          border: none;
+        }
+        .tax-fee-table {
+          display: block;
+          width: 100%;
+        }
+        .tax-fee-table thead {
+          display: none;
+        }
+        .tax-fee-table tbody {
+          display: grid;
+          gap: 12px;
+        }
+        .tax-fee-table tr {
+          display: flex;
+          flex-direction: column;
+          background: #ffffff;
+          border: 1.5px solid #e2e8f0;
+          border-radius: 12px;
+          padding: 14px 16px;
+          gap: 6px;
+          box-shadow: 0 2px 8px rgba(15, 23, 42, 0.03);
+        }
+        .tax-fee-table td {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 6px 0 !important;
+          border-bottom: 1px dashed #f1f5f9;
+          font-size: 0.85rem;
+          flex-wrap: wrap;
+          gap: 6px;
+        }
+        .tax-fee-table td:first-child {
+          border-bottom: 1.5px solid #e2e8f0;
+          padding-bottom: 8px !important;
+        }
+        .tax-fee-table td:last-child {
+          border-bottom: none;
+        }
+        .tax-fee-table td::before {
+          content: attr(data-label);
+          font-size: 0.72rem;
+          font-weight: 800;
+          text-transform: uppercase;
+          color: #64748b;
+          letter-spacing: 0.03em;
+        }
+        .tax-fee-table td:first-child::before {
+          display: none;
+        }
       }
       .tax-fee-guarantee {
         background: #ecfdf5;
@@ -2376,53 +2432,53 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <td><strong>Fresh GST Registration (Proprietorship)</strong></td>
-                    <td>₹0.00 (Statutory Free)</td>
-                    <td>₹499.00</td>
-                    <td class="tax-fee-total">₹499.00*</td>
-                    <td>3–7 Working Days*</td>
+                    <td data-label="Service Category"><strong>Fresh GST Registration (Proprietorship)</strong></td>
+                    <td data-label="Govt Portal Fee">₹0.00 (Statutory Free)</td>
+                    <td data-label="Operator Assistance">₹499.00</td>
+                    <td data-label="Estimated Total" class="tax-fee-total">₹499.00*</td>
+                    <td data-label="Turnaround Time">3–7 Working Days*</td>
                   </tr>
                   <tr>
-                    <td><strong>Fresh GST Registration (Partnership / Pvt Ltd)</strong></td>
-                    <td>₹0.00 (Statutory Free)</td>
-                    <td>₹799.00</td>
-                    <td class="tax-fee-total">₹799.00*</td>
-                    <td>3–7 Working Days*</td>
+                    <td data-label="Service Category"><strong>Fresh GST Registration (Partnership / Pvt Ltd)</strong></td>
+                    <td data-label="Govt Portal Fee">₹0.00 (Statutory Free)</td>
+                    <td data-label="Operator Assistance">₹799.00</td>
+                    <td data-label="Estimated Total" class="tax-fee-total">₹799.00*</td>
+                    <td data-label="Turnaround Time">3–7 Working Days*</td>
                   </tr>
                   <tr>
-                    <td><strong>GST Monthly Return Filing (GSTR-1 + 3B)</strong></td>
-                    <td>₹0.00 (Tax at Actuals)</td>
-                    <td>₹499.00</td>
-                    <td class="tax-fee-total">₹499.00*</td>
-                    <td>2–3 Working Days*</td>
+                    <td data-label="Service Category"><strong>GST Monthly Return Filing (GSTR-1 + 3B)</strong></td>
+                    <td data-label="Govt Portal Fee">₹0.00 (Tax at Actuals)</td>
+                    <td data-label="Operator Assistance">₹499.00</td>
+                    <td data-label="Estimated Total" class="tax-fee-total">₹499.00*</td>
+                    <td data-label="Turnaround Time">2–3 Working Days*</td>
                   </tr>
                   <tr>
-                    <td><strong>Nil GST Return Filing Support</strong></td>
-                    <td>₹0.00 (Statutory Free)</td>
-                    <td>₹149.00</td>
-                    <td class="tax-fee-total">₹149.00*</td>
-                    <td>Same Day (1–2 Hrs)*</td>
+                    <td data-label="Service Category"><strong>Nil GST Return Filing Support</strong></td>
+                    <td data-label="Govt Portal Fee">₹0.00 (Statutory Free)</td>
+                    <td data-label="Operator Assistance">₹149.00</td>
+                    <td data-label="Estimated Total" class="tax-fee-total">₹149.00*</td>
+                    <td data-label="Turnaround Time">Same Day (1–2 Hrs)*</td>
                   </tr>
                   <tr>
-                    <td><strong>GST Profile / Address Amendment</strong></td>
-                    <td>₹0.00 (Statutory Free)</td>
-                    <td>₹299.00</td>
-                    <td class="tax-fee-total">₹299.00*</td>
-                    <td>2–4 Working Days*</td>
+                    <td data-label="Service Category"><strong>GST Profile / Address Amendment</strong></td>
+                    <td data-label="Govt Portal Fee">₹0.00 (Statutory Free)</td>
+                    <td data-label="Operator Assistance">₹299.00</td>
+                    <td data-label="Estimated Total" class="tax-fee-total">₹299.00*</td>
+                    <td data-label="Turnaround Time">2–4 Working Days*</td>
                   </tr>
                   <tr>
-                    <td><strong>GST Notice Reply / Revocation Support</strong></td>
-                    <td>₹0.00 (Statutory Free)</td>
-                    <td>₹599.00</td>
-                    <td class="tax-fee-total">₹599.00*</td>
-                    <td>2–4 Working Days*</td>
+                    <td data-label="Service Category"><strong>GST Notice Reply / Revocation Support</strong></td>
+                    <td data-label="Govt Portal Fee">₹0.00 (Statutory Free)</td>
+                    <td data-label="Operator Assistance">₹599.00</td>
+                    <td data-label="Estimated Total" class="tax-fee-total">₹599.00*</td>
+                    <td data-label="Turnaround Time">2–4 Working Days*</td>
                   </tr>
                   <tr>
-                    <td><strong>GST Certificate Download / Status Check</strong></td>
-                    <td>₹0.00 (Statutory Free)</td>
-                    <td>₹99.00</td>
-                    <td class="tax-fee-total">₹99.00*</td>
-                    <td>Instant Download*</td>
+                    <td data-label="Service Category"><strong>GST Certificate Download / Status Check</strong></td>
+                    <td data-label="Govt Portal Fee">₹0.00 (Statutory Free)</td>
+                    <td data-label="Operator Assistance">₹99.00</td>
+                    <td data-label="Estimated Total" class="tax-fee-total">₹99.00*</td>
+                    <td data-label="Turnaround Time">Instant Download*</td>
                   </tr>
                 </tbody>
               </table>
@@ -2756,7 +2812,7 @@
 
     <div data-site-footer></div>
     
-    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+    <script src="https://unpkg.com/lucide@1.57.0/dist/umd/lucide.min.js" defer></script>
     <script src="assets/pilot-metrics.js?v=release-107" defer></script>
     <script src="assets/app.js?v=onemart-109" defer></script>
 

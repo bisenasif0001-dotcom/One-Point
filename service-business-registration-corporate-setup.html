@@ -1124,8 +1124,76 @@
       .biz-matrix-table tbody tr:last-child td {
         border-bottom: none;
       }
-      .biz-matrix-table tbody tr:hover {
+            .biz-matrix-table tbody tr:hover {
         background: #f8fafc;
+      }
+      /* Phase 9: Mobile Responsive Entity Comparison Matrix */
+      @media (max-width: 860px) {
+        .biz-matrix-table-wrap {
+          overflow-x: visible;
+          border: none;
+        }
+        .biz-matrix-table {
+          display: block;
+          min-width: 0 !important;
+          width: 100%;
+        }
+        .biz-matrix-table thead {
+          display: none;
+        }
+        .biz-matrix-table tbody {
+          display: grid;
+          gap: 14px;
+        }
+        .biz-matrix-table tbody tr {
+          display: flex;
+          flex-direction: column;
+          background: #ffffff;
+          border: 1.5px solid #e2e8f0;
+          border-radius: 14px;
+          padding: 14px 16px;
+          gap: 8px;
+          box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+        }
+        .biz-matrix-table td {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 6px 0 !important;
+          border-bottom: 1px dashed #f1f5f9;
+          font-size: 0.84rem;
+          flex-wrap: wrap;
+          gap: 6px;
+        }
+        .biz-matrix-table td:first-child {
+          border-bottom: 1.5px solid #e2e8f0;
+          padding-bottom: 10px !important;
+        }
+        .biz-matrix-table td:last-child {
+          border-bottom: none;
+          padding-top: 10px !important;
+        }
+        .biz-matrix-table td:last-child .biz-table-btn {
+          width: 100%;
+          min-height: 44px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          box-sizing: border-box;
+        }
+        .biz-matrix-table td::before {
+          content: attr(data-label);
+          font-size: 0.72rem;
+          font-weight: 800;
+          text-transform: uppercase;
+          letter-spacing: 0.04em;
+          color: #64748b;
+          margin-right: 8px;
+        }
+        .biz-matrix-table td:first-child::before,
+        .biz-matrix-table td:last-child::before {
+          display: none;
+        }
       }
       .biz-entity-name-cell {
         display: flex;
@@ -2748,7 +2816,7 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <td>
+                    <td data-label="Entity Structure">
                       <div class="biz-entity-name-cell">
                         <span class="biz-entity-icon"><i data-lucide="store"></i></span>
                         <div>
@@ -2757,14 +2825,14 @@
                         </div>
                       </div>
                     </td>
-                    <td><span class="biz-pill-badge">1 Owner</span></td>
-                    <td><strong>GST / Udyam / Shop Licence</strong></td>
-                    <td>Small shops, retail traders, freelancers</td>
-                    <td><span class="biz-sla-pill"><i data-lucide="clock" style="width:13px; height:13px;"></i> Same Day (1–2 Hrs)</span></td>
-                    <td><a class="biz-table-btn" href="#service-options">Select <i data-lucide="arrow-right" style="width:12px; height:12px;"></i></a></td>
+                    <td data-label="Min Owners / Directors"><span class="biz-pill-badge">1 Owner</span></td>
+                    <td data-label="Key Registration Proof"><strong>GST / Udyam / Shop Licence</strong></td>
+                    <td data-label="Suitable For">Small shops, retail traders, freelancers</td>
+                    <td data-label="Turnaround &amp; SLA"><span class="biz-sla-pill"><i data-lucide="clock" style="width:13px; height:13px;"></i> Same Day (1–2 Hrs)</span></td>
+                    <td data-label="Action"><a class="biz-table-btn" href="#service-options">Select <i data-lucide="arrow-right" style="width:12px; height:12px;"></i></a></td>
                   </tr>
                   <tr>
-                    <td>
+                    <td data-label="Entity Structure">
                       <div class="biz-entity-name-cell">
                         <span class="biz-entity-icon"><i data-lucide="users"></i></span>
                         <div>
@@ -2773,14 +2841,14 @@
                         </div>
                       </div>
                     </td>
-                    <td><span class="biz-pill-badge">2+ Partners</span></td>
-                    <td><strong>Partnership Deed &amp; RoF Challan</strong></td>
-                    <td>Family businesses, local trade partnerships</td>
-                    <td><span class="biz-sla-pill"><i data-lucide="clock" style="width:13px; height:13px;"></i> 3–5 Working Days</span></td>
-                    <td><a class="biz-table-btn" href="#service-options">Select <i data-lucide="arrow-right" style="width:12px; height:12px;"></i></a></td>
+                    <td data-label="Min Owners / Directors"><span class="biz-pill-badge">2+ Partners</span></td>
+                    <td data-label="Key Registration Proof"><strong>Partnership Deed &amp; RoF Challan</strong></td>
+                    <td data-label="Suitable For">Family businesses, local trade partnerships</td>
+                    <td data-label="Turnaround &amp; SLA"><span class="biz-sla-pill"><i data-lucide="clock" style="width:13px; height:13px;"></i> 3–5 Working Days</span></td>
+                    <td data-label="Action"><a class="biz-table-btn" href="#service-options">Select <i data-lucide="arrow-right" style="width:12px; height:12px;"></i></a></td>
                   </tr>
                   <tr>
-                    <td>
+                    <td data-label="Entity Structure">
                       <div class="biz-entity-name-cell">
                         <span class="biz-entity-icon"><i data-lucide="briefcase"></i></span>
                         <div>
@@ -2789,14 +2857,14 @@
                         </div>
                       </div>
                     </td>
-                    <td><span class="biz-pill-badge">2+ Designated Partners</span></td>
-                    <td><strong>MCA Incorporation Certificate &amp; Agreement</strong></td>
-                    <td>Professional services, tech consultancies</td>
-                    <td><span class="biz-sla-pill"><i data-lucide="clock" style="width:13px; height:13px;"></i> 3–7 Working Days</span></td>
-                    <td><a class="biz-table-btn" href="#service-options">Select <i data-lucide="arrow-right" style="width:12px; height:12px;"></i></a></td>
+                    <td data-label="Min Owners / Directors"><span class="biz-pill-badge">2+ Designated Partners</span></td>
+                    <td data-label="Key Registration Proof"><strong>MCA Incorporation Certificate &amp; Agreement</strong></td>
+                    <td data-label="Suitable For">Professional services, tech consultancies</td>
+                    <td data-label="Turnaround &amp; SLA"><span class="biz-sla-pill"><i data-lucide="clock" style="width:13px; height:13px;"></i> 3–7 Working Days</span></td>
+                    <td data-label="Action"><a class="biz-table-btn" href="#service-options">Select <i data-lucide="arrow-right" style="width:12px; height:12px;"></i></a></td>
                   </tr>
                   <tr>
-                    <td>
+                    <td data-label="Entity Structure">
                       <div class="biz-entity-name-cell">
                         <span class="biz-entity-icon"><i data-lucide="building-2"></i></span>
                         <div>
@@ -2805,14 +2873,14 @@
                         </div>
                       </div>
                     </td>
-                    <td><span class="biz-pill-badge">2+ Directors (Max 200)</span></td>
-                    <td><strong>MCA SPICe+ Incorporation, PAN, TAN &amp; COI</strong></td>
-                    <td>Startups seeking funding, scalable ventures</td>
-                    <td><span class="biz-sla-pill"><i data-lucide="clock" style="width:13px; height:13px;"></i> 4–8 Working Days</span></td>
-                    <td><a class="biz-table-btn" href="#service-options">Select <i data-lucide="arrow-right" style="width:12px; height:12px;"></i></a></td>
+                    <td data-label="Min Owners / Directors"><span class="biz-pill-badge">2+ Directors (Max 200)</span></td>
+                    <td data-label="Key Registration Proof"><strong>MCA SPICe+ Incorporation, PAN, TAN &amp; COI</strong></td>
+                    <td data-label="Suitable For">Startups seeking funding, scalable ventures</td>
+                    <td data-label="Turnaround &amp; SLA"><span class="biz-sla-pill"><i data-lucide="clock" style="width:13px; height:13px;"></i> 4–8 Working Days</span></td>
+                    <td data-label="Action"><a class="biz-table-btn" href="#service-options">Select <i data-lucide="arrow-right" style="width:12px; height:12px;"></i></a></td>
                   </tr>
                   <tr>
-                    <td>
+                    <td data-label="Entity Structure">
                       <div class="biz-entity-name-cell">
                         <span class="biz-entity-icon"><i data-lucide="user-check"></i></span>
                         <div>
@@ -2821,11 +2889,11 @@
                         </div>
                       </div>
                     </td>
-                    <td><span class="biz-pill-badge">1 Director + 1 Nominee</span></td>
-                    <td><strong>MCA Incorporation &amp; Nominee Consent</strong></td>
-                    <td>Solo founders wanting corporate status</td>
-                    <td><span class="biz-sla-pill"><i data-lucide="clock" style="width:13px; height:13px;"></i> 4–8 Working Days</span></td>
-                    <td><a class="biz-table-btn" href="#service-options">Select <i data-lucide="arrow-right" style="width:12px; height:12px;"></i></a></td>
+                    <td data-label="Min Owners / Directors"><span class="biz-pill-badge">1 Director + 1 Nominee</span></td>
+                    <td data-label="Key Registration Proof"><strong>MCA Incorporation &amp; Nominee Consent</strong></td>
+                    <td data-label="Suitable For">Solo founders wanting corporate status</td>
+                    <td data-label="Turnaround &amp; SLA"><span class="biz-sla-pill"><i data-lucide="clock" style="width:13px; height:13px;"></i> 4–8 Working Days</span></td>
+                    <td data-label="Action"><a class="biz-table-btn" href="#service-options">Select <i data-lucide="arrow-right" style="width:12px; height:12px;"></i></a></td>
                   </tr>
                 </tbody>
               </table>
@@ -3107,7 +3175,7 @@
       </div>
       <a class="btn btn-primary" href="checkout.html?service=msme-registration&amp;service_name=MSME+Registration">Apply Now</a>
     </div>
-    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+    <script src="https://unpkg.com/lucide@1.57.0/dist/umd/lucide.min.js" defer></script>
     <script src="assets/pilot-metrics.js?v=release-107" defer></script>
     <script src="assets/app.js?v=onemart-109" defer></script>
 

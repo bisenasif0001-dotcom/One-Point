@@ -680,7 +680,7 @@ body[data-account-page="profile"] .cpf-page { width: 100%; max-width: none; marg
 
 .cpf-modal-backdrop {
   position: fixed; inset: 0; background: rgba(7, 20, 38, .5);
-  backdrop-filter: blur(4px); z-index: 300; display: grid; place-items: center; padding: 20px;
+  backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); z-index: 300; display: grid; place-items: center; padding: 20px;
 }
 .cpf-modal {
   background: #fff; border-radius: 16px; width: min(520px, 100%);

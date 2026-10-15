@@ -1,9 +1,177 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Order documents | One Point</title>
-<meta name="robots" content="noindex,nofollow"><link rel="stylesheet" href="assets/onepoint.css"><link rel="stylesheet" href="assets/quick-order.css?v=2"><link rel="stylesheet" href="assets/order-documents.css?v=2">
-<script src="assets/deployment-config.js?v=1"></script><script src="assets/transaction-host.js?v=2"></script>
-<script src="assets/document-upload.js?v=2" defer></script><script src="assets/order-documents.js?v=2" defer></script></head>
-<body class="utility-page"><a class="opds-skip-link" href="#main-content">Skip to main content</a><header class="utility-mobile-header"><a href="index.html" aria-label="One Point home"><img src="assets/logo-bisen-one-point.svg" alt="One Point Suvidha Kendra"></a><a class="btn btn-soft" href="contact.html">Support</a></header><main id="main-content" tabindex="-1" class="container section"><a href="customer-account-orders.html">My orders</a><h1>Send documents for your order</h1><p id="document-order-label"></p><p id="document-state" role="status">Loading order…</p>
-<p>Payment and document approval are separate. Processing needs an operator's review.</p><ul id="order-document-requirements"></ul>
-<form id="order-document-form" hidden><label for="order-document-files">PDF, JPG or PNG — up to 3MB per file</label><input class="quick-order-input" id="order-document-files" type="file" multiple accept=".pdf,.jpg,.jpeg,.png" required><button class="eds-btn eds-btn-secondary" type="button" id="order-document-camera">Use camera</button><div id="order-document-selected" aria-live="polite"></div><button class="eds-btn eds-btn-primary" type="submit">Upload for review</button></form>
-<p id="order-upload-feedback" role="status"></p><ul id="order-document-list"></ul><a id="document-whatsapp" hidden target="_blank" rel="noopener">Send via WhatsApp with order reference</a><p><a href="login.html" id="document-login">Sign in to upload documents for this order</a></p></main></body></html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Send Order Documents | One Point Suvidha Kendra</title>
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="icon" href="assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/onepoint.css?v=mobile-layout-111">
+  <link rel="stylesheet" href="assets/quick-order.css?v=2">
+  <link rel="stylesheet" href="assets/order-documents.css?v=3">
+  <script src="assets/deployment-config.js?v=1" defer></script>
+  <script src="assets/transaction-host.js?v=2" defer></script>
+  <script src="assets/document-upload.js?v=2" defer></script>
+  <script src="assets/order-documents.js?v=2" defer></script>
+</head>
+<body class="utility-page">
+  <a class="opds-skip-link" href="#main-content">Skip to main content</a>
+  
+  <header class="order-docs-header">
+    <div class="site-container order-docs-nav-wrap">
+      <a href="index.html" class="order-docs-brand" aria-label="One Point Suvidha Kendra home">
+        <img src="assets/logo-bisen-one-point.svg" alt="One Point Suvidha Kendra" width="160" height="38">
+      </a>
+      <div class="order-docs-nav-actions">
+        <a class="btn" href="customer-account-orders.html"><i data-lucide="package"></i> My orders</a>
+        <a class="btn" href="contact.html"><i data-lucide="headphones"></i> Support</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content" tabindex="-1" class="site-container order-docs-main">
+    <nav class="order-docs-breadcrumbs" aria-label="Breadcrumb">
+      <a href="index.html">Home</a>
+      <span class="sep">/</span>
+      <a href="customer-account-orders.html">My Orders</a>
+      <span class="sep">/</span>
+      <span>Upload Documents</span>
+    </nav>
+
+    <div class="order-docs-hero-card">
+      <div class="order-docs-kicker-row">
+        <span class="docs-kicker-tag"><i data-lucide="shield-check"></i> Official Document Verification</span>
+        <div class="docs-order-badge">
+          <i data-lucide="file-text"></i>
+          <span id="document-order-label">Order verification</span>
+        </div>
+      </div>
+      <h1>Send documents for your order</h1>
+      <p class="order-docs-lead">Upload required proofs, certificates, or photos directly to our authorized CSC operator console for review.</p>
+      
+      <div class="docs-state-card" role="status">
+        <div class="docs-state-icon"><i data-lucide="info"></i></div>
+        <div class="docs-state-body">
+          <strong>Review Status</strong>
+          <p id="document-state">Loading order details…</p>
+        </div>
+      </div>
+
+      <div class="docs-protocol-banner">
+        <i data-lucide="check-circle-2"></i>
+        <span>Payment and document verification are processed securely. Operator review is performed for all uploaded files.</span>
+      </div>
+    </div>
+
+    <div class="order-docs-grid">
+      <!-- Left Column: Requirements & Verification Guidelines -->
+      <div class="docs-requirements-col">
+        <div class="docs-card">
+          <div class="docs-card-header">
+            <i data-lucide="list-checks"></i>
+            <h2>Required Documents</h2>
+          </div>
+          <p class="docs-card-sub">The operator has specified the following items for this service order:</p>
+          <ul id="order-document-requirements" class="docs-checklist-list"></ul>
+          
+          <div class="docs-guidelines-box">
+            <h3><i data-lucide="lightbulb"></i> Upload Tips</h3>
+            <ul>
+              <li>Ensure all 4 corners of documents are visible and legible.</li>
+              <li>Avoid flash reflections or blurry shadows on identity cards.</li>
+              <li>Files must be in PDF, JPG, or PNG format under 3MB each.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Document Upload Console -->
+      <div class="docs-upload-col">
+        <div class="docs-card docs-upload-card">
+          <div class="docs-card-header">
+            <i data-lucide="upload-cloud"></i>
+            <h2>Attach Files</h2>
+          </div>
+          
+          <form id="order-document-form" hidden>
+            <div class="docs-dropzone-box">
+              <label for="order-document-files" class="docs-dropzone-label">
+                <div class="docs-dropzone-icon"><i data-lucide="file-up"></i></div>
+                <div class="docs-dropzone-text">
+                  <strong>Choose files to upload</strong>
+                  <span>PDF, JPG or PNG &bull; up to 3MB per file</span>
+                </div>
+                <div class="docs-format-pills">
+                  <span class="docs-format-pill">PDF</span>
+                  <span class="docs-format-pill">JPG</span>
+                  <span class="docs-format-pill">PNG</span>
+                </div>
+              </label>
+            </div>
+            
+            <input class="quick-order-input" id="order-document-files" type="file" multiple accept=".pdf,.jpg,.jpeg,.png" required>
+            
+            <div class="docs-action-row">
+              <button class="btn btn-secondary" type="button" id="order-document-camera">
+                <i data-lucide="camera"></i> Use camera
+              </button>
+              <button class="btn btn-primary docs-btn-submit" type="submit">
+                <i data-lucide="lock"></i> Upload for review
+              </button>
+            </div>
+            
+            <div id="order-document-selected" aria-live="polite"></div>
+          </form>
+
+          <p id="order-upload-feedback" role="status"></p>
+
+          <!-- Sign-in Prompt if Not Authenticated -->
+          <div class="docs-login-card">
+            <a href="login.html" id="document-login" class="btn btn-primary">
+              <i data-lucide="log-in"></i> Sign in to upload documents for this order
+            </a>
+          </div>
+        </div>
+
+        <!-- WhatsApp Fallback Card -->
+        <div class="docs-whatsapp-card">
+          <div class="docs-wa-copy">
+            <strong>Prefer sending via WhatsApp?</strong>
+            <p>Send your documents directly to our verified operator along with your order ID.</p>
+          </div>
+          <a id="document-whatsapp" hidden target="_blank" rel="noopener">
+            <i data-lucide="message-circle"></i> Send via WhatsApp
+          </a>
+        </div>
+
+        <!-- Upload History Card -->
+        <div class="docs-card docs-history-card">
+          <div class="docs-card-header">
+            <i data-lucide="history"></i>
+            <h2>Document Review History</h2>
+          </div>
+          <ul id="order-document-list" class="docs-history-list"></ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="order-docs-trust-strip">
+      <div class="docs-trust-item"><i data-lucide="shield-check"></i> <span>256-bit SSL encrypted intake</span></div>
+      <div class="docs-trust-item"><i data-lucide="user-check"></i> <span>Verified CSC operator review</span></div>
+      <div class="docs-trust-item"><i data-lucide="award"></i> <span>Government certified center</span></div>
+    </div>
+  </main>
+
+  <script src="https://unpkg.com/lucide@1.57.0/dist/umd/lucide.min.js" defer></script>
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      if (window.lucide && typeof window.lucide.createIcons === 'function') {
+        window.lucide.createIcons();
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,6 +1,20 @@
 User-agent: *
 Allow: /
 Disallow: /admin.html
+Disallow: /admin-change-password.html
 Disallow: /dashboard.html
+Disallow: /checkout.html
+Disallow: /order-documents.html
+Disallow: /payment-success.html
+Disallow: /payment-failed.html
+Disallow: /payment-recovery.html
+Disallow: /customer-account.html
+Disallow: /customer-profile.html
+Disallow: /order-history.html
+Disallow: /login.html
+Disallow: /register.html
+Disallow: /forgot-password.html
+Disallow: /reset-password.html
+Disallow: /api/
 
 Sitemap: https://bisenonepoint.com/sitemap.xml
