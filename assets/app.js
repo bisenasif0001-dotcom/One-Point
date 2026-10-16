@@ -3250,7 +3250,7 @@ function renderNav() {
     if (item.isPortals) {
       return `
         <div class="nav-item nav-item-portals">
-          <button class="nav-trigger" type="button" aria-haspopup="true" aria-expanded="false">
+          <button class="nav-trigger" type="button" aria-haspopup="true" aria-expanded="false" data-dropdown-trigger>
             ${icon("user", 16)} ${item.label} ${icon("chevron-down", 15)}
           </button>
           <div class="submenu portals-submenu" aria-label="Portals">
@@ -4347,22 +4347,25 @@ function setupDropdowns() {
     // focusin for keyboard nav
     item.addEventListener("focusin", open);
 
-    // Mobile: toggle on trigger click / Touch navigation support
+    // Toggle on trigger click (handles button triggers on desktop/mobile and links on touch/mobile)
     trigger?.addEventListener("click", (event) => {
       const isMobile = window.matchMedia("(max-width: 1080px)").matches;
       const isTouchLike = window.matchMedia("(hover: none)").matches;
-      if (!isMobile && !isTouchLike) return;
+      const isButton = trigger.tagName === "BUTTON";
+      if (!isMobile && !isTouchLike && !isButton) return;
 
       const isOpen = item.classList.contains("dropdown-open") || item.classList.contains("open");
       if (!isOpen) {
-        // If closed, prevent navigation and open it
         event.preventDefault();
         open();
         item.classList.add("open");
       } else {
-        // If already open, let the click navigate naturally.
-        // Also close the dropdown so it's not open if navigating to a hash link on the same page.
-        setTimeout(() => closeItem(item), 150);
+        if (isButton) {
+          event.preventDefault();
+          closeItem(item);
+        } else {
+          setTimeout(() => closeItem(item), 150);
+        }
       }
     });
 
