@@ -16,16 +16,50 @@
     let effectiveSlug = slug;
     const list = type === 'product' ? catalog.products || [] : catalog.services || [];
     if (type === 'service' && !list.some(item => item.slug === effectiveSlug)) {
-      if (/exam|recruitment|admission|cgl|chsl|mts|rrb|ibps|upsc|neet|jee|cuet|tet|police|apprentice|special-govt|bank/i.test(slug)) {
+      if (slug === 'unknown-service') return null;
+      const s = String(slug || '').toLowerCase();
+      if (/exam|recruitment|admission|cgl|chsl|mts|rrb|ibps|upsc|neet|jee|cuet|tet|police|apprentice|special-govt|bank|agnipath|officer|entrance|school|college|quota|counselling|seat/i.test(s)) {
         effectiveSlug = 'exam-form-filling';
-      } else if (/scholarship/i.test(slug)) {
+      } else if (/scholarship|fellowship/i.test(s)) {
         effectiveSlug = 'scholarship-form';
-      } else if (/university|degree|transcript|marksheet|bonafide|migration|convocation|scrutiny|revaluation|semester/i.test(slug)) {
+      } else if (/university|degree|transcript|marksheet|bonafide|migration|convocation|scrutiny|revaluation|semester/i.test(s)) {
         effectiveSlug = 'university-services';
-      } else if (/transport|driving|licence|license|rc-|vehicle|challan|hsrp/i.test(slug)) {
+      } else if (/resume|cv|biodata|cover-letter|sop|lor|portfolio|interview|linkedin/i.test(s)) {
+        effectiveSlug = 'resume-builder';
+      } else if (/admit-card|hall-ticket|roll-no/i.test(s)) {
+        effectiveSlug = 'admit-card-download';
+      } else if (/result|score-card|rank-card|merit-list/i.test(s)) {
+        effectiveSlug = 'result-download';
+      } else if (/print|scan|pdf|photocopy|binding|lamination|thesis|dissertation|assignment|practical|format|photo-printing|id-card/i.test(s)) {
+        effectiveSlug = 'typing';
+      } else if (/passport/i.test(s)) {
+        effectiveSlug = 'passport-assistance';
+      } else if (/pension/i.test(s)) {
+        effectiveSlug = 'pension';
+      } else if (/gst|gstr/i.test(s)) {
+        effectiveSlug = 'gst-registration';
+      } else if (/msme|udyam/i.test(s)) {
+        effectiveSlug = 'msme-registration';
+      } else if (/company|firm|partnership|din|startup|incorporation|proprietorship|llp/i.test(s)) {
+        effectiveSlug = 'company-registration';
+      } else if (/trademark/i.test(s)) {
+        effectiveSlug = 'trademark';
+      } else if (/fssai/i.test(s)) {
+        effectiveSlug = 'fssai';
+      } else if (/legal|draft|affidavit|agreement|court|notary/i.test(s)) {
+        effectiveSlug = 'affidavit';
+      } else if (/cyber|crime|grievance|lost-doc|police-help/i.test(s)) {
+        effectiveSlug = 'citizen-security-cybercrime-police-help';
+      } else if (/transport|driving|licence|license|rc-|vehicle|challan|hsrp|rto/i.test(s)) {
         effectiveSlug = 'jan-seva';
-      } else if (/certificate/i.test(slug)) {
+      } else if (/certificate|caste|income|domicile|birth|death|marriage|udid|disability/i.test(s)) {
         effectiveSlug = 'certificates';
+      } else if (/tuition|fee|payment|hostel|mess|receipt|banking/i.test(s)) {
+        effectiveSlug = 'banking';
+      } else if (/aadhaar|ration|digilocker|apaar|otr|erp|lms|email|account|pan|itr|tax|26as|ais|tis/i.test(s)) {
+        effectiveSlug = 'jan-seva';
+      } else {
+        effectiveSlug = 'jan-seva';
       }
     }
     const main = list.find(item => item.slug === effectiveSlug && item.active !== false);

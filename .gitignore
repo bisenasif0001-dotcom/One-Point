@@ -16,3 +16,4 @@ backend/data/invoices/
 *.pem
 scratch/
 release-packages/
+One-Point/
