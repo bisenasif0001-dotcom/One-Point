@@ -1469,7 +1469,9 @@ section.section.reveal:has(.bento-grid) {
 }
 
 #homepage-body .btn-gold {
-  border: 1px solid var(--primary) !important; /* using primary token for line-active style */
+  border: 1px solid #b8881b !important;
+  background: #d4a329 !important;
+  box-shadow: none !important;
 }
 
 #homepage-body .hos-search-field {

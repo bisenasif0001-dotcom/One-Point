@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <script src="assets/opds-boot.js?v=anti-fouc-79"></script>
-  <link rel="stylesheet" href="assets/onepoint.css?v=mobile-layout-111">
+  <link rel="stylesheet" href="assets/onepoint.css?v=desktop-fix-114">
   <link rel="stylesheet" href="assets/service-expansion.css?v=109">
 </head>
 <body class="service-request-page">
@@ -28,50 +28,53 @@
       <p class="service-request-intro">Confirm availability, required documents and the complete price before placing an order.</p>
     </div>
 
-    <!-- Structured 3-Step Guidance Matrix -->
-    <div class="service-request-guide-grid">
-      <div class="sr-guide-step">
-        <div class="sr-step-num">01</div>
-        <div class="sr-step-info">
-          <strong>Eligibility &amp; Scope Review</strong>
-          <small>Our CSC VLE operator reviews your jurisdiction and requirements against current official portal rules.</small>
+
+    <!-- Flexible Booking Choices (Dual Action Grid) -->
+    <div class="sr-booking-options-grid">
+      <!-- Option 1: Direct Payment & Online Booking -->
+      <div class="sr-booking-card sr-card-pay">
+        <div class="sr-card-head">
+          <span class="sr-card-pill pill-blue"><i data-lucide="zap"></i> Direct Online Booking</span>
+          <span class="sr-card-price" data-request-price>Fee: ₹150</span>
         </div>
+        <h3 class="sr-card-title">Pay &amp; Apply Online Now</h3>
+        <p class="sr-card-desc">Pay the CSC Kendra assistance fee online, fill applicant details, and upload your documents (photo &amp; signature). Portal fee is verified before submission.</p>
+        <ul class="sr-card-benefits">
+          <li><i data-lucide="check"></i> Instant receipt &amp; tracking ID generated</li>
+          <li><i data-lucide="check"></i> Upload documents now or send via WhatsApp later</li>
+          <li><i data-lucide="check"></i> 100% secure Razorpay / UPI payment</li>
+        </ul>
+        <a class="btn btn-primary sr-btn-checkout" data-request-checkout href="checkout.html">
+          <i data-lucide="credit-card"></i> Pay Online &amp; Book (<span data-request-btn-price>₹150</span>)
+        </a>
       </div>
-      <div class="sr-guide-step">
-        <div class="sr-step-num">02</div>
-        <div class="sr-step-info">
-          <strong>Document Checklist Confirmation</strong>
-          <small>We verify exactly which identity, address, or supporting documents you need before proceeding.</small>
+
+      <!-- Option 2: WhatsApp Consultation First -->
+      <div class="sr-booking-card sr-card-whatsapp">
+        <div class="sr-card-head">
+          <span class="sr-card-pill pill-green"><i data-lucide="shield-check"></i> Zero Upfront Risk</span>
+          <span class="sr-card-price price-free">Free Help</span>
         </div>
-      </div>
-      <div class="sr-guide-step">
-        <div class="sr-step-num">03</div>
-        <div class="sr-step-info">
-          <strong>Assisted Portal Submission</strong>
-          <small>Once verified, your application is submitted directly to the official government portal with tracking.</small>
-        </div>
+        <h3 class="sr-card-title">Consult on WhatsApp First</h3>
+        <p class="sr-card-desc">Prefer to confirm your eligibility, category/quota concessions, and exact total fees before paying? Chat directly with our verified operator.</p>
+        <ul class="sr-card-benefits">
+          <li><i data-lucide="check"></i> Check required documents &amp; exam eligibility</li>
+          <li><i data-lucide="check"></i> Direct chat with CSC VLE operator</li>
+          <li><i data-lucide="check"></i> No payment needed to enquire</li>
+        </ul>
+        <a class="btn btn-whatsapp sr-btn-whatsapp" data-request-whatsapp href="contact.html" target="_blank" rel="noopener">
+          <i data-lucide="message-circle"></i> Ask on WhatsApp
+        </a>
       </div>
     </div>
 
-    <!-- Reassurance / Transparency Callout -->
-    <div class="service-request-notice-box" role="status">
-      <div class="sr-notice-icon"><i data-lucide="info"></i></div>
-      <div class="sr-notice-copy">
-        <strong>Zero Risk &bull; No Prior Payment Required</strong>
-        <p>This task needs confirmation from our team. No order or payment has been created.</p>
-      </div>
-    </div>
-
-    <!-- Action Group -->
-    <div class="service-request-actions">
-      <a class="btn btn-primary sr-btn-whatsapp" data-request-whatsapp href="contact.html" target="_blank" rel="noopener">
-        <i data-lucide="message-circle"></i> Ask on WhatsApp
-      </a>
+    <!-- Secondary Links -->
+    <div class="service-request-secondary-actions">
       <a class="btn btn-secondary sr-btn-contact" href="contact.html">
-        <i data-lucide="phone-call"></i> Other contact options
+        <i data-lucide="phone-call"></i> Call Kendra Operator
       </a>
       <a class="btn btn-secondary sr-btn-browse" href="services.html">
-        <i data-lucide="grid-3x3"></i> Browse services
+        <i data-lucide="grid-3x3"></i> Browse all services
       </a>
     </div>
 
@@ -86,7 +89,7 @@
   <div data-site-footer></div>
   <script src="https://unpkg.com/lucide@1.57.0/dist/umd/lucide.min.js" defer></script>
   <script src="assets/pilot-metrics.js?v=107" defer></script>
-  <script src="assets/app.js?v=onemart-109" defer></script>
+  <script src="assets/app.js?v=desktop-fix-114" defer></script>
   <script src="assets/service-request.js?v=security-routing-110" defer></script>
 </body>
 </html>

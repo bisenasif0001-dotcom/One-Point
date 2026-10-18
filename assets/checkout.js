@@ -673,7 +673,7 @@
     checkoutItems = checkoutItems.map(item => {
       const entry = window.OPDSServicePolicy.resolve(catalog, item.slug, item.type);
       if (!entry) return item;
-      return { ...item, slug: entry.slug, name: entry.name, price: entry.policy.pricing.amount,
+      return { ...item, slug: entry.slug, name: item.name || entry.name, price: entry.policy.pricing.amount,
         taxRate: Number(entry.taxRate || 0), displayPrice: entry.policy.pricing.displayPrice,
         pricingModel: entry.policy.pricing.model, priceNote: entry.policy.pricing.note,
         duration: entry.policy.fulfilment.duration, policy: entry.policy };

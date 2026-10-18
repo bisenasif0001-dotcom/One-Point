@@ -3,14 +3,14 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="All One Point Digital Services categories, including EduPoint, E-Services, ProServe, OneMart, Travel Services, CSC and utility services.">
+    <meta name="description" content="All One Point Digital Services categories, including EduPoint, E-Services, ProServe, and OneMart personalized products.">
     <title>Services | One Point Digital Services</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <script src="assets/opds-boot.js?v=anti-fouc-79"></script>
-<link rel="stylesheet" href="assets/onepoint.css?v=mobile-layout-111">
+<link rel="stylesheet" href="assets/onepoint.css?v=desktop-fix-114">
     <link rel="stylesheet" href="assets/quick-order.css?v=2">
     <link rel="stylesheet" href="assets/mobile-ordering.css?v=1">
     <style>
@@ -1472,15 +1472,12 @@
             
             <div class="shub-toolbar-filters">
               <select id="shub-cat-select" class="shub-select" aria-label="Filter by category">
-                <option value="all">All Categories (8)</option>
+                <option value="all">All Categories (5)</option>
                 <option value="govt">Government &amp; Citizen</option>
                 <option value="edu">Education &amp; Admissions</option>
                 <option value="business">Business &amp; Professional</option>
-                <option value="print">Print, Copy &amp; Scan</option>
-                <option value="design">Graphic Design &amp; Web</option>
                 <option value="onemart">OneMart Products</option>
                 <option value="legal">Documents &amp; Legal</option>
-                <option value="travel">Travel &amp; Local Services</option>
               </select>
 
               <select id="shub-mode-select" class="shub-select" aria-label="Filter by delivery mode">
@@ -1501,13 +1498,12 @@
             <button type="button" class="shub-chip" data-chip="govt"><i data-lucide="landmark"></i> Government</button>
             <button type="button" class="shub-chip" data-chip="business"><i data-lucide="briefcase"></i> Business</button>
             <button type="button" class="shub-chip" data-chip="edu"><i data-lucide="graduation-cap"></i> Student</button>
-            <button type="button" class="shub-chip" data-chip="design"><i data-lucide="palette"></i> Design &amp; Print</button>
           </div>
 
           <!-- Discovery View Mode Tabs: Categories vs Goal -->
           <div class="shub-view-switcher">
             <button type="button" class="shub-view-tab active" id="tab-btn-categories" data-view="categories">
-              <i data-lucide="grid-3x3"></i> Browse by Category (8)
+              <i data-lucide="grid-3x3"></i> Browse by Category (5)
             </button>
             <button type="button" class="shub-view-tab" id="tab-btn-goals" data-view="goals">
               <i data-lucide="target"></i> Browse by Goal / Need
@@ -1549,28 +1545,6 @@
               </div>
             </a>
 
-            <a href="print-scan.html" class="shub-cat-card" data-cat="print">
-              <div class="shub-cat-icon-wrap" style="background:#fff7ed; color:#c2410c;">
-                <i data-lucide="printer"></i>
-              </div>
-              <div class="shub-cat-info">
-                <h3>Print, Copy &amp; Scan</h3>
-                <p>High-Speed Document Print, Color Xerox, Spiral Binding &amp; Plans</p>
-                <span class="shub-cat-link">Explore 8+ Services <i data-lucide="arrow-right"></i></span>
-              </div>
-            </a>
-
-            <a href="design-services.html" class="shub-cat-card" data-cat="design">
-              <div class="shub-cat-icon-wrap" style="background:#fdf2f8; color:#be185d;">
-                <i data-lucide="palette"></i>
-              </div>
-              <div class="shub-cat-info">
-                <h3>Graphic Design &amp; Web</h3>
-                <p>Logo Branding, Flex Banners, Corporate UI/UX &amp; Custom Websites</p>
-                <span class="shub-cat-link">Explore 16 Services <i data-lucide="arrow-right"></i></span>
-              </div>
-            </a>
-
             <a href="products.html" class="shub-cat-card" data-cat="onemart">
               <div class="shub-cat-icon-wrap" style="background:#ecfeff; color:#0e7490;">
                 <i data-lucide="shopping-bag"></i>
@@ -1590,17 +1564,6 @@
                 <h3>Documents &amp; Legal</h3>
                 <p>Affidavit Drafting, Rent Agreements, Notary Support &amp; Gazette</p>
                 <span class="shub-cat-link">Explore Legal <i data-lucide="arrow-right"></i></span>
-              </div>
-            </a>
-
-            <a href="travel-services.html" class="shub-cat-card" data-cat="travel">
-              <div class="shub-cat-icon-wrap" style="background:#fefce8; color:#a16207;">
-                <i data-lucide="plane"></i>
-              </div>
-              <div class="shub-cat-info">
-                <h3>Travel &amp; Local Services</h3>
-                <p>Passport Assistance, IRCTC Train Booking, Bills &amp; Banking Kiosk</p>
-                <span class="shub-cat-link">Explore Travel <i data-lucide="arrow-right"></i></span>
               </div>
             </a>
           </div>
@@ -1632,24 +1595,6 @@
                 <p>GST Registration, MSME/Udyam, Trademark, FSSAI &amp; Google Profile</p>
               </div>
               <a href="business-solutions.html" class="shub-goal-btn">Business Setup <i data-lucide="arrow-right"></i></a>
-            </div>
-
-            <div class="shub-goal-card" data-filter-trigger="print">
-              <div class="shub-goal-icon"><i data-lucide="printer"></i></div>
-              <div class="shub-goal-body">
-                <h4>"I Need Printing, Scanning, or Book Binding"</h4>
-                <p>Color Xerox, Spiral Binding, Thesis Printing, Lamination &amp; Scanning</p>
-              </div>
-              <a href="print-scan.html" class="shub-goal-btn">Print Now <i data-lucide="arrow-right"></i></a>
-            </div>
-
-            <div class="shub-goal-card" data-filter-trigger="design">
-              <div class="shub-goal-icon"><i data-lucide="layout"></i></div>
-              <div class="shub-goal-body">
-                <h4>"I Need a Logo, Banner, or Custom Website"</h4>
-                <p>Vector Branding, Shop Flex Banners, UI/UX &amp; Full-Stack Web Development</p>
-              </div>
-              <a href="design-services.html" class="shub-goal-btn">Design &amp; Code <i data-lucide="arrow-right"></i></a>
             </div>
 
             <div class="shub-goal-card" data-filter-trigger="onemart">
@@ -1809,48 +1754,6 @@
               </div>
             </div>
 
-            <!-- 6. Print, Scan & Binding -->
-            <div class="shub-card" data-category="print">
-              <div class="shub-card-top">
-                <div class="shub-card-icon" style="background:#fff7ed; color:#c2410c;"><i data-lucide="printer"></i></div>
-                <div class="shub-card-badges">
-                  <span class="shub-badge badge-orange">Print Lab</span>
-                  <span class="shub-badge badge-emerald">Instant</span>
-                </div>
-              </div>
-              <h3 class="shub-card-title">HD Document Print, Scan &amp; Binding</h3>
-              <p class="shub-card-desc">Laser B&amp;W/Color printouts, thesis hardbound, spiral binding, large format plan print &amp; high-DPI scanning.</p>
-              <div class="shub-card-meta">
-                <span class="shub-meta-time"><i data-lucide="clock"></i> Instant</span>
-                <span class="shub-meta-price">From <strong>₹2</strong>/page</span>
-              </div>
-              <div class="shub-card-footer">
-                <a href="print-scan.html" class="shub-btn-card">Order Prints <i data-lucide="arrow-right"></i></a>
-                <a href="https://wa.me/919473946181?text=Hi%20One%20Point,%20I%20need%20Printing%20or%20Scanning%20Service" class="shub-btn-card-wa" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><i data-lucide="message-circle"></i></a>
-              </div>
-            </div>
-
-            <!-- 7. Logo & Brand Identity -->
-            <div class="shub-card" data-category="design">
-              <div class="shub-card-top">
-                <div class="shub-card-icon" style="background:#fdf2f8; color:#be185d;"><i data-lucide="palette"></i></div>
-                <div class="shub-card-badges">
-                  <span class="shub-badge badge-pink">Creative</span>
-                  <span class="shub-badge badge-gold">Vector Master</span>
-                </div>
-              </div>
-              <h3 class="shub-card-title">Logo Design &amp; Brand Identity</h3>
-              <p class="shub-card-desc">Custom vector logo creation, typography palette, brand guidelines &amp; stationery kit with 100% ownership.</p>
-              <div class="shub-card-meta">
-                <span class="shub-meta-time"><i data-lucide="clock"></i> 24–48h</span>
-                <span class="shub-meta-price">From <strong>₹299</strong></span>
-              </div>
-              <div class="shub-card-footer">
-                <a href="design-services.html" class="shub-btn-card">Start Project <i data-lucide="arrow-right"></i></a>
-                <a href="https://wa.me/919473946181?text=Hi%20One%20Point,%20I%20need%20Logo%20Design" class="shub-btn-card-wa" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><i data-lucide="message-circle"></i></a>
-              </div>
-            </div>
-
             <!-- 8. Custom Merchandise -->
             <div class="shub-card" data-category="onemart">
               <div class="shub-card-top">
@@ -1992,8 +1895,6 @@
                   <option value="gst">GST Registration &amp; Certificate</option>
                   <option value="udyam">MSME / Udyam Registration</option>
                   <option value="cuet">College Admission / Entrance Form</option>
-                  <option value="print">Document Print &amp; Thesis Binding</option>
-                  <option value="logo">Logo &amp; Brand Identity Design</option>
                   <option value="mug">Personalized Photo Mug Print</option>
                   <option value="affidavit">Affidavit / Legal Agreement</option>
                   <option value="passport">Passport Online Application</option>
@@ -2095,8 +1996,6 @@
             <button type="button" class="shub-doc-tab active" data-doctab="govt"><i data-lucide="landmark"></i> Government &amp; Citizen</button>
             <button type="button" class="shub-doc-tab" data-doctab="edu"><i data-lucide="graduation-cap"></i> Student &amp; Exams</button>
             <button type="button" class="shub-doc-tab" data-doctab="business"><i data-lucide="briefcase"></i> Business Setup</button>
-            <button type="button" class="shub-doc-tab" data-doctab="print"><i data-lucide="printer"></i> Print &amp; Scan</button>
-            <button type="button" class="shub-doc-tab" data-doctab="design"><i data-lucide="palette"></i> Design &amp; Web</button>
             <button type="button" class="shub-doc-tab" data-doctab="onemart"><i data-lucide="shopping-bag"></i> Personalized Store</button>
           </div>
 
@@ -2320,25 +2219,6 @@
             popular: false
           },
           {
-            id: 'gmb',
-            title: 'Google Business Profile Setup & SEO',
-            category: 'business',
-            catName: 'Local Marketing',
-            desc: 'Google Maps verification, local SEO keywords, review QR standee, phone number fix & catalog sync.',
-            price: '₹499',
-            time: '2–4 Days',
-            mode: 'online',
-            badge: 'Google Maps',
-            badgeClass: 'badge-blue',
-            icon: 'map-pin',
-            iconBg: '#eff6ff',
-            iconColor: '#2563eb',
-            url: 'business-online-setup-services.html',
-            cta: 'Setup Profile',
-            keywords: 'google my business gmb maps profile verification local seo reviews qr code shop on google',
-            popular: false
-          },
-          {
             id: 'cuet',
             title: 'College Admission & Entrance Forms',
             category: 'edu',
@@ -2377,82 +2257,6 @@
             popular: false
           },
           {
-            id: 'print',
-            title: 'HD Document Print, Scan & Binding',
-            category: 'print',
-            catName: 'Print Lab',
-            desc: 'Laser B&W/Color printouts, thesis hardbound, spiral binding, large format plan print & high-DPI scanning.',
-            price: '₹2/page',
-            time: 'Instant',
-            mode: 'sameday',
-            badge: 'Instant',
-            badgeClass: 'badge-orange',
-            icon: 'printer',
-            iconBg: '#fff7ed',
-            iconColor: '#c2410c',
-            url: 'print-scan.html',
-            cta: 'Order Prints',
-            keywords: 'print printing xerox photocopy spiral binding thesis scan document project file color print',
-            popular: true
-          },
-          {
-            id: 'logo',
-            title: 'Logo Design & Brand Identity',
-            category: 'design',
-            catName: 'Creative Design',
-            desc: 'Custom vector logo creation, typography palette, brand guidelines & stationery kit with 100% ownership.',
-            price: '₹299',
-            time: '24–48h',
-            mode: 'online',
-            badge: 'Vector Master',
-            badgeClass: 'badge-pink',
-            icon: 'palette',
-            iconBg: '#fdf2f8',
-            iconColor: '#be185d',
-            url: 'design-services.html',
-            cta: 'Start Project',
-            keywords: 'logo design graphic design vector brand identity typography business card letterhead',
-            popular: true
-          },
-          {
-            id: 'flex',
-            title: 'Signage, Flex Banner & Hoardings',
-            category: 'design',
-            catName: 'Outdoor Print',
-            desc: 'High-impact shop front board designs, star flex banners, roll-up standees & exhibition graphics in vector CMYK.',
-            price: '₹349',
-            time: '24h Delivery',
-            mode: 'online',
-            badge: 'Outdoor HD',
-            badgeClass: 'badge-pink',
-            icon: 'image',
-            iconBg: '#fdf2f8',
-            iconColor: '#be185d',
-            url: 'design-services.html',
-            cta: 'Start Banner',
-            keywords: 'flex banner shop board hoarding standee poster flex print outdoor advertising signage',
-            popular: false
-          },
-          {
-            id: 'webdev',
-            title: 'Custom Website & Web Application',
-            category: 'design',
-            catName: 'Web & SaaS',
-            desc: 'Modern responsive websites, landing pages, e-commerce stores & scalable full-stack custom web apps.',
-            price: '₹1,999',
-            time: '3–7 Days',
-            mode: 'online',
-            badge: 'Full Stack',
-            badgeClass: 'badge-purple',
-            icon: 'code',
-            iconBg: '#eff6ff',
-            iconColor: '#2563eb',
-            url: 'design-services.html',
-            cta: 'Start Website',
-            keywords: 'website development web design ecommerce react node custom app landing page web app',
-            popular: false
-          },
-          {
             id: 'onemart',
             title: 'Personalized Gifts & Merchandise',
             category: 'onemart',
@@ -2474,8 +2278,8 @@
           {
             id: 'passport',
             title: 'Passport Online Application & Appointment',
-            category: 'travel',
-            catName: 'Travel Desk',
+            category: 'govt',
+            catName: 'Citizen Seva',
             desc: 'Fresh passport application, Tatkaal appointment booking, renewal & document checklist assistance.',
             price: '₹250',
             time: '1–2 Days',
@@ -2488,25 +2292,6 @@
             url: 'service-passport-assistance.html',
             cta: 'Book Passport',
             keywords: 'passport online seva kendra psk appointment tatkaal visa renewal travel document',
-            popular: false
-          },
-          {
-            id: 'train',
-            title: 'IRCTC Train, Bus & Flight Booking',
-            category: 'travel',
-            catName: 'Ticketing',
-            desc: 'Instant confirmed railway ticket booking, Tatkal assistance, flight reservations & bus ticketing.',
-            price: '₹30 / ticket',
-            time: 'Instant',
-            mode: 'sameday',
-            badge: 'Instant Ticket',
-            badgeClass: 'badge-gold',
-            icon: 'train',
-            iconBg: '#fefce8',
-            iconColor: '#a16207',
-            url: 'travel-services.html',
-            cta: 'Book Ticket',
-            keywords: 'irctc train ticket booking tatkal railway flight flight booking bus ticket travel',
             popular: false
           },
           {
@@ -2769,20 +2554,6 @@
             time: 'Same Day Verification',
             url: 'edupoint.html'
           },
-          print: {
-            name: 'Document Print & Thesis Binding',
-            fee: 'From ₹2 / page',
-            govt: '₹0 (Commercial print lab)',
-            time: 'Instant / Same Day',
-            url: 'print-scan.html'
-          },
-          logo: {
-            name: 'Logo & Brand Identity Design',
-            fee: 'From ₹299',
-            govt: '₹0 (100% Vector IP Handover)',
-            time: '24–48 Hours',
-            url: 'design-services.html'
-          },
           mug: {
             name: 'Personalized Photo Mug Print',
             fee: 'From ₹199',
@@ -2844,18 +2615,6 @@
             { icon: 'receipt-text', title: 'Bank Proof or Cancelled Cheque', desc: 'Active business/savings bank account statement or cancelled cheque showing IFSC code.' },
             { icon: 'user-check', title: 'Aadhaar with Linked Mobile', desc: 'For instant OTP verification during GST portal authorization and digital signature.' }
           ],
-          print: [
-            { icon: 'file-type', title: 'Digital Source File (PDF / Word)', desc: 'High-resolution PDF or documents formatted to standard A4/A3 page dimensions.' },
-            { icon: 'printer', title: 'Print Specifications', desc: 'Mention Color or B&W preference, single/double sided, and 75/100 GSM paper grade.' },
-            { icon: 'layers', title: 'Binding Preference', desc: 'Choose between standard stapling, spiral coil binding, soft cover, or hard thesis binding.' },
-            { icon: 'scan-line', title: 'Original Physical Document (For Scanning)', desc: 'Uncreased original papers or IDs for clean high-DPI optical scanning and OCR.' }
-          ],
-          design: [
-            { icon: 'palette', title: 'Brand Name & Core Concept', desc: 'Your registered trade name, preferred color scheme, and aesthetic style preference.' },
-            { icon: 'file-text', title: 'Text Content & Contact Info', desc: 'Headline, services list, phone numbers, and address to be typeset on banner/brochure.' },
-            { icon: 'layout', title: 'Exact Dimensions & Aspect Ratio', desc: 'Width x Height (in feet or pixels) for flex banners, social media posts, or website.' },
-            { icon: 'sparkles', title: 'Inspiration Reference Links', desc: 'Any reference logos or competitor sample designs you admire for visual direction.' }
-          ],
           onemart: [
             { icon: 'gift', title: 'Product Selection', desc: 'Choose ceramic mug (white/magic), cotton t-shirt size, engraved pen, or wooden frame.' },
             { icon: 'image', title: 'High-Resolution Photo or Artwork', desc: 'Clear JPEG/PNG photograph or vector logo for high-clarity heat transfer sublimation.' },
@@ -2901,7 +2660,7 @@
     <script src="https://unpkg.com/lucide@1.57.0/dist/umd/lucide.min.js" defer></script>
     <script src="assets/mobile-services.js?v=performance-105" defer></script>
     <script src="assets/pilot-metrics.js?v=release-107" defer></script>
-    <script src="assets/app.js?v=onemart-109" defer></script>
+    <script src="assets/app.js?v=desktop-fix-114" defer></script>
     <script src="assets/quick-order.js?v=2" defer></script>
 <script src="assets/print-product-rules.js?v=1" defer></script>
 <script src="assets/print-quick-order.js?v=1" defer></script>

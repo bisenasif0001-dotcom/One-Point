@@ -103,28 +103,8 @@ const services = [
   { slug: "ayushman", name: "Ayushman", category: "CSC Services", price: 199, taxRate: 0 },
   { slug: "jan-seva", name: "Jan Seva", category: "CSC Services", price: 199, taxRate: 0 },
   { slug: "typing", name: "Typing", category: "Documentation", price: 199, taxRate: 0 },
-  { slug: "scan", name: "Scan", category: "Documentation", price: 199, taxRate: 0 },
-  { slug: "print", name: "Print", category: "Documentation", price: 199, taxRate: 0 },
-  { slug: "print-scan", name: "Print & Scan", category: "Documentation", price: 199, taxRate: 0 },
-  { slug: "color-printing", name: "Color Printing", category: "Documentation", price: 199, taxRate: 0 },
-  { slug: "document-scanning", name: "Document Scanning", category: "Documentation", price: 199, taxRate: 0 },
   { slug: "affidavit", name: "Affidavit", category: "Documentation", price: 199, taxRate: 0 },
   { slug: "certificates", name: "Certificates", category: "Documentation", price: 199, taxRate: 0 },
-  { slug: "mobile-recharge", name: "Mobile Recharge", category: "Bill & Recharge", price: 199, taxRate: 0 },
-  { slug: "electricity-bill", name: "Electricity Bill", category: "Bill & Recharge", price: 199, taxRate: 0 },
-  { slug: "fastag", name: "FASTag", category: "Bill & Recharge", price: 199, taxRate: 0 },
-  { slug: "dth-recharge", name: "DTH Recharge", category: "Bill & Recharge", price: 199, taxRate: 0 },
-  { slug: "water-bill", name: "Water Bill", category: "Bill & Recharge", price: 199, taxRate: 0 },
-  { slug: "logo-design", name: "Logo Design", category: "Design Services", price: 199, taxRate: 0 },
-  { slug: "flex-design", name: "Flex Design", category: "Design Services", price: 199, taxRate: 0 },
-  { slug: "visiting-card-design", name: "Visiting Card", category: "Design Services", price: 199, taxRate: 0 },
-  { slug: "banner-design", name: "Banner Design", category: "Design Services", price: 199, taxRate: 0 },
-  { slug: "social-media-post", name: "Social Media Post", category: "Design Services", price: 199, taxRate: 0 },
-  { slug: "bus-ticket", name: "Bus Ticket", category: "Travel Services", price: 199, taxRate: 0 },
-  { slug: "train-ticket", name: "Train Ticket", category: "Travel Services", price: 199, taxRate: 0 },
-  { slug: "flight-booking", name: "Flight Booking", category: "Travel Services", price: 199, taxRate: 0 },
-  { slug: "hotel-booking", name: "Hotel Booking", category: "Travel Services", price: 199, taxRate: 0 },
-  { slug: "tour-package", name: "Tour Package", category: "Travel Services", price: 199, taxRate: 0 }
 ];
 
 function getProduct(slug) {

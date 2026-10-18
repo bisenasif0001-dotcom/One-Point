@@ -6,21 +6,30 @@
   'use strict';
   const aliases = Object.freeze({
     'fssai-license': 'fssai', 'trademark-registration': 'trademark',
-    'flight-ticket': 'flight-booking', 'flight-booking': 'flight-booking',
-    'train-ticket-booking': 'train-ticket', 'tour-package-assistance': 'tour-package',
-    'photocopy-print': 'photocopy-printing', 'photocopy-and-print': 'photocopy-printing',
-    'scanning': 'document-scanning', 'pension-assistance': 'pension',
-    'fastag-recharge': 'fastag', 'recharge-and-bills': 'electricity-bill',
-    'social-media-creative': 'social-media-post', 'travel-booking': 'bus-ticket', 'general-support': 'jan-seva'
+    'pension-assistance': 'pension', 'general-support': 'jan-seva'
   });
   const unique = values => [...new Set(values.filter(value => typeof value === 'string' && value.trim()).map(value => value.trim()))];
   const docs = item => Array.isArray(item?.requiredDocs) ? item.requiredDocs : [];
   function resolve(catalog, slug, type = 'service') {
     if (!catalog || !slug) return null;
     if (type === 'service') slug = aliases[slug] || slug;
+    let effectiveSlug = slug;
     const list = type === 'product' ? catalog.products || [] : catalog.services || [];
-    const main = list.find(item => item.slug === slug && item.active !== false);
-    const variant = type === 'service' ? (catalog.serviceVariants || []).find(item => item.slug === slug && item.active !== false) : null;
+    if (type === 'service' && !list.some(item => item.slug === effectiveSlug)) {
+      if (/exam|recruitment|admission|cgl|chsl|mts|rrb|ibps|upsc|neet|jee|cuet|tet|police|apprentice|special-govt|bank/i.test(slug)) {
+        effectiveSlug = 'exam-form-filling';
+      } else if (/scholarship/i.test(slug)) {
+        effectiveSlug = 'scholarship-form';
+      } else if (/university|degree|transcript|marksheet|bonafide|migration|convocation|scrutiny|revaluation|semester/i.test(slug)) {
+        effectiveSlug = 'university-services';
+      } else if (/transport|driving|licence|license|rc-|vehicle|challan|hsrp/i.test(slug)) {
+        effectiveSlug = 'jan-seva';
+      } else if (/certificate/i.test(slug)) {
+        effectiveSlug = 'certificates';
+      }
+    }
+    const main = list.find(item => item.slug === effectiveSlug && item.active !== false);
+    const variant = type === 'service' ? (catalog.serviceVariants || []).find(item => item.slug === effectiveSlug && item.active !== false) : null;
     const selected = variant || main;
     if (!selected) return null;
     // Variant pricing follows the backend's exact-slug precedence. Same-ID main

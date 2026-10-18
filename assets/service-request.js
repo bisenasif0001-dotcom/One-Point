@@ -20,4 +20,19 @@
     link.href = 'https://wa.me/919473946181?text=' + encodeURIComponent('Please confirm availability, requirements and the complete price for: ' + name);
     document.querySelectorAll('[data-request-sticky-link]').forEach(action => { action.href = link.href; });
   }
+
+  // Configure Direct Online Booking / Checkout Action
+  const checkoutQuery = new URLSearchParams();
+  checkoutQuery.set('service', slug || 'exam-form-filling');
+  checkoutQuery.set('service_name', name);
+  if (params.get('category')) checkoutQuery.set('category', params.get('category'));
+  const checkoutHref = 'checkout.html?' + checkoutQuery.toString();
+
+  document.querySelectorAll('[data-request-checkout], [data-request-sticky-pay]').forEach(action => {
+    action.href = checkoutHref;
+  });
+
+  if (window.lucide && typeof window.lucide.createIcons === 'function') {
+    window.lucide.createIcons();
+  }
 })();

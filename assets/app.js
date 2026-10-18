@@ -2127,8 +2127,6 @@ const navItems = [
       "Scholarship Form",
       "CCC / O Level",
       "University Services",
-      "Photocopy & Printing",
-      "Lamination",
       "Online Test",
       "Resume Builder"
     ]
@@ -2184,77 +2182,7 @@ const navItems = [
   }
 ];
 
-const megaGroups = [
-  {
-    title: "Business Online Setup",
-    icon: "globe",
-    href: "business-online-setup-services.html",
-    description: "Google profiles, WhatsApp setup, vCards, QR codes & automation.",
-    items: [
-      ["Google Profile", "business-online-setup-services.html"],
-      ["Google Reviews", "business-online-setup-services.html"],
-      ["WhatsApp Business", "business-online-setup-services.html"],
-      ["WhatsApp Auto Reply", "business-online-setup-services.html"],
-      ["Business QR Code", "business-online-setup-services.html"],
-      ["Digital Visiting Card", "business-online-setup-services.html"]
-    ]
-  },
-  {
-    title: "Documentation",
-    icon: "files",
-    href: "print-scan.html",
-    description: "Typing, printing, scanning and document preparation.",
-    items: [
-      ["Typing", "print-scan.html"],
-      ["Scan", "service-document-scanning.html"],
-      ["Print", "service-photocopy-printing.html"],
-      ["Lamination", "service-lamination.html"],
-      ["Affidavit", "service-legal-drafting-court-services.html"],
-      ["Certificates", "service-state-certificates-civil-registration.html"]
-    ]
-  },
-  {
-    title: "Bill & Recharge",
-    icon: "smartphone-charging",
-    href: "online-services.html",
-    description: "Utility bill, mobile, DTH and FASTag support.",
-    items: [
-      ["Mobile Recharge", "online-services.html"],
-      ["Electricity Bill", "online-services.html"],
-      ["FASTag", "online-services.html"],
-      ["DTH Recharge", "online-services.html"],
-      ["Water Bill", "online-services.html"]
-    ]
-  },
-  {
-    title: "Design Services",
-    icon: "paintbrush",
-    href: "design-services.html",
-    description: "Local business creatives and print-ready design help.",
-    items: [
-      ["Logo Design", "design-services.html#logo-design"],
-      ["Flex Design", "design-services.html#flex-design"],
-      ["Visiting Card", "design-services.html#visiting-card"],
-      ["Banner Design", "design-services.html#banner-design"],
-      ["Social Media Post", "design-services.html#social-media-post"]
-    ]
-  },
-  {
-    title: "Travel Services",
-    icon: "plane",
-    href: "travel-services.html",
-    description: "Booking assistance with clear confirmation support.",
-    highlight: true,
-    items: [
-      ["Bus Ticket", "travel-services.html#bus-ticket"],
-      ["Train Ticket", "travel-services.html#train-ticket"],
-      ["Flight Ticket", "travel-services.html#flight-ticket"],
-      ["Hotel Booking", "travel-services.html#hotel-booking"],
-      ["Tour Package", "travel-services.html#tour-package"],
-      ["Passport Assistance", "travel-services.html#passport-assistance"]
-    ]
-  }
-];
+const megaGroups = [];
 
 const oneMartGroups = [
   {
@@ -2872,7 +2800,6 @@ const searchIndex = [
   { term: "citizen security cybercrime police help tenant verification character certificate ldr lost article", title: "Citizen Security, Cybercrime & Police Help", href: "service-citizen-security-cybercrime-police-help.html" },
   { term: "ayushman card health card pmjay golden card free medical treatment hospital 5 lakh", title: "Ayushman Bharat Golden Card", href: "online-services.html#welfare" },
   { term: "police verification pcc tenant verification domestic worker servant verification character", title: "Police Verification Assistance", href: "service-citizen-security-cybercrime-police-help.html" },
-  { term: "bus ticket train ticket flight ticket hotel booking tour", title: "Travel Services", href: "travel-services.html" },
   { term: "voter id election card voter registration", title: "Voter ID", href: "service-voter-id.html" },
   { term: "passport passport form passport appointment", title: "Passport Assistance", href: "service-passport-assistance.html" },
   { term: "aadhaar aadhar enrolment update pvc card", title: "Aadhaar Services Assistance", href: "service-aadhaar-services-assistance.html" },
@@ -2886,25 +2813,13 @@ const searchIndex = [
   { term: "shop license dukaan license trade license", title: "Shop License", href: "service-business-registration-corporate-setup.html" },
   { term: "trademark brand registration tm", title: "Trademark", href: "service-business-registration-corporate-setup.html" },
   { term: "company registration pvt ltd startup private limited", title: "Company Registration", href: "service-business-registration-corporate-setup.html" },
-  { term: "logo design logo banana brand logo", title: "Logo Design", href: "design-services.html#logo-design" },
-  { term: "flex design banner design print", title: "Flex / Banner Design", href: "design-services.html#flex-design" },
-  { term: "visiting card business card", title: "Visiting Card", href: "design-services.html#visiting-card" },
-  { term: "social media post facebook instagram", title: "Social Media Post", href: "design-services.html#social-media-post" },
   { term: "scholarship form chatravritti up scholarship", title: "Scholarship Form", href: "edupoint.html#scholarship-form" },
   { term: "exam form ssc railway upsc up police", title: "Exam Form Filling", href: "edupoint.html#exam-form-filling" },
   { term: "result download mark sheet result check", title: "Result Download", href: "edupoint.html#result-download" },
   { term: "ccc o level computer course tally", title: "CCC / O Level", href: "edupoint.html#ccc-o-level" },
-  { term: "google business profile maps ranking local seo", title: "Google Business Profile", href: "business-online-setup-services.html" },
-  { term: "whatsapp business auto reply bot catalogue vcard qr code", title: "Business Online Setup", href: "business-online-setup-services.html" },
-  { term: "mobile recharge jio airtel bsnl vi", title: "Mobile Recharge", href: "online-services.html" },
-  { term: "electricity bill bijli bill uppcl", title: "Electricity Bill", href: "online-services.html" },
-  { term: "fastag recharge toll highway", title: "FASTag Recharge", href: "online-services.html" },
-  { term: "dth recharge tata sky dish tv airtel", title: "DTH Recharge", href: "online-services.html" },
   { term: "pm kisan kisan samman nidhi farmer", title: "PM Kisan", href: "service-pension-welfare-schemes-assistance.html" },
   { term: "pension old age widow atal pension", title: "Pension", href: "service-pension-welfare-schemes-assistance.html" },
   { term: "insurance pmsby pmjjby jeevan jyoti", title: "Insurance", href: "online-services.html" },
-  { term: "photocopy print lamination scan xerox", title: "Print & Scan", href: "print-scan.html" },
-  { term: "tour package yatra travel package", title: "Tour Package", href: "travel-services.html#tour-package" },
   { term: "iec code import export trading", title: "IEC Code", href: "service-business-registration-corporate-setup.html" },
   { term: "logo sticker waterproof sticker vinyl holographic label packaging print", title: "Sticker Printing", href: "products.html#sticker-printing" },
   { term: "uv dtf cup bottle glass acrylic name plate logo transfer branding", title: "UV DTF Printing", href: "products.html#uv-dtf-printing" },
@@ -2914,16 +2829,6 @@ const searchIndex = [
   { term: "about us company info one point", title: "About Us", href: "about.html" },
   { term: "contact whatsapp helpline support", title: "Contact Support", href: "contact.html" },
   { term: "track application status check", title: "Track Application", href: "track-application.html" },
-  { term: "google business profile optimization maps ranking local seo", title: "Google Business Profile Optimization", href: "business-online-setup-services.html" },
-  { term: "google review management setup feedback automated qr", title: "Google Review Management Setup", href: "business-online-setup-services.html" },
-  { term: "whatsapp business profile setup catalog location hours", title: "WhatsApp Business Profile Setup", href: "business-online-setup-services.html" },
-  { term: "whatsapp auto reply setup bot automated response", title: "WhatsApp Auto Reply Setup", href: "business-online-setup-services.html" },
-  { term: "business qr code creation payment google review vcard", title: "Business QR Code Creation", href: "business-online-setup-services.html" },
-  { term: "digital visiting card creation vcard interactive click to call", title: "Digital Visiting Card Creation", href: "business-online-setup-services.html" },
-  { term: "online catalogue creation product showcase PDF catalog", title: "Online Catalogue Creation", href: "business-online-setup-services.html" },
-  { term: "business email signature design professional email header footer", title: "Business Email Signature Design", href: "business-online-setup-services.html" },
-  { term: "email template creation HTML newsletter promo template", title: "Email Template Creation", href: "business-online-setup-services.html" },
-  { term: "business automation setup workflow CRM leads auto message", title: "Business Automation Setup", href: "business-online-setup-services.html" },
   { term: "admission assistance school college iti nios bed nursing university", title: "Admission Assistance", href: "edupoint-admission-assistance.html" },
   { term: "competitive exams upsc ssc rrb ibps police neet jee psc", title: "Competitive Exams", href: "edupoint-competitive-exams.html" },
   { term: "university services degree certificate marksheet migration scrutiny", title: "University Services", href: "edupoint-university-services.html" },
@@ -2966,18 +2871,10 @@ function panServiceAlias(label = "") {
 }
 const servicePageByCategory = {
   "e-services": "online-services.html",
-  "csc-services": "business-online-setup-services.html",
-  "business-online-setup": "business-online-setup-services.html",
   proserve: "business-solutions.html",
   business: "business-solutions.html",
   student: "edupoint.html",
   edupoint: "edupoint.html",
-  "print-scan": "print-scan.html",
-  documentation: "print-scan.html",
-  travel: "travel-services.html",
-  "travel-services": "travel-services.html",
-  design: "design-services.html",
-  "design-services": "design-services.html",
   onemart: "products.html",
   products: "products.html",
   support: "support.html"
@@ -3124,66 +3021,6 @@ const servicesMegaGroups = [
       ["Business Branding", "products.html#business-branding", "Visiting cards, PVC cards, flyers, menu cards and banners.", "briefcase"]
     ]
   },
-  {
-    title: "Travel Services",
-    icon: "plane",
-    desc: "Bus, train, flight, hotel, tour and passport travel support.",
-    href: "travel-services.html",
-    items: [
-      ["Bus Ticket", "travel-services.html#bus-ticket", "Book sleeper and AC bus tickets across major routes.", "bus"],
-      ["Train Ticket", "travel-services.html#train-ticket", "IRCTC authorized railway ticket booking assistance.", "train"],
-      ["Flight Ticket", "travel-services.html#flight-ticket", "Domestic and international flight ticket bookings.", "plane"],
-      ["Hotel Booking", "travel-services.html#hotel-booking", "Budget-friendly hotel room reservations.", "hotel"]
-    ]
-  },
-  {
-    title: "Business Online Setup Services",
-    icon: "globe",
-    desc: "Google profile optimization, WhatsApp setup, vCards, QR codes & automation.",
-    href: "business-online-setup-services.html",
-    items: [
-      ["Google Business Profile", "business-online-setup-services.html", "Optimize Google Maps profile and local SEO rank.", "map-pin"],
-      ["Google Review Setup", "business-online-setup-services.html", "Automated Google review collection link & QR code.", "star"],
-      ["WhatsApp Business Setup", "business-online-setup-services.html", "Setup product catalog, auto-reply, location and hours.", "message-square"],
-      ["Digital Visiting Card", "business-online-setup-services.html", "Interactive vCard with click-to-call & social links.", "contact-2"]
-    ]
-  },
-  {
-    title: "Print & Scan",
-    icon: "printer",
-    desc: "Photocopy, color print, scanning, lamination and ID card printing.",
-    href: "print-scan.html",
-    items: [
-      ["Photocopy & Print", "service-photocopy-printing.html", "B&W and color page printing from mobile/email.", "copy"],
-      ["Color Printing", "service-color-printing.html", "Premium photo printing and document copies.", "image"],
-      ["Document Scanning", "service-document-scanning.html", "Scan certificates and forms to PDF or JPEG formats.", "scan"],
-      ["Lamination Support", "service-lamination.html", "Protect cards and certificates with plastic seal.", "layers"]
-    ]
-  },
-  {
-    title: "Design Services",
-    icon: "palette",
-    desc: "Visiting card, banner, flex, logo and small business brand support.",
-    href: "design-services.html",
-    items: [
-      ["Visiting Card", "design-services.html#visiting-card", "Custom business card designs with premium finish.", "contact"],
-      ["Banner Design", "design-services.html#banner-design", "Promotional banners for shops, events, and festivals.", "layout"],
-      ["Flex & Banner", "design-services.html#flex-design", "High-resolution flex banner layout and printing.", "maximize"],
-      ["Logo Design", "design-services.html#logo-design", "Unique brand logo creations for small businesses.", "palette"]
-    ]
-  },
-  {
-    title: "Recharge & Bills",
-    icon: "smartphone",
-    desc: "Mobile recharge, electricity bill, DTH recharge and utility support.",
-    href: "online-services.html",
-    items: [
-      ["Mobile Recharge", "online-services.html", "Prepaid and postpaid recharges for Jio, Airtel, VI.", "smartphone"],
-      ["Electricity Bill", "online-services.html", "Pay electricity bills online without extra charges.", "zap"],
-      ["DTH Recharge", "online-services.html", "Recharge Tata Play, Dish TV, Airtel DTH, Videocon.", "tv"],
-      ["FASTag Recharge", "online-services.html", "Instant highway toll card recharge assistance.", "tag"]
-    ]
-  }
 ];
 
 function renderNav() {
@@ -3201,6 +3038,10 @@ function renderNav() {
             ${icon("chevron-right", 14)}
           </a>
         `).join("")}
+        <a class="mega-sidebar-all-link" href="services.html" style="margin-top: auto; padding: 10px 12px; border-top: 1px solid rgba(255,255,255,0.15); color: #eedca4; font-size: 0.82rem; font-weight: 700; display: flex; align-items: center; justify-content: space-between; text-decoration: none; border-radius: 8px;">
+          <span>Explore All Services</span>
+          ${icon("arrow-right", 13)}
+        </a>
       </div>
       <div class="mega-content-panel" style="opacity: 1; transition: opacity 0.15s ease;">
         <div class="mega-content-header">
@@ -3240,7 +3081,9 @@ function renderNav() {
     if (item.isMega) {
       return `
         <div class="nav-item nav-item-mega">
-          <a class="nav-trigger ${active}" href="${item.href}" aria-haspopup="true" aria-expanded="false" data-dropdown-trigger>${item.label} ${icon("chevron-down", 15)}</a>
+          <button class="nav-trigger ${active}" type="button" aria-haspopup="true" aria-expanded="false" data-dropdown-trigger>
+            ${item.label} ${icon("chevron-down", 15)}
+          </button>
           <div class="mega-menu utilities-mega onemart-mega" aria-label="Services Categories">
             ${megaHtml}
           </div>
@@ -3274,28 +3117,32 @@ function renderNav() {
     return `<a class="nav-link ${active}" href="${item.href}">${item.label}${item.href === 'products.html' ? '<span class="onemart-coming-badge">Coming soon</span>' : ''}</a>`;
   }).join("");
 
-  const mobilePopularLinks = [
-    ["PAN Card", "service-pan-card.html", "credit-card"],
-    ["Aadhaar", "service-aadhaar-services-assistance.html", "fingerprint"],
-    ["GST", "service-gst-registration.html", "coins"],
-    ["Track", "track-application.html", "search-check"]
-  ].map(([label, href, iconName]) => `
-    <a class="mobile-quick-chip" href="${href}">
+  const mobilePopularChips = [
+    { label: "PAN Card", href: "service-pan-card.html", iconName: "credit-card", theme: "chip-blue" },
+    { label: "Aadhaar", href: "service-aadhaar-services-assistance.html", iconName: "fingerprint", theme: "chip-emerald" },
+    { label: "GST", href: "service-gst-registration.html", iconName: "coins", theme: "chip-amber" },
+    { label: "Track", href: "track-application.html", iconName: "search-check", theme: "chip-violet" }
+  ];
+  const mobilePopularLinks = mobilePopularChips.map(({ label, href, iconName, theme }) => `
+    <a class="mobile-quick-chip ${theme}" href="${href}">
       <span class="mobile-quick-icon">${icon(iconName, 15)}</span>
-      <span>${label}</span>
+      <span class="mobile-quick-label">${label}</span>
+      <span class="mobile-quick-arrow">${icon("chevron-right", 12)}</span>
     </a>
   `).join("");
 
-  const mobileAccordions = servicesMegaGroups.map((group, idx) => `
-    <section class="mobile-accordion mobile-mega-card${idx === 0 ? ' open' : ''}" data-mobile-menu-text="${group.title} ${group.desc} ${group.items.map(([label]) => label).join(' ')}">
+  const mobileAccordions = servicesMegaGroups.map((group, idx) => {
+    const catClass = `category-${group.title.toLowerCase().replace(/[^a-z0-9]/g, '')}`;
+    return `
+    <section class="mobile-accordion mobile-mega-card ${catClass}${idx === 0 ? ' open' : ''}" data-mobile-menu-text="${group.title} ${group.desc} ${group.items.map(([label]) => label).join(' ')}">
       <button class="nav-trigger mobile-mega-trigger" type="button" aria-expanded="${idx === 0 ? 'true' : 'false'}" data-mobile-accordion>
         <span class="mobile-mega-icon">${icon(group.icon, 19)}</span>
         <span class="mobile-mega-copy">
           <strong>${group.title}</strong>
           <small>${group.desc}</small>
         </span>
-        <span class="mobile-mega-count">${group.items.length}</span>
-        ${icon("chevron-down", 16)}
+        <span class="mobile-mega-count mobile-mega-badge-pill">${group.items.length}</span>
+        <span class="mobile-mega-chevron-box">${icon("chevron-down", 15)}</span>
       </button>
       <div class="mobile-accordion-panel">
         <a class="mobile-overview-link" href="${group.href}">
@@ -3316,7 +3163,8 @@ function renderNav() {
         </div>
       </div>
     </section>
-  `).join("");
+  `;
+  }).join("");
 
   navRoot.innerHTML = `
     <header class="site-header">
@@ -3350,7 +3198,7 @@ function renderNav() {
             </div>
             <div class="mobile-menu-search">
               ${icon("search", 17)}
-              <input type="search" data-mobile-menu-search placeholder="Search PAN, GST, recharge, admit card..." aria-label="Search services" autocomplete="off" spellcheck="false">
+              <input type="search" data-mobile-menu-search placeholder="Search PAN, Aadhaar, GST, exams..." aria-label="Search services" autocomplete="off" spellcheck="false">
               <button class="mobile-search-clear" type="button" aria-label="Clear search" data-mobile-search-clear hidden>&times;</button>
             </div>
             <div class="mobile-search-feedback" data-mobile-search-feedback hidden></div>
@@ -3366,7 +3214,8 @@ function renderNav() {
                   <strong>Home Page</strong>
                   <small>Main Overview & Live Status</small>
                 </span>
-                <span class="mobile-home-badge">${current === "index.html" ? "Current" : "Visit"}</span>
+                <span class="mobile-home-badge ${current === "index.html" ? "badge-current" : ""}">${current === "index.html" ? "Current" : "Visit"}</span>
+                <span class="mobile-home-arrow">${icon("chevron-right", 14)}</span>
               </a>
               <div class="mobile-quick-grid">
                 ${mobilePopularLinks}
@@ -3374,7 +3223,7 @@ function renderNav() {
 
               <div class="mobile-section-header">
                 <span>Service Categories</span>
-                <span>${servicesMegaGroups.length} Categories</span>
+                <span class="section-badge">${servicesMegaGroups.length} Categories</span>
               </div>
               <div class="mobile-categories-list">
                 ${mobileAccordions}
@@ -3383,15 +3232,15 @@ function renderNav() {
               <div class="mobile-section-header">
                 <span>Portals & Account</span>
               </div>
-              <div class="mobile-accordion mobile-mega-card">
+              <div class="mobile-accordion mobile-mega-card category-portals">
                 <button class="nav-trigger mobile-mega-trigger" type="button" aria-expanded="false" data-mobile-accordion>
                   <span class="mobile-mega-icon">${icon("user", 19)}</span>
                   <span class="mobile-mega-copy">
                     <strong>Portals & Login</strong>
                     <small>Customer account, admin & secure login</small>
                   </span>
-                  <span class="mobile-mega-count">3</span>
-                  ${icon("chevron-down", 16)}
+                  <span class="mobile-mega-count mobile-mega-badge-pill">3</span>
+                  <span class="mobile-mega-chevron-box">${icon("chevron-down", 15)}</span>
                 </button>
                 <div class="mobile-accordion-panel">
                   <div class="mobile-service-list">
@@ -3942,16 +3791,20 @@ function setupMobileNav() {
   updateHeaderOffset();
   const header = document.querySelector('.site-header');
   if (header && window.ResizeObserver) new ResizeObserver(updateHeaderOffset).observe(header);
-  window.addEventListener("resize", updateHeaderOffset, { passive: true });
+  window.addEventListener("resize", () => {
+    updateHeaderOffset();
+    syncMenuModality();
+  }, { passive: true });
   window.addEventListener("scroll", updateHeaderOffset, { passive: true });
 
   const mobileLayout = () => window.matchMedia(document.body.id === 'homepage-body' ? '(max-width: 1180px)' : '(max-width: 980px)').matches;
   const isolateMenu = createDialogIsolation(menu);
   const syncMenuModality = () => {
+    const isMobile = mobileLayout();
     const open = menu.classList.contains('open');
-    isolateMenu(open && mobileLayout());
-    menu.inert = !open;
-    if (open && mobileLayout()) {
+    isolateMenu(open && isMobile);
+    menu.inert = isMobile ? !open : false;
+    if (open && isMobile) {
       menu.setAttribute('role', 'dialog');
       menu.setAttribute('aria-modal', 'true');
       menu.setAttribute('aria-label', 'Site navigation');
@@ -4234,11 +4087,11 @@ function setupMobileNav() {
           <strong>No services found for "${safeHtml(rawQuery)}"</strong>
           <p>Try searching for popular services:</p>
           <div class="search-suggest-chips">
-            <button type="button" class="search-suggest-chip" data-search-chip="Mobile Recharge">Mobile Recharge</button>
+            <button type="button" class="search-suggest-chip" data-search-chip="Scholarship">Scholarship</button>
             <button type="button" class="search-suggest-chip" data-search-chip="PAN Card">PAN Card</button>
             <button type="button" class="search-suggest-chip" data-search-chip="Aadhaar">Aadhaar</button>
             <button type="button" class="search-suggest-chip" data-search-chip="GST">GST</button>
-            <button type="button" class="search-suggest-chip" data-search-chip="Ticket">Ticket</button>
+            <button type="button" class="search-suggest-chip" data-search-chip="Voter ID">Voter ID</button>
           </div>
         `;
         emptyEl.querySelectorAll("[data-search-chip]").forEach((chip) => {
@@ -4286,7 +4139,6 @@ function setupDropdowns() {
 
   const desktopQuery = window.matchMedia("(min-width: 1081px)");
   const closeTimers = new WeakMap();
-  const closeDelay = 400;
 
   const clearCloseTimer = (item) => {
     const timer = closeTimers.get(item);
@@ -4326,46 +4178,50 @@ function setupDropdowns() {
   items.forEach((item) => {
     const trigger = item.querySelector("[data-dropdown-trigger]");
 
-    const open = () => {
+    const openHover = () => {
       clearCloseTimer(item);
       closeSiblings(item);
       item.classList.add("dropdown-open");
-      trigger?.setAttribute("aria-expanded", "true");
+      setExpanded(item, true);
     };
 
-    // Desktop: open on hover, close automatically on pointerleave with smooth 200ms grace period
+    // Desktop: open preview on hover, close automatically on pointerleave unless pinned open
     item.addEventListener("pointerenter", () => {
-      if (desktopQuery.matches) open();
+      if (desktopQuery.matches) {
+        openHover();
+      }
     });
 
     item.addEventListener("pointerleave", () => {
       if (desktopQuery.matches) {
-        closeItem(item, 200);
+        // If the item was explicitly clicked open, keep it open until click outside or Escape
+        if (!item.classList.contains("open")) {
+          closeItem(item, 220);
+        }
       }
     });
 
     // focusin for keyboard nav
-    item.addEventListener("focusin", open);
+    item.addEventListener("focusin", () => {
+      clearCloseTimer(item);
+      closeSiblings(item);
+      item.classList.add("dropdown-open");
+      setExpanded(item, true);
+    });
 
-    // Toggle on trigger click (handles button triggers on desktop/mobile and links on touch/mobile)
+    // Toggle on trigger click (handles clicks reliably across desktop, laptop, tablet and mobile)
     trigger?.addEventListener("click", (event) => {
-      const isMobile = window.matchMedia("(max-width: 1080px)").matches;
-      const isTouchLike = window.matchMedia("(hover: none)").matches;
-      const isButton = trigger.tagName === "BUTTON";
-      if (!isMobile && !isTouchLike && !isButton) return;
+      event.preventDefault();
+      event.stopPropagation();
+      clearCloseTimer(item);
 
-      const isOpen = item.classList.contains("dropdown-open") || item.classList.contains("open");
-      if (!isOpen) {
-        event.preventDefault();
-        open();
-        item.classList.add("open");
+      const isPinnedOpen = item.classList.contains("open");
+      if (isPinnedOpen) {
+        closeItem(item);
       } else {
-        if (isButton) {
-          event.preventDefault();
-          closeItem(item);
-        } else {
-          setTimeout(() => closeItem(item), 150);
-        }
+        closeSiblings(item);
+        item.classList.add("dropdown-open", "open");
+        setExpanded(item, true);
       }
     });
 
@@ -4375,14 +4231,12 @@ function setupDropdowns() {
       dropdownContent.addEventListener("click", (event) => {
         const link = event.target.closest("a");
         if (link) {
-          // Mega sidebar links are handled by setupMegaMenuTabs so hover preview
-          // and click navigation do not fight this generic dropdown closer.
+          // Mega sidebar category items are handled by setupMegaMenuTabs for hover/click preview
           if (link.classList.contains("mega-sidebar-item")) {
             return;
           }
 
           try {
-            // Check if it's a same-page hash link
             const currentUrl = new URL(window.location.href);
             const targetUrl = new URL(link.href, window.location.href);
             const isSamePageHash = currentUrl.origin === targetUrl.origin &&
@@ -4390,11 +4244,10 @@ function setupDropdowns() {
                                    targetUrl.hash !== "";
 
             if (isSamePageHash) {
-              // Close after a short delay to allow the browser to register hash changes and scroll
               setTimeout(() => closeItem(item), 150);
             } else {
-              // For different-page links, force navigation via window.location.href to prevent click cancellation
               event.preventDefault();
+              closeItem(item);
               if (link.getAttribute("target") === "_blank") {
                 window.open(link.href, "_blank");
               } else {
@@ -4402,7 +4255,7 @@ function setupDropdowns() {
               }
             }
           } catch (e) {
-            // Fallback: force navigation to avoid failures
+            closeItem(item);
             event.preventDefault();
             const href = link.getAttribute("href") || link.href;
             if (link.getAttribute("target") === "_blank") {
@@ -4416,11 +4269,14 @@ function setupDropdowns() {
     }
   });
 
-  // Close ALL dropdowns when clicking ANYWHERE outside the nav
+  // Close ALL dropdowns when clicking anywhere outside any active dropdown
   document.addEventListener("click", (event) => {
-    if (!event.target.closest(".nav-bar")) {
-      items.forEach((item) => closeItem(item));
-    }
+    const clickedItem = event.target.closest(".nav-item");
+    items.forEach((item) => {
+      if (item !== clickedItem) {
+        closeItem(item);
+      }
+    });
   });
 
   // Close on Escape key
@@ -7753,21 +7609,14 @@ function setupContactForm() {
     'e-services': navItems.find(i => i.label === 'E-Services')?.children || [],
     'proserve': navItems.find(i => i.label === 'ProServe')?.children || [],
     'onemart': [...new Set(oneMartGroups.flatMap(group => [group.title, ...group.items]))],
-    'travel-services': megaGroups.find(g => g.title === 'Travel Services')?.items.map(i => i[0]) || [],
-    'travel': megaGroups.find(g => g.title === 'Travel Services')?.items.map(i => i[0]) || [],
-    'csc-services': megaGroups.find(g => g.title === 'CSC Services')?.items.map(i => i[0]) || [],
-    'documentation': megaGroups.find(g => g.title === 'Documentation')?.items.map(i => i[0]) || [],
-    'print-scan': ["Print & Scan", "Photocopy & Printing", "Photocopy & Print", "Color Printing", "Document Scanning", "Scanning", "Lamination", "Lamination Support"],
-    'bill-recharge': megaGroups.find(g => g.title === 'Bill & Recharge')?.items.map(i => i[0]) || [],
-    'design-services': megaGroups.find(g => g.title === 'Design Services')?.items.map(i => i[0]) || [],
-    'design': megaGroups.find(g => g.title === 'Design Services')?.items.map(i => i[0]) || [],
+    
   };
 
   let servicesToShow = [];
   if (category && serviceMap[category]) {
     servicesToShow = serviceMap[category];
   } else {
-    servicesToShow = [ "PAN Card", "Ayushman Card", "Exam Form Filling", "Admit Card Download", "GST Registration", "Bus Ticket", "Train Ticket" ];
+    servicesToShow = [ "PAN Card", "Ayushman Card", "Exam Form Filling", "Admit Card Download", "GST Registration" ];
   }
 
   select.innerHTML = '<option value="" disabled>Select a service...</option>';
@@ -8110,11 +7959,6 @@ function inferServiceSlug(form) {
     "service-iec-code.html": "iec-code",
     "service-trademark-registration.html": "trademark-registration",
     "service-company-registration.html": "company-registration",
-    "print-scan.html": "print-scan",
-    "service-photocopy-printing.html": "photocopy-printing",
-    "service-color-printing.html": "color-printing",
-    "service-document-scanning.html": "document-scanning",
-    "service-lamination.html": "lamination",
     "edupoint.html": "exam-form-filling",
     "business-solutions.html": "gst-registration",
     "online-services.html": "pan-card"
@@ -8269,24 +8113,7 @@ function getApplyCategoryOptions(category = "general") {
       "Company Registration"
     ],
     onemart: ["Custom Print Order", "OneMart Bulk Order", ...oneMartGroups.flatMap((group) => [group.title, ...group.items])],
-    products: ["Custom Print Order", "OneMart Bulk Order", ...oneMartGroups.flatMap((group) => [group.title, ...group.items])],
-    "travel-services": megaGroups.find((group) => group.title === "Travel Services")?.items.map((item) => item[0]) || [],
-    travel: megaGroups.find((group) => group.title === "Travel Services")?.items.map((item) => item[0]) || [],
-    "print-scan": ["Print & Scan", "Photocopy & Printing", "Photocopy & Print", "Color Printing", "Document Scanning", "Scanning", "Lamination", "Lamination Support"],
-    documentation: ["Print & Scan", "Photocopy & Printing", "Photocopy & Print", "Color Printing", "Document Scanning", "Scanning", "Lamination", "Lamination Support"],
-    "design-services": ["Design Services", ...(megaGroups.find((group) => group.title === "Design Services")?.items.map((item) => item[0]) || [])],
-    design: ["Design Services", ...(megaGroups.find((group) => group.title === "Design Services")?.items.map((item) => item[0]) || [])],
-    "csc-services": [
-      ...(megaGroups.find((group) => group.title === "CSC Services")?.items.map((item) => item[0]) || []),
-      ...(megaGroups.find((group) => group.title === "Documentation")?.items.map((item) => item[0]) || []),
-      ...(megaGroups.find((group) => group.title === "Bill & Recharge")?.items.map((item) => item[0]) || [])
-    ],
-    csc: [
-      ...(megaGroups.find((group) => group.title === "CSC Services")?.items.map((item) => item[0]) || []),
-      ...(megaGroups.find((group) => group.title === "Documentation")?.items.map((item) => item[0]) || []),
-      ...(megaGroups.find((group) => group.title === "Bill & Recharge")?.items.map((item) => item[0]) || [])
-    ],
-    support: ["WhatsApp Support", "Call Support", "General Support"]
+    products: ["Custom Print Order", "OneMart Bulk Order", ...oneMartGroups.flatMap((group) => [group.title, ...group.items])],    support: ["WhatsApp Support", "Call Support", "General Support"]
   };
 
   return uniqueServiceOptions(map[key] || []);
@@ -8343,12 +8170,6 @@ function catalogCategoryAliases(category = "general") {
     business: ["ProServe", "Business"],
     onemart: ["Personalized Gifts", "Sticker Printing", "T-Shirt Printing", "UV DTF Printing", "Business Branding", "Trending Products"],
     products: ["Personalized Gifts", "Sticker Printing", "T-Shirt Printing", "UV DTF Printing", "Business Branding", "Trending Products"],
-    "travel-services": ["Travel Services", "Travel Booking", "Travel"],
-    travel: ["Travel Services", "Travel Booking", "Travel"],
-    "design-services": ["Design Services"],
-    design: ["Design Services"],
-    "csc-services": ["CSC Services", "Documentation", "Bill & Recharge"],
-    csc: ["CSC Services", "Documentation", "Bill & Recharge"]
   };
   return aliases[key] || [];
 }
@@ -8688,15 +8509,7 @@ function inferApplyCategory(explicitCategory = "", requestedService = "") {
     "service-iec-code.html": "proserve",
     "service-trademark-registration.html": "proserve",
     "service-company-registration.html": "proserve",
-    "print-scan.html": "print-scan",
-    "service-photocopy-printing.html": "print-scan",
-    "service-color-printing.html": "print-scan",
-    "service-document-scanning.html": "print-scan",
-    "service-lamination.html": "print-scan",
     "edupoint.html": "edupoint",
-    "travel-services.html": "travel-services",
-    "design-services.html": "design-services",
-    "business-online-setup-services.html": "business-online-setup",
     "products.html": "onemart",
     "product-detail.html": "onemart",
     "support.html": "support"
@@ -8725,7 +8538,7 @@ function inferApplyCategory(explicitCategory = "", requestedService = "") {
   if (explicitCategory && getApplyCategoryOptions(explicitCategory).length) return explicitCategory;
 
   const normalizedService = (requestedService || "").toLowerCase();
-  const match = ["e-services", "proserve", "edupoint", "print-scan", "travel-services", "design-services", "csc-services", "onemart", "support"]
+  const match = ["e-services", "proserve", "edupoint", "onemart", "support"]
     .find((key) => getApplyCategoryOptions(key).some((service) => service.toLowerCase() === normalizedService));
   return match || "general";
 }
@@ -8791,11 +8604,6 @@ function defaultApplyServiceForPage() {
     "service-iec-code.html": "IEC Code",
     "service-trademark-registration.html": "Trademark Registration",
     "service-company-registration.html": "Company Registration",
-    "print-scan.html": "Print & Scan",
-    "service-photocopy-printing.html": "Photocopy & Printing",
-    "service-color-printing.html": "Color Printing",
-    "service-document-scanning.html": "Document Scanning",
-    "service-lamination.html": "Lamination",
     "edupoint-admission-assistance.html": "Admission Assistance",
     "edupoint-competitive-exams.html": "Competitive Exam Application Assistance",
     "edupoint-university-services.html": "University & Academic Services",
@@ -8808,9 +8616,6 @@ function defaultApplyServiceForPage() {
     "edupoint-career-services.html": "Career Services",
     "edupoint.html": "Exam Form Filling",
     "service-exam-form-filling.html": "Exam Form Filling",
-    "travel-services.html": "Bus Ticket",
-    "design-services.html": "Logo Design",
-    "business-online-setup-services.html": "Business Online Setup Services",
     "products.html": "Custom Print Order",
     "support.html": "WhatsApp Support"
   };
@@ -8861,7 +8666,6 @@ function saveOrder(data) {
 function isDrawerPage() {
   return new Set([
     "online-services.html", "business-solutions.html", "edupoint.html",
-    "travel-services.html", "design-services.html", "business-online-setup-services.html",
     "products.html", "support.html", "contact.html"
   ]).has(getCurrentPage());
 }
@@ -11041,54 +10845,6 @@ function setupDynamicQuickServices() {
       actions: [
         { label: "Quick Apply", href: "service-legal-drafting-court-services.html", primary: true }
       ]
-    },
-    {
-      title: "Bus Ticket",
-      tag: "Travel",
-      category: "travel",
-      popular: true,
-      accent: "#d2a12a",
-      icon: "bus",
-      desc: "Book sleeper, luxury and AC bus tickets across all major routes.",
-      actions: [
-        { label: "Book Now", href: "travel-services.html#bus-ticket", primary: true }
-      ]
-    },
-    {
-      title: "Train Ticket",
-      tag: "Travel",
-      category: "travel",
-      popular: true,
-      accent: "#125696",
-      icon: "train",
-      desc: "IRCTC authorized railway ticket booking, Tatkal assistance & PNR status check.",
-      actions: [
-        { label: "Book Now", href: "travel-services.html#train-ticket", primary: true }
-      ]
-    },
-    {
-      title: "Flight Ticket",
-      tag: "Travel",
-      category: "travel",
-      popular: false,
-      accent: "#d2a12a",
-      icon: "plane",
-      desc: "Domestic and international flight ticket bookings at competitive rates.",
-      actions: [
-        { label: "Book Now", href: "travel-services.html#flight-ticket", primary: true }
-      ]
-    },
-    {
-      title: "Hotel Booking",
-      tag: "Travel",
-      category: "travel",
-      popular: false,
-      accent: "#125696",
-      icon: "hotel",
-      desc: "Budget-friendly hotel room reservations and tour packages.",
-      actions: [
-        { label: "Book Now", href: "travel-services.html#hotel-booking", primary: true }
-      ]
     }
   ];
 
@@ -11369,10 +11125,8 @@ function setupDynamicQuickServices() {
 const enterpriseServicePages = new Set([
   "services.html",
   "online-services.html",
-  "design-services.html",
   "edupoint.html",
-  "business-solutions.html",
-  "travel-services.html"
+  "business-solutions.html"
 ]);
 
 const enterpriseServiceFallbacks = {
@@ -11449,17 +11203,7 @@ const enterpriseServiceFallbacks = {
   "Admit Card Download": { time: "Instant", price: "Rs. 30", category: "student", icon: "download-cloud", docs: ["Registration number", "DOB"], popular: true },
   "Result Download": { time: "Instant", price: "Rs. 30", category: "student", icon: "award", docs: ["Roll number", "DOB"] },
   "Scholarship Form": { time: "1-2 days", price: "Rs. 149", category: "student", icon: "graduation-cap", docs: ["Aadhaar", "Bank passbook", "Income proof"], popular: true },
-  "Resume Builder": { time: "30 min", price: "Rs. 99", category: "student", icon: "file-user", docs: ["Education details", "Photo", "Experience"] },
-  "Photocopy & Printing": { time: "Instant", price: "Rs. 2/page", category: "printing", icon: "printer", docs: ["Original document"], popular: true },
-  "Color Printing": { time: "Instant", price: "Rs. 10/page", category: "printing", icon: "image", docs: ["Digital file"] },
-  "Document Scanning": { time: "Instant", price: "Rs. 10/page", category: "printing", icon: "scan-line", docs: ["Original document"] },
-  "Lamination": { time: "10 min", price: "Rs. 30", category: "printing", icon: "layers", docs: ["Document/card"] },
-  "Logo Design": { time: "1-2 days", price: "Rs. 499", category: "design", icon: "pen-tool", docs: ["Brand name", "Style reference"], popular: true },
-  "Flex Design": { time: "1-2 days", price: "Rs. 299", category: "design", icon: "image", docs: ["Text", "Size", "Logo/photo"] },
-  "Visiting Card": { time: "1-2 days", price: "Rs. 199", category: "design", icon: "contact", docs: ["Name", "Phone", "Logo"], popular: true },
-  "Banner Design": { time: "1-2 days", price: "Rs. 299", category: "design", icon: "panel-top", docs: ["Offer text", "Size", "Photos"] },
-  "Social Media Post": { time: "Same day", price: "Rs. 149", category: "design", icon: "share-2", docs: ["Offer text", "Logo", "Photo"] },
-  "PM Kisan": { time: "Same day", price: "Rs. 99", category: "government", icon: "sprout", docs: ["Aadhaar", "Land details", "Bank details"], popular: true },
+  "Resume Builder": { time: "30 min", price: "Rs. 99", category: "student", icon: "file-user", docs: ["Education details", "Photo", "Experience"] },  "PM Kisan": { time: "Same day", price: "Rs. 99", category: "government", icon: "sprout", docs: ["Aadhaar", "Land details", "Bank details"], popular: true },
   "Pension": { time: "7-15 days", price: "Rs. 149", category: "government", icon: "hand-coins", docs: ["Aadhaar", "Bank passbook", "Photo"] },
   "Insurance": { time: "1-3 days", price: "Rs. 99 + Premium", category: "government", icon: "shield", docs: ["Aadhaar", "Nominee details"], recent: true },
   "Banking": { time: "Same day", price: "Rs. 20", category: "csc", icon: "landmark", docs: ["Aadhaar", "Mobile number"], popular: true },
@@ -12594,12 +12338,9 @@ function enterpriseDetailHash(value = "") {
 function enterpriseDetailRelatedServices(serviceName, profile) {
   const groups = {
     government: ["Aadhaar Services Assistance", "Passport Assistance", "Voter ID", "Income Tax Assistance", "Income Certificate", "Domicile Certificate", "Pension & Welfare Schemes", "Ayushman Card"],
-    csc: ["Ayushman Card", "PM Kisan", "Pension Assistance", "Aadhaar Services Assistance", "Recharge & Bills"],
+    csc: ["Ayushman Card", "PM Kisan", "Pension Assistance", "Aadhaar Services Assistance"],
     business: ["GST Registration", "MSME Registration", "Digital Signature", "FSSAI License", "Shop License", "IEC Code", "Trademark Registration", "Company Registration"],
-    printing: ["Photocopy & Printing", "Color Printing", "Document Scanning", "Lamination"],
-    design: ["Logo Design", "Visiting Card", "Banner Design", "Social Media Creative"],
-    travel: ["Passport Assistance", "Bus Ticket", "Flight Ticket", "Train Ticket Booking"],
-    digital: ["Digital Signature", "Document Scanning", "Photocopy & Printing", "Aadhaar Services Assistance"]
+    digital: ["Digital Signature", "Aadhaar Services Assistance"]
   };
   const candidates = groups[profile.category] || groups.digital;
   const currentSlug = normalizePricingLookup(serviceName || "");
@@ -13109,16 +12850,24 @@ function injectEnterpriseComparisonTable(isDetailPage) {
 }
 
 function injectEnterpriseStickyActions(isDetailPage) {
-  if (document.querySelector(".enterprise-sticky-actions") || document.querySelector(".bos-sticky-mobile-bar") || document.querySelector(".ps-sticky-mobile-bar") || document.body.classList.contains("page-business-setup") || document.body.classList.contains("print-scan-page") || document.querySelector(".bos-container") || document.querySelector(".ps-container")) return;
+  if (getCurrentPage() === "service-request.html" || document.querySelector(".enterprise-sticky-actions") || document.querySelector(".bos-sticky-mobile-bar") || document.querySelector(".ps-sticky-mobile-bar") || document.body.classList.contains("page-business-setup") || document.body.classList.contains("print-scan-page") || document.querySelector(".bos-container") || document.querySelector(".ps-container")) return;
   const serviceName = enterpriseCurrentServiceName();
-  const requestLink = getCurrentPage() === "service-request.html" ? document.querySelector('[data-request-whatsapp]') : null;
-  const primaryHref = requestLink ? requestLink.getAttribute('href') : serviceApplyHref(serviceName, inferApplyCategory("", serviceName));
+  const isServiceRequest = getCurrentPage() === "service-request.html";
+  const requestPayLink = isServiceRequest ? document.querySelector('[data-request-checkout]') : null;
+  const requestWaLink = isServiceRequest ? document.querySelector('[data-request-whatsapp]') : null;
+  const primaryHref = isServiceRequest
+    ? (requestPayLink ? requestPayLink.getAttribute('href') : 'checkout.html')
+    : serviceApplyHref(serviceName, inferApplyCategory("", serviceName));
+  const waHref = isServiceRequest
+    ? (requestWaLink ? requestWaLink.getAttribute('href') : buildServiceWhatsAppUrl(serviceName))
+    : buildServiceWhatsAppUrl(serviceName);
+
   const bar = document.createElement("div");
   bar.className = "enterprise-sticky-actions";
   bar.setAttribute("aria-label", "Quick service actions");
   bar.innerHTML = `
-    <a class="esa-apply" href="${primaryHref}" ${requestLink ? 'data-request-sticky-link target="_blank" rel="noopener"' : ''}>${icon("arrow-right", 16)} ${requestLink ? "Confirm availability" : isDetailPage ? "Apply Now" : "Apply"}</a>
-    <a class="esa-whatsapp" href="${requestLink ? primaryHref : buildServiceWhatsAppUrl(serviceName)}" ${requestLink ? 'data-request-sticky-link' : ''} target="_blank" rel="noopener">${icon("message-circle", 16)} WhatsApp</a>
+    <a class="esa-apply" href="${primaryHref}" data-request-sticky-pay>${icon("credit-card", 16)} ${isServiceRequest ? "Pay Online" : isDetailPage ? "Apply Now" : "Apply"}</a>
+    <a class="esa-whatsapp" href="${waHref}" ${isServiceRequest ? 'data-request-sticky-link' : ''} target="_blank" rel="noopener">${icon("message-circle", 16)} WhatsApp</a>
     <a class="esa-call" href="tel:+919473946181">${icon("phone", 16)} Call</a>
   `;
   document.body.appendChild(bar);
@@ -14134,8 +13883,6 @@ function setupWhatsAppPrefills() {
     serviceName = "Student Portal Services";
   } else if (filename === 'products.html') {
     serviceName = "OneMart Store Products";
-  } else if (filename === 'travel-services.html') {
-    serviceName = "Travel Booking Services";
   } else {
     const titleText = document.title || "";
     if (titleText.includes("|")) {
@@ -14328,16 +14075,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const filename = window.location.pathname.split('/').pop() || 'index.html';
   const isServicePage = filename.startsWith('service-') || 
                         filename === 'edupoint.html' || 
-                        filename === 'products.html' || 
-                        filename === 'travel-services.html';
+                        filename === 'products.html';
   
   if (isServicePage) {
     let serviceName = filename.replace('service-', '').replace('.html', '').replace(/-/g, ' ');
     serviceName = serviceName.replace(/\b\w/g, c => c.toUpperCase());
     if (filename === 'edupoint.html') serviceName = 'STUDENT CORNER';
     if (filename === 'products.html') serviceName = 'ONEMART STORE';
-    if (filename === 'travel-services.html') serviceName = 'TRAVEL SERVICES';
-
     window.trackAnalyticsEvent('service_view', {
       service: serviceName,
       path: window.location.pathname

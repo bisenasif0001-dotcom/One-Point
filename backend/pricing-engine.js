@@ -171,10 +171,10 @@ function defaultPricingForService(service = {}) {
     internalNotes: "Missing Master Pricing override; admin must enter government/operator split before publishing."
   };
 
-  if (category === "Bill & Recharge" || category === "Travel Services" || service.slug === "insurance") {
+  if (service.slug === "insurance") {
     base.pricingModel = PRICING_MODELS.SERVICE_PLUS_ACTUAL;
   }
-  if (category === "Design Services" || category === "Documentation") {
+  if (category === "Documentation") {
     base.pricingModel = PRICING_MODELS.STARTING_FROM;
   }
   return base;
@@ -401,23 +401,6 @@ const SERVICE_PRICING = Object.freeze({
     requiredDocs: ["Student ID", "Marksheet", "Course details"],
     description: "University form, result, correction and document assistance."
   },
-  "photocopy-printing": {
-    subCategory: "Printing",
-    pricingModel: PRICING_MODELS.STARTING_FROM,
-    operatorFee: 2,
-    timeline: "Quick",
-    requiredDocs: ["Print file or original document", "Quantity"],
-    popular: true,
-    description: "Photocopy and printing with quantity based pricing."
-  },
-  "lamination": {
-    subCategory: "Printing",
-    pricingModel: PRICING_MODELS.STARTING_FROM,
-    operatorFee: 20,
-    timeline: "Quick",
-    requiredDocs: ["Document/photo", "Lamination size"],
-    description: "Document and photo lamination by size."
-  },
   "online-test": {
     subCategory: "Skill Course",
     pricingModel: PRICING_MODELS.ALL_INCLUSIVE,
@@ -560,46 +543,6 @@ const SERVICE_PRICING = Object.freeze({
     requiredDocs: ["Draft content", "Language preference"],
     description: "Typing service with page based pricing."
   },
-  scan: {
-    subCategory: "Documentation",
-    pricingModel: PRICING_MODELS.STARTING_FROM,
-    operatorFee: 10,
-    timeline: "Instant",
-    requiredDocs: ["Document to scan", "Output format"],
-    description: "Scanning service with page based pricing."
-  },
-  print: {
-    subCategory: "Documentation",
-    pricingModel: PRICING_MODELS.STARTING_FROM,
-    operatorFee: 3,
-    timeline: "Instant",
-    requiredDocs: ["Print file", "Quantity", "Print type"],
-    description: "Print service with quantity based pricing."
-  },
-  "print-scan": {
-    subCategory: "Documentation",
-    pricingModel: PRICING_MODELS.STARTING_FROM,
-    operatorFee: 10,
-    timeline: "Instant",
-    requiredDocs: ["Print/scan file", "Quantity", "Format"],
-    description: "Combined print and scan service."
-  },
-  "color-printing": {
-    subCategory: "Printing",
-    pricingModel: PRICING_MODELS.STARTING_FROM,
-    operatorFee: 5,
-    timeline: "Quick",
-    requiredDocs: ["Print file", "Paper size", "Quantity"],
-    description: "Color printing with per page pricing."
-  },
-  "document-scanning": {
-    subCategory: "Scanning",
-    pricingModel: PRICING_MODELS.STARTING_FROM,
-    operatorFee: 10,
-    timeline: "Quick",
-    requiredDocs: ["Document", "Output format"],
-    description: "Document scanning and PDF conversion."
-  },
   affidavit: {
     subCategory: "Documentation",
     pricingModel: PRICING_MODELS.STARTING_FROM,
@@ -616,129 +559,6 @@ const SERVICE_PRICING = Object.freeze({
     requiredDocs: ["Identity proof", "Certificate details"],
     description: "Certificate support with quote based pricing."
   },
-  "mobile-recharge": {
-    subCategory: "Recharge",
-    pricingModel: PRICING_MODELS.SERVICE_PLUS_ACTUAL,
-    operatorFee: 10,
-    timeline: "Instant",
-    requiredDocs: ["Mobile number", "Operator/plan"],
-    description: "Mobile recharge service charge plus actual recharge amount."
-  },
-  "electricity-bill": {
-    subCategory: "Bill Payment",
-    pricingModel: PRICING_MODELS.SERVICE_PLUS_ACTUAL,
-    operatorFee: 20,
-    timeline: "Instant",
-    requiredDocs: ["Consumer number", "Registered mobile"],
-    description: "Electricity bill payment service charge plus actual bill amount."
-  },
-  fastag: {
-    subCategory: "Recharge",
-    pricingModel: PRICING_MODELS.SERVICE_PLUS_ACTUAL,
-    operatorFee: 30,
-    timeline: "Same day",
-    requiredDocs: ["Vehicle number", "FASTag details"],
-    description: "FASTag recharge service charge plus actual recharge amount."
-  },
-  "dth-recharge": {
-    subCategory: "Recharge",
-    pricingModel: PRICING_MODELS.SERVICE_PLUS_ACTUAL,
-    operatorFee: 10,
-    timeline: "Instant",
-    requiredDocs: ["Subscriber ID", "Operator/plan"],
-    description: "DTH recharge service charge plus actual recharge amount."
-  },
-  "water-bill": {
-    subCategory: "Bill Payment",
-    pricingModel: PRICING_MODELS.SERVICE_PLUS_ACTUAL,
-    operatorFee: 20,
-    timeline: "Instant",
-    requiredDocs: ["Consumer number", "Registered mobile"],
-    description: "Water bill payment service charge plus actual bill amount."
-  },
-  "logo-design": {
-    subCategory: "Branding",
-    pricingModel: PRICING_MODELS.STARTING_FROM,
-    operatorFee: 299,
-    timeline: "1-2 days",
-    requiredDocs: ["Brand name", "Reference style", "Color preference"],
-    popular: true,
-    description: "Logo design package pricing."
-  },
-  "flex-design": {
-    subCategory: "Print Design",
-    pricingModel: PRICING_MODELS.STARTING_FROM,
-    operatorFee: 249,
-    timeline: "1-2 days",
-    requiredDocs: ["Size", "Matter", "Reference"],
-    description: "Flex design package pricing."
-  },
-  "visiting-card-design": {
-    subCategory: "Business Design",
-    pricingModel: PRICING_MODELS.STARTING_FROM,
-    operatorFee: 199,
-    timeline: "1-2 days",
-    requiredDocs: ["Name/business details", "Logo", "Design preference"],
-    popular: true,
-    description: "Visiting card design package pricing."
-  },
-  "banner-design": {
-    subCategory: "Print Design",
-    pricingModel: PRICING_MODELS.STARTING_FROM,
-    operatorFee: 249,
-    timeline: "1-2 days",
-    requiredDocs: ["Banner size", "Matter", "Images/logo"],
-    description: "Banner design package pricing."
-  },
-  "social-media-post": {
-    subCategory: "Digital Design",
-    pricingModel: PRICING_MODELS.STARTING_FROM,
-    operatorFee: 149,
-    timeline: "1-2 days",
-    requiredDocs: ["Post matter", "Logo", "Reference"],
-    popular: true,
-    description: "Social media creative package pricing."
-  },
-  "bus-ticket": {
-    subCategory: "Ticket Booking",
-    pricingModel: PRICING_MODELS.SERVICE_PLUS_ACTUAL,
-    operatorFee: 49,
-    timeline: "Same day",
-    requiredDocs: ["Passenger details", "Route", "Travel date"],
-    description: "Bus ticket booking service charge plus actual fare."
-  },
-  "train-ticket": {
-    subCategory: "Ticket Booking",
-    pricingModel: PRICING_MODELS.SERVICE_PLUS_ACTUAL,
-    operatorFee: 99,
-    timeline: "Same day",
-    requiredDocs: ["Passenger details", "Route", "Travel date", "ID proof"],
-    description: "Train ticket booking service charge plus actual fare."
-  },
-  "flight-booking": {
-    subCategory: "Ticket Booking",
-    pricingModel: PRICING_MODELS.SERVICE_PLUS_ACTUAL,
-    operatorFee: 149,
-    timeline: "Same day",
-    requiredDocs: ["Passenger details", "Route", "Travel date", "ID proof"],
-    description: "Flight booking service charge plus actual fare."
-  },
-  "hotel-booking": {
-    subCategory: "Hotel Booking",
-    pricingModel: PRICING_MODELS.SERVICE_PLUS_ACTUAL,
-    operatorFee: 99,
-    timeline: "Same day",
-    requiredDocs: ["Guest details", "City", "Check-in/check-out dates"],
-    description: "Hotel booking service charge plus actual stay amount."
-  },
-  "tour-package": {
-    subCategory: "Tour Package",
-    pricingModel: PRICING_MODELS.STARTING_FROM,
-    operatorFee: 299,
-    timeline: "1-3 days",
-    requiredDocs: ["Destination", "Travel dates", "Passenger count"],
-    description: "Tour package planning service with quote based pricing."
-  }
 });
 
 function makeVariant(parentSlug, variantName, label, pricingModel, operatorFee, options = {}) {
@@ -774,18 +594,6 @@ const SERVICE_VARIANTS = Object.freeze([
   makeVariant("pan-card", "PAN-Aadhaar Link", "PAN Link", PRICING_MODELS.ALL_INCLUSIVE, 100, { variantSlug: "pan-aadhaar-link", governmentFee: 0, timeline: "1-2 days" }),
   makeVariant("pan-card", "Duplicate PAN Surrender", "Surrender", PRICING_MODELS.ALL_INCLUSIVE, 250, { variantSlug: "duplicate-pan-surrender", governmentFee: 0, timeline: "3-7 days" }),
 
-  makeVariant("bus-ticket", "Bus Ticket One Way", "One Way", PRICING_MODELS.SERVICE_PLUS_ACTUAL, 49, { customerPriceNote: "Actual bus fare is payable as per selected route." }),
-  makeVariant("bus-ticket", "Bus Ticket Round", "Round Trip", PRICING_MODELS.SERVICE_PLUS_ACTUAL, 79, { customerPriceNote: "Actual bus fare is payable as per selected route." }),
-  makeVariant("train-ticket", "Train General Ticket", "General", PRICING_MODELS.SERVICE_PLUS_ACTUAL, 99, { customerPriceNote: "Actual railway fare is payable as per IRCTC/railway availability." }),
-  makeVariant("train-ticket", "Train Tatkal Ticket", "Tatkal", PRICING_MODELS.SERVICE_PLUS_ACTUAL, 149, { customerPriceNote: "Actual railway fare is payable as per IRCTC/railway availability." }),
-  makeVariant("train-ticket", "Train Premium Tatkal", "Premium", PRICING_MODELS.SERVICE_PLUS_ACTUAL, 199, { customerPriceNote: "Actual railway fare is payable as per IRCTC/railway availability." }),
-  makeVariant("flight-booking", "Domestic Flight", "Domestic", PRICING_MODELS.SERVICE_PLUS_ACTUAL, 149, { customerPriceNote: "Actual flight fare is payable as per airline quote." }),
-  makeVariant("flight-booking", "International Flight", "International", PRICING_MODELS.SERVICE_PLUS_ACTUAL, 299, { customerPriceNote: "Actual flight fare is payable as per airline quote." }),
-  makeVariant("hotel-booking", "Hotel Budget Stay", "Budget", PRICING_MODELS.SERVICE_PLUS_ACTUAL, 99, { customerPriceNote: "Actual hotel tariff is payable as per selected stay." }),
-  makeVariant("hotel-booking", "Hotel Premium Stay", "Premium", PRICING_MODELS.SERVICE_PLUS_ACTUAL, 149, { customerPriceNote: "Actual hotel tariff is payable as per selected stay." }),
-  makeVariant("tour-package", "Pilgrimage Package", "Pilgrimage", PRICING_MODELS.STARTING_FROM, 299),
-  makeVariant("tour-package", "Hill Station Package", "Hills", PRICING_MODELS.STARTING_FROM, 399),
-  makeVariant("tour-package", "Beach Package", "Beach", PRICING_MODELS.STARTING_FROM, 499),
 
   makeVariant("ayushman-card", "Ayushman Card Check", "Check & Apply", PRICING_MODELS.ALL_INCLUSIVE, 49),
   makeVariant("ayushman-card", "Ayushman Reprint", "Card Reprint", PRICING_MODELS.ALL_INCLUSIVE, 29),
@@ -834,14 +642,7 @@ const SERVICE_VARIANTS = Object.freeze([
   makeVariant("company-registration", "LLP Registration", "LLP", PRICING_MODELS.STARTING_FROM, 1499),
   makeVariant("company-registration", "OPC Registration", "OPC", PRICING_MODELS.STARTING_FROM, 1999),
 
-  makeVariant("photocopy-printing", "BW Photocopy", "B&W Copies", PRICING_MODELS.STARTING_FROM, 1, { displayPrice: "Starting from Rs. 1/page" }),
-  makeVariant("photocopy-printing", "Color Printing", "Color Print", PRICING_MODELS.STARTING_FROM, 5, { displayPrice: "Starting from Rs. 5/page" }),
-  makeVariant("color-printing", "Color Copies", "Color Copies", PRICING_MODELS.STARTING_FROM, 5, { displayPrice: "Starting from Rs. 5/page" }),
-  makeVariant("color-printing", "Photo Print", "Photo Print", PRICING_MODELS.STARTING_FROM, 20),
-  makeVariant("document-scanning", "Document Scan", "Scan to PDF", PRICING_MODELS.STARTING_FROM, 10, { displayPrice: "Starting from Rs. 10/page" }),
-  makeVariant("document-scanning", "Photo Scan", "Photo Scan", PRICING_MODELS.STARTING_FROM, 15),
-  makeVariant("lamination", "Standard Laminate", "Standard", PRICING_MODELS.STARTING_FROM, 20),
-  makeVariant("lamination", "Photo Laminate", "Photo", PRICING_MODELS.STARTING_FROM, 30)
+  makeVariant("photocopy-printing", "BW Photocopy", "B&W Copies", PRICING_MODELS.STARTING_FROM, 1, { displayPrice: "Starting from Rs. 1/page" })
 ]);
 
 function normalizeServicePricing(service = {}) {

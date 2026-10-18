@@ -3,14 +3,14 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Frequently Asked Questions about One Point Digital Services — PAN Card, GST, student services, travel booking, fees, tracking, and document requirements.">
+    <meta name="description" content="Frequently Asked Questions about One Point Digital Services — PAN Card, GST, student services, fees, tracking, and document requirements.">
     <title>Frequently Asked Questions | One Point Digital Services</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
     <script src="assets/opds-boot.js?v=anti-fouc-79"></script>
-    <link rel="stylesheet" href="assets/onepoint.css?v=mobile-layout-111">
+    <link rel="stylesheet" href="assets/onepoint.css?v=desktop-fix-114">
     <link rel="stylesheet" href="assets/enterprise-design-system.css?v=eds-2">
     <link rel="stylesheet" href="assets/enterprise-visual-polish.css?v=polish-3">
     <style>
@@ -752,14 +752,6 @@
                   <span class="faq-cat-count">3</span>
                 </button>
 
-                <button class="faq-cat-item" data-cat="travel" onclick="switchCategory(this, 'travel')">
-                  <span class="faq-cat-left">
-                    <i data-lucide="plane"></i>
-                    <span>Travel Booking</span>
-                  </span>
-                  <span class="faq-cat-count">3</span>
-                </button>
-
                 <button class="faq-cat-item" data-cat="privacy" onclick="switchCategory(this, 'privacy')">
                   <span class="faq-cat-left">
                     <i data-lucide="shield-check"></i>
@@ -825,7 +817,7 @@
                     <i data-lucide="chevron-down" class="faq-chevron"></i>
                   </summary>
                   <div class="faq-answer-body">
-                    <p>One Point Digital Services is a local-first, hybrid service center in Lucknow. We help everyday families, students, and businesses apply for government forms, PAN cards, certificates, GST filing, travel tickets, printing, and custom design &mdash; with human assistance at every step.</p>
+                    <p>One Point Digital Services is a local-first, hybrid service center in Lucknow. We help everyday families, students, and businesses apply for government forms, PAN cards, certificates, GST filing and digital services &mdash; with human assistance at every step.</p>
                   </div>
                 </details>
 
@@ -1120,62 +1112,6 @@
                 <a href="service-gst-itr.html" class="faq-footnote-btn">Open Business Services &rarr;</a>
               </div>
             </div>
-
-            <!-- Category 6: Travel Booking -->
-            <div class="faq-group-pane" id="cat-travel">
-              <div class="faq-group-head">
-                <div class="faq-group-title-row">
-                  <div class="faq-group-icon"><i data-lucide="plane"></i></div>
-                  <h2 class="faq-group-title">Travel Booking</h2>
-                </div>
-                <span class="faq-group-badge">3 Verified Answers</span>
-              </div>
-
-              <div class="faq-accordion-list">
-                <details class="faq-item-card" open>
-                  <summary>
-                    <span class="faq-question-text">
-                      <span class="faq-q-dot">Q1</span>
-                      <span>How does ticket booking through One Point work?</span>
-                    </span>
-                    <i data-lucide="chevron-down" class="faq-chevron"></i>
-                  </summary>
-                  <div class="faq-answer-body">
-                    <p>Share your route, journey date, passenger details, and timing preference on WhatsApp. We check live availability, share best fare options, and once confirmed, send the ticket PDF immediately.</p>
-                  </div>
-                </details>
-
-                <details class="faq-item-card">
-                  <summary>
-                    <span class="faq-question-text">
-                      <span class="faq-q-dot">Q2</span>
-                      <span>Do you assist with IRCTC Tatkal train tickets?</span>
-                    </span>
-                    <i data-lucide="chevron-down" class="faq-chevron"></i>
-                  </summary>
-                  <div class="faq-answer-body">
-                    <p>Yes. Tatkal booking opens at 10:00 AM (AC) and 11:00 AM (Sleeper). WhatsApp us the evening prior with passenger names and ID details for timely queuing.</p>
-                  </div>
-                </details>
-
-                <details class="faq-item-card">
-                  <summary>
-                    <span class="faq-question-text">
-                      <span class="faq-q-dot">Q3</span>
-                      <span>What is your travel booking service charge?</span>
-                    </span>
-                    <i data-lucide="chevron-down" class="faq-chevron"></i>
-                  </summary>
-                  <div class="faq-answer-body">
-                    <p>Service charges are fixed and displayed upfront before checkout. Actual railway, flight, or bus ticket costs are charged transparently as per the official carrier rates.</p>
-                  </div>
-                </details>
-              </div>
-
-              <div class="faq-pane-footnote">
-                <span>Book train, flight, or bus tickets via WhatsApp:</span>
-                <a href="https://wa.me/919473946181" target="_blank" rel="noopener" class="faq-footnote-btn">Chat on WhatsApp &rarr;</a>
-              </div>
             </div>
 
             <!-- Category 7: Privacy & Security -->
@@ -1259,7 +1195,7 @@
     <div data-site-footer></div>
     <script src="https://unpkg.com/lucide@1.57.0/dist/umd/lucide.min.js" defer></script>
     <script src="assets/pilot-metrics.js?v=release-107" defer></script>
-    <script src="assets/app.js?v=onemart-109" defer></script>
+    <script src="assets/app.js?v=desktop-fix-114" defer></script>
     <script>
       function switchCategory(btn, catId) {
         document.querySelectorAll('.faq-cat-item').forEach(b => b.classList.remove('active'));
