@@ -31,7 +31,7 @@
 .onemart-coming-page p { max-width: 40ch; margin-inline: auto; color: var(--muted); }
 @media (max-width: 720px) {
   .mobile-bottom-nav a { min-width: 0; }
-  .mobile-bottom-nav .onemart-coming-badge { position: absolute; bottom: calc(100% + var(--eds-space-1)); left: 50%; transform: translateX(-50%); margin-inline: 0; padding: var(--eds-space-1) var(--eds-space-2); font-size: var(--eds-fs-sm); line-height: var(--eds-lh-heading); }
+  .mobile-bottom-nav .onemart-coming-badge { display: none !important; }
 }
 
 /* ---------------------------------------------------------------------------
@@ -27476,7 +27476,13 @@ body.public-site-page .customer-guest-login:hover {
 }
 .site-header .nav-actions .cart-nav-button [data-cart-count]:empty,
 .site-header .nav-actions .cart-nav-button [data-cart-count="0"],
-#homepage-body .nav-actions .cart-nav-button [data-cart-count="0"] {
+#homepage-body .nav-actions .cart-nav-button [data-cart-count="0"],
+[data-cart-count="0"],
+[data-cart-count]:empty,
+[data-cart-count][hidden],
+.cart-nav-button [data-cart-count="0"],
+.cart-nav-button [data-cart-count]:empty,
+.cart-nav-button [data-cart-count][hidden] {
   display: none !important;
 }
 
@@ -27583,32 +27589,126 @@ body:not(.nav-open) .nav-backdrop,
 }
 
 /* 2. Desktop Normal State (when drawer is NOT open) */
-#nav-menu:not(.open),
-.nav-menu:not(.open) {
-  position: static !important;
-  top: auto !important;
-  right: auto !important;
-  bottom: auto !important;
-  left: auto !important;
-  width: auto !important;
-  height: auto !important;
-  background: transparent !important;
-  border: none !important;
-  box-shadow: none !important;
-  padding: 0 !important;
-  margin: 0 !important;
-  overflow: visible !important;
-  z-index: auto !important;
-  animation: none !important;
-  display: flex !important;
-  align-items: center !important;
+@media (min-width: 1025px) {
+  .site-header .nav-actions .mobile-toggle,
+  .site-header .mobile-toggle,
+  #homepage-body .mobile-toggle,
+  .mobile-toggle {
+    display: none !important;
+  }
+
+  #nav-menu:not(.open),
+  .nav-menu:not(.open) {
+    position: static !important;
+    top: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    left: auto !important;
+    width: auto !important;
+    height: auto !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    overflow: visible !important;
+    z-index: auto !important;
+    animation: none !important;
+    display: flex !important;
+    align-items: center !important;
+  }
+
+  #nav-menu:not(.open) .desktop-nav-menu,
+  .nav-menu:not(.open) .desktop-nav-menu {
+    display: flex !important;
+    align-items: center !important;
+    gap: 4px !important;
+  }
 }
 
-#nav-menu:not(.open) .desktop-nav-menu,
-.nav-menu:not(.open) .desktop-nav-menu {
-  display: flex !important;
-  align-items: center !important;
-  gap: 4px !important;
+@media (max-width: 1024px) {
+  #nav-menu:not(.open),
+  .nav-menu:not(.open),
+  #nav-menu:not(.open) .desktop-nav-menu,
+  .nav-menu:not(.open) .desktop-nav-menu,
+  .desktop-nav-menu {
+    display: none !important;
+  }
+
+  .site-header .nav-actions .btn-gold,
+  #homepage-body .nav-actions .btn-gold,
+  #homepage-body .nav-cta-btn,
+  body:not(#homepage-body) .nav-actions .btn-gold,
+  body.public-site-page .nav-actions .btn-gold {
+    display: none !important;
+  }
+
+  .mobile-bottom-nav .onemart-coming-badge {
+    display: none !important;
+  }
+
+  .site-header .nav-bar,
+  #homepage-body .nav-bar,
+  body.public-site-page .nav-bar {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    width: 100% !important;
+    padding: 8px 16px !important;
+    min-height: 58px !important;
+    gap: 8px !important;
+    box-sizing: border-box !important;
+  }
+
+  .site-header .nav-bar > .brand,
+  #homepage-body .nav-bar > .brand,
+  body.public-site-page .nav-bar > .brand {
+    display: inline-flex !important;
+    align-items: center !important;
+    flex: 0 0 auto !important;
+    margin-right: auto !important;
+    max-width: 180px !important;
+    min-width: 120px !important;
+  }
+
+  .brand-logo-header,
+  #homepage-body .brand-logo-header,
+  body.public-site-page .brand-logo-header {
+    height: 36px !important;
+    max-height: 36px !important;
+    width: auto !important;
+    max-width: 160px !important;
+    object-fit: contain !important;
+    display: block !important;
+  }
+
+  .site-header .nav-actions,
+  #homepage-body .nav-actions,
+  body.public-site-page .nav-actions {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    gap: 8px !important;
+    flex: 0 0 auto !important;
+    margin-left: auto !important;
+  }
+
+  .site-header .nav-actions .cart-nav-button,
+  .site-header .nav-actions .customer-guest-login,
+  .site-header .nav-actions .nav-action-glass,
+  .site-header .nav-action-glass.mobile-toggle,
+  #homepage-body .nav-actions .cart-nav-button,
+  #homepage-body .customer-guest-login:not([hidden]),
+  #homepage-body .nav-action-glass,
+  #homepage-body .mobile-toggle,
+  body.public-site-page .nav-actions .cart-nav-button,
+  body.public-site-page .customer-guest-login {
+    width: 38px !important;
+    height: 38px !important;
+    min-width: 38px !important;
+    min-height: 38px !important;
+    border-radius: 10px !important;
+  }
 }
 
 /* 3. Backdrop */

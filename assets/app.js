@@ -3314,7 +3314,7 @@ function renderNav() {
           </div>
         </div>
         <div class="nav-actions">
-          <button class="icon-button cart-nav-button nav-action-glass" type="button" aria-label="Open OneMart cart" title="Cart" data-cart-button>${icon("shopping-cart", 19)}<span data-cart-count>0</span></button>
+          <button class="icon-button cart-nav-button nav-action-glass" type="button" aria-label="Open OneMart cart" title="Cart" data-cart-button>${icon("shopping-cart", 19)}<span data-cart-count data-cart-count="0" hidden></span></button>
           <div class="customer-nav-account" data-customer-nav-account>
             <a class="icon-button nav-action-glass customer-guest-login" href="login.html" aria-label="Customer login" title="Customer login" data-customer-guest><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-log-in" data-lucide="log-in" aria-hidden="true"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" x2="3" y1="12" y2="12"/></svg></a>
             <button class="customer-account-trigger" type="button" aria-haspopup="menu" aria-expanded="false" aria-label="Open customer account menu" title="Customer account — signed in" data-customer-account-trigger data-customer-auth hidden>
@@ -3751,7 +3751,7 @@ function renderFooter() {
     <nav class="mobile-bottom-nav" aria-label="Mobile quick navigation">
       <a href="index.html">${icon("home", 19)}<span>Home</span></a>
       <a href="services.html">${icon("grid-3x3", 19)}<span>Services</span></a>
-      <a href="products.html">${icon("shopping-bag", 19)}<span>Store <span class="onemart-coming-badge">Coming soon</span></span></a>
+      <a href="products.html">${icon("shopping-bag", 19)}<span>Store</span></a>
       <a href="track-application.html">${icon("search", 19)}<span>Track</span></a>
       <a href="contact.html">${icon("message-circle", 19)}<span>Contact</span></a>
     </nav>
@@ -7240,8 +7240,16 @@ function addProductToCart(slug, quantity = 1) {
 function updateCartCount() {
   const count = getCart().reduce((total, item) => total + item.quantity, 0);
   document.querySelectorAll("[data-cart-count]").forEach((node) => {
-    node.textContent = String(count);
-    node.style.display = count ? "inline-flex" : "none";
+    node.dataset.cartCount = String(count);
+    if (count > 0) {
+      node.textContent = String(count);
+      node.removeAttribute("hidden");
+      node.style.display = "inline-flex";
+    } else {
+      node.textContent = "";
+      node.setAttribute("hidden", "");
+      node.style.display = "none";
+    }
   });
 }
 
