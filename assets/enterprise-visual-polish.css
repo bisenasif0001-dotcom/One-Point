@@ -1109,18 +1109,15 @@ section.section.reveal {
 /* --- Issue 4: Category filter buttons visual stabilization --- */
 #homepage-body #trending-services .category-filters {
   display: grid !important;
-  grid-template-columns: repeat(auto-fit, minmax(var(--category-col-min), 1fr)) !important;
+  grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
   align-items: stretch !important;
-  gap: var(--sp-3) !important;
+  gap: 14px !important;
 }
 
 #homepage-body #trending-services .category-filters button {
-  display: grid !important;
-  grid-template-columns: var(--icon-col-w) 1fr !important;
-  grid-template-rows: auto 1fr !important;
-  align-content: stretch !important;
+  display: flex !important;
+  align-items: center !important;
   height: 100% !important;
-  min-height: var(--category-btn-min-h) !important;
   min-width: 0 !important;
 }
 
