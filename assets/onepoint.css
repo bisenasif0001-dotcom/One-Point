@@ -1790,47 +1790,63 @@ body.nav-open .nav-backdrop {
   body { padding-bottom: calc(var(--eds-space-16) + var(--eds-space-12) + env(safe-area-inset-bottom, 0px)); }
   .mobile-bottom-nav {
     position: fixed;
-    left: 12px;
-    right: 12px;
-    bottom: 12px;
-    z-index: 95;
+    left: 14px;
+    right: 14px;
+    bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+    z-index: 9999;
+    max-width: 410px;
+    margin-inline: auto;
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1.1fr);
+    grid-template-columns: repeat(5, minmax(0, 1fr));
     gap: 4px;
-    padding: 8px;
-    border: 1px solid rgba(255,255,255,.2);
-    border-radius: 22px;
-    background: rgba(18, 86, 150, .92);
-    box-shadow: 0 24px 60px rgba(7, 27, 52, .28);
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
+    padding: 5px 6px;
+    border-radius: 28px;
+    background: rgba(10, 25, 47, 0.94);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    box-shadow: 0 16px 40px -4px rgba(0, 0, 0, 0.45), 0 4px 14px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.16);
+    box-sizing: border-box;
   }
   .mobile-bottom-nav a {
     position: relative;
     min-width: 0;
-    display: grid;
-    place-items: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     gap: 3px;
-    padding: var(--eds-space-2) 0;
-    border-radius: 15px;
-    color: rgba(255,255,255,.68);
-    font-size: var(--eds-fs-sm);
-    font-weight: 700;
-    line-height: var(--eds-lh-heading);
-    transition: background var(--t), color var(--t), transform var(--t);
+    min-height: 48px;
+    padding: 4px 2px;
+    border-radius: 20px;
+    color: rgba(255, 255, 255, 0.72);
+    text-decoration: none;
+    font-size: 11px;
+    font-weight: 550;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    box-sizing: border-box;
   }
   .mobile-bottom-nav svg,
   .mobile-bottom-nav i {
-    width: 18px;
-    height: 18px;
+    width: 19px;
+    height: 19px;
+    stroke-width: 2.1px;
+    transition: transform 0.2s ease;
   }
   .mobile-bottom-nav a.active {
-    color: #fff;
-    background: rgba(var(--primary-rgb), .72);
+    color: #ffffff;
+    background: linear-gradient(135deg, #0957b8 0%, #063c82 100%);
+    border-radius: 20px;
+    box-shadow: 0 4px 14px rgba(9, 87, 184, 0.42), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.16);
   }
-  .mobile-bottom-nav a:active { transform: scale(.97); }
-  .mobile-bottom-nav a.active > span { text-decoration: underline; text-underline-offset: var(--eds-space-1); }
-  .mobile-bottom-nav a > span { max-width: 100%; overflow-wrap: anywhere; white-space: normal; }
+  .mobile-bottom-nav a:active { transform: scale(0.92); }
+  .mobile-bottom-nav a.active > span { text-decoration: none !important; font-weight: 700; color: #ffffff; }
+  .mobile-bottom-nav a.active svg,
+  .mobile-bottom-nav a.active i { color: #ffffff; transform: translateY(-0.5px) scale(1.05); }
+  .mobile-bottom-nav a > span { max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-decoration: none; }
   /* WhatsApp float position handled in the consolidated bottom-bar block below. */
 }
 
@@ -9742,17 +9758,25 @@ body.online-services-page section.light-blue-full-width-section > div {
   /* 4. Premium Aesthetics & Enhanced Glassmorphism */
   .mobile-bottom-nav {
     bottom: calc(12px + env(safe-area-inset-bottom, 0px)) !important;
-    background: rgba(7, 27, 52, 0.94) !important;
-    backdrop-filter: blur(24px) !important;
-    -webkit-backdrop-filter: blur(24px) !important;
-    border: 1px solid rgba(255, 255, 255, 0.25) !important;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35) !important;
-    border-radius: 26px !important;
-    padding: var(--eds-space-2) var(--eds-space-1) !important;
+    background: rgba(10, 25, 47, 0.94) !important;
+    backdrop-filter: blur(24px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
+    border: 1px solid rgba(255, 255, 255, 0.16) !important;
+    box-shadow: 0 16px 40px -4px rgba(0, 0, 0, 0.45), 0 4px 14px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.16) !important;
+    border-radius: 28px !important;
+    max-width: 410px !important;
+    margin-inline: auto !important;
+    padding: 5px 6px !important;
+    grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
   }
   .mobile-bottom-nav a {
-    min-height: 44px !important;
-    border-radius: 18px !important;
+    min-height: 48px !important;
+    border-radius: 20px !important;
+    text-decoration: none !important;
+  }
+  .mobile-bottom-nav a > span,
+  .mobile-bottom-nav a.active > span {
+    text-decoration: none !important;
   }
 
   /* 5. Dynamic Micro-Interactions (Active Tap States) */
