@@ -1800,7 +1800,7 @@ body.nav-open .nav-backdrop {
     grid-template-columns: repeat(5, minmax(0, 1fr));
     gap: 4px;
     padding: 5px 6px;
-    border-radius: 28px;
+    border-radius: 16px;
     background: rgba(10, 25, 47, 0.94);
     backdrop-filter: blur(24px) saturate(180%);
     -webkit-backdrop-filter: blur(24px) saturate(180%);
@@ -1818,7 +1818,7 @@ body.nav-open .nav-backdrop {
     gap: 3px;
     min-height: 48px;
     padding: 4px 2px;
-    border-radius: 20px;
+    border-radius: 10px;
     color: rgba(255, 255, 255, 0.72);
     text-decoration: none;
     font-size: 11px;
@@ -1838,7 +1838,7 @@ body.nav-open .nav-backdrop {
   .mobile-bottom-nav a.active {
     color: #ffffff;
     background: linear-gradient(135deg, #0957b8 0%, #063c82 100%);
-    border-radius: 20px;
+    border-radius: 10px;
     box-shadow: 0 4px 14px rgba(9, 87, 184, 0.42), inset 0 1px 0 rgba(255, 255, 255, 0.25);
     border: 1px solid rgba(255, 255, 255, 0.16);
   }
@@ -9763,7 +9763,7 @@ body.online-services-page section.light-blue-full-width-section > div {
     -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
     border: 1px solid rgba(255, 255, 255, 0.16) !important;
     box-shadow: 0 16px 40px -4px rgba(0, 0, 0, 0.45), 0 4px 14px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.16) !important;
-    border-radius: 28px !important;
+    border-radius: 16px !important;
     max-width: 410px !important;
     margin-inline: auto !important;
     padding: 5px 6px !important;
@@ -9771,8 +9771,11 @@ body.online-services-page section.light-blue-full-width-section > div {
   }
   .mobile-bottom-nav a {
     min-height: 48px !important;
-    border-radius: 20px !important;
+    border-radius: 10px !important;
     text-decoration: none !important;
+  }
+  .mobile-bottom-nav a.active {
+    border-radius: 10px !important;
   }
   .mobile-bottom-nav a > span,
   .mobile-bottom-nav a.active > span {

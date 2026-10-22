@@ -200,8 +200,9 @@
   #homepage-body #trending-services .category-card-icon,
   #homepage-body #trending-services .category-card-copy small { display: none !important; }
   #homepage-body #trending-services .category-card-copy strong { font-size: var(--eds-fs-base) !important; white-space: nowrap; }
-  #homepage-body .mobile-bottom-nav { bottom: calc(12px + env(safe-area-inset-bottom, 0px)) !important; max-width: 410px !important; margin-inline: auto !important; border-radius: 28px !important; padding: 5px 6px !important; }
-  #homepage-body .mobile-bottom-nav a { min-height: 48px !important; border-radius: 20px !important; text-decoration: none !important; }
+  #homepage-body .mobile-bottom-nav { bottom: calc(12px + env(safe-area-inset-bottom, 0px)) !important; max-width: 410px !important; margin-inline: auto !important; border-radius: 16px !important; padding: 5px 6px !important; }
+  #homepage-body .mobile-bottom-nav a { min-height: 48px !important; border-radius: 10px !important; text-decoration: none !important; }
+  #homepage-body .mobile-bottom-nav a.active { border-radius: 10px !important; }
   #homepage-body .mobile-bottom-nav a > span, #homepage-body .mobile-bottom-nav a.active > span { text-decoration: none !important; }
   #homepage-body .whatsapp-float { display: none !important; }
   #homepage-body .mobile-nav-menu { overscroll-behavior: contain; padding-bottom: calc(var(--eds-space-5) + env(safe-area-inset-bottom, 0px)) !important; }
