@@ -3461,6 +3461,26 @@ section.section.reveal:has(.bento-grid) {
   box-shadow: var(--evp-shadow-md) !important;
 }
 
+.enterprise-detail-command[class*="-overview-section"],
+.enterprise-detail-command.voter-overview-section,
+.enterprise-detail-command.aadhaar-overview-section,
+.enterprise-detail-command.pan-overview-section,
+.enterprise-detail-command.passport-overview-section,
+.enterprise-detail-command.rto-overview-section,
+.enterprise-detail-command.msme-overview-section,
+.enterprise-detail-command.gst-overview-section,
+.enterprise-detail-command.tax-overview-section,
+.enterprise-detail-command.legal-overview-section,
+.enterprise-detail-command.pension-overview-section,
+.enterprise-detail-command.ration-overview-section,
+.enterprise-detail-command.income-overview-section,
+#security-overview {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+}
+
 .edc-summary {
   background: #ffffff !important;
   border: 1px solid #e2e8f0 !important;
