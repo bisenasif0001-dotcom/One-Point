@@ -647,13 +647,21 @@ const SERVICE_VARIANTS = Object.freeze([
 
 function normalizeServicePricing(service = {}) {
   const canonical = canonicalSlug(service.slug || service.name);
+  const override = SERVICE_PRICING[canonical] || {};
+  const effectivePrice = service.price !== undefined ? Number(service.price) : (override.operatorFee !== undefined ? Number(override.operatorFee) : 0);
+  const govFee = override.governmentFee || 0;
+  const opFee = Math.max(0, effectivePrice - govFee);
   const merged = {
     ...defaultPricingForService(service),
-    ...(SERVICE_PRICING[canonical] || {}),
+    ...override,
     serviceId: canonical,
     serviceName: service.name || "",
     category: service.category || "",
-    variant: "Standard"
+    variant: "Standard",
+    pricingModel: override.pricingModel || PRICING_MODELS.ALL_INCLUSIVE,
+    governmentFee: govFee,
+    operatorFee: opFee,
+    displayPrice: `Rs. ${effectivePrice}`
   };
   return normalizePricingRecord(merged);
 }
@@ -661,6 +669,15 @@ function normalizeServicePricing(service = {}) {
 function normalizeVariantPricing(variant = {}) {
   const parentSlug = canonicalSlug(variant.parentSlug);
   const parentDefaults = SERVICE_PRICING[parentSlug] || {};
+  let masterPricing = null;
+  try {
+    masterPricing = require("../assets/catalog-pricing")[variant.variantSlug || variant.slug];
+  } catch (e) {}
+  const effectivePrice = variant.price !== undefined
+    ? Number(variant.price)
+    : (masterPricing ? masterPricing.price : (variant.operatorFee || parentDefaults.operatorFee || 0));
+  const govFee = variant.governmentFee || 0;
+  const opFee = Math.max(0, effectivePrice - govFee);
   return normalizePricingRecord({
     ...parentDefaults,
     ...variant,
@@ -669,7 +686,10 @@ function normalizeVariantPricing(variant = {}) {
     category: variant.category || "",
     subCategory: variant.subCategory || parentDefaults.subCategory || "",
     parentSlug,
-    variant: variant.label || variant.variantName || "Variant"
+    variant: variant.label || variant.variantName || "Variant",
+    governmentFee: govFee,
+    operatorFee: opFee,
+    displayPrice: `Rs. ${effectivePrice}`
   });
 }
 

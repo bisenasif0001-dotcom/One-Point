@@ -16,7 +16,7 @@
     let effectiveSlug = slug;
     const list = type === 'product' ? catalog.products || [] : catalog.services || [];
     if (type === 'service' && !list.some(item => item.slug === effectiveSlug)) {
-      if (slug === 'unknown-service') return null;
+      if (slug === 'unknown-service' || String(slug).startsWith('unknown-')) return null;
       const s = String(slug || '').toLowerCase();
       if (/exam|recruitment|admission|cgl|chsl|mts|rrb|ibps|upsc|neet|jee|cuet|tet|police|apprentice|special-govt|bank|agnipath|officer|entrance|school|college|quota|counselling|seat/i.test(s)) {
         effectiveSlug = 'exam-form-filling';

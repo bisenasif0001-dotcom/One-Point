@@ -673,10 +673,13 @@
     checkoutItems = checkoutItems.map(item => {
       const entry = window.OPDSServicePolicy.resolve(catalog, item.slug, item.type);
       if (!entry) return item;
-      return { ...item, slug: entry.slug, name: item.name || entry.name, price: entry.policy.pricing.amount,
-        taxRate: Number(entry.taxRate || 0), displayPrice: entry.policy.pricing.displayPrice,
-        pricingModel: entry.policy.pricing.model, priceNote: entry.policy.pricing.note,
-        duration: entry.policy.fulfilment.duration, policy: entry.policy };
+      const staticMaster = window.OPDS_MASTER_PRICING || window.OPDS_STATIC_PRICING || {};
+      const masterInfo = staticMaster[pricingKey(item.slug)] || staticMaster[item.slug] || {};
+      const effectivePrice = masterInfo.price !== undefined ? masterInfo.price : entry.policy.pricing.amount;
+      return { ...item, slug: entry.slug, name: item.name || entry.name, price: effectivePrice,
+        taxRate: Number(entry.taxRate || 0), displayPrice: masterInfo.displayPrice || entry.policy.pricing.displayPrice,
+        pricingModel: masterInfo.pricingModel || entry.policy.pricing.model, priceNote: masterInfo.priceNote || entry.policy.pricing.note,
+        duration: masterInfo.duration || entry.policy.fulfilment.duration, policy: entry.policy };
     });
     renderServicePolicy();
   }
@@ -893,10 +896,10 @@
 
     checkoutItems.forEach(item => {
       const slugKey = pricingKey(item.slug || item.id || item.name || "");
-      const masterInfo = staticMaster[slugKey] || {};
-      const itemPrice = item.policy ? item.policy.pricing.amount : (masterInfo.price || Number(item.price || 0));
-      const itemServiceCharge = item.policy ? itemPrice : (masterInfo.serviceCharge !== undefined ? masterInfo.serviceCharge : itemPrice);
-      const itemOfficialFee = item.policy ? 0 : (masterInfo.officialFee !== undefined ? masterInfo.officialFee : 0);
+      const masterInfo = staticMaster[slugKey] || staticMaster[item.slug] || {};
+      const itemPrice = masterInfo.price !== undefined ? masterInfo.price : (item.policy ? item.policy.pricing.amount : Number(item.price || 0));
+      const itemServiceCharge = masterInfo.serviceCharge !== undefined ? masterInfo.serviceCharge : itemPrice;
+      const itemOfficialFee = masterInfo.officialFee !== undefined ? masterInfo.officialFee : 0;
       
       const qty = item.quantity || 1;
       subtotal += itemPrice * qty;
